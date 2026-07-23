@@ -61,10 +61,41 @@ check_start; consistent with Stage 1's lock-by-10). And a first directional
 signal, no verdict weight at n=2: the band-exact window A4 does **not** funnel
 to `D` — per-prompt distinct terminals, still moving at the smoke cap.
 
+## 2026-07-23 — Pilot (5 prompts × 6 arms, max_iter=300; non-registered tier)
+
+**What ran:** `--tier pilot --model-path <local>`, 30 runs, 799 s CPU, all
+converged. Directional signal only; no spec-§6 verdicts drawn from this tier.
+
+| Arm | Window | Terminals (n=5 prompts) | Unique | Lock-in | Margin range |
+|---|---|---|---|---|---|
+| A0 | 0→23 | `D` ×5 | 1 | 70 | 0.52 |
+| A4 | 10→21 (band-exact) | `' ('` ×3, `' forever'`, `' since'` | **3** | 70–140 | 0.93–1.52 |
+| A1 | 0→11 | `','` ×4, `'ing'` | 2 | 70 | 0.27–1.11 |
+| A2 | 6→17 | `'\n'` ×5 | 1 | 70 | 0.05–0.85 |
+| A3 | 12→23 | `'bone'` ×3, `'"'` ×2 | 2 | 80–90 | 0.06–0.46 |
+| A5 | 8→15 | `' rant'` ×2, `' trillion(s)'` ×3 | 3 | 70–100 | 0.04–2.05 |
+
+**Directional observations (pilot-grade, n=5):**
+- Baseline confirms again: single `D` funnel, exactly Stage 1.
+- The two windows centred on the mapped band (A4 10→21, A5 8→15) show the
+  most terminal diversity (3 unique each), the first **prompt-dependent**
+  terminals seen in Medium, word-like tokens (`forever`, `since`, `rant`,
+  `trillion`), and the highest readout confidence (margins up to 2.05 vs
+  baseline's 0.52).
+- Off-band windows funnel to punctuation: A1 → `','`, A2 → `'\n'`,
+  A3 → `'"'`/`'bone'` — single-or-two-basin, low margins.
+- Pattern is consistent with H9 and H9a (band windows qualitatively richest),
+  pending the registered run.
+
+**Recorded caveat:** cross-window terminal decoding uses the Stage-1
+`ln_final → W_U` convention applied at the window's extract layer — a
+logit-lens-at-layer-j readout. Mid-stack decodes are exactly where the J-lens
+diverges from the logit lens; EXP_013m re-decodes these terminals properly.
+
 ## Pending
 
 1. ~~Smoke with real weights~~ ✅ above.
-2. **Pilot:** `--tier pilot` — 5 prompts × 6 arms, max_iter=300. Directional
-   signal only (non-registered tier). IN PROGRESS this session.
-3. **Registered run:** `--tier full` — 25 × 6, gated, max_iter=1000. Overnight
-   CPU. Verdicts per spec §6 recorded HERE.
+2. ~~Pilot~~ ✅ above.
+3. **Registered run:** `--tier full` — 25 × 6, gated, max_iter=1000. Verdicts
+   per spec §6 recorded HERE. IN PROGRESS this session (est. 1.5–3 h at pilot
+   throughput).
