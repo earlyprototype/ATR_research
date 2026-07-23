@@ -104,3 +104,4 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [O4] G02_brackets     -> ','            lock=120 iters=120 margin=0.08
   [O4] E03_orgs         -> ','            lock=120 iters=120 margin=0.04
   [O4] D03_organic      -> ','            lock=120 iters=120 margin=0.09
+  [O4] A03_neuro        -> ','            lock=120 iters=120 margin=0.05
