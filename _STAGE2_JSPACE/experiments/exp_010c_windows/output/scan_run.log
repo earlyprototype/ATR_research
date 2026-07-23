@@ -55,3 +55,52 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [E23] C03_mary_lamb    -> ' ('           lock=760 iters=760 margin=0.48
   [E23] F03_frustration  -> ' self'        lock=120 iters=120 margin=0.60
   [E23] G03_counting     -> '/'            lock=120 iters=120 margin=0.15
+  [E23] E04_internet     -> ' self'        lock=120 iters=120 margin=0.77
+  [E23] D04_equation     -> ' until'       lock=120 iters=120 margin=0.85
+  [E23] A04_climate      -> ' self'        lock=170 iters=170 margin=0.35
+  [E23] B04_rome         -> ' Uber'        lock=180 iters=180 margin=0.09
+
+=== Arm O0: window 0->21 ===
+  [O0] E01_politics     -> ','            lock=120 iters=120 margin=0.28
+  [O0] D01_water        -> ','            lock=120 iters=120 margin=0.28
+  [O0] A01_physics      -> ','            lock=120 iters=120 margin=0.28
+  [O0] B01_napoleon     -> ','            lock=120 iters=120 margin=0.28
+  [O0] C01_jack_jill    -> ','            lock=120 iters=120 margin=0.27
+  [O0] F01_anger        -> ','            lock=120 iters=120 margin=0.27
+  [O0] G01_punctuation  -> ','            lock=120 iters=120 margin=0.28
+  [O0] E02_tech         -> ','            lock=120 iters=120 margin=0.27
+  [O0] D02_periodic     -> ','            lock=120 iters=120 margin=0.28
+  [O0] A02_medical      -> ','            lock=120 iters=120 margin=0.28
+  [O0] B02_wwi          -> ','            lock=120 iters=120 margin=0.28
+  [O0] C02_king_cole    -> ','            lock=120 iters=120 margin=0.27
+  [O0] F02_insult       -> ','            lock=120 iters=120 margin=0.27
+  [O0] G02_brackets     -> ','            lock=120 iters=120 margin=0.28
+  [O0] E03_orgs         -> ','            lock=120 iters=120 margin=0.27
+  [O0] D03_organic      -> ','            lock=120 iters=120 margin=0.28
+  [O0] A03_neuro        -> ','            lock=120 iters=120 margin=0.28
+  [O0] B03_moon         -> ','            lock=120 iters=120 margin=0.27
+  [O0] C03_mary_lamb    -> ','            lock=120 iters=120 margin=0.28
+  [O0] F03_frustration  -> ','            lock=120 iters=120 margin=0.28
+  [O0] G03_counting     -> ','            lock=120 iters=120 margin=0.28
+  [O0] E04_internet     -> ','            lock=120 iters=120 margin=0.28
+  [O0] D04_equation     -> ','            lock=120 iters=120 margin=0.28
+  [O0] A04_climate      -> ','            lock=120 iters=120 margin=0.28
+  [O0] B04_rome         -> ','            lock=120 iters=120 margin=0.27
+
+=== Arm O4: window 4->21 ===
+  [O4] E01_politics     -> ','            lock=120 iters=120 margin=0.07
+  [O4] D01_water        -> ','            lock=120 iters=120 margin=0.09
+  [O4] A01_physics      -> ','            lock=120 iters=120 margin=0.05
+  [O4] B01_napoleon     -> ','            lock=120 iters=120 margin=0.05
+  [O4] C01_jack_jill    -> ','            lock=120 iters=120 margin=0.04
+  [O4] F01_anger        -> ','            lock=120 iters=120 margin=0.04
+  [O4] G01_punctuation  -> ','            lock=120 iters=120 margin=0.07
+  [O4] E02_tech         -> ','            lock=120 iters=120 margin=0.04
+  [O4] D02_periodic     -> ','            lock=120 iters=120 margin=0.06
+  [O4] A02_medical      -> ','            lock=120 iters=120 margin=0.05
+  [O4] B02_wwi          -> ','            lock=120 iters=120 margin=0.07
+  [O4] C02_king_cole    -> ','            lock=120 iters=120 margin=0.04
+  [O4] F02_insult       -> ','            lock=120 iters=120 margin=0.04
+  [O4] G02_brackets     -> ','            lock=120 iters=120 margin=0.08
+  [O4] E03_orgs         -> ','            lock=120 iters=120 margin=0.04
+  [O4] D03_organic      -> ','            lock=120 iters=120 margin=0.09
