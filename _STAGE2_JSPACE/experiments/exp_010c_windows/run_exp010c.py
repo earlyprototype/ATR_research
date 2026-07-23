@@ -36,13 +36,24 @@ ARMS = {
     "A2": (6, 17),   # placement: middle
     "A3": (12, 23),  # placement: back
     "A5": (8, 15),   # length probe (8 layers, mid-band)
+    # EXP_010c-2 boundary scan (EXP_010c2_SPEC.md §3)
+    "E22": (10, 22),  # exit edge: +layer 22
+    "E23": (10, 23),  # exit edge: +motor tail (final-layer necessity, H10a)
+    "O0": (0, 21),    # onset edge: sensory-splice test (H10b)
+    "O4": (4, 21),
+    "O6": (6, 21),
+    "O8": (8, 21),
+    "O12": (12, 21),
+    "O14": (14, 21),
 }
 ARM_ORDER = ["A0", "A4", "A1", "A2", "A3", "A5"]  # spec §5 execution order
+SCAN_ORDER = ["E22", "E23", "O0", "O4", "O6", "O8", "O12", "O14"]
 
 TIERS = {
     "smoke": dict(n_prompts=2, max_iter=60, check_start=20, arms=["A0", "A4"]),
     "pilot": dict(n_prompts=5, max_iter=300, check_start=50, arms=ARM_ORDER),
     "full": dict(n_prompts=25, max_iter=1000, check_start=100, arms=ARM_ORDER),
+    "scan": dict(n_prompts=25, max_iter=1000, check_start=100, arms=SCAN_ORDER),
 }
 
 

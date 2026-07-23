@@ -24,7 +24,9 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 
 ARMS_WINDOWS = {"A0": (0, 23), "A4": (10, 21), "A1": (0, 11), "A2": (6, 17),
-                "A3": (12, 23), "A5": (8, 15)}
+                "A3": (12, 23), "A5": (8, 15),
+                "E22": (10, 22), "E23": (10, 23), "O0": (0, 21), "O4": (4, 21),
+                "O6": (6, 21), "O8": (8, 21), "O12": (12, 21), "O14": (14, 21)}
 CLUSTER_THRESHOLD = 0.999  # same as the convergence gate
 
 
