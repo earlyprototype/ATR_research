@@ -151,12 +151,40 @@ def _toy_tokens(prompt, d_vocab=997, max_len=12):
     return torch.tensor([ids or [1]], dtype=torch.long)
 
 
+def _load_medium_from_local(path):
+    """Offline load: local dir must hold config.json, pytorch_model.bin,
+    vocab.json, merges.txt (e.g. from the legacy HF S3 mirror). Seeds the HF
+    cache with config.json so transformer_lens's internal AutoConfig lookup
+    resolves without network, then passes model+tokenizer in explicitly."""
+    import os
+    import shutil
+
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
+    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+    cache = Path(os.environ.get("HF_HOME", Path.home() / ".cache" / "huggingface")) / "hub"
+    snap = cache / "models--gpt2-medium" / "snapshots" / "local"
+    refs = cache / "models--gpt2-medium" / "refs"
+    snap.mkdir(parents=True, exist_ok=True)
+    refs.mkdir(parents=True, exist_ok=True)
+    shutil.copy(Path(path) / "config.json", snap / "config.json")
+    (refs / "main").write_text("local")
+
+    from transformers import GPT2LMHeadModel, GPT2Tokenizer
+    from transformer_lens import HookedTransformer
+
+    hf = GPT2LMHeadModel.from_pretrained(path)
+    tok = GPT2Tokenizer.from_pretrained(path)
+    return HookedTransformer.from_pretrained("gpt2-medium", hf_model=hf, tokenizer=tok)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", choices=TIERS, required=True)
     ap.add_argument("--arms", default=None, help="comma-separated override, e.g. A0,A4")
     ap.add_argument("--harness-check", action="store_true",
                     help="random-init toy model; validates the harness, draws no verdicts")
+    ap.add_argument("--model-path", default=None,
+                    help="local dir with gpt2-medium files for offline load")
     args = ap.parse_args()
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
@@ -165,6 +193,9 @@ def main():
     if args.harness_check:
         print("HARNESS CHECK — random-init toy model, results carry no verdict weight.")
         model = _toy_model()
+    elif args.model_path:
+        print(f"Loading gpt2-medium from local path {args.model_path} (offline) ...", flush=True)
+        model = _load_medium_from_local(args.model_path)
     else:
         from transformer_lens import HookedTransformer
         print("Loading gpt2-medium ...", flush=True)

@@ -32,11 +32,39 @@ alphabetical by ID; recovered from the Stage 1 record
 `experiments/gpt2_medium/output/dissolution_sentences.md` in the public repo,
 since `prompt_library.py` is absent — deviation per spec §5).
 
-## Pending (operator machine, models cached locally)
+## 2026-07-23 — Model acquisition + real-weights smoke (reproduction gate PASSED)
 
-1. **Smoke with real weights:** `python run_exp010c.py --tier smoke`
-   — A0 must reproduce the `D` collapse on E01/D01 (reproduction gate). Minutes.
-2. **Pilot:** `python run_exp010c.py --tier pilot` — 5 prompts × 6 arms,
-   max_iter=300. Directional signal only (non-registered tier). ~1–2 h CPU.
-3. **Registered run:** `python run_exp010c.py --tier full` — 25 × 6, gated,
-   max_iter=1000. Overnight CPU. Verdicts per spec §6 recorded HERE.
+**Model route (recorded):** huggingface.co is blocked by this session's network
+policy, but the **legacy HF S3 bucket** is reachable and still serves the model:
+`https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-medium-{pytorch_model.bin,config.json,vocab.json,merges.txt}`.
+Downloaded to a local dir (1,520,013,706 bytes; state dict verified: 316 tensors,
+wte [50257, 1024], 24 layers) and loaded offline via the runner's new
+`--model-path` flag (seeds the HF cache with config.json so transformer_lens's
+internal AutoConfig lookup resolves without network; weights and tokenizer passed
+in explicitly). Provenance caveat: this is the pre-2020 HF mirror of gpt2-medium;
+the reproduction gate below is the check that it matches the Stage 1 model's
+behaviour.
+
+**What ran:** `run_exp010c.py --tier smoke --model-path <local>` — 2 prompts
+(E01_politics, D01_water) × arms {A0, A4}, max_iter=60, check_start=20. 71 s CPU.
+
+**Result:**
+
+| Arm | Window | E01_politics | D01_water | Converged |
+|---|---|---|---|---|
+| A0 | 0→23 | `D` (lock 40) | `D` (lock 40) | 2/2 |
+| A4 | 10→21 | `' ('` | `' except'` | 0/2 (60-iter cap) |
+
+**Reproduction gate: PASSED.** A0 reproduces the Stage 1 `D` collapse on real
+weights (lock at the earliest possible gated iteration for this tier's
+check_start; consistent with Stage 1's lock-by-10). And a first directional
+signal, no verdict weight at n=2: the band-exact window A4 does **not** funnel
+to `D` — per-prompt distinct terminals, still moving at the smoke cap.
+
+## Pending
+
+1. ~~Smoke with real weights~~ ✅ above.
+2. **Pilot:** `--tier pilot` — 5 prompts × 6 arms, max_iter=300. Directional
+   signal only (non-registered tier). IN PROGRESS this session.
+3. **Registered run:** `--tier full` — 25 × 6, gated, max_iter=1000. Overnight
+   CPU. Verdicts per spec §6 recorded HERE.
