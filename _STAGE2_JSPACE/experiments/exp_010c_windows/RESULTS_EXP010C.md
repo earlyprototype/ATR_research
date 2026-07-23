@@ -161,7 +161,82 @@ sensitivity unexplored; direct decode at j<23 is a logit-lens-at-layer-j
 readout (now with measured unreliability off-band); the J-lens re-decode
 (EXP_013m) remains the arbiter for all mid-stack claims.
 
+## 2026-07-23 — EXP_010c-2 BOUNDARY SCAN (8 arms × 25, gated, max_iter=1000)
+
+**What ran:** `--tier scan --model-path <local>`. 200/200 converged.
+Artifacts: `output/results_scan.json`, `output/terminals_scan.pt`.
+
+**Onset-edge sweep (inject i → extract 21), with A4 (i=10) from the main grid:**
+
+| i | Terminals | Unique | Character |
+|---|---|---|---|
+| 0 | `','` ×25 | 1 | junk funnel |
+| 4 | `','` ×25 | 1 | junk funnel |
+| 6 | `' apologies'`, `' etc'`, `' please'`, `'..'`, `'oooo'`, `'​'` | 6 | transitional junk |
+| **8** | **`' halfway'`, `' simultaneously'`** | 2 | **semantic: temporal/positional** |
+| **10** | **`' until'`, `' forever'`, `' since'`** (A4) | 3 | **semantic: temporal-durative** |
+| 12 | `' NHS'`, `' £'`, `'or'` | 3 | lexical junk |
+| 14 | `' DES'`, `' or'`, `' than'`, `' vs'`, `'.'`, `'."'`, `'.)'` | 7 | comparative/punctuation fragments |
+
+**Exit-edge sweep (inject 10 → extract j):**
+
+| j | Terminals | Unique | Character |
+|---|---|---|---|
+| 21 | `until`/`forever`/`since` (A4) | 3 | semantic, via-tail-robust |
+| 22 | incl. `' until'`, `'<|endoftext|>'`, `' Tak'`, `' honor'`… | 7 | degrading, temporal remnant |
+| 23 | incl. `' self'` ×10, `' until'` ×5, misc junk | 10 | fragmented; **no `D`** |
+
+**Verdicts (spec `EXP_010c2_SPEC.md` §4):**
+
+- **H10 (edge localisation): SUPPORTED.** Transitions are sharp, not smooth:
+  junk funnel (i≤4) → transitional junk (i=6) → semantic temporal regime
+  (i=8–10) → junk again (i≥12). The landscape's character is a non-monotonic
+  function of the injection point with an identifiable semantic window.
+- **H10a (final-layer necessity): REFUTED in its strong form.** Re-including
+  the motor tail (10→22, 10→23) *degrades* the temporal structure but does
+  not restore the `D` funnel. Combined with A3 (12→23, no `D`) and the main
+  grid: the motor tail is neither sufficient nor necessary alone — **the `D`
+  collapse requires the full motor→sensory conjunction**, the pre-registered
+  "only their conjunction" branch. Sharper sentence: the collapse is a
+  property of the *splice*, not of any layer set.
+- **H10b (sensory-splice necessity): SUPPORTED.** 0→21 and 4→21 collapse to
+  the `','` funnel with no motor involvement at all — splicing into the
+  sensory front destroys structure by itself.
+
+**The ATR-derived band prediction for the J-lens census (EXP_012m):**
+the semantic regime is entered between injection layers 6 and 8 and exited
+between 10 and 12 — i.e. **Medium's workspace-relevant injection zone is
+layers ≈7–11 (~30–45% of depth)**, brackets the paper's 38% band-onset
+mapping. Notably the semantic regime tracks the band *onset*, not the whole
+band: injecting deeper inside the mapped band (12, 14) loses coherence. In
+the paper's vocabulary this is suggestive of **ignition** — the workspace
+onset where winner-take-all commitment happens — being the dynamically
+special injection point. Recorded as interpretation, not finding.
+
+**Semantic family note (recorded observation):** every semantically coherent
+arm across both experiments lands in temporal/positional-durative vocabulary:
+*until, forever, since, endless, simultaneously, halfway*. The band's
+attractor family appears to have a theme, not just structure. No hypothesis
+registered yet; candidate for the J-lens phase to probe.
+
+**Scan characterisation + via-tail control**
+(`terminal_characterisation_scan.json`): the semantic injection zone survives
+the motor-pathway readout — O8's `' simultaneously'` ×17 holds under via-tail
+(17/25 agreement; margins to 5.1), the same robustness class as A4. The
+funnels do not: O0/O4 flip 0/25 (`','`→`'.'`/`'"'`). O6 is transitional
+(7/25). O12/O14 mostly resolve to comparative junk (`or`) under via-tail.
+Tensor-basin counts confirm the same boundary: 1 (O0, O4) → 11–12 (O6, O8) →
+10–25 fragmenting (O12+, E22/E23). The i=8–10 semantic zone is therefore
+robust across both readout instruments; final arbitration to EXP_013m.
+
+**Caveats:** single seed; one 25-prompt subset; cluster-threshold sensitivity
+unexplored; two-instrument agreement is necessary but not sufficient — the
+J-lens re-decode remains the registered arbiter.
+
 ## Next
 
-EXP_010c-2 boundary scan (pre-registered, `../../EXP_010c2_SPEC.md`): exit-edge
-{10→22, 10→23} and onset-edge {0,4,6,8,12,14}→21 sweeps, same protocol.
+Phase 0 / J-lens track per `RUNBOOK_JLENS_MEDIUM.md`, with branch priors now
+set by both experiments: EXP_011m first (are the A4/O8 temporal terminals
+J-space-loaded where the funnels are not?), EXP_012m census testing the
+**layers ≈7–11 (~30–45% depth) band-onset prediction**, EXP_013m re-decode of
+the temporal-family terminals and the `D`/`','` funnels.
