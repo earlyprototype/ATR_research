@@ -4,3 +4,54 @@ Loaded pretrained model gpt2-medium into HookedTransformer
 Tier=scan arms=['E22', 'E23', 'O0', 'O4', 'O6', 'O8', 'O12', 'O14'] prompts=25 max_iter=1000 check_start=100
 
 === Arm E22: window 10->22 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:68: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [E22] E01_politics     -> '<|endoftext|>' lock=190 iters=190 margin=0.47
+  [E22] D01_water        -> '<|endoftext|>' lock=220 iters=220 margin=4.37
+  [E22] A01_physics      -> '<|endoftext|>' lock=280 iters=280 margin=0.69
+  [E22] B01_napoleon     -> ' until'       lock=310 iters=310 margin=2.04
+  [E22] C01_jack_jill    -> ' or'          lock=170 iters=170 margin=1.91
+  [E22] F01_anger        -> ' honor'       lock=360 iters=360 margin=0.65
+  [E22] G01_punctuation  -> ' parts'       lock=290 iters=290 margin=0.12
+  [E22] E02_tech         -> '<|endoftext|>' lock=170 iters=170 margin=4.34
+  [E22] D02_periodic     -> '<|endoftext|>' lock=180 iters=180 margin=2.75
+  [E22] A02_medical      -> '<|endoftext|>' lock=180 iters=180 margin=1.27
+  [E22] B02_wwi          -> '<|endoftext|>' lock=220 iters=220 margin=2.67
+  [E22] C02_king_cole    -> '<|endoftext|>' lock=290 iters=290 margin=1.83
+  [E22] F02_insult       -> ' and'         lock=240 iters=240 margin=0.58
+  [E22] G02_brackets     -> '<|endoftext|>' lock=250 iters=250 margin=2.43
+  [E22] E03_orgs         -> ' until'       lock=240 iters=240 margin=0.56
+  [E22] D03_organic      -> ' and'         lock=340 iters=340 margin=0.25
+  [E22] A03_neuro        -> ' Tak'         lock=380 iters=380 margin=0.98
+  [E22] B03_moon         -> '<|endoftext|>' lock=350 iters=350 margin=1.27
+  [E22] C03_mary_lamb    -> '<|endoftext|>' lock=270 iters=270 margin=3.72
+  [E22] F03_frustration  -> '<|endoftext|>' lock=200 iters=200 margin=1.55
+  [E22] G03_counting     -> ' until'       lock=180 iters=180 margin=3.19
+  [E22] E04_internet     -> ' Tak'         lock=190 iters=190 margin=0.57
+  [E22] D04_equation     -> ' and'         lock=230 iters=230 margin=0.34
+  [E22] A04_climate      -> '<|endoftext|>' lock=180 iters=180 margin=1.79
+  [E22] B04_rome         -> '<|endoftext|>' lock=420 iters=420 margin=3.67
+
+=== Arm E23: window 10->23 ===
+  [E23] E01_politics     -> '/'            lock=420 iters=420 margin=0.13
+  [E23] D01_water        -> ' until'       lock=290 iters=290 margin=2.23
+  [E23] A01_physics      -> ' in'          lock=370 iters=370 margin=0.23
+  [E23] B01_napoleon     -> ' "'           lock=280 iters=280 margin=0.06
+  [E23] C01_jack_jill    -> ' until'       lock=250 iters=250 margin=1.45
+  [E23] F01_anger        -> ' self'        lock=120 iters=120 margin=0.31
+  [E23] G01_punctuation  -> ' plate'       lock=120 iters=120 margin=0.36
+  [E23] E02_tech         -> ' until'       lock=120 iters=120 margin=0.88
+  [E23] D02_periodic     -> ' self'        lock=120 iters=120 margin=0.76
+  [E23] A02_medical      -> ' until'       lock=120 iters=120 margin=0.30
+  [E23] B02_wwi          -> ' —'           lock=210 iters=210 margin=0.96
+  [E23] C02_king_cole    -> ' Uber'        lock=180 iters=180 margin=0.76
+  [E23] F02_insult       -> ' self'        lock=120 iters=120 margin=0.78
+  [E23] G02_brackets     -> ' self'        lock=120 iters=120 margin=0.27
+  [E23] E03_orgs         -> ' self'        lock=120 iters=120 margin=0.33
+  [E23] D03_organic      -> ' self'        lock=280 iters=280 margin=0.88
+  [E23] A03_neuro        -> ' and'         lock=120 iters=120 margin=0.27
+  [E23] B03_moon         -> ' self'        lock=280 iters=280 margin=0.66
+  [E23] C03_mary_lamb    -> ' ('           lock=760 iters=760 margin=0.48
+  [E23] F03_frustration  -> ' self'        lock=120 iters=120 margin=0.60
+  [E23] G03_counting     -> '/'            lock=120 iters=120 margin=0.15
