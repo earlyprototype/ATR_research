@@ -2,3 +2,4 @@
 _frozen/
 # HF cache artifacts if any land here
 **/__pycache__/
+experiments/exp_010c_windows/output/full_run.log
