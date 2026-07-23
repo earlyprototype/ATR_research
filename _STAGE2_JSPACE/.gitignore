@@ -1,0 +1,4 @@
+# Extracted read-only copies of the committed _DATA zip — re-extract, do not commit
+_frozen/
+# HF cache artifacts if any land here
+**/__pycache__/
