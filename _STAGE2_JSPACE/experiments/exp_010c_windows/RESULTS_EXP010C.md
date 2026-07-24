@@ -257,32 +257,38 @@ gpt2-medium mirror (state dict verified, 316 tensors, wte [50257,1024]).
 | Set | k | Space | Observed | Null μ | Null σ | z | p | sig |
 |---|---|---|---|---|---|---|---|---|
 | WS_A4 (until/forever/since, direct) | 3 | W_E | 0.4121 | 0.2754 | 0.0293 | 4.66 | 0.00070 | `*` |
-| WS_A4 | 3 | W_U | 0.8639 | 0.8097 | 0.0210 | 2.58 | 0.00460 | |
+| ↳ | 3 | W_U | 0.8639 | 0.8097 | 0.0210 | 2.58 | 0.00460 | |
 | WS_O8 (halfway/simultaneously, direct) | 2 | W_E | 0.2972 | 0.3029 | 0.0411 | −0.14 | 0.52415 | |
-| WS_O8 | 2 | W_U | 0.8206 | 0.8085 | 0.0256 | 0.47 | 0.35946 | |
-| WS_POOL (A4∪O8∪A5 direct) | 6 | W_E | 0.3180 | 0.2853 | 0.0174 | 1.88 | 0.04110 | |
-| WS_POOL | 6 | W_U | 0.8303 | 0.7992 | 0.0132 | 2.36 | 0.01180 | |
+| ↳ | 2 | W_U | 0.8206 | 0.8085 | 0.0256 | 0.47 | 0.35946 | |
+| WS_POOL (A4∪O8∪A5 direct) | 6 | W_E | 0.3180 | 0.2854 | 0.0175 | 1.87 | 0.04120 | |
+| ↳ | 6 | W_U | 0.8303 | 0.7993 | 0.0131 | 2.37 | 0.01090 | |
 | WT_A4 (until/forever/since, via-tail) | 3 | W_E | 0.4121 | 0.2751 | 0.0293 | 4.67 | 0.00150 | `*` |
-| WT_A4 | 3 | W_U | 0.8639 | 0.8092 | 0.0207 | 2.64 | 0.00330 | |
-| WT_O8 (simultaneously/just/`'`) | 3 | W_E | 0.2993 | 0.2889 | 0.0381 | 0.27 | 0.30397 | |
-| WT_O8 | 3 | W_U | 0.8435 | 0.7855 | 0.0243 | 2.38 | 0.03740 | |
-| WT_A5 (endless/`'`) | 2 | W_E | 0.2863 | 0.2997 | 0.0574 | −0.23 | 0.52975 | |
-| WT_A5 | 2 | W_U | 0.8143 | 0.7705 | 0.0326 | 1.34 | 0.07489 | |
-| WT_POOL (via-tail pool) | 7 | W_E | 0.3320 | 0.2840 | 0.0197 | 2.44 | 0.02660 | |
-| WT_POOL | 7 | W_U | 0.8473 | 0.7979 | 0.0139 | 3.55 | 0.00190 | `*` |
-| CS_A1 (`ing`/`,` punct funnel) | 2 | W_E | 0.3937 | 0.3225 | 0.0659 | 1.08 | 0.11669 | |
-| CS_A1 | 2 | W_U | 0.8796 | 0.7774 | 0.0344 | 2.98 | 0.00970 | |
-| CS_A3 (`"`/`work`) | 2 | W_E | 0.3282 | 0.3110 | 0.0579 | 0.30 | 0.27467 | |
-| CS_A3 | 2 | W_U | 0.8237 | 0.7675 | 0.0311 | 1.81 | 0.04620 | |
-| CS_O14 (or/vs/than/punct, off-band) | 7 | W_E | 0.3721 | 0.2872 | 0.0244 | 3.48 | 0.00640 | |
-| CS_O14 | 7 | W_U | 0.8696 | 0.7780 | 0.0155 | 5.91 | 0.00010 | `*` |
+| ↳ | 3 | W_U | 0.8639 | 0.8092 | 0.0207 | 2.64 | 0.00330 | |
+| WT_O8 (simultaneously/just/`'`) | 3 | W_E | 0.2993 | 0.2883 | 0.0373 | 0.29 | 0.29937 | |
+| ↳ | 3 | W_U | 0.8435 | 0.7853 | 0.0244 | 2.38 | 0.03710 | |
+| WT_A5 (endless/`'`) | 2 | W_E | 0.2863 | 0.2995 | 0.0572 | −0.23 | 0.53085 | |
+| ↳ | 2 | W_U | 0.8143 | 0.7711 | 0.0329 | 1.31 | 0.07919 | |
+| WT_POOL (via-tail pool) | 7 | W_E | 0.3320 | 0.2839 | 0.0196 | 2.46 | 0.02400 | |
+| ↳ | 7 | W_U | 0.8473 | 0.7978 | 0.0139 | 3.57 | 0.00180 | `*` |
+| CS_A1 (`ing`/`,` punct funnel) | 2 | W_E | 0.3937 | 0.3222 | 0.0660 | 1.08 | 0.11619 | |
+| ↳ | 2 | W_U | 0.8796 | 0.7769 | 0.0344 | 2.99 | 0.00860 | |
+| CS_A3 (`"`/`work`) | 2 | W_E | 0.3282 | 0.3107 | 0.0585 | 0.30 | 0.27327 | |
+| ↳ | 2 | W_U | 0.8237 | 0.7672 | 0.0315 | 1.79 | 0.05019 | |
+| CS_O14 (or/vs/than/punct, off-band) | 7 | W_E | 0.3721 | 0.2871 | 0.0241 | 3.53 | 0.00440 | |
+| ↳ | 7 | W_U | 0.8696 | 0.7777 | 0.0153 | 6.00 | 0.00010 | `*` |
 
 Excluded (fewer than 2 unique types, no pairwise cosine, recorded not dropped):
 A0 (`D`), A5 direct (`rant`), O0/O4 (`,`). Matched pools were healthy for every
 tested token (min 92 candidates, for `' simultaneously'`); no band or length
-relaxation was triggered. Effect sizes were identical and the four starred
+relaxation was triggered. Effect sizes were stable and the four starred
 calls held under two additional seeds (99; 7 at N=50,000) — the observed
 statistic is deterministic and the null moved by <0.001.
+
+(Numbers above regenerated 2026-07-24 after PR review: candidate-pool length
+matching now uses **decoded** character length per spec §5, not byte-level
+vocab-key length — the two differ only for multibyte-UTF-8 vocab entries, so
+observed statistics are unchanged and null means shifted by ≤0.0007; no verdict
+moved.)
 
 **Which pre-registered reading was observed (mechanical application of spec §7):**
 
@@ -295,7 +301,7 @@ statistic is deterministic and the null moved by <0.001.
    "semantic." The word stays quarantined pending the J-lens.
 2. **The wider "family" does not survive.** The other word sets sit at the null
    in `W_E`: WS_O8 z = −0.14 (p = 0.52), WT_A5 z = −0.23 (p = 0.53), and the
-   pooled word set WS_POOL z = 1.88 (p = 0.041, not clearing Bonferroni).
+   pooled word set WS_POOL z = 1.87 (p = 0.041, not clearing Bonferroni).
    Pre-registered reading for these: *the apparent family is an
    anisotropy/matching artifact.* So the eyeballed six-token family
    (`until forever since endless simultaneously halfway`) is not a unit — its
@@ -303,7 +309,7 @@ statistic is deterministic and the null moved by <0.001.
    `halfway`, `simultaneously`, `endless`, `rant` pulls the set back to chance.
 3. **The contrast reading fired, and it is the decisive caveat on `W_U`.** The
    off-band contrast set CS_O14 (`or`, `vs`, `than`, punctuation) is the single
-   **most** significant test in the whole battery (`W_U` z = 5.91, p = 0.0001) —
+   **most** significant test in the whole battery (`W_U` z = 6.00, p = 0.0001) —
    more extreme than any word set. Pre-registered reading: *contrast set
    significant too → the test is flagging a generic property of loop terminals,
    not the word family; W_U-space significance is not to be read as semantic.*

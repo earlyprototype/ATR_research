@@ -44,6 +44,14 @@ def bytes_to_unicode():
     return dict(zip(bs, [chr(c) for c in cs]))
 
 
+_U2B = {v: k for k, v in bytes_to_unicode().items()}
+
+
+def decode_key(key):
+    """Decode a GPT-2 byte-level vocab key to its surface string (Ġ -> space)."""
+    return bytearray(_U2B[c] for c in key).decode("utf-8", errors="replace")
+
+
 def load_tokenizer(model_dir):
     with open(os.path.join(model_dir, "vocab.json")) as f:
         vocab = json.load(f)  # token_string -> id
@@ -64,12 +72,6 @@ def load_tokenizer(model_dir):
         if merged not in merge_rank:
             merge_rank[merged] = r
         r += 1
-
-    b2u = bytes_to_unicode()
-    u2b = {v: k for k, v in b2u.items()}
-
-    def decode_key(key):
-        return bytearray(u2b[c] for c in key).decode("utf-8", errors="replace")
 
     # surface string -> id  (for mapping via-tail decoded strings back to ids)
     surface_to_id = {}
@@ -113,7 +115,8 @@ class Matcher:
         ids = np.array([i for i in id_to_key if i not in exclude_ids], dtype=np.int64)
         keys = [id_to_key[int(i)] for i in ids]
         self.ls = np.array([1 if k.startswith("Ġ") else 0 for k in keys], dtype=np.int8)
-        self.length = np.array([len(k) for k in keys], dtype=np.int32)
+        # decoded character length (spec §5: decoded length ±1), not byte-key length
+        self.length = np.array([len(decode_key(k)) for k in keys], dtype=np.int32)
         rank = np.array([merge_rank.get(k, 0) for k in keys], dtype=np.int64)
         # quintile bands over the merge-rank distribution of the vocab
         qs = np.quantile(rank, np.linspace(0, 1, n_bands + 1)[1:-1])
