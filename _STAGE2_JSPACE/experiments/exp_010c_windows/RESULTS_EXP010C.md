@@ -286,3 +286,26 @@ above are ATR-side and need no J-lens.
    Phase-2 hand-off artifact); revisit LFS/release assets if they grow.
 4. **Item 4:** terminal `.pt` keys changed from tuples to "ARM|PROMPT_ID"
    strings so the files load with `weights_only=True`.
+
+## 2026-07-23/24 — Artifact regeneration complete (post-review)
+
+**What ran:** full tier (150 runs) and scan tier (200 runs) rerun end-to-end
+with the fixed capture path (engine-side `capture_terminal`, real lag_scan).
+
+**Repeatability (observation):** all 350 (arm, prompt) records identical to
+the pre-fix runs on terminal_token, terminal_token_id, lock_in_iter, n_iters,
+and converged — full tier compared against the pre-fix A0/A4 backup plus the
+committed part-2 log; scan tier against the committed pre-fix
+`results_scan.json`. Zero mismatches. (Same machine, same seed — this is
+same-machine repeatability, not seed robustness; control 2 stands.)
+
+**lag_scan (now real; observation):** A0's locked state reads cosine 1.00000
+at every lag 1–8. A4 and O8 locked states show monotonic decay with lag
+(A4: 0.99955 at lag-1 → 0.97373 at lag-8; O8: 0.99995 → 0.99665). No lag
+pattern shows the multiples-of-p signature of a limit cycle in these runs.
+The full per-run values are in the regenerated `results_full.json` /
+`results_scan.json`.
+
+**Housekeeping:** `results_full.json` and `terminals_full.pt` un-ignored and
+committed (the gitignore entries existed to keep mid-run checkpoints out;
+final versions are the record, per the convention above).
