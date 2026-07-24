@@ -92,3 +92,26 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [I5] D01_water        -> '...'          lock=120 iters=120 margin=0.60
   [I5] A01_physics      -> '…'            lock=150 iters=150 margin=0.29
   [I5] B01_napoleon     -> '...'          lock=170 iters=170 margin=0.35
+  [I5] C01_jack_jill    -> 'been'         lock=120 iters=120 margin=1.40
+  [I5] F01_anger        -> '...'          lock=150 iters=150 margin=0.27
+  [I5] G01_punctuation  -> ' Congratulations' lock=120 iters=120 margin=0.08
+  [I5] E02_tech         -> '…'            lock=170 iters=170 margin=0.01
+  [I5] D02_periodic     -> ' Congratulations' lock=120 iters=120 margin=2.06
+  [I5] A02_medical      -> '!!'           lock=120 iters=120 margin=0.09
+  [I5] B02_wwi          -> ' Congratulations' lock=120 iters=120 margin=0.05
+  [I5] C02_king_cole    -> '...'          lock=150 iters=150 margin=0.57
+  [I5] F02_insult       -> 'been'         lock=120 iters=120 margin=0.29
+  [I5] G02_brackets     -> '...'          lock=120 iters=120 margin=0.17
+  [I5] E03_orgs         -> '…'            lock=170 iters=170 margin=0.22
+  [I5] D03_organic      -> ' Welcome'     lock=120 iters=120 margin=0.17
+  [I5] A03_neuro        -> '…'            lock=150 iters=150 margin=0.29
+  [I5] B03_moon         -> '...'          lock=170 iters=170 margin=0.14
+  [I5] C03_mary_lamb    -> '…'            lock=150 iters=150 margin=0.03
+  [I5] F03_frustration  -> ' been'        lock=120 iters=120 margin=0.81
+  [I5] G03_counting     -> '…'            lock=150 iters=150 margin=0.64
+  [I5] E04_internet     -> ' Welcome'     lock=120 iters=120 margin=0.81
+  [I5] D04_equation     -> ' Welcome'     lock=120 iters=120 margin=0.03
+  [I5] A04_climate      -> '!!'           lock=120 iters=120 margin=0.21
+  [I5] B04_rome         -> '...'          lock=170 iters=170 margin=0.04
+
+=== Arm X1019: window 10->19 ===
