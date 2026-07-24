@@ -1,1 +1,6 @@
 Loading gpt2-medium from local path /home/user/models/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 5784.26it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=full arms=['A0', 'A4', 'A1', 'A2', 'A3', 'A5'] prompts=25 max_iter=1000 check_start=100
+
+=== Arm A0: window 0->23 ===
