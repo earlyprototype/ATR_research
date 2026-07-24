@@ -1,7 +1,13 @@
-# atr_engine2.py — VERBATIM copy of the public ATR repo engine (P0-4 pattern).
+# atr_engine2.py — copy of the public ATR repo engine (P0-4 pattern).
 # Source: lucier-gpt2-activ-tensor-reson-experiments/atr_engine.py @ branch main.
-# Window params (layer_start, layer_end) already exist upstream; no code changes.
-# Equivalence is by construction: diff against upstream must be header-only.
+# Window params (layer_start, layer_end) already exist upstream.
+# RECORDED DIFF vs upstream (2026-07-23, per PR #4 review item 2 — single
+# source of truth for the gated protocol):
+#   run_atr_gated(..., capture_terminal=False): when True, the return dict
+#   additionally carries terminal_mean_vec, terminal_last_vec, and lag_scan
+#   (dict {lag: mean cosine} over the last 9 mean-vector iterates, computed
+#   with the module's own lag_scan()). Protocol logic is otherwise unchanged;
+#   the diff against upstream must remain exactly this header + that feature.
 """
 ATR Engine: Activation Tensor Resonance
 =========================================
@@ -248,7 +254,7 @@ def run_atr_loop(model, prompt, layer_start, layer_end, max_iter, schedule, verb
 
 def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
                   threshold=0.999, patience=3, check_every=10, check_start=100,
-                  verbose=False, gate_lag=1):
+                  verbose=False, gate_lag=1, capture_terminal=False):
     """Convergence-gated ATR loop (early-stop variant of run_atr_loop).
 
     Iterates the full-tensor re-injection until the tensor stops moving, then
@@ -293,6 +299,7 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
     # Oldest-first buffer of the last gate_lag mean vectors: entry 0 is the
     # iterate gate_lag steps back once i >= gate_lag.
     mean_history = [current_tensor.mean(dim=0).clone()]
+    recent_means = []  # capture_terminal only: last 9 iterates for lag_scan
 
     consecutive = 0
     lock_in_iter = None
@@ -321,6 +328,10 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
 
         current_tensor = cache[hook_point_read][0].clone()
         mean_vec = current_tensor.mean(dim=0).clone()
+        if capture_terminal:
+            recent_means.append(mean_vec)
+            if len(recent_means) > 9:
+                recent_means.pop(0)
 
         if i >= check_start and i % check_every == 0:
             cos = F.cosine_similarity(
@@ -341,7 +352,7 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
     last_vec = current_tensor[-1, :].clone()
     top = get_top_tokens(model, last_vec, k=1)[0]
     detail = get_readout_detail(model, last_vec)
-    return {
+    out = {
         "terminal_token": top[0],
         "terminal_token_id": detail["top_token_ids"][0],
         "terminal_prob": top[1],
@@ -352,6 +363,14 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
         "top_logit_margin": detail["top_logit_margin"],
         "entropy": detail["entropy"],
     }
+    if capture_terminal:
+        out["terminal_mean_vec"] = current_tensor.mean(dim=0).clone()
+        out["terminal_last_vec"] = last_vec
+        out["lag_scan"] = (
+            {k: float(v) for k, v in lag_scan(recent_means).items()}
+            if len(recent_means) > 1 else None
+        )
+    return out
 
 
 def lag_scan(iterates, max_lag=8):

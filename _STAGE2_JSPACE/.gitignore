@@ -6,3 +6,5 @@ experiments/exp_010c_windows/output/full_run.log
 # Live checkpoints of the in-progress registered run — final versions committed with the results
 experiments/exp_010c_windows/output/results_full.json
 experiments/exp_010c_windows/output/terminals_full.pt
+# Scratch state is never versioned (PR #4 review item 3)
+*.bak

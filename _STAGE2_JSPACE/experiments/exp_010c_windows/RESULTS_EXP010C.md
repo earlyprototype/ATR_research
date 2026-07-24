@@ -265,3 +265,24 @@ Medium's J-lens band structure), EXP_011m (project terminal tensors onto
 J-space vs complement, permutation null), EXP_013m (re-decode terminals and
 trajectories through the J-lens; three-readout comparison). Controls 1–4
 above are ATR-side and need no J-lens.
+
+## 2026-07-23 — Post-review corrections (PR #4 review)
+
+1. **lag_scan bug (review item 1):** all `lag_scan` fields committed before
+   this date are placeholders (`[1.0..8.0]` — the dict's keys, not its
+   cosines). Fixed; full and scan tiers rerun to regenerate artifacts with
+   real values. Convergence-relevant fields (terminals, locks, margins) were
+   unaffected by the bug; the reruns also serve as a same-machine
+   repeatability check against the pre-fix artifacts, and any discrepancy
+   will be recorded here.
+2. **Single source of truth (item 2):** the runner's duplicated gated loop
+   replaced by `atr_engine2.run_atr_gated(capture_terminal=True)` — a
+   recorded diff vs the upstream engine (see atr_engine2.py header).
+   Equivalence check: post-refactor smoke reproduces the pre-refactor smoke
+   exactly (terminals, lock iterations, convergence flags).
+3. **Artifact convention (item 3):** `.bak` files removed and ignored;
+   JSON results stay versioned (they are the quantitative record);
+   terminal `.pt` files stay versioned while ≤ ~2 MB each (they are the
+   Phase-2 hand-off artifact); revisit LFS/release assets if they grow.
+4. **Item 4:** terminal `.pt` keys changed from tuples to "ARM|PROMPT_ID"
+   strings so the files load with `weights_only=True`.

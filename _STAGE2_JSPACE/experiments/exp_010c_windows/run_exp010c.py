@@ -26,7 +26,7 @@ import torch.nn.functional as F
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))  # for atr_engine2
 
-from atr_engine2 import run_atr_gated, lag_scan, get_readout_detail  # noqa: E402
+from atr_engine2 import run_atr_gated  # noqa: E402
 from derive_prompts import select_subset  # noqa: E402
 
 ARMS = {
@@ -58,77 +58,22 @@ TIERS = {
 
 
 def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start):
-    """run_atr_gated + capture of the terminal tensor (mean + last-position vectors).
+    """Thin wrapper: the gated protocol lives ONLY in atr_engine2.run_atr_gated
+    (capture_terminal=True adds terminal tensors + a real lag_scan dict — the
+    recorded diff vs the upstream engine; see atr_engine2.py header).
 
-    Re-runs the final injection state capture by repeating the gated loop's exact
-    protocol; to avoid doubling cost we inline a light variant: run the gated loop,
-    then one extra natural re-derivation is unnecessary because run_atr_gated
-    classifies from its own final tensor — so instead we replicate its loop here
-    with terminal capture. Kept minimal and protocol-identical.
+    History note (PR #4 review): an earlier version re-implemented the gated
+    loop here and saved lag_scan's dict KEYS instead of its cosine values, so
+    every pre-fix artifact carries the placeholder [1.0..8.0]. Fixed by this
+    wrapper; artifacts regenerated.
     """
-    hook_read = f"blocks.{j}.hook_resid_post"
-    hook_write = f"blocks.{i}.hook_resid_pre"
-    threshold, patience, check_every, gate_lag = 0.999, 3, 10, 1
-
-    with torch.no_grad():
-        _, cache = model.run_with_cache(prompt, names_filter=lambda n: n == hook_read)
-    current = cache[hook_read][0].clone()
-    initial_norm = current.norm().item()
-    mean_history = [current.mean(dim=0).clone()]
-
-    consecutive, lock_in, final_cos, it = 0, None, 1.0, 0
-    recent = []  # last 8 mean vectors for lag_scan
-
-    for it in range(1, max_iter + 1):
-        norm = current.norm().item()
-        if norm > 0:
-            current = current * (initial_norm / norm)
-        inject = current.clone()
-
-        def injection_hook(resid, hook, tensor=inject):
-            resid[0, :, :] = tensor
-            return resid
-
-        model.add_hook(hook_write, injection_hook)
-        try:
-            with torch.no_grad():
-                _, cache = model.run_with_cache(prompt, names_filter=lambda n: n == hook_read)
-        finally:
-            model.reset_hooks()
-        current = cache[hook_read][0].clone()
-        mean_vec = current.mean(dim=0).clone()
-        recent.append(mean_vec)
-        if len(recent) > 9:
-            recent.pop(0)
-
-        if it >= check_start and it % check_every == 0:
-            cos = F.cosine_similarity(mean_vec.unsqueeze(0), mean_history[0].unsqueeze(0)).item()
-            final_cos = cos
-            consecutive = consecutive + 1 if cos > threshold else 0
-            if consecutive >= patience:
-                lock_in = it
-                break
-        mean_history.append(mean_vec)
-        if len(mean_history) > gate_lag:
-            mean_history.pop(0)
-
-    last_vec = current[-1, :].clone()
-    detail = get_readout_detail(model, last_vec)
-    lags = lag_scan(torch.stack(recent), max_lag=min(8, len(recent) - 1)) if len(recent) > 1 else None
-    return {
-        "terminal_token": detail["top_token_strings"][0],
-        "terminal_token_id": detail["top_token_ids"][0],
-        "terminal_prob": detail["top_token_probs"][0],
-        "top_logit_margin": detail["top_logit_margin"],
-        "entropy": detail["entropy"],
-        "lock_in_iter": lock_in,
-        "converged": lock_in is not None,
-        "n_iters": it,
-        "final_cos_sim_mean": final_cos,
-        "lag_scan": [float(x) for x in lags] if lags is not None else None,
-        "terminal_mean_vec": current.mean(dim=0).clone(),
-        "terminal_last_vec": last_vec,
-    }
+    r = run_atr_gated(model, prompt, i, j, max_iter=max_iter,
+                      check_start=check_start, capture_terminal=True)
+    # lag_scan arrives as {lag: mean_cosine}; keep the mapping explicit.
+    if r.get("lag_scan") is not None:
+        r["lag_scan"] = {str(k): v for k, v in r["lag_scan"].items()}
+    r["terminal_prob"] = float(r["terminal_prob"])
+    return r
 
 
 class _DummyTokenizer:
@@ -231,7 +176,8 @@ def main():
             p = rec["prompt"]
             p_text = p if isinstance(p, str) else "harness-check-tokens"
             r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], tier["check_start"])
-            terminals[(arm, rec["id"])] = {
+            # string keys ("ARM|PROMPT_ID") so the .pt loads with weights_only=True
+            terminals[f"{arm}|{rec['id']}"] = {
                 "mean": r.pop("terminal_mean_vec"),
                 "last": r.pop("terminal_last_vec"),
             }

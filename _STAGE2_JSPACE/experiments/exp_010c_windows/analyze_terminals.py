@@ -52,8 +52,12 @@ def main():
     args = ap.parse_args()
 
     results = json.load(open(HERE / "output" / f"results_{args.tier}.json"))
-    terminals = torch.load(HERE / "output" / f"terminals_{args.tier}.pt",
-                           map_location="cpu", weights_only=False)
+    tpath = HERE / "output" / f"terminals_{args.tier}.pt"
+    try:  # new format: string keys "ARM|PROMPT_ID", loads safely
+        terminals = torch.load(tpath, map_location="cpu", weights_only=True)
+    except Exception:  # legacy tuple-keyed files
+        terminals = torch.load(tpath, map_location="cpu", weights_only=False)
+        terminals = {f"{k[0]}|{k[1]}": v for k, v in terminals.items()}
 
     model = None
     if args.decode_via_tail:
@@ -66,7 +70,7 @@ def main():
     for arm in arms:
         rs = [r for r in results if r["arm"] == arm]
         ids = [r["prompt_id"] for r in rs]
-        vecs = [terminals[(arm, pid)]["mean"] for pid in ids]
+        vecs = [terminals[f"{arm}|{pid}"]["mean"] for pid in ids]
         labels, n_clusters = cluster(vecs)
         sizes = Counter(labels)
         toks = Counter(r["terminal_token"] for r in rs)
@@ -99,7 +103,7 @@ def main():
             tail_toks = Counter()
             agree = 0
             for pid, r in zip(ids, rs):
-                t = terminals[(arm, pid)]["mean"].clone()
+                t = terminals[f"{arm}|{pid}"]["mean"].clone()
                 x = t.unsqueeze(0).unsqueeze(0)  # [1, 1, d_model]
                 with torch.no_grad():
                     for layer in range(j + 1, model.cfg.n_layers):
