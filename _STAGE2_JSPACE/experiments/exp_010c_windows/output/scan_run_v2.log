@@ -30,3 +30,22 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [E22] G03_counting     -> ' until'       lock=180 iters=180 margin=3.19
   [E22] E04_internet     -> ' Tak'         lock=190 iters=190 margin=0.57
   [E22] D04_equation     -> ' and'         lock=230 iters=230 margin=0.34
+  [E22] A04_climate      -> '<|endoftext|>' lock=180 iters=180 margin=1.79
+  [E22] B04_rome         -> '<|endoftext|>' lock=420 iters=420 margin=3.67
+
+=== Arm E23: window 10->23 ===
+  [E23] E01_politics     -> '/'            lock=420 iters=420 margin=0.13
+  [E23] D01_water        -> ' until'       lock=290 iters=290 margin=2.23
+  [E23] A01_physics      -> ' in'          lock=370 iters=370 margin=0.23
+  [E23] B01_napoleon     -> ' "'           lock=280 iters=280 margin=0.06
+  [E23] C01_jack_jill    -> ' until'       lock=250 iters=250 margin=1.45
+  [E23] F01_anger        -> ' self'        lock=120 iters=120 margin=0.31
+  [E23] G01_punctuation  -> ' plate'       lock=120 iters=120 margin=0.36
+  [E23] E02_tech         -> ' until'       lock=120 iters=120 margin=0.88
+  [E23] D02_periodic     -> ' self'        lock=120 iters=120 margin=0.76
+  [E23] A02_medical      -> ' until'       lock=120 iters=120 margin=0.30
+  [E23] B02_wwi          -> ' —'           lock=210 iters=210 margin=0.96
+  [E23] C02_king_cole    -> ' Uber'        lock=180 iters=180 margin=0.76
+  [E23] F02_insult       -> ' self'        lock=120 iters=120 margin=0.78
+  [E23] G02_brackets     -> ' self'        lock=120 iters=120 margin=0.27
+  [E23] E03_orgs         -> ' self'        lock=120 iters=120 margin=0.33
