@@ -1,0 +1,6 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user-ATR-research/7e472327-54ae-54ea-8f69-618842ecc6bb/scratchpad/gpt2-medium-local (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 16222.54it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=infill arms=['I9', 'I11', 'I7', 'I5', 'X1019', 'X1017', 'X1015', 'X819', 'X817'] prompts=25 max_iter=1000 check_start=100
+
+=== Arm I9: window 9->21 ===
