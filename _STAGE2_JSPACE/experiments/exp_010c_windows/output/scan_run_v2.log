@@ -144,3 +144,36 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
 === Arm O8: window 8->21 ===
   [O8] E01_politics     -> ' halfway'     lock=120 iters=120 margin=0.88
   [O8] D01_water        -> ' halfway'     lock=120 iters=120 margin=0.78
+  [O8] A01_physics      -> ' simultaneously' lock=120 iters=120 margin=3.70
+  [O8] B01_napoleon     -> ' simultaneously' lock=120 iters=120 margin=4.11
+  [O8] C01_jack_jill    -> ' simultaneously' lock=120 iters=120 margin=4.74
+  [O8] F01_anger        -> ' simultaneously' lock=120 iters=120 margin=4.37
+  [O8] G01_punctuation  -> ' halfway'     lock=120 iters=120 margin=0.87
+  [O8] E02_tech         -> ' simultaneously' lock=120 iters=120 margin=5.10
+  [O8] D02_periodic     -> ' simultaneously' lock=120 iters=120 margin=0.99
+  [O8] A02_medical      -> ' simultaneously' lock=120 iters=120 margin=1.81
+  [O8] B02_wwi          -> ' halfway'     lock=120 iters=120 margin=0.94
+  [O8] C02_king_cole    -> ' simultaneously' lock=120 iters=120 margin=4.73
+  [O8] F02_insult       -> ' simultaneously' lock=120 iters=120 margin=4.45
+  [O8] G02_brackets     -> ' halfway'     lock=120 iters=120 margin=1.38
+  [O8] E03_orgs         -> ' simultaneously' lock=120 iters=120 margin=4.37
+  [O8] D03_organic      -> ' halfway'     lock=120 iters=120 margin=0.82
+  [O8] A03_neuro        -> ' simultaneously' lock=120 iters=120 margin=3.73
+  [O8] B03_moon         -> ' simultaneously' lock=120 iters=120 margin=4.46
+  [O8] C03_mary_lamb    -> ' simultaneously' lock=120 iters=120 margin=3.24
+  [O8] F03_frustration  -> ' simultaneously' lock=120 iters=120 margin=3.04
+  [O8] G03_counting     -> ' simultaneously' lock=120 iters=120 margin=3.86
+  [O8] E04_internet     -> ' halfway'     lock=120 iters=120 margin=1.11
+  [O8] D04_equation     -> ' halfway'     lock=120 iters=120 margin=1.47
+  [O8] A04_climate      -> ' simultaneously' lock=120 iters=120 margin=2.37
+  [O8] B04_rome         -> ' simultaneously' lock=120 iters=120 margin=4.71
+
+=== Arm O12: window 12->21 ===
+  [O12] E01_politics     -> 'or'           lock=120 iters=120 margin=2.36
+  [O12] D01_water        -> 'or'           lock=120 iters=120 margin=0.29
+  [O12] A01_physics      -> ' £'           lock=120 iters=120 margin=0.37
+  [O12] B01_napoleon     -> ' £'           lock=120 iters=120 margin=0.41
+  [O12] C01_jack_jill    -> ' NHS'         lock=120 iters=120 margin=0.13
+  [O12] F01_anger        -> ' NHS'         lock=120 iters=120 margin=0.15
+  [O12] G01_punctuation  -> 'or'           lock=120 iters=120 margin=2.43
+  [O12] E02_tech         -> ' NHS'         lock=120 iters=120 margin=0.39
