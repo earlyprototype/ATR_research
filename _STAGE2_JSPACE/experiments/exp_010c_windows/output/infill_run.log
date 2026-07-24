@@ -172,3 +172,28 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [X1015] E01_politics     -> ' Fas'         lock=120 iters=120 margin=1.38
   [X1015] D01_water        -> ' Fas'         lock=120 iters=120 margin=1.43
   [X1015] A01_physics      -> ' Fas'         lock=120 iters=120 margin=1.90
+  [X1015] B01_napoleon     -> ' Fas'         lock=120 iters=120 margin=1.89
+  [X1015] C01_jack_jill    -> ' Fas'         lock=120 iters=120 margin=2.25
+  [X1015] F01_anger        -> ' Fas'         lock=120 iters=120 margin=2.22
+  [X1015] G01_punctuation  -> ' Fas'         lock=120 iters=120 margin=1.37
+  [X1015] E02_tech         -> ' Fas'         lock=120 iters=120 margin=2.20
+  [X1015] D02_periodic     -> ' Fas'         lock=120 iters=120 margin=1.58
+  [X1015] A02_medical      -> ' Fas'         lock=120 iters=120 margin=1.65
+  [X1015] B02_wwi          -> ' Fas'         lock=120 iters=120 margin=1.39
+  [X1015] C02_king_cole    -> ' Fas'         lock=120 iters=120 margin=2.17
+  [X1015] F02_insult       -> ' Fas'         lock=120 iters=120 margin=2.23
+  [X1015] G02_brackets     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] E03_orgs         -> ' Fas'         lock=120 iters=120 margin=2.20
+  [X1015] D03_organic      -> ' Fas'         lock=120 iters=120 margin=1.41
+  [X1015] A03_neuro        -> ' Fas'         lock=120 iters=120 margin=1.92
+  [X1015] B03_moon         -> ' Fas'         lock=120 iters=120 margin=2.21
+  [X1015] C03_mary_lamb    -> ' Fas'         lock=120 iters=120 margin=1.93
+  [X1015] F03_frustration  -> ' Fas'         lock=120 iters=120 margin=1.94
+  [X1015] G03_counting     -> ' Fas'         lock=120 iters=120 margin=1.96
+  [X1015] E04_internet     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] D04_equation     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] A04_climate      -> ' Fas'         lock=120 iters=120 margin=1.67
+  [X1015] B04_rome         -> ' Fas'         lock=120 iters=120 margin=2.26
+
+=== Arm X819: window 8->19 ===
+  [X819] E01_politics     -> "'d"           lock=120 iters=120 margin=1.34
