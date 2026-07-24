@@ -1,0 +1,10 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user-ATR-research/7e472327-54ae-54ea-8f69-618842ecc6bb/scratchpad/gpt2-medium-local (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 14218.31it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=infill arms=['X819'] prompts=25 max_iter=1000 check_start=100
+
+=== Arm X819: window 8->19 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [X819] E01_politics     -> "'d"           lock=120 iters=120 margin=1.34
