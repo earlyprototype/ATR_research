@@ -51,13 +51,31 @@ def main():
     if args.decode_via_tail and not args.model_path:
         ap.error("--decode-via-tail requires --model-path")
 
-    results = json.load(open(HERE / "output" / f"results_{args.tier}.json"))
+    rpath = HERE / "output" / f"results_{args.tier}.json"
+    rdir = HERE / "output" / f"results_{args.tier}"
+    if rpath.exists():
+        results = json.load(open(rpath))
+    elif rdir.is_dir():  # sharded tier (census): one json per arm
+        results = []
+        for f in sorted(rdir.glob("*.json")):
+            results.extend(json.load(open(f)))
+    else:
+        raise SystemExit(f"no results for tier {args.tier!r} (neither {rpath} nor {rdir}/)")
+
     tpath = HERE / "output" / f"terminals_{args.tier}.pt"
-    try:  # new format: string keys "ARM|PROMPT_ID", loads safely
-        terminals = torch.load(tpath, map_location="cpu", weights_only=True)
-    except Exception:  # legacy tuple-keyed files
-        terminals = torch.load(tpath, map_location="cpu", weights_only=False)
-        terminals = {f"{k[0]}|{k[1]}": v for k, v in terminals.items()}
+    tdir = HERE / "output" / f"terminals_{args.tier}"
+    if tpath.exists():
+        try:  # new format: string keys "ARM|PROMPT_ID", loads safely
+            terminals = torch.load(tpath, map_location="cpu", weights_only=True)
+        except Exception:  # legacy tuple-keyed files
+            terminals = torch.load(tpath, map_location="cpu", weights_only=False)
+            terminals = {f"{k[0]}|{k[1]}": v for k, v in terminals.items()}
+    elif tdir.is_dir():  # sharded tier: one .pt per arm, string-keyed
+        terminals = {}
+        for f in sorted(tdir.glob("*.pt")):
+            terminals.update(torch.load(f, map_location="cpu", weights_only=True))
+    else:
+        raise SystemExit(f"no terminals for tier {args.tier!r} (neither {tpath} nor {tdir}/)")
 
     model = None
     if args.decode_via_tail:
