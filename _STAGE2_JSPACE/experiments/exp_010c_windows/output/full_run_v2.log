@@ -66,3 +66,33 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [A1] A01_physics      -> ','            lock=120 iters=120 margin=0.27
   [A1] B01_napoleon     -> ','            lock=120 iters=120 margin=0.27
   [A1] C01_jack_jill    -> ','            lock=120 iters=120 margin=0.27
+  [A1] F01_anger        -> ','            lock=120 iters=120 margin=0.27
+  [A1] G01_punctuation  -> ','            lock=120 iters=120 margin=0.28
+  [A1] E02_tech         -> ','            lock=120 iters=120 margin=0.27
+  [A1] D02_periodic     -> ','            lock=120 iters=120 margin=0.27
+  [A1] A02_medical      -> ','            lock=120 iters=120 margin=0.27
+  [A1] B02_wwi          -> ','            lock=120 iters=120 margin=0.28
+  [A1] C02_king_cole    -> ','            lock=120 iters=120 margin=0.27
+  [A1] F02_insult       -> ','            lock=120 iters=120 margin=0.27
+  [A1] G02_brackets     -> ','            lock=120 iters=120 margin=0.28
+  [A1] E03_orgs         -> ','            lock=120 iters=120 margin=0.27
+  [A1] D03_organic      -> 'ing'          lock=120 iters=120 margin=0.37
+  [A1] A03_neuro        -> ','            lock=120 iters=120 margin=0.27
+  [A1] B03_moon         -> ','            lock=120 iters=120 margin=0.27
+  [A1] C03_mary_lamb    -> ','            lock=120 iters=120 margin=0.27
+  [A1] F03_frustration  -> ','            lock=120 iters=120 margin=0.27
+  [A1] G03_counting     -> ','            lock=120 iters=120 margin=0.27
+  [A1] E04_internet     -> 'ing'          lock=120 iters=120 margin=1.84
+  [A1] D04_equation     -> ','            lock=120 iters=120 margin=0.28
+  [A1] A04_climate      -> ','            lock=120 iters=120 margin=0.27
+  [A1] B04_rome         -> ','            lock=120 iters=120 margin=0.27
+
+=== Arm A2: window 6->17 ===
+  [A2] E01_politics     -> ' "'           lock=120 iters=120 margin=0.02
+  [A2] D01_water        -> ' "'           lock=120 iters=120 margin=0.10
+  [A2] A01_physics      -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] B01_napoleon     -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] C01_jack_jill    -> ' state'       lock=120 iters=120 margin=0.04
+  [A2] F01_anger        -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] G01_punctuation  -> ' "'           lock=120 iters=120 margin=0.03
+  [A2] E02_tech         -> ' state'       lock=120 iters=120 margin=0.03
