@@ -309,3 +309,172 @@ The full per-run values are in the regenerated `results_full.json` /
 **Housekeeping:** `results_full.json` and `terminals_full.pt` un-ignored and
 committed (the gitignore entries existed to keep mid-run checkpoints out;
 final versions are the record, per the convention above).
+
+## 2026-07-24 — EXP_010c-3 IN-FILL SCAN (9 arms × 25, gated, max_iter=1000)
+
+**Spec:** `../../EXP_010c3_SPEC.md` (pre-registered and committed before any
+run; task register GitHub issue #6, whose "10 windows / 250 runs" header
+arithmetic vs its enumerated 9 windows / 225 runs is recorded there as a
+deviation — the enumerated set ran).
+
+**What ran:** `--tier infill --model-path <local>`. 225/225 converged
+(lock-in 120–170; 214/225 at the earliest gated lock of 120). Environment
+rebuilt in a fresh container and re-verified before running: state dict
+316 tensors / wte [50257, 1024] / 24 layers; smoke reproduction gate passed
+with **byte-identical committed artifacts** (cross-container repeatability;
+same pins torch 2.13.0 / transformer_lens 3.5.1 / py3.11). Deviation: the
+sweep executed as three processes — the first died silently at 188/225
+(no traceback, no OOM evidence; 7 completed arms already committed by
+per-arm checkpoints), X819 rerun as its own process (its 13-run overlap
+with the dead process's log is **line-identical** — determinism check),
+X817 likewise. Protocol parameters identical throughout. Artifacts:
+`results_infill.json`, `terminals_infill.pt`, logs `infill_run*.log`,
+`terminal_characterisation_infill.json`.
+
+**Injection in-fill (inject i → extract 21).** New arms marked •; measured
+neighbours repeated for the axis to read in order:
+
+| i | Terminals (n=25) | Unique | Token class (per spec §3 rule) |
+|---|---|---|---|
+| 4 | `','` ×25 | 1 | punctuation funnel |
+| •5 | `'...'` ×7, `'…'` ×6, `' Congratulations'` ×4, `' Welcome'` ×3, `'been'` ×2, `'!!'` ×2, `' been'` ×1 | 7 | mixed (word/punctuation/fragment) |
+| 6 | `' apologies'`, `' etc'`, `' please'`, `'..'`, `'oooo'`, `'​'` | 6 | mixed |
+| •7 | `'oooooooo'` ×25 | 1 | fragment, single terminal |
+| 8 | `' simultaneously'` ×17, `' halfway'` ×8 | 2 | whole-word, prompt-dependent |
+| •9 | `'oooooooo'` ×18, `'…'` ×7 | 2 | fragment + punctuation |
+| 10 | `' until'` ×19, `' forever'` ×5, `' since'` ×1 | 3 | whole-word, prompt-dependent |
+| •11 | `'<|endoftext|>'` ×25 | 1 | special token, single terminal |
+| 12 | `' NHS'`, `' £'`, `'or'` | 3 | mixed (abbreviation/symbol/fragment) |
+| 14 | `' DES'`, `' or'`, `' than'`, `' vs'`, `'.'`, `'."'`, `'.)'` | 7 | mixed |
+
+**Extraction columns (rows i=8 and i=10).** New arms •; measured cells
+repeated for the axis:
+
+| Window | Terminals (n=25) | Unique | Token class (per spec §3 rule) |
+|---|---|---|---|
+| 8→15 | `' rant'` ×25 | 1 | whole-word, single terminal |
+| •8→17 | `' GOP'` ×25 | 1 | abbreviation, single terminal |
+| •8→19 | `"'d"` ×25 | 1 | see classification note below |
+| 8→21 | `' simultaneously'` ×17, `' halfway'` ×8 | 2 | whole-word, prompt-dependent |
+| •10→15 | `' Fas'` ×25 | 1 | whole-word by the §3 character rule; see note |
+| •10→17 | `' Bhar'` ×25 | 1 | whole-word by the §3 character rule; see note |
+| •10→19 | `'…)'` ×15, `' […]'` ×10 | 2 | punctuation |
+| 10→21 | `' until'` ×19, `' forever'` ×5, `' since'` ×1 | 3 | whole-word, prompt-dependent |
+
+**Classification notes (recorded flat):** the §3 rule is character-based.
+(1) `"'d"` contains an apostrophe: it is not *whole-word*, not *punctuation*
+(has an alphanumeric), and not *fragment* under the strict "alphabetic
+only" wording — it falls to *abbreviation/symbol* by the letter of the
+rule, while functionally it is a continuation piece (fragment reading).
+Both readings are carried below. (2) `' Fas'` and `' Bhar'` satisfy the
+whole-word character test (leading space + alphabetic, not all-caps) while
+not being standalone dictionary words; the rule classes them whole-word and
+this is recorded as a rule limitation, not adjusted post hoc.
+
+**Characterisation + via-tail control**
+(`terminal_characterisation_infill.json`):
+
+| Arm | Window | Tensor basins (top sizes) | Direct decode | Decode-via-tail | Agree | Margin μ/max |
+|---|---|---|---|---|---|---|
+| I9 | 9→21 | 8 ([9,6,2,2,2…]) | `'oooooooo'` ×18, `'…'` ×7 | `'…'` ×25 | 7/25 | 1.69/2.31 |
+| I11 | 11→21 | 3 ([16,7,2]) | `'<|endoftext|>'` ×25 | `'<|endoftext|>'` ×25 | 25/25 | 1.84/2.17 |
+| I7 | 7→21 | 6 ([15,4,2,2,1…]) | `'oooooooo'` ×25 | `'oooooooo'` ×25 | 25/25 | 2.40/2.57 |
+| I5 | 5→21 | 21 ([2,2,2,2,1…]) | 7 tokens (table above) | `'!'` ×7, `'…'` ×6, `' once'` ×4, `' been'` ×4, `' Welcome'` ×2, `'been'` ×1, `'.'` ×1 | 6/25 | 0.42/2.06 |
+| X1019 | 10→19 | 16 ([3,3,3,2,2…]) | `'…)'` ×15, `' […]'` ×10 | `','` ×13, `' )'` ×5, `' ,'` ×4, `' at'` ×2, `' […]'` ×1 | 1/25 | 1.01/2.05 |
+| X1017 | 10→17 | 5 ([13,5,3,3,1]) | `' Bhar'` ×25 | `' Indian'` ×25 | 0/25 | 1.31/1.47 |
+| X1015 | 10→15 | 3 ([10,8,7]) | `' Fas'` ×25 | `' the'` ×25 | 0/25 | 1.81/2.26 |
+| X819 | 8→19 | 8 ([12,4,2,2,2…]) | `"'d"` ×25 | `"'d"` ×15, `'…'` ×10 | 15/25 | 2.57/3.65 |
+| X817 | 8→17 | 2 ([23,2]) | `' GOP'` ×25 | `' since'` ×25 | 0/25 | 1.15/1.45 |
+
+**Observations (no interpretation in this section):**
+
+1. 225/225 converged; no arm required the non-convergence outcome row.
+2. I9 (9→21): terminals are fragment + punctuation on all 25 prompts. The
+   even-i onset scan's two whole-word arms (i=8, i=10) are therefore not
+   connected through i=9 at extraction 21.
+3. Every new extraction-column cell (j ∈ {15, 17, 19} in both rows, plus
+   both 17/19 cells) produced a single- or two-terminal, prompt-independent
+   set. The whole-word **and** prompt-dependent combination observed at
+   (8→21) and (10→21) did not occur at any new cell.
+4. Direct-vs-via-tail agreement at the new cells: 25/25 only at I7 and I11
+   (both funnels agreeing on the same token); 15/25 at X819; ≤7/25
+   elsewhere; 0/25 at X1015, X1017, X817. For comparison, the registered
+   grid's only high non-trivial agreement remains A4 (10→21, 23/25) and
+   O8 (8→21, 17/25).
+5. Token identities under via-tail at single-funnel cells (flat statement
+   of instrument output, no relationship asserted): X817's `' GOP'` ×25
+   reads as `' since'` ×25 through the tail; X1017's `' Bhar'` ×25 as
+   `' Indian'` ×25; X1015's `' Fas'` ×25 as `' the'` ×25.
+6. Tensor-basin counts at the new cells range 2–21; the two cells with the
+   most basins (I5: 21, X1019: 16) are also the two with the lowest margins
+   (μ 0.42, 1.01). X817 is near-single-basin (2, sizes [23,2], off-diag
+   cos .9993).
+7. All new-cell margins (μ 0.42–2.57) sit below the registered A4 value
+   (μ 4.20).
+
+**Spec §4 verdicts (mechanical application of the pre-registered table):**
+
+- **H11 (zone contiguity): REFUTED.** Pre-registered criterion: I9
+  majority non-whole-word → two-island reading. Observed: 25/25
+  non-whole-word at I9. Consequence as pre-registered: 8→21 and 10→21 go
+  forward to the J-lens phase as separate target cells.
+- **H11a (edge localisation): SUPPORTED under the §3 class rule, with a
+  recorded coarseness caveat.** Each flank lands in a measured-neighbour
+  class: I5 mixed (O6-like), I7 mixed (O6-like), I11 mixed (O12-like);
+  no flank shows the "matching neither neighbour" character as classed.
+  Caveat, stated flat: the *mixed* bucket absorbs qualitatively different
+  behaviours here — I7's and I11's single-terminal funnels vs O6's/O12's
+  multi-token mixtures. The class-level verdict stands by the
+  pre-registered rule; the per-cell tables above carry the structure the
+  rule compresses.
+- **H11b (extraction independence): NOT SUPPORTED; refutation row fires at
+  (10,19).** Support required all five X arms whole-word — fails (X1019
+  punctuation; X817 abbreviation; X819 non-whole-word under either
+  reading). The pre-registered refutation criterion (majority
+  punctuation/fragment) fires cleanly at (10,19); at (8,19) it fires only
+  under the fragment reading of `"'d"` (classification note above); at
+  (8,17), (10,15), (10,17) neither pre-registered row fires — those cells'
+  single-terminal funnels are recorded flat as outcomes the spec's two
+  rows did not anticipate.
+
+**Updated tested-windows map (32 of 300 valid (i≤j) cells measured at the
+registered protocol).** Cell entries: class shorthand (WW = whole-word,
+PD = prompt-dependent, fun = single-terminal funnel):
+
+| i\j | 11 | 15 | 17 | 19 | 21 | 22 | 23 |
+|---|---|---|---|---|---|---|---|
+| 0 | mixed | | | | punct fun | | `D` fun |
+| 4 | | | | | punct fun | | |
+| 5 | | | | | mixed | | |
+| 6 | | | punct fun (6→17) | | mixed | | |
+| 8 | | **WW fun** (`rant`) | abbrev fun (`GOP`) | `'d` fun | **WW PD** | | |
+| 9 | | | | | frag/punct | | |
+| 10 | | WW-by-rule fun (`Fas`) | WW-by-rule fun (`Bhar`) | punct | **WW PD** | mixed | mixed |
+| 11 | | | | | EOT fun | | |
+| 12 | | | | | mixed | | mixed (12→23) |
+| 14 | | | | | mixed | | |
+
+**Hand-forward to the J-lens phase (issue #6 deliverable 3):** cells with
+whole-word **prompt-dependent** terminals remain exactly **(8→21)** and
+**(10→21)** — two isolated cells, not a block and not a column: i=9
+between them is fragment/punctuation, and every measured extraction depth
+below 21 in both rows loses either the whole-word class or the prompt
+dependence. Whole-word single-terminal funnels additionally at (8→15) and
+— by the character rule, with the recorded note — (10→15), (10→17).
+Per-layer lens priority from the two-instrument data: extraction 21 is the
+only depth where direct and via-tail readouts agree at high rates (A4
+23/25, O8 17/25); agreement collapses at 15–19 (0–15/25). EXP_012m/011m/
+013m should therefore target layer-21 states of (8→21) and (10→21) first,
+and treat all sub-21 terminal identities as instrument-dependent pending
+the J-lens re-decode.
+
+**Caveats (standing + new):** single seed; one 25-prompt subset;
+cluster-threshold sensitivity unexplored; the §3 token-class rule is
+character-based and its *mixed* bucket is coarse (measured above); direct
+decode at j<23 is a logit-lens-at-layer-j readout with now-measured
+unreliability at j ∈ {15,17,19}; **sampling-resolution caveat:** this map
+covers 32/300 valid windows — single-layer structure demonstrated here
+(I9, X819) means unmeasured cells cannot be interpolated; the registered
+full census `EXP_010c4_SPEC.md` (all 277 remaining cells, same protocol)
+addresses this. The J-lens re-decode (EXP_013m) remains the registered
+arbiter for all mid-stack terminal claims.
