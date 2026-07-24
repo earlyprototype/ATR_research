@@ -244,7 +244,8 @@ of any story; each is listed with the uncertainty it removes.
 1. **Anisotropy-corrected permutation test** on terminal-set relatedness in
    W_E (Stage 1 `02b` pattern). Removes uncertainty about whether any
    apparent relatedness among terminals exceeds the embedding space's
-   baseline anisotropy.
+   baseline anisotropy. **DONE — see §2026-07-24 below.** A4's triplet
+   survives (4.6σ, p=0.002); all other sets null.
 2. **Seed and prompt-subset variation** for A4 and O8. Removes uncertainty
    about whether the observed basin structure and the i ∈ {8,10} whole-word
    zone are properties of this seed/subset or of the model.
@@ -309,3 +310,72 @@ The full per-run values are in the regenerated `results_full.json` /
 **Housekeeping:** `results_full.json` and `terminals_full.pt` un-ignored and
 committed (the gitignore entries existed to keep mid-run checkpoints out;
 final versions are the record, per the convention above).
+
+## 2026-07-24 — Anisotropy-corrected permutation test (planned control 1)
+
+**Spec:** `../../PERM_TEST_EXP010c_SPEC.md` (pre-registered and committed
+before any computation).
+**Script:** `permutation_test.py` (this directory).
+**Artifacts:** `output/permutation_results.json`.
+**Pattern:** Stage 1 `02b_permutation_test.py` (Lucier repo), extended with
+per-token matching on leading-space status, string length (±1 char), and
+BPE merge-rank frequency decile.
+
+**Design:** 10,000 permutations per set; seed 2026; Bonferroni correction
+across 8 testable sets (α = 0.00625). Token sets from the full uncurated
+inventories (`results_full.json`, `results_scan.json`,
+`terminal_characterisation_full.json`, `terminal_characterisation_scan.json`).
+See spec for complete set definitions.
+
+**Weight tying (recorded):** GPT-2 Medium ties W_E = W_U (no separate
+`lm_head.weight` in the state dict). The spec pre-registered both spaces
+side by side; since they are identical, one column is reported. Global
+mean pairwise cosine (unmatched, 200k pairs): 0.307.
+
+**Results (observations only):**
+
+| Set | Description | n | Observed | Null μ±σ | Effect | p | Sig |
+|---|---|---|---|---|---|---|---|
+| S1 | A4 direct (`until`/`forever`/`since`) | 3 | 0.4121 | 0.2746±0.0300 | 4.59σ | 0.0022 | **yes** |
+| S2 | O8 direct (`simultaneously`/`halfway`) | 2 | 0.2972 | 0.3017±0.0416 | −0.11σ | 0.510 | no |
+| S3 | A5 direct (`rant`) | 1 | — | — | — | — | degenerate |
+| S4 | Pooled word-arms direct (A4+O8+A5) | 6 | 0.3180 | 0.2832±0.0176 | 1.98σ | 0.034 | no |
+| S5 | A1 contrast (`,`/`ing`) | 2 | 0.3937 | 0.3264±0.0711 | 0.95σ | 0.136 | no |
+| S6 | A4 via-tail (`until`/`forever`/`since`) | 3 | 0.4121 | 0.2745±0.0299 | 4.60σ | 0.0019 | **yes** |
+| S7 | O8 via-tail (`simultaneously`/`just`/`'`) | 3 | 0.2993 | 0.2880±0.0407 | 0.28σ | 0.298 | no |
+| S8 | A5 via-tail (`endless`/`'`) | 2 | 0.2863 | 0.3026±0.0629 | −0.26σ | 0.525 | no |
+| S9 | Pooled via-tail (S6+S7+S8) | 7 | 0.3320 | 0.2830±0.0204 | 2.40σ | 0.027 | no |
+
+Notes: "Sig" = significant after Bonferroni at α = 0.00625. Pool-size
+warning: token 11640 (` simultaneously`) had only 43 matches at ±1 char;
+relaxed to ±2 chars (108 matches) — affects S2, S4, S7, S9. S6 = S1
+numerically (same three token IDs under both readouts); the via-tail
+readout for A4 recovers the same three types.
+
+**Pre-registered readings applied mechanically:**
+
+- **S1, S6 (A4: `until`/`forever`/`since`):** observed ≫ null (4.6σ,
+  p < 0.00625). The pre-registered reading: **the relatedness pattern
+  survives its first anisotropy control.** These three tokens are more
+  clustered in embedding space than matched random tokens in the same
+  structural class (same leading-space status, similar length, similar
+  frequency). The word "semantic" stays quarantined — this is an
+  embedding-geometry observation, not a semantic claim.
+
+- **S2, S7 (O8: `simultaneously`/`halfway`), S8 (A5 via-tail),
+  S4 (pooled direct), S9 (pooled tail):** observed ≈ null. The
+  pre-registered reading: **the apparent relatedness of these tokens
+  does not exceed the baseline anisotropy of matched random sets.** The
+  broader "temporal/durative family" reading across all word-producing
+  arms does not survive this control. The pooled sets (S4, S9) show
+  marginal effects (2.0–2.4σ) that are driven entirely by the A4
+  cluster and do not survive Bonferroni correction.
+
+- **S5 (A1 contrast: punctuation funnel):** null (p = 0.14). The
+  within-experiment negative control behaves as expected.
+
+**Summary observation (flat, no interpretation):** of the three
+word-producing arms, only A4 (10→21) produces terminal tokens that are
+more related than chance under the matched null. O8 (8→21) and A5
+(8→15) do not. The signal is arm-specific, not a property of the
+word-producing zone as a whole.
