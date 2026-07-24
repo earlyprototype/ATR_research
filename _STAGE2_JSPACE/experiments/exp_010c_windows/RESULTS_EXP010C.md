@@ -118,43 +118,37 @@ mean-vs-last-position decode check (both pass — position collapse holds).
 A1's single tensor cluster with two direct-decode tokens reflects mean-vector
 clustering vs last-position decoding.
 
-**Headline findings:**
+**Observations (no interpretation in this section):**
 
-1. **Reproduction gate: PASSED.** A0: 25/25 → `D`, near-identical tensors.
-2. **The band window (A4) is qualitatively unlike every other arm:** 12
-   distinct tensor basins (a genuinely diverse landscape, not a funnel),
-   decoding to a small semantically coherent temporal-durative set
-   (`until`/`forever`/`since`), with by far the highest readout confidence —
-   and it is the **only** arm whose mid-stack decode survives the
-   decode-via-tail control (23/25). The motor pathway itself endorses the
-   band window's readout.
-3. **The final-layer concern, answered empirically:** mid-stack decodes at
-   j=11, 15, 17 flip completely under via-tail (0/25 agreement) — the
-   `ln_final` calibration mismatch is real and large *except* in the band
-   window, where the readout is robust to it. This both vindicates the concern
-   and shows it does not touch the A4 result.
-4. **The temporal theme extends across the band:** A5's via-tail decode is
-   `' endless'` ×18 — the *other* in-band window also speaks duration once
-   read through the model's own pathway, and its via-tail split (18/7)
-   tracks its tensor-basin split ([17,7,1]). In-band iteration settles into
-   duration-words: *until, forever, since, endless*.
-5. **A3 (12→23) is a mass `Divine`-like dissociation:** 21 distinct tensor
-   fixed points sharing one decode (`'"'`) — many private dynamics, one
-   public word.
+1. Reproduction gate: PASSED. A0: 25/25 → `D`; terminal tensors
+   near-identical across prompts (off-diag cos .998).
+2. A4 (10→21): 12 tensor clusters at the gate threshold; 3 decode terminals,
+   all whole-word tokens, varying by prompt; highest margins of any arm
+   (μ 4.20, max 7.15); direct decode and via-tail agree 23/25 — the only
+   arm with non-trivial (j<23) agreement above 0/25 in this grid.
+3. Direct-decode vs via-tail agreement at j<23: A4 23/25; A1, A2, A5 all
+   0/25. (For j=23 arms the tail is empty; agreement there is the
+   mean-vs-last-position check, 25/25 both.)
+4. A5 (8→15): 3 tensor clusters ([17,7,1]); direct decode a single token
+   (`' rant'` ×25); via-tail decode splits 18/7 (`' endless'`/`"'"`),
+   numerically close to the tensor-cluster split.
+5. A3 (12→23): 21 tensor clusters; 23/25 of them decode to the same token
+   (`'"'`). (Same observation class as Stage 1's `Divine` prompts: distinct
+   tensors, shared decode.)
 
-**Spec §6 verdicts (pre-registered readings):**
+**Spec §6 verdicts (mechanical application of the pre-registered table):**
 
-- **H9 (collapse rescue): SUPPORTED.** The `D` collapse is cut-dependent:
-  no window reproduces it, and window placement produces four qualitatively
-  distinct landscape types (uniform funnel / junk funnel / diverse-semantic /
-  many-private-one-decode).
-- **H9a (band placement): SUPPORTED, with a recorded nuance.** The
-  paper-mapped band-exact window is the richest by every measure (basin
-  count, prompt-dependence, semantic coherence, margin, readout robustness).
-  Nuance: in-band A5 (8 layers) funnels to a single direct-decode token at
-  full scale, so placement is necessary but window length co-determines
-  richness — exactly the question EXP_010c-2's edge sweeps are registered
-  to resolve.
+- **H9 (collapse rescue): SUPPORTED.** Pre-registered criterion: at least
+  one window with 0<i or j<23 produces multiple terminals, word terminals,
+  or non-convergence on the same prompts. Observed: yes (several windows;
+  table above).
+- **H9a (band placement): SUPPORTED on the registered wording, with a
+  recorded measure caveat.** Registered wording: the window most different
+  from baseline sits inside the mapped band. "Most different" was not given
+  a single pre-registered metric; by unique-terminal count, prompt-
+  dependence, margin, and decode agreement, A4 (in-band) is the outlier arm.
+  Caveat: in-band A5 produces a single direct-decode terminal at n=25, so
+  window length co-varies with the effect — addressed by the 010c-2 sweeps.
 
 **Caveats (standing):** single seed; one 25-prompt subset; cluster threshold
 sensitivity unexplored; direct decode at j<23 is a logit-lens-at-layer-j
@@ -168,30 +162,31 @@ Artifacts: `output/results_scan.json`, `output/terminals_scan.pt`.
 
 **Onset-edge sweep (inject i → extract 21), with A4 (i=10) from the main grid:**
 
-| i | Terminals | Unique | Character |
+| i | Terminals | Unique | Token class (lexical, checkable) |
 |---|---|---|---|
-| 0 | `','` ×25 | 1 | junk funnel |
-| 4 | `','` ×25 | 1 | junk funnel |
-| 6 | `' apologies'`, `' etc'`, `' please'`, `'..'`, `'oooo'`, `'​'` | 6 | transitional junk |
-| **8** | **`' halfway'`, `' simultaneously'`** | 2 | **semantic: temporal/positional** |
-| **10** | **`' until'`, `' forever'`, `' since'`** (A4) | 3 | **semantic: temporal-durative** |
-| 12 | `' NHS'`, `' £'`, `'or'` | 3 | lexical junk |
-| 14 | `' DES'`, `' or'`, `' than'`, `' vs'`, `'.'`, `'."'`, `'.)'` | 7 | comparative/punctuation fragments |
+| 0 | `','` ×25 | 1 | punctuation, single terminal |
+| 4 | `','` ×25 | 1 | punctuation, single terminal |
+| 6 | `' apologies'`, `' etc'`, `' please'`, `'..'`, `'oooo'`, `'​'` | 6 | mixed word/punctuation/fragment |
+| 8 | `' halfway'` ×8, `' simultaneously'` ×17 | 2 | whole-word |
+| 10 | `' until'` ×19, `' forever'` ×5, `' since'` ×1 (A4) | 3 | whole-word |
+| 12 | `' NHS'`, `' £'`, `'or'` | 3 | abbreviation/symbol/fragment |
+| 14 | `' DES'`, `' or'`, `' than'`, `' vs'`, `'.'`, `'."'`, `'.)'` | 7 | mixed word/punctuation |
 
 **Exit-edge sweep (inject 10 → extract j):**
 
-| j | Terminals | Unique | Character |
+| j | Terminals | Unique | Token class |
 |---|---|---|---|
-| 21 | `until`/`forever`/`since` (A4) | 3 | semantic, via-tail-robust |
-| 22 | incl. `' until'`, `'<|endoftext|>'`, `' Tak'`, `' honor'`… | 7 | degrading, temporal remnant |
-| 23 | incl. `' self'` ×10, `' until'` ×5, misc junk | 10 | fragmented; **no `D`** |
+| 21 | `until`/`forever`/`since` (A4) | 3 | whole-word |
+| 22 | incl. `' until'` ×3, `'<|endoftext|>'` ×14, `' Tak'`, `' honor'`… | 7 | mixed, EOT plurality |
+| 23 | `' self'` ×10, `' until'` ×5, 8 others ×1–2 | 10 | mixed; `D` not observed |
 
-**Verdicts (spec `EXP_010c2_SPEC.md` §4):**
+**Verdicts (mechanical application of spec `EXP_010c2_SPEC.md` §4):**
 
-- **H10 (edge localisation): SUPPORTED.** Transitions are sharp, not smooth:
-  junk funnel (i≤4) → transitional junk (i=6) → semantic temporal regime
-  (i=8–10) → junk again (i≥12). The landscape's character is a non-monotonic
-  function of the injection point with an identifiable semantic window.
+- **H10 (edge localisation): SUPPORTED.** Pre-registered criterion:
+  landscape character changes non-uniformly as an edge slides. Observed:
+  single-terminal arms at i≤4; multi-terminal mixed arms at i=6 and i≥12;
+  whole-word-only arms exactly at i=8 and i=10. Adjacent settings differ
+  qualitatively; the change is not monotonic in i.
 - **H10a (final-layer necessity): REFUTED in its strong form.** Re-including
   the motor tail (10→22, 10→23) changes the landscape but does not restore
   the `D` funnel.
@@ -214,26 +209,18 @@ Artifacts: `output/results_scan.json`, `output/terminals_scan.pt`.
   the `','` funnel with no motor involvement at all — splicing into the
   sensory front destroys structure by itself.
 
-**The ATR-derived prediction handed to the J-lens census (EXP_012m):**
-word-like, prompt-dependent terminals occur only for injection at layers
-8–10 (extraction 15–21). Whether that zone has anything to do with a
-*workspace* is exactly what the census must test — the coincidence with the
-paper's 38% onset mapping (layer ≈9) is consistent-with on one model, one
-seed, one prompt subset, and the mapping's rounding was our own choice. The
-"ignition" reading (band onset as the special injection point) is recorded
-as interpretation only. **The prediction is falsifiable in both directions:
-if the J-lens band census puts Medium's onset far from layers 8–10, or finds
-no coherent band, the workspace reading of the injection zone dies.**
+**Recorded for later comparison (observation only):** whole-word,
+prompt-dependent terminals occurred only for injection at i ∈ {8, 10}
+(extraction 15–21) in this grid. EXP_012m will measure Medium's J-lens band
+independently; the two numbers get compared when both exist. No relationship
+is asserted here.
 
-**Token-pattern note (recorded observation, hypothesis NOT registered):**
-the word-like arms' terminals read as temporal/positional vocabulary
-(*until, forever, since, endless, simultaneously, halfway*). CAUTION: this
-is eyeballed semantic clustering over ~6 token types — the exact move Stage
-1's `W_E` permutation test killed once already (all-warm neighbourhoods were
-an anisotropy artifact). Before this pattern is called a theme anywhere, it
-needs the permutation-null treatment: are these tokens closer to each other
-in embedding space than matched random terminal sets, under the anisotropy-
-corrected null? Until then it is a curiosity, not a finding.
+**Terminal inventories:** the complete, uncurated terminal lists per arm are
+in `results_full.json` and `results_scan.json`. No curated sublist is
+maintained in this record — selecting evocative tokens is itself a bias.
+Any statement about semantic relatedness among terminals is deferred to the
+anisotropy-corrected permutation control (Stage 1 `02b` pattern), which
+previously reclassified an apparent semantic cluster as an artifact.
 
 **Scan characterisation + via-tail control**
 (`terminal_characterisation_scan.json`): the semantic injection zone survives
@@ -249,38 +236,32 @@ robust across both readout instruments; final arbitration to EXP_013m.
 unexplored; two-instrument agreement is necessary but not sufficient — the
 J-lens re-decode remains the registered arbiter.
 
-## Registered disconfirmers (added 2026-07-23, after review)
+## Planned controls — next observations (revised 2026-07-23 after review)
 
-This programme is exploration, not validation. The following tests would
-*hurt* the workspace reading, and are registered so the frame can lose:
+Register note: this programme is exploration. These controls are not trials
+of any story; each is listed with the uncertainty it removes.
 
-1. **Anisotropy null for the token pattern:** permutation test of the
-   "temporal" terminal set against matched random terminal draws in W_E
-   (Stage 1 `02b` pattern). Kills the theme if it fails.
-2. **Seed and subset robustness:** rerun A4 and O8 with a different seed and
-   a disjoint 25-prompt subset. If the basin structure or the 8–10 zone
-   moves, the localisation claim weakens accordingly.
-3. **Placebo windows on a control model:** run the same window grid on
-   Pythia-410m (whose full-stack regime is fragmentation, not collapse). If
-   band-mapped windows there also produce "richest" landscapes at ~38%
-   depth, the effect is generic depth-arithmetic, not workspace structure.
-4. **Hook-point control:** inject at `resid_post` of layer i−1 instead of
-   `resid_pre` of layer i (identical computation, different hook) and at
-   i=1 vs i=0 specifically, to test whether the layer-0 funnels are an
-   artifact of the raw-embedding slot rather than "sensory splicing."
-5. **The J-lens census itself (EXP_012m):** an onset far from layers 8–10,
-   or no coherent band at 345M, falsifies the workspace reading of the
-   injection zone outright.
-
-If 1–2 fail, the token-theme and localisation claims are withdrawn. If 3–5
-fail, the workspace framing of EXP_010c reverts to a classical-dynamics
-description (window-dependent attractor landscapes, mechanism unknown) — per
-the Stage 2 plan's standing kill criteria.
+1. **Anisotropy-corrected permutation test** on terminal-set relatedness in
+   W_E (Stage 1 `02b` pattern). Removes uncertainty about whether any
+   apparent relatedness among terminals exceeds the embedding space's
+   baseline anisotropy.
+2. **Seed and prompt-subset variation** for A4 and O8. Removes uncertainty
+   about whether the observed basin structure and the i ∈ {8,10} whole-word
+   zone are properties of this seed/subset or of the model.
+3. **Same window grid on Pythia-410m.** Removes uncertainty about whether
+   window-position effects at these relative depths are specific to
+   gpt2-medium or generic to decoder stacks of this size.
+4. **Hook-point variants** (`resid_post` at i−1 vs `resid_pre` at i; i=1 vs
+   i=0). Removes uncertainty about whether the layer-0 single-terminal
+   arms reflect the raw-embedding slot's coordinate system rather than
+   layer position.
+5. **EXP_012m J-lens band measurement** (independent instrument). Produces
+   the number the i ∈ {8,10} observation will be compared against.
 
 ## Next
 
-Phase 0 / J-lens track per `RUNBOOK_JLENS_MEDIUM.md`, with branch priors now
-set by both experiments: EXP_011m first (are the A4/O8 temporal terminals
-J-space-loaded where the funnels are not?), EXP_012m census testing the
-**layers ≈7–11 (~30–45% depth) band-onset prediction**, EXP_013m re-decode of
-the temporal-family terminals and the `D`/`','` funnels.
+Phase 0 / J-lens track per `RUNBOOK_JLENS_MEDIUM.md`: EXP_012m (measure
+Medium's J-lens band structure), EXP_011m (project terminal tensors onto
+J-space vs complement, permutation null), EXP_013m (re-decode terminals and
+trajectories through the J-lens; three-readout comparison). Controls 1–4
+above are ATR-side and need no J-lens.

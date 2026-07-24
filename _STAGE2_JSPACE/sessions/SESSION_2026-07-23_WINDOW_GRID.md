@@ -111,3 +111,18 @@ House lesson, restated for Stage 2: the outcome tables are written before
 the runs precisely so the story cannot bend afterward — and the person who
 wrote the outcome table is the wrong person to grade it enthusiastically.
 The correction itself is part of the record.
+
+## Second addendum — observations only (same day, TC)
+
+TC pushed the correction further: a "disconfirmers" list still centres a
+reading — it organises future work as attack/defence on a story, which is
+validation posture wearing a skeptic's coat. Rule adopted for the results
+record: **NO CONCLUSIONS, JUST OBSERVATIONS.** Pre-registered H-verdicts
+remain (they are mechanical checks of pre-stated criteria, the house
+discipline), but all post-hoc interpretation is removed from the results
+file. "Semantic/junk" labels became lexical token classes (whole-word /
+punctuation / fragment — checkable); the curated "temporal token" list was
+deleted after noticing the curation itself was the bias (evocative tokens
+kept, boring ones dropped); "disconfirmers" became "planned controls", each
+stated by the uncertainty it removes, owing allegiance to no story.
+Interpretive material lives here in the session notes, fenced as thinking.
