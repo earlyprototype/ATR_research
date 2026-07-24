@@ -65,3 +65,4 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [A1] D01_water        -> ','            lock=120 iters=120 margin=0.28
   [A1] A01_physics      -> ','            lock=120 iters=120 margin=0.27
   [A1] B01_napoleon     -> ','            lock=120 iters=120 margin=0.27
+  [A1] C01_jack_jill    -> ','            lock=120 iters=120 margin=0.27
