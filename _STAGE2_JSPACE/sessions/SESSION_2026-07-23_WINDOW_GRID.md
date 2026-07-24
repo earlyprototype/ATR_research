@@ -86,3 +86,28 @@ recorded"). Instead it was pushed until it met the instrument built for it. That
 is the same motion Stage 1 made when the corpus-fingerprint hypothesis was pushed
 until it broke — the house method: take the naive worry seriously, formalise it,
 and let it choose the next instrument.
+
+---
+
+## Addendum — the attachment correction (same day, TC)
+
+After the boundary scan reported, TC flagged that the reporting had drifted
+into validation posture: H10a's *refutation* was being converted into a
+sharper claim for the same story ("the collapse is a property of the
+splice") — the signature of a frame that absorbs every outcome as support.
+"We aren't trying to validate anything, we are just exploring."
+
+Corrections applied to the results record: the splice claim demoted to
+labelled interpretation with its untested alternatives listed; the
+"brackets the 38% mapping" language replaced with consistent-with plus both
+falsification directions; the "temporal theme" demoted to an eyeballed
+token pattern pending the anisotropy-corrected permutation null (the exact
+test that killed Stage 1's all-warm claim); and a **Registered
+disconfirmers** section added so the frame can lose: anisotropy null, seed/
+subset robustness, placebo windows on Pythia-410m, hook-point control, and
+the J-lens census as outright falsifier.
+
+House lesson, restated for Stage 2: the outcome tables are written before
+the runs precisely so the story cannot bend afterward — and the person who
+wrote the outcome table is the wrong person to grade it enthusiastically.
+The correction itself is part of the record.

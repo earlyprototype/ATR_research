@@ -193,31 +193,47 @@ Artifacts: `output/results_scan.json`, `output/terminals_scan.pt`.
   (i=8–10) → junk again (i≥12). The landscape's character is a non-monotonic
   function of the injection point with an identifiable semantic window.
 - **H10a (final-layer necessity): REFUTED in its strong form.** Re-including
-  the motor tail (10→22, 10→23) *degrades* the temporal structure but does
-  not restore the `D` funnel. Combined with A3 (12→23, no `D`) and the main
-  grid: the motor tail is neither sufficient nor necessary alone — **the `D`
-  collapse requires the full motor→sensory conjunction**, the pre-registered
-  "only their conjunction" branch. Sharper sentence: the collapse is a
-  property of the *splice*, not of any layer set.
+  the motor tail (10→22, 10→23) changes the landscape but does not restore
+  the `D` funnel.
+  **Observation, stated flat:** of the 14 windows tested across both
+  experiments, exactly one — the full stack 0→23 — produces `D`. Every
+  partial window produces something else. One genuine deconfound: 0→21 is
+  22 of 24 layers and does not produce `D`, so window length alone is not
+  the driver.
+  **Interpretation (labelled as such, NOT a finding):** "the collapse
+  requires the motor→sensory conjunction / is a property of the splice" is
+  one story consistent with this table. Untested alternatives that would
+  also fit: the layer-0 `resid_pre` hook point is a special coordinate
+  system (the raw-embedding slot); `D` requires the specific early layers
+  0–2 plus tail jointly; other unexamined combinations (no 2→23, no
+  gapped-window controls were run). CAUTION recorded: H10a's refutation
+  must not be silently converted into support for the splice story — a
+  frame that absorbs both confirmation and refutation of its own
+  predictions is not being tested.
 - **H10b (sensory-splice necessity): SUPPORTED.** 0→21 and 4→21 collapse to
   the `','` funnel with no motor involvement at all — splicing into the
   sensory front destroys structure by itself.
 
-**The ATR-derived band prediction for the J-lens census (EXP_012m):**
-the semantic regime is entered between injection layers 6 and 8 and exited
-between 10 and 12 — i.e. **Medium's workspace-relevant injection zone is
-layers ≈7–11 (~30–45% of depth)**, brackets the paper's 38% band-onset
-mapping. Notably the semantic regime tracks the band *onset*, not the whole
-band: injecting deeper inside the mapped band (12, 14) loses coherence. In
-the paper's vocabulary this is suggestive of **ignition** — the workspace
-onset where winner-take-all commitment happens — being the dynamically
-special injection point. Recorded as interpretation, not finding.
+**The ATR-derived prediction handed to the J-lens census (EXP_012m):**
+word-like, prompt-dependent terminals occur only for injection at layers
+8–10 (extraction 15–21). Whether that zone has anything to do with a
+*workspace* is exactly what the census must test — the coincidence with the
+paper's 38% onset mapping (layer ≈9) is consistent-with on one model, one
+seed, one prompt subset, and the mapping's rounding was our own choice. The
+"ignition" reading (band onset as the special injection point) is recorded
+as interpretation only. **The prediction is falsifiable in both directions:
+if the J-lens band census puts Medium's onset far from layers 8–10, or finds
+no coherent band, the workspace reading of the injection zone dies.**
 
-**Semantic family note (recorded observation):** every semantically coherent
-arm across both experiments lands in temporal/positional-durative vocabulary:
-*until, forever, since, endless, simultaneously, halfway*. The band's
-attractor family appears to have a theme, not just structure. No hypothesis
-registered yet; candidate for the J-lens phase to probe.
+**Token-pattern note (recorded observation, hypothesis NOT registered):**
+the word-like arms' terminals read as temporal/positional vocabulary
+(*until, forever, since, endless, simultaneously, halfway*). CAUTION: this
+is eyeballed semantic clustering over ~6 token types — the exact move Stage
+1's `W_E` permutation test killed once already (all-warm neighbourhoods were
+an anisotropy artifact). Before this pattern is called a theme anywhere, it
+needs the permutation-null treatment: are these tokens closer to each other
+in embedding space than matched random terminal sets, under the anisotropy-
+corrected null? Until then it is a curiosity, not a finding.
 
 **Scan characterisation + via-tail control**
 (`terminal_characterisation_scan.json`): the semantic injection zone survives
@@ -232,6 +248,34 @@ robust across both readout instruments; final arbitration to EXP_013m.
 **Caveats:** single seed; one 25-prompt subset; cluster-threshold sensitivity
 unexplored; two-instrument agreement is necessary but not sufficient — the
 J-lens re-decode remains the registered arbiter.
+
+## Registered disconfirmers (added 2026-07-23, after review)
+
+This programme is exploration, not validation. The following tests would
+*hurt* the workspace reading, and are registered so the frame can lose:
+
+1. **Anisotropy null for the token pattern:** permutation test of the
+   "temporal" terminal set against matched random terminal draws in W_E
+   (Stage 1 `02b` pattern). Kills the theme if it fails.
+2. **Seed and subset robustness:** rerun A4 and O8 with a different seed and
+   a disjoint 25-prompt subset. If the basin structure or the 8–10 zone
+   moves, the localisation claim weakens accordingly.
+3. **Placebo windows on a control model:** run the same window grid on
+   Pythia-410m (whose full-stack regime is fragmentation, not collapse). If
+   band-mapped windows there also produce "richest" landscapes at ~38%
+   depth, the effect is generic depth-arithmetic, not workspace structure.
+4. **Hook-point control:** inject at `resid_post` of layer i−1 instead of
+   `resid_pre` of layer i (identical computation, different hook) and at
+   i=1 vs i=0 specifically, to test whether the layer-0 funnels are an
+   artifact of the raw-embedding slot rather than "sensory splicing."
+5. **The J-lens census itself (EXP_012m):** an onset far from layers 8–10,
+   or no coherent band at 345M, falsifies the workspace reading of the
+   injection zone outright.
+
+If 1–2 fail, the token-theme and localisation claims are withdrawn. If 3–5
+fail, the workspace framing of EXP_010c reverts to a classical-dynamics
+description (window-dependent attractor landscapes, mechanism unknown) — per
+the Stage 2 plan's standing kill criteria.
 
 ## Next
 
