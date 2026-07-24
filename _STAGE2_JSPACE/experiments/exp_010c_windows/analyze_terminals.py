@@ -53,6 +53,15 @@ def main():
 
     rpath = HERE / "output" / f"results_{args.tier}.json"
     rdir = HERE / "output" / f"results_{args.tier}"
+    tpath = HERE / "output" / f"terminals_{args.tier}.pt"
+    tdir = HERE / "output" / f"terminals_{args.tier}"
+    # Mixed layouts are ambiguous (a re-run in the other mode could leave one
+    # stale) — refuse rather than silently prefer one (PR #10 review).
+    if rpath.exists() and rdir.is_dir():
+        raise SystemExit(f"both {rpath} and {rdir}/ exist — ambiguous layout, remove one")
+    if tpath.exists() and tdir.is_dir():
+        raise SystemExit(f"both {tpath} and {tdir}/ exist — ambiguous layout, remove one")
+
     if rpath.exists():
         results = json.load(open(rpath))
     elif rdir.is_dir():  # sharded tier (census): one json per arm
@@ -62,8 +71,6 @@ def main():
     else:
         raise SystemExit(f"no results for tier {args.tier!r} (neither {rpath} nor {rdir}/)")
 
-    tpath = HERE / "output" / f"terminals_{args.tier}.pt"
-    tdir = HERE / "output" / f"terminals_{args.tier}"
     if tpath.exists():
         try:  # new format: string keys "ARM|PROMPT_ID", loads safely
             terminals = torch.load(tpath, map_location="cpu", weights_only=True)

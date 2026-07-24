@@ -318,7 +318,8 @@ arithmetic vs its enumerated 9 windows / 225 runs is recorded there as a
 deviation — the enumerated set ran).
 
 **What ran:** `--tier infill --model-path <local>`. 225/225 converged
-(lock-in 120–170; 214/225 at the earliest gated lock of 120). Environment
+(lock-in 120–170; 210/225 at the earliest gated lock of 120; 4 at 130,
+6 at 150, 5 at 170). Environment
 rebuilt in a fresh container and re-verified before running: state dict
 316 tensors / wte [50257, 1024] / 24 layers; smoke reproduction gate passed
 with **byte-identical committed artifacts** (cross-container repeatability;
@@ -339,11 +340,11 @@ neighbours repeated for the axis to read in order:
 | 4 | `','` ×25 | 1 | punctuation funnel |
 | •5 | `'...'` ×7, `'…'` ×6, `' Congratulations'` ×4, `' Welcome'` ×3, `'been'` ×2, `'!!'` ×2, `' been'` ×1 | 7 | mixed (word/punctuation/fragment) |
 | 6 | `' apologies'`, `' etc'`, `' please'`, `'..'`, `'oooo'`, `'​'` | 6 | mixed |
-| •7 | `'oooooooo'` ×25 | 1 | fragment, single terminal |
+| •7 | `'oooooooo'` ×25 | 1 | fragment, single terminal (arm class per §3 rule: mixed) |
 | 8 | `' simultaneously'` ×17, `' halfway'` ×8 | 2 | whole-word, prompt-dependent |
 | •9 | `'oooooooo'` ×18, `'…'` ×7 | 2 | fragment + punctuation |
 | 10 | `' until'` ×19, `' forever'` ×5, `' since'` ×1 | 3 | whole-word, prompt-dependent |
-| •11 | `'<|endoftext|>'` ×25 | 1 | special token, single terminal |
+| •11 | `'<\|endoftext\|>'` ×25 | 1 | special token, single terminal (arm class per §3 rule: mixed) |
 | 12 | `' NHS'`, `' £'`, `'or'` | 3 | mixed (abbreviation/symbol/fragment) |
 | 14 | `' DES'`, `' or'`, `' than'`, `' vs'`, `'.'`, `'."'`, `'.)'` | 7 | mixed |
 
@@ -377,7 +378,7 @@ this is recorded as a rule limitation, not adjusted post hoc.
 | Arm | Window | Tensor basins (top sizes) | Direct decode | Decode-via-tail | Agree | Margin μ/max |
 |---|---|---|---|---|---|---|
 | I9 | 9→21 | 8 ([9,6,2,2,2…]) | `'oooooooo'` ×18, `'…'` ×7 | `'…'` ×25 | 7/25 | 1.69/2.31 |
-| I11 | 11→21 | 3 ([16,7,2]) | `'<|endoftext|>'` ×25 | `'<|endoftext|>'` ×25 | 25/25 | 1.84/2.17 |
+| I11 | 11→21 | 3 ([16,7,2]) | `'<\|endoftext\|>'` ×25 | `'<\|endoftext\|>'` ×25 | 25/25 | 1.84/2.17 |
 | I7 | 7→21 | 6 ([15,4,2,2,1…]) | `'oooooooo'` ×25 | `'oooooooo'` ×25 | 25/25 | 2.40/2.57 |
 | I5 | 5→21 | 21 ([2,2,2,2,1…]) | 7 tokens (table above) | `'!'` ×7, `'…'` ×6, `' once'` ×4, `' been'` ×4, `' Welcome'` ×2, `'been'` ×1, `'.'` ×1 | 6/25 | 0.42/2.06 |
 | X1019 | 10→19 | 16 ([3,3,3,2,2…]) | `'…)'` ×15, `' […]'` ×10 | `','` ×13, `' )'` ×5, `' ,'` ×4, `' at'` ×2, `' […]'` ×1 | 1/25 | 1.01/2.05 |
@@ -419,14 +420,20 @@ this is recorded as a rule limitation, not adjusted post hoc.
   non-whole-word at I9. Consequence as pre-registered: 8→21 and 10→21 go
   forward to the J-lens phase as separate target cells.
 - **H11a (edge localisation): SUPPORTED under the §3 class rule, with a
-  recorded coarseness caveat.** Each flank lands in a measured-neighbour
-  class: I5 mixed (O6-like), I7 mixed (O6-like), I11 mixed (O12-like);
-  no flank shows the "matching neither neighbour" character as classed.
+  recorded coarseness caveat.** Derivation shown, since the arm-level rule
+  and the per-token labels differ: the §3 arm classes are *whole-word*
+  (all unique terminals whole-word), *punctuation funnel* (single unique
+  terminal of class punctuation), else *mixed*. I7's single `'oooooooo'`
+  is a fragment → not whole-word, not a punctuation funnel → arm class
+  **mixed**. I11's single `'<\|endoftext\|>'` is a special token → arm
+  class **mixed**. I5 (7 unique, mixed tokens) → **mixed**. All three
+  flanks therefore share the arm class of their measured outer neighbours
+  (O6, O12: mixed); no flank shows a class matching neither neighbour.
   Caveat, stated flat: the *mixed* bucket absorbs qualitatively different
   behaviours here — I7's and I11's single-terminal funnels vs O6's/O12's
-  multi-token mixtures. The class-level verdict stands by the
-  pre-registered rule; the per-cell tables above carry the structure the
-  rule compresses.
+  multi-token mixtures — so the class-level verdict is weaker than the
+  table-level structure; the per-cell tables above carry what the rule
+  compresses, and the axis-table entries now state both labels.
 - **H11b (extraction independence): NOT SUPPORTED; refutation row fires at
   (10,19).** Support required all five X arms whole-word — fails (X1019
   punctuation; X817 abbreviation; X819 non-whole-word under either
@@ -437,8 +444,8 @@ this is recorded as a rule limitation, not adjusted post hoc.
   single-terminal funnels are recorded flat as outcomes the spec's two
   rows did not anticipate.
 
-**Updated tested-windows map (32 of 300 valid (i≤j) cells measured at the
-registered protocol).** Cell entries: class shorthand (WW = whole-word,
+**Updated tested-windows map (23 of 300 valid (i≤j) cells measured at the
+registered protocol: 6 full-tier + 8 scan + 9 infill).** Cell entries: class shorthand (WW = whole-word,
 PD = prompt-dependent, fun = single-terminal funnel):
 
 | i\j | 11 | 15 | 17 | 19 | 21 | 22 | 23 |
@@ -454,13 +461,14 @@ PD = prompt-dependent, fun = single-terminal funnel):
 | 12 | | | | | mixed | | mixed (12→23) |
 | 14 | | | | | mixed | | |
 
-**Hand-forward to the J-lens phase (issue #6 deliverable 3):** cells with
-whole-word **prompt-dependent** terminals remain exactly **(8→21)** and
-**(10→21)** — two isolated cells, not a block and not a column: i=9
-between them is fragment/punctuation, and every measured extraction depth
-below 21 in both rows loses either the whole-word class or the prompt
-dependence. Whole-word single-terminal funnels additionally at (8→15) and
-— by the character rule, with the recorded note — (10→15), (10→17).
+**Hand-forward to the J-lens phase (issue #6 deliverable 3):** among the
+23 measured cells, whole-word **prompt-dependent** terminals occur at
+exactly **(8→21)** and **(10→21)** — two isolated cells, not a block and
+not a column: i=9 between them is fragment/punctuation, and every measured
+extraction depth below 21 in both rows loses either the whole-word class
+or the prompt dependence. Whole-word single-terminal funnels additionally
+at (8→15) and — by the character rule, with the recorded note — (10→15),
+(10→17).
 Per-layer lens priority from the two-instrument data: extraction 21 is the
 only depth where direct and via-tail readouts agree at high rates (A4
 23/25, O8 17/25); agreement collapses at 15–19 (0–15/25). EXP_012m/011m/
@@ -468,12 +476,23 @@ only depth where direct and via-tail readouts agree at high rates (A4
 and treat all sub-21 terminal identities as instrument-dependent pending
 the J-lens re-decode.
 
+**Post-review corrections (PR #10 review, same day):** (1) earliest-lock
+aggregate corrected 214→210 of 225 (recomputed from the artifact: 210 at
+120, 4 at 130, 6 at 150, 5 at 170); (2) measured-cell count corrected
+32→23 of 300 in the map header and caveats (transposition; the census
+count 277 = 300 − 23 was and is consistent); (3) H11a derivation spelled
+out after the review flagged that the axis tables' per-token labels
+(fragment funnel, special-token funnel) and the verdict's arm classes
+(mixed) read as contradictory — recomputation under the pre-registered §3
+arm-class rule confirms the verdict unchanged; (4) `<\|endoftext\|>`
+escaped in two table rows (rendering). None of these changes any verdict.
+
 **Caveats (standing + new):** single seed; one 25-prompt subset;
 cluster-threshold sensitivity unexplored; the §3 token-class rule is
 character-based and its *mixed* bucket is coarse (measured above); direct
 decode at j<23 is a logit-lens-at-layer-j readout with now-measured
 unreliability at j ∈ {15,17,19}; **sampling-resolution caveat:** this map
-covers 32/300 valid windows — single-layer structure demonstrated here
+covers 23/300 valid windows — single-layer structure demonstrated here
 (I9, X819) means unmeasured cells cannot be interpolated; the registered
 full census `EXP_010c4_SPEC.md` (all 277 remaining cells, same protocol)
 addresses this. The J-lens re-decode (EXP_013m) remains the registered

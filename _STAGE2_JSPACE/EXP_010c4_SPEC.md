@@ -116,3 +116,25 @@ run is interrupted. No reduced-prompt recon tier is used (directive above).
   priority block completing), and the full observations-only section +
   final map when the census completes. Interpretation stays in session
   notes, fenced as thinking.
+
+## 6. Amendment — 2026-07-24, pre-analysis (PR #10 review)
+
+Recorded before any census analysis or H12 evaluation (census execution
+~1 arm in; no characterisation run). The review found a hole in H12 as
+written in §2: a census cell with **no** already-measured adjacent cell
+(e.g. 0→0 — most cells outside the measured region) satisfies "differs
+from every measured neighbour" **vacuously**, making H12 unfalsifiable as
+stated. Correction, replacing the eligibility condition only (the
+support/refutation logic is unchanged):
+
+> **H12 (amended):** evaluated over the subset of census cells having at
+> least one already-measured adjacent cell on the valid (i ≤ j) lattice
+> (4-neighbourhood: (i±1, j), (i, j±1), restricted to valid cells).
+> Supported = at least one eligible cell's arm class (010c-3 §3 rule)
+> differs from the arm class of **every** already-measured neighbour.
+> Refuted = every eligible cell matches at least one measured neighbour's
+> class. Cells with no measured neighbour are excluded from the H12
+> evaluation and reported in the map only.
+
+The original §2 text stands above as written (append-don't-rewrite); this
+amendment governs.

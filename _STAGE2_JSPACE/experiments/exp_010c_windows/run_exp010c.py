@@ -212,19 +212,32 @@ def main():
     # boundaries (verified 350/350 on the full+scan regeneration and 13/13 on
     # the X819 rerun), and the per-arm checkpoint only ever writes COMPLETE
     # arms, so skipping arms already on disk is exact, not approximate.
+    # An arm counts as complete only if BOTH artifacts verify: full record
+    # count AND a terminal entry per record (PR #10 review: a crash between
+    # the two writes must not mark the arm done; terminals are written first
+    # and the results JSON is the completion marker, but resume re-verifies
+    # the pair regardless).
     results, terminals = [], {}
     if args.resume:
         if shard:
             done = set()
             for arm in arms:
                 rshard = outdir / f"results_{suffix}" / f"{arm}.json"
+                tshard = outdir / f"terminals_{suffix}" / f"{arm}.pt"
                 try:
-                    if len(json.load(open(rshard))) >= len(prompts):
+                    recs = json.load(open(rshard))
+                    if len(recs) < len(prompts) or not tshard.exists():
+                        continue
+                    keys = set(torch.load(tshard, map_location="cpu", weights_only=True))
+                    if keys >= {f"{arm}|{r['prompt_id']}" for r in recs}:
                         done.add(arm)
-                except Exception:
-                    pass  # absent or truncated shard -> rerun the arm
+                except FileNotFoundError:
+                    pass  # arm not attempted yet
+                except Exception as e:
+                    print(f"Resume: shard for {arm} failed verification ({e!r}); "
+                          "will rerun.", flush=True)
             arms = [a for a in arms if a not in done]
-            print(f"Resume (sharded): {len(done)} arms already complete on disk; "
+            print(f"Resume (sharded): {len(done)} arms verified complete on disk; "
                   f"{len(arms)} remaining.", flush=True)
         else:
             rpath = outdir / f"results_{suffix}.json"
@@ -233,10 +246,19 @@ def main():
                 results = json.load(open(rpath))
                 if tpath.exists():
                     terminals = torch.load(tpath, map_location="cpu", weights_only=True)
-                done = {a for a, n in Counter(r["arm"] for r in results).items()
-                        if n >= len(prompts)}
+                done = set()
+                for a, n in Counter(r["arm"] for r in results).items():
+                    if n >= len(prompts) and all(
+                        f"{a}|{r['prompt_id']}" in terminals
+                        for r in results if r["arm"] == a
+                    ):
+                        done.add(a)
+                # drop anything not verified so reruns cannot duplicate records
+                results = [r for r in results if r["arm"] in done]
+                terminals = {k: v for k, v in terminals.items()
+                             if k.split("|", 1)[0] in done}
                 arms = [a for a in arms if a not in done]
-                print(f"Resume: {len(done)} arms already complete on disk; "
+                print(f"Resume: {len(done)} arms verified complete on disk; "
                       f"{len(arms)} remaining.", flush=True)
         if not arms:
             print("Resume: nothing to run — all requested arms complete.")
@@ -281,16 +303,19 @@ def main():
         results.extend(arm_results)
         terminals.update(arm_terminals)
         # checkpoint after every arm: sharded tiers write the arm's own files
-        # once (stable per-arm blobs for git); monolith tiers rewrite the pair
+        # once (stable per-arm blobs for git); monolith tiers rewrite the pair.
+        # Terminals are written FIRST so the results JSON acts as the
+        # completion marker — a crash between the writes leaves an arm that
+        # resume treats as incomplete, never one missing its tensors.
         if shard:
             (outdir / f"results_{suffix}").mkdir(exist_ok=True)
             (outdir / f"terminals_{suffix}").mkdir(exist_ok=True)
+            torch.save(arm_terminals, outdir / f"terminals_{suffix}" / f"{arm}.pt")
             json.dump(arm_results,
                       open(outdir / f"results_{suffix}" / f"{arm}.json", "w"), indent=2)
-            torch.save(arm_terminals, outdir / f"terminals_{suffix}" / f"{arm}.pt")
         else:
-            json.dump(results, open(outdir / f"results_{suffix}.json", "w"), indent=2)
             torch.save(terminals, outdir / f"terminals_{suffix}.pt")
+            json.dump(results, open(outdir / f"results_{suffix}.json", "w"), indent=2)
 
     # summary table
     print(f"\n=== Summary ({time.time()-t0:.0f}s) ===")
