@@ -17,3 +17,16 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [E22] E02_tech         -> '<|endoftext|>' lock=170 iters=170 margin=4.34
   [E22] D02_periodic     -> '<|endoftext|>' lock=180 iters=180 margin=2.75
   [E22] A02_medical      -> '<|endoftext|>' lock=180 iters=180 margin=1.27
+  [E22] B02_wwi          -> '<|endoftext|>' lock=220 iters=220 margin=2.67
+  [E22] C02_king_cole    -> '<|endoftext|>' lock=290 iters=290 margin=1.83
+  [E22] F02_insult       -> ' and'         lock=240 iters=240 margin=0.58
+  [E22] G02_brackets     -> '<|endoftext|>' lock=250 iters=250 margin=2.43
+  [E22] E03_orgs         -> ' until'       lock=240 iters=240 margin=0.56
+  [E22] D03_organic      -> ' and'         lock=340 iters=340 margin=0.25
+  [E22] A03_neuro        -> ' Tak'         lock=380 iters=380 margin=0.98
+  [E22] B03_moon         -> '<|endoftext|>' lock=350 iters=350 margin=1.27
+  [E22] C03_mary_lamb    -> '<|endoftext|>' lock=270 iters=270 margin=3.72
+  [E22] F03_frustration  -> '<|endoftext|>' lock=200 iters=200 margin=1.55
+  [E22] G03_counting     -> ' until'       lock=180 iters=180 margin=3.19
+  [E22] E04_internet     -> ' Tak'         lock=190 iters=190 margin=0.57
+  [E22] D04_equation     -> ' and'         lock=230 iters=230 margin=0.34
