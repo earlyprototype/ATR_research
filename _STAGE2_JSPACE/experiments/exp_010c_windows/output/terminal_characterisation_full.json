@@ -1,0 +1,180 @@
+[
+  {
+    "arm": "A0",
+    "window": "0->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 4,
+    "basin_sizes": [
+      18,
+      3,
+      2,
+      2
+    ],
+    "decode_terminals": {
+      "D": 25
+    },
+    "offdiag_cos_mean": 0.9981,
+    "offdiag_cos_min": 0.9772,
+    "margin_mean": 0.519,
+    "margin_max": 0.521,
+    "entropy_mean": 7.94,
+    "tail_decode_terminals": {
+      "D": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "A4",
+    "window": "10->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      6,
+      6,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " until": 19,
+      " forever": 5,
+      " since": 1
+    },
+    "offdiag_cos_mean": 0.8284,
+    "offdiag_cos_min": 0.578,
+    "margin_mean": 4.204,
+    "margin_max": 7.154,
+    "entropy_mean": 0.464,
+    "tail_decode_terminals": {
+      " until": 17,
+      " forever": 5,
+      " since": 3
+    },
+    "tail_agreement": "23/25"
+  },
+  {
+    "arm": "A1",
+    "window": "0->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 22,
+      "ing": 3
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9998,
+    "margin_mean": 0.373,
+    "margin_max": 1.843,
+    "entropy_mean": 8.724,
+    "tail_decode_terminals": {
+      ".": 15,
+      " the": 10
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "A2",
+    "window": "6->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " state": 15,
+      " \"": 10
+    },
+    "offdiag_cos_mean": 0.9996,
+    "offdiag_cos_min": 0.9982,
+    "margin_mean": 0.036,
+    "margin_max": 0.109,
+    "entropy_mean": 8.233,
+    "tail_decode_terminals": {
+      " source": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "A3",
+    "window": "12->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 21,
+    "basin_sizes": [
+      4,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\"": 23,
+      "work": 2
+    },
+    "offdiag_cos_mean": 0.943,
+    "offdiag_cos_min": 0.8549,
+    "margin_mean": 2.407,
+    "margin_max": 3.535,
+    "entropy_mean": 4.172,
+    "tail_decode_terminals": {
+      "\"": 23,
+      "work": 2
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "A5",
+    "window": "8->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      17,
+      7,
+      1
+    ],
+    "decode_terminals": {
+      " rant": 25
+    },
+    "offdiag_cos_mean": 0.9973,
+    "offdiag_cos_min": 0.9879,
+    "margin_mean": 2.135,
+    "margin_max": 2.28,
+    "entropy_mean": 2.335,
+    "tail_decode_terminals": {
+      " endless": 18,
+      "'": 7
+    },
+    "tail_agreement": "0/25"
+  }
+]
