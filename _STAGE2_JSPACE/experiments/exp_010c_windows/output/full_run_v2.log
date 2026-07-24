@@ -96,3 +96,34 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [A2] F01_anger        -> ' state'       lock=120 iters=120 margin=0.03
   [A2] G01_punctuation  -> ' "'           lock=120 iters=120 margin=0.03
   [A2] E02_tech         -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] D02_periodic     -> ' "'           lock=120 iters=120 margin=0.00
+  [A2] A02_medical      -> ' state'       lock=120 iters=120 margin=0.01
+  [A2] B02_wwi          -> ' "'           lock=120 iters=120 margin=0.02
+  [A2] C02_king_cole    -> ' state'       lock=120 iters=120 margin=0.04
+  [A2] F02_insult       -> ' state'       lock=120 iters=120 margin=0.04
+  [A2] G02_brackets     -> ' "'           lock=120 iters=120 margin=0.04
+  [A2] E03_orgs         -> ' "'           lock=120 iters=120 margin=0.00
+  [A2] D03_organic      -> ' "'           lock=120 iters=120 margin=0.11
+  [A2] A03_neuro        -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] B03_moon         -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] C03_mary_lamb    -> ' state'       lock=120 iters=120 margin=0.03
+  [A2] F03_frustration  -> ' state'       lock=120 iters=120 margin=0.02
+  [A2] G03_counting     -> ' state'       lock=120 iters=120 margin=0.02
+  [A2] E04_internet     -> ' "'           lock=120 iters=120 margin=0.08
+  [A2] D04_equation     -> ' "'           lock=120 iters=120 margin=0.06
+  [A2] A04_climate      -> ' state'       lock=120 iters=120 margin=0.02
+  [A2] B04_rome         -> ' state'       lock=120 iters=120 margin=0.04
+
+=== Arm A3: window 12->23 ===
+  [A3] E01_politics     -> '"'            lock=120 iters=120 margin=2.42
+  [A3] D01_water        -> '"'            lock=120 iters=120 margin=2.90
+  [A3] A01_physics      -> '"'            lock=130 iters=130 margin=2.58
+  [A3] B01_napoleon     -> '"'            lock=120 iters=120 margin=2.37
+  [A3] C01_jack_jill    -> '"'            lock=130 iters=130 margin=2.52
+  [A3] F01_anger        -> '"'            lock=120 iters=120 margin=2.67
+  [A3] G01_punctuation  -> '"'            lock=120 iters=120 margin=2.25
+  [A3] E02_tech         -> '"'            lock=120 iters=120 margin=2.56
+  [A3] D02_periodic     -> '"'            lock=120 iters=120 margin=2.89
+  [A3] A02_medical      -> '"'            lock=130 iters=130 margin=2.22
+  [A3] B02_wwi          -> '"'            lock=120 iters=120 margin=0.23
+  [A3] C02_king_cole    -> '"'            lock=130 iters=130 margin=2.80
