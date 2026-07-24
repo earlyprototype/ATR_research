@@ -143,3 +143,30 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
 
 === Arm X1017: window 10->17 ===
   [X1017] E01_politics     -> ' Bhar'        lock=120 iters=120 margin=1.16
+  [X1017] D01_water        -> ' Bhar'        lock=120 iters=120 margin=0.97
+  [X1017] A01_physics      -> ' Bhar'        lock=120 iters=120 margin=1.40
+  [X1017] B01_napoleon     -> ' Bhar'        lock=120 iters=120 margin=1.36
+  [X1017] C01_jack_jill    -> ' Bhar'        lock=120 iters=120 margin=1.44
+  [X1017] F01_anger        -> ' Bhar'        lock=120 iters=120 margin=1.46
+  [X1017] G01_punctuation  -> ' Bhar'        lock=120 iters=120 margin=1.12
+  [X1017] E02_tech         -> ' Bhar'        lock=120 iters=120 margin=1.47
+  [X1017] D02_periodic     -> ' Bhar'        lock=120 iters=120 margin=1.30
+  [X1017] A02_medical      -> ' Bhar'        lock=120 iters=120 margin=1.35
+  [X1017] B02_wwi          -> ' Bhar'        lock=120 iters=120 margin=1.19
+  [X1017] C02_king_cole    -> ' Bhar'        lock=120 iters=120 margin=1.45
+  [X1017] F02_insult       -> ' Bhar'        lock=120 iters=120 margin=1.46
+  [X1017] G02_brackets     -> ' Bhar'        lock=120 iters=120 margin=1.11
+  [X1017] E03_orgs         -> ' Bhar'        lock=120 iters=120 margin=1.47
+  [X1017] D03_organic      -> ' Bhar'        lock=120 iters=120 margin=0.97
+  [X1017] A03_neuro        -> ' Bhar'        lock=120 iters=120 margin=1.39
+  [X1017] B03_moon         -> ' Bhar'        lock=120 iters=120 margin=1.47
+  [X1017] C03_mary_lamb    -> ' Bhar'        lock=120 iters=120 margin=1.40
+  [X1017] F03_frustration  -> ' Bhar'        lock=120 iters=120 margin=1.41
+  [X1017] G03_counting     -> ' Bhar'        lock=120 iters=120 margin=1.41
+  [X1017] E04_internet     -> ' Bhar'        lock=120 iters=120 margin=1.03
+  [X1017] D04_equation     -> ' Bhar'        lock=120 iters=120 margin=1.08
+  [X1017] A04_climate      -> ' Bhar'        lock=120 iters=120 margin=1.35
+  [X1017] B04_rome         -> ' Bhar'        lock=120 iters=120 margin=1.47
+
+=== Arm X1015: window 10->15 ===
+  [X1015] E01_politics     -> ' Fas'         lock=120 iters=120 margin=1.38
