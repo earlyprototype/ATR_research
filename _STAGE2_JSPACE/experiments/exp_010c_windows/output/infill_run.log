@@ -197,3 +197,15 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
 
 === Arm X819: window 8->19 ===
   [X819] E01_politics     -> "'d"           lock=120 iters=120 margin=1.34
+  [X819] D01_water        -> "'d"           lock=120 iters=120 margin=2.06
+  [X819] A01_physics      -> "'d"           lock=120 iters=120 margin=2.96
+  [X819] B01_napoleon     -> "'d"           lock=120 iters=120 margin=2.98
+  [X819] C01_jack_jill    -> "'d"           lock=120 iters=120 margin=3.54
+  [X819] F01_anger        -> "'d"           lock=120 iters=120 margin=3.52
+  [X819] G01_punctuation  -> "'d"           lock=120 iters=120 margin=1.26
+  [X819] E02_tech         -> "'d"           lock=120 iters=120 margin=3.65
+  [X819] D02_periodic     -> "'d"           lock=120 iters=120 margin=1.43
+  [X819] A02_medical      -> "'d"           lock=120 iters=120 margin=2.35
+  [X819] B02_wwi          -> "'d"           lock=120 iters=120 margin=1.13
+  [X819] C02_king_cole    -> "'d"           lock=120 iters=120 margin=3.56
+  [X819] F02_insult       -> "'d"           lock=120 iters=120 margin=3.54
