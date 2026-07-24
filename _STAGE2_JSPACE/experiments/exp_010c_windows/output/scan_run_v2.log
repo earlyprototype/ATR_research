@@ -110,3 +110,37 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [O4] F03_frustration  -> ','            lock=120 iters=120 margin=0.05
   [O4] G03_counting     -> ','            lock=120 iters=120 margin=0.05
   [O4] E04_internet     -> ','            lock=120 iters=120 margin=0.08
+  [O4] D04_equation     -> ','            lock=120 iters=120 margin=0.08
+  [O4] A04_climate      -> ','            lock=120 iters=120 margin=0.05
+  [O4] B04_rome         -> ','            lock=120 iters=120 margin=0.04
+
+=== Arm O6: window 6->21 ===
+  [O6] E01_politics     -> '\u200b'       lock=120 iters=120 margin=1.20
+  [O6] D01_water        -> ' please'      lock=170 iters=170 margin=1.62
+  [O6] A01_physics      -> '..'           lock=120 iters=120 margin=0.05
+  [O6] B01_napoleon     -> '..'           lock=120 iters=120 margin=0.07
+  [O6] C01_jack_jill    -> '\u200b'       lock=120 iters=120 margin=0.57
+  [O6] F01_anger        -> '\u200b'       lock=120 iters=120 margin=0.36
+  [O6] G01_punctuation  -> '\u200b'       lock=120 iters=120 margin=1.06
+  [O6] E02_tech         -> '\u200b'       lock=120 iters=120 margin=0.21
+  [O6] D02_periodic     -> '\u200b'       lock=120 iters=120 margin=1.27
+  [O6] A02_medical      -> '..'           lock=120 iters=120 margin=0.34
+  [O6] B02_wwi          -> '\u200b'       lock=120 iters=120 margin=0.91
+  [O6] C02_king_cole    -> '\u200b'       lock=120 iters=120 margin=0.39
+  [O6] F02_insult       -> '\u200b'       lock=120 iters=120 margin=0.55
+  [O6] G02_brackets     -> '\u200b'       lock=120 iters=120 margin=0.30
+  [O6] E03_orgs         -> '\u200b'       lock=120 iters=120 margin=0.16
+  [O6] D03_organic      -> 'oooo'         lock=140 iters=140 margin=0.18
+  [O6] A03_neuro        -> '..'           lock=120 iters=120 margin=0.03
+  [O6] B03_moon         -> '\u200b'       lock=120 iters=120 margin=0.11
+  [O6] C03_mary_lamb    -> '..'           lock=120 iters=120 margin=0.07
+  [O6] F03_frustration  -> '..'           lock=120 iters=120 margin=0.05
+  [O6] G03_counting     -> '..'           lock=120 iters=120 margin=0.09
+  [O6] E04_internet     -> ' apologies'   lock=120 iters=120 margin=0.77
+  [O6] D04_equation     -> ' apologies'   lock=120 iters=120 margin=0.60
+  [O6] A04_climate      -> '..'           lock=120 iters=120 margin=0.46
+  [O6] B04_rome         -> ' etc'         lock=120 iters=120 margin=0.03
+
+=== Arm O8: window 8->21 ===
+  [O8] E01_politics     -> ' halfway'     lock=120 iters=120 margin=0.88
+  [O8] D01_water        -> ' halfway'     lock=120 iters=120 margin=0.78
