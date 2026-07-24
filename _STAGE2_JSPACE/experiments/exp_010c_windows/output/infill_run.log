@@ -61,3 +61,30 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [I11] B04_rome         -> '<|endoftext|>' lock=120 iters=120 margin=1.77
 
 === Arm I7: window 7->21 ===
+  [I7] E01_politics     -> 'oooooooo'     lock=120 iters=120 margin=2.50
+  [I7] D01_water        -> 'oooooooo'     lock=120 iters=120 margin=2.47
+  [I7] A01_physics      -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I7] B01_napoleon     -> 'oooooooo'     lock=120 iters=120 margin=2.31
+  [I7] C01_jack_jill    -> 'oooooooo'     lock=120 iters=120 margin=2.39
+  [I7] F01_anger        -> 'oooooooo'     lock=120 iters=120 margin=2.39
+  [I7] G01_punctuation  -> 'oooooooo'     lock=120 iters=120 margin=2.51
+  [I7] E02_tech         -> 'oooooooo'     lock=120 iters=120 margin=2.43
+  [I7] D02_periodic     -> 'oooooooo'     lock=120 iters=120 margin=2.38
+  [I7] A02_medical      -> 'oooooooo'     lock=120 iters=120 margin=2.29
+  [I7] B02_wwi          -> 'oooooooo'     lock=120 iters=120 margin=2.54
+  [I7] C02_king_cole    -> 'oooooooo'     lock=120 iters=120 margin=2.41
+  [I7] F02_insult       -> 'oooooooo'     lock=120 iters=120 margin=2.40
+  [I7] G02_brackets     -> 'oooooooo'     lock=120 iters=120 margin=2.54
+  [I7] E03_orgs         -> 'oooooooo'     lock=120 iters=120 margin=2.42
+  [I7] D03_organic      -> 'oooooooo'     lock=120 iters=120 margin=2.43
+  [I7] A03_neuro        -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I7] B03_moon         -> 'oooooooo'     lock=120 iters=120 margin=2.35
+  [I7] C03_mary_lamb    -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I7] F03_frustration  -> 'oooooooo'     lock=120 iters=120 margin=2.29
+  [I7] G03_counting     -> 'oooooooo'     lock=120 iters=120 margin=2.31
+  [I7] E04_internet     -> 'oooooooo'     lock=120 iters=120 margin=2.54
+  [I7] D04_equation     -> 'oooooooo'     lock=120 iters=120 margin=2.57
+  [I7] A04_climate      -> 'oooooooo'     lock=120 iters=120 margin=2.28
+  [I7] B04_rome         -> 'oooooooo'     lock=120 iters=120 margin=2.39
+
+=== Arm I5: window 5->21 ===
