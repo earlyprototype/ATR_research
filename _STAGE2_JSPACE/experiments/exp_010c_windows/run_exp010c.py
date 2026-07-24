@@ -6,6 +6,8 @@ Tiers:
     smoke  — 2 prompts, arms A0+A4, max_iter=60   (harness validation only)
     pilot  — 5 prompts, all arms,   max_iter=300  (directional signal, ~1-2 h CPU)
     full   — 25 prompts, all arms,  max_iter=1000 (the pre-registered run, overnight)
+    scan   — 25 prompts, boundary-scan arms, max_iter=1000 (EXP_010c-2)
+    infill — 25 prompts, in-fill arms, max_iter=1000 (EXP_010c-3)
 
 The gated protocol params (threshold/patience/check_every/check_start) follow the
 spec for `full`; smoke/pilot shrink check_start proportionally and are RECORDED as
@@ -45,15 +47,27 @@ ARMS = {
     "O8": (8, 21),
     "O12": (12, 21),
     "O14": (14, 21),
+    # EXP_010c-3 in-fill scan (EXP_010c3_SPEC.md §3)
+    "I9": (9, 21),      # injection in-fill: the critical untested point (H11)
+    "I11": (11, 21),    # injection in-fill: right flank
+    "I7": (7, 21),      # injection in-fill: left flank
+    "I5": (5, 21),      # injection in-fill: left approach
+    "X1019": (10, 19),  # extraction column, i=10 row
+    "X1017": (10, 17),
+    "X1015": (10, 15),
+    "X819": (8, 19),    # extraction column, i=8 row
+    "X817": (8, 17),
 }
 ARM_ORDER = ["A0", "A4", "A1", "A2", "A3", "A5"]  # spec §5 execution order
 SCAN_ORDER = ["E22", "E23", "O0", "O4", "O6", "O8", "O12", "O14"]
+INFILL_ORDER = ["I9", "I11", "I7", "I5", "X1019", "X1017", "X1015", "X819", "X817"]
 
 TIERS = {
     "smoke": dict(n_prompts=2, max_iter=60, check_start=20, arms=["A0", "A4"]),
     "pilot": dict(n_prompts=5, max_iter=300, check_start=50, arms=ARM_ORDER),
     "full": dict(n_prompts=25, max_iter=1000, check_start=100, arms=ARM_ORDER),
     "scan": dict(n_prompts=25, max_iter=1000, check_start=100, arms=SCAN_ORDER),
+    "infill": dict(n_prompts=25, max_iter=1000, check_start=100, arms=INFILL_ORDER),
 }
 
 
