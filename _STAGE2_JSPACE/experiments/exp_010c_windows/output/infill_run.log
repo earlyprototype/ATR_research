@@ -88,3 +88,7 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [I7] B04_rome         -> 'oooooooo'     lock=120 iters=120 margin=2.39
 
 === Arm I5: window 5->21 ===
+  [I5] E01_politics     -> ' Congratulations' lock=120 iters=120 margin=0.82
+  [I5] D01_water        -> '...'          lock=120 iters=120 margin=0.60
+  [I5] A01_physics      -> '…'            lock=150 iters=150 margin=0.29
+  [I5] B01_napoleon     -> '...'          lock=170 iters=170 margin=0.35
