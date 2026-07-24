@@ -236,6 +236,101 @@ robust across both readout instruments; final arbitration to EXP_013m.
 unexplored; two-instrument agreement is necessary but not sufficient — the
 J-lens re-decode remains the registered arbiter.
 
+## 2026-07-24 — ANISOTROPY-CORRECTED PERMUTATION TEST (planned control 1)
+
+**Spec:** `../../EXP_010c_PERM_SPEC.md` (pre-registered and committed before
+this ran). **Script:** `permutation_test.py`. **Per-set JSON:**
+`output/perm_test_results.json`. Implements GitHub issue #7 and the Stage 1
+`02b` matched-null pattern.
+
+**What ran:** for each pre-registered token set, mean pairwise cosine over
+unique token types vs N=10,000 matched random token sets (matched on
+leading-space status, string length ±1, and BPE merge-rank quintile band).
+Two spaces: raw `W_E` (`wte` rows) and `W_U` (the ln_final-gain-weighted
+decode space `γ⊙wte`; GPT-2 ties W_E=W_U in the raw dict, so the γ weighting
+is what makes the decode space distinct). Seed 20260724. Model: the recorded
+gpt2-medium mirror (state dict verified, 316 tensors, wte [50257,1024]).
+20 tests (10 sets × 2 spaces); Bonferroni threshold α = 0.05/20 = **0.0025**.
+
+**Results (observation; `*` = p < 0.0025):**
+
+| Set | k | Space | Observed | Null μ | Null σ | z | p | sig |
+|---|---|---|---|---|---|---|---|---|
+| WS_A4 (until/forever/since, direct) | 3 | W_E | 0.4121 | 0.2754 | 0.0293 | 4.66 | 0.00070 | `*` |
+| WS_A4 | 3 | W_U | 0.8639 | 0.8097 | 0.0210 | 2.58 | 0.00460 | |
+| WS_O8 (halfway/simultaneously, direct) | 2 | W_E | 0.2972 | 0.3029 | 0.0411 | −0.14 | 0.52415 | |
+| WS_O8 | 2 | W_U | 0.8206 | 0.8085 | 0.0256 | 0.47 | 0.35946 | |
+| WS_POOL (A4∪O8∪A5 direct) | 6 | W_E | 0.3180 | 0.2853 | 0.0174 | 1.88 | 0.04110 | |
+| WS_POOL | 6 | W_U | 0.8303 | 0.7992 | 0.0132 | 2.36 | 0.01180 | |
+| WT_A4 (until/forever/since, via-tail) | 3 | W_E | 0.4121 | 0.2751 | 0.0293 | 4.67 | 0.00150 | `*` |
+| WT_A4 | 3 | W_U | 0.8639 | 0.8092 | 0.0207 | 2.64 | 0.00330 | |
+| WT_O8 (simultaneously/just/`'`) | 3 | W_E | 0.2993 | 0.2889 | 0.0381 | 0.27 | 0.30397 | |
+| WT_O8 | 3 | W_U | 0.8435 | 0.7855 | 0.0243 | 2.38 | 0.03740 | |
+| WT_A5 (endless/`'`) | 2 | W_E | 0.2863 | 0.2997 | 0.0574 | −0.23 | 0.52975 | |
+| WT_A5 | 2 | W_U | 0.8143 | 0.7705 | 0.0326 | 1.34 | 0.07489 | |
+| WT_POOL (via-tail pool) | 7 | W_E | 0.3320 | 0.2840 | 0.0197 | 2.44 | 0.02660 | |
+| WT_POOL | 7 | W_U | 0.8473 | 0.7979 | 0.0139 | 3.55 | 0.00190 | `*` |
+| CS_A1 (`ing`/`,` punct funnel) | 2 | W_E | 0.3937 | 0.3225 | 0.0659 | 1.08 | 0.11669 | |
+| CS_A1 | 2 | W_U | 0.8796 | 0.7774 | 0.0344 | 2.98 | 0.00970 | |
+| CS_A3 (`"`/`work`) | 2 | W_E | 0.3282 | 0.3110 | 0.0579 | 0.30 | 0.27467 | |
+| CS_A3 | 2 | W_U | 0.8237 | 0.7675 | 0.0311 | 1.81 | 0.04620 | |
+| CS_O14 (or/vs/than/punct, off-band) | 7 | W_E | 0.3721 | 0.2872 | 0.0244 | 3.48 | 0.00640 | |
+| CS_O14 | 7 | W_U | 0.8696 | 0.7780 | 0.0155 | 5.91 | 0.00010 | `*` |
+
+Excluded (fewer than 2 unique types, no pairwise cosine, recorded not dropped):
+A0 (`D`), A5 direct (`rant`), O0/O4 (`,`). Matched pools were healthy for every
+tested token (min 92 candidates, for `' simultaneously'`); no band or length
+relaxation was triggered. Effect sizes were identical and the four starred
+calls held under two additional seeds (99; 7 at N=50,000) — the observed
+statistic is deterministic and the null moved by <0.001.
+
+**Which pre-registered reading was observed (mechanical application of spec §7):**
+
+1. **One word set survives the control, and only the narrow one.** The temporal
+   trio `until`/`forever`/`since` (A4, identical under direct decode WS_A4 and
+   via-tail WT_A4 — one underlying set, counted once) is closer than its matched
+   null in `W_E` at z ≈ 4.7, p < 0.0025. Pre-registered reading: *the
+   relatedness pattern survives its first control.* Recorded exactly as
+   registered — this licenses "closer than a matched anisotropy null," NOT
+   "semantic." The word stays quarantined pending the J-lens.
+2. **The wider "family" does not survive.** The other word sets sit at the null
+   in `W_E`: WS_O8 z = −0.14 (p = 0.52), WT_A5 z = −0.23 (p = 0.53), and the
+   pooled word set WS_POOL z = 1.88 (p = 0.041, not clearing Bonferroni).
+   Pre-registered reading for these: *the apparent family is an
+   anisotropy/matching artifact.* So the eyeballed six-token family
+   (`until forever since endless simultaneously halfway`) is not a unit — its
+   relatedness is carried by the `until`/`forever`/`since` core alone; adding
+   `halfway`, `simultaneously`, `endless`, `rant` pulls the set back to chance.
+3. **The contrast reading fired, and it is the decisive caveat on `W_U`.** The
+   off-band contrast set CS_O14 (`or`, `vs`, `than`, punctuation) is the single
+   **most** significant test in the whole battery (`W_U` z = 5.91, p = 0.0001) —
+   more extreme than any word set. Pre-registered reading: *contrast set
+   significant too → the test is flagging a generic property of loop terminals,
+   not the word family; W_U-space significance is not to be read as semantic.*
+   Consistent with this, every `W_U` result skews positive (the funnel sets
+   CS_A1, CS_A3 too). `W_U`-space closeness is therefore treated as residual
+   anisotropy the matching does not fully remove for short function/punctuation
+   tokens, not evidence of relatedness. WT_POOL's lone `W_U` star is discounted
+   on the same grounds.
+
+**Net observation, stated flat:** across 20 matched tests, exactly one
+token-family claim survives its anisotropy control — the three-token temporal
+group `until`/`forever`/`since`, in the input-embedding space, at z ≈ 4.7. The
+broader durative "family" read off the terminal inventory does not exceed a
+matched null. The one space where nearly everything looks related (`W_U`) also
+lights up a punctuation contrast set harder than any word set, so it carries no
+family-specific signal. This is the Stage 1 lesson recurring in miniature: the
+evocative multi-token cluster is mostly matching/anisotropy; a small hard core
+is not. Final semantic arbitration remains deferred to the J-lens re-decode
+(EXP_013m); this control only sets how much attention the pattern earns —
+little for the wide family, a flag kept on the `until`/`forever`/`since` core.
+
+**Caveats (standing):** single 25-prompt subset and single loop seed feed the
+terminal inventories (the null seed is separate and varied above); merge-rank is
+a frequency proxy, not a frequency table; W_E and raw W_U are tied so the
+two-space contrast is entirely the ln_final gain; k is small (2–7 types) so
+individual p-values are coarse though the effect sizes are stable.
+
 ## Planned controls — next observations (revised 2026-07-23 after review)
 
 Register note: this programme is exploration. These controls are not trials
@@ -244,7 +339,11 @@ of any story; each is listed with the uncertainty it removes.
 1. **Anisotropy-corrected permutation test** on terminal-set relatedness in
    W_E (Stage 1 `02b` pattern). Removes uncertainty about whether any
    apparent relatedness among terminals exceeds the embedding space's
-   baseline anisotropy.
+   baseline anisotropy. **DONE 2026-07-24** — see the dated section above
+   (spec `../../EXP_010c_PERM_SPEC.md`, results
+   `output/perm_test_results.json`). Outcome: only the `until`/`forever`/`since`
+   core survives the matched null (W_E, z ≈ 4.7); the wider family does not, and
+   an off-band contrast set outscores every word set in W_U.
 2. **Seed and prompt-subset variation** for A4 and O8. Removes uncertainty
    about whether the observed basin structure and the i ∈ {8,10} whole-word
    zone are properties of this seed/subset or of the model.

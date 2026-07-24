@@ -1,0 +1,518 @@
+{
+  "experiment": "EXP_010c-PERM",
+  "spec": "_STAGE2_JSPACE/EXP_010c_PERM_SPEC.md",
+  "seed": 20260724,
+  "n_null": 10000,
+  "statistic": "mean pairwise cosine over unique token types (unweighted)",
+  "spaces": {
+    "W_E": "raw wte rows",
+    "W_U": "ln_final-gain-weighted wte (gamma ⊙ wte); GPT-2 ties W_E=W_U"
+  },
+  "null": "matched on leading-space (exact) + length (+/-1) + BPE merge-rank quintile band",
+  "n_tests": 20,
+  "bonferroni_threshold": 0.0025,
+  "results": [
+    {
+      "set": "WS_A4",
+      "desc": "A4 10->21 direct",
+      "n_unique": 3,
+      "tokens": [
+        " forever",
+        " since",
+        " until"
+      ],
+      "token_ids": [
+        8097,
+        1201,
+        1566
+      ],
+      "status": "tested",
+      "matching": {
+        " forever": {
+          "pool_size": 2097,
+          "relax": "none"
+        },
+        " since": {
+          "pool_size": 3001,
+          "relax": "none"
+        },
+        " until": {
+          "pool_size": 3001,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.4121185869073722,
+          "null_mean": 0.2753740306855954,
+          "null_sd": 0.029317859922970462,
+          "z": 4.6642066160715165,
+          "p_value": 0.0006999300069993001
+        },
+        "W_U": {
+          "observed": 0.8638838231724447,
+          "null_mean": 0.8096903491639065,
+          "null_sd": 0.02102000254411878,
+          "z": 2.578185891975599,
+          "p_value": 0.0045995400459954
+        }
+      }
+    },
+    {
+      "set": "WS_O8",
+      "desc": "O8 8->21 direct",
+      "n_unique": 2,
+      "tokens": [
+        " halfway",
+        " simultaneously"
+      ],
+      "token_ids": [
+        19487,
+        11640
+      ],
+      "status": "tested",
+      "matching": {
+        " halfway": {
+          "pool_size": 2635,
+          "relax": "none"
+        },
+        " simultaneously": {
+          "pool_size": 92,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.2972203337552841,
+          "null_mean": 0.3028983304782287,
+          "null_sd": 0.041060360363780406,
+          "z": -0.13828414248290796,
+          "p_value": 0.5241475852414759
+        },
+        "W_U": {
+          "observed": 0.8205669017471369,
+          "null_mean": 0.8084754043850707,
+          "null_sd": 0.025583354843667135,
+          "z": 0.4726314213266394,
+          "p_value": 0.3594640535946405
+        }
+      }
+    },
+    {
+      "set": "WS_POOL",
+      "desc": "A4|O8|A5 pooled direct",
+      "n_unique": 6,
+      "tokens": [
+        " forever",
+        " since",
+        " until",
+        " halfway",
+        " simultaneously",
+        " rant"
+      ],
+      "token_ids": [
+        8097,
+        1201,
+        1566,
+        19487,
+        11640,
+        30993
+      ],
+      "status": "tested",
+      "matching": {
+        " forever": {
+          "pool_size": 2097,
+          "relax": "none"
+        },
+        " since": {
+          "pool_size": 3001,
+          "relax": "none"
+        },
+        " until": {
+          "pool_size": 3001,
+          "relax": "none"
+        },
+        " halfway": {
+          "pool_size": 2635,
+          "relax": "none"
+        },
+        " simultaneously": {
+          "pool_size": 92,
+          "relax": "none"
+        },
+        " rant": {
+          "pool_size": 2299,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.31800490529513875,
+          "null_mean": 0.28525360365735114,
+          "null_sd": 0.017411335915841566,
+          "z": 1.8810332415670126,
+          "p_value": 0.0410958904109589
+        },
+        "W_U": {
+          "observed": 0.8303467759204626,
+          "null_mean": 0.7992410234162455,
+          "null_sd": 0.01319970329153062,
+          "z": 2.3565493721495705,
+          "p_value": 0.0117988201179882
+        }
+      }
+    },
+    {
+      "set": "WT_A4",
+      "desc": "A4 via-tail",
+      "n_unique": 3,
+      "tokens": [
+        " until",
+        " forever",
+        " since"
+      ],
+      "token_ids": [
+        1566,
+        8097,
+        1201
+      ],
+      "status": "tested",
+      "matching": {
+        " until": {
+          "pool_size": 3001,
+          "relax": "none"
+        },
+        " forever": {
+          "pool_size": 2097,
+          "relax": "none"
+        },
+        " since": {
+          "pool_size": 3001,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.412118586907372,
+          "null_mean": 0.27510612704425197,
+          "null_sd": 0.029334446991825986,
+          "z": 4.670701987369949,
+          "p_value": 0.0014998500149985001
+        },
+        "W_U": {
+          "observed": 0.8638838231724447,
+          "null_mean": 0.8092076846309615,
+          "null_sd": 0.020733303164479154,
+          "z": 2.637116628630398,
+          "p_value": 0.0032996700329967
+        }
+      }
+    },
+    {
+      "set": "WT_O8",
+      "desc": "O8 via-tail",
+      "n_unique": 3,
+      "tokens": [
+        " simultaneously",
+        " just",
+        "'"
+      ],
+      "token_ids": [
+        11640,
+        655,
+        6
+      ],
+      "status": "tested",
+      "matching": {
+        " simultaneously": {
+          "pool_size": 92,
+          "relax": "none"
+        },
+        " just": {
+          "pool_size": 3049,
+          "relax": "none"
+        },
+        "'": {
+          "pool_size": 961,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.29926370559052096,
+          "null_mean": 0.28894599936850357,
+          "null_sd": 0.03805952455758009,
+          "z": 0.2710939335673459,
+          "p_value": 0.30396960303969606
+        },
+        "W_U": {
+          "observed": 0.8434736603678715,
+          "null_mean": 0.7854620993295798,
+          "null_sd": 0.024330728847925222,
+          "z": 2.384291954461472,
+          "p_value": 0.037396260373962605
+        }
+      }
+    },
+    {
+      "set": "WT_A5",
+      "desc": "A5 via-tail",
+      "n_unique": 2,
+      "tokens": [
+        " endless",
+        "'"
+      ],
+      "token_ids": [
+        13079,
+        6
+      ],
+      "status": "tested",
+      "matching": {
+        " endless": {
+          "pool_size": 2635,
+          "relax": "none"
+        },
+        "'": {
+          "pool_size": 961,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.28630780389152033,
+          "null_mean": 0.2997466366436539,
+          "null_sd": 0.057357742056557415,
+          "z": -0.23429849694714747,
+          "p_value": 0.5297470252974702
+        },
+        "W_U": {
+          "observed": 0.8142578159820144,
+          "null_mean": 0.7705228965064284,
+          "null_sd": 0.03260179578992433,
+          "z": 1.3414880504558722,
+          "p_value": 0.07489251074892511
+        }
+      }
+    },
+    {
+      "set": "WT_POOL",
+      "desc": "A4|O8|A5 pooled via-tail",
+      "n_unique": 7,
+      "tokens": [
+        " until",
+        " forever",
+        " since",
+        " simultaneously",
+        " just",
+        "'",
+        " endless"
+      ],
+      "token_ids": [
+        1566,
+        8097,
+        1201,
+        11640,
+        655,
+        6,
+        13079
+      ],
+      "status": "tested",
+      "matching": {
+        " until": {
+          "pool_size": 3001,
+          "relax": "none"
+        },
+        " forever": {
+          "pool_size": 2097,
+          "relax": "none"
+        },
+        " since": {
+          "pool_size": 3001,
+          "relax": "none"
+        },
+        " simultaneously": {
+          "pool_size": 92,
+          "relax": "none"
+        },
+        " just": {
+          "pool_size": 3049,
+          "relax": "none"
+        },
+        "'": {
+          "pool_size": 961,
+          "relax": "none"
+        },
+        " endless": {
+          "pool_size": 2635,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.33202291192616507,
+          "null_mean": 0.2840048417216239,
+          "null_sd": 0.019709847480373147,
+          "z": 2.436247680371807,
+          "p_value": 0.026597340265973404
+        },
+        "W_U": {
+          "observed": 0.847312753140996,
+          "null_mean": 0.7978652013482728,
+          "null_sd": 0.013946175051212406,
+          "z": 3.545599536155578,
+          "p_value": 0.0018998100189981002
+        }
+      }
+    },
+    {
+      "set": "CS_A1",
+      "desc": "A1 0->11 direct (punct funnel)",
+      "n_unique": 2,
+      "tokens": [
+        "ing",
+        ","
+      ],
+      "token_ids": [
+        278,
+        11
+      ],
+      "status": "tested",
+      "matching": {
+        "ing": {
+          "pool_size": 2416,
+          "relax": "none"
+        },
+        ",": {
+          "pool_size": 961,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.3936803853149762,
+          "null_mean": 0.32252561360450255,
+          "null_sd": 0.06590929207836022,
+          "z": 1.0795863446064178,
+          "p_value": 0.1166883311668833
+        },
+        "W_U": {
+          "observed": 0.8796150717805848,
+          "null_mean": 0.7773608892937988,
+          "null_sd": 0.03436103291727082,
+          "z": 2.97587627045374,
+          "p_value": 0.0096990300969903
+        }
+      }
+    },
+    {
+      "set": "CS_A3",
+      "desc": "A3 12->23 direct",
+      "n_unique": 2,
+      "tokens": [
+        "\"",
+        "work"
+      ],
+      "token_ids": [
+        1,
+        1818
+      ],
+      "status": "tested",
+      "matching": {
+        "\"": {
+          "pool_size": 961,
+          "relax": "none"
+        },
+        "work": {
+          "pool_size": 2271,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.3281912946065868,
+          "null_mean": 0.3110485873313821,
+          "null_sd": 0.057881103783931465,
+          "z": 0.2961710498679841,
+          "p_value": 0.2746725327467253
+        },
+        "W_U": {
+          "observed": 0.8237221458149939,
+          "null_mean": 0.7675179719888129,
+          "null_sd": 0.031129747155383247,
+          "z": 1.8054812185155087,
+          "p_value": 0.0461953804619538
+        }
+      }
+    },
+    {
+      "set": "CS_O14",
+      "desc": "O14 14->21 direct (off-band)",
+      "n_unique": 7,
+      "tokens": [
+        " or",
+        ".\"",
+        " vs",
+        ".)",
+        " DES",
+        ".",
+        " than"
+      ],
+      "token_ids": [
+        393,
+        526,
+        3691,
+        2014,
+        22196,
+        13,
+        621
+      ],
+      "status": "tested",
+      "matching": {
+        " or": {
+          "pool_size": 1511,
+          "relax": "none"
+        },
+        ".\"": {
+          "pool_size": 1836,
+          "relax": "none"
+        },
+        " vs": {
+          "pool_size": 1511,
+          "relax": "none"
+        },
+        ".)": {
+          "pool_size": 1836,
+          "relax": "none"
+        },
+        " DES": {
+          "pool_size": 1759,
+          "relax": "none"
+        },
+        ".": {
+          "pool_size": 961,
+          "relax": "none"
+        },
+        " than": {
+          "pool_size": 3049,
+          "relax": "none"
+        }
+      },
+      "spaces": {
+        "W_E": {
+          "observed": 0.3721405628631096,
+          "null_mean": 0.2872484347430597,
+          "null_sd": 0.02438848458399867,
+          "z": 3.480828332226421,
+          "p_value": 0.006399360063993601
+        },
+        "W_U": {
+          "observed": 0.8695934989201067,
+          "null_mean": 0.7780198500708221,
+          "null_sd": 0.015485854794433927,
+          "z": 5.913373854067062,
+          "p_value": 9.999000099990002e-05
+        }
+      }
+    }
+  ]
+}
