@@ -83,6 +83,7 @@ class _DummyTokenizer:
     pad_token_id = 0
 
     def decode(self, ids):
+        """Render dummy token ids as visible placeholders like <42>."""
         ids = ids if isinstance(ids, (list, tuple)) else [ids]
         return "".join(f"<{int(i)}>" for i in ids)
 
@@ -103,6 +104,7 @@ def _toy_model():
 
 
 def _toy_tokens(prompt, d_vocab=997, max_len=12):
+    """Map a prompt string to deterministic dummy token ids (harness-check only)."""
     ids = [(hash(w) % (d_vocab - 1)) + 1 for w in prompt.split()[:max_len]]
     return torch.tensor([ids or [1]], dtype=torch.long)
 
@@ -134,6 +136,7 @@ def _load_medium_from_local(path):
 
 
 def main():
+    """Run the selected tier's arms and write results + terminal artifacts."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", choices=TIERS, required=True)
     ap.add_argument("--arms", default=None, help="comma-separated override, e.g. A0,A4")

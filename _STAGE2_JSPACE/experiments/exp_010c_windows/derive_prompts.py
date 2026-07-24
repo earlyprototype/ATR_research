@@ -14,11 +14,15 @@ saved alongside the results so the pick is auditable.
 """
 
 import json
+import os
 import re
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-SOURCE = Path("/home/user/lucier-gpt2-activ-tensor-reson-experiments/experiments/gpt2_medium/output/dissolution_sentences.md")
+# Override with ATR_STAGE1_REPO if the public Stage 1 repo lives elsewhere.
+SOURCE = Path(os.environ.get(
+    "ATR_STAGE1_REPO", "/home/user/lucier-gpt2-activ-tensor-reson-experiments"
+)) / "experiments" / "gpt2_medium" / "output" / "dissolution_sentences.md"
 
 ENTRY = re.compile(
     r"^### (?P<pid>\S+) \[(?P<cat>[^\]]+)\][^\n]*\n\*\"(?P<prompt>.*?)\"\*",

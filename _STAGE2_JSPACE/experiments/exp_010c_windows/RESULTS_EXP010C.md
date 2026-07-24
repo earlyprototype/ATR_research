@@ -1,7 +1,7 @@
 # EXP_010c — Results Record
 
 **Spec:** `../../EXP_010c_SPEC.md` (pre-registered before any run).
-**Status:** harness validated; registered run NOT yet executed.
+**Status:** COMPLETE — registered full run and boundary scan executed and regenerated post-review; see dated sections below.
 
 ---
 

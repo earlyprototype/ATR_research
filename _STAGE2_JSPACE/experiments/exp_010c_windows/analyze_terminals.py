@@ -23,10 +23,7 @@ import torch.nn.functional as F
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 
-ARMS_WINDOWS = {"A0": (0, 23), "A4": (10, 21), "A1": (0, 11), "A2": (6, 17),
-                "A3": (12, 23), "A5": (8, 15),
-                "E22": (10, 22), "E23": (10, 23), "O0": (0, 21), "O4": (4, 21),
-                "O6": (6, 21), "O8": (8, 21), "O12": (12, 21), "O14": (14, 21)}
+from run_exp010c import ARMS as ARMS_WINDOWS  # single source of truth  # noqa: E402
 CLUSTER_THRESHOLD = 0.999  # same as the convergence gate
 
 
@@ -45,11 +42,14 @@ def cluster(vecs, threshold=CLUSTER_THRESHOLD):
 
 
 def main():
+    """Cluster saved terminal tensors per arm and print/save the characterisation."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--tier", default="full")
     ap.add_argument("--decode-via-tail", action="store_true")
     ap.add_argument("--model-path", default=None)
     args = ap.parse_args()
+    if args.decode_via_tail and not args.model_path:
+        ap.error("--decode-via-tail requires --model-path")
 
     results = json.load(open(HERE / "output" / f"results_{args.tier}.json"))
     tpath = HERE / "output" / f"terminals_{args.tier}.pt"
