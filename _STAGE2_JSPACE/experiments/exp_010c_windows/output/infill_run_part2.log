@@ -17,3 +17,5 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [X819] E02_tech         -> "'d"           lock=120 iters=120 margin=3.65
   [X819] D02_periodic     -> "'d"           lock=120 iters=120 margin=1.43
   [X819] A02_medical      -> "'d"           lock=120 iters=120 margin=2.35
+  [X819] B02_wwi          -> "'d"           lock=120 iters=120 margin=1.13
+  [X819] C02_king_cole    -> "'d"           lock=120 iters=120 margin=3.56
