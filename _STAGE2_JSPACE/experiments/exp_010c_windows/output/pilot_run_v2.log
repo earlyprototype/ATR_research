@@ -1,0 +1,59 @@
+Loading gpt2-medium from local path /home/user/models/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 12948.26it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=pilot arms=['A0', 'A4', 'A1', 'A2', 'A3', 'A5'] prompts=5 max_iter=300 check_start=50
+
+=== Arm A0: window 0->23 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [A0] E01_politics     -> 'D'            lock=70 iters=70 margin=0.52
+  [A0] D01_water        -> 'D'            lock=70 iters=70 margin=0.52
+  [A0] A01_physics      -> 'D'            lock=70 iters=70 margin=0.52
+  [A0] B01_napoleon     -> 'D'            lock=70 iters=70 margin=0.52
+  [A0] C01_jack_jill    -> 'D'            lock=70 iters=70 margin=0.52
+
+=== Arm A4: window 10->21 ===
+  [A4] E01_politics     -> ' forever'     lock=140 iters=140 margin=0.93
+  [A4] D01_water        -> ' since'       lock=140 iters=140 margin=0.99
+  [A4] A01_physics      -> ' ('           lock=70 iters=70 margin=0.97
+  [A4] B01_napoleon     -> ' ('           lock=70 iters=70 margin=1.02
+  [A4] C01_jack_jill    -> ' ('           lock=70 iters=70 margin=1.52
+
+=== Arm A1: window 0->11 ===
+  [A1] E01_politics     -> 'ing'          lock=70 iters=70 margin=1.11
+  [A1] D01_water        -> ','            lock=70 iters=70 margin=0.28
+  [A1] A01_physics      -> ','            lock=70 iters=70 margin=0.27
+  [A1] B01_napoleon     -> ','            lock=70 iters=70 margin=0.27
+  [A1] C01_jack_jill    -> ','            lock=70 iters=70 margin=0.27
+
+=== Arm A2: window 6->17 ===
+  [A2] E01_politics     -> '\n'           lock=70 iters=70 margin=0.77
+  [A2] D01_water        -> '\n'           lock=70 iters=70 margin=0.71
+  [A2] A01_physics      -> '\n'           lock=70 iters=70 margin=0.05
+  [A2] B01_napoleon     -> '\n'           lock=70 iters=70 margin=0.84
+  [A2] C01_jack_jill    -> '\n'           lock=70 iters=70 margin=0.85
+
+=== Arm A3: window 12->23 ===
+  [A3] E01_politics     -> 'bone'         lock=80 iters=80 margin=0.12
+  [A3] D01_water        -> '"'            lock=80 iters=80 margin=0.06
+  [A3] A01_physics      -> '"'            lock=90 iters=90 margin=0.46
+  [A3] B01_napoleon     -> 'bone'         lock=80 iters=80 margin=0.30
+  [A3] C01_jack_jill    -> 'bone'         lock=80 iters=80 margin=0.36
+
+=== Arm A5: window 8->15 ===
+  [A5] E01_politics     -> ' rant'        lock=100 iters=100 margin=2.05
+  [A5] D01_water        -> ' rant'        lock=90 iters=90 margin=2.00
+  [A5] A01_physics      -> ' trillion'    lock=70 iters=70 margin=0.30
+  [A5] B01_napoleon     -> ' trillions'   lock=70 iters=70 margin=0.10
+  [A5] C01_jack_jill    -> ' trillions'   lock=70 iters=70 margin=0.04
+
+=== Summary (1341s) ===
+  A0  0->23 converged 5/5 unique_terminals=1 ['D']
+  A4 10->21 converged 5/5 unique_terminals=3 [' (', ' forever', ' since']
+  A1  0->11 converged 5/5 unique_terminals=2 [',', 'ing']
+  A2  6->17 converged 5/5 unique_terminals=1 ['\n']
+  A3 12->23 converged 5/5 unique_terminals=2 ['"', 'bone']
+  A5  8->15 converged 5/5 unique_terminals=3 [' rant', ' trillion', ' trillions']
+
+Artifacts: results_pilot.json, terminals_pilot.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
