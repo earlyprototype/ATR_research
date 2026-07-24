@@ -26,3 +26,14 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [X819] A03_neuro        -> "'d"           lock=120 iters=120 margin=2.97
   [X819] B03_moon         -> "'d"           lock=120 iters=120 margin=3.50
   [X819] C03_mary_lamb    -> "'d"           lock=120 iters=120 margin=2.96
+  [X819] F03_frustration  -> "'d"           lock=120 iters=120 margin=2.92
+  [X819] G03_counting     -> "'d"           lock=120 iters=120 margin=2.97
+  [X819] E04_internet     -> "'d"           lock=120 iters=120 margin=1.52
+  [X819] D04_equation     -> "'d"           lock=120 iters=120 margin=1.29
+  [X819] A04_climate      -> "'d"           lock=120 iters=120 margin=2.23
+  [X819] B04_rome         -> "'d"           lock=120 iters=120 margin=3.59
+
+=== Summary (1079s) ===
+  X819  8->19 converged 25/25 unique_terminals=1 ["'d"]
+
+Artifacts: results_infill.json, terminals_infill.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
