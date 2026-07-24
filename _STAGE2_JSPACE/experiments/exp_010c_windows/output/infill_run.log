@@ -115,3 +115,31 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [I5] B04_rome         -> '...'          lock=170 iters=170 margin=0.04
 
 === Arm X1019: window 10->19 ===
+  [X1019] E01_politics     -> '…)'           lock=120 iters=120 margin=1.99
+  [X1019] D01_water        -> ' […]'         lock=120 iters=120 margin=0.97
+  [X1019] A01_physics      -> '…)'           lock=120 iters=120 margin=1.80
+  [X1019] B01_napoleon     -> '…)'           lock=120 iters=120 margin=0.34
+  [X1019] C01_jack_jill    -> ' […]'         lock=120 iters=120 margin=0.95
+  [X1019] F01_anger        -> '…)'           lock=120 iters=120 margin=0.13
+  [X1019] G01_punctuation  -> '…)'           lock=120 iters=120 margin=0.17
+  [X1019] E02_tech         -> ' […]'         lock=120 iters=120 margin=1.37
+  [X1019] D02_periodic     -> '…)'           lock=120 iters=120 margin=1.75
+  [X1019] A02_medical      -> '…)'           lock=120 iters=120 margin=1.33
+  [X1019] B02_wwi          -> '…)'           lock=120 iters=120 margin=0.71
+  [X1019] C02_king_cole    -> ' […]'         lock=120 iters=120 margin=0.77
+  [X1019] F02_insult       -> ' […]'         lock=120 iters=120 margin=0.66
+  [X1019] G02_brackets     -> '…)'           lock=120 iters=120 margin=0.25
+  [X1019] E03_orgs         -> ' […]'         lock=120 iters=120 margin=1.19
+  [X1019] D03_organic      -> ' […]'         lock=120 iters=120 margin=0.95
+  [X1019] A03_neuro        -> '…)'           lock=120 iters=120 margin=1.46
+  [X1019] B03_moon         -> ' […]'         lock=120 iters=120 margin=0.93
+  [X1019] C03_mary_lamb    -> '…)'           lock=120 iters=120 margin=0.91
+  [X1019] F03_frustration  -> '…)'           lock=120 iters=120 margin=2.05
+  [X1019] G03_counting     -> '…)'           lock=120 iters=120 margin=1.09
+  [X1019] E04_internet     -> ' […]'         lock=120 iters=120 margin=0.68
+  [X1019] D04_equation     -> '…)'           lock=120 iters=120 margin=0.02
+  [X1019] A04_climate      -> '…)'           lock=120 iters=120 margin=1.55
+  [X1019] B04_rome         -> ' […]'         lock=120 iters=120 margin=1.29
+
+=== Arm X1017: window 10->17 ===
+  [X1017] E01_politics     -> ' Bhar'        lock=120 iters=120 margin=1.16
