@@ -170,3 +170,5 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
 
 === Arm X1015: window 10->15 ===
   [X1015] E01_politics     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] D01_water        -> ' Fas'         lock=120 iters=120 margin=1.43
+  [X1015] A01_physics      -> ' Fas'         lock=120 iters=120 margin=1.90
