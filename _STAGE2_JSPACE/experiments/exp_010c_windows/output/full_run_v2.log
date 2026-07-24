@@ -156,3 +156,24 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [A5] C02_king_cole    -> ' rant'        lock=120 iters=120 margin=2.21
   [A5] F02_insult       -> ' rant'        lock=120 iters=120 margin=2.25
   [A5] G02_brackets     -> ' rant'        lock=120 iters=120 margin=2.03
+  [A5] E03_orgs         -> ' rant'        lock=120 iters=120 margin=2.09
+  [A5] D03_organic      -> ' rant'        lock=120 iters=120 margin=1.96
+  [A5] A03_neuro        -> ' rant'        lock=120 iters=120 margin=2.28
+  [A5] B03_moon         -> ' rant'        lock=120 iters=120 margin=2.18
+  [A5] C03_mary_lamb    -> ' rant'        lock=120 iters=120 margin=2.15
+  [A5] F03_frustration  -> ' rant'        lock=120 iters=120 margin=2.21
+  [A5] G03_counting     -> ' rant'        lock=120 iters=120 margin=2.15
+  [A5] E04_internet     -> ' rant'        lock=120 iters=120 margin=1.96
+  [A5] D04_equation     -> ' rant'        lock=120 iters=120 margin=2.03
+  [A5] A04_climate      -> ' rant'        lock=120 iters=120 margin=2.24
+  [A5] B04_rome         -> ' rant'        lock=120 iters=120 margin=2.19
+
+=== Summary (9754s) ===
+  A0  0->23 converged 25/25 unique_terminals=1 ['D']
+  A4 10->21 converged 25/25 unique_terminals=3 [' forever', ' since', ' until']
+  A1  0->11 converged 25/25 unique_terminals=2 [',', 'ing']
+  A2  6->17 converged 25/25 unique_terminals=2 [' "', ' state']
+  A3 12->23 converged 25/25 unique_terminals=2 ['"', 'work']
+  A5  8->15 converged 25/25 unique_terminals=1 [' rant']
+
+Artifacts: results_full.json, terminals_full.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
