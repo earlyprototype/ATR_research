@@ -125,7 +125,9 @@ def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start):
         "converged": lock_in is not None,
         "n_iters": it,
         "final_cos_sim_mean": final_cos,
-        "lag_scan": [float(x) for x in lags] if lags is not None else None,
+        # lag_scan() returns a dict {lag: mean_cosine}; iterate values, not keys,
+        # so this records the cosines (the period signal) rather than [1..8].
+        "lag_scan": {int(k): float(v) for k, v in lags.items()} if lags is not None else None,
         "terminal_mean_vec": current.mean(dim=0).clone(),
         "terminal_last_vec": last_vec,
     }
@@ -186,6 +188,35 @@ def _load_medium_from_local(path):
     hf = GPT2LMHeadModel.from_pretrained(path)
     tok = GPT2Tokenizer.from_pretrained(path)
     return HookedTransformer.from_pretrained("gpt2-medium", hf_model=hf, tokenizer=tok)
+
+
+def _load_gpt2_from_local(path, tl_name):
+    """Generalised offline loader for any GPT-2 size (S3-mirror layout). `tl_name`
+    is the transformer_lens name, e.g. 'gpt2' (small) or 'gpt2-medium'."""
+    import os
+    import shutil
+
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
+    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+    cache = Path(os.environ.get("HF_HOME", Path.home() / ".cache" / "huggingface")) / "hub"
+    snap = cache / f"models--{tl_name.replace('/', '--')}" / "snapshots" / "local"
+    refs = cache / f"models--{tl_name.replace('/', '--')}" / "refs"
+    snap.mkdir(parents=True, exist_ok=True)
+    refs.mkdir(parents=True, exist_ok=True)
+    shutil.copy(Path(path) / "config.json", snap / "config.json")
+    (refs / "main").write_text("local")
+
+    from transformers import GPT2LMHeadModel, GPT2Tokenizer
+    from transformer_lens import HookedTransformer
+
+    hf = GPT2LMHeadModel.from_pretrained(path)
+    tok = GPT2Tokenizer.from_pretrained(path)
+    return HookedTransformer.from_pretrained(tl_name, hf_model=hf, tokenizer=tok)
+
+
+def _load_small_from_local(path):
+    """Offline gpt2-small load (EXP_010d). See `_load_gpt2_from_local`."""
+    return _load_gpt2_from_local(path, "gpt2")
 
 
 def main():
