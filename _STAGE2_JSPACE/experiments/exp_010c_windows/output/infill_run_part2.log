@@ -21,3 +21,6 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [X819] C02_king_cole    -> "'d"           lock=120 iters=120 margin=3.56
   [X819] F02_insult       -> "'d"           lock=120 iters=120 margin=3.54
   [X819] G02_brackets     -> "'d"           lock=120 iters=120 margin=1.24
+  [X819] E03_orgs         -> "'d"           lock=120 iters=120 margin=3.60
+  [X819] D03_organic      -> "'d"           lock=120 iters=120 margin=2.08
+  [X819] A03_neuro        -> "'d"           lock=120 iters=120 margin=2.97
