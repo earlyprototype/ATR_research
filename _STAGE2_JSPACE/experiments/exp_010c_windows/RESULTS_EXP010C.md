@@ -309,3 +309,202 @@ The full per-run values are in the regenerated `results_full.json` /
 **Housekeeping:** `results_full.json` and `terminals_full.pt` un-ignored and
 committed (the gitignore entries existed to keep mid-run checkpoints out;
 final versions are the record, per the convention above).
+
+## 2026-07-24 — EXP_010c-3 IN-FILL SWEEP (9 arms × 25, gated, max_iter=1000)
+
+**Spec:** `../../EXP_010c3_SPEC.md` (pre-registered before any run; committed first).
+
+**What ran:** `run_exp010c.py --tier infill --model-path <local>` (executed via a
+resume-capable driver that reuses the runner's `run_arm_with_terminal` →
+`atr_engine2.run_atr_gated` path unchanged, so the protocol is identical to the
+plain `--tier infill`; the driver adds per-arm commit and restart-resume).
+9 new windows × 25 prompts = **225 runs, 225/225 converged.** Same 25-prompt
+subset as the registered runs (`output/prompt_subset.json`; the derivation was
+re-verified this session to reproduce the committed subset exactly). Model: the
+S3-mirror gpt2-medium (`pytorch_model.bin` 1,520,013,706 bytes — the same file
+recorded in §Model acquisition), loaded offline; torch 2.13.0 /
+transformer_lens 3.5.1 (same versions as the registered runs). Deviation
+recorded: the sweep was interrupted by a container pause partway through arm
+X1017 (no partial written — checkpoints are per-completed-arm) and resumed; the
+first seven arms and the last two ran as two processes, protocol identical
+throughout. Artifacts: `output/results_infill.json`, `output/terminals_infill.pt`,
+`output/terminal_characterisation_infill.json`.
+
+**Recorded count deviation:** the issue header says "10 new windows × 25 prompts
+= 250 runs" but its window table enumerates 9 windows (4 injection + 5
+extraction); this sweep ran the 9 enumerated, justified cells (spec §3 records
+why no 10th was added).
+
+**Injection in-fill (inject i → extract 21).** Token class is the checkable
+lexical rule (whole-word = leading-space alphabetic core len≥2; punctuation = no
+alphanumeric char; fragment = otherwise):
+
+| Arm | i | Terminals | Unique | Dominant class | Class counts | Conv | Lock-ins |
+|---|---|---|---|---|---|---|---|
+| I5 | 5 | `'...'`×7, `'…'`×6, `' Congratulations'`×4, `' Welcome'`×3, `'been'`×2, `'!!'`×2 +1 | 7 | punctuation | punctuation:15, whole-word:8, fragment:2 | 25/25 | 120/150/170 |
+| I7 | 7 | `'oooooooo'`×25 | 1 | fragment | fragment:25 | 25/25 | 120 |
+| I9 | 9 | `'oooooooo'`×18, `'…'`×7 | 2 | fragment | fragment:18, punctuation:7 | 25/25 | 120/130 |
+| I11 | 11 | `'<\|endoftext\|>'`×25 | 1 | (EOT special token) | fragment:25 | 25/25 | 120 |
+
+Context rows from the boundary scan (extract 21), surrounding even injection
+layers: i=6 → 6 unique, mixed (plurality `'​'`); **i=8 → `' simultaneously'`×17,
+`' halfway'`×8 (whole-word);** i=10 (A4) → `' until'`×19, `' forever'`×5,
+`' since'`×1 (whole-word); i=12 → `'or'`/`' £'`/`' NHS'` (mixed); i=14 → 7 unique,
+plurality `' or'`×15.
+
+**Extraction ladder (inject 8 or 10 → extract j):**
+
+| Arm | Window | Terminals | Unique | Dominant class | Conv | Lock-ins |
+|---|---|---|---|---|---|---|
+| X817 | 8→17 | `' GOP'`×25 | 1 | whole-word | 25/25 | 120 |
+| X819 | 8→19 | `"'d"`×25 | 1 | fragment | 25/25 | 120 |
+| X1015 | 10→15 | `' Fas'`×25 | 1 | whole-word | 25/25 | 120 |
+| X1017 | 10→17 | `' Bhar'`×25 | 1 | whole-word | 25/25 | 120 |
+| X1019 | 10→19 | `'…)'`×15, `' […]'`×10 | 2 | punctuation | 25/25 | 120 |
+
+Context: existing extraction endpoints — inject 8 → j=15 (A5) `' rant'`×25, j=21
+(O8) `' simultaneously'`/`' halfway'`; inject 10 → j=21 (A4)
+`' until'`/`' forever'`/`' since'`.
+
+**Terminal characterisation (tensor basins + decode-via-tail control;** cosine
+clustering at gate threshold 0.999; all 9 windows have j<23 so the via-tail is
+non-empty):
+
+| Arm | Window | Tensor basins | Direct decode | Via-tail | Agree | Margin μ/max |
+|---|---|---|---|---|---|---|
+| I5 | 5→21 | 21 | `'...'`×7, `'…'`×6, `' Congratulations'`×4, `' Welcome'`×3 | `'!'`×7, `'…'`×6, `' once'`×4, `' been'`×4 | 6/25 | 0.418/2.06 |
+| I7 | 7→21 | 6 | `'oooooooo'`×25 | `'oooooooo'`×25 | 25/25 | 2.402/2.572 |
+| I9 | 9→21 | 8 | `'oooooooo'`×18, `'…'`×7 | `'…'`×25 | 7/25 | 1.693/2.305 |
+| I11 | 11→21 | 3 | `'<\|endoftext\|>'`×25 | `'<\|endoftext\|>'`×25 | 25/25 | 1.836/2.172 |
+| X817 | 8→17 | 2 | `' GOP'`×25 | `' since'`×25 | 0/25 | 1.153/1.451 |
+| X819 | 8→19 | 8 | `"'d"`×25 | `"'d"`×15, `'…'`×10 | 15/25 | 2.568/3.646 |
+| X1015 | 10→15 | 3 | `' Fas'`×25 | `' the'`×25 | 0/25 | 1.811/2.261 |
+| X1017 | 10→17 | 5 | `' Bhar'`×25 | `' Indian'`×25 | 0/25 | 1.308/1.474 |
+| X1019 | 10→19 | 16 | `'…)'`×15, `' […]'`×10 | `','`×13, `' )'`×5, `' ,'`×4 | 1/25 | 1.013/2.054 |
+
+**Observations (no interpretation in this section):**
+
+1. All 225 runs converged (lock-in 120–170; most arms lock at exactly 120,
+   the earliest gated iteration for check_start=100).
+2. Of the 9 new cells, **7 direct-decode to a single terminal repeated across
+   all 25 prompts** (I7 `oooooooo`, I11 `<|endoftext|>`, X817 `GOP`, X819 `'d`,
+   X1015 `Fas`, X1017 `Bhar`; and I9 is 18/7 between two tokens). Two are
+   multi-token: I5 (7 unique, plurality punctuation) and X1019 (2 unique,
+   punctuation). None has a whole-word plurality with ≥2 unique whole-word
+   terminals.
+3. Mechanical whole-word flag (≥2 unique terminals AND plurality class
+   whole-word) across all 9 new cells: **0 flagged.**
+4. I9 (9→21), the injection midpoint between the two extract-21 whole-word
+   cells i=8 and i=10: plurality `oooooooo` (fragment) ×18, `…` ×7; whole-word
+   count 0/25.
+5. Injection flanks at extract 21: I5 (i=5) plurality punctuation; I7 (i=7)
+   single fragment `oooooooo` ×25; I11 (i=11) single `<|endoftext|>` ×25.
+6. Extraction ladder below 21: at inject 8, j=17 `GOP` and j=19 `'d`; at
+   inject 10, j=15 `Fas`, j=17 `Bhar`, j=19 `…)`/`[…]`. Every rung is a single
+   direct terminal (or, at j=19-10, two punctuation tokens).
+7. Decode-via-tail agreement at these cells: I7 25/25 and I11 25/25 (a single
+   prompt-independent token surviving the tail); X819 15/25; I9 7/25; I5 6/25;
+   X1019 1/25; **X817, X1015, X1017 all 0/25 — the direct-decode terminal
+   inverts entirely under the tail** (`GOP`→`since`, `Fas`→`the`, `Bhar`→`Indian`).
+
+**Spec §4 verdicts (mechanical application of the pre-registered table):**
+
+- **H12 (injection-zone continuity): REFUTED.** Pre-registered: 9→21 funnelling
+  to punctuation/fragments or a single shared terminal refutes continuity.
+  Observed: I9 plurality `oooooooo` (fragment), 0/25 whole-word. The extract-21
+  whole-word cells at i=8 and i=10 are **separate one-layer islands**, not a
+  contiguous band; the layer between them is fragment/punctuation.
+- **H12a (injection-zone edges): SUPPORTED on the onset side, with a recorded
+  sharpening.** Pre-registered: 5→21 and 7→21 resembling the i≤6
+  punctuation/fragment character puts the word-zone onset at i=8, sharp.
+  Observed: I5 punctuation-dominant, I7 single fragment — both non-whole-word,
+  so onset is at i=8. The specific sub-prediction "7→21 whole-word but 5→21 not"
+  is **not** borne out (neither is whole-word); the onset is one layer sharper
+  than that reading allowed. On the exit side, I11 (i=11) is a single EOT
+  terminal (non-whole-word), so the extract-21 whole-word set is exactly
+  i ∈ {8, 10} with i=9 excluded.
+- **H13 (extraction ladder): SUPPORTED; edge at j=21, sharp.** Pre-registered:
+  whole-word + via-tail-robust at the top of the ladder, lost at some locatable
+  j\*. Observed: the whole-word, via-tail-robust character holds only at the
+  seed extract layer j=21 (O8 17/25, A4 23/25); every rung below (j ∈ {15,17,19}
+  at inject 8 and 10) is a single direct terminal, and via-tail agreement
+  collapses (0/25 at X817, X1015, X1017; 1/25 at X1019; 15/25 at X819). The
+  robust character does not extend even one layer below the seed extract point.
+- **Non-convergence:** none (225/225).
+- **Via-tail inversion flag (readout-load-bearing cells for EXP_013m):** X817
+  (`GOP`→`since`), X1015 (`Fas`→`the`), X1017 (`Bhar`→`Indian`) invert fully
+  (0/25). The direct logit-lens-at-j readout at these cells is not what the
+  motor tail makes of the same tensor; EXP_013m arbitrates.
+
+### Updated tested-windows map (hand-off to the J-lens phase)
+
+Whole-word flag = ≥2 unique terminals AND plurality lexical class whole-word.
+`via-tail` is direct-vs-tail decode agreement; `basins` is tensor clusters at
+0.999. `✓` = flagged; `·` = not flagged; blank = not run.
+
+**Injection axis at extract 21** (bold = new this experiment):
+
+| i | arm | unique | whole-word (of 25) | plurality token | basins | via-tail | flag |
+|---|---|---|---|---|---|---|---|
+| 0 | O0 | 1 | 0 | `','` ×25 | 1 | 0/25 | · |
+| 4 | O4 | 1 | 0 | `','` ×25 | 1 | 0/25 | · |
+| **5** | **I5** | **7** | **8** | `'...'` ×7 | **21** | **6/25** | **·** |
+| 6 | O6 | 6 | 4 | `'​'` ×12 | 12 | 7/25 | · |
+| **7** | **I7** | **1** | **0** | `'oooooooo'` ×25 | **6** | **25/25** | **·** |
+| 8 | O8 | 2 | 25 | `' simultaneously'` ×17 | 11 | 17/25 | ✓ |
+| **9** | **I9** | **2** | **0** | `'oooooooo'` ×18 | **8** | **7/25** | **·** |
+| 10 | A4 | 3 | 25 | `' until'` ×19 | 12 | 23/25 | ✓ |
+| **11** | **I11** | **1** | **0** | `'<\|endoftext\|>'` ×25 | **3** | **25/25** | **·** |
+| 12 | O12 | 3 | 7 | `'or'` ×11 | 10 | 9/25 | · |
+| 14 | O14 | 7 | 19 | `' or'` ×15 | 19 | 17/25 | ✓ |
+
+**Extraction ladders** (bold = new this experiment):
+
+| inject | j | arm | unique | whole-word (of 25) | plurality token | basins | via-tail | flag |
+|---|---|---|---|---|---|---|---|---|
+| 8 | 15 | A5 | 1 | 25 | `' rant'` ×25 | 3 | 0/25 | · |
+| 8 | **17** | **X817** | **1** | **25** | `' GOP'` ×25 | **2** | **0/25** | **·** |
+| 8 | **19** | **X819** | **1** | **0** | `"'d"` ×25 | **8** | **15/25** | **·** |
+| 8 | 21 | O8 | 2 | 25 | `' simultaneously'` ×17 | 11 | 17/25 | ✓ |
+| 10 | **15** | **X1015** | **1** | **25** | `' Fas'` ×25 | **3** | **0/25** | **·** |
+| 10 | **17** | **X1017** | **1** | **25** | `' Bhar'` ×25 | **5** | **0/25** | **·** |
+| 10 | **19** | **X1019** | **2** | **0** | `'…)'` ×15 | **16** | **1/25** | **·** |
+| 10 | 21 | A4 | 3 | 25 | `' until'` ×19 | 12 | 23/25 | ✓ |
+
+**Map observations for the J-lens phase (observation only; no mechanism
+asserted):**
+
+- The mechanical whole-word flag marks three injection cells at extract 21:
+  i ∈ {8, 10, 14}. The in-fill added **no** new flagged cell on either axis.
+- Among the flagged cells the plurality token differs in kind (checkable, not
+  interpreted): i=8 `' simultaneously'` and i=10 `' until'` are content words;
+  i=14 `' or'` is a function word (and i=14's remaining terminals are
+  punctuation/fragments). Recorded for the J-lens phase to adjudicate; not
+  resolved here.
+- At extract 21 the whole-word flag holds at i=8 and i=10 but **not** at the
+  layer between them (i=9) nor at the immediate odd flanks (i=7, i=11): single-
+  layer resolution, isolated cells.
+- On the extraction axis the flag holds only at j=21 for both flagged
+  injections; every rung at j ∈ {15,17,19} is unflagged, and three of them
+  (8→17, 10→15, 10→17) invert entirely under the via-tail control.
+- Suggested J-lens targets (EXP_012m / EXP_011m / EXP_013m), stated as the cells
+  where a robust whole-word signature exists to explain: **(8,21) and (10,21)**
+  as isolated single-layer islands, plus **(8,15)** (single direct terminal but
+  three tensor basins and a via-tail split, per the registered run). The
+  via-tail-inverting cells **(8,17), (10,15), (10,17)** are flagged as readout-
+  load-bearing: their direct decode is not tail-robust, so any claim about them
+  needs the J-lens re-decode.
+
+**Terminal inventories:** the complete uncurated per-arm terminal lists are in
+`results_infill.json`; the full characterisation (basins, direct + via-tail
+decode, margins, entropy) is in `terminal_characterisation_infill.json`. No
+curated sublist is maintained here.
+
+**Caveats (standing):** single seed; one 25-prompt subset; cluster-threshold
+sensitivity unexplored; direct decode at j<23 is a logit-lens-at-j readout whose
+off-band unreliability is already measured (and here shows full inversion at
+three cells); two-instrument (direct + via-tail) agreement is necessary but not
+sufficient. The J-lens re-decode (EXP_013m) remains the registered arbiter for
+every mid-stack terminal claim, including all cells in this in-fill.
+`terminals_infill.pt` is ~2.0 MB — at the committed-`.pt` size threshold noted
+in the PR #4 review (item 3); revisit LFS/release assets if the grid grows.

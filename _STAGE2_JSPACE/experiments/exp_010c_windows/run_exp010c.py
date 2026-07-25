@@ -45,15 +45,28 @@ ARMS = {
     "O8": (8, 21),
     "O12": (12, 21),
     "O14": (14, 21),
+    # EXP_010c-3 in-fill around the word-forming cells (EXP_010c3_SPEC.md §3)
+    "I5": (5, 21),     # injection in-fill (extract 21): odd layers around 8/10
+    "I7": (7, 21),
+    "I9": (9, 21),     # critical point between the two word cells 8->21 and 10->21
+    "I11": (11, 21),
+    "X817": (8, 17),   # extraction column below 21 at the word-forming injections
+    "X819": (8, 19),
+    "X1015": (10, 15),
+    "X1017": (10, 17),
+    "X1019": (10, 19),
 }
 ARM_ORDER = ["A0", "A4", "A1", "A2", "A3", "A5"]  # spec §5 execution order
 SCAN_ORDER = ["E22", "E23", "O0", "O4", "O6", "O8", "O12", "O14"]
+INFILL_ORDER = ["I5", "I7", "I9", "I11",  # EXP_010c3_SPEC.md §5 execution order
+                "X817", "X819", "X1015", "X1017", "X1019"]
 
 TIERS = {
     "smoke": dict(n_prompts=2, max_iter=60, check_start=20, arms=["A0", "A4"]),
     "pilot": dict(n_prompts=5, max_iter=300, check_start=50, arms=ARM_ORDER),
     "full": dict(n_prompts=25, max_iter=1000, check_start=100, arms=ARM_ORDER),
     "scan": dict(n_prompts=25, max_iter=1000, check_start=100, arms=SCAN_ORDER),
+    "infill": dict(n_prompts=25, max_iter=1000, check_start=100, arms=INFILL_ORDER),
 }
 
 
