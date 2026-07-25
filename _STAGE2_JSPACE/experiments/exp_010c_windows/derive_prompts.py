@@ -66,6 +66,21 @@ def select_subset(n=25):
     return picked
 
 
+def select_subset_b(n=25):
+    """Disjoint subset B (EXP_010c-ROBUST spec §3): the NEXT n prompts under
+    the identical round-robin/alphabetical ordering, i.e. positions 26..25+n —
+    deterministic, no hand-picking, disjoint from the registered subset."""
+    picked = select_subset(25 + n)
+    if len(picked) != 25 + n:
+        raise SystemExit(f"Could not derive {25 + n} prompts (got {len(picked)})")
+    subset_b = picked[25:]
+    reg_ids = {r["id"] for r in picked[:25]}
+    overlap = reg_ids & {r["id"] for r in subset_b}
+    if overlap:
+        raise SystemExit(f"Subset B overlaps registered subset: {overlap}")
+    return subset_b
+
+
 if __name__ == "__main__":
     records = load_all()
     cats = sorted({r["category"] for r in records})
