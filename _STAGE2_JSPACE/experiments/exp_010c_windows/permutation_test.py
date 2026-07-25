@@ -1,366 +1,289 @@
-"""
-Anisotropy-corrected permutation test for EXP_010c terminal-token relatedness.
+#!/usr/bin/env python3
+"""EXP_010c-PERM: anisotropy-corrected permutation test on window-loop terminals.
 
-Spec: ../../PERM_TEST_EXP010c_SPEC.md (pre-registered before this script).
-Pattern: Stage 1's 02b_permutation_test.py (Lucier repo), extended with
-matched nulls and multiple token sets.
+Implements _STAGE2_JSPACE/EXP_010c_PERM_SPEC.md (pre-registered; committed
+before this script ran). Issue: earlyprototype/ATR_research#7.
 
-Run:  python permutation_test.py --model-path <dir-with-pytorch_model.bin>
+Zero model forward passes: loads gpt2-medium's state dict for wte only.
+Deterministic: seed 20260725, per-set substreams rng([SEED, set_index]).
+
+Usage:
+    python permutation_test.py --model-dir /path/to/gpt2-medium-files \
+        [--n-null 10000] [--out output/permutation_results.json]
+
+The model dir must contain pytorch_model.bin, vocab.json, merges.txt.
 """
+
 import argparse
+import hashlib
 import json
-import pathlib
-import sys
+import os
+from itertools import combinations
 
 import numpy as np
 import torch
 
-HERE = pathlib.Path(__file__).resolve().parent
-OUT = HERE / "output"
+SEED = 20260725
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT_DIR = os.path.join(HERE, "output")
 
-N_PERM = 10_000
-SEED = 2026
-FREQ_BANDS = 10
-VOCAB_SIZE = 50257
-LENGTH_TOLERANCE = 1
-
-TOKEN_SETS = {
-    "S1_A4_direct": {
-        "description": "A4 (10->21) direct decode",
-        "token_ids": [1566, 8097, 1201],
-        "tokens": [" until", " forever", " since"],
-    },
-    "S2_O8_direct": {
-        "description": "O8 (8->21) direct decode",
-        "token_ids": [11640, 19487],
-        "tokens": [" simultaneously", " halfway"],
-    },
-    "S3_A5_direct": {
-        "description": "A5 (8->15) direct decode — DEGENERATE (n=1)",
-        "token_ids": [30993],
-        "tokens": [" rant"],
-    },
-    "S4_pooled_direct": {
-        "description": "Pooled word-arms direct (A4 + O8 + A5)",
-        "token_ids": [1566, 8097, 1201, 11640, 19487, 30993],
-        "tokens": [" until", " forever", " since", " simultaneously", " halfway", " rant"],
-    },
-    "S5_A1_contrast": {
-        "description": "A1 (0->11) direct decode — CONTRAST (punctuation funnel)",
-        "token_ids": [11, 278],
-        "tokens": [",", "ing"],
-    },
-    "S6_A4_tail": {
-        "description": "A4 (10->21) via-tail decode",
-        "token_ids": [1566, 8097, 1201],
-        "tokens": [" until", " forever", " since"],
-    },
-    "S7_O8_tail": {
-        "description": "O8 (8->21) via-tail decode",
-        "token_ids": [11640, 655, 6],
-        "tokens": [" simultaneously", " just", "'"],
-    },
-    "S8_A5_tail": {
-        "description": "A5 (8->15) via-tail decode",
-        "token_ids": [13079, 6],
-        "tokens": [" endless", "'"],
-    },
-    "S9_pooled_tail": {
-        "description": "Pooled word-arms via-tail (S6 + S7 + S8)",
-        "token_ids": [1566, 8097, 1201, 11640, 655, 6, 13079],
-        "tokens": [" until", " forever", " since", " simultaneously", " just", "'", " endless"],
-    },
-}
+# ---------------------------------------------------------------- GPT-2 bytes
 
 
-def load_embeddings(model_path):
-    sd = torch.load(
-        pathlib.Path(model_path) / "pytorch_model.bin",
-        map_location="cpu",
-        weights_only=True,
+def bytes_to_unicode():
+    """GPT-2's byte<->unicode table (verbatim algorithm from the reference impl)."""
+    bs = (
+        list(range(ord("!"), ord("~") + 1))
+        + list(range(ord("\xa1"), ord("\xac") + 1))
+        + list(range(ord("\xae"), ord("\xff") + 1))
     )
-    W_E = sd["wte.weight"].numpy()
-    tied = "lm_head.weight" not in sd
-    W_U = W_E if tied else sd["lm_head.weight"].numpy()
-    return W_E, W_U, tied
+    cs = bs[:]
+    n = 0
+    for b in range(2**8):
+        if b not in bs:
+            bs.append(b)
+            cs.append(2**8 + n)
+            n += 1
+    return dict(zip(bs, [chr(c) for c in cs]))
 
 
-def load_vocab(model_path):
-    with open(pathlib.Path(model_path) / "vocab.json") as f:
-        vocab = json.load(f)
-    id_to_str = {v: k for k, v in vocab.items()}
-    return id_to_str
+B2U = bytes_to_unicode()
+U2B = {v: k for k, v in B2U.items()}
 
 
-def build_token_properties(id_to_str):
-    props = {}
-    for tid in range(VOCAB_SIZE):
-        s = id_to_str.get(tid, "")
-        has_space = s.startswith("Ġ")
-        display = s.replace("Ġ", " ")
-        strlen = len(s)
-        freq_band = min(tid * FREQ_BANDS // VOCAB_SIZE, FREQ_BANDS - 1)
-        props[tid] = {
-            "has_space": has_space,
-            "strlen": strlen,
-            "freq_band": freq_band,
-            "display": display,
-        }
-    return props
+def encode_str(s):
+    """Decoded token string -> vocab key (e.g. ' until' -> 'Ġuntil')."""
+    return "".join(B2U[b] for b in s.encode("utf-8"))
 
 
-def build_matching_pools(token_ids, props):
-    pools = {}
-    warnings = []
-    for tid in token_ids:
-        p = props[tid]
-        pool = []
-        for cid in range(VOCAB_SIZE):
-            if cid == tid:
-                continue
-            cp = props[cid]
-            if cp["has_space"] != p["has_space"]:
-                continue
-            if abs(cp["strlen"] - p["strlen"]) > LENGTH_TOLERANCE:
-                continue
-            if cp["freq_band"] != p["freq_band"]:
-                continue
-            pool.append(cid)
-        if len(pool) < 50:
-            pool_relaxed = []
-            for cid in range(VOCAB_SIZE):
-                if cid == tid:
-                    continue
-                cp = props[cid]
-                if cp["has_space"] != p["has_space"]:
-                    continue
-                if abs(cp["strlen"] - p["strlen"]) > LENGTH_TOLERANCE + 1:
-                    continue
-                if cp["freq_band"] != p["freq_band"]:
-                    continue
-                pool_relaxed.append(cid)
-            warnings.append(
-                f"token {tid} ({props[tid]['display']!r}): pool {len(pool)} -> "
-                f"relaxed to ±{LENGTH_TOLERANCE+1} chars -> {len(pool_relaxed)}"
-            )
-            pool = pool_relaxed
-        pools[tid] = np.array(pool, dtype=np.int64)
-    return pools, warnings
+def decode_key(key):
+    """Vocab key -> decoded token string."""
+    return bytes(U2B[c] for c in key).decode("utf-8", errors="replace")
 
 
-def mean_pairwise_cosine(W_norm, token_ids):
-    if len(token_ids) < 2:
-        return float("nan")
-    vecs = W_norm[token_ids]
-    sim = vecs @ vecs.T
-    n = len(token_ids)
-    mask = ~np.eye(n, dtype=bool)
-    return float(sim[mask].mean())
+# ------------------------------------------------------------------ token sets
 
 
-def offdiag_stats(sim_matrix):
-    mask = ~np.eye(sim_matrix.shape[0], dtype=bool)
-    vals = sim_matrix[mask]
-    return {
-        "mean": float(vals.mean()),
-        "min": float(vals.min()),
-        "max": float(vals.max()),
-        "std": float(vals.std()),
-    }
+def build_token_sets():
+    """Exact sets of spec section 3, derived from the committed artifacts."""
+    with open(os.path.join(OUT_DIR, "terminal_characterisation_full.json")) as f:
+        char_full = json.load(f)
+    with open(os.path.join(OUT_DIR, "terminal_characterisation_scan.json")) as f:
+        char_scan = json.load(f)
+    chars = {r["arm"]: r for r in char_full + char_scan}
+
+    with open(os.path.join(OUT_DIR, "results_full.json")) as f:
+        res = json.load(f)
+    with open(os.path.join(OUT_DIR, "results_scan.json")) as f:
+        res += json.load(f)
+    direct_ids = {(r["arm"], r["terminal_token"]): r["terminal_token_id"] for r in res}
+    return chars, direct_ids
 
 
-def run_permutation_test(W_norm, token_ids, pools, rng, n_perm):
-    observed = mean_pairwise_cosine(W_norm, token_ids)
-    if np.isnan(observed):
-        return None
+def make_sets(chars, direct_ids, vocab):
+    def ids_for(arm, field):
+        out = {}
+        for s in chars[arm][field]:
+            tid = vocab[encode_str(s)]
+            if field == "decode_terminals":
+                assert direct_ids[(arm, s)] == tid, (arm, s, tid)
+            out[s] = tid
+        return out
 
-    null_stats = np.empty(n_perm)
-    for k in range(n_perm):
-        replacement = []
-        used = set()
-        for tid in token_ids:
-            pool = pools[tid]
-            pool_available = pool[~np.isin(pool, list(used))]
-            if len(pool_available) == 0:
-                pool_available = pool
-            chosen = rng.choice(pool_available)
-            replacement.append(int(chosen))
-            used.add(int(chosen))
-        null_stats[k] = mean_pairwise_cosine(W_norm, replacement)
+    sets = {}
+    sets["A4_direct"] = ids_for("A4", "decode_terminals")
+    sets["O8_direct"] = ids_for("O8", "decode_terminals")
+    sets["A5_direct"] = ids_for("A5", "decode_terminals")
+    sets["A4_tail"] = ids_for("A4", "tail_decode_terminals")
+    sets["O8_tail"] = ids_for("O8", "tail_decode_terminals")
+    sets["A5_tail"] = ids_for("A5", "tail_decode_terminals")
+    pooled_d, pooled_t = {}, {}
+    for a in ("A4_direct", "O8_direct", "A5_direct"):
+        pooled_d.update(sets[a])
+    for a in ("A4_tail", "O8_tail", "A5_tail"):
+        pooled_t.update(sets[a])
+    sets["pooled_word_direct"] = pooled_d
+    sets["pooled_word_tail"] = pooled_t
+    sets["A1_direct"] = ids_for("A1", "decode_terminals")
+    sets["A1_tail"] = ids_for("A1", "tail_decode_terminals")
+    return sets  # insertion order == spec set numbering 1..10
 
-    null_mean = float(null_stats.mean())
-    null_sd = float(null_stats.std())
-    effect_size = (observed - null_mean) / null_sd if null_sd > 0 else float("inf")
-    p_value = (np.sum(null_stats >= observed) + 1) / (n_perm + 1)
 
-    return {
-        "observed": observed,
-        "null_mean": null_mean,
-        "null_sd": null_sd,
-        "effect_size": effect_size,
-        "p_value": float(p_value),
-        "null_min": float(null_stats.min()),
-        "null_max": float(null_stats.max()),
-        "null_median": float(np.median(null_stats)),
-    }
+# ---------------------------------------------------------------- matching
+
+
+def build_features(vocab, merges_path):
+    """Per-token (leading_space, decoded_len, band) per spec section 6."""
+    with open(merges_path, encoding="utf-8") as f:
+        lines = f.read().splitlines()
+    assert lines[0].startswith("#"), "merges.txt header expected"
+    merges = lines[1:]
+    assert len(merges) == 50000, len(merges)
+    rank = {}
+    for k, line in enumerate(merges):
+        a, b = line.split(" ")
+        t = a + b
+        if t not in rank:
+            rank[t] = k
+
+    feats = {}
+    for key, tid in vocab.items():
+        if tid == 50256:  # <|endoftext|> excluded from all pools
+            continue
+        band = "byte" if key not in rank else rank[key] // 5000
+        feats[tid] = (key.startswith("Ġ"), len(decode_key(key)), band)
+    return feats
+
+
+def candidate_pool(tid, feats):
+    sp, length, band = feats[tid]
+    return np.array(
+        [j for j, (s2, l2, b2) in feats.items() if s2 == sp and abs(l2 - length) <= 1 and b2 == band],
+        dtype=np.int64,
+    )
+
+
+# ---------------------------------------------------------------- statistic
+
+
+def mean_pairwise_cos(ids, emb_n):
+    """Mean pairwise cosine over unique types; emb_n is row-normalised W_E."""
+    v = emb_n[ids]
+    sims = v @ v.T
+    iu = np.triu_indices(len(ids), k=1)
+    return float(sims[iu].mean())
+
+
+def null_distribution(pools, n_null, rng):
+    """Draw n_null sets: one token per pool, distinct within each set."""
+    k = len(pools)
+    draws = np.empty((n_null, k), dtype=np.int64)
+    for i in range(n_null):
+        while True:
+            pick = [pool[rng.integers(len(pool))] for pool in pools]
+            if len(set(pick)) == k:
+                break
+        draws[i] = pick
+    return draws
+
+
+# ---------------------------------------------------------------- main
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", required=True)
-    args = parser.parse_args()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--model-dir", required=True)
+    ap.add_argument("--n-null", type=int, default=10000)
+    ap.add_argument("--out", default=os.path.join(OUT_DIR, "permutation_results.json"))
+    args = ap.parse_args()
 
-    print("Loading embeddings...")
-    W_E, W_U, tied = load_embeddings(args.model_path)
-    print(f"  W_E: {W_E.shape}, W_U: {'tied to W_E' if tied else W_U.shape}")
+    # Provenance attestation (PR #19 review): digest the exact statistical
+    # inputs so the recorded null is tied to immutable file contents, not a
+    # mutable download route. Digests are serialized into the results JSON.
+    input_digests = {}
+    for fname in ("pytorch_model.bin", "vocab.json", "merges.txt"):
+        h = hashlib.sha256()
+        with open(os.path.join(args.model_dir, fname), "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        input_digests[fname] = h.hexdigest()
 
-    W_E_norm = W_E / np.linalg.norm(W_E, axis=1, keepdims=True)
-    W_U_norm = W_U / np.linalg.norm(W_U, axis=1, keepdims=True)
+    with open(os.path.join(args.model_dir, "vocab.json")) as f:
+        vocab = json.load(f)
+    chars, direct_ids = build_token_sets()
+    sets = make_sets(chars, direct_ids, vocab)
 
-    print("Loading vocab and building token properties...")
-    id_to_str = load_vocab(args.model_path)
-    props = build_token_properties(id_to_str)
+    sd = torch.load(
+        os.path.join(args.model_dir, "pytorch_model.bin"),
+        map_location="cpu",
+        weights_only=True,
+    )
+    assert "wte.weight" in sd and not any("lm_head" in k for k in sd), (
+        "spec section 4 premise: tied weights, no separate lm_head"
+    )
+    wte = sd["wte.weight"].float().numpy()
+    assert wte.shape == (50257, 1024), wte.shape
+    # W_E rows; W_U = wte^T (tied), so W_U column t == W_E row t. Both spaces
+    # are computed from this one matrix; cosines are identical by identity.
+    emb_n = wte / np.linalg.norm(wte, axis=1, keepdims=True)
 
-    for sid, sdef in TOKEN_SETS.items():
-        for tid, tok_str in zip(sdef["token_ids"], sdef["tokens"]):
-            display = props[tid]["display"]
-            expected = tok_str.replace(" ", "Ġ")
-            if " " in tok_str:
-                expected = tok_str
-                display_check = " " + display.lstrip() if not display.startswith(" ") else display
-            else:
-                display_check = display
-            assert display_check.strip() == tok_str.strip() or display == tok_str, (
-                f"Set {sid}: token {tid} expected {tok_str!r} but vocab says {display!r}"
-            )
+    feats = build_features(vocab, os.path.join(args.model_dir, "merges.txt"))
 
-    rng = np.random.default_rng(SEED)
-    n_bonferroni = sum(1 for s in TOKEN_SETS.values() if len(s["token_ids"]) >= 2)
-    alpha = 0.05 / n_bonferroni
-
-    print(f"\nGlobal anisotropy context (200k random pairs)...")
-    pairs = rng.choice(VOCAB_SIZE, size=(200_000, 2))
-    pairs = pairs[pairs[:, 0] != pairs[:, 1]]
-    global_we = float((W_E_norm[pairs[:, 0]] * W_E_norm[pairs[:, 1]]).sum(1).mean())
-    global_wu = float((W_U_norm[pairs[:, 0]] * W_U_norm[pairs[:, 1]]).sum(1).mean())
-    print(f"  W_E global mean pairwise cosine: {global_we:.4f}")
-    print(f"  W_U global mean pairwise cosine: {global_wu:.4f}")
-    print(f"  Weight tying: {'YES (W_E = W_U, results identical)' if tied else 'NO'}")
+    n_testable = sum(1 for d in sets.values() if len(d) >= 2)
+    alpha = 0.05 / n_testable
 
     results = {
-        "design": {
-            "n_permutations": N_PERM,
-            "seed": SEED,
-            "matching": "leading_space + strlen_pm1 + freq_decile",
-            "bonferroni_n": n_bonferroni,
-            "bonferroni_alpha": alpha,
-            "weight_tying": tied,
-        },
-        "context": {
-            "global_mean_pairwise_cosine_WE": global_we,
-            "global_mean_pairwise_cosine_WU": global_wu,
-        },
-        "sets": {},
+        "spec": "_STAGE2_JSPACE/EXP_010c_PERM_SPEC.md",
+        "issue": "earlyprototype/ATR_research#7",
+        "input_sha256": input_digests,
+        "seed": SEED,
+        "n_null": args.n_null,
+        "space_note": (
+            "checkpoint has wte.weight only (no lm_head): GPT-2 tied weights, "
+            "W_U = wte^T; W_U-column cosines are identical to W_E-row cosines "
+            "by identity, so one test per set (spec section 4)"
+        ),
+        "matching": "leading-space exact; decoded length +/-1; merge-rank band rank//5000 ('byte' band for the 256 byte tokens; <|endoftext|> excluded)",
+        "n_testable_sets": n_testable,
+        "bonferroni_alpha": alpha,
+        "sets": [],
     }
 
-    rng_we = np.random.default_rng(SEED)
-    rng_wu = np.random.default_rng(SEED)
-
-    for sid, sdef in TOKEN_SETS.items():
-        tids = sdef["token_ids"]
-        n_types = len(tids)
-        n_pairs = n_types * (n_types - 1) // 2
-        print(f"\n--- {sid}: {sdef['description']} ---")
-        print(f"  Tokens: {sdef['tokens']} (IDs: {tids})")
-        print(f"  n_types={n_types}, n_pairs={n_pairs}")
-
-        set_result = {
-            "description": sdef["description"],
-            "token_ids": tids,
-            "tokens": sdef["tokens"],
-            "n_types": n_types,
-            "n_pairs": n_pairs,
+    for set_index, (name, d) in enumerate(sets.items(), start=1):
+        tokens = {s: int(t) for s, t in d.items()}
+        entry = {
+            "set_index": set_index,
+            "set": name,
+            "tokens": tokens,
+            "n_types": len(d),
         }
-
-        if n_types < 2:
-            print("  SKIPPED: degenerate set (n < 2)")
-            set_result["status"] = "degenerate"
-            results["sets"][sid] = set_result
+        if len(d) < 2:
+            entry["status"] = "N/A - singleton, pairwise statistic undefined (spec section 3)"
+            results["sets"].append(entry)
+            print(f"[{set_index}] {name}: n=1, N/A")
             continue
 
-        pools, warnings = build_matching_pools(tids, props)
-        pool_sizes = {tid: len(pools[tid]) for tid in tids}
-        print(f"  Matching pools: {pool_sizes}")
-        for w in warnings:
-            print(f"  WARNING: {w}")
-        set_result["pool_sizes"] = {str(tid): sz for tid, sz in pool_sizes.items()}
-        set_result["pool_warnings"] = warnings
+        ids = np.array(sorted(d.values()), dtype=np.int64)
+        pools = [candidate_pool(t, feats) for t in ids]
+        rng = np.random.default_rng([SEED, set_index])
+        draws = null_distribution(pools, args.n_null, rng)
 
-        # Pairwise cosine matrix (for the record)
-        vecs_we = W_E_norm[tids]
-        sim_we = vecs_we @ vecs_we.T
-        set_result["pairwise_cosine_WE"] = {
-            f"{tids[i]}-{tids[j]}": float(sim_we[i, j])
-            for i in range(n_types)
-            for j in range(i + 1, n_types)
-        }
+        obs = mean_pairwise_cos(ids, emb_n)
+        null_stats = np.array([mean_pairwise_cos(row, emb_n) for row in draws])
+        null_mean = float(null_stats.mean())
+        null_sd = float(null_stats.std(ddof=1))
+        p = float((1 + int((null_stats >= obs).sum())) / (args.n_null + 1))
+        z = (obs - null_mean) / null_sd
 
-        print(f"  Running W_E permutation test (N={N_PERM})...")
-        res_we = run_permutation_test(W_E_norm, tids, pools, rng_we, N_PERM)
-        set_result["WE"] = res_we
-        sig_we = res_we["p_value"] < alpha
-        print(
-            f"  W_E: observed={res_we['observed']:.4f}, "
-            f"null={res_we['null_mean']:.4f}±{res_we['null_sd']:.4f}, "
-            f"effect={res_we['effect_size']:.2f}σ, "
-            f"p={res_we['p_value']:.6f} {'***' if sig_we else ''}"
-        )
-
-        if not tied:
-            vecs_wu = W_U_norm[tids]
-            sim_wu = vecs_wu @ vecs_wu.T
-            set_result["pairwise_cosine_WU"] = {
-                f"{tids[i]}-{tids[j]}": float(sim_wu[i, j])
-                for i in range(n_types)
-                for j in range(i + 1, n_types)
+        entry.update(
+            {
+                "status": "tested",
+                "pool_sizes": {decode_key_for_id(t, vocab): int(len(p_)) for t, p_ in zip(ids, pools)},
+                "observed_mean_pairwise_cos_WE": obs,
+                "observed_mean_pairwise_cos_WU": obs,  # identical by tying (spec section 4)
+                "null_mean": null_mean,
+                "null_sd": null_sd,
+                "p_empirical": p,
+                "z_effect_size": z,
+                "passes_bonferroni": bool(p < alpha),
             }
-            print(f"  Running W_U permutation test (N={N_PERM})...")
-            res_wu = run_permutation_test(W_U_norm, tids, pools, rng_wu, N_PERM)
-            set_result["WU"] = res_wu
-            sig_wu = res_wu["p_value"] < alpha
-            print(
-                f"  W_U: observed={res_wu['observed']:.4f}, "
-                f"null={res_wu['null_mean']:.4f}±{res_wu['null_sd']:.4f}, "
-                f"effect={res_wu['effect_size']:.2f}σ, "
-                f"p={res_wu['p_value']:.6f} {'***' if sig_wu else ''}"
-            )
-        else:
-            set_result["WU"] = "identical to WE (weights tied)"
-
-        set_result["significant_bonferroni"] = sig_we
-        set_result["status"] = "tested"
-        results["sets"][sid] = set_result
-
-    out_path = OUT / "permutation_results.json"
-    out_path.write_text(json.dumps(results, indent=2))
-    print(f"\n[SAVED] {out_path}")
-
-    print("\n=== SUMMARY ===")
-    print(f"Bonferroni threshold: α = {alpha:.6f} (0.05 / {n_bonferroni})")
-    print(f"Weight tying: {'YES — W_E and W_U identical' if tied else 'NO'}")
-    for sid, sr in results["sets"].items():
-        if sr["status"] == "degenerate":
-            print(f"  {sid}: DEGENERATE (n=1)")
-            continue
-        we = sr["WE"]
-        sig = sr["significant_bonferroni"]
-        print(
-            f"  {sid}: obs={we['observed']:.4f} null={we['null_mean']:.4f}±{we['null_sd']:.4f} "
-            f"effect={we['effect_size']:.2f}σ p={we['p_value']:.6f} "
-            f"{'SIGNIFICANT' if sig else 'not significant'}"
         )
+        results["sets"].append(entry)
+        print(
+            f"[{set_index}] {name}: n={len(d)} obs={obs:.4f} null={null_mean:.4f}"
+            f"+/-{null_sd:.4f} p={p:.5f} z={z:+.2f} pass={p < alpha}"
+        )
+
+    with open(args.out, "w") as f:
+        json.dump(results, f, indent=1)
+    print("wrote", args.out)
+
+
+def decode_key_for_id(tid, vocab, _inv={}):
+    if not _inv:
+        _inv.update({v: k for k, v in vocab.items()})
+    return decode_key(_inv[int(tid)])
 
 
 if __name__ == "__main__":
-    with torch.no_grad():
-        main()
+    main()

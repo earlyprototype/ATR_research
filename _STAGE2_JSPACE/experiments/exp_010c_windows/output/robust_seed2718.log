@@ -1,0 +1,19 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 14740.24it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=full arms=['A0', 'A4', 'O8'] prompts=25 subset=registered seed=2718 max_iter=1000 check_start=100
+
+=== Arm A0: window 0->23 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [A0] E01_politics     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D01_water        -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A01_physics      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B01_napoleon     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] C01_jack_jill    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F01_anger        -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G01_punctuation  -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E02_tech         -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D02_periodic     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A02_medical      -> 'D'            lock=120 iters=120 margin=0.52

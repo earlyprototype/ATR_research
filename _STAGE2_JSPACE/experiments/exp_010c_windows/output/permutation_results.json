@@ -1,384 +1,234 @@
 {
-  "design": {
-    "n_permutations": 10000,
-    "seed": 2026,
-    "matching": "leading_space + strlen_pm1 + freq_decile",
-    "bonferroni_n": 8,
-    "bonferroni_alpha": 0.00625,
-    "weight_tying": true
+ "spec": "_STAGE2_JSPACE/EXP_010c_PERM_SPEC.md",
+ "issue": "earlyprototype/ATR_research#7",
+ "seed": 20260725,
+ "n_null": 10000,
+ "space_note": "checkpoint has wte.weight only (no lm_head): GPT-2 tied weights, W_U = wte^T; W_U-column cosines are identical to W_E-row cosines by identity, so one test per set (spec section 4)",
+ "matching": "leading-space exact; decoded length +/-1; merge-rank band rank//5000 ('byte' band for the 256 byte tokens; <|endoftext|> excluded)",
+ "n_testable_sets": 9,
+ "bonferroni_alpha": 0.005555555555555556,
+ "sets": [
+  {
+   "set_index": 1,
+   "set": "A4_direct",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201
+   },
+   "n_types": 3,
+   "status": "tested",
+   "pool_sizes": {
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245
+   },
+   "observed_mean_pairwise_cos_WE": 0.4121185839176178,
+   "observed_mean_pairwise_cos_WU": 0.4121185839176178,
+   "null_mean": 0.2741726190432906,
+   "null_sd": 0.029417128235892785,
+   "p_empirical": 0.0008999100089991,
+   "z_effect_size": 4.689307663486162,
+   "passes_bonferroni": true
   },
-  "context": {
-    "global_mean_pairwise_cosine_WE": 0.307312935590744,
-    "global_mean_pairwise_cosine_WU": 0.307312935590744
+  {
+   "set_index": 2,
+   "set": "O8_direct",
+   "tokens": {
+    " simultaneously": 11640,
+    " halfway": 19487
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    " simultaneously": 43,
+    " halfway": 1341
+   },
+   "observed_mean_pairwise_cos_WE": 0.2972203493118286,
+   "observed_mean_pairwise_cos_WU": 0.2972203493118286,
+   "null_mean": 0.30053156650960444,
+   "null_sd": 0.03996608807911176,
+   "p_empirical": 0.5009499050094991,
+   "z_effect_size": -0.08285067057905107,
+   "passes_bonferroni": false
   },
-  "sets": {
-    "S1_A4_direct": {
-      "description": "A4 (10->21) direct decode",
-      "token_ids": [
-        1566,
-        8097,
-        1201
-      ],
-      "tokens": [
-        " until",
-        " forever",
-        " since"
-      ],
-      "n_types": 3,
-      "n_pairs": 3,
-      "pool_sizes": {
-        "1566": 1405,
-        "8097": 1257,
-        "1201": 1405
-      },
-      "pool_warnings": [],
-      "pairwise_cosine_WE": {
-        "1566-8097": 0.4176405072212219,
-        "1566-1201": 0.49327653646469116,
-        "8097-1201": 0.32543879747390747
-      },
-      "WE": {
-        "observed": 0.4121185839176178,
-        "null_mean": 0.27460636327415705,
-        "null_sd": 0.02997752034787132,
-        "effect_size": 4.587177960275336,
-        "p_value": 0.0021997800219978004,
-        "null_min": 0.18902496993541718,
-        "null_max": 0.5514511466026306,
-        "null_median": 0.2712605446577072
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": true,
-      "status": "tested"
-    },
-    "S2_O8_direct": {
-      "description": "O8 (8->21) direct decode",
-      "token_ids": [
-        11640,
-        19487
-      ],
-      "tokens": [
-        " simultaneously",
-        " halfway"
-      ],
-      "n_types": 2,
-      "n_pairs": 1,
-      "pool_sizes": {
-        "11640": 108,
-        "19487": 1340
-      },
-      "pool_warnings": [
-        "token 11640 (' simultaneously'): pool 43 -> relaxed to \u00b12 chars -> 108"
-      ],
-      "pairwise_cosine_WE": {
-        "11640-19487": 0.2972203493118286
-      },
-      "WE": {
-        "observed": 0.2972203493118286,
-        "null_mean": 0.30172268603891134,
-        "null_sd": 0.041620337345227104,
-        "effect_size": -0.10817636314999829,
-        "p_value": 0.50994900509949,
-        "null_min": 0.1692945659160614,
-        "null_max": 0.6313844919204712,
-        "null_median": 0.298106849193573
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": false,
-      "status": "tested"
-    },
-    "S3_A5_direct": {
-      "description": "A5 (8->15) direct decode \u2014 DEGENERATE (n=1)",
-      "token_ids": [
-        30993
-      ],
-      "tokens": [
-        " rant"
-      ],
-      "n_types": 1,
-      "n_pairs": 0,
-      "status": "degenerate"
-    },
-    "S4_pooled_direct": {
-      "description": "Pooled word-arms direct (A4 + O8 + A5)",
-      "token_ids": [
-        1566,
-        8097,
-        1201,
-        11640,
-        19487,
-        30993
-      ],
-      "tokens": [
-        " until",
-        " forever",
-        " since",
-        " simultaneously",
-        " halfway",
-        " rant"
-      ],
-      "n_types": 6,
-      "n_pairs": 15,
-      "pool_sizes": {
-        "1566": 1405,
-        "8097": 1257,
-        "1201": 1405,
-        "11640": 108,
-        "19487": 1340,
-        "30993": 1144
-      },
-      "pool_warnings": [
-        "token 11640 (' simultaneously'): pool 43 -> relaxed to \u00b12 chars -> 108"
-      ],
-      "pairwise_cosine_WE": {
-        "1566-8097": 0.4176405072212219,
-        "1566-1201": 0.49327653646469116,
-        "1566-11640": 0.3366238474845886,
-        "1566-19487": 0.27604490518569946,
-        "1566-30993": 0.27961456775665283,
-        "8097-1201": 0.32543879747390747,
-        "8097-11640": 0.3220672011375427,
-        "8097-19487": 0.30558961629867554,
-        "8097-30993": 0.3035418391227722,
-        "1201-11640": 0.3038294315338135,
-        "1201-19487": 0.2534806728363037,
-        "1201-30993": 0.2779421806335449,
-        "11640-19487": 0.2972203493118286,
-        "11640-30993": 0.2687531113624573,
-        "19487-30993": 0.30901044607162476
-      },
-      "WE": {
-        "observed": 0.3180049657821655,
-        "null_mean": 0.28317188406288624,
-        "null_sd": 0.017571519645233312,
-        "effect_size": 1.9823602296531355,
-        "p_value": 0.0342965703429657,
-        "null_min": 0.2255704402923584,
-        "null_max": 0.36292585730552673,
-        "null_median": 0.28206171095371246
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": false,
-      "status": "tested"
-    },
-    "S5_A1_contrast": {
-      "description": "A1 (0->11) direct decode \u2014 CONTRAST (punctuation funnel)",
-      "token_ids": [
-        11,
-        278
-      ],
-      "tokens": [
-        ",",
-        "ing"
-      ],
-      "n_types": 2,
-      "n_pairs": 1,
-      "pool_sizes": {
-        "11": 723,
-        "278": 1436
-      },
-      "pool_warnings": [],
-      "pairwise_cosine_WE": {
-        "11-278": 0.39368027448654175
-      },
-      "WE": {
-        "observed": 0.39368027448654175,
-        "null_mean": 0.32638855148255824,
-        "null_sd": 0.07106880020807307,
-        "effect_size": 0.9468532296446379,
-        "p_value": 0.135986401359864,
-        "null_min": 0.12881416082382202,
-        "null_max": 0.8850575089454651,
-        "null_median": 0.31051595509052277
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": false,
-      "status": "tested"
-    },
-    "S6_A4_tail": {
-      "description": "A4 (10->21) via-tail decode",
-      "token_ids": [
-        1566,
-        8097,
-        1201
-      ],
-      "tokens": [
-        " until",
-        " forever",
-        " since"
-      ],
-      "n_types": 3,
-      "n_pairs": 3,
-      "pool_sizes": {
-        "1566": 1405,
-        "8097": 1257,
-        "1201": 1405
-      },
-      "pool_warnings": [],
-      "pairwise_cosine_WE": {
-        "1566-8097": 0.4176405072212219,
-        "1566-1201": 0.49327653646469116,
-        "8097-1201": 0.32543879747390747
-      },
-      "WE": {
-        "observed": 0.4121185839176178,
-        "null_mean": 0.27449570549875496,
-        "null_sd": 0.029925892398699243,
-        "effect_size": 4.598789455810673,
-        "p_value": 0.0018998100189981002,
-        "null_min": 0.19281280040740967,
-        "null_max": 0.49341002106666565,
-        "null_median": 0.2710064798593521
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": true,
-      "status": "tested"
-    },
-    "S7_O8_tail": {
-      "description": "O8 (8->21) via-tail decode",
-      "token_ids": [
-        11640,
-        655,
-        6
-      ],
-      "tokens": [
-        " simultaneously",
-        " just",
-        "'"
-      ],
-      "n_types": 3,
-      "n_pairs": 3,
-      "pool_sizes": {
-        "11640": 108,
-        "655": 1561,
-        "6": 723
-      },
-      "pool_warnings": [
-        "token 11640 (' simultaneously'): pool 43 -> relaxed to \u00b12 chars -> 108"
-      ],
-      "pairwise_cosine_WE": {
-        "11640-655": 0.2865948975086212,
-        "11640-6": 0.26879653334617615,
-        "655-6": 0.3423996567726135
-      },
-      "WE": {
-        "observed": 0.29926371574401855,
-        "null_mean": 0.28795730140656234,
-        "null_sd": 0.04071094577255228,
-        "effect_size": 0.27772418751025707,
-        "p_value": 0.2980701929807019,
-        "null_min": 0.19891835749149323,
-        "null_max": 0.5343652367591858,
-        "null_median": 0.28058429062366486
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": false,
-      "status": "tested"
-    },
-    "S8_A5_tail": {
-      "description": "A5 (8->15) via-tail decode",
-      "token_ids": [
-        13079,
-        6
-      ],
-      "tokens": [
-        " endless",
-        "'"
-      ],
-      "n_types": 2,
-      "n_pairs": 1,
-      "pool_sizes": {
-        "13079": 1294,
-        "6": 723
-      },
-      "pool_warnings": [],
-      "pairwise_cosine_WE": {
-        "13079-6": 0.28630778193473816
-      },
-      "WE": {
-        "observed": 0.28630778193473816,
-        "null_mean": 0.30257080300450323,
-        "null_sd": 0.06287047170784267,
-        "effect_size": -0.25867502864204484,
-        "p_value": 0.5248475152484752,
-        "null_min": 0.1554011106491089,
-        "null_max": 0.7302217483520508,
-        "null_median": 0.2887967675924301
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": false,
-      "status": "tested"
-    },
-    "S9_pooled_tail": {
-      "description": "Pooled word-arms via-tail (S6 + S7 + S8)",
-      "token_ids": [
-        1566,
-        8097,
-        1201,
-        11640,
-        655,
-        6,
-        13079
-      ],
-      "tokens": [
-        " until",
-        " forever",
-        " since",
-        " simultaneously",
-        " just",
-        "'",
-        " endless"
-      ],
-      "n_types": 7,
-      "n_pairs": 21,
-      "pool_sizes": {
-        "1566": 1405,
-        "8097": 1257,
-        "1201": 1405,
-        "11640": 108,
-        "655": 1561,
-        "6": 723,
-        "13079": 1294
-      },
-      "pool_warnings": [
-        "token 11640 (' simultaneously'): pool 43 -> relaxed to \u00b12 chars -> 108"
-      ],
-      "pairwise_cosine_WE": {
-        "1566-8097": 0.4176405072212219,
-        "1566-1201": 0.49327653646469116,
-        "1566-11640": 0.3366238474845886,
-        "1566-655": 0.3508298397064209,
-        "1566-6": 0.3274856209754944,
-        "1566-13079": 0.3052126169204712,
-        "8097-1201": 0.32543879747390747,
-        "8097-11640": 0.3220672011375427,
-        "8097-655": 0.29781144857406616,
-        "8097-6": 0.2626799941062927,
-        "8097-13079": 0.4861980080604553,
-        "1201-11640": 0.3038294315338135,
-        "1201-655": 0.35551324486732483,
-        "1201-6": 0.32151147723197937,
-        "1201-13079": 0.27237945795059204,
-        "11640-655": 0.2865948975086212,
-        "11640-6": 0.26879653334617615,
-        "11640-13079": 0.3018617331981659,
-        "655-6": 0.3423996567726135,
-        "655-13079": 0.3080228567123413,
-        "6-13079": 0.28630778193473816
-      },
-      "WE": {
-        "observed": 0.33202290534973145,
-        "null_mean": 0.2830079929858446,
-        "null_sd": 0.020436056775771518,
-        "effect_size": 2.3984525440347033,
-        "p_value": 0.027497250274972504,
-        "null_min": 0.23408472537994385,
-        "null_max": 0.37972211837768555,
-        "null_median": 0.28013692796230316
-      },
-      "WU": "identical to WE (weights tied)",
-      "significant_bonferroni": false,
-      "status": "tested"
-    }
+  {
+   "set_index": 3,
+   "set": "A5_direct",
+   "tokens": {
+    " rant": 30993
+   },
+   "n_types": 1,
+   "status": "N/A - singleton, pairwise statistic undefined (spec section 3)"
+  },
+  {
+   "set_index": 4,
+   "set": "A4_tail",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201
+   },
+   "n_types": 3,
+   "status": "tested",
+   "pool_sizes": {
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245
+   },
+   "observed_mean_pairwise_cos_WE": 0.4121185839176178,
+   "observed_mean_pairwise_cos_WU": 0.4121185839176178,
+   "null_mean": 0.27496271261572836,
+   "null_sd": 0.03015851030939868,
+   "p_empirical": 0.0018998100189981002,
+   "z_effect_size": 4.547833095693251,
+   "passes_bonferroni": true
+  },
+  {
+   "set_index": 5,
+   "set": "O8_tail",
+   "tokens": {
+    " simultaneously": 11640,
+    " just": 655,
+    "'": 6
+   },
+   "n_types": 3,
+   "status": "tested",
+   "pool_sizes": {
+    "'": 255,
+    " just": 1626,
+    " simultaneously": 43
+   },
+   "observed_mean_pairwise_cos_WE": 0.29926368594169617,
+   "observed_mean_pairwise_cos_WU": 0.29926368594169617,
+   "null_mean": 0.30014970177263023,
+   "null_sd": 0.05064753287581611,
+   "p_empirical": 0.3554644535546445,
+   "z_effect_size": -0.0174937609124319,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 6,
+   "set": "A5_tail",
+   "tokens": {
+    " endless": 13079,
+    "'": 6
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    "'": 255,
+    " endless": 1291
+   },
+   "observed_mean_pairwise_cos_WE": 0.28630778193473816,
+   "observed_mean_pairwise_cos_WU": 0.28630778193473816,
+   "null_mean": 0.32191162970811127,
+   "null_sd": 0.08240510130211677,
+   "p_empirical": 0.5771422857714229,
+   "z_effect_size": -0.43205878290035593,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 7,
+   "set": "pooled_word_direct",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201,
+    " simultaneously": 11640,
+    " halfway": 19487,
+    " rant": 30993
+   },
+   "n_types": 6,
+   "status": "tested",
+   "pool_sizes": {
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245,
+    " simultaneously": 43,
+    " halfway": 1341,
+    " rant": 1139
+   },
+   "observed_mean_pairwise_cos_WE": 0.3180049657821655,
+   "observed_mean_pairwise_cos_WU": 0.3180049657821655,
+   "null_mean": 0.28305595116615295,
+   "null_sd": 0.017235873148380945,
+   "p_empirical": 0.029197080291970802,
+   "z_effect_size": 2.027690405652325,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 8,
+   "set": "pooled_word_tail",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201,
+    " simultaneously": 11640,
+    " just": 655,
+    "'": 6,
+    " endless": 13079
+   },
+   "n_types": 7,
+   "status": "tested",
+   "pool_sizes": {
+    "'": 255,
+    " just": 1626,
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245,
+    " simultaneously": 43,
+    " endless": 1291
+   },
+   "observed_mean_pairwise_cos_WE": 0.33202290534973145,
+   "observed_mean_pairwise_cos_WU": 0.33202290534973145,
+   "null_mean": 0.28790659784674644,
+   "null_sd": 0.023939985438621716,
+   "p_empirical": 0.060193980601939805,
+   "z_effect_size": 1.8427875662703366,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 9,
+   "set": "A1_direct",
+   "tokens": {
+    ",": 11,
+    "ing": 278
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    ",": 255,
+    "ing": 1480
+   },
+   "observed_mean_pairwise_cos_WE": 0.39368027448654175,
+   "observed_mean_pairwise_cos_WU": 0.39368027448654175,
+   "null_mean": 0.3344315082669258,
+   "null_sd": 0.08102695687119171,
+   "p_empirical": 0.2233776622337766,
+   "z_effect_size": 0.7312228980017541,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 10,
+   "set": "A1_tail",
+   "tokens": {
+    ".": 13,
+    " the": 262
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    ".": 255,
+    " the": 1427
+   },
+   "observed_mean_pairwise_cos_WE": 0.5121616721153259,
+   "observed_mean_pairwise_cos_WU": 0.5121616721153259,
+   "null_mean": 0.3043121819391847,
+   "null_sd": 0.07118277667038815,
+   "p_empirical": 0.006199380061993801,
+   "z_effect_size": 2.9199407482878663,
+   "passes_bonferroni": false
   }
+ ]
 }

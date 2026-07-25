@@ -244,8 +244,9 @@ of any story; each is listed with the uncertainty it removes.
 1. **Anisotropy-corrected permutation test** on terminal-set relatedness in
    W_E (Stage 1 `02b` pattern). Removes uncertainty about whether any
    apparent relatedness among terminals exceeds the embedding space's
-   baseline anisotropy. **DONE — see §2026-07-24 below.** A4's triplet
-   survives (4.6σ, p=0.002); all other sets null.
+   baseline anisotropy. **DONE 2026-07-25** — spec `../../EXP_010c_PERM_SPEC.md`,
+   results in §"2026-07-25 — EXP_010c-PERM" below and
+   `output/permutation_results.json`.
 2. **Seed and prompt-subset variation** for A4 and O8. Removes uncertainty
    about whether the observed basin structure and the i ∈ {8,10} whole-word
    zone are properties of this seed/subset or of the model.
@@ -311,71 +312,70 @@ The full per-run values are in the regenerated `results_full.json` /
 committed (the gitignore entries existed to keep mid-run checkpoints out;
 final versions are the record, per the convention above).
 
-## 2026-07-24 — Anisotropy-corrected permutation test (planned control 1)
+## 2026-07-25 — EXP_010c-PERM: anisotropy-corrected permutation test (planned control 1)
 
-**Spec:** `../../PERM_TEST_EXP010c_SPEC.md` (pre-registered and committed
-before any computation).
-**Script:** `permutation_test.py` (this directory).
-**Artifacts:** `output/permutation_results.json`.
-**Pattern:** Stage 1 `02b_permutation_test.py` (Lucier repo), extended with
-per-token matching on leading-space status, string length (±1 char), and
-BPE merge-rank frequency decile.
+**Spec:** `../../EXP_010c_PERM_SPEC.md`, committed before any statistic was
+computed (commit 0ca5829). **Script:** `permutation_test.py`. **Per-set JSON:**
+`output/permutation_results.json`. Issue: #7.
 
-**Design:** 10,000 permutations per set; seed 2026; Bonferroni correction
-across 8 testable sets (α = 0.00625). Token sets from the full uncurated
-inventories (`results_full.json`, `results_scan.json`,
-`terminal_characterisation_full.json`, `terminal_characterisation_scan.json`).
-See spec for complete set definitions.
+**What ran:** mean pairwise cosine over unique terminal types per
+pre-registered set, against N=10,000 matched random same-size token sets
+(matched on leading-space status, decoded length ±1, BPE merge-rank band
+rank//5000 with a separate byte-token band; `<|endoftext|>` excluded from
+pools). Seed 20260725, per-set substreams. Zero forward passes.
 
-**Weight tying (recorded):** GPT-2 Medium ties W_E = W_U (no separate
-`lm_head.weight` in the state dict). The spec pre-registered both spaces
-side by side; since they are identical, one column is reported. Global
-mean pairwise cosine (unmatched, 200k pairs): 0.307.
+**Space (recorded):** the gpt2-medium checkpoint carries `wte.weight` only —
+no `lm_head` tensor (verified on the state dict; 316 tensors). Weights are
+tied: W_U = wte^T, so the W_U column for token t is the W_E row for token t
+and the two report columns are numerically identical. One test per set.
+Model files fetched from `huggingface.co/gpt2-medium/resolve/main/`
+(post-2026-07-25 policy route per `REMOTE_ENV_MODEL_ACCESS.md`);
+`pytorch_model.bin` 1,520,013,706 bytes, same size as the legacy-mirror
+artifact recorded in §"Model acquisition."
 
-**Results (observations only):**
+**Per-set results (all sets reported; α\* = 0.05/9 = 0.00556 Bonferroni across
+the 9 testable sets):**
 
-| Set | Description | n | Observed | Null μ±σ | Effect | p | Sig |
-|---|---|---|---|---|---|---|---|
-| S1 | A4 direct (`until`/`forever`/`since`) | 3 | 0.4121 | 0.2746±0.0300 | 4.59σ | 0.0022 | **yes** |
-| S2 | O8 direct (`simultaneously`/`halfway`) | 2 | 0.2972 | 0.3017±0.0416 | −0.11σ | 0.510 | no |
-| S3 | A5 direct (`rant`) | 1 | — | — | — | — | degenerate |
-| S4 | Pooled word-arms direct (A4+O8+A5) | 6 | 0.3180 | 0.2832±0.0176 | 1.98σ | 0.034 | no |
-| S5 | A1 contrast (`,`/`ing`) | 2 | 0.3937 | 0.3264±0.0711 | 0.95σ | 0.136 | no |
-| S6 | A4 via-tail (`until`/`forever`/`since`) | 3 | 0.4121 | 0.2745±0.0299 | 4.60σ | 0.0019 | **yes** |
-| S7 | O8 via-tail (`simultaneously`/`just`/`'`) | 3 | 0.2993 | 0.2880±0.0407 | 0.28σ | 0.298 | no |
-| S8 | A5 via-tail (`endless`/`'`) | 2 | 0.2863 | 0.3026±0.0629 | −0.26σ | 0.525 | no |
-| S9 | Pooled via-tail (S6+S7+S8) | 7 | 0.3320 | 0.2830±0.0204 | 2.40σ | 0.027 | no |
+| # | Set | n | obs cos (W_E) | obs cos (W_U) | null μ | null σ | p | z (σ) | p < α\* |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | A4_direct (`until, forever, since`) | 3 | 0.4121 | 0.4121 | 0.2742 | 0.0294 | 0.00090 | +4.69 | **yes** |
+| 2 | O8_direct (`simultaneously, halfway`) | 2 | 0.2972 | 0.2972 | 0.3005 | 0.0400 | 0.50095 | −0.08 | no |
+| 3 | A5_direct (`rant`) | 1 | N/A — singleton, statistic undefined | | | | | | — |
+| 4 | A4_tail (`until, forever, since`) | 3 | 0.4121 | 0.4121 | 0.2750 | 0.0302 | 0.00190 | +4.55 | **yes** |
+| 5 | O8_tail (`simultaneously, just, '`) | 3 | 0.2993 | 0.2993 | 0.3001 | 0.0506 | 0.35546 | −0.02 | no |
+| 6 | A5_tail (`endless, '`) | 2 | 0.2863 | 0.2863 | 0.3219 | 0.0824 | 0.57714 | −0.43 | no |
+| 7 | pooled_word_direct | 6 | 0.3180 | 0.3180 | 0.2831 | 0.0172 | 0.02920 | +2.03 | no |
+| 8 | pooled_word_tail | 7 | 0.3320 | 0.3320 | 0.2879 | 0.0239 | 0.06019 | +1.84 | no |
+| 9 | A1_direct (contrast: `, ing`) | 2 | 0.3937 | 0.3937 | 0.3344 | 0.0810 | 0.22338 | +0.73 | no |
+| 10 | A1_tail (contrast: `. the`) | 2 | 0.5122 | 0.5122 | 0.3043 | 0.0712 | 0.00620 | +2.92 | no |
 
-Notes: "Sig" = significant after Bonferroni at α = 0.00625. Pool-size
-warning: token 11640 (` simultaneously`) had only 43 matches at ±1 char;
-relaxed to ±2 chars (108 matches) — affects S2, S4, S7, S9. S6 = S1
-numerically (same three token IDs under both readouts); the via-tail
-readout for A4 recovers the same three types.
+Smallest candidate pool: `' simultaneously'` (43); all other pools 255–1,626
+(full sizes in the JSON).
 
-**Pre-registered readings applied mechanically:**
+**Which pre-registered reading obtained (mechanical application of spec §8):**
+the **mixed outcome** row. Sets 1 and 4 (A4, both readouts — the identical
+type set {`until`, `forever`, `since`}) pass at p < α\* with z > 0: for A4 the
+relatedness pattern survives its first control ("semantic" stays quarantined).
+Sets 2, 5, 6 (O8 both readouts, A5 via-tail) are at or below their null means
+(z −0.43 to −0.08): consistent with baseline anisotropy at matched
+size/space/length/frequency. Pooled sets 7–8 do not pass (z +2.03/+1.84,
+p ≥ 0.029); per spec §8 the pooled rows do not override per-arm rows or vice
+versa. Contrast sets 9–10 do not pass, so no calibration downgrade is
+triggered; recorded plainly: A1_tail sits at p = 0.00620 against
+α\* = 0.00556.
 
-- **S1, S6 (A4: `until`/`forever`/`since`):** observed ≫ null (4.6σ,
-  p < 0.00625). The pre-registered reading: **the relatedness pattern
-  survives its first anisotropy control.** These three tokens are more
-  clustered in embedding space than matched random tokens in the same
-  structural class (same leading-space status, similar length, similar
-  frequency). The word "semantic" stays quarantined — this is an
-  embedding-geometry observation, not a semantic claim.
+**Caveats (standing):** n=2 sets carry a single pairwise cosine; the A4 pass
+rests on 3 types from one seed and one 25-prompt subset (control 2 covers
+seed/subset variation); merge-rank band is a frequency proxy, not a measured
+frequency; no statement about *why* the A4 terminals are related is made or
+implied.
 
-- **S2, S7 (O8: `simultaneously`/`halfway`), S8 (A5 via-tail),
-  S4 (pooled direct), S9 (pooled tail):** observed ≈ null. The
-  pre-registered reading: **the apparent relatedness of these tokens
-  does not exceed the baseline anisotropy of matched random sets.** The
-  broader "temporal/durative family" reading across all word-producing
-  arms does not survive this control. The pooled sets (S4, S9) show
-  marginal effects (2.0–2.4σ) that are driven entirely by the A4
-  cluster and do not survive Bonferroni correction.
+## 2026-07-25 — Provenance addendum (PR #19 review)
 
-- **S5 (A1 contrast: punctuation funnel):** null (p = 0.14). The
-  within-experiment negative control behaves as expected.
-
-**Summary observation (flat, no interpretation):** of the three
-word-producing arms, only A4 (10→21) produces terminal tokens that are
-more related than chance under the matched null. O8 (8→21) and A5
-(8→15) do not. The signal is arm-specific, not a property of the
-word-producing zone as a whole.
+SHA-256 digests of the exact statistical inputs used by the permutation
+test (recorded post-run; spec addendum has the same values):
+`pytorch_model.bin` 98c7b055…10f8318 · `vocab.json` 19613966…636783 ·
+`merges.txt` 1ce16647…26adc5. Full values in `EXP_010c_PERM_SPEC.md`
+§Post-run addendum and in `output/permutation_results.json` once
+regenerated by the updated script; the numbers in the recorded run are
+unchanged by this addendum.
