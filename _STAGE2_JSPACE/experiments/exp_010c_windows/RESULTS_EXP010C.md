@@ -508,3 +508,210 @@ sufficient. The J-lens re-decode (EXP_013m) remains the registered arbiter for
 every mid-stack terminal claim, including all cells in this in-fill.
 `terminals_infill.pt` is ~2.0 MB — at the committed-`.pt` size threshold noted
 in the PR #4 review (item 3); revisit LFS/release assets if the grid grows.
+
+## 2026-07-25 — EXP_010c-3b FOLLOW-UP CHECKS (issue #21)
+
+**Spec:** `../../EXP_010c3b_SPEC.md` (pre-registered before any of these results
+existed; committed first). Items ordered so the checks capable of weakening the
+2026-07-24 section run first. Model, protocol and subset as registered unless
+stated. Artifacts: `funnel_geometry.json`, `tested_windows_map.json`,
+`results_det_seed42/1234.json`, `results_subset2.json`, `results_ladder8.json`,
+`results_settle.json` (+ matching `.pt`).
+
+### Item 1 — are the single-token funnels a decode-geometry artifact? (no model time)
+
+`analyze_funnel_geometry.py`, state dict only. **S1** = share of 10,000
+isotropic random directions whose argmax (through the real `ln_final`, tied
+unembedding) is that token; **S2** = percentile of `‖wte[t]‖₂` in the 50257
+vocabulary; **S3** = percentile of cosine with the mean embedding-row direction.
+Seed 42.
+
+| Set | Token | S1 % | S2 norm pct | S3 cos pct |
+|---|---|---|---|---|
+| funnel | `'oooooooo'` (I7, I9) | 0.00 | 82.28 | 79.65 |
+| funnel | `'<\|endoftext\|>'` (I11) | 0.00 | 0.29 | 37.23 |
+| funnel | `' GOP'` (X817) | 0.00 | 5.20 | 55.44 |
+| funnel | `"'d"` (X819) | 0.00 | 2.74 | 33.38 |
+| funnel | `' Fas'` (X1015) | 0.01 | 92.04 | 9.76 |
+| funnel | `' Bhar'` (X1017) | 0.00 | 61.89 | 46.27 |
+| funnel (extra) | `'…)'` (X1019) | 0.00 | 84.93 | 37.15 |
+| funnel (extra) | `' […]'` (X1019) | 0.00 | 54.70 | 4.85 |
+| word contrast | `' until'` | 0.00 | 2.20 | 7.58 |
+| word contrast | `' forever'` | 0.00 | 27.85 | 5.22 |
+| word contrast | `' since'` | 0.00 | 0.97 | 7.59 |
+| word contrast | `' simultaneously'` | 0.00 | 17.25 | 25.69 |
+| word contrast | `' halfway'` | 0.00 | 26.18 | 14.70 |
+| word contrast | `' rant'` | 0.00 | 26.96 | 74.86 |
+
+Collective S1: funnel **0.01%**, word contrast 0.00%. The census top-20 contains
+none of the funnel tokens and is led by unrelated tokens at ≤0.22% each
+(`'enegger'`, `' destro'`, `' mathemat'`, `'SPONSORED'`, `'advertisement'`,
+`'Interstitial'`, …; full list in the artifact).
+
+**Observations:** no funnel token wins ≥1% of random directions; funnel norm
+percentiles are scattered (0.29–92.04) rather than concentrated in the upper
+tail; the two values outside the central 90% are **low**-norm; the word-contrast
+norm percentiles (0.97–27.85) are if anything lower than the funnel set's.
+
+**Spec §1 verdict (mechanical):** the artifact reading is **not met** (required
+≥3 funnel tokens at ≥1% each, or ≥25% collectively; observed 0 and 0.01%). The
+"not explained" reading is met on the primary statistic (0.01% ≪ 5%) but its S2
+sub-condition is **not literally satisfied**, 2 of 6 tokens falling outside the
+central 90%. Recorded under the pre-registered middle row — **quantitative,
+partial, no verdict beyond the numbers** — with the observation that both
+deviations run in the *low*-norm direction, opposite to the mechanism tested
+for. No statistic computed here supports the artifact reading.
+
+**Recorded limitation:** isotropic directions are not distributed like real
+residual states. S1 bounds the decoder's reach over *generic* directions only
+and does not exclude these tokens winning across the region these loops occupy.
+A post-hoc diagnostic on that question is recorded immediately below, labelled
+as such.
+
+**POST-HOC diagnostic (NOT pre-registered; no verdict weight against the §1
+readings).** `analyze_natural_decode.py`: decode the model's **own natural
+states** at each extract layer used by the in-fill arms — one ordinary forward
+pass per prompt, no ATR loop — with the same `ln_final → W_U` readout. This
+replaces the isotropic null with the states the readout actually meets at that
+layer. Registered 25-prompt subset; artifact `natural_decode_posthoc.json`.
+
+| Layer | Natural last-position decode (top entries) | Natural mean-position decode |
+|---|---|---|
+| 15 | varied, one per prompt | `','` ×14, `'\n'` ×5, `'-'` ×3, … |
+| 17 | `' China'`, `' CO'`, `' there'`, `' thousands'`, `' meet'`, … | `','` ×9, `'\n'` ×6, `'-'` ×3, `' the'` ×3 |
+| 19 | `' UN'`, `' CO'`, `' quantum'`, `' 300'`, `' meet'`, … | `','` ×6, `'\n'` ×4, `' the'` ×4 |
+| 21 | `' WTO'`, `'OH'`, `' quantum'`, `' 300'`, `' the'`, … | `'\n'` ×6, `','` ×6, `' the'` ×5 |
+
+**Observation:** at every one of these layers the natural states decode to
+varied, prompt-appropriate tokens (last position) or to common punctuation and
+function words (mean position). **None of the funnel tokens — `' GOP'`,
+`' Bhar'`, `' Fas'`, `'oooooooo'`, `"'d"` — appears anywhere in the natural
+decode at the layer where its arm extracts.** The funnel tokens are therefore
+not what this readout generically returns at those layers, on the states the
+model itself produces there. Taken with S1, no evidence was found that the
+single-token funnels are a property of the decoding step; they remain a
+property of the looped dynamics. Stated as an observation; the J-lens re-decode
+(EXP_013m) remains the registered arbiter.
+
+### Item 2a — seed variation is a no-op in this harness
+
+I9 (9→21), 3 prompts, seed 42 vs seed 1234, all else identical: every record
+identical on `terminal_token`, `terminal_token_id`, `lock_in_iter`, `n_iters`,
+`converged`, `top_logit_margin`, `entropy`, and on `final_cos_sim_mean` to 10
+decimal places (e.g. `0.9999542832` under both).
+
+**Reading (spec §2a):** the model runs in `eval()` and the gated loop performs
+no sampling, so the trajectory is determined by prompt and weights;
+`torch.manual_seed` has nothing to act on. **The "single seed" caveat carried in
+every section above is therefore not the caveat it appears to be** — the honest
+wording is "single prompt subset". #11's registered seed-variation control
+cannot vary anything and is flagged there for amendment rather than execution.
+
+### Item 2b — the 9→21 refutation on a disjoint prompt subset
+
+Deterministic round-robin at offset 25 (`derive_prompts.select_subset(25,
+offset=25)`; zero overlap with the registered subset; `offset=0` verified to
+reproduce the committed subset exactly). 50 runs, 50/50 converged.
+
+| Arm | Window | Terminals | Unique | Plurality class | Whole-word | Locks |
+|---|---|---|---|---|---|---|
+| A0 | 0→23 | `'D'` ×25 | 1 | fragment | 0/25 | 120 |
+| I9 | 9→21 | `'oooooooo'` ×22, `'…'` ×2, `' forever'` ×1 | 3 | fragment | 1/25 | 120, 130 |
+
+**Reproduction gate: PASSED** on the new subset (A0 → `D` 25/25, margin 0.52
+throughout), so the I9 result is readable.
+
+**Spec §2b verdict (mechanical): H12's refutation SURVIVES.** The
+pre-registered failure condition was ≥2 unique terminals *with a whole-word
+plurality*; observed plurality is `'oooooooo'` (fragment) at 22/25, whole-word
+1/25. Recorded without curation: `' forever'` — one of A4's registered
+terminals — occurs once at 1/25.
+
+### Item 3 — the whole-word scoring rule, and a correction to the map
+
+Decision taken in the spec before recomputing: **the flag rule is kept
+unchanged**; narrowing it after seeing which cell it inconveniences would stop
+it being mechanical. A content/function column (spec §3 closed-class list) is
+computed by the same code for every cell (`analyze_map.py`). No flag changes.
+
+| i | arm | flagged | plurality token | content/function |
+|---|---|---|---|---|
+| 8 | O8 | YES | `' simultaneously'` ×17 | content |
+| 10 | A4 | YES | `' until'` ×19 | content |
+| 14 | O14 | YES | `' or'` ×15 | **function** |
+
+**Correction to the 2026-07-24 hand-off.** That section scored only the
+extract-21 injection axis and the ladder rungs below 21. Scored uniformly,
+**E23 (10→23) also flags** — 10 unique, 20/25 whole-word, plurality `' self'`
+×10 (content), 21 tensor basins — and was omitted from the flagged list handed
+forward. Recorded here as an addition, with the caveat the earlier record
+already states for j=23: **no via-tail control exists at j=23** (empty tail), so
+E23's "25/25" is the mean-vs-last-position check, not readout robustness. E23 is
+flagged **and** unarbitrated by the second instrument. Full uniform map (all
+three axes, every cell) in `output/tested_windows_map.json`.
+
+### Item 4 — extraction ladder above 21 at injection 8
+
+50 runs, 50/50 converged.
+
+| Arm | Window | Terminals | Unique | Plurality class | Whole-word | Locks |
+|---|---|---|---|---|---|---|
+| E822 | 8→22 | `' �'` ×25 | 1 | punctuation | 0/25 | 120 |
+| E823 | 8→23 | `' �'` ×10, `'<\|endoftext\|>'` ×6, `'…'` ×6, `' to'`, `'\n'`, `' //'` | 6 | punctuation (18/25) | 1/25 | 120–740 |
+
+**Spec §4 verdict (mechanical): the pre-registered "both degrade" reading is
+observed** — neither arm retains the whole-word character, so **j=21 is a sharp
+peak at injection 8**, with nothing above or below it retaining the character.
+
+**Asymmetry recorded (observation, not in the pre-registered table):** the two
+ladders differ *above* 21. At injection 10, E23 (10→23) flags whole-word (item
+3); at injection 8, both E822 and E823 are punctuation-dominant. Also, E823's
+lock iterations span 120–740, unlike the uniform 120 seen almost everywhere
+else in the grid.
+
+### Item 5 — settle time, and a stopping-rule dependence
+
+Recorded protocol variant: `check_start=10` (earliest reportable lock 30),
+arms I7 / I9 / X1017, 5 prompts, all else registered. 15 runs, 15/15 converged.
+The registered artifacts are untouched.
+
+Observed locks are **80–90**, not the earliest reportable 30. So gate
+satisfaction occurs near iteration 80, and the registered `lock=120` values are
+upper bounds set by `check_start=100`, as suspected.
+
+**The more consequential observation.** With only the stopping rule changed,
+same arm and same prompts:
+
+| Arm | Terminal agreement (cs=100 vs cs=10) | Registered (lock 120) | Variant (lock 80–90) |
+|---|---|---|---|
+| I7 (7→21) | **5/5 same** | `'oooooooo'` | `'oooooooo'` |
+| X1017 (10→17) | **5/5 same** | `' Bhar'` | `' Bhar'` |
+| I9 (9→21) | **0/5 same** | `'oooooooo'` ×4, `'…'` ×1 | `'iren'` ×3, `' would'`, `"'d"` |
+
+**Reading (observation only):** the gated `converged` flag does not imply a
+fixed point at every cell. I7 and X1017 return the identical terminal under both
+stopping rules; **I9 returns a different terminal on every prompt**, so its
+state is still moving between iterations ~80 and ~120 while satisfying the
+cosine gate at both. I9's terminal *identity* is stopping-rule dependent; its
+lexical *class* (non-whole-word plurality) is stable under both rules, so the
+H12 refutation in item 2b is unaffected. Every claim about a specific terminal
+token in this record inherits this caveat, and I9 is recorded as a slow-drift
+cell.
+
+### Consequences for the 2026-07-24 section (appended, not rewritten)
+
+1. The single-token funnels are **not** shown to be a decode-geometry artifact
+   (item 1), subject to the recorded isotropy limitation.
+2. The "isolated islands" statement **survives** a disjoint prompt subset
+   (item 2b) and the alternative stopping rule (item 5, by lexical class).
+3. The flagged-cell list handed to the J-lens phase **gains E23 (10→23)**, which
+   the earlier map omitted, and which no via-tail control can arbitrate
+   (item 3).
+4. Every "single seed" caveat should read **"single prompt subset"** (item 2a).
+5. Terminal *identity* claims are stopping-rule dependent at slow-drift cells;
+   **I9 is one** (item 5).
+
+**Caveats (standing):** one 25-prompt subset per condition; cluster-threshold
+sensitivity still unexplored; direct decode at j<23 remains a
+logit-lens-at-layer-j readout; the J-lens re-decode (EXP_013m) remains the
+registered arbiter for every mid-stack terminal claim.
