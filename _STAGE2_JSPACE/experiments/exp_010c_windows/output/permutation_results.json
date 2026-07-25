@@ -1,0 +1,234 @@
+{
+ "spec": "_STAGE2_JSPACE/EXP_010c_PERM_SPEC.md",
+ "issue": "earlyprototype/ATR_research#7",
+ "seed": 20260725,
+ "n_null": 10000,
+ "space_note": "checkpoint has wte.weight only (no lm_head): GPT-2 tied weights, W_U = wte^T; W_U-column cosines are identical to W_E-row cosines by identity, so one test per set (spec section 4)",
+ "matching": "leading-space exact; decoded length +/-1; merge-rank band rank//5000 ('byte' band for the 256 byte tokens; <|endoftext|> excluded)",
+ "n_testable_sets": 9,
+ "bonferroni_alpha": 0.005555555555555556,
+ "sets": [
+  {
+   "set_index": 1,
+   "set": "A4_direct",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201
+   },
+   "n_types": 3,
+   "status": "tested",
+   "pool_sizes": {
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245
+   },
+   "observed_mean_pairwise_cos_WE": 0.4121185839176178,
+   "observed_mean_pairwise_cos_WU": 0.4121185839176178,
+   "null_mean": 0.2741726190432906,
+   "null_sd": 0.029417128235892785,
+   "p_empirical": 0.0008999100089991,
+   "z_effect_size": 4.689307663486162,
+   "passes_bonferroni": true
+  },
+  {
+   "set_index": 2,
+   "set": "O8_direct",
+   "tokens": {
+    " simultaneously": 11640,
+    " halfway": 19487
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    " simultaneously": 43,
+    " halfway": 1341
+   },
+   "observed_mean_pairwise_cos_WE": 0.2972203493118286,
+   "observed_mean_pairwise_cos_WU": 0.2972203493118286,
+   "null_mean": 0.30053156650960444,
+   "null_sd": 0.03996608807911176,
+   "p_empirical": 0.5009499050094991,
+   "z_effect_size": -0.08285067057905107,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 3,
+   "set": "A5_direct",
+   "tokens": {
+    " rant": 30993
+   },
+   "n_types": 1,
+   "status": "N/A - singleton, pairwise statistic undefined (spec section 3)"
+  },
+  {
+   "set_index": 4,
+   "set": "A4_tail",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201
+   },
+   "n_types": 3,
+   "status": "tested",
+   "pool_sizes": {
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245
+   },
+   "observed_mean_pairwise_cos_WE": 0.4121185839176178,
+   "observed_mean_pairwise_cos_WU": 0.4121185839176178,
+   "null_mean": 0.27496271261572836,
+   "null_sd": 0.03015851030939868,
+   "p_empirical": 0.0018998100189981002,
+   "z_effect_size": 4.547833095693251,
+   "passes_bonferroni": true
+  },
+  {
+   "set_index": 5,
+   "set": "O8_tail",
+   "tokens": {
+    " simultaneously": 11640,
+    " just": 655,
+    "'": 6
+   },
+   "n_types": 3,
+   "status": "tested",
+   "pool_sizes": {
+    "'": 255,
+    " just": 1626,
+    " simultaneously": 43
+   },
+   "observed_mean_pairwise_cos_WE": 0.29926368594169617,
+   "observed_mean_pairwise_cos_WU": 0.29926368594169617,
+   "null_mean": 0.30014970177263023,
+   "null_sd": 0.05064753287581611,
+   "p_empirical": 0.3554644535546445,
+   "z_effect_size": -0.0174937609124319,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 6,
+   "set": "A5_tail",
+   "tokens": {
+    " endless": 13079,
+    "'": 6
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    "'": 255,
+    " endless": 1291
+   },
+   "observed_mean_pairwise_cos_WE": 0.28630778193473816,
+   "observed_mean_pairwise_cos_WU": 0.28630778193473816,
+   "null_mean": 0.32191162970811127,
+   "null_sd": 0.08240510130211677,
+   "p_empirical": 0.5771422857714229,
+   "z_effect_size": -0.43205878290035593,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 7,
+   "set": "pooled_word_direct",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201,
+    " simultaneously": 11640,
+    " halfway": 19487,
+    " rant": 30993
+   },
+   "n_types": 6,
+   "status": "tested",
+   "pool_sizes": {
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245,
+    " simultaneously": 43,
+    " halfway": 1341,
+    " rant": 1139
+   },
+   "observed_mean_pairwise_cos_WE": 0.3180049657821655,
+   "observed_mean_pairwise_cos_WU": 0.3180049657821655,
+   "null_mean": 0.28305595116615295,
+   "null_sd": 0.017235873148380945,
+   "p_empirical": 0.029197080291970802,
+   "z_effect_size": 2.027690405652325,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 8,
+   "set": "pooled_word_tail",
+   "tokens": {
+    " until": 1566,
+    " forever": 8097,
+    " since": 1201,
+    " simultaneously": 11640,
+    " just": 655,
+    "'": 6,
+    " endless": 13079
+   },
+   "n_types": 7,
+   "status": "tested",
+   "pool_sizes": {
+    "'": 255,
+    " just": 1626,
+    " since": 1476,
+    " until": 1476,
+    " forever": 1245,
+    " simultaneously": 43,
+    " endless": 1291
+   },
+   "observed_mean_pairwise_cos_WE": 0.33202290534973145,
+   "observed_mean_pairwise_cos_WU": 0.33202290534973145,
+   "null_mean": 0.28790659784674644,
+   "null_sd": 0.023939985438621716,
+   "p_empirical": 0.060193980601939805,
+   "z_effect_size": 1.8427875662703366,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 9,
+   "set": "A1_direct",
+   "tokens": {
+    ",": 11,
+    "ing": 278
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    ",": 255,
+    "ing": 1480
+   },
+   "observed_mean_pairwise_cos_WE": 0.39368027448654175,
+   "observed_mean_pairwise_cos_WU": 0.39368027448654175,
+   "null_mean": 0.3344315082669258,
+   "null_sd": 0.08102695687119171,
+   "p_empirical": 0.2233776622337766,
+   "z_effect_size": 0.7312228980017541,
+   "passes_bonferroni": false
+  },
+  {
+   "set_index": 10,
+   "set": "A1_tail",
+   "tokens": {
+    ".": 13,
+    " the": 262
+   },
+   "n_types": 2,
+   "status": "tested",
+   "pool_sizes": {
+    ".": 255,
+    " the": 1427
+   },
+   "observed_mean_pairwise_cos_WE": 0.5121616721153259,
+   "observed_mean_pairwise_cos_WU": 0.5121616721153259,
+   "null_mean": 0.3043121819391847,
+   "null_sd": 0.07118277667038815,
+   "p_empirical": 0.006199380061993801,
+   "z_effect_size": 2.9199407482878663,
+   "passes_bonferroni": false
+  }
+ ]
+}
