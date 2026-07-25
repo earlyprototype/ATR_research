@@ -1,0 +1,40 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 10211.59it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=energynorm arms=['A4'] prompts=25 subset=registered seed=42 renorm=natural_i max_iter=1000 check_start=100
+Natural per-layer resid_pre norms recorded -> natural_resid_norms_energynorm_A4.json
+
+=== Arm A4: window 10->21 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [A4] E01_politics     -> ' until'       lock=140 iters=140 margin=0.12
+  [A4] D01_water        -> ' until'       lock=130 iters=130 margin=0.14
+  [A4] A01_physics      -> ' until'       lock=140 iters=140 margin=7.11
+  [A4] B01_napoleon     -> ' until'       lock=140 iters=140 margin=7.08
+  [A4] C01_jack_jill    -> ' until'       lock=140 iters=140 margin=7.30
+  [A4] F01_anger        -> ' until'       lock=140 iters=140 margin=5.97
+  [A4] G01_punctuation  -> ' since'       lock=140 iters=140 margin=0.11
+  [A4] E02_tech         -> ' until'       lock=150 iters=150 margin=6.98
+  [A4] D02_periodic     -> ' forever'     lock=140 iters=140 margin=0.33
+  [A4] A02_medical      -> ' until'       lock=140 iters=140 margin=4.89
+  [A4] B02_wwi          -> ' forever'     lock=140 iters=140 margin=0.02
+  [A4] C02_king_cole    -> ' until'       lock=140 iters=140 margin=7.29
+  [A4] F02_insult       -> ' until'       lock=140 iters=140 margin=7.31
+  [A4] G02_brackets     -> ' since'       lock=140 iters=140 margin=0.15
+  [A4] E03_orgs         -> ' until'       lock=140 iters=140 margin=6.39
+  [A4] D03_organic      -> ' until'       lock=130 iters=130 margin=0.13
+  [A4] A03_neuro        -> ' until'       lock=140 iters=140 margin=7.07
+  [A4] B03_moon         -> ' until'       lock=140 iters=140 margin=6.11
+  [A4] C03_mary_lamb    -> ' until'       lock=140 iters=140 margin=7.10
+  [A4] F03_frustration  -> ' until'       lock=140 iters=140 margin=7.11
+  [A4] G03_counting     -> ' until'       lock=140 iters=140 margin=7.05
+  [A4] E04_internet     -> ' until'       lock=130 iters=130 margin=0.01
+  [A4] D04_equation     -> ' forever'     lock=130 iters=130 margin=0.72
+  [A4] A04_climate      -> ' until'       lock=140 iters=140 margin=4.46
+  [A4] B04_rome         -> ' until'       lock=140 iters=140 margin=6.38
+
+=== Summary (1251s) ===
+  A4 10->21 converged 25/25 unique_terminals=3 [' forever', ' since', ' until']
+
+Artifacts: results_energynorm_A4.json, terminals_energynorm_A4.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
