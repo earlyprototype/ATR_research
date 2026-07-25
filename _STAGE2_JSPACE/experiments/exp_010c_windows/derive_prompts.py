@@ -44,26 +44,40 @@ def load_all():
     return records
 
 
-def select_subset(n=25):
+def round_robin_order():
+    """The full 125 prompts in the spec §5 order: round-robin across the 7
+    categories, alphabetical by prompt ID within category. The registered
+    subset is the first 25 of this ordering."""
     by_cat = {}
     for rec in load_all():
         by_cat.setdefault(rec["category"], []).append(rec)
     for cat in by_cat:
         by_cat[cat].sort(key=lambda r: r["id"])  # alphabetical by prompt ID
     cats = sorted(by_cat)
-    picked, idx = [], 0
-    while len(picked) < n:
+    order, idx = [], 0
+    while True:
         progressed = False
         for cat in cats:
-            if len(picked) >= n:
-                break
             if idx < len(by_cat[cat]):
-                picked.append(by_cat[cat][idx])
+                order.append(by_cat[cat][idx])
                 progressed = True
         if not progressed:
-            break
+            return order
         idx += 1
-    return picked
+
+
+def select_subset(n=25, offset=0):
+    """n prompts from the deterministic round-robin ordering, starting at
+    `offset`.
+
+    offset=0 reproduces the registered subset exactly (verified against the
+    committed output/prompt_subset.json) — the default path is unchanged, so
+    every registered run stays reproducible.
+
+    offset is the disjoint-subset mechanism for EXP_010c-3b §2b: offset=25
+    gives the next 25 by the same rule, with no overlap and no hand-picking.
+    """
+    return round_robin_order()[offset:offset + n]
 
 
 if __name__ == "__main__":

@@ -55,11 +55,15 @@ ARMS = {
     "X1015": (10, 15),
     "X1017": (10, 17),
     "X1019": (10, 19),
+    # EXP_010c-3b §4 — extraction ladder above 21 at injection 8
+    "E822": (8, 22),
+    "E823": (8, 23),
 }
 ARM_ORDER = ["A0", "A4", "A1", "A2", "A3", "A5"]  # spec §5 execution order
 SCAN_ORDER = ["E22", "E23", "O0", "O4", "O6", "O8", "O12", "O14"]
 INFILL_ORDER = ["I5", "I7", "I9", "I11",  # EXP_010c3_SPEC.md §5 execution order
                 "X817", "X819", "X1015", "X1017", "X1019"]
+LADDER8_ORDER = ["E822", "E823"]          # EXP_010c3b_SPEC.md §4
 
 TIERS = {
     "smoke": dict(n_prompts=2, max_iter=60, check_start=20, arms=["A0", "A4"]),
@@ -67,6 +71,12 @@ TIERS = {
     "full": dict(n_prompts=25, max_iter=1000, check_start=100, arms=ARM_ORDER),
     "scan": dict(n_prompts=25, max_iter=1000, check_start=100, arms=SCAN_ORDER),
     "infill": dict(n_prompts=25, max_iter=1000, check_start=100, arms=INFILL_ORDER),
+    "ladder8": dict(n_prompts=25, max_iter=1000, check_start=100, arms=LADDER8_ORDER),
+    # EXP_010c3b_SPEC.md §5 — settle-time variant. check_start=10 is a RECORDED
+    # protocol deviation (earliest reportable lock drops 120 -> 30); it exists to
+    # measure settle time and draws no verdicts on the registered questions.
+    "settle": dict(n_prompts=5, max_iter=1000, check_start=10,
+                   arms=["I7", "I9", "X1017"]),
 }
 
 
@@ -157,11 +167,25 @@ def main():
                     help="random-init toy model; validates the harness, draws no verdicts")
     ap.add_argument("--model-path", default=None,
                     help="local dir with gpt2-medium files for offline load")
+    # EXP_010c-3b overrides. All default to the registered behaviour, so every
+    # existing command line reproduces exactly as before.
+    ap.add_argument("--seed", type=int, default=42,
+                    help="RNG seed (EXP_010c3b §2a tests whether this is a no-op)")
+    ap.add_argument("--prompt-offset", type=int, default=0,
+                    help="offset into the deterministic round-robin ordering; "
+                         "25 gives the disjoint subset (EXP_010c3b §2b)")
+    ap.add_argument("--n-prompts", type=int, default=None,
+                    help="override the tier's prompt count")
+    ap.add_argument("--tag", default=None,
+                    help="output filename suffix; defaults to the tier name. "
+                         "REQUIRED for variant runs so they cannot overwrite "
+                         "the registered artifacts.")
     args = ap.parse_args()
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
+    n_prompts = args.n_prompts if args.n_prompts is not None else tier["n_prompts"]
 
-    torch.manual_seed(42)
+    torch.manual_seed(args.seed)
     if args.harness_check:
         print("HARNESS CHECK — random-init toy model, results carry no verdict weight.")
         model = _toy_model()
@@ -174,15 +198,16 @@ def main():
         model = HookedTransformer.from_pretrained("gpt2-medium")
     model.eval()
 
-    prompts = select_subset(tier["n_prompts"])
+    prompts = select_subset(n_prompts, offset=args.prompt_offset)
     if args.harness_check:
         prompts = [dict(rec, prompt=_toy_tokens(rec["prompt"])) for rec in prompts]
     print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} "
-          f"max_iter={tier['max_iter']} check_start={tier['check_start']}")
+          f"max_iter={tier['max_iter']} check_start={tier['check_start']} "
+          f"seed={args.seed} prompt_offset={args.prompt_offset}")
 
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
-    suffix = f"{args.tier}_harness" if args.harness_check else args.tier
+    suffix = args.tag or (f"{args.tier}_harness" if args.harness_check else args.tier)
     results, terminals = [], {}
     t0 = time.time()
     for arm in arms:

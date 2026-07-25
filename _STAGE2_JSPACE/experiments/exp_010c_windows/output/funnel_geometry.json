@@ -1,0 +1,232 @@
+{
+  "n_directions": 10000,
+  "seed": 42,
+  "vocab": 50257,
+  "funnel": [
+    {
+      "token": "oooooooo",
+      "id": 26759,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 82.28,
+      "S3_cosmean_pct": 79.65,
+      "norm": 4.0601
+    },
+    {
+      "token": "<|endoftext|>",
+      "id": 50256,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 0.29,
+      "S3_cosmean_pct": 37.23,
+      "norm": 2.5296
+    },
+    {
+      "token": " GOP",
+      "id": 6796,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 5.2,
+      "S3_cosmean_pct": 55.44,
+      "norm": 3.0551
+    },
+    {
+      "token": "'d",
+      "id": 1549,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 2.74,
+      "S3_cosmean_pct": 33.38,
+      "norm": 2.9392
+    },
+    {
+      "token": " Fas",
+      "id": 38971,
+      "S1_share_pct": 0.01,
+      "S2_norm_pct": 92.04,
+      "S3_cosmean_pct": 9.76,
+      "norm": 4.2638
+    },
+    {
+      "token": " Bhar",
+      "id": 33653,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 61.89,
+      "S3_cosmean_pct": 46.27,
+      "norm": 3.7907
+    }
+  ],
+  "funnel_extra": [
+    {
+      "token": "\u2026)",
+      "id": 38418,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 84.93,
+      "S3_cosmean_pct": 37.15,
+      "norm": 4.1059
+    },
+    {
+      "token": " [\u2026]",
+      "id": 23834,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 54.7,
+      "S3_cosmean_pct": 4.85,
+      "norm": 3.714
+    }
+  ],
+  "word_contrast": [
+    {
+      "token": " until",
+      "id": 1566,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 2.2,
+      "S3_cosmean_pct": 7.58,
+      "norm": 2.9061
+    },
+    {
+      "token": " forever",
+      "id": 8097,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 27.85,
+      "S3_cosmean_pct": 5.22,
+      "norm": 3.4447
+    },
+    {
+      "token": " since",
+      "id": 1201,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 0.97,
+      "S3_cosmean_pct": 7.59,
+      "norm": 2.7497
+    },
+    {
+      "token": " simultaneously",
+      "id": 11640,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 17.25,
+      "S3_cosmean_pct": 25.69,
+      "norm": 3.3144
+    },
+    {
+      "token": " halfway",
+      "id": 19487,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 26.18,
+      "S3_cosmean_pct": 14.7,
+      "norm": 3.4266
+    },
+    {
+      "token": " rant",
+      "id": 30993,
+      "S1_share_pct": 0.0,
+      "S2_norm_pct": 26.96,
+      "S3_cosmean_pct": 74.86,
+      "norm": 3.435
+    }
+  ],
+  "vocab_norm_mean": 3.6842,
+  "vocab_norm_p05_p95": [
+    3.0476,
+    4.3626
+  ],
+  "census_top20": [
+    {
+      "token": "\ufffd\ufffd",
+      "id": 31204,
+      "share_pct": 0.22
+    },
+    {
+      "token": "enegger",
+      "id": 44028,
+      "share_pct": 0.19
+    },
+    {
+      "token": " destro",
+      "id": 11411,
+      "share_pct": 0.19
+    },
+    {
+      "token": " mathemat",
+      "id": 11896,
+      "share_pct": 0.19
+    },
+    {
+      "token": "SPONSORED",
+      "id": 37190,
+      "share_pct": 0.17
+    },
+    {
+      "token": "etheless",
+      "id": 12845,
+      "share_pct": 0.15
+    },
+    {
+      "token": " awa",
+      "id": 14908,
+      "share_pct": 0.15
+    },
+    {
+      "token": "Interstitial",
+      "id": 29447,
+      "share_pct": 0.14
+    },
+    {
+      "token": "advertisement",
+      "id": 45876,
+      "share_pct": 0.14
+    },
+    {
+      "token": "ngth",
+      "id": 11910,
+      "share_pct": 0.13
+    },
+    {
+      "token": "\ufffd",
+      "id": 35266,
+      "share_pct": 0.13
+    },
+    {
+      "token": "theless",
+      "id": 9603,
+      "share_pct": 0.13
+    },
+    {
+      "token": "\u25fc",
+      "id": 48366,
+      "share_pct": 0.12
+    },
+    {
+      "token": "terday",
+      "id": 6432,
+      "share_pct": 0.12
+    },
+    {
+      "token": "lyak",
+      "id": 43782,
+      "share_pct": 0.11
+    },
+    {
+      "token": "thood",
+      "id": 12951,
+      "share_pct": 0.1
+    },
+    {
+      "token": " Niet",
+      "id": 28428,
+      "share_pct": 0.1
+    },
+    {
+      "token": " princ",
+      "id": 5144,
+      "share_pct": 0.1
+    },
+    {
+      "token": "xit",
+      "id": 10198,
+      "share_pct": 0.1
+    },
+    {
+      "token": "Sov",
+      "id": 38574,
+      "share_pct": 0.09
+    }
+  ],
+  "funnel_collective_share_pct": 0.01,
+  "word_contrast_collective_share_pct": 0.0
+}
