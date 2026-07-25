@@ -1,0 +1,127 @@
+[
+  {
+    "id": "C04_humpty",
+    "category": "Simple",
+    "prompt": "Humpty Dumpty sat on a wall Humpty Dumpty"
+  },
+  {
+    "id": "F04_argument",
+    "category": "Vulgarity",
+    "prompt": "Go fuck yourself you absolute fucking moron you"
+  },
+  {
+    "id": "G04_fibonacci",
+    "category": "Wild",
+    "prompt": "1 1 2 3 5 8 13 21 34 55"
+  },
+  {
+    "id": "E05_finance",
+    "category": "Acronyms",
+    "prompt": "IPO ETF GDP CPI EBITDA P/E ROI"
+  },
+  {
+    "id": "D05_amino",
+    "category": "Chemical",
+    "prompt": "Ala Gly Val Leu Ile Pro Phe Trp"
+  },
+  {
+    "id": "A05_evolution",
+    "category": "Complex",
+    "prompt": "The phylogenetic analysis of mitochondrial DNA sequences reveals"
+  },
+  {
+    "id": "B05_mlk",
+    "category": "Narrative",
+    "prompt": "I have a dream that one day this"
+  },
+  {
+    "id": "C05_twinkle",
+    "category": "Simple",
+    "prompt": "Twinkle twinkle little star how I wonder what"
+  },
+  {
+    "id": "F05_rant",
+    "category": "Vulgarity",
+    "prompt": "This is complete and utter bullshit and everyone"
+  },
+  {
+    "id": "G05_primes",
+    "category": "Wild",
+    "prompt": "2 3 5 7 11 13 17 19 23 29"
+  },
+  {
+    "id": "E06_medical",
+    "category": "Acronyms",
+    "prompt": "MRI CT ECG EEG ICU OR ER NICU"
+  },
+  {
+    "id": "D06_physics_eq",
+    "category": "Chemical",
+    "prompt": "E = mc2 F = ma PV = nRT"
+  },
+  {
+    "id": "A06_epistemology",
+    "category": "Complex",
+    "prompt": "The epistemological foundations of empiricism rest on"
+  },
+  {
+    "id": "B06_sources",
+    "category": "Narrative",
+    "prompt": "According to sources familiar with the matter the"
+  },
+  {
+    "id": "C06_dog",
+    "category": "Simple",
+    "prompt": "The dog ran to the big red box"
+  },
+  {
+    "id": "F06_dismissal",
+    "category": "Vulgarity",
+    "prompt": "I dont give a damn what anyone thinks"
+  },
+  {
+    "id": "G06_binary",
+    "category": "Wild",
+    "prompt": "01001000 01100101 01101100 01101100 01101111"
+  },
+  {
+    "id": "E07_military",
+    "category": "Acronyms",
+    "prompt": "AWOL MIA KIA IED RPG IFF SIGINT"
+  },
+  {
+    "id": "D07_dna",
+    "category": "Chemical",
+    "prompt": "ATCG TAGC GCTA AATTCCGG TTAGGCCAA"
+  },
+  {
+    "id": "A07_sociology",
+    "category": "Complex",
+    "prompt": "The intersectionality of socioeconomic stratification and racial"
+  },
+  {
+    "id": "B07_breaking",
+    "category": "Narrative",
+    "prompt": "Breaking news tonight as officials confirmed that the"
+  },
+  {
+    "id": "C07_cat_mat",
+    "category": "Simple",
+    "prompt": "See the cat sit on the mat and"
+  },
+  {
+    "id": "F07_shock",
+    "category": "Vulgarity",
+    "prompt": "Holy shit did you see what just happened"
+  },
+  {
+    "id": "G07_the",
+    "category": "Wild",
+    "prompt": "The"
+  },
+  {
+    "id": "E08_academic",
+    "category": "Acronyms",
+    "prompt": "PhD MSc BA STEM GPA SAT GRE LSAT"
+  }
+]
