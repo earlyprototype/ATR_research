@@ -7,6 +7,16 @@ fetch actually fails, and update this file when the picture changes.
 **Last verified:** 2026-07-25 (all status codes below observed directly in a
 CCR session; proxy policy is the org egress allowlist, non-selective).
 
+**POLICY UPDATE 2026-07-25:** TC added `huggingface.co`, `*.huggingface.co`,
+and `*.hf.co` to the environment's custom allowlist (defaults kept). Verified
+live in-session the same day: `huggingface.co/.../resolve/main/` works
+end-to-end, including the weights CDN redirect to `us.aws.cdn.hf.co` (the
+`*.hf.co` wildcard matches multi-level subdomains; 206 partial fetch
+confirmed on pythia-410m `pytorch_model.bin`). Policy changes apply to
+running sessions, not just new ones. **Standard HF downloads are now the
+preferred route for all models; the legacy-mirror route below remains as a
+recorded fallback.**
+
 ---
 
 ## Verdicts
@@ -16,7 +26,7 @@ CCR session; proxy policy is the org egress allowlist, non-selective).
 | gpt2 (small) | **YES** (verified, all 4 files HTTP 200) | legacy S3 mirror, below |
 | gpt2-medium | **YES** (verified, all 4 files HTTP 200; used for EXP_010c) | legacy S3 mirror |
 | gpt2-large | **YES** (verified, all 4 files HTTP 200) | legacy S3 mirror |
-| pythia-410m / pythia-160m | **NO — definitively** | none; see below |
+| pythia-410m / pythia-160m | **YES** (since 2026-07-25 policy update; config + ranged weights fetch verified) | huggingface.co directly |
 
 ## The working route (GPT-2 family)
 
@@ -44,7 +54,7 @@ state-dict verification pattern). Provenance caveat stands: this is the
 pre-2020 HF mirror; every experiment's reproduction gate is the behavioural
 check on these weights.
 
-## Pythia: why NO is definitive (2026-07-25 search record)
+## Pythia: the pre-policy-update search record (historical; resolved by the 2026-07-25 policy update above)
 
 Pythia weights exist only on huggingface.co (LFS). Checked and exhausted:
 
@@ -69,17 +79,12 @@ Pythia weights exist only on huggingface.co (LFS). Checked and exhausted:
 - `storage.googleapis.com` (public GCS objects)
 - `github.com` (git), `pypi.org` / `files.pythonhosted.org` (direct, no proxy)
 
-## Durable fixes for Pythia (one-time, operator action)
+## Durable fixes for Pythia (historical)
 
-1. **Preferred:** add `huggingface.co` (and its CDN hosts, e.g.
-   `cdn-lfs.huggingface.co`, `cas-bridge.xethub.hf.co`) to the CCR
-   environment's network policy (claude.ai → Code → environment settings).
-   Unblocks everything, permanently.
-2. **Alternative:** from the local machine (models already in the HF cache),
-   attach `pythia-410m` (~810 MB) and `pythia-160m` (~375 MB) as release
-   assets on this repo (limit is 2 GB/asset). `objects.githubusercontent.com`
-   is allowed, so remote sessions can then fetch them. Record sha256s here.
-3. **Fallback:** Pythia experiments (issue #12) run on the local machine.
+Fix 1 (allow `huggingface.co` + `*.huggingface.co` + `*.hf.co` in the
+environment's custom network policy, defaults kept) was **applied by TC on
+2026-07-25** and verified the same day. The release-asset and local-machine
+alternatives are moot.
 
-Until one of 1–2 happens: **issue #12 is local-machine-only; every other
-open experiment (#6, #7, #11, #13, #14, #15, #16) is runnable in CCR.**
+Current state: **every open experiment (#6, #7, #11, #12, #13, #14, #15,
+#16) is runnable in CCR.**
