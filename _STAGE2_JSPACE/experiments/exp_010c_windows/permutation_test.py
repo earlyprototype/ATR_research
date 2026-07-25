@@ -15,6 +15,7 @@ The model dir must contain pytorch_model.bin, vocab.json, merges.txt.
 """
 
 import argparse
+import hashlib
 import json
 import os
 from itertools import combinations
@@ -176,6 +177,17 @@ def main():
     ap.add_argument("--out", default=os.path.join(OUT_DIR, "permutation_results.json"))
     args = ap.parse_args()
 
+    # Provenance attestation (PR #19 review): digest the exact statistical
+    # inputs so the recorded null is tied to immutable file contents, not a
+    # mutable download route. Digests are serialized into the results JSON.
+    input_digests = {}
+    for fname in ("pytorch_model.bin", "vocab.json", "merges.txt"):
+        h = hashlib.sha256()
+        with open(os.path.join(args.model_dir, fname), "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        input_digests[fname] = h.hexdigest()
+
     with open(os.path.join(args.model_dir, "vocab.json")) as f:
         vocab = json.load(f)
     chars, direct_ids = build_token_sets()
@@ -203,6 +215,7 @@ def main():
     results = {
         "spec": "_STAGE2_JSPACE/EXP_010c_PERM_SPEC.md",
         "issue": "earlyprototype/ATR_research#7",
+        "input_sha256": input_digests,
         "seed": SEED,
         "n_null": args.n_null,
         "space_note": (

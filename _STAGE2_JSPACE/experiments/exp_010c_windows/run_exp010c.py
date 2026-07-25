@@ -174,6 +174,7 @@ def main():
         prompts = select_subset_b(tier["n_prompts"])
     else:
         prompts = select_subset(tier["n_prompts"])
+    subset_b_records = prompts if args.subset == "B" else None
     if args.harness_check:
         prompts = [dict(rec, prompt=_toy_tokens(rec["prompt"])) for rec in prompts]
     print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} subset={args.subset} "
@@ -182,8 +183,8 @@ def main():
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
     suffix = args.out_suffix or (f"{args.tier}_harness" if args.harness_check else args.tier)
-    if args.subset == "B":  # audit record of the executed disjoint subset
-        (outdir / "prompt_subset_b.json").write_text(json.dumps(prompts, indent=2))
+    if subset_b_records is not None:  # audit record of the executed disjoint subset
+        (outdir / "prompt_subset_b.json").write_text(json.dumps(subset_b_records, indent=2))
     results, terminals = [], {}
     t0 = time.time()
     for arm in arms:

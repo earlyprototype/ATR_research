@@ -139,3 +139,21 @@ p < α\*.
 
 Either outcome on the word arms is a finding. No result from this test is a
 statement about *why* any relatedness exists.
+
+---
+
+## Post-run addendum (2026-07-25, PR #19 review — provenance attestation)
+
+Recorded after the run; does not alter any pre-registered statistical
+decision. The exact input files used by the executed test have been digested
+(SHA-256) and the digests serialized into `permutation_results.json`
+(`input_sha256` field) by the updated script. Digests of the files used for
+the recorded 2026-07-25 run:
+
+- `pytorch_model.bin`: `98c7b0558df2c732799e509a8157d392251b3a6b06e2c72eefb3a00eb10f8318`
+- `vocab.json`: `196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783`
+- `merges.txt`: `1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5`
+
+Any future re-run must either match these digests or record its own set —
+the mutable `resolve/main/` download route is not, by itself, the provenance
+claim.
