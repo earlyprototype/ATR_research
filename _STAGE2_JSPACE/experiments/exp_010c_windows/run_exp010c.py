@@ -248,7 +248,18 @@ def main():
     suffix = (args.tag or args.out_suffix
               or (f"{args.tier}_harness" if args.harness_check else args.tier))
     if subset_b_records is not None:  # audit record of the executed disjoint subset
-        (outdir / "prompt_subset_b.json").write_text(json.dumps(subset_b_records, indent=2))
+        # The canonical audit file records the FULL 25-prompt subset B that the
+        # registered EXP_010c-ROBUST runs used. A partial or resized run (e.g.
+        # --tier smoke, or --n-prompts) must not overwrite it with a truncated
+        # list — that silently invalidates another experiment's audit record.
+        # Found the hard way: a 2-prompt smoke test clobbered the committed
+        # 25-entry file. Same principle as --tag on the results artifacts.
+        if len(subset_b_records) == 25:
+            (outdir / "prompt_subset_b.json").write_text(
+                json.dumps(subset_b_records, indent=2))
+        else:
+            (outdir / f"prompt_subset_b_{suffix}.json").write_text(
+                json.dumps(subset_b_records, indent=2))
     if args.renorm == "natural_i":
         # Reference-norm record (spec §4, issue #14): natural per-layer
         # resid_pre norms for every prompt, one un-hooked pass each.
