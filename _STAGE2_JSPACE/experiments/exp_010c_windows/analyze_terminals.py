@@ -47,6 +47,9 @@ def main():
     ap.add_argument("--tier", default="full")
     ap.add_argument("--decode-via-tail", action="store_true")
     ap.add_argument("--model-path", default=None)
+    # EXP_012-PYTHIA spec §3 (recorded diff, issue #12); default unchanged.
+    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m"],
+                    default="gpt2-medium")
     args = ap.parse_args()
     if args.decode_via_tail and not args.model_path:
         ap.error("--decode-via-tail requires --model-path")
@@ -61,8 +64,8 @@ def main():
 
     model = None
     if args.decode_via_tail:
-        from run_exp010c import _load_medium_from_local
-        model = _load_medium_from_local(args.model_path)
+        from run_exp010c import load_model_from_local
+        model = load_model_from_local(args.model_path, args.model_name)
         model.eval()
 
     report = []

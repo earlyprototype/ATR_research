@@ -24,10 +24,9 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-# Override with ATR_STAGE1_REPO if the public Stage 1 repo lives elsewhere.
-STAGE1_REPO = Path(os.environ.get(
-    "ATR_STAGE1_REPO", "/home/user/lucier-gpt2-activ-tensor-reson-experiments"
-))
+# Location of the public Stage 1 repo (for prompt_library.py). REQUIRED — no
+# developer-specific default (PR #39 review): fail closed with a clear message.
+_STAGE1_ENV = os.environ.get("ATR_STAGE1_REPO")
 
 # The Stage 1 deep-run core, in deep_config.pt order (recorded verbatim; the
 # .pt lives in a committed zip, so the derivation does not re-read it at
@@ -37,14 +36,67 @@ DEEP_RUN_8 = [
     "E01_politics", "F01_anger", "G01_punctuation", "G13_buffalo",
 ]
 
+EXPECTED_CATEGORIES = {
+    "Complex", "Narrative", "Simple", "Chemical", "Acronyms", "Vulgarity", "Wild",
+}
+
 
 def _library():
-    sys.path.insert(0, str(STAGE1_REPO))
+    if not _STAGE1_ENV:
+        raise SystemExit(
+            "ATR_STAGE1_REPO is not set. Point it at a clone of the public "
+            "lucier Stage 1 repo (the directory containing prompt_library.py) "
+            "before deriving the EXP_012-PYTHIA subset."
+        )
+    repo = Path(_STAGE1_ENV)
+    if not (repo / "prompt_library.py").exists():
+        raise SystemExit(f"prompt_library.py not found in ATR_STAGE1_REPO={repo}")
+    sys.path.insert(0, str(repo))
     import prompt_library
-    return prompt_library.PROMPT_LIBRARY, prompt_library.CATEGORY_MAP
+    lib, cat_map = prompt_library.PROMPT_LIBRARY, prompt_library.CATEGORY_MAP
+    # Fail closed on schema drift (mirror of derive_prompts.py's 125-record
+    # validation; PR #39 review): inspect and RECORD before adapting.
+    if len(lib) != 125:
+        raise SystemExit(
+            f"Expected 125 prompts, got {len(lib)} — schema drift in "
+            "prompt_library.py; inspect and RECORD before adapting.")
+    missing_cat = [k for k in lib if k not in cat_map]
+    if missing_cat:
+        raise SystemExit(
+            f"CATEGORY_MAP does not cover {len(missing_cat)} prompt IDs "
+            f"(e.g. {missing_cat[:5]}) — schema drift; inspect and RECORD.")
+    cats = set(cat_map.values())
+    if cats != EXPECTED_CATEGORIES:
+        raise SystemExit(
+            f"Category set drifted: {sorted(cats)} != {sorted(EXPECTED_CATEGORIES)} "
+            "— inspect and RECORD before adapting.")
+    return lib, cat_map
+
+
+COMMITTED_SUBSET = HERE / "output" / "prompt_subset_pythia.json"
 
 
 def select_subset_pythia(n=25):
+    """Derive the subset AND, when the committed record exists, validate the
+    fresh derivation against it (PR #39 review: the committed
+    prompt_subset_pythia.json is the execution authority — any mismatch is a
+    hard stop, not a silent re-derivation)."""
+    derived = _derive_subset(25)
+    if COMMITTED_SUBSET.exists():
+        committed = json.loads(COMMITTED_SUBSET.read_text())
+        if [r["id"] for r in committed] != [r["id"] for r in derived]:
+            raise SystemExit(
+                "Committed prompt_subset_pythia.json disagrees with the fresh "
+                "derivation — inspect and RECORD before running anything.")
+        if any(c["prompt"] != d["prompt"] for c, d in zip(committed, derived)):
+            raise SystemExit(
+                "Committed prompt texts disagree with prompt_library.py — "
+                "inspect and RECORD before running anything.")
+        return committed[:n]
+    return derived[:n]
+
+
+def _derive_subset(n=25):
     lib, cat_map = _library()
     missing = [k for k in DEEP_RUN_8 if k not in lib]
     if missing:
@@ -78,7 +130,7 @@ def select_subset_pythia(n=25):
 
 
 if __name__ == "__main__":
-    subset = select_subset_pythia()
+    subset = _derive_subset()
     print(f"Selected {len(subset)} (core 8 deep-run + round-robin 17):")
     for i, rec in enumerate(subset):
         tag = "core8" if rec["id"] in DEEP_RUN_8 else "rr17"

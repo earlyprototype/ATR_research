@@ -64,7 +64,13 @@ fixed-horizon runs, so not an automatic STOP — recorded and investigated).
 `--model-name` parameter (default `gpt2-medium`; recorded minimal diff). Arm
 keys reuse the existing window definitions (single source of truth); the
 results register reports them with a `P-` prefix. Artifacts suffix:
-`pythia410m`.
+`pythia410m`. **Ordering note (spec-first rule, recorded per PR #39
+review):** this spec pre-registers the design and therefore precedes the
+runner-generalisation diff by design; the `--model-name` diff (plus the
+GPTNeoX offline loader and the natural-norm record for seed_j runs) is
+committed after this spec and BEFORE any registered arm's artifacts. The
+committed `output/prompt_subset_pythia.json` is the execution authority for
+the prompt set: the runner re-derives and hard-stops on any mismatch.
 
 **Windows (inject i → extract j, inclusive; both models are 24-layer, so the
 Medium grid's absolute layers ARE the same relative depths):**
