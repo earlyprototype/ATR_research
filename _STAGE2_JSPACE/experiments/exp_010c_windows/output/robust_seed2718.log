@@ -17,3 +17,79 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
   [A0] E02_tech         -> 'D'            lock=120 iters=120 margin=0.52
   [A0] D02_periodic     -> 'D'            lock=120 iters=120 margin=0.52
   [A0] A02_medical      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B02_wwi          -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] C02_king_cole    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F02_insult       -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G02_brackets     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E03_orgs         -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D03_organic      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A03_neuro        -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B03_moon         -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] C03_mary_lamb    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F03_frustration  -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G03_counting     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E04_internet     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D04_equation     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A04_climate      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B04_rome         -> 'D'            lock=120 iters=120 margin=0.52
+
+=== Arm A4: window 10->21 ===
+  [A4] E01_politics     -> ' forever'     lock=140 iters=140 margin=0.93
+  [A4] D01_water        -> ' since'       lock=140 iters=140 margin=0.99
+  [A4] A01_physics      -> ' until'       lock=140 iters=140 margin=6.91
+  [A4] B01_napoleon     -> ' until'       lock=140 iters=140 margin=6.78
+  [A4] C01_jack_jill    -> ' until'       lock=150 iters=150 margin=5.61
+  [A4] F01_anger        -> ' until'       lock=150 iters=150 margin=4.23
+  [A4] G01_punctuation  -> ' forever'     lock=140 iters=140 margin=0.57
+  [A4] E02_tech         -> ' until'       lock=150 iters=150 margin=6.68
+  [A4] D02_periodic     -> ' until'       lock=140 iters=140 margin=2.68
+  [A4] A02_medical      -> ' until'       lock=140 iters=140 margin=7.07
+  [A4] B02_wwi          -> ' forever'     lock=140 iters=140 margin=0.78
+  [A4] C02_king_cole    -> ' until'       lock=150 iters=150 margin=5.46
+  [A4] F02_insult       -> ' until'       lock=150 iters=150 margin=5.96
+  [A4] G02_brackets     -> ' forever'     lock=140 iters=140 margin=0.25
+  [A4] E03_orgs         -> ' until'       lock=150 iters=150 margin=4.83
+  [A4] D03_organic      -> ' forever'     lock=130 iters=130 margin=0.79
+  [A4] A03_neuro        -> ' until'       lock=140 iters=140 margin=6.34
+  [A4] B03_moon         -> ' until'       lock=150 iters=150 margin=4.82
+  [A4] C03_mary_lamb    -> ' until'       lock=140 iters=140 margin=7.14
+  [A4] F03_frustration  -> ' until'       lock=140 iters=140 margin=7.15
+  [A4] G03_counting     -> ' until'       lock=140 iters=140 margin=6.51
+  [A4] E04_internet     -> ' until'       lock=140 iters=140 margin=0.32
+  [A4] D04_equation     -> ' until'       lock=140 iters=140 margin=0.30
+  [A4] A04_climate      -> ' until'       lock=140 iters=140 margin=7.06
+  [A4] B04_rome         -> ' until'       lock=150 iters=150 margin=4.93
+
+=== Arm O8: window 8->21 ===
+  [O8] E01_politics     -> ' halfway'     lock=120 iters=120 margin=0.88
+  [O8] D01_water        -> ' halfway'     lock=120 iters=120 margin=0.78
+  [O8] A01_physics      -> ' simultaneously' lock=120 iters=120 margin=3.70
+  [O8] B01_napoleon     -> ' simultaneously' lock=120 iters=120 margin=4.11
+  [O8] C01_jack_jill    -> ' simultaneously' lock=120 iters=120 margin=4.74
+  [O8] F01_anger        -> ' simultaneously' lock=120 iters=120 margin=4.37
+  [O8] G01_punctuation  -> ' halfway'     lock=120 iters=120 margin=0.87
+  [O8] E02_tech         -> ' simultaneously' lock=120 iters=120 margin=5.10
+  [O8] D02_periodic     -> ' simultaneously' lock=120 iters=120 margin=0.99
+  [O8] A02_medical      -> ' simultaneously' lock=120 iters=120 margin=1.81
+  [O8] B02_wwi          -> ' halfway'     lock=120 iters=120 margin=0.94
+  [O8] C02_king_cole    -> ' simultaneously' lock=120 iters=120 margin=4.73
+  [O8] F02_insult       -> ' simultaneously' lock=120 iters=120 margin=4.45
+  [O8] G02_brackets     -> ' halfway'     lock=120 iters=120 margin=1.38
+  [O8] E03_orgs         -> ' simultaneously' lock=120 iters=120 margin=4.37
+  [O8] D03_organic      -> ' halfway'     lock=120 iters=120 margin=0.82
+  [O8] A03_neuro        -> ' simultaneously' lock=120 iters=120 margin=3.73
+  [O8] B03_moon         -> ' simultaneously' lock=120 iters=120 margin=4.46
+  [O8] C03_mary_lamb    -> ' simultaneously' lock=120 iters=120 margin=3.24
+  [O8] F03_frustration  -> ' simultaneously' lock=120 iters=120 margin=3.04
+  [O8] G03_counting     -> ' simultaneously' lock=120 iters=120 margin=3.86
+  [O8] E04_internet     -> ' halfway'     lock=120 iters=120 margin=1.11
+  [O8] D04_equation     -> ' halfway'     lock=120 iters=120 margin=1.47
+  [O8] A04_climate      -> ' simultaneously' lock=120 iters=120 margin=2.37
+  [O8] B04_rome         -> ' simultaneously' lock=120 iters=120 margin=4.71
+
+=== Summary (3285s) ===
+  A0  0->23 converged 25/25 unique_terminals=1 ['D']
+  A4 10->21 converged 25/25 unique_terminals=3 [' forever', ' since', ' until']
+  O8  8->21 converged 25/25 unique_terminals=2 [' halfway', ' simultaneously']
+
+Artifacts: results_robust_seed2718.json, terminals_robust_seed2718.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
