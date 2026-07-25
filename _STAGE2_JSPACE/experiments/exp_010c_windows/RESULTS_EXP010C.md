@@ -244,7 +244,9 @@ of any story; each is listed with the uncertainty it removes.
 1. **Anisotropy-corrected permutation test** on terminal-set relatedness in
    W_E (Stage 1 `02b` pattern). Removes uncertainty about whether any
    apparent relatedness among terminals exceeds the embedding space's
-   baseline anisotropy.
+   baseline anisotropy. **DONE 2026-07-25** — spec `../../EXP_010c_PERM_SPEC.md`,
+   results in §"2026-07-25 — EXP_010c-PERM" below and
+   `output/permutation_results.json`.
 2. **Seed and prompt-subset variation** for A4 and O8. Removes uncertainty
    about whether the observed basin structure and the i ∈ {8,10} whole-word
    zone are properties of this seed/subset or of the model.
@@ -309,3 +311,71 @@ The full per-run values are in the regenerated `results_full.json` /
 **Housekeeping:** `results_full.json` and `terminals_full.pt` un-ignored and
 committed (the gitignore entries existed to keep mid-run checkpoints out;
 final versions are the record, per the convention above).
+
+## 2026-07-25 — EXP_010c-PERM: anisotropy-corrected permutation test (planned control 1)
+
+**Spec:** `../../EXP_010c_PERM_SPEC.md`, committed before any statistic was
+computed (commit 0ca5829). **Script:** `permutation_test.py`. **Per-set JSON:**
+`output/permutation_results.json`. Issue: #7.
+
+**What ran:** mean pairwise cosine over unique terminal types per
+pre-registered set, against N=10,000 matched random same-size token sets
+(matched on leading-space status, decoded length ±1, BPE merge-rank band
+rank//5000 with a separate byte-token band; `<|endoftext|>` excluded from
+pools). Seed 20260725, per-set substreams. Zero forward passes.
+
+**Space (recorded):** the gpt2-medium checkpoint carries `wte.weight` only —
+no `lm_head` tensor (verified on the state dict; 316 tensors). Weights are
+tied: W_U = wte^T, so the W_U column for token t is the W_E row for token t
+and the two report columns are numerically identical. One test per set.
+Model files fetched from `huggingface.co/gpt2-medium/resolve/main/`
+(post-2026-07-25 policy route per `REMOTE_ENV_MODEL_ACCESS.md`);
+`pytorch_model.bin` 1,520,013,706 bytes, same size as the legacy-mirror
+artifact recorded in §"Model acquisition."
+
+**Per-set results (all sets reported; α\* = 0.05/9 = 0.00556 Bonferroni across
+the 9 testable sets):**
+
+| # | Set | n | obs cos (W_E) | obs cos (W_U) | null μ | null σ | p | z (σ) | p < α\* |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | A4_direct (`until, forever, since`) | 3 | 0.4121 | 0.4121 | 0.2742 | 0.0294 | 0.00090 | +4.69 | **yes** |
+| 2 | O8_direct (`simultaneously, halfway`) | 2 | 0.2972 | 0.2972 | 0.3005 | 0.0400 | 0.50095 | −0.08 | no |
+| 3 | A5_direct (`rant`) | 1 | N/A — singleton, statistic undefined | | | | | | — |
+| 4 | A4_tail (`until, forever, since`) | 3 | 0.4121 | 0.4121 | 0.2750 | 0.0302 | 0.00190 | +4.55 | **yes** |
+| 5 | O8_tail (`simultaneously, just, '`) | 3 | 0.2993 | 0.2993 | 0.3001 | 0.0506 | 0.35546 | −0.02 | no |
+| 6 | A5_tail (`endless, '`) | 2 | 0.2863 | 0.2863 | 0.3219 | 0.0824 | 0.57714 | −0.43 | no |
+| 7 | pooled_word_direct | 6 | 0.3180 | 0.3180 | 0.2831 | 0.0172 | 0.02920 | +2.03 | no |
+| 8 | pooled_word_tail | 7 | 0.3320 | 0.3320 | 0.2879 | 0.0239 | 0.06019 | +1.84 | no |
+| 9 | A1_direct (contrast: `, ing`) | 2 | 0.3937 | 0.3937 | 0.3344 | 0.0810 | 0.22338 | +0.73 | no |
+| 10 | A1_tail (contrast: `. the`) | 2 | 0.5122 | 0.5122 | 0.3043 | 0.0712 | 0.00620 | +2.92 | no |
+
+Smallest candidate pool: `' simultaneously'` (43); all other pools 255–1,626
+(full sizes in the JSON).
+
+**Which pre-registered reading obtained (mechanical application of spec §8):**
+the **mixed outcome** row. Sets 1 and 4 (A4, both readouts — the identical
+type set {`until`, `forever`, `since`}) pass at p < α\* with z > 0: for A4 the
+relatedness pattern survives its first control ("semantic" stays quarantined).
+Sets 2, 5, 6 (O8 both readouts, A5 via-tail) are at or below their null means
+(z −0.43 to −0.08): consistent with baseline anisotropy at matched
+size/space/length/frequency. Pooled sets 7–8 do not pass (z +2.03/+1.84,
+p ≥ 0.029); per spec §8 the pooled rows do not override per-arm rows or vice
+versa. Contrast sets 9–10 do not pass, so no calibration downgrade is
+triggered; recorded plainly: A1_tail sits at p = 0.00620 against
+α\* = 0.00556.
+
+**Caveats (standing):** n=2 sets carry a single pairwise cosine; the A4 pass
+rests on 3 types from one seed and one 25-prompt subset (control 2 covers
+seed/subset variation); merge-rank band is a frequency proxy, not a measured
+frequency; no statement about *why* the A4 terminals are related is made or
+implied.
+
+## 2026-07-25 — Provenance addendum (PR #19 review)
+
+SHA-256 digests of the exact statistical inputs used by the permutation
+test (recorded post-run; spec addendum has the same values):
+`pytorch_model.bin` 98c7b055…10f8318 · `vocab.json` 19613966…636783 ·
+`merges.txt` 1ce16647…26adc5. Full values in `EXP_010c_PERM_SPEC.md`
+§Post-run addendum and in `output/permutation_results.json` once
+regenerated by the updated script; the numbers in the recorded run are
+unchanged by this addendum.

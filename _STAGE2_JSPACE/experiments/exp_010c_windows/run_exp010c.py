@@ -27,7 +27,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))  # for atr_engine2
 
 from atr_engine2 import run_atr_gated  # noqa: E402
-from derive_prompts import select_subset  # noqa: E402
+from derive_prompts import select_subset, select_subset_b  # noqa: E402
 
 ARMS = {
     "A0": (0, 23),   # baseline / reproduction gate
@@ -144,11 +144,20 @@ def main():
                     help="random-init toy model; validates the harness, draws no verdicts")
     ap.add_argument("--model-path", default=None,
                     help="local dir with gpt2-medium files for offline load")
+    # EXP_010c-ROBUST spec §3 (recorded diff, issue #11): seed / subset /
+    # artifact-suffix parameters. Defaults reproduce prior behaviour exactly.
+    ap.add_argument("--seed", type=int, default=42,
+                    help="global torch seed (registered runs used 42)")
+    ap.add_argument("--subset", choices=["registered", "B"], default="registered",
+                    help="prompt subset: registered round-robin 25, or disjoint B")
+    ap.add_argument("--out-suffix", default=None,
+                    help="artifact suffix override (e.g. robust_seed1337); "
+                         "default keeps the tier-based naming")
     args = ap.parse_args()
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
 
-    torch.manual_seed(42)
+    torch.manual_seed(args.seed)
     if args.harness_check:
         print("HARNESS CHECK — random-init toy model, results carry no verdict weight.")
         model = _toy_model()
@@ -161,15 +170,21 @@ def main():
         model = HookedTransformer.from_pretrained("gpt2-medium")
     model.eval()
 
-    prompts = select_subset(tier["n_prompts"])
+    if args.subset == "B":
+        prompts = select_subset_b(tier["n_prompts"])
+    else:
+        prompts = select_subset(tier["n_prompts"])
+    subset_b_records = prompts if args.subset == "B" else None
     if args.harness_check:
         prompts = [dict(rec, prompt=_toy_tokens(rec["prompt"])) for rec in prompts]
-    print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} "
-          f"max_iter={tier['max_iter']} check_start={tier['check_start']}")
+    print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} subset={args.subset} "
+          f"seed={args.seed} max_iter={tier['max_iter']} check_start={tier['check_start']}")
 
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
-    suffix = f"{args.tier}_harness" if args.harness_check else args.tier
+    suffix = args.out_suffix or (f"{args.tier}_harness" if args.harness_check else args.tier)
+    if subset_b_records is not None:  # audit record of the executed disjoint subset
+        (outdir / "prompt_subset_b.json").write_text(json.dumps(subset_b_records, indent=2))
     results, terminals = [], {}
     t0 = time.time()
     for arm in arms:
