@@ -1,0 +1,67 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 11594.92it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=full arms=['A4', 'O8'] prompts=25 subset=B seed=42 max_iter=1000 check_start=100
+
+=== Arm A4: window 10->21 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [A4] C04_humpty       -> ' until'       lock=140 iters=140 margin=1.38
+  [A4] F04_argument     -> ' until'       lock=140 iters=140 margin=7.28
+  [A4] G04_fibonacci    -> ' until'       lock=140 iters=140 margin=6.34
+  [A4] E05_finance      -> ' forever'     lock=140 iters=140 margin=0.91
+  [A4] D05_amino        -> ' forever'     lock=140 iters=140 margin=0.84
+  [A4] A05_evolution    -> ' until'       lock=140 iters=140 margin=5.35
+  [A4] B05_mlk          -> ' until'       lock=150 iters=150 margin=3.74
+  [A4] C05_twinkle      -> ' until'       lock=140 iters=140 margin=6.28
+  [A4] F05_rant         -> ' until'       lock=150 iters=150 margin=4.36
+  [A4] G05_primes       -> ' until'       lock=140 iters=140 margin=6.45
+  [A4] E06_medical      -> ' until'       lock=140 iters=140 margin=4.38
+  [A4] D06_physics_eq   -> ' until'       lock=140 iters=140 margin=4.21
+  [A4] A06_epistemology -> ' until'       lock=140 iters=140 margin=7.06
+  [A4] B06_sources      -> ' until'       lock=150 iters=150 margin=4.49
+  [A4] C06_dog          -> ' until'       lock=150 iters=150 margin=4.50
+  [A4] F06_dismissal    -> ' until'       lock=150 iters=150 margin=4.68
+  [A4] G06_binary       -> ' until'       lock=140 iters=140 margin=0.02
+  [A4] E07_military     -> ' until'       lock=140 iters=140 margin=0.09
+  [A4] D07_dna          -> ' until'       lock=140 iters=140 margin=0.48
+  [A4] A07_sociology    -> ' until'       lock=140 iters=140 margin=6.47
+  [A4] B07_breaking     -> ' until'       lock=150 iters=150 margin=4.72
+  [A4] C07_cat_mat      -> ' until'       lock=150 iters=150 margin=3.50
+  [A4] F07_shock        -> ' until'       lock=150 iters=150 margin=5.84
+  [A4] G07_the          -> ' ('           lock=120 iters=120 margin=1.65
+  [A4] E08_academic     -> ' until'       lock=140 iters=140 margin=4.50
+
+=== Arm O8: window 8->21 ===
+  [O8] C04_humpty       -> ' halfway'     lock=120 iters=120 margin=0.52
+  [O8] F04_argument     -> ' simultaneously' lock=120 iters=120 margin=3.63
+  [O8] G04_fibonacci    -> ' simultaneously' lock=120 iters=120 margin=1.82
+  [O8] E05_finance      -> ' halfway'     lock=120 iters=120 margin=0.71
+  [O8] D05_amino        -> ' halfway'     lock=120 iters=120 margin=0.90
+  [O8] A05_evolution    -> ' simultaneously' lock=120 iters=120 margin=4.05
+  [O8] B05_mlk          -> ' simultaneously' lock=120 iters=120 margin=3.33
+  [O8] C05_twinkle      -> ' simultaneously' lock=120 iters=120 margin=1.58
+  [O8] F05_rant         -> ' simultaneously' lock=120 iters=120 margin=4.29
+  [O8] G05_primes       -> ' simultaneously' lock=120 iters=120 margin=1.66
+  [O8] E06_medical      -> ' simultaneously' lock=120 iters=120 margin=1.21
+  [O8] D06_physics_eq   -> ' simultaneously' lock=120 iters=120 margin=1.85
+  [O8] A06_epistemology -> ' simultaneously' lock=120 iters=120 margin=2.28
+  [O8] B06_sources      -> ' simultaneously' lock=120 iters=120 margin=4.18
+  [O8] C06_dog          -> ' simultaneously' lock=120 iters=120 margin=4.22
+  [O8] F06_dismissal    -> ' simultaneously' lock=120 iters=120 margin=4.31
+  [O8] G06_binary       -> ' halfway'     lock=120 iters=120 margin=1.61
+  [O8] E07_military     -> ' halfway'     lock=120 iters=120 margin=0.86
+  [O8] D07_dna          -> ' halfway'     lock=120 iters=120 margin=1.72
+  [O8] A07_sociology    -> ' simultaneously' lock=120 iters=120 margin=3.42
+  [O8] B07_breaking     -> ' simultaneously' lock=120 iters=120 margin=3.55
+  [O8] C07_cat_mat      -> ' simultaneously' lock=120 iters=120 margin=3.95
+  [O8] F07_shock        -> ' simultaneously' lock=120 iters=120 margin=4.26
+  [O8] G07_the          -> ' already'     lock=120 iters=120 margin=0.12
+  [O8] E08_academic     -> ' simultaneously' lock=120 iters=120 margin=1.36
+
+=== Summary (2217s) ===
+  A4 10->21 converged 25/25 unique_terminals=3 [' (', ' forever', ' until']
+  O8  8->21 converged 25/25 unique_terminals=3 [' already', ' halfway', ' simultaneously']
+
+Artifacts: results_robust_subsetB_p2.json, terminals_robust_subsetB_p2.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output

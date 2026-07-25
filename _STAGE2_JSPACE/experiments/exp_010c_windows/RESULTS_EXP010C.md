@@ -244,10 +244,16 @@ of any story; each is listed with the uncertainty it removes.
 1. **Anisotropy-corrected permutation test** on terminal-set relatedness in
    W_E (Stage 1 `02b` pattern). Removes uncertainty about whether any
    apparent relatedness among terminals exceeds the embedding space's
-   baseline anisotropy.
+   baseline anisotropy. **DONE 2026-07-25** — spec `../../EXP_010c_PERM_SPEC.md`,
+   results in §"2026-07-25 — EXP_010c-PERM" below and
+   `output/permutation_results.json`.
 2. **Seed and prompt-subset variation** for A4 and O8. Removes uncertainty
    about whether the observed basin structure and the i ∈ {8,10} whole-word
    zone are properties of this seed/subset or of the model.
+   **DONE 2026-07-25** — spec `../../EXP_010c_ROBUST_SPEC.md`, results in
+   §"2026-07-25 — EXP_010c-ROBUST" below; artifacts
+   `output/results_robust_*.json`, `output/terminals_robust_*.pt`,
+   `output/terminal_characterisation_robust_*.json`. Issue: #11.
 3. **Same window grid on Pythia-410m.** Removes uncertainty about whether
    window-position effects at these relative depths are specific to
    gpt2-medium or generic to decoder stacks of this size.
@@ -627,6 +633,26 @@ plurality*; observed plurality is `'oooooooo'` (fragment) at 22/25, whole-word
 1/25. Recorded without curation: `' forever'` — one of A4's registered
 terminals — occurs once at 1/25.
 
+**Cross-experiment observation (added on merge; neither experiment states this
+alone).** EXP_010c-ROBUST (issue #11, section below) independently ran A4
+(10→21) and O8 (8→21) on its "subset B", and EXP_010c-3b ran I9 (9→21) at
+`--prompt-offset 25`. These are **the same 25 prompts** — the two entry points
+were added in parallel for the same need and are verified equal
+(`select_subset_b(n) == select_subset(n, offset=25)`, checked against both
+committed audit files). The three cells on that shared disjoint subset:
+
+| i | arm | source | Terminals on subset B | Plurality class |
+|---|---|---|---|---|
+| 8 | O8 | EXP_010c-ROBUST V3 | `' simultaneously'` ×18, `' halfway'` ×6, `' already'` ×1 | whole-word |
+| 9 | I9 | EXP_010c-3b §2b | `'oooooooo'` ×22, `'…'` ×2, `' forever'` ×1 | fragment |
+| 10 | A4 | EXP_010c-ROBUST V3 | `' until'` ×22, `' forever'` ×2, `' ('` ×1 | whole-word |
+
+**The whole-word / not / whole-word alternation across i ∈ {8, 9, 10}
+reproduces on a prompt set disjoint from the one that produced it.** Stated as
+an observation on two independently executed experiments sharing a subset
+definition; the standing caveats (one additional subset, single machine,
+logit-lens-at-j readout) apply unchanged, and EXP_013m remains the arbiter.
+
 ### Item 3 — the whole-word scoring rule, and a correction to the map
 
 Decision taken in the spec before recomputing: **the flag rule is kept
@@ -715,3 +741,149 @@ cell.
 sensitivity still unexplored; direct decode at j<23 remains a
 logit-lens-at-layer-j readout; the J-lens re-decode (EXP_013m) remains the
 registered arbiter for every mid-stack terminal claim.
+## 2026-07-25 — EXP_010c-PERM: anisotropy-corrected permutation test (planned control 1)
+
+**Spec:** `../../EXP_010c_PERM_SPEC.md`, committed before any statistic was
+computed (commit 0ca5829). **Script:** `permutation_test.py`. **Per-set JSON:**
+`output/permutation_results.json`. Issue: #7.
+
+**What ran:** mean pairwise cosine over unique terminal types per
+pre-registered set, against N=10,000 matched random same-size token sets
+(matched on leading-space status, decoded length ±1, BPE merge-rank band
+rank//5000 with a separate byte-token band; `<|endoftext|>` excluded from
+pools). Seed 20260725, per-set substreams. Zero forward passes.
+
+**Space (recorded):** the gpt2-medium checkpoint carries `wte.weight` only —
+no `lm_head` tensor (verified on the state dict; 316 tensors). Weights are
+tied: W_U = wte^T, so the W_U column for token t is the W_E row for token t
+and the two report columns are numerically identical. One test per set.
+Model files fetched from `huggingface.co/gpt2-medium/resolve/main/`
+(post-2026-07-25 policy route per `REMOTE_ENV_MODEL_ACCESS.md`);
+`pytorch_model.bin` 1,520,013,706 bytes, same size as the legacy-mirror
+artifact recorded in §"Model acquisition."
+
+**Per-set results (all sets reported; α\* = 0.05/9 = 0.00556 Bonferroni across
+the 9 testable sets):**
+
+| # | Set | n | obs cos (W_E) | obs cos (W_U) | null μ | null σ | p | z (σ) | p < α\* |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | A4_direct (`until, forever, since`) | 3 | 0.4121 | 0.4121 | 0.2742 | 0.0294 | 0.00090 | +4.69 | **yes** |
+| 2 | O8_direct (`simultaneously, halfway`) | 2 | 0.2972 | 0.2972 | 0.3005 | 0.0400 | 0.50095 | −0.08 | no |
+| 3 | A5_direct (`rant`) | 1 | N/A — singleton, statistic undefined | | | | | | — |
+| 4 | A4_tail (`until, forever, since`) | 3 | 0.4121 | 0.4121 | 0.2750 | 0.0302 | 0.00190 | +4.55 | **yes** |
+| 5 | O8_tail (`simultaneously, just, '`) | 3 | 0.2993 | 0.2993 | 0.3001 | 0.0506 | 0.35546 | −0.02 | no |
+| 6 | A5_tail (`endless, '`) | 2 | 0.2863 | 0.2863 | 0.3219 | 0.0824 | 0.57714 | −0.43 | no |
+| 7 | pooled_word_direct | 6 | 0.3180 | 0.3180 | 0.2831 | 0.0172 | 0.02920 | +2.03 | no |
+| 8 | pooled_word_tail | 7 | 0.3320 | 0.3320 | 0.2879 | 0.0239 | 0.06019 | +1.84 | no |
+| 9 | A1_direct (contrast: `, ing`) | 2 | 0.3937 | 0.3937 | 0.3344 | 0.0810 | 0.22338 | +0.73 | no |
+| 10 | A1_tail (contrast: `. the`) | 2 | 0.5122 | 0.5122 | 0.3043 | 0.0712 | 0.00620 | +2.92 | no |
+
+Smallest candidate pool: `' simultaneously'` (43); all other pools 255–1,626
+(full sizes in the JSON).
+
+**Which pre-registered reading obtained (mechanical application of spec §8):**
+the **mixed outcome** row. Sets 1 and 4 (A4, both readouts — the identical
+type set {`until`, `forever`, `since`}) pass at p < α\* with z > 0: for A4 the
+relatedness pattern survives its first control ("semantic" stays quarantined).
+Sets 2, 5, 6 (O8 both readouts, A5 via-tail) are at or below their null means
+(z −0.43 to −0.08): consistent with baseline anisotropy at matched
+size/space/length/frequency. Pooled sets 7–8 do not pass (z +2.03/+1.84,
+p ≥ 0.029); per spec §8 the pooled rows do not override per-arm rows or vice
+versa. Contrast sets 9–10 do not pass, so no calibration downgrade is
+triggered; recorded plainly: A1_tail sits at p = 0.00620 against
+α\* = 0.00556.
+
+**Caveats (standing):** n=2 sets carry a single pairwise cosine; the A4 pass
+rests on 3 types from one seed and one 25-prompt subset (control 2 covers
+seed/subset variation); merge-rank band is a frequency proxy, not a measured
+frequency; no statement about *why* the A4 terminals are related is made or
+implied.
+
+## 2026-07-25 — Provenance addendum (PR #19 review)
+
+SHA-256 digests of the exact statistical inputs used by the permutation
+test (recorded post-run; spec addendum has the same values):
+`pytorch_model.bin` 98c7b055…10f8318 · `vocab.json` 19613966…636783 ·
+`merges.txt` 1ce16647…26adc5. Full values in `EXP_010c_PERM_SPEC.md`
+§Post-run addendum and in `output/permutation_results.json` once
+regenerated by the updated script; the numbers in the recorded run are
+unchanged by this addendum.
+
+## 2026-07-25 — EXP_010c-ROBUST: seed and prompt-subset robustness (planned control 2)
+
+**Spec:** `../../EXP_010c_ROBUST_SPEC.md`, committed before any run (commit
+d4c3a3c). **Runner diff:** `--seed` / `--subset` / `--out-suffix` parameters
+plus `derive_prompts.select_subset_b()` (commit 435043b; no protocol change).
+Issue: #11.
+
+**What ran:** 3 variants × arms {A0 0→23, A4 10→21, O8 8→21} × 25 prompts =
+225 gated runs, protocol identical to the registered full tier (cos > 0.999
+×3, check every 10 past 100, max_iter=1000, L0 natural-pass seeding),
+gpt2-medium offline via `--model-path`. All 225 converged. Variant 1: seed
+1337, registered subset (3488 s). Variant 2: seed 2718, registered subset
+(3285 s). Variant 3: seed 42, disjoint subset B — the NEXT 25 prompts under
+the registered round-robin/alphabetical rule, recorded in the spec §3 and
+`output/prompt_subset_b.json` (2828 s + 2217 s, see deviation).
+
+**Deviation (recorded):** the container restarted at ~14:18 during Variant
+3's A4 arm (its log ends mid-arm with no traceback; dmesg shows a fresh
+boot). The per-arm A0 checkpoint held; A4 and O8 were rerun via
+`--arms A4,O8 --out-suffix robust_subsetB_p2` and the artifacts merged into
+`results_robust_subsetB.json` / `terminals_robust_subsetB.pt` (75/75
+records; same recovery pattern as the registered full run's restart). Parts
+and the A0-only checkpoint backup are committed alongside the merged files
+for audit.
+
+**Seed-variant determinism (spec §2 observation):** Variants 1 and 2 are
+**identical to the registered run record-by-record** — all 75 records each
+match the registered A0/A4 (full tier) and O8 (scan tier) records on all 9
+compared fields (terminal_token, terminal_token_id, lock_in_iter, n_iters,
+converged, top_logit_margin, entropy, final_cos_sim_mean, terminal_prob),
+and their terminal-characterisation lines (basins, cosines, margins,
+via-tail) are numerically identical to the registered ones. As pre-registered
+in spec §2: the protocol contains no sampling, so the global torch seed does
+not influence the run on this machine; the robustness burden falls on the
+subset variant.
+
+**Per-variant observation table** (registered rows from the 2026-07-23 full
+and scan sections for comparison; Variants 1–2 shown once since they equal
+the registered rows exactly):
+
+| Arm | Variant | Direct decode | Via-tail decode | Agree | Tensor basins (sizes) | Margin μ/max | Lock-in |
+|---|---|---|---|---|---|---|---|
+| A0 | registered = V1 = V2 | `D` ×25 | `D` ×25 | 25/25 | 4 ([18,3,2,2], cos .998) | 0.52/0.52 | 120 |
+| A0 | V3 (subset B) | `D` ×25 | `D` ×25 | 25/25 | 3 ([21,3,1], cos .999) | 0.52/0.52 | 120 |
+| A4 | registered = V1 = V2 | `' until'` ×19, `' forever'` ×5, `' since'` ×1 | `' until'` ×17, `' forever'` ×5, `' since'` ×3 | 23/25 | 12 (cos .828) | 4.20/7.15 | 130–150 |
+| A4 | V3 (subset B) | `' until'` ×22, `' forever'` ×2, `' ('` ×1 | `' until'` ×19, `' forever'` ×4, `' since'` ×1, `' ('` ×1 | 22/25 | 13 (cos .819) | 3.98/7.28 | 120–150 |
+| O8 | registered = V1 = V2 | `' simultaneously'` ×17, `' halfway'` ×8 | `' simultaneously'` ×17, `' just'` ×6, `"'"` ×2 | 17/25 | 11 (cos .967) | 2.88/5.10 | 120 |
+| O8 | V3 (subset B) | `' simultaneously'` ×18, `' halfway'` ×6, `' already'` ×1 | `' simultaneously'` ×19, `' just'` ×4, `"'"` ×1, `' already'` ×1 | 19/25 | 12 (cos .962) | 2.46/4.31 | 120 |
+
+Token classes: every V3 direct-decode terminal except `' ('` is a whole-word
+alphabetic token; both V3-only terminals (`' ('` in A4, `' already'` in O8)
+come from the same prompt, `G07_the` (text `"The"`, the subset's only
+single-word prompt; margins 1.65 and 0.12 respectively). Full uncurated
+inventories in `results_robust_*.json`; no curated sublist kept.
+
+**Pre-registered readings (mechanical application of spec §5):**
+
+- **Primary criterion → "same-basin-structure (stable)".** In every variant:
+  A0's direct decode is `D` for all 25 prompts (25/25 in V1, V2, V3), and
+  A4's direct-decode terminal set contains ≥2 of its 3 registered types —
+  V1/V2: all 3 (`until`, `forever`, `since`); V3: 2 of 3 (`until` ×22,
+  `forever` ×2; `since` absent from direct decode, though present ×1 in
+  V3's via-tail decode).
+- **Secondary reading → "zone-stable at i=8".** O8's direct-decode terminals
+  are whole-word alphabetic tokens for all 25 prompts in every variant
+  (V3 adds `' already'` ×1 to `simultaneously`/`halfway`).
+- Differences observed under subset B, stated exactly: A4 loses `' since'`
+  from the direct decode and gains `' ('` on `G07_the`; O8 gains
+  `' already'` on `G07_the`; A0's basin count moves from 4 to 3; margin
+  means shift by −0.22 (A4) and −0.43 (O8); basin counts 12→13 (A4),
+  11→12 (O8).
+
+**Caveats (standing):** the two seed variants test only the global-torch-seed
+pathway on one machine — they demonstrate protocol determinism, not
+cross-machine invariance; subset B is one additional subset (n=25) drawn by
+the same rule from the same 125-prompt pool; cluster-threshold sensitivity
+remains unexplored; direct decode at j=21 remains a logit-lens-at-layer-j
+readout with the J-lens re-decode (EXP_013m) as arbiter.

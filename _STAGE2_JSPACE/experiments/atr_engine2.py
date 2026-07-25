@@ -8,6 +8,13 @@
 #   (dict {lag: mean cosine} over the last 9 mean-vector iterates, computed
 #   with the module's own lag_scan()). Protocol logic is otherwise unchanged;
 #   the diff against upstream must remain exactly this header + that feature.
+# RECORDED DIFF 2 (2026-07-25, EXP_010c_VARIANTS_SPEC.md §2, issues #13/#14):
+#   run_atr_gated gains inject_hook_name=None (override the injection hook,
+#   Control A sanity arm) and renorm="seed_j" ("natural_i" rescales the looped
+#   tensor to the natural resid_pre norm at the injection layer instead of the
+#   seed norm at the extraction layer, Control B). Defaults reproduce the
+#   registered path exactly; the return dict now always carries inject_hook,
+#   renorm, target_norm, seed_norm_at_j (metadata only).
 """
 ATR Engine: Activation Tensor Resonance
 =========================================
@@ -254,7 +261,8 @@ def run_atr_loop(model, prompt, layer_start, layer_end, max_iter, schedule, verb
 
 def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
                   threshold=0.999, patience=3, check_every=10, check_start=100,
-                  verbose=False, gate_lag=1, capture_terminal=False):
+                  verbose=False, gate_lag=1, capture_terminal=False,
+                  inject_hook_name=None, renorm="seed_j"):
     """Convergence-gated ATR loop (early-stop variant of run_atr_loop).
 
     Iterates the full-tensor re-injection until the tensor stops moving, then
@@ -287,15 +295,26 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
         raise ValueError(
             f"check_start ({check_start}) must be >= gate_lag ({gate_lag}) "
             "for the lagged comparison to be well-formed")
+    if renorm not in ("seed_j", "natural_i"):
+        raise ValueError(f"renorm must be 'seed_j' or 'natural_i', got {renorm!r}")
     hook_point_read = f"blocks.{layer_end}.hook_resid_post"
-    hook_point_write = f"blocks.{layer_start}.hook_resid_pre"
+    hook_point_write = inject_hook_name or f"blocks.{layer_start}.hook_resid_pre"
+    # Control B (renorm="natural_i") needs the natural resid_pre norm at the
+    # injection layer; the initial pass is un-hooked, so its resid_pre at
+    # layer_start IS the natural value for this prompt.
+    natural_pre_name = f"blocks.{layer_start}.hook_resid_pre"
+    cache_names = {hook_point_read} | ({natural_pre_name} if renorm == "natural_i" else set())
 
     with torch.no_grad():
         _, cache = model.run_with_cache(
-            prompt, names_filter=lambda n: n == hook_point_read
+            prompt, names_filter=lambda n: n in cache_names
         )
     current_tensor = cache[hook_point_read][0].clone()
     initial_norm = current_tensor.norm().item()
+    if renorm == "natural_i":
+        target_norm = cache[natural_pre_name][0].norm().item()
+    else:
+        target_norm = initial_norm
     # Oldest-first buffer of the last gate_lag mean vectors: entry 0 is the
     # iterate gate_lag steps back once i >= gate_lag.
     mean_history = [current_tensor.mean(dim=0).clone()]
@@ -309,7 +328,7 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
     for i in range(1, max_iter + 1):
         current_norm = current_tensor.norm().item()
         if current_norm > 0:
-            current_tensor = current_tensor * (initial_norm / current_norm)
+            current_tensor = current_tensor * (target_norm / current_norm)
 
         inject_tensor = current_tensor.clone()
 
@@ -362,6 +381,10 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
         "final_cos_sim_mean": final_cos,
         "top_logit_margin": detail["top_logit_margin"],
         "entropy": detail["entropy"],
+        "inject_hook": hook_point_write,
+        "renorm": renorm,
+        "target_norm": target_norm,
+        "seed_norm_at_j": initial_norm,
     }
     if capture_terminal:
         out["terminal_mean_vec"] = current_tensor.mean(dim=0).clone()

@@ -1,0 +1,43 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 13147.86it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=full arms=['A0', 'A4', 'O8'] prompts=25 subset=B seed=42 max_iter=1000 check_start=100
+
+=== Arm A0: window 0->23 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [A0] C04_humpty       -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F04_argument     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G04_fibonacci    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E05_finance      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D05_amino        -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A05_evolution    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B05_mlk          -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] C05_twinkle      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F05_rant         -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G05_primes       -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E06_medical      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D06_physics_eq   -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A06_epistemology -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B06_sources      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] C06_dog          -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F06_dismissal    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G06_binary       -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E07_military     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] D07_dna          -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] A07_sociology    -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] B07_breaking     -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] C07_cat_mat      -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] F07_shock        -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] G07_the          -> 'D'            lock=120 iters=120 margin=0.52
+  [A0] E08_academic     -> 'D'            lock=120 iters=120 margin=0.52
+
+=== Arm A4: window 10->21 ===
+  [A4] C04_humpty       -> ' until'       lock=140 iters=140 margin=1.38
+  [A4] F04_argument     -> ' until'       lock=140 iters=140 margin=7.28
+  [A4] G04_fibonacci    -> ' until'       lock=140 iters=140 margin=6.34
+  [A4] E05_finance      -> ' forever'     lock=140 iters=140 margin=0.91
+  [A4] D05_amino        -> ' forever'     lock=140 iters=140 margin=0.84
+  [A4] A05_evolution    -> ' until'       lock=140 iters=140 margin=5.35
+  [A4] B05_mlk          -> ' until'       lock=150 iters=150 margin=3.74

@@ -80,6 +80,30 @@ def select_subset(n=25, offset=0):
     return round_robin_order()[offset:offset + n]
 
 
+def select_subset_b(n=25):
+    """Disjoint subset B (EXP_010c-ROBUST spec §3): the NEXT n prompts under
+    the identical round-robin/alphabetical ordering, i.e. positions 26..25+n —
+    deterministic, no hand-picking, disjoint from the registered subset.
+
+    MERGE NOTE: EXP_010c-ROBUST (#11) and EXP_010c-3b (#21) added this helper
+    and `select_subset(n, offset=)` in parallel for the same need. They are the
+    same selection — `select_subset_b(n) == select_subset(n, offset=25)` — so
+    this now delegates rather than re-deriving, leaving ONE implementation.
+    Both call sites are kept because each experiment's committed artifacts were
+    produced through its own entry point. The disjointness assertion is
+    retained: it is a cheap guard that would catch any future change to the
+    ordering rule silently overlapping the registered subset.
+    """
+    subset_b = select_subset(n, offset=25)
+    if len(subset_b) != n:
+        raise SystemExit(f"Could not derive {n} prompts at offset 25 (got {len(subset_b)})")
+    reg_ids = {r["id"] for r in select_subset(25)}
+    overlap = reg_ids & {r["id"] for r in subset_b}
+    if overlap:
+        raise SystemExit(f"Subset B overlaps registered subset: {overlap}")
+    return subset_b
+
+
 if __name__ == "__main__":
     records = load_all()
     cats = sorted({r["category"] for r in records})

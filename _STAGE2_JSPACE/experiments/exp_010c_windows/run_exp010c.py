@@ -27,7 +27,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))  # for atr_engine2
 
 from atr_engine2 import run_atr_gated  # noqa: E402
-from derive_prompts import select_subset  # noqa: E402
+from derive_prompts import select_subset, select_subset_b  # noqa: E402
 
 ARMS = {
     "A0": (0, 23),   # baseline / reproduction gate
@@ -58,7 +58,14 @@ ARMS = {
     # EXP_010c-3b §4 — extraction ladder above 21 at injection 8
     "E822": (8, 22),
     "E823": (8, 23),
+    # EXP_010c-VARIANTS Control A (EXP_010c_VARIANTS_SPEC.md §3, issue #13)
+    "I1A0": (1, 23),   # i=1 variant of A0 (0->23)
+    "I1O0": (1, 21),   # i=1 variant of O0 (0->21)
+    "HP9": (10, 21),   # sanity: inject at blocks.9.hook_resid_post (see ARM_INJECT_HOOK)
 }
+# Control A sanity arm: pre-registered expectation is that resid_post(9) is
+# the SAME residual value as resid_pre(10), so HP9 must reproduce A4 exactly.
+ARM_INJECT_HOOK = {"HP9": "blocks.9.hook_resid_post"}
 ARM_ORDER = ["A0", "A4", "A1", "A2", "A3", "A5"]  # spec §5 execution order
 SCAN_ORDER = ["E22", "E23", "O0", "O4", "O6", "O8", "O12", "O14"]
 INFILL_ORDER = ["I5", "I7", "I9", "I11",  # EXP_010c3_SPEC.md §5 execution order
@@ -77,10 +84,16 @@ TIERS = {
     # measure settle time and draws no verdicts on the registered questions.
     "settle": dict(n_prompts=5, max_iter=1000, check_start=10,
                    arms=["I7", "I9", "X1017"]),
+    # EXP_010c-VARIANTS tiers (spec §3/§4): registered protocol, variant arms.
+    "hookpoint": dict(n_prompts=25, max_iter=1000, check_start=100,
+                      arms=["I1A0", "I1O0", "HP9"]),
+    "energynorm": dict(n_prompts=25, max_iter=1000, check_start=100,
+                       arms=["A0", "A4", "O8", "A1"]),
 }
 
 
-def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start):
+def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start,
+                          inject_hook_name=None, renorm="seed_j"):
     """Thin wrapper: the gated protocol lives ONLY in atr_engine2.run_atr_gated
     (capture_terminal=True adds terminal tensors + a real lag_scan dict — the
     recorded diff vs the upstream engine; see atr_engine2.py header).
@@ -91,7 +104,8 @@ def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start):
     wrapper; artifacts regenerated.
     """
     r = run_atr_gated(model, prompt, i, j, max_iter=max_iter,
-                      check_start=check_start, capture_terminal=True)
+                      check_start=check_start, capture_terminal=True,
+                      inject_hook_name=inject_hook_name, renorm=renorm)
     # lag_scan arrives as {lag: mean_cosine}; keep the mapping explicit.
     if r.get("lag_scan") is not None:
         r["lag_scan"] = {str(k): v for k, v in r["lag_scan"].items()}
@@ -167,19 +181,37 @@ def main():
                     help="random-init toy model; validates the harness, draws no verdicts")
     ap.add_argument("--model-path", default=None,
                     help="local dir with gpt2-medium files for offline load")
-    # EXP_010c-3b overrides. All default to the registered behaviour, so every
-    # existing command line reproduces exactly as before.
+    # Seed / subset / artifact-suffix parameters. All defaults reproduce the
+    # registered behaviour exactly, so every prior command line still replays.
+    #
+    # MERGE NOTE (EXP_010c-ROBUST issue #11 and EXP_010c-3b issue #21 added
+    # overlapping flags in parallel). Both interfaces are kept so the run
+    # commands recorded against each experiment's committed artifacts still
+    # work; they share ONE implementation underneath:
+    #   --subset B      == --prompt-offset 25   (verified equal, see below)
+    #   --out-suffix X  == --tag X
     ap.add_argument("--seed", type=int, default=42,
-                    help="RNG seed (EXP_010c3b §2a tests whether this is a no-op)")
+                    help="global torch seed (registered runs used 42; EXP_010c3b "
+                         "§2a measured this to be a no-op in this harness)")
+    ap.add_argument("--subset", choices=["registered", "B"], default="registered",
+                    help="prompt subset: registered round-robin 25, or disjoint B "
+                         "(equivalent to --prompt-offset 25)")
     ap.add_argument("--prompt-offset", type=int, default=0,
                     help="offset into the deterministic round-robin ordering; "
                          "25 gives the disjoint subset (EXP_010c3b §2b)")
     ap.add_argument("--n-prompts", type=int, default=None,
                     help="override the tier's prompt count")
+    ap.add_argument("--out-suffix", default=None,
+                    help="artifact suffix override (e.g. robust_seed1337); "
+                         "default keeps the tier-based naming")
     ap.add_argument("--tag", default=None,
-                    help="output filename suffix; defaults to the tier name. "
-                         "REQUIRED for variant runs so they cannot overwrite "
-                         "the registered artifacts.")
+                    help="alias of --out-suffix. REQUIRED for variant runs so they "
+                         "cannot overwrite the registered artifacts.")
+    # EXP_010c-VARIANTS spec §2 (recorded diff, issue #14): energy-rescale
+    # target. Default reproduces the registered convention exactly.
+    ap.add_argument("--renorm", choices=["seed_j", "natural_i"], default="seed_j",
+                    help="loop rescale target: seed norm at extraction layer j "
+                         "(registered) or natural resid_pre norm at injection layer i")
     args = ap.parse_args()
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
@@ -198,25 +230,52 @@ def main():
         model = HookedTransformer.from_pretrained("gpt2-medium")
     model.eval()
 
-    prompts = select_subset(n_prompts, offset=args.prompt_offset)
+    # --subset B and --prompt-offset 25 are the same request (see MERGE NOTE);
+    # conflicting explicit values are an error rather than a silent precedence.
+    if args.subset == "B" and args.prompt_offset not in (0, 25):
+        ap.error(f"--subset B implies --prompt-offset 25, got {args.prompt_offset}")
+    offset = 25 if args.subset == "B" else args.prompt_offset
+    prompts = select_subset(n_prompts, offset=offset)
+    subset_b_records = prompts if offset == 25 else None
     if args.harness_check:
         prompts = [dict(rec, prompt=_toy_tokens(rec["prompt"])) for rec in prompts]
-    print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} "
-          f"max_iter={tier['max_iter']} check_start={tier['check_start']} "
-          f"seed={args.seed} prompt_offset={args.prompt_offset}")
+    print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} subset={args.subset} "
+          f"prompt_offset={offset} seed={args.seed} renorm={args.renorm} "
+          f"max_iter={tier['max_iter']} check_start={tier['check_start']}")
 
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
-    suffix = args.tag or (f"{args.tier}_harness" if args.harness_check else args.tier)
+    suffix = (args.tag or args.out_suffix
+              or (f"{args.tier}_harness" if args.harness_check else args.tier))
+    if subset_b_records is not None:  # audit record of the executed disjoint subset
+        (outdir / "prompt_subset_b.json").write_text(json.dumps(subset_b_records, indent=2))
+    if args.renorm == "natural_i":
+        # Reference-norm record (spec §4, issue #14): natural per-layer
+        # resid_pre norms for every prompt, one un-hooked pass each.
+        norm_rec = {}
+        for rec in prompts:
+            with torch.no_grad():
+                _, cache = model.run_with_cache(
+                    rec["prompt"], names_filter=lambda n: n.endswith("hook_resid_pre"))
+            norm_rec[rec["id"]] = {
+                str(l): round(cache[f"blocks.{l}.hook_resid_pre"][0].norm().item(), 4)
+                for l in range(model.cfg.n_layers)}
+        (outdir / f"natural_resid_norms_{suffix}.json").write_text(
+            json.dumps(norm_rec, indent=2))
+        print(f"Natural per-layer resid_pre norms recorded -> "
+              f"natural_resid_norms_{suffix}.json", flush=True)
     results, terminals = [], {}
     t0 = time.time()
     for arm in arms:
         i, j = ARMS[arm]
-        print(f"\n=== Arm {arm}: window {i}->{j} ===", flush=True)
+        inject_hook = ARM_INJECT_HOOK.get(arm)
+        print(f"\n=== Arm {arm}: window {i}->{j}"
+              f"{' inject_hook=' + inject_hook if inject_hook else ''} ===", flush=True)
         for rec in prompts:
             p = rec["prompt"]
             p_text = p if isinstance(p, str) else "harness-check-tokens"
-            r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], tier["check_start"])
+            r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], tier["check_start"],
+                                      inject_hook_name=inject_hook, renorm=args.renorm)
             # string keys ("ARM|PROMPT_ID") so the .pt loads with weights_only=True
             terminals[f"{arm}|{rec['id']}"] = {
                 "mean": r.pop("terminal_mean_vec"),
