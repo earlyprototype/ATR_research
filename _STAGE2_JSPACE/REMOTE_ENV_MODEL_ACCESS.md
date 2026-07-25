@@ -20,11 +20,23 @@ CCR session; proxy policy is the org egress allowlist, non-selective).
 
 ## The working route (GPT-2 family)
 
-```
-https://s3.amazonaws.com/models.huggingface.co/bert/<model>-{pytorch_model.bin,config.json,vocab.json,merges.txt}
+Base URL pattern (template, not a literal URL):
+
+```text
+https://s3.amazonaws.com/models.huggingface.co/bert/<model>-<file>
 ```
 
-where `<model>` ∈ {gpt2, gpt2-medium, gpt2-large}. Download the four files to
+where `<model>` ∈ {gpt2, gpt2-medium, gpt2-large} and `<file>` ∈
+{pytorch_model.bin, config.json, vocab.json, merges.txt}. Copy-pasteable:
+
+```bash
+MODEL=gpt2-medium   # or gpt2, gpt2-large
+for f in pytorch_model.bin config.json vocab.json merges.txt; do
+  curl -sS -O "https://s3.amazonaws.com/models.huggingface.co/bert/${MODEL}-${f}"
+done
+```
+
+Download the four files to
 a local dir and load offline via the EXP_010c runner's `--model-path` flag
 (seeds the HF cache with config.json so transformer_lens resolves without
 network; see RESULTS_EXP010C.md §"Model acquisition" for the flow and the
@@ -37,9 +49,11 @@ check on these weights.
 Pythia weights exist only on huggingface.co (LFS). Checked and exhausted:
 
 - huggingface.co, hf-mirror.com, modelscope.cn, the-eye.eu,
-  object.ord1.coreweave.com, data.together.xyz, ollama.com/registry.ollama.ai,
-  kaggle.com — **all denied by the egress policy** (proxy CONNECT 403 / no
-  connection). Per `/root/.ccr/README.md`: policy denials are to be reported,
+  object.ord1.coreweave.com, data.together.xyz, ollama.com,
+  registry.ollama.ai, kaggle.com — **all denied by the egress policy**
+  (proxy CONNECT 403 / no connection; tested endpoints:
+  `ollama.com/library/pythia`, `registry.ollama.ai/v2/`, plus the hosts'
+  roots for the others). Per `/root/.ccr/README.md`: policy denials are to be reported,
   not routed around.
 - Legacy S3 mirror: zero EleutherAI keys (bucket list with prefix
   `EleutherAI` returns KeyCount 0; pythia paths 404).
