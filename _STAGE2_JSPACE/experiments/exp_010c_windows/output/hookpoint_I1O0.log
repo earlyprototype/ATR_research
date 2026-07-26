@@ -1,0 +1,39 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 10399.22it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=hookpoint arms=['I1O0'] prompts=25 subset=registered seed=42 renorm=seed_j max_iter=1000 check_start=100
+
+=== Arm I1O0: window 1->21 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [I1O0] E01_politics     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] D01_water        -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] A01_physics      -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] B01_napoleon     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] C01_jack_jill    -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] F01_anger        -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] G01_punctuation  -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] E02_tech         -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] D02_periodic     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] A02_medical      -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] B02_wwi          -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] C02_king_cole    -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] F02_insult       -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] G02_brackets     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] E03_orgs         -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] D03_organic      -> ','            lock=120 iters=120 margin=0.15
+  [I1O0] A03_neuro        -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] B03_moon         -> ','            lock=120 iters=120 margin=0.13
+  [I1O0] C03_mary_lamb    -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] F03_frustration  -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] G03_counting     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] E04_internet     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] D04_equation     -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] A04_climate      -> ','            lock=120 iters=120 margin=0.14
+  [I1O0] B04_rome         -> ','            lock=120 iters=120 margin=0.13
+
+=== Summary (1105s) ===
+  I1O0  1->21 converged 25/25 unique_terminals=1 [',']
+
+Artifacts: results_hookpoint_I1O0.json, terminals_hookpoint_I1O0.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output

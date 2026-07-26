@@ -1,0 +1,40 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 10824.97it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=energynorm arms=['A1'] prompts=25 subset=registered seed=42 renorm=natural_i max_iter=1000 check_start=100
+Natural per-layer resid_pre norms recorded -> natural_resid_norms_energynorm_A1.json
+
+=== Arm A1: window 0->11 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [A1] E01_politics     -> ','            lock=None iters=1000 margin=0.60
+  [A1] D01_water        -> ' ('           lock=None iters=1000 margin=0.03
+  [A1] A01_physics      -> ' T'           lock=None iters=1000 margin=0.17
+  [A1] B01_napoleon     -> '\n'           lock=None iters=1000 margin=0.69
+  [A1] C01_jack_jill    -> ' ('           lock=None iters=1000 margin=0.04
+  [A1] F01_anger        -> ' ('           lock=None iters=1000 margin=0.06
+  [A1] G01_punctuation  -> ' ('           lock=None iters=1000 margin=0.04
+  [A1] E02_tech         -> ','            lock=None iters=1000 margin=0.57
+  [A1] D02_periodic     -> ' T'           lock=None iters=1000 margin=0.18
+  [A1] A02_medical      -> ' ('           lock=None iters=1000 margin=0.03
+  [A1] B02_wwi          -> ' T'           lock=None iters=1000 margin=0.16
+  [A1] C02_king_cole    -> ','            lock=None iters=1000 margin=0.60
+  [A1] F02_insult       -> ' the'         lock=None iters=1000 margin=0.48
+  [A1] G02_brackets     -> ' T'           lock=None iters=1000 margin=0.22
+  [A1] E03_orgs         -> ' Theater'     lock=None iters=1000 margin=0.16
+  [A1] D03_organic      -> ' ('           lock=None iters=1000 margin=0.05
+  [A1] A03_neuro        -> ' ('           lock=None iters=1000 margin=0.04
+  [A1] B03_moon         -> ' ('           lock=None iters=1000 margin=0.04
+  [A1] C03_mary_lamb    -> ' T'           lock=None iters=1000 margin=0.19
+  [A1] F03_frustration  -> ' T'           lock=None iters=1000 margin=0.21
+  [A1] G03_counting     -> '-'            lock=None iters=1000 margin=0.90
+  [A1] E04_internet     -> ' ('           lock=None iters=1000 margin=0.03
+  [A1] D04_equation     -> ','            lock=None iters=1000 margin=0.20
+  [A1] A04_climate      -> ' ('           lock=None iters=1000 margin=0.03
+  [A1] B04_rome         -> ' ('           lock=None iters=1000 margin=0.05
+
+=== Summary (8950s) ===
+  A1  0->11 converged 0/25 unique_terminals=7 ['\n', ' (', ' T', ' Theater', ' the', ',', '-']
+
+Artifacts: results_energynorm_A1.json, terminals_energynorm_A1.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output

@@ -28,6 +28,7 @@ sys.path.insert(0, str(HERE.parent))  # for atr_engine2
 
 from atr_engine2 import run_atr_gated  # noqa: E402
 from derive_prompts import select_subset, select_subset_b  # noqa: E402
+from derive_prompts_pythia import select_subset_pythia  # noqa: E402
 
 ARMS = {
     "A0": (0, 23),   # baseline / reproduction gate
@@ -66,6 +67,11 @@ TIERS = {
                       arms=["I1A0", "I1O0", "HP9"]),
     "energynorm": dict(n_prompts=25, max_iter=1000, check_start=100,
                        arms=["A0", "A4", "O8", "A1"]),
+    # EXP_012-PYTHIA (EXP_012_PYTHIA_SPEC.md §3, issue #12): registered
+    # protocol, same absolute windows (both models are 24-layer). Reported
+    # with a P- prefix (P-A0 ... P-O8) in the results register.
+    "pythia": dict(n_prompts=25, max_iter=1000, check_start=100,
+                   arms=["A0", "A1", "A2", "A3", "A4", "O8"]),
 }
 
 
@@ -149,6 +155,49 @@ def _load_medium_from_local(path):
     return HookedTransformer.from_pretrained("gpt2-medium", hf_model=hf, tokenizer=tok)
 
 
+def _load_pythia_from_local(path):
+    """Offline load for EleutherAI/pythia-410m (EXP_012_PYTHIA_SPEC.md §2/§3,
+    issue #12): local dir must hold config.json, pytorch_model.bin,
+    tokenizer.json (GPTNeoX ships tokenizer.json, not vocab/merges). Same
+    cache-seeding pattern as the medium loader, under the official repo name
+    that transformer_lens's alias resolves to."""
+    import os
+    import shutil
+
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
+    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+    cache = Path(os.environ.get("HF_HOME", Path.home() / ".cache" / "huggingface")) / "hub"
+    snap = cache / "models--EleutherAI--pythia-410m" / "snapshots" / "local"
+    refs = cache / "models--EleutherAI--pythia-410m" / "refs"
+    snap.mkdir(parents=True, exist_ok=True)
+    refs.mkdir(parents=True, exist_ok=True)
+    shutil.copy(Path(path) / "config.json", snap / "config.json")
+    (refs / "main").write_text("local")
+
+    from transformers import AutoTokenizer, GPTNeoXForCausalLM
+    from transformer_lens import HookedTransformer
+
+    hf = GPTNeoXForCausalLM.from_pretrained(path)
+    # Compatibility shim (recorded): transformers 5.x renamed GPTNeoX's output
+    # embedding attribute `embed_out` -> `lm_head`; transformer_lens 3.5.1's
+    # convert_neox_weights still reads `embed_out`. Alias the SAME module
+    # object under the old name — no weights are copied or altered.
+    if not hasattr(hf, "embed_out"):
+        hf.embed_out = hf.lm_head
+    tok = AutoTokenizer.from_pretrained(path)
+    return HookedTransformer.from_pretrained("pythia-410m", hf_model=hf, tokenizer=tok)
+
+
+def load_model_from_local(path, model_name):
+    """Dispatch the offline local-dir load by --model-name (recorded diff,
+    issue #12). Defaults preserve the original gpt2-medium behaviour."""
+    if model_name == "pythia-410m":
+        return _load_pythia_from_local(path)
+    if model_name == "gpt2-medium":
+        return _load_medium_from_local(path)
+    raise ValueError(f"No local-load route for model {model_name!r}")
+
+
 def main():
     """Run the selected tier's arms and write results + terminal artifacts."""
     ap = argparse.ArgumentParser()
@@ -157,13 +206,23 @@ def main():
     ap.add_argument("--harness-check", action="store_true",
                     help="random-init toy model; validates the harness, draws no verdicts")
     ap.add_argument("--model-path", default=None,
-                    help="local dir with gpt2-medium files for offline load")
+                    help="local dir with model files for offline load")
+    # EXP_012-PYTHIA spec §3 (recorded diff, issue #12): model selection.
+    # Default reproduces prior behaviour exactly.
+    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m"],
+                    default="gpt2-medium",
+                    help="which model to load (default gpt2-medium)")
+    ap.add_argument("--record-natural-norms", action="store_true",
+                    help="record natural per-layer resid_pre norms for every "
+                         "prompt even under renorm=seed_j (EXP_012-PYTHIA "
+                         "spec §4: per-arm seed_j/natural_i ratio record)")
     # EXP_010c-ROBUST spec §3 (recorded diff, issue #11): seed / subset /
     # artifact-suffix parameters. Defaults reproduce prior behaviour exactly.
     ap.add_argument("--seed", type=int, default=42,
                     help="global torch seed (registered runs used 42)")
-    ap.add_argument("--subset", choices=["registered", "B"], default="registered",
-                    help="prompt subset: registered round-robin 25, or disjoint B")
+    ap.add_argument("--subset", choices=["registered", "B", "pythia"], default="registered",
+                    help="prompt subset: registered round-robin 25, disjoint B, "
+                         "or the EXP_012-PYTHIA core8+17 set")
     ap.add_argument("--out-suffix", default=None,
                     help="artifact suffix override (e.g. robust_seed1337); "
                          "default keeps the tier-based naming")
@@ -175,22 +234,35 @@ def main():
     args = ap.parse_args()
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
+    if args.tier == "pythia":
+        # EXP_012-PYTHIA spec §4 promises the natural-norm record for the
+        # registered seed_j run — implied, not flag-dependent (PR #39 review).
+        args.record_natural_norms = True
+        # PR #39 review round 2: bind the tier to its model and subset so the
+        # gpt2-medium defaults cannot silently produce mislabeled artifacts.
+        if args.model_name != "pythia-410m":
+            ap.error("--tier pythia requires --model-name pythia-410m")
+        if args.subset != "pythia":
+            ap.error("--tier pythia requires --subset pythia")
 
     torch.manual_seed(args.seed)
     if args.harness_check:
         print("HARNESS CHECK — random-init toy model, results carry no verdict weight.")
         model = _toy_model()
     elif args.model_path:
-        print(f"Loading gpt2-medium from local path {args.model_path} (offline) ...", flush=True)
-        model = _load_medium_from_local(args.model_path)
+        print(f"Loading {args.model_name} from local path {args.model_path} (offline) ...",
+              flush=True)
+        model = load_model_from_local(args.model_path, args.model_name)
     else:
         from transformer_lens import HookedTransformer
-        print("Loading gpt2-medium ...", flush=True)
-        model = HookedTransformer.from_pretrained("gpt2-medium")
+        print(f"Loading {args.model_name} ...", flush=True)
+        model = HookedTransformer.from_pretrained(args.model_name)
     model.eval()
 
     if args.subset == "B":
         prompts = select_subset_b(tier["n_prompts"])
+    elif args.subset == "pythia":
+        prompts = select_subset_pythia(tier["n_prompts"])
     else:
         prompts = select_subset(tier["n_prompts"])
     subset_b_records = prompts if args.subset == "B" else None
@@ -205,8 +277,9 @@ def main():
     suffix = args.out_suffix or (f"{args.tier}_harness" if args.harness_check else args.tier)
     if subset_b_records is not None:  # audit record of the executed disjoint subset
         (outdir / "prompt_subset_b.json").write_text(json.dumps(subset_b_records, indent=2))
-    if args.renorm == "natural_i":
-        # Reference-norm record (spec §4, issue #14): natural per-layer
+    if args.renorm == "natural_i" or args.record_natural_norms:
+        # Reference-norm record (spec §4, issue #14; also EXP_012-PYTHIA §4,
+        # issue #12, via --record-natural-norms): natural per-layer
         # resid_pre norms for every prompt, one un-hooked pass each.
         norm_rec = {}
         for rec in prompts:

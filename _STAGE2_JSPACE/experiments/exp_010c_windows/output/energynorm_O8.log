@@ -1,0 +1,40 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 10013.38it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=energynorm arms=['O8'] prompts=25 subset=registered seed=42 renorm=natural_i max_iter=1000 check_start=100
+Natural per-layer resid_pre norms recorded -> natural_resid_norms_energynorm_O8.json
+
+=== Arm O8: window 8->21 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [O8] E01_politics     -> ' halfway'     lock=120 iters=120 margin=1.30
+  [O8] D01_water        -> ' spit'        lock=120 iters=120 margin=0.35
+  [O8] A01_physics      -> ' simultaneously' lock=120 iters=120 margin=1.95
+  [O8] B01_napoleon     -> ' simultaneously' lock=120 iters=120 margin=2.62
+  [O8] C01_jack_jill    -> ' simultaneously' lock=120 iters=120 margin=3.70
+  [O8] F01_anger        -> ' simultaneously' lock=120 iters=120 margin=2.50
+  [O8] G01_punctuation  -> ' halfway'     lock=120 iters=120 margin=0.89
+  [O8] E02_tech         -> ' simultaneously' lock=120 iters=120 margin=4.52
+  [O8] D02_periodic     -> ' halfway'     lock=120 iters=120 margin=0.63
+  [O8] A02_medical      -> ' halfway'     lock=120 iters=120 margin=0.25
+  [O8] B02_wwi          -> ' halfway'     lock=120 iters=120 margin=1.52
+  [O8] C02_king_cole    -> ' simultaneously' lock=120 iters=120 margin=3.48
+  [O8] F02_insult       -> ' simultaneously' lock=120 iters=120 margin=3.43
+  [O8] G02_brackets     -> ' halfway'     lock=120 iters=120 margin=0.92
+  [O8] E03_orgs         -> ' simultaneously' lock=120 iters=120 margin=3.32
+  [O8] D03_organic      -> ' spit'        lock=120 iters=120 margin=0.42
+  [O8] A03_neuro        -> ' simultaneously' lock=120 iters=120 margin=1.80
+  [O8] B03_moon         -> ' simultaneously' lock=120 iters=120 margin=3.52
+  [O8] C03_mary_lamb    -> ' simultaneously' lock=120 iters=120 margin=1.42
+  [O8] F03_frustration  -> ' simultaneously' lock=120 iters=120 margin=1.05
+  [O8] G03_counting     -> ' simultaneously' lock=120 iters=120 margin=2.08
+  [O8] E04_internet     -> ' halfway'     lock=120 iters=120 margin=0.45
+  [O8] D04_equation     -> ' halfway'     lock=120 iters=120 margin=0.80
+  [O8] A04_climate      -> ' halfway'     lock=120 iters=120 margin=0.05
+  [O8] B04_rome         -> ' simultaneously' lock=120 iters=120 margin=3.82
+
+=== Summary (1109s) ===
+  O8  8->21 converged 25/25 unique_terminals=3 [' halfway', ' simultaneously', ' spit']
+
+Artifacts: results_energynorm_O8.json, terminals_energynorm_O8.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
