@@ -31,6 +31,7 @@ from derive_prompts import select_subset  # noqa: E402
 
 
 def main():
+    """Derive (or validate) the 50 held-out census prompts; disjointness asserted."""
     picked = select_subset(100)
     if len(picked) != 100:
         raise SystemExit(f"expected 100, got {len(picked)}")
@@ -48,9 +49,12 @@ def main():
         print(f"disjoint from {name}: OK ({len(committed_ids)} ids)")
 
     # Disjointness vs the fitting set (literal prompt-text comparison)
-    wikitext = json.load(
-        open(os.path.join(HERE, "..", "..", "artifacts", "wikitext_prompts_160.json"))
-    )
+    wt_path = os.path.join(HERE, "..", "..", "artifacts", "wikitext_prompts_160.json")
+    if not os.path.exists(wt_path):
+        raise SystemExit(
+            "Missing fitting-corpus record: " + wt_path + "\n"
+            "Regenerate deterministically with: python3 fit_lens.py --refresh-prompts")
+    wikitext = json.load(open(wt_path))
     fit_texts = set(wikitext[:100])
     overlap_texts = [r["id"] for r in heldout if r["prompt"] in fit_texts]
     if overlap_texts:

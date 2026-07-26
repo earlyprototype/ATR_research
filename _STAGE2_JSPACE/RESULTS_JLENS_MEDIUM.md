@@ -60,8 +60,8 @@ gate. The repo's actual fitting corpus is WikiText-103 via its own loader
 `jlens.examples.load_wikitext_prompts` (the paper's released lenses are named
 `…/Salesforce-wikitext/…_n1000.pt`). Used here: the first 160 WikiText-103
 train records with ≥600 chars, in stream order (deterministic), frozen to
-`artifacts/wikitext_prompts_160.json` (gitignored artifact dir; regeneration
-is the one-liner in `experiments/jlens_medium/fit_lens.py`). **Fitting set =
+`artifacts/wikitext_prompts_160.json` (gitignored artifact dir; deterministic
+regeneration: `python3 experiments/jlens_medium/fit_lens.py --refresh-prompts`). **Fitting set =
 records 0..99**, `max_seq_len=128` (the paper's sequence length).
 
 **Cost measurement (P0-2 step 1):** single-prompt probe (128 tokens, 111
@@ -126,7 +126,7 @@ Committed before the gate ran. Script: `experiments/jlens_medium/run_gate.py`.
   semantic neighbourhood mid, relational/output-ish late (e.g. ' hill' →
   ' slopes' → ' overlooking'/' toward' at L21).
 - **Prediction positions (−1): J-lens mid layers 5–12 are dominated by
-  truncated BPE stems** (`' streng'`, ` arrang'`, `' mathemat'`, `' indo'`,
+  truncated BPE stems** (`' streng'`, `' arrang'`, `' mathemat'`, `' indo'`,
   `' cryst'` — recurring across unrelated prompts, i.e. a lens artifact
   signature, not content) while the logit lens shows clean but generic
   function words (`' not'`, `' currently'`, `' often'`). **From ~L15 the
@@ -196,8 +196,7 @@ aggregates + all 50×23 top-5 readouts in `census_results.json`):
 
 - **Lens-dominant layers under the pre-registered rule: none. Band verdict:
   NO COHERENT BAND.** No layer satisfies even criterion (i): the logit
-  lens's median rank of the model's final top-1 falls smoothly 119→1 across
-  the stack, while the J-lens's stays in the 600–4000 range through the
+  lens's median rank of the model's final top-1 falls from 119 to 1 across the stack (non-monotone below L5), while the J-lens's stays in the 600–4000 range through the
   mid-stack and only reaches 11 at L21 / 3 at L22. J-better fraction peaks
   at 0.50 at L0 and is ≤0.20 everywhere else.
 - **Multi-hop intermediates (93 items): a genuine null on both lenses.**

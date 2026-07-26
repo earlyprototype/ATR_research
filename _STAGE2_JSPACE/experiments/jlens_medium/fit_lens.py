@@ -44,36 +44,64 @@ import jlens
 HERE = os.path.dirname(os.path.abspath(__file__))
 STAGE2 = os.path.abspath(os.path.join(HERE, "..", ".."))
 ARTIFACTS = os.path.join(STAGE2, "artifacts")
-MODEL_PATH = (
-    "/tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/"
-    "scratchpad/gpt2-medium"
-)
+# Recorded acquisition path for the registered run is in
+# RESULTS_JLENS_MEDIUM.md section 1; override with JLENS_MODEL_PATH or
+# --model-path. Falls back to the HF hub name.
+DEFAULT_MODEL_PATH = os.environ.get("JLENS_MODEL_PATH", "gpt2-medium")
 PROMPTS_JSON = os.path.join(ARTIFACTS, "wikitext_prompts_160.json")
 
 
-def load_model():
-    tok = transformers.AutoTokenizer.from_pretrained(MODEL_PATH)
-    hf = transformers.AutoModelForCausalLM.from_pretrained(MODEL_PATH)
+def lens_path(n=100, tag=""):
+    """Canonical artifact path for a fitted lens (shared with the runners)."""
+    suffix = f"_{tag}" if tag else ""
+    return os.path.join(ARTIFACTS, f"jlens_gpt2_medium_{n}{suffix}.pt")
+
+
+def refresh_prompts():
+    """Deterministically regenerate the frozen fitting-corpus list: the first
+    160 WikiText-103 train records with >= 600 characters, in stream order,
+    via the instrument's own loader (see header). Writes PROMPTS_JSON."""
+    from jlens.examples import load_wikitext_prompts
+
+    prompts = load_wikitext_prompts(n=160, min_chars=600)
+    os.makedirs(ARTIFACTS, exist_ok=True)
+    json.dump(prompts, open(PROMPTS_JSON, "w"), indent=1)
+    print(f"Wrote {len(prompts)} prompts -> {PROMPTS_JSON}")
+
+
+def load_model(model_path=None):
+    """Load gpt2-medium (local dir or hub name) and wrap it for jlens."""
+    model_path = model_path or DEFAULT_MODEL_PATH
+    tok = transformers.AutoTokenizer.from_pretrained(model_path)
+    hf = transformers.AutoModelForCausalLM.from_pretrained(model_path)
     model = jlens.from_hf(hf, tok)
     assert model.n_layers == 24 and model.d_model == 1024
     return model, tok
 
 
 def main():
+    """Fit the Medium J-lens per the header config; resumable via checkpoint."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=100)
     ap.add_argument("--dim-batch", type=int, default=8)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--model-path", default=None,
+                    help="local model dir or hub name (default: JLENS_MODEL_PATH or gpt2-medium)")
+    ap.add_argument("--refresh-prompts", action="store_true",
+                    help="regenerate artifacts/wikitext_prompts_160.json deterministically and exit")
     args = ap.parse_args()
+    if args.refresh_prompts:
+        refresh_prompts()
+        return
 
     jlens.configure_logging(level=logging.INFO)
     os.makedirs(ARTIFACTS, exist_ok=True)
     prompts = json.load(open(PROMPTS_JSON))[: args.n]
 
-    model, _ = load_model()
+    model, _ = load_model(args.model_path)
     suffix = f"_{args.tag}" if args.tag else ""
     ckpt = os.path.join(ARTIFACTS, f"jlens_gpt2_medium_{args.n}{suffix}.ckpt.pt")
-    out = os.path.join(ARTIFACTS, f"jlens_gpt2_medium_{args.n}{suffix}.pt")
+    out = lens_path(args.n, args.tag)
 
     t0 = time.perf_counter()
     lens = jlens.fit(

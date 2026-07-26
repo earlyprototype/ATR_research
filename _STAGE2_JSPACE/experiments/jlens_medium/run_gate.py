@@ -41,12 +41,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def top_tokens(tok, logits, k=TOPK):
+    """Decode the top-k token strings from a logits vector."""
     return [tok.decode([t]) for t in logits.topk(k).indices.tolist()]
 
 
 def main():
+    """Run the P0-3 gate: J-lens vs logit-lens table over the fixed prompts/layers."""
     model, tok = load_model()
-    lens_path = os.path.join(ARTIFACTS, "jlens_gpt2_medium_100.pt")
+    from fit_lens import lens_path as _lens_path
+    lens_path = os.environ.get("JLENS_LENS_PATH") or _lens_path(100)
     lens = jlens.JacobianLens.load(lens_path)
     print(lens)
 

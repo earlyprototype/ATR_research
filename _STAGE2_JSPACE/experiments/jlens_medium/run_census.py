@@ -28,11 +28,14 @@
 #   length >= 3. No such run -> "no coherent band". Ties/islands reported flat.
 
 import json
+from statistics import median
 import os
 
 import torch
 
 import jlens
+
+from fit_lens import lens_path as _lens_path
 
 from fit_lens import ARTIFACTS, load_model
 
@@ -49,18 +52,21 @@ TOPK = 5
 
 
 def rank_of(logits: torch.Tensor, token_id: int) -> int:
+    """Rank (1-indexed) of token_id in a logits vector."""
     return int((logits > logits[token_id]).sum().item()) + 1  # 1-based
 
 
 def word_like(s: str) -> bool:
+    """Whole-word-alphabetic test used by the census interpretability counts."""
     t = s.strip()
     return len(t) >= 3 and t.isalpha()
 
 
 def main():
+    """Run the EXP_012m band census over the held-out 50 prompts."""
     model, tok = load_model()
     lens = jlens.JacobianLens.load(
-        os.path.join(ARTIFACTS, "jlens_gpt2_medium_100.pt")
+        os.environ.get("JLENS_LENS_PATH") or _lens_path(100)
     )
     layers = lens.source_layers
     print(lens)
@@ -100,9 +106,6 @@ def main():
         k = str(l)
         j_ranks = sorted(r["layers"][k]["j_rank_final"] for r in per_prompt)
         l_ranks = sorted(r["layers"][k]["l_rank_final"] for r in per_prompt)
-        med = lambda xs: xs[len(xs) // 2] if len(xs) % 2 else (
-            xs[len(xs) // 2 - 1] + xs[len(xs) // 2]
-        ) / 2
         j_better = sum(
             r["layers"][k]["j_rank_final"] < r["layers"][k]["l_rank_final"]
             for r in per_prompt
@@ -110,8 +113,8 @@ def main():
         agg[k] = {
             "j_agree_final": sum(r["layers"][k]["j_top1_eq_final"] for r in per_prompt) / n,
             "l_agree_final": sum(r["layers"][k]["l_top1_eq_final"] for r in per_prompt) / n,
-            "j_median_rank_final": med(j_ranks),
-            "l_median_rank_final": med(l_ranks),
+            "j_median_rank_final": median(j_ranks),
+            "l_median_rank_final": median(l_ranks),
             "j_better_frac": j_better,
             "j_wordlike_top1": sum(
                 word_like(r["layers"][k]["j_top5"][0]) for r in per_prompt
@@ -162,6 +165,8 @@ def main():
             ids = tok.encode(" " + inter)
             if ids and ids[0] == tok.bos_token_id:
                 ids = ids[1:]
+            if not ids:
+                continue
             tid = ids[0]
             for l in layers:
                 rj = rank_of(jl[l][0], tid)
