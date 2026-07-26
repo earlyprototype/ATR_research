@@ -24,12 +24,18 @@ def main():
     sb = [r for r in results if r["arm"] == "SB"]
     if len(sb) != 25:
         raise SystemExit(f"Expected 25 SB records, got {len(sb)}")
+    sb_by_id = {r["prompt_id"]: r for r in sb}
     subset = select_subset_small(25)
     expected = stage1_expected(subset)
+    if len(sb_by_id) != len(sb) or set(sb_by_id) != set(expected):
+        raise SystemExit(
+            "SB prompt IDs are not the exact registered 25-prompt subset: "
+            f"got={sorted(sb_by_id)}, expected={sorted(expected)}")
 
     mismatches = []
     print(f"{'prompt':<18} {'stage1':<22} {'SB (this run)':<22} match")
-    for r in sb:
+    for rec in subset:
+        r = sb_by_id[rec["id"]]
         e = expected[r["prompt_id"]]
         got = (bool(r["converged"]), r["terminal_token"])
         want = (e["converged"], e["terminal_token"])

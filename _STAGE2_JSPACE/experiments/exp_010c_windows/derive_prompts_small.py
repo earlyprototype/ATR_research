@@ -175,7 +175,7 @@ def stage1_expected(subset=None):
 
 
 if __name__ == "__main__":
-    subset = _derive_subset()
+    subset = select_subset_small()  # validates against the committed record when present
     gated = load_gated_results()
     div34 = set(divine_ids(gated))
     picks5 = set(divine_ids(gated)[:5])
@@ -188,6 +188,9 @@ if __name__ == "__main__":
     n_div = sum(1 for r in subset if r["id"] in div34)
     print(f"Divine in subset: {n_div}/25 (5 picks + {n_div - 5} via round-robin)")
     out = COMMITTED_SUBSET
-    out.parent.mkdir(exist_ok=True)
-    out.write_text(json.dumps(subset, indent=2))
-    print(f"Saved -> {out}")
+    if not out.exists():
+        out.parent.mkdir(exist_ok=True)
+        out.write_text(json.dumps(subset, indent=2))
+        print(f"Saved -> {out}")
+    else:
+        print(f"Validated -> {out} (committed record left untouched)")

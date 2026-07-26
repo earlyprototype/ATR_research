@@ -47,7 +47,7 @@ From `results_small010b.json` + `terminal_characterisation_small010b.json`
 | S2 | 3→8 | 25/25 | all 120 | 25 (all singletons) | 21 unique: fragments/punct (`er`×3, ` ,`×2, `ur`×2, `lex`, ` just`, ` how`, ` Animated`, ` )`, `'`, `:`, `pan`, NBSP-run, `,`, `o`, ` Sky`, ` the`, `ison`, `y`, `-`, `]`, `Yes`) | **2/25** |
 | S3 | 6→11 | 25/25 | all 120 | 5 (13,5,4,2,1) | `.`×25 | 25/25 (tail empty) |
 | S4 | 0→8 | 25/25 | all 120 | 1 (25) | ` the`×25 | 25/25 |
-| S5 | 3→11 | **1/25** | D02 @180 | 7 (11,5,5,1,1,1,1) | `<|endoftext|>`×23, `.`×1 (G01, capped), ` to`×1 (D02, converged) | 25/25 (tail empty) |
+| S5 | 3→11 | **1/25** | D02 @180 | 7 (11,5,5,1,1,1,1) | `<\|endoftext\|>`×23, `.`×1 (G01, capped), ` to`×1 (D02, converged) | 25/25 (tail empty) |
 
 Cross-prompt terminal cosine (off-diagonal mean / min): SB 0.849 / 0.339;
 S1 1.000 / 1.000; S2 0.853 / 0.514; S3 0.997 / 0.984; S4 1.000 / 1.000;
@@ -157,6 +157,9 @@ this table is fenced to the session record.
 
 1. `small_smoke` harness tier ran after the spec commit, before SB
    (registered as non-registered validation in spec §6; artifacts committed).
+   The mixed-arm `terminals_small_smoke.pt` / `results_small_smoke.json`
+   artifacts are retained intentionally as the provenance record of that
+   check (PR #42 review note); they carry no verdict weight.
 2. None otherwise: registered protocol, subset, windows, seed and renorm ran
    as specced; per-arm invocation + merge was pre-declared in spec §6.
 
