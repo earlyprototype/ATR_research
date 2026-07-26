@@ -1,0 +1,252 @@
+[
+ {
+  "id": "D08_math",
+  "category": "Chemical",
+  "prompt": "\u222b dx/x = ln|x| + C where C is"
+ },
+ {
+  "id": "A08_linguistics",
+  "category": "Complex",
+  "prompt": "Chomsky's theory of universal grammar posits that"
+ },
+ {
+  "id": "B08_editorial",
+  "category": "Narrative",
+  "prompt": "The prime minister's decision to call an early"
+ },
+ {
+  "id": "C08_boy_girl",
+  "category": "Simple",
+  "prompt": "A boy and a girl went to the"
+ },
+ {
+  "id": "F08_mild",
+  "category": "Vulgarity",
+  "prompt": "Oh crap I totally forgot about the stupid"
+ },
+ {
+  "id": "G08_period",
+  "category": "Wild",
+  "prompt": "."
+ },
+ {
+  "id": "E09_mixed",
+  "category": "Acronyms",
+  "prompt": "POTUS SCOTUS FLOTUS GOP DNC RNC PAC"
+ },
+ {
+  "id": "D09_units",
+  "category": "Chemical",
+  "prompt": "kg m s A K mol cd Hz Pa"
+ },
+ {
+  "id": "A09_code",
+  "category": "Complex",
+  "prompt": "The function returns a pointer to the allocated"
+ },
+ {
+  "id": "B09_sports",
+  "category": "Narrative",
+  "prompt": "In the final minutes of the championship game"
+ },
+ {
+  "id": "C09_run",
+  "category": "Simple",
+  "prompt": "Run run as fast as you can you"
+ },
+ {
+  "id": "F09_slur_adjacent",
+  "category": "Vulgarity",
+  "prompt": "You are the most pathetic worthless disgusting excuse"
+ },
+ {
+  "id": "G09_space",
+  "category": "Wild",
+  "prompt": " "
+ },
+ {
+  "id": "E10_crypto",
+  "category": "Acronyms",
+  "prompt": "BTC ETH DeFi NFT DAO ICO HODL FUD"
+ },
+ {
+  "id": "D10_isotopes",
+  "category": "Chemical",
+  "prompt": "U-235 Pu-239 C-14 K-40 Cs-137 Sr-90"
+ },
+ {
+  "id": "A10_sql",
+  "category": "Complex",
+  "prompt": "SELECT COUNT(*) FROM users WHERE status ="
+ },
+ {
+  "id": "B10_weather",
+  "category": "Narrative",
+  "prompt": "A severe thunderstorm warning has been issued for"
+ },
+ {
+  "id": "C10_spot",
+  "category": "Simple",
+  "prompt": "See Spot run see Spot play see Spot"
+ },
+ {
+  "id": "F10_exasperation",
+  "category": "Vulgarity",
+  "prompt": "Jesus Christ not this again I swear to"
+ },
+ {
+  "id": "G10_newline",
+  "category": "Wild",
+  "prompt": "\n\n\n\n\n"
+ },
+ {
+  "id": "A11_ml",
+  "category": "Complex",
+  "prompt": "The gradient is computed via backpropagation through the"
+ },
+ {
+  "id": "B11_alone",
+  "category": "Narrative",
+  "prompt": "I have never felt so alone in my entire"
+ },
+ {
+  "id": "C11_genesis",
+  "category": "Simple",
+  "prompt": "And God said let there be light and"
+ },
+ {
+  "id": "G11_aaa",
+  "category": "Wild",
+  "prompt": "a a a a a a a a a a"
+ },
+ {
+  "id": "A12_systems",
+  "category": "Complex",
+  "prompt": "The kernel schedules processes using a preemptive round"
+ },
+ {
+  "id": "B12_fear",
+  "category": "Narrative",
+  "prompt": "She woke up terrified that something terrible had"
+ },
+ {
+  "id": "C12_beatitudes",
+  "category": "Simple",
+  "prompt": "Blessed are the meek for they shall"
+ },
+ {
+  "id": "G12_the_the",
+  "category": "Wild",
+  "prompt": "the the the the the the the the"
+ },
+ {
+  "id": "A13_networking",
+  "category": "Complex",
+  "prompt": "TCP implements congestion control through a sliding window"
+ },
+ {
+  "id": "B13_joy",
+  "category": "Narrative",
+  "prompt": "Nothing could have prepared me for the overwhelming"
+ },
+ {
+  "id": "C13_psalm",
+  "category": "Simple",
+  "prompt": "The Lord is my shepherd I shall not"
+ },
+ {
+  "id": "G13_buffalo",
+  "category": "Wild",
+  "prompt": "buffalo buffalo buffalo buffalo buffalo buffalo buffalo"
+ },
+ {
+  "id": "A14_kant",
+  "category": "Complex",
+  "prompt": "The categorical imperative demands that we treat each"
+ },
+ {
+  "id": "B14_anger",
+  "category": "Narrative",
+  "prompt": "He slammed the door and screamed that he"
+ },
+ {
+  "id": "C14_commandment",
+  "category": "Simple",
+  "prompt": "Thou shalt not kill thou shalt not steal"
+ },
+ {
+  "id": "G14_nursery_acad",
+  "category": "Wild",
+  "prompt": "The cat sat on the implications of quantum"
+ },
+ {
+  "id": "A15_sartre",
+  "category": "Complex",
+  "prompt": "Existence precedes essence and therefore we must"
+ },
+ {
+  "id": "B15_casual",
+  "category": "Narrative",
+  "prompt": "So anyway I was telling him about the"
+ },
+ {
+  "id": "C15_fox_hen",
+  "category": "Simple",
+  "prompt": "The fox and the hen sat by the"
+ },
+ {
+  "id": "G15_bible_code",
+  "category": "Wild",
+  "prompt": "And God said SELECT * FROM heaven WHERE"
+ },
+ {
+  "id": "A16_wittgenstein",
+  "category": "Complex",
+  "prompt": "Whereof one cannot speak thereof one must"
+ },
+ {
+  "id": "B16_gossip",
+  "category": "Narrative",
+  "prompt": "You will never guess what happened at the"
+ },
+ {
+  "id": "C16_ant_dove",
+  "category": "Simple",
+  "prompt": "The ant and the dove met at the"
+ },
+ {
+  "id": "G16_nursery_vulgar",
+  "category": "Wild",
+  "prompt": "Jack and Jill went up the fucking hill"
+ },
+ {
+  "id": "A17_marx",
+  "category": "Complex",
+  "prompt": "The history of all hitherto existing society is"
+ },
+ {
+  "id": "B17_argument",
+  "category": "Narrative",
+  "prompt": "That is completely wrong and I can prove"
+ },
+ {
+  "id": "C17_tortoise",
+  "category": "Simple",
+  "prompt": "The hare and the tortoise had a race"
+ },
+ {
+  "id": "G17_formal_slang",
+  "category": "Wild",
+  "prompt": "The committee hereby resolves to yeet the motion"
+ },
+ {
+  "id": "A18_gothic",
+  "category": "Complex",
+  "prompt": "Through the labyrinthine corridors of forgotten memory the"
+ },
+ {
+  "id": "B18_advice",
+  "category": "Narrative",
+  "prompt": "If I were you I would probably just"
+ }
+]
