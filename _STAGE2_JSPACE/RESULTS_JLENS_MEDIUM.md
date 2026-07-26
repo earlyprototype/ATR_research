@@ -79,7 +79,12 @@ says ~100 is usable. 10-prompt measured milestone recorded below from the
 fit log (the fit is checkpointed per prompt and was launched as one resumable
 100-prompt run rather than a throwaway 10-prompt run — deviation §5).
 
-- 10-prompt milestone: `<PENDING — filled from fit_100.log>`
+- 10-prompt milestone (measured): **46 m 08 s wall** for prompts 1–10
+  (incl. 1 m 45 s model-load/setup), per-prompt 250–279 s, mean ≈ 266 s —
+  all prompts seq_len=128, n_valid=111. Extrapolation: 100 prompts ≈
+  **7.6 h**; 1000 ≈ 3.1 days (fits the runbook's "only if the gate demands
+  it" branch, not the default). Convergence diagnostic `max_d_mean` falling
+  ~1/n as documented (0.58 → 0.08 by prompt 11).
 - 100-prompt fit wall time: `<PENDING>`
 - Checkpoint path: `artifacts/jlens_gpt2_medium_100.ckpt.pt` (gitignored);
   final lens `artifacts/jlens_gpt2_medium_100.pt` (fp16, ~48 MB).
