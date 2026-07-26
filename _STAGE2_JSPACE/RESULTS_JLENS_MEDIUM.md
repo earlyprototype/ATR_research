@@ -85,7 +85,12 @@ fit log (the fit is checkpointed per prompt and was launched as one resumable
   **7.6 h**; 1000 ≈ 3.1 days (fits the runbook's "only if the gate demands
   it" branch, not the default). Convergence diagnostic `max_d_mean` falling
   ~1/n as documented (0.58 → 0.08 by prompt 11).
-- 100-prompt fit wall time: `<PENDING>`
+- 100-prompt fit wall time (measured): **25,456 s ≈ 7 h 04 m** (100/100
+  prompts processed, none skipped; 97 at seq_len=128/n_valid=111, three
+  shorter records at 117–125 tokens). Convergence diagnostic at prompt 100:
+  `max_d_mean = 9.15e-03` (running-mean relative shift, falling ~1/n
+  throughout — no heavy-tailed outlier prompts; per-prompt
+  `max‖J‖/√d` stayed in 1.27–1.97).
 - Checkpoint path: `artifacts/jlens_gpt2_medium_100.ckpt.pt` (gitignored);
   final lens `artifacts/jlens_gpt2_medium_100.pt` (fp16, ~48 MB).
 - Fitting config: `experiments/jlens_medium/fit_lens.py` (committed).
@@ -107,7 +112,46 @@ Committed before the gate ran. Script: `experiments/jlens_medium/run_gate.py`.
   "beats logit lens", not "matches the paper"; **FAIL is evidence for
   EXP_012m and is not retried into passing.**
 
-Verdict: `<PENDING>`
+**Result** (full side-by-side table: `experiments/jlens_medium/gate_table.md`
++ `gate_results.json`; committed unedited, first run, no retries):
+
+- **Content positions (−2, the token carrying the prompt's key entity):
+  J-lens more interpretable than logit-lens at every tested mid layer on
+  6/6 prompts.** The lens reads the current token's verbalizable
+  neighbourhood — `' boot'→' boots'/' Boot'/' booted'`,
+  `' sun'→' solar'/' celestial'/' lunar'`, `' army'→' cavalry'/' generals'/
+  ' armies'`, `' hill'→' slope'/' uphill'` — where the logit lens at the same
+  layers emits BPE-continuation fragments (`'strap'`, `'stra'`, `'lit'`,
+  `'side'`, `'top'`). Per-layer progression is sane: token-identity early,
+  semantic neighbourhood mid, relational/output-ish late (e.g. ' hill' →
+  ' slopes' → ' overlooking'/' toward' at L21).
+- **Prediction positions (−1): J-lens mid layers 5–12 are dominated by
+  truncated BPE stems** (`' streng'`, ` arrang'`, `' mathemat'`, `' indo'`,
+  `' cryst'` — recurring across unrelated prompts, i.e. a lens artifact
+  signature, not content) while the logit lens shows clean but generic
+  function words (`' not'`, `' currently'`, `' often'`). **From ~L15 the
+  J-lens becomes task-relevant and often leads the logit lens**: eiffel L15
+  `' town'/' cities'/' city'` and L18 `' Budapest'/' Islamabad'/
+  ' Constantinople'` (the *category* capital-city before the instance;
+  logit-lens L15 has `' also'/' now'/' often'`); mars L15
+  `' colors'/' rainbow'/' hue'` vs logit-lens `' often'/' not'`; boot L18–21
+  `' counterfeit'/' nicknamed'/' coined'`; napoleon L21
+  `' troops'/' cavalry'/' infantry'` (composition words; the model's actual
+  output is numbers, which the *logit lens* tracks better from L15).
+- **Multi-hop intermediates specifically:** weak. `Italy` never surfaces on
+  the boot prompt (any layer, either lens); `France` surfaces at J-lens L21
+  (#3) behind `' Paris'` (#1); `Mars` never surfaces on the mars prompt,
+  though its *color* semantics do (L15–21). At 345M the lens transports
+  semantic category more than it recovers the latent entity.
+
+**Verdict: MARGINAL.** The gate's literal criterion — "at mid layers,
+J-lens top-5 more interpretable/task-relevant than logit-lens on the
+majority of test prompts" — passes decisively at content positions and
+fails at prediction positions for layers ≲12, passing there only from
+~L15. Not silently retried; recorded both ways per the runbook. Reading
+forward: whatever coherent J-readable structure Medium has sits in the
+upper-mid stack (~15–21), not across the naive 10–21 band's lower half —
+EXP_012m below measures exactly this.
 
 ## 3. EXP_012m — band census — protocol
 
