@@ -257,6 +257,10 @@ of any story; each is listed with the uncertainty it removes.
 3. **Same window grid on Pythia-410m.** Removes uncertainty about whether
    window-position effects at these relative depths are specific to
    gpt2-medium or generic to decoder stacks of this size.
+   **DONE 2026-07-26** — spec `../../EXP_012_PYTHIA_SPEC.md`, results in
+   `RESULTS_EXP012_PYTHIA.md` (separate register, this directory; includes
+   the H8 depth-control verdict closing RUNBOOK_PHASE1 §EXP_010a);
+   artifacts `output/*_pythia410m.*`. Issue: #12.
 4. **Hook-point variants** (`resid_post` at i−1 vs `resid_pre` at i; i=1 vs
    i=0). Removes uncertainty about whether the layer-0 single-terminal
    arms reflect the raw-embedding slot's coordinate system rather than
