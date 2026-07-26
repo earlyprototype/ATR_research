@@ -238,6 +238,12 @@ def main():
         # EXP_012-PYTHIA spec §4 promises the natural-norm record for the
         # registered seed_j run — implied, not flag-dependent (PR #39 review).
         args.record_natural_norms = True
+        # PR #39 review round 2: bind the tier to its model and subset so the
+        # gpt2-medium defaults cannot silently produce mislabeled artifacts.
+        if args.model_name != "pythia-410m":
+            ap.error("--tier pythia requires --model-name pythia-410m")
+        if args.subset != "pythia":
+            ap.error("--tier pythia requires --subset pythia")
 
     torch.manual_seed(args.seed)
     if args.harness_check:

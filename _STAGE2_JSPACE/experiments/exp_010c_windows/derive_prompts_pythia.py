@@ -84,14 +84,13 @@ def select_subset_pythia(n=25):
     derived = _derive_subset(25)
     if COMMITTED_SUBSET.exists():
         committed = json.loads(COMMITTED_SUBSET.read_text())
-        if [r["id"] for r in committed] != [r["id"] for r in derived]:
+        # Full-record comparison (PR #39 review round 2): a drifted category
+        # field must fail just as loudly as a drifted id or prompt text.
+        if committed != derived:
             raise SystemExit(
                 "Committed prompt_subset_pythia.json disagrees with the fresh "
-                "derivation — inspect and RECORD before running anything.")
-        if any(c["prompt"] != d["prompt"] for c, d in zip(committed, derived)):
-            raise SystemExit(
-                "Committed prompt texts disagree with prompt_library.py — "
-                "inspect and RECORD before running anything.")
+                "derivation (full-record compare) — inspect and RECORD before "
+                "running anything.")
         return committed[:n]
     return derived[:n]
 
