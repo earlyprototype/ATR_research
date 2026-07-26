@@ -497,3 +497,48 @@ covers 23/300 valid windows — single-layer structure demonstrated here
 full census `EXP_010c4_SPEC.md` (all 277 remaining cells, same protocol)
 addresses this. The J-lens re-decode (EXP_013m) remains the registered
 arbiter for all mid-stack terminal claims.
+
+## 2026-07-26 — EXP_010c-4 census checkpoint: priority block complete (observations only)
+
+**Spec:** `../../EXP_010c4_SPEC.md` (+ §6 amendment). Checkpoint note per
+spec §5 — counts and classes only; the full observations section, map, and
+H12 evaluation come at census completion. Status: 100/277 arms done (the
+complete 4 ≤ i ≤ 14, j ≥ 13 neighbourhood), 177-cell remainder in
+progress. Artifacts: per-arm shards `output/results_census/`,
+`output/terminals_census/`, all committed. Ops: sweep running across
+process relaunches (7 silent process deaths to date, each recovered by
+`--resume`; per-arm duty ≈ 92%).
+
+**Convergence:** 2,499/2,500 runs converged (lock 120–170). The single
+non-convergence — the first in the programme — is W7_14 (7→14),
+D01_water: 1000 iterations, final lag-1 cosine 0.99849 (just under the
+0.999 gate), lag_scan monotonically decaying 0.9974 → 0.8792 over lags
+1–8 (no multiples-of-p signature), terminal decode `' PLEASE'`. Below the
+spec's >5/25 systematic-non-convergence threshold; recorded flat.
+
+**Arm classes over the 100 cells (mechanical, the 010c-3 §3 rule):**
+21 whole-word, 53 mixed, 26 punctuation funnels; 58/100 prompt-dependent
+(≥2 unique terminals at n=25).
+
+**Whole-word AND prompt-dependent cells (the map's target signature) — 9,
+all previously unmeasured:** (5→23) `as`/`name` · (6→23) `dawn`/`once` ·
+(8→16) `dozen`/`darn` · (9→20) `enough`/`hopefully`/`survive`/
+`heartbeat`/`etc` · (10→16) `etc`/`Fas` · (12→15) `HuffPost`/`Interest` ·
+(13→13, single-layer window) `till` ×20 + 4 singles · (13→21)
+`Kra`/`until`/`today`/`ever` · (14→16) `impressed`/`anything`/`nor` + 2
+singles. Token-identity statements, recorded flat: `' until'` at (13→21)
+matches an A4 (10→21) terminal token; `' till'` at (13→13) matches the
+token of GPT-2 Small's Stage 1 basin. No relatedness asserted
+(anisotropy-corrected permutation control remains pending).
+
+**Whole-word single-terminal funnels — 12:** (5→22) `Happy` · (6→18)
+`Republican` · (8→14) `rant` (token shared with measured 8→15) · (8→18)
+`lol` · (9→13) `hopefully` · (9→14) and (9→15) `dreaded` · (10→13) `Fas`
+(shared with measured 10→15) · (11→14) `Amen` · (11→16) `Afgh` · (12→13)
+`evid` · (12→22) `or`.
+
+**Standing note:** all class labels are the character-based rule with its
+recorded edges (leading-space alphabetic non-words such as `Fas`, `Kra`,
+`Afgh`, `evid` class as whole-word by the rule; the 010c-3 classification
+notes apply). Full uncurated inventories live in the shards; no curated
+sublist is maintained.
