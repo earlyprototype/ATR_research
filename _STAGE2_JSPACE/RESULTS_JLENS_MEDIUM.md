@@ -180,11 +180,96 @@ Committed before the census ran. Script:
   21 as isolated single-layer islands** (i=9 fails, i=7/11 fail; extraction
   rungs 15/17/19 unflagged).
 
-Band verdict: `<PENDING>`
+**Result** (full table: `experiments/jlens_medium/census_table.md`; per-layer
+aggregates + all 50×23 top-5 readouts in `census_results.json`):
+
+| L (sample) | J agree-final | LL agree-final | J med-rank | LL med-rank | J-better | mh J@10 | mh LL@10 |
+|---|---|---|---|---|---|---|---|
+| 2 | 0.02 | 0.12 | 2595 | 64 | 0.14 | 0.00 | 0.01 |
+| 8 | 0.02 | 0.04 | 1240 | 36 | 0.14 | 0.00 | 0.00 |
+| 9 | 0.02 | 0.10 | 923 | 28 | 0.16 | 0.00 | 0.00 |
+| 10 | 0.02 | 0.10 | 1084 | 24 | 0.12 | 0.00 | 0.00 |
+| 15 | 0.04 | 0.20 | 476 | 3 | 0.06 | 0.00 | 0.00 |
+| 18 | 0.08 | 0.36 | 167 | 2 | 0.02 | 0.00 | 0.00 |
+| 21 | 0.20 | 0.70 | 11 | 1 | 0.00 | 0.00 | 0.00 |
+| 22 | 0.32 | 0.88 | 3 | 1 | 0.02 | 0.00 | 0.00 |
+
+- **Lens-dominant layers under the pre-registered rule: none. Band verdict:
+  NO COHERENT BAND.** No layer satisfies even criterion (i): the logit
+  lens's median rank of the model's final top-1 falls smoothly 119→1 across
+  the stack, while the J-lens's stays in the 600–4000 range through the
+  mid-stack and only reaches 11 at L21 / 3 at L22. J-better fraction peaks
+  at 0.50 at L0 and is ≤0.20 everywhere else.
+- **Multi-hop intermediates (93 items): a genuine null on both lenses.**
+  hit@10 ≤ 0.01 at every layer for the logit lens (max 0.97% at L2) and
+  exactly 0 at every layer for the J-lens; spot-checked best ranks are
+  ~400–1000 (logit) vs ~4400–5500 (J-lens) for items like `Brazil`/`Mars`.
+  At 345M there is no layer at which either readout surfaces latent
+  multi-hop intermediates.
+- **Qualitative held-out readouts mirror the gate:** at the prediction
+  position the J-lens mid-stack (≲L14) emits the same prompt-independent
+  truncated stems seen in the gate (`' mathemat'`, `' horizont'`,
+  `' destro'`, `' trave'` recur across unrelated prompts); semantically
+  clustered content appears only at L15–22 (A11_ml: `' gradient'/
+  ' coefficients'/' vectors'/' equations'` by L21; C11_genesis:
+  `' darkness'/' brightness'/' illum'` from L15). The word-like top-1
+  fraction (J ≈ 0.9 vs LL ≈ 0.65) is recorded but is inflated by exactly
+  those stems and carries no band structure.
+
+**Comparisons (stated flat, numbers only, no relationship asserted):**
+
+1. **vs the naive 40–90% mapping (layers 10–21) EXP_010c assumed:** the
+   census finds no J-lens-dominant layer anywhere in 10–21. At the mapping's
+   lower edge (L10–12) the J-lens readout is at its least interpretable
+   (med-rank ~1000, junk-stem-dominated top-5); such structured J-readouts
+   as exist sit at L15–22 — the mapping's upper half — but never beat the
+   logit lens on the registered metrics there.
+2. **vs the ATR in-fill map (#6/PR #33: whole-word cells at inject
+   i ∈ {8, 10} → extract 21 as isolated single-layer islands; i=9 and
+   i=7/11 unflagged):** the census shows no island structure at 8/9/10 on
+   any recorded J-lens metric — J agree-final 0.02/0.02/0.02, med-rank
+   1240/923/1084, J-better 0.14/0.16/0.12 — i.e. layers 8 and 10 are
+   indistinguishable from 9 and from their flanks under the lens. The
+   census therefore provides **no independent J-lens correlate** of the
+   ATR word-cell islands; the two instruments disagree about whether
+   anything distinguishes {8,10} from {9}. (Convention note: ATR inject-i
+   splices at `resid_pre(i)` = lens layer i−1's output; the non-result is
+   unchanged shifting the comparison by one layer — 7/8/9 read
+   0.20/0.14/0.16 J-better, no islands either.)
 
 ## 4. Deliverable summary
 
-`<PENDING>`
+**What ran:** P0-1 clone+pin+install of `anthropics/jacobian-lens`
+(581d398); 100-prompt WikiText-103 J-lens fit for gpt2-medium (23 source
+layers, target L23, 7 h 04 m CPU, checkpointed per prompt); P0-3 Medium
+validation gate (6 prompts × 8 layers × 2 positions, single run); EXP_012m
+band census (50 held-out prompts × 23 layers + 93-item multi-hop per-layer
+curve, rerun once for the recorded BOS scoring bug — §5.3).
+
+**Headline numbers:** fit ≈ 266 s/prompt (10-prompt milestone 46 m,
+100-prompt 7 h 04 m, `max_d_mean` 0.58→0.009); gate MARGINAL (content
+positions: J-lens wins 6/6 at mid layers; prediction positions: junk-stem
+dominated ≤L12, task-relevant from ~L15); census: zero lens-dominant
+layers, LL med-rank 119→1 vs J med-rank stuck ≥600 mid-stack, multi-hop
+hit@10 ≤1% (LL) / 0% (J) everywhere.
+
+**Decides:** EXP_012m — Medium has **no coherent J-lens band** under the
+pre-registered rule; neither the naive 10–21 mapping nor the ATR
+{8,10}→21 islands has a J-lens-side correlate in this census.
+
+**Interpretation (labelled as such):** the fitted lens does transport
+verbalizable *semantic-neighbourhood* content (gate, content positions;
+L15–22 clusters), so the null is not "the lens does nothing" — it is "no
+layer range where the lens reads a workspace better than the trivial
+readout, and no multi-hop workspace content findable at all at 345M".
+This feeds the runbook §3 first-row reading in the negative: ATR and
+J-lens do **not** localise the same band by independent means on Medium.
+
+**Open questions:** whether EXP_011m's subspace-overlap test (which does
+not go through readout rankings at all) sees the {8,10} islands; whether
+EXP_013m's re-decode of the frozen terminals changes any terminal-identity
+claim; whether a 1000-prompt lens moves any census number (not fitted —
+the gate did not demand it on the saturation evidence, §1).
 
 ## 5. Deviations
 
@@ -195,9 +280,21 @@ Band verdict: `<PENDING>`
 2. **10-prompt cost measurement folded into the checkpointed 100-prompt
    run** — same prompts (indices 0..9), same config; the milestone timing is
    read from the fit log instead of a separate throwaway fit.
-3. `<any further deviations recorded as they occur>`
+3. **Census multi-hop columns rerun once for a scoring bug** (not a lens
+   or verdict change): `from_hf(force_bos=True)` sets `add_bos_token=True`
+   on the GPT-2 tokenizer, so the first run's `encode(" word")[0]` scored
+   the BOS token (`<|endoftext|>`) instead of the intermediate — mh columns
+   read 0.00 for the wrong reason. Fixed by stripping BOS; every non-mh
+   number was bit-identical across the two runs; corrected mh maxima are
+   0.97% (LL, L2) / 0% (J). Recorded in `run_census.py` at the fix site.
+   The band verdict is identical under both runs.
+4. **Prompts carry a leading BOS throughout** (fitting and readout) — the
+   instrument's documented `force_bos=True` default, kept as-is for
+   fidelity to the reference implementation; noted because the ATR engine
+   does not prepend BOS.
 
 ---
 
-Final line: `<PENDING — MEDIUM J-TRACK (unblocked leg): gate <verdict> ·
-EXP_012m band <[lo,hi]|none>; EXP_011m/EXP_013m not run (own issues)>`
+`MEDIUM J-TRACK (unblocked leg, issue #15): gate MARGINAL · EXP_012m band:
+none (no coherent band) · EXP_011m: not run (own issue) · EXP_013m: not run
+(own issue)`

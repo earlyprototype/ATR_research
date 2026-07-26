@@ -153,7 +153,16 @@ def main():
             model, item["prompt"], layers=layers, positions=[-1], use_jacobian=False
         )
         for inter in item["intermediates"]:
-            tid = tok.encode(" " + inter)[0]
+            # NOTE deviation record: from_hf(force_bos=True) sets
+            # add_bos_token=True on the GPT-2 tokenizer, so encode() prepends
+            # <|endoftext|>; the first RUN of this script took ids[0] and
+            # therefore scored the BOS token (mh columns all 0.00). Fixed to
+            # strip the BOS; first-run artifacts superseded, bug recorded in
+            # RESULTS §5.
+            ids = tok.encode(" " + inter)
+            if ids and ids[0] == tok.bos_token_id:
+                ids = ids[1:]
+            tid = ids[0]
             for l in layers:
                 rj = rank_of(jl[l][0], tid)
                 rl = rank_of(ll[l][0], tid)
