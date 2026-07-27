@@ -1,0 +1,198 @@
+{
+  "prompt_ids": [
+    "E01_politics",
+    "D01_water",
+    "A01_physics",
+    "B01_napoleon",
+    "C01_jack_jill",
+    "F01_anger",
+    "G01_punctuation",
+    "E02_tech",
+    "D02_periodic",
+    "A02_medical",
+    "B02_wwi",
+    "C02_king_cole",
+    "F02_insult",
+    "G02_brackets",
+    "E03_orgs",
+    "D03_organic",
+    "A03_neuro",
+    "B03_moon",
+    "C03_mary_lamb",
+    "F03_frustration",
+    "G03_counting",
+    "E04_internet",
+    "D04_equation",
+    "A04_climate",
+    "B04_rome"
+  ],
+  "small_converged": "18/25",
+  "small": {
+    "basins": 7,
+    "decode_terminals": {
+      " prolet": 13,
+      " Divine": 7,
+      " till": 3,
+      " Anarch": 2
+    },
+    "labels": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      4,
+      3,
+      0,
+      5,
+      1,
+      2,
+      1,
+      2,
+      3,
+      1,
+      6,
+      0,
+      2,
+      0,
+      2,
+      1,
+      1,
+      0
+    ]
+  },
+  "comparisons": {
+    "A4": {
+      "medium_window": "10->21",
+      "medium_basins_tensor": 12,
+      "medium_basins_effective_decode": 3,
+      "ari_vs_small": 0.048,
+      "perm_p": 0.24448,
+      "labels": [
+        0,
+        1,
+        2,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        0,
+        3,
+        3,
+        5,
+        3,
+        9,
+        2,
+        3,
+        2,
+        2,
+        2,
+        10,
+        11,
+        8,
+        3
+      ]
+    },
+    "A0": {
+      "medium_window": "0->23",
+      "medium_basins_tensor": 4,
+      "medium_basins_effective_decode": 1,
+      "ari_vs_small": 0.2001,
+      "perm_p": 0.0009,
+      "labels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        3,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "h11a": {
+    "small_basins": 7,
+    "k_window": 4
+  },
+  "threshold_sweep": [
+    {
+      "threshold": 0.99,
+      "small_basins": 4,
+      "A4": {
+        "basins": 6,
+        "ari_vs_small": 0.0109,
+        "perm_p": 0.43586
+      },
+      "A0": {
+        "basins": 1,
+        "ari_vs_small": 0.0,
+        "perm_p": 1.0
+      }
+    },
+    {
+      "threshold": 0.995,
+      "small_basins": 5,
+      "A4": {
+        "basins": 8,
+        "ari_vs_small": 0.0136,
+        "perm_p": 0.41566
+      },
+      "A0": {
+        "basins": 3,
+        "ari_vs_small": 0.1693,
+        "perm_p": 0.0217
+      }
+    },
+    {
+      "threshold": 0.999,
+      "small_basins": 7,
+      "A4": {
+        "basins": 12,
+        "ari_vs_small": 0.048,
+        "perm_p": 0.24448
+      },
+      "A0": {
+        "basins": 4,
+        "ari_vs_small": 0.2001,
+        "perm_p": 0.0009
+      }
+    },
+    {
+      "threshold": 0.9995,
+      "small_basins": 8,
+      "A4": {
+        "basins": 15,
+        "ari_vs_small": 0.068,
+        "perm_p": 0.16058
+      },
+      "A0": {
+        "basins": 6,
+        "ari_vs_small": 0.2188,
+        "perm_p": 0.0004
+      }
+    }
+  ]
+}
