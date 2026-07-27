@@ -26,10 +26,16 @@ autonomous run.
 
 ## Interpretation (labelled as such, NOT a finding)
 
-One story consistent with all three: **the `D` collapse was an apparatus
-mask, not the phenomenon.** The full-stack loop's tensors carry Small-like
-prompt structure throughout; the joint condition {layer-0 slot ∧ ~218×
-over-natural energy} produces a readout that hides it behind a single token.
+One hypothesis consistent with all three (scoped to what was measured —
+the **terminal mean vectors at extract layer 23** from the committed
+EXP_010c A0 artifacts, the tensors PR #5's ARI was computed on): **the `D`
+collapse may be an apparatus mask, not the phenomenon.** On this hypothesis
+the baseline loop's *terminal* tensors carry Small-like prompt partition
+structure, and the joint condition {layer-0 slot ∧ ~218× over-natural
+energy} co-occurs with a readout that shows a single token instead.
+Whether the masking is causal, and whether the structure exists at
+intermediate iterations rather than only at the measured terminals, are
+exactly the gaps the arbiters below exist to close.
 On this story the year-old cross-model claim "Medium funnels to one empty
 token" describes the mask, and the window experiments' "escape" manufactures
 new structure rather than uncovering the latent one.
@@ -49,9 +55,18 @@ Small itself only 18/25 converged.
   latent content" and "instrument can't see it."
 - **EXP_011m (issue #45):** subspace projection of the terminal tensors.
 - A direct test not yet filed anywhere: re-run the capstone's ARI comparison
-  on the **natural_i** (natural-energy) terminals from Control B, where no
-  `D` mask exists — if the Small-likeness strengthens, the mask story gains;
-  if it vanishes, the ARI was an artifact of the loud convention itself.
+  on the **natural_i** (natural-energy) terminals from Control B.
+  Discriminating outcomes, stated in advance: (a) ARI vs Small significant
+  under natural_i (no `D` present) → the Small-like partition does not
+  require the loud convention, mask hypothesis strengthened; (b) ARI at
+  chance under natural_i → the structure PR #5 measured is bound to the
+  loud convention, mask hypothesis weakened (note this test varies energy
+  and mask together — a natural_i-with-forced-decode control would be
+  needed to separate them if (b) obtains); (c) for EXP_013m: J-lens
+  re-decode of the seed_j A0 terminals surfacing Small-family content →
+  rules in latent content; a null there is ambiguous between no-content
+  and instrument-blindness (gate MARGINAL, census band NONE) and settles
+  nothing on its own — it must be read jointly with (a)/(b).
 
 ## Status warning (the reason this note exists)
 
