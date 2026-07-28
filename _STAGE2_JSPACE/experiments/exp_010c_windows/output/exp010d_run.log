@@ -1,0 +1,49 @@
+Medium terminals: terminals_full_A0A4.pt.bak   results: results_full_A0A4.json.bak
+Medium arms available: ['A0', 'A4']
+Loading gpt2-small from /home/user/gpt2-small-local (offline) ...
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 12188.67it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:68: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [SMALL] E01_politics     -> ' prolet'      lock=120 conv=True
+  [SMALL] D01_water        -> ' prolet'      lock=120 conv=True
+  [SMALL] A01_physics      -> ' prolet'      lock=120 conv=True
+  [SMALL] B01_napoleon     -> ' prolet'      lock=120 conv=True
+  [SMALL] C01_jack_jill    -> ' prolet'      lock=120 conv=True
+  [SMALL] F01_anger        -> ' Divine'      lock=None conv=False
+  [SMALL] G01_punctuation  -> ' till'        lock=120 conv=True
+  [SMALL] E02_tech         -> ' Divine'      lock=None conv=False
+  [SMALL] D02_periodic     -> ' till'        lock=120 conv=True
+  [SMALL] A02_medical      -> ' prolet'      lock=120 conv=True
+  [SMALL] B02_wwi          -> ' prolet'      lock=120 conv=True
+  [SMALL] C02_king_cole    -> ' prolet'      lock=120 conv=True
+  [SMALL] F02_insult       -> ' Divine'      lock=None conv=False
+  [SMALL] G02_brackets     -> ' prolet'      lock=120 conv=True
+  [SMALL] E03_orgs         -> ' Divine'      lock=None conv=False
+  [SMALL] D03_organic      -> ' till'        lock=120 conv=True
+  [SMALL] A03_neuro        -> ' Anarch'      lock=120 conv=True
+  [SMALL] B03_moon         -> ' Divine'      lock=None conv=False
+  [SMALL] C03_mary_lamb    -> ' prolet'      lock=120 conv=True
+  [SMALL] F03_frustration  -> ' Divine'      lock=None conv=False
+  [SMALL] G03_counting     -> ' prolet'      lock=120 conv=True
+  [SMALL] E04_internet     -> ' Divine'      lock=None conv=False
+  [SMALL] D04_equation     -> ' Anarch'      lock=120 conv=True
+  [SMALL] A04_climate      -> ' prolet'      lock=120 conv=True
+  [SMALL] B04_rome         -> ' prolet'      lock=120 conv=True
+
+=== EXP_010d verdicts ===
+Small (0->11): 7 tensor basins on 25 prompts; converged 18/25
+  ARI(Small, A4 band 10->21) = 0.048  perm_p = 0.24448
+  ARI(Small, A0 baseline)    = 0.2001  perm_p = 0.0009
+  H11 (geometry recreation): REFUTED
+  H11a (basin count, k=4): A4 out band, A0 in band (Small 7, A4 12, A0 4)
+
+=== threshold-sensitivity sweep (ARI vs Small; is the effect stable?) ===
+  thr     S_basins  A4 basins/ARI/p           A0 basins/ARI/p           
+  0.99    4         6/0.0109/0.43586          1/0.0/1.0                 
+  0.995   5         8/0.0136/0.41566          3/0.1693/0.0217           
+  0.999   7         12/0.048/0.24448          4/0.2001/0.0009           
+  0.9995  8         15/0.068/0.16058          6/0.2188/0.0004           
+
+Saved -> /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output/basin_comparison_full.json

@@ -1,0 +1,1775 @@
+{
+ "lens_file": "jlens_gpt2_medium_100.pt",
+ "prompts": [
+  {
+   "id": "runbook_boot",
+   "prompt": "Fact: The currency used in the country shaped like a boot is",
+   "n_tokens": 14,
+   "layers": {
+    "2": {
+     "-2": {
+      "jlens": [
+       " boot",
+       " Boot",
+       " booted",
+       " boots",
+       "Boot"
+      ],
+      "logit": [
+       "strap",
+       "stra",
+       "loader",
+       "y",
+       "-"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       ",",
+       " thus",
+       ".",
+       ";",
+       " in"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " often",
+       " now",
+       " in"
+      ]
+     }
+    },
+    "5": {
+     "-2": {
+      "jlens": [
+       " boot",
+       "Boot",
+       "boot",
+       " Boot",
+       " booted"
+      ],
+      "logit": [
+       "strap",
+       "stra",
+       "y",
+       " heel",
+       "loader"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " streng",
+       " arrang",
+       " trave",
+       " mathemat",
+       " tiss"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " bound",
+       " often",
+       " usually"
+      ]
+     }
+    },
+    "8": {
+     "-2": {
+      "jlens": [
+       " boot",
+       "strap",
+       " booted",
+       " todd",
+       "boot"
+      ],
+      "logit": [
+       "strap",
+       "stra",
+       "-",
+       "y",
+       " and"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " ingred",
+       " streng",
+       " cryst",
+       " arrang",
+       " nodd"
+      ],
+      "logit": [
+       " not",
+       " often",
+       " usually",
+       " now",
+       " NOT"
+      ]
+     }
+    },
+    "10": {
+     "-2": {
+      "jlens": [
+       "strap",
+       " boot",
+       " boots",
+       "boot",
+       " booted"
+      ],
+      "logit": [
+       "strap",
+       "stra",
+       "y",
+       "-",
+       " and"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " streng",
+       " arrang",
+       " indo",
+       " cryst",
+       " condem"
+      ],
+      "logit": [
+       " not",
+       " usually",
+       " often",
+       " now",
+       " also"
+      ]
+     }
+    },
+    "12": {
+     "-2": {
+      "jlens": [
+       " boot",
+       " boots",
+       "strap",
+       " booted",
+       " Boot"
+      ],
+      "logit": [
+       "strap",
+       "stra",
+       "-",
+       "y",
+       " and"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " showc",
+       " condem",
+       " indo",
+       " horizont",
+       " shenan"
+      ],
+      "logit": [
+       " not",
+       " likely",
+       " often",
+       " probably",
+       " now"
+      ]
+     }
+    },
+    "15": {
+     "-2": {
+      "jlens": [
+       "strap",
+       " booted",
+       " boots",
+       " boot",
+       " amput"
+      ],
+      "logit": [
+       "strap",
+       "stra",
+       "y",
+       "-",
+       " and"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " distingu",
+       " shenan",
+       " indo",
+       " counterfeit",
+       " destro"
+      ],
+      "logit": [
+       " not",
+       " actually",
+       " known",
+       " also",
+       " commonly"
+      ]
+     }
+    },
+    "18": {
+     "-2": {
+      "jlens": [
+       "strap",
+       "legged",
+       " nodd",
+       " heel",
+       "hoe"
+      ],
+      "logit": [
+       "strap",
+       " is",
+       ",",
+       " and",
+       "y"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " slang",
+       " counterfeit",
+       " nicknamed",
+       " mathemat",
+       " notor"
+      ],
+      "logit": [
+       " known",
+       " called",
+       " not",
+       " commonly",
+       " named"
+      ]
+     }
+    },
+    "21": {
+     "-2": {
+      "jlens": [
+       "strap",
+       "legged",
+       "lace",
+       "leg",
+       " heel"
+      ],
+      "logit": [
+       "strap",
+       " is",
+       "leg",
+       ",",
+       " has"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " counterfeit",
+       " called",
+       " nicknamed",
+       " counterfe",
+       " coined"
+      ],
+      "logit": [
+       " called",
+       " known",
+       " not",
+       " actually",
+       " named"
+      ]
+     }
+    }
+   },
+   "model_top5": {
+    "-2": [
+     " is",
+     "leg",
+     ".",
+     " has",
+     "y"
+    ],
+    "-1": [
+     " called",
+     " not",
+     " the",
+     " actually",
+     " a"
+    ]
+   }
+  },
+  {
+   "id": "runbook_mars",
+   "prompt": "The color of the planet fourth from the sun is",
+   "n_tokens": 11,
+   "layers": {
+    "2": {
+     "-2": {
+      "jlens": [
+       " sun",
+       " solar",
+       " Solar",
+       " Sun",
+       " Suns"
+      ],
+      "logit": [
+       "lit",
+       "sets",
+       "rays",
+       "shine",
+       "flower"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       ",",
+       ".",
+       " thus",
+       ";",
+       " in"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " now",
+       " also",
+       " often"
+      ]
+     }
+    },
+    "5": {
+     "-2": {
+      "jlens": [
+       " solar",
+       " sun",
+       "sun",
+       " Solar",
+       " satell"
+      ],
+      "logit": [
+       "lit",
+       "sets",
+       "flower",
+       "-",
+       "shine"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " arrang",
+       " mathemat",
+       " streng",
+       " cryst",
+       " destro"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " often",
+       " usually",
+       " likely"
+      ]
+     }
+    },
+    "8": {
+     "-2": {
+      "jlens": [
+       " solar",
+       " cryst",
+       " sun",
+       " satell",
+       " Solar"
+      ],
+      "logit": [
+       "lit",
+       ",",
+       " and",
+       "-",
+       " Constant"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " cryst",
+       " streng",
+       " trave",
+       " ingred",
+       " nodd"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " often",
+       " usually",
+       " now"
+      ]
+     }
+    },
+    "10": {
+     "-2": {
+      "jlens": [
+       " solar",
+       " celestial",
+       " sun",
+       " lunar",
+       " comet"
+      ],
+      "logit": [
+       ",",
+       "lit",
+       " and",
+       "'s",
+       " ("
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " horizont",
+       " mathemat",
+       " indo",
+       " trave",
+       " therefore"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " now",
+       " often",
+       " likely"
+      ]
+     }
+    },
+    "12": {
+     "-2": {
+      "jlens": [
+       " solar",
+       " orbiting",
+       " phot",
+       " celestial",
+       " planet"
+      ],
+      "logit": [
+       ",",
+       " (",
+       " and",
+       "'s",
+       "."
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " horizont",
+       " mathemat",
+       " therefore",
+       ":",
+       " colours"
+      ],
+      "logit": [
+       " not",
+       " often",
+       " usually",
+       " currently",
+       " now"
+      ]
+     }
+    },
+    "15": {
+     "-2": {
+      "jlens": [
+       " orbiting",
+       " brightest",
+       " celestial",
+       " astronomers",
+       " solar"
+      ],
+      "logit": [
+       ",",
+       " is",
+       " (",
+       " and",
+       "."
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " fluorescent",
+       " colors",
+       " rainbow",
+       " hue",
+       " Transparency"
+      ],
+      "logit": [
+       " often",
+       " not",
+       " usually",
+       " known",
+       " currently"
+      ]
+     }
+    },
+    "18": {
+     "-2": {
+      "jlens": [
+       " emits",
+       " orbiting",
+       " emitted",
+       " orbits",
+       " shines"
+      ],
+      "logit": [
+       " is",
+       ",",
+       " has",
+       " (",
+       " was"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " fluorescent",
+       " rgb",
+       " violet",
+       " rainbow",
+       " RGB"
+      ],
+      "logit": [
+       " color",
+       " blue",
+       " purple",
+       " red",
+       " yellow"
+      ]
+     }
+    },
+    "21": {
+     "-2": {
+      "jlens": [
+       " shines",
+       " emits",
+       " corresponds",
+       " determines",
+       " varies"
+      ],
+      "logit": [
+       " is",
+       " has",
+       ",",
+       " shines",
+       " determines"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " violet",
+       " purple",
+       " fluorescent",
+       " blue",
+       " yellow"
+      ],
+      "logit": [
+       " blue",
+       " red",
+       " black",
+       " yellow",
+       " purple"
+      ]
+     }
+    }
+   },
+   "model_top5": {
+    "-2": [
+     " is",
+     ",",
+     ".",
+     "\n",
+     " has"
+    ],
+    "-1": [
+     " red",
+     " a",
+     " blue",
+     " the",
+     " called"
+    ]
+   }
+  },
+  {
+   "id": "runbook_eiffel",
+   "prompt": "The capital of the country where the Eiffel Tower stands is",
+   "n_tokens": 14,
+   "layers": {
+    "2": {
+     "-2": {
+      "jlens": [
+       " tall",
+       " upright",
+       " Tall",
+       " stands",
+       " stand"
+      ],
+      "logit": [
+       " up",
+       " out",
+       " at",
+       " before",
+       " on"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       ",",
+       " thus",
+       ".",
+       ";",
+       " then"
+      ],
+      "logit": [
+       " currently",
+       " not",
+       " often",
+       " now",
+       " still"
+      ]
+     }
+    },
+    "5": {
+     "-2": {
+      "jlens": [
+       " unden",
+       " tall",
+       " showc",
+       " arrang",
+       " horizont"
+      ],
+      "logit": [
+       " in",
+       " on",
+       " up",
+       " at",
+       " unpaid"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " streng",
+       " arrang",
+       " neighb",
+       " nodd",
+       " mathemat"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " often",
+       " located",
+       " usually"
+      ]
+     }
+    },
+    "8": {
+     "-2": {
+      "jlens": [
+       " unden",
+       " arrang",
+       " tall",
+       " stands",
+       " advoc"
+      ],
+      "logit": [
+       " in",
+       " on",
+       " above",
+       " before",
+       " up"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " cryst",
+       " neighb",
+       " therefore",
+       " thus",
+       " streng"
+      ],
+      "logit": [
+       " often",
+       " currently",
+       " not",
+       " located",
+       " now"
+      ]
+     }
+    },
+    "10": {
+     "-2": {
+      "jlens": [
+       " stands",
+       " tall",
+       " pic",
+       " unden",
+       " statue"
+      ],
+      "logit": [
+       " in",
+       " on",
+       " above",
+       ".",
+       ","
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " therefore",
+       " thus",
+       " now",
+       ",",
+       " instead"
+      ],
+      "logit": [
+       " not",
+       " currently",
+       " often",
+       " now",
+       " also"
+      ]
+     }
+    },
+    "12": {
+     "-2": {
+      "jlens": [
+       " stands",
+       " sits",
+       " tall",
+       " tallest",
+       " statue"
+      ],
+      "logit": [
+       " in",
+       " on",
+       ",",
+       " at",
+       "."
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " unsurprisingly",
+       " also",
+       " town",
+       " likewise",
+       " Town"
+      ],
+      "logit": [
+       " named",
+       " not",
+       " also",
+       " located",
+       " often"
+      ]
+     }
+    },
+    "15": {
+     "-2": {
+      "jlens": [
+       " tallest",
+       " skyline",
+       " erected",
+       " proudly",
+       " today"
+      ],
+      "logit": [
+       ",",
+       ".",
+       " today",
+       " proudly",
+       " in"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " town",
+       " cities",
+       " Britann",
+       " city",
+       " municip"
+      ],
+      "logit": [
+       " also",
+       " now",
+       " often",
+       " not",
+       " currently"
+      ]
+     }
+    },
+    "18": {
+     "-2": {
+      "jlens": [
+       " tallest",
+       " perched",
+       " skyline",
+       " erected",
+       " proudly"
+      ],
+      "logit": [
+       " today",
+       ",",
+       " is",
+       " proudly",
+       "."
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " municip",
+       " Budapest",
+       " Islamabad",
+       " Constantinople",
+       " Istanbul"
+      ],
+      "logit": [
+       " Paris",
+       " located",
+       " also",
+       " London",
+       " now"
+      ]
+     }
+    },
+    "21": {
+     "-2": {
+      "jlens": [
+       " dominates",
+       " sits",
+       " is",
+       " today",
+       " proudly"
+      ],
+      "logit": [
+       " is",
+       ",",
+       " today",
+       ".",
+       " was"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " Paris",
+       " Marse",
+       " France",
+       " Tunis",
+       " Stras"
+      ],
+      "logit": [
+       " Paris",
+       " France",
+       " Berlin",
+       " French",
+       " the"
+      ]
+     }
+    }
+   },
+   "model_top5": {
+    "-2": [
+     ",",
+     " is",
+     ".",
+     " was",
+     " has"
+    ],
+    "-1": [
+     " Paris",
+     " the",
+     " a",
+     " located",
+     " now"
+    ]
+   }
+  },
+  {
+   "id": "A03_neuro",
+   "prompt": "The hippocampal formation plays a critical role in",
+   "n_tokens": 10,
+   "layers": {
+    "2": {
+     "-2": {
+      "jlens": [
+       " role",
+       " roles",
+       " Role",
+       " involvement",
+       "Role"
+      ],
+      "logit": [
+       " role",
+       " in",
+       " of",
+       " determining",
+       ","
+      ]
+     },
+     "-1": {
+      "jlens": [
+       ",",
+       ".",
+       ";",
+       " [",
+       " and"
+      ],
+      "logit": [
+       " the",
+       ",",
+       " in",
+       " conjunction",
+       " and"
+      ]
+     }
+    },
+    "5": {
+     "-2": {
+      "jlens": [
+       " arrang",
+       " conduc",
+       " traged",
+       " streng",
+       " proble"
+      ],
+      "logit": [
+       " in",
+       " determining",
+       " internationally",
+       " driving",
+       ","
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " streng",
+       " arrang",
+       " veter",
+       " conclud",
+       " confir"
+      ],
+      "logit": [
+       " the",
+       " determining",
+       " producing",
+       " this",
+       " generating"
+      ]
+     }
+    },
+    "8": {
+     "-2": {
+      "jlens": [
+       " advoc",
+       " streng",
+       " mathemat",
+       " enthusi",
+       " conduc"
+      ],
+      "logit": [
+       " in",
+       " determining",
+       ",",
+       " to",
+       " globally"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " indo",
+       " streng",
+       " initiation",
+       " horizont",
+       " initiating"
+      ],
+      "logit": [
+       " determining",
+       " the",
+       " developing",
+       " generating",
+       " this"
+      ]
+     }
+    },
+    "10": {
+     "-2": {
+      "jlens": [
+       " conduc",
+       " mathemat",
+       " destro",
+       " facult",
+       " advoc"
+      ],
+      "logit": [
+       " in",
+       " determining",
+       " to",
+       ",",
+       " genetic"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " indo",
+       " mathemat",
+       " initiation",
+       " streng",
+       " facilitating"
+      ],
+      "logit": [
+       " determining",
+       " the",
+       " developing",
+       " maintaining",
+       " this"
+      ]
+     }
+    },
+    "12": {
+     "-2": {
+      "jlens": [
+       " conduc",
+       " facilitating",
+       " mathemat",
+       " influencing",
+       " conserv"
+      ],
+      "logit": [
+       " in",
+       " determining",
+       " to",
+       " for",
+       ","
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " mathemat",
+       " initiation",
+       " shaping",
+       " facilitating",
+       " conduc"
+      ],
+      "logit": [
+       " determining",
+       " the",
+       " maintaining",
+       " developing",
+       " generating"
+      ]
+     }
+    },
+    "15": {
+     "-2": {
+      "jlens": [
+       " conduc",
+       " mathemat",
+       " embry",
+       " conserv",
+       " geop"
+      ],
+      "logit": [
+       " in",
+       " biologically",
+       " throughout",
+       " for",
+       " determining"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " mathemat",
+       " initiation",
+       " physiological",
+       " physiology",
+       " neuroscience"
+      ],
+      "logit": [
+       " the",
+       " determining",
+       " human",
+       " maintaining",
+       " developing"
+      ]
+     }
+    },
+    "18": {
+     "-2": {
+      "jlens": [
+       "\ufffd\ufffd",
+       " adolesc",
+       " conduc",
+       " embry",
+       " skelet"
+      ],
+      "logit": [
+       " in",
+       " both",
+       " for",
+       " on",
+       " throughout"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " cognition",
+       " neuronal",
+       " mammalian",
+       " cognitive",
+       " adolesc"
+      ],
+      "logit": [
+       " cognitive",
+       " neural",
+       " learning",
+       " regulating",
+       " spatial"
+      ]
+     }
+    },
+    "21": {
+     "-2": {
+      "jlens": [
+       " in",
+       " throughout",
+       " during",
+       " skelet",
+       " within"
+      ],
+      "logit": [
+       " in",
+       " for",
+       " during",
+       " within",
+       " throughout"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " neuronal",
+       " cognition",
+       " hippocamp",
+       " synaptic",
+       " spatial"
+      ],
+      "logit": [
+       " learning",
+       " the",
+       " cognitive",
+       " memory",
+       " spatial"
+      ]
+     }
+    }
+   },
+   "model_top5": {
+    "-2": [
+     " in",
+     " for",
+     " during",
+     " throughout",
+     " both"
+    ],
+    "-1": [
+     " learning",
+     " the",
+     " memory",
+     " spatial",
+     " cognitive"
+    ]
+   }
+  },
+  {
+   "id": "B01_napoleon",
+   "prompt": "Napoleon crossed the Alps with an army of",
+   "n_tokens": 10,
+   "layers": {
+    "2": {
+     "-2": {
+      "jlens": [
+       " army",
+       " troops",
+       " cavalry",
+       " armies",
+       " generals"
+      ],
+      "logit": [
+       " surplus",
+       " marches",
+       " Corps",
+       "camp",
+       " Vet"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       ",",
+       ";",
+       ".]",
+       ".",
+       " ["
+      ],
+      "logit": [
+       " the",
+       " course",
+       " which",
+       " this",
+       " our"
+      ]
+     }
+    },
+    "5": {
+     "-2": {
+      "jlens": [
+       " cavalry",
+       " armies",
+       " army",
+       " troops",
+       " generals"
+      ],
+      "logit": [
+       "illary",
+       " and",
+       " IG",
+       " marches",
+       " of"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " mathemat",
+       " streng",
+       " surpr",
+       " challeng",
+       " destro"
+      ],
+      "logit": [
+       " the",
+       " varying",
+       " equal",
+       " white",
+       " either"
+      ]
+     }
+    },
+    "8": {
+     "-2": {
+      "jlens": [
+       " generals",
+       " cavalry",
+       " armies",
+       " army",
+       " troops"
+      ],
+      "logit": [
+       " of",
+       ",",
+       " consisting",
+       " and",
+       " corps"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " destro",
+       " mathemat",
+       " cannons",
+       " desper",
+       " cryst"
+      ],
+      "logit": [
+       " white",
+       " black",
+       " armed",
+       " foreign",
+       " around"
+      ]
+     }
+    },
+    "10": {
+     "-2": {
+      "jlens": [
+       " generals",
+       " cavalry",
+       " armies",
+       " infantry",
+       " marched"
+      ],
+      "logit": [
+       " of",
+       ",",
+       " and",
+       " corps",
+       " consisting"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " destro",
+       " mathemat",
+       " juven",
+       " fiercely",
+       " warriors"
+      ],
+      "logit": [
+       " gu",
+       " foreign",
+       " armed",
+       " twenty",
+       " around"
+      ]
+     }
+    },
+    "12": {
+     "-2": {
+      "jlens": [
+       " cavalry",
+       " besie",
+       " generals",
+       " armies",
+       " marched"
+      ],
+      "logit": [
+       " of",
+       " consisting",
+       ",",
+       " and",
+       " comprised"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " destro",
+       " mathemat",
+       " mercenaries",
+       " laborers",
+       " warriors"
+      ],
+      "logit": [
+       " gu",
+       " six",
+       " seven",
+       " four",
+       " twenty"
+      ]
+     }
+    },
+    "15": {
+     "-2": {
+      "jlens": [
+       " marching",
+       " marches",
+       " besie",
+       " massac",
+       " cavalry"
+      ],
+      "logit": [
+       " consisting",
+       " of",
+       " comprised",
+       " and",
+       " comprising"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " destro",
+       " mercenaries",
+       " peasants",
+       " mathemat",
+       " helicop"
+      ],
+      "logit": [
+       " thousands",
+       " seven",
+       " 200",
+       " six",
+       " twenty"
+      ]
+     }
+    },
+    "18": {
+     "-2": {
+      "jlens": [
+       " besie",
+       " marching",
+       " garrison",
+       " numbering",
+       " consisting"
+      ],
+      "logit": [
+       " consisting",
+       " of",
+       " comprised",
+       " comprising",
+       " composed"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " mercenaries",
+       " troops",
+       " helicop",
+       " peasants",
+       " assassins"
+      ],
+      "logit": [
+       " thousands",
+       " 300",
+       " hundreds",
+       " 200",
+       " 500"
+      ]
+     }
+    },
+    "21": {
+     "-2": {
+      "jlens": [
+       " numbering",
+       " consisting",
+       " comprised",
+       " comprising",
+       " garrison"
+      ],
+      "logit": [
+       " of",
+       " consisting",
+       " that",
+       " composed",
+       " numbering"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " troops",
+       " mercenaries",
+       " soldiers",
+       " cavalry",
+       " infantry"
+      ],
+      "logit": [
+       " 300",
+       " troops",
+       " soldiers",
+       " 200",
+       " 100"
+      ]
+     }
+    }
+   },
+   "model_top5": {
+    "-2": [
+     " of",
+     " that",
+     ",",
+     " and",
+     "."
+    ],
+    "-1": [
+     " 100",
+     " about",
+     " 1",
+     " 200",
+     " 300"
+    ]
+   }
+  },
+  {
+   "id": "C01_jack_jill",
+   "prompt": "Jack and Jill went up the hill to",
+   "n_tokens": 9,
+   "layers": {
+    "2": {
+     "-2": {
+      "jlens": [
+       " hill",
+       " hills",
+       " Hill",
+       "Hill",
+       "hill"
+      ],
+      "logit": [
+       "top",
+       " to",
+       " Elder",
+       "stead",
+       " of"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       ",",
+       ";",
+       ".",
+       " in",
+       " ["
+      ],
+      "logit": [
+       " be",
+       " make",
+       " the",
+       " get",
+       " meet"
+      ]
+     }
+    },
+    "5": {
+     "-2": {
+      "jlens": [
+       " hill",
+       "Hill",
+       "hill",
+       " Hill",
+       " hills"
+      ],
+      "logit": [
+       "top",
+       "side",
+       " to",
+       "market",
+       " with"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " confir",
+       " mathemat",
+       " destro",
+       " rul",
+       " challeng"
+      ],
+      "logit": [
+       " find",
+       " make",
+       " the",
+       " where",
+       " meet"
+      ]
+     }
+    },
+    "8": {
+     "-2": {
+      "jlens": [
+       " hill",
+       " hills",
+       " Hill",
+       " elevation",
+       " valley"
+      ],
+      "logit": [
+       "side",
+       ",",
+       " and",
+       " to",
+       " on"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " confir",
+       " rul",
+       " ingred",
+       " veter",
+       " destro"
+      ],
+      "logit": [
+       " meet",
+       " make",
+       " be",
+       " find",
+       " where"
+      ]
+     }
+    },
+    "10": {
+     "-2": {
+      "jlens": [
+       " hill",
+       " hills",
+       " uphill",
+       " slope",
+       " slopes"
+      ],
+      "logit": [
+       "side",
+       ",",
+       " and",
+       " to",
+       " on"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " horizont",
+       " mathemat",
+       " neighb",
+       " veter",
+       " destro"
+      ],
+      "logit": [
+       " meet",
+       " make",
+       " get",
+       " where",
+       " be"
+      ]
+     }
+    },
+    "12": {
+     "-2": {
+      "jlens": [
+       " hill",
+       " slopes",
+       " slope",
+       " hills",
+       " valley"
+      ],
+      "logit": [
+       "side",
+       " to",
+       " and",
+       ",",
+       " on"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " horizont",
+       " their",
+       " scouts",
+       " they",
+       " mum"
+      ],
+      "logit": [
+       " meet",
+       " make",
+       " get",
+       " try",
+       " the"
+      ]
+     }
+    },
+    "15": {
+     "-2": {
+      "jlens": [
+       " slopes",
+       " slope",
+       " hill",
+       " uphill",
+       " hills"
+      ],
+      "logit": [
+       " to",
+       ",",
+       " toward",
+       " and",
+       " in"
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " horizont",
+       " farmland",
+       " helicop",
+       " scouts",
+       " scout"
+      ],
+      "logit": [
+       " meet",
+       " get",
+       " make",
+       " the",
+       " try"
+      ]
+     }
+    },
+    "18": {
+     "-2": {
+      "jlens": [
+       " slopes",
+       " uphill",
+       " stairs",
+       " skiing",
+       " hills"
+      ],
+      "logit": [
+       ",",
+       " to",
+       " in",
+       " and",
+       "."
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " horizont",
+       " assassinate",
+       " glim",
+       " retrieve",
+       " farmland"
+      ],
+      "logit": [
+       " meet",
+       " the",
+       " get",
+       " pick",
+       " try"
+      ]
+     }
+    },
+    "21": {
+     "-2": {
+      "jlens": [
+       " overlooking",
+       " toward",
+       " towards",
+       " onto",
+       " uphill"
+      ],
+      "logit": [
+       " from",
+       " to",
+       ",",
+       " and",
+       "."
+      ]
+     },
+     "-1": {
+      "jlens": [
+       " retrieve",
+       " investigate",
+       " meet",
+       " assassinate",
+       " celebrate"
+      ],
+      "logit": [
+       " the",
+       " get",
+       " meet",
+       " see",
+       " find"
+      ]
+     }
+    }
+   },
+   "model_top5": {
+    "-2": [
+     " to",
+     ",",
+     " and",
+     ".",
+     " from"
+    ],
+    "-1": [
+     " the",
+     " get",
+     " a",
+     " see",
+     " meet"
+    ]
+   }
+  }
+ ]
+}

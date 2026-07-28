@@ -257,6 +257,10 @@ of any story; each is listed with the uncertainty it removes.
 3. **Same window grid on Pythia-410m.** Removes uncertainty about whether
    window-position effects at these relative depths are specific to
    gpt2-medium or generic to decoder stacks of this size.
+   **DONE 2026-07-26** — spec `../../EXP_012_PYTHIA_SPEC.md`, results in
+   `RESULTS_EXP012_PYTHIA.md` (separate register, this directory; includes
+   the H8 depth-control verdict closing RUNBOOK_PHASE1 §EXP_010a);
+   artifacts `output/*_pythia410m.*`. Issue: #12.
 4. **Hook-point variants** (`resid_post` at i−1 vs `resid_pre` at i; i=1 vs
    i=0). Removes uncertainty about whether the layer-0 single-terminal
    arms reflect the raw-embedding slot's coordinate system rather than
@@ -887,3 +891,84 @@ cross-machine invariance; subset B is one additional subset (n=25) drawn by
 the same rule from the same 125-prompt pool; cluster-threshold sensitivity
 remains unexplored; direct decode at j=21 remains a logit-lens-at-layer-j
 readout with the J-lens re-decode (EXP_013m) as arbiter.
+
+## 2026-07-25 — EXP_010c-VARIANTS: hook-point and energy-normalisation controls (issues #13, #14)
+
+**Spec:** `../../EXP_010c_VARIANTS_SPEC.md` (pre-registered, committed before
+any run). Protocol identical to the registered tiers except the single named
+variable per control. Runner/engine diffs recorded in the spec §2. Deviation:
+the executing agent was twice terminated by server-side API errors; sweeps
+continued uninterrupted and the analysis was completed by the orchestrating
+session — protocol parameters unaffected.
+
+### Control A — hook-point variants (planned-controls item 4)
+
+| Arm | Window / hook | Converged | Tensor basins | Direct decode | Via-tail (agree) | Margin μ/max |
+|---|---|---|---|---|---|---|
+| I1A0 | 1→23 | 25/25 | 5 | `name` ×22, `Class` ×2, `host` ×1 | `name` ×23, `Class` ×2 (24/25) | 0.16/0.70 |
+| I1O0 | 1→21 | 25/25 | 1 | `','` ×25 | `' the'` ×25 (0/25) | 0.14/0.15 |
+| HP9 | 10→21 @ `blocks.9.hook_resid_post` | 25/25 | 12 | `' until'` ×19, `' forever'` ×5, `' since'` ×1 | 17/5/3 (23/25) | 4.20/7.15 |
+
+Registered comparators: A0 (0→23) → `D` ×25; O0 (0→21) → `','` ×25.
+
+**Spec §3 readings (mechanical):**
+
+- **Hook equivalence: CONFIRMED.** HP9 is identical to registered A4 on all
+  9 comparison fields for all 25 records (0 mismatches).
+- **Row-1 condition (both i=1 arms single-terminal): NOT met.** I1O0 is
+  single-terminal (`','` ×25 — same token as O0, funnel character and token
+  preserved at i=1); I1A0 is not.
+- **Row-2 condition (an i=1 arm with ≥3 unique, ≥2 whole-word alphabetic):
+  MET by I1A0** (3 unique: `name`, `Class`, `host`; all alphabetic) →
+  reading **"embedding-slot effect isolated"** for the 0→23 funnel: the `D`
+  terminal does not survive moving injection from layer 0 to layer 1;
+  H10b's sensory-splice reading inherits this caveat. Stated flat: the
+  0→21 funnel survives i=1 with the same token; the 0→23 `D` funnel does
+  not (margins in the I1A0 arm are low: μ 0.16).
+
+### Control B — energy-normalisation variant (session-registered control)
+
+Rescale target: `natural_pre_norm_i` (per-prompt, measured on the natural
+pass; saved per arm). Measured seed_j/natural_i norm ratios: A0 ×217.8,
+A1 ×306.7, A4 ×1.04, O8 ×1.05 — under the registered convention the i=0
+arms re-injected at two orders of magnitude above natural layer-0 input
+norm, while the mid-stack arms were within 5% of natural.
+
+| Arm | Window | Converged | Tensor basins | Direct decode | Via-tail (agree) | Margin μ/max |
+|---|---|---|---|---|---|---|
+| A0 | 0→23 | **0/25** (all 1000-iter cap) | 14 | `This` ×10, `A` ×7, `If` ×3, `','` ×3, `The`, `An` | same set (25/25) | 0.46/1.29 |
+| A4 | 10→21 | 25/25 | 12 | `' until'` ×20, `' forever'` ×3, `' since'` ×2 | 16/5/4 (21/25) | 4.29/7.31 |
+| O8 | 8→21 | 25/25 | 17 | `' simultaneously'` ×14, `' halfway'` ×9, `' spit'` ×2 | `simultaneously` ×16, `just` ×5, `collision` ×2 (14/25) | 1.87/4.52 |
+| A1 | 0→11 | **0/25** (all 1000-iter cap) | 9 | `' ('` ×11, `' T'` ×6, `','` ×4, others | `'"'` ×12, `2017` ×6, `This` ×3 (0/25) | 0.23/0.90 |
+
+**Spec §4 readings (mechanical, class definitions in the spec):**
+
+- A4: word-structured (3 unique types, 0 non-word terminals) — class
+  unchanged; terminal types identical to registered (`until`/`forever`/
+  `since`), margins within 2% of registered.
+- O8: word-structured (3 unique, all whole-word) — class unchanged;
+  `simultaneously`/`halfway` persist, `' spit'` ×2 new.
+- A0: **not a funnel** under `natural_i` (6 unique types, modal 10/25,
+  `D` absent, 0/25 converged) — **class changed**.
+- A1: **not a funnel** under `natural_i` (≥5 unique types, modal 11/25,
+  0/25 converged) — **class changed**.
+- Reading obtained: **"energy convention load-bearing" for A0 and A1;
+  "not an energy artifact" for A4 and O8.** Per the pre-registered wording:
+  every EXP_010c/010c-2 observation about the i=0 arms (including the
+  reproduction-gate `D` collapse and the O0/O4 funnels) is conditional on
+  the j-scale energy convention; the in-band word-window observations are
+  not conditional on it.
+
+**Combined observation across both controls (stated flat):** of everything
+tested to date, the `D` terminal has been observed only under the joint
+condition {inject at layer-0 `resid_pre`} ∧ {j-scale (≈218× natural) energy}.
+Removing either condition removes `D`. The A4/O8 word-window landscape is
+unchanged under: seed variation, disjoint prompt subset, hook-point
+convention (HP9), and i-scale energy normalisation.
+
+**Caveats (standing):** single subset for the variant arms; non-convergence
+at the 1000-iter cap is a bounded observation (longer horizons untested);
+cluster-threshold sensitivity unexplored; direct decode at j<23 remains a
+logit-lens readout; the J-lens re-decode (EXP_013m) remains the registered
+arbiter. Planned-controls item 4 (hook-point): done (this section). The
+session-registered energy-norm control: done (this section).

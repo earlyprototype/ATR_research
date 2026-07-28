@@ -1,0 +1,170 @@
+[
+  {
+    "arm": "A0",
+    "window": "0->23",
+    "n": 25,
+    "converged": 0,
+    "tensor_basins": 14,
+    "basin_sizes": [
+      5,
+      4,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "This": 10,
+      "A": 7,
+      "If": 3,
+      ",": 3,
+      "The": 1,
+      "An": 1
+    },
+    "offdiag_cos_mean": 0.6499,
+    "offdiag_cos_min": 0.3632,
+    "margin_mean": 0.463,
+    "margin_max": 1.287,
+    "entropy_mean": 4.729,
+    "tail_decode_terminals": {
+      "This": 10,
+      "A": 7,
+      "If": 3,
+      ",": 3,
+      "The": 1,
+      "An": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "A4",
+    "window": "10->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      6,
+      6,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " until": 20,
+      " forever": 3,
+      " since": 2
+    },
+    "offdiag_cos_mean": 0.8362,
+    "offdiag_cos_min": 0.5912,
+    "margin_mean": 4.293,
+    "margin_max": 7.314,
+    "entropy_mean": 0.471,
+    "tail_decode_terminals": {
+      " until": 16,
+      " forever": 5,
+      " since": 4
+    },
+    "tail_agreement": "21/25"
+  },
+  {
+    "arm": "A1",
+    "window": "0->11",
+    "n": 25,
+    "converged": 0,
+    "tensor_basins": 9,
+    "basin_sizes": [
+      10,
+      5,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " (": 11,
+      " T": 6,
+      ",": 4,
+      "\n": 1,
+      " the": 1,
+      " Theater": 1,
+      "-": 1
+    },
+    "offdiag_cos_mean": 0.8336,
+    "offdiag_cos_min": 0.4396,
+    "margin_mean": 0.23,
+    "margin_max": 0.899,
+    "entropy_mean": 6.429,
+    "tail_decode_terminals": {
+      "\"": 12,
+      "2017": 6,
+      "This": 3,
+      "\u00ad": 1,
+      "'": 1,
+      " and": 1,
+      " They": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "O8",
+    "window": "8->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 17,
+    "basin_sizes": [
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " simultaneously": 14,
+      " halfway": 9,
+      " spit": 2
+    },
+    "offdiag_cos_mean": 0.9424,
+    "offdiag_cos_min": 0.7744,
+    "margin_mean": 1.871,
+    "margin_max": 4.523,
+    "entropy_mean": 2.853,
+    "tail_decode_terminals": {
+      " simultaneously": 16,
+      " just": 5,
+      " collision": 2,
+      " I": 1,
+      "'": 1
+    },
+    "tail_agreement": "14/25"
+  }
+]

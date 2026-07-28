@@ -1,0 +1,127 @@
+[
+  {
+    "id": "A01_physics",
+    "category": "Complex",
+    "prompt": "The implications of quantum entanglement suggest that"
+  },
+  {
+    "id": "B01_napoleon",
+    "category": "Narrative",
+    "prompt": "Napoleon crossed the Alps with an army of"
+  },
+  {
+    "id": "C01_jack_jill",
+    "category": "Simple",
+    "prompt": "Jack and Jill went up the hill to"
+  },
+  {
+    "id": "D01_water",
+    "category": "Chemical",
+    "prompt": "H2O NaCl CO2 O2 Fe2O3 CH4 NH3"
+  },
+  {
+    "id": "E01_politics",
+    "category": "Acronyms",
+    "prompt": "NATO EU UN ASEAN BRICS G7 IMF WTO"
+  },
+  {
+    "id": "F01_anger",
+    "category": "Vulgarity",
+    "prompt": "What the fuck is wrong with you you"
+  },
+  {
+    "id": "G01_punctuation",
+    "category": "Wild",
+    "prompt": "... --- !!! ??? ,,, ;;; ::: ((( )))"
+  },
+  {
+    "id": "G13_buffalo",
+    "category": "Wild",
+    "prompt": "buffalo buffalo buffalo buffalo buffalo buffalo buffalo"
+  },
+  {
+    "id": "E02_tech",
+    "category": "Acronyms",
+    "prompt": "HTTP API REST JSON SQL TCP UDP SSH"
+  },
+  {
+    "id": "D02_periodic",
+    "category": "Chemical",
+    "prompt": "He Ne Ar Kr Xe Rn Og Ts Lv"
+  },
+  {
+    "id": "A02_medical",
+    "category": "Complex",
+    "prompt": "A meta-analysis of randomised controlled trials indicates"
+  },
+  {
+    "id": "B02_wwi",
+    "category": "Narrative",
+    "prompt": "The assassination of Archduke Franz Ferdinand in Sarajevo"
+  },
+  {
+    "id": "C02_king_cole",
+    "category": "Simple",
+    "prompt": "Old King Cole was a merry old soul"
+  },
+  {
+    "id": "F02_insult",
+    "category": "Vulgarity",
+    "prompt": "You stupid piece of shit I told you"
+  },
+  {
+    "id": "G02_brackets",
+    "category": "Wild",
+    "prompt": "[ ] { } ( ) < > | / \\ ^ ~ `"
+  },
+  {
+    "id": "E03_orgs",
+    "category": "Acronyms",
+    "prompt": "FBI CIA NSA DOJ IRS SEC FDA CDC"
+  },
+  {
+    "id": "D03_organic",
+    "category": "Chemical",
+    "prompt": "CH3CH2OH COOH C6H12O6 ATP ADP"
+  },
+  {
+    "id": "A03_neuro",
+    "category": "Complex",
+    "prompt": "The hippocampal formation plays a critical role in"
+  },
+  {
+    "id": "B03_moon",
+    "category": "Narrative",
+    "prompt": "One small step for man one giant leap"
+  },
+  {
+    "id": "C03_mary_lamb",
+    "category": "Simple",
+    "prompt": "Mary had a little lamb its fleece was"
+  },
+  {
+    "id": "F03_frustration",
+    "category": "Vulgarity",
+    "prompt": "For fucks sake how many times do I"
+  },
+  {
+    "id": "G03_counting",
+    "category": "Wild",
+    "prompt": "1 2 3 4 5 6 7 8 9"
+  },
+  {
+    "id": "E04_internet",
+    "category": "Acronyms",
+    "prompt": "LOL LMAO ROFL IMHO TBH SMH FWIW"
+  },
+  {
+    "id": "D04_equation",
+    "category": "Chemical",
+    "prompt": "2H2 + O2 -> 2H2O delta G = -"
+  },
+  {
+    "id": "A04_climate",
+    "category": "Complex",
+    "prompt": "Anthropogenic climate change has accelerated the rate of"
+  }
+]
