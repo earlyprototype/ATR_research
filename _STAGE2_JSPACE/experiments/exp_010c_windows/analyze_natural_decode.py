@@ -39,6 +39,7 @@ LAYERS = {15: "X1015 ' Fas'", 17: "X817 ' GOP' / X1017 ' Bhar'",
 
 
 def main():
+    """Decode natural resid states at each extract layer and write the report."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--model-path", required=True)
     args = ap.parse_args()

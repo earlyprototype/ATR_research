@@ -45,6 +45,7 @@ def load_pieces(model_path):
                     weights_only=True)
 
     def get(*names):
+        """First matching key from the state dict, or KeyError naming all tried."""
         for n in names:
             if n in sd:
                 return sd[n]
@@ -80,6 +81,7 @@ def census(wte, g, b, n, seed=SEED, chunk=1000):
 
 
 def main():
+    """Compute S1/S2/S3 for the fixed token sets and write the report JSON."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--model-path", required=True)
     ap.add_argument("--n", type=int, default=10000)
@@ -97,13 +99,15 @@ def main():
     mean_dir = mean_dir / mean_dir.norm()
     cos_mean = (wte / norms.clamp_min(1e-9).unsqueeze(1)) @ mean_dir
 
-    def pct(vals, x):                        # percentile of x within vals
+    def pct(vals, x):
+        """Percentile of x within vals (share of entries strictly below x)."""
         return round(100.0 * float((vals < x).sum()) / len(vals), 2)
 
     counts = census(wte, g, b, args.n)
     share = counts.float() / args.n
 
     def rows(names):
+        """Per-token S1/S2/S3 records for one named token set."""
         out = []
         for s in names:
             i = index.get(s)

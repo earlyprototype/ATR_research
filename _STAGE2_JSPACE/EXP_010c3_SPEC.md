@@ -167,3 +167,30 @@ unreliability is already measured; two-instrument (direct + via-tail) agreement
 is necessary but not sufficient. The J-lens re-decode (EXP_013m) remains the
 registered arbiter for every mid-stack terminal claim, including all cells in
 this in-fill.
+
+---
+
+## Addendum 2026-07-25 — gate parameters stated explicitly (PR #33 review)
+
+**Clarification only. The protocol is unchanged and the runs are unaffected** —
+this records, in one place, the exact values §3 referred to as
+"gated (cos > 0.999 ×3, check_every 10, check_start 100, max_iter 1000)".
+`cos > 0.999 ×3` was flagged as ambiguous as a runner contract, since it does
+not by itself say what is compared, how often, or from when. The executed
+contract, as implemented in `atr_engine2.run_atr_gated`:
+
+| Parameter | Value | Meaning |
+|---|---|---|
+| `threshold` | `0.999` | lock requires cosine **strictly greater** than this |
+| `patience` | `3` | consecutive passing checks required |
+| `check_every` | `10` | a check occurs only when `iteration % 10 == 0` |
+| `check_start` | `100` | no check before this iteration |
+| `max_iter` | `1000` | classify here if lock never occurs |
+| `gate_lag` | `1` | cosine is iterate *t* vs iterate *t − 1* |
+| compared quantity | mean vector | `cos_sim_mean`, not the last-position vector |
+
+Consequence worth stating because it shaped the observations: the earliest
+reportable lock is **120** (checks at 100, 110, 120), so a run reporting
+`lock_in_iter = 120` had already satisfied the gate at its first opportunity and
+120 is an upper bound on settle time, not a measurement of it. EXP_010c-3b §5
+measures the actual value.

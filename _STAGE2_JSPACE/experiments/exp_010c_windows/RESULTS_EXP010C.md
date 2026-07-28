@@ -396,12 +396,16 @@ non-empty):
 
 1. All 225 runs converged (lock-in 120–170; most arms lock at exactly 120,
    the earliest gated iteration for check_start=100).
-2. Of the 9 new cells, **7 direct-decode to a single terminal repeated across
-   all 25 prompts** (I7 `oooooooo`, I11 `<|endoftext|>`, X817 `GOP`, X819 `'d`,
-   X1015 `Fas`, X1017 `Bhar`; and I9 is 18/7 between two tokens). Two are
-   multi-token: I5 (7 unique, plurality punctuation) and X1019 (2 unique,
-   punctuation). None has a whole-word plurality with ≥2 unique whole-word
-   terminals.
+2. Of the 9 new cells, **6 direct-decode to a single terminal repeated across
+   all 25 prompts** (I7 `oooooooo`, I11 `<\|endoftext\|>`, X817 `GOP`,
+   X819 `'d`, X1015 `Fas`, X1017 `Bhar`). The other three are multi-token:
+   I9 (2 unique, `oooooooo` ×18 / `…` ×7), X1019 (2 unique, punctuation), and
+   I5 (7 unique, plurality punctuation). None has a whole-word plurality with
+   ≥2 unique whole-word terminals.
+   *(Corrected 2026-07-25 after the PR #33 review: this read "7 … and I9 is
+   18/7 between two tokens", which counted a two-terminal cell inside a
+   strict-single-terminal total. The strict count is 6; I9 is stated
+   separately above. No verdict depended on the figure.)*
 3. Mechanical whole-word flag (≥2 unique terminals AND plurality class
    whole-word) across all 9 new cells: **0 flagged.**
 4. I9 (9→21), the injection midpoint between the two extract-21 whole-word
@@ -689,6 +693,21 @@ three axes, every cell) in `output/tested_windows_map.json`.
 | E822 | 8→22 | `' �'` ×25 | 1 | punctuation | 0/25 | 120 |
 | E823 | 8→23 | `' �'` ×10, `'<\|endoftext\|>'` ×6, `'…'` ×6, `' to'`, `'\n'`, `' //'` | 6 | punctuation (18/25) | 1/25 | 120–740 |
 
+**Characterisation + via-tail control** (`terminal_characterisation_ladder8.json`,
+added 2026-07-25 after the PR #33 review noted the map advertised these columns
+for cells that had never been characterised):
+
+| Arm | Window | Tensor basins | Direct decode | Via-tail | Agree | Margin μ |
+|---|---|---|---|---|---|---|
+| E822 | 8→22 | 2 ([22,3]) | `' �'` ×25 | `' �'` ×25 | 25/25 | 0.891 |
+| E823 | 8→23 | 25 (all singletons) | `' �'` ×10, `'<\|endoftext\|>'` ×6, `'…'` ×6 | identical | 25/25 | 0.795 |
+
+Note: E823 is a j=23 arm, so its tail is empty and "25/25" is the
+mean-vs-last-position check, not a readout-robustness measure (same caveat as
+A0/A3/E23). E822's 25/25 *is* a real one-layer tail check. E823's 25 singleton
+tensor basins alongside 6 decode terminals is the same observation class as
+A3 and the Stage 1 `Divine` prompts: distinct tensors, shared decode.
+
 **Spec §4 verdict (mechanical): the pre-registered "both degrade" reading is
 observed** — neither arm retains the whole-word character, so **j=21 is a sharp
 peak at injection 8**, with nothing above or below it retaining the character.
@@ -745,6 +764,38 @@ cell.
 sensitivity still unexplored; direct decode at j<23 remains a
 logit-lens-at-layer-j readout; the J-lens re-decode (EXP_013m) remains the
 registered arbiter for every mid-stack terminal claim.
+
+### Addendum 2026-07-25 — the J-lens census has since reported (cross-reference)
+
+Recorded here because every section above defers to an instrument that has now
+returned a result. `../../RESULTS_JLENS_MEDIUM.md` (issue #15) reports EXP_012m:
+
+- **Medium has no coherent J-lens band** under that experiment's pre-registered
+  rule — zero lens-dominant layers.
+- **No J-lens correlate of the {8,10}→21 islands.** At the three layers this
+  record's map distinguishes, the census reports J agree-final 0.02/0.02/0.02
+  and J-better 0.14/0.16/0.12 for i = 8/9/10 — i.e. **8 and 10 are
+  indistinguishable from 9 and from their flanks** under that instrument. The
+  same non-result holds after shifting the comparison one layer to account for
+  the convention difference (ATR inject-*i* splices at `resid_pre(i)`, which is
+  lens layer *i−1*'s output): 7/8/9 read 0.20/0.14/0.16 J-better, no islands.
+
+**Consequence for this record, stated flatly:** the ATR-side alternation
+(whole-word at i=8 and i=10, not at i=9) is a measurement of this looping
+procedure and reproduces on a disjoint prompt subset; it currently has **no
+independent corroboration from the second instrument**, and the two instruments
+disagree about whether anything distinguishes {8,10} from {9}. Nothing in the
+observations above is withdrawn — they were readout-specific from the start, and
+that limitation was recorded — but the "the two instruments should localise the
+same band" expectation stated in the 2026-07-23 session note is **not** borne
+out on Medium.
+
+Still open, and now the remaining route to independent corroboration: EXP_011m
+(subspace overlap), which does not go through readout rankings at all. EXP_013m
+(re-decode of the frozen terminals) also remains open and inherits the
+stopping-rule caveat from item 5 above — at I9 the terminal identity depends on
+when the loop is stopped, so a re-decode of a frozen terminal is a re-decode of
+one stopping rule's answer.
 ## 2026-07-25 — EXP_010c-PERM: anisotropy-corrected permutation test (planned control 1)
 
 **Spec:** `../../EXP_010c_PERM_SPEC.md`, committed before any statistic was

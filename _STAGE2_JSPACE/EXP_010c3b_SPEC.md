@@ -169,3 +169,36 @@ optional); a dated results section stating mechanically which reading was
 observed for each, including any that weaken EXP_010c-3; the tested-windows map
 corrected if items 1–3 change what it should hand forward; the seed-determinism
 answer recorded and #11 flagged if it is a no-op.
+
+---
+
+## Addendum 2026-07-25 — item 1 inputs stated operationally (PR #33 review)
+
+**Clarification only; the executed analysis is unchanged.** §1 described the S1
+sample as "scaled to a typical residual norm" and S3 as a cosine with the
+"mean-row direction". Neither was operationally defined, so an independent rerun
+could have used different inputs. As implemented in `analyze_funnel_geometry.py`
+and executed:
+
+- **Source of the vocabulary statistics:** the `wte` matrix of the local
+  gpt2-medium state dict (`pytorch_model.bin`, 1,520,013,706 bytes — the
+  S3-mirror file recorded in RESULTS §Model acquisition), all 50257 rows. GPT-2
+  ties its unembedding to `wte`, so this is also the decode matrix. No prompts
+  and no forward passes are involved in S1/S2/S3.
+- **S1 sample:** N = 10,000 vectors drawn i.i.d. `torch.randn` at
+  `torch.Generator().manual_seed(42)`, d = 1024, then passed through the real
+  `ln_final` (γ, β from the same state dict, eps 1e-5) before the argmax.
+- **"scaled to a typical residual norm" is a NO-OP and was not applied.**
+  LayerNorm is scale-invariant, so the input norm cannot affect the argmax. The
+  phrase should not be read as an unrecorded free parameter; recorded here
+  rather than quietly dropped.
+- **S3 "mean-row direction":** the arithmetic **mean** (not median) over all
+  50257 `wte` rows, L2-normalised; each token's statistic is the cosine between
+  its own row and that direction. Percentiles for S2 and S3 are computed against
+  the full 50257-token distribution.
+- **Reported values** are in `output/funnel_geometry.json`, which also records
+  `n_directions`, `seed`, and `vocab` so the run is self-describing.
+
+The post-hoc natural-decode diagnostic (labelled as such in the results) uses
+the registered 25-prompt subset and one un-hooked forward pass per prompt,
+reading `blocks.{j}.hook_resid_post` at j ∈ {15, 17, 19, 21}.

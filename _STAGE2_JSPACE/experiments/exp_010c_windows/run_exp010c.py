@@ -323,6 +323,28 @@ def main():
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
     n_prompts = args.n_prompts if args.n_prompts is not None else tier["n_prompts"]
+    # A variant run must never land on the registered artifact names. Documenting
+    # --tag as "required" did not enforce it: any parameter below changes the
+    # results while the suffix still defaults to the tier name, so a variant could
+    # silently overwrite results_<tier>.json / terminals_<tier>.pt. Checked here,
+    # BEFORE the model load, so it fails in a second rather than after a minute.
+    # (PR #33 review, data-integrity finding; same principle as the subset-B
+    # audit-file guard further down.)
+    if not (args.tag or args.out_suffix or args.harness_check):
+        variant = [
+            f"--seed {args.seed}" if args.seed != 42 else None,
+            f"--subset {args.subset}" if args.subset != "registered" else None,
+            f"--prompt-offset {args.prompt_offset}" if args.prompt_offset else None,
+            f"--n-prompts {args.n_prompts}" if args.n_prompts is not None else None,
+            f"--renorm {args.renorm}" if args.renorm != "seed_j" else None,
+        ]
+        variant = [v for v in variant if v]
+        if variant:
+            ap.error(
+                "non-registered configuration (" + ", ".join(variant) + ") would "
+                f"write to the registered artifact names results_{args.tier}.json / "
+                f"terminals_{args.tier}.pt. Pass --tag (or --out-suffix) to give "
+                "this run its own artifacts.")
     if args.tier == "pythia":
         # EXP_012-PYTHIA spec §4 promises the natural-norm record for the
         # registered seed_j run — implied, not flag-dependent (PR #39 review).
@@ -342,6 +364,14 @@ def main():
             ap.error(f"--tier {args.tier} requires --model-name gpt2")
         if args.subset != "small":
             ap.error(f"--tier {args.tier} requires --subset small")
+    elif args.tier != "pythia" and args.model_name != "gpt2-medium":
+        # The converse of the two bindings above (PR #33 review): the pythia and
+        # small tiers are pinned to their models, but nothing stopped a
+        # gpt2-medium tier from being run against a different model and writing
+        # the result into that tier's registered artifact name.
+        ap.error(f"--tier {args.tier} is a gpt2-medium tier; --model-name "
+                 f"{args.model_name} would write non-medium results to "
+                 f"results_{args.tier}.json")
 
     torch.manual_seed(args.seed)
     if args.harness_check:
@@ -387,8 +417,6 @@ def main():
 
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
-    suffix = (args.tag or args.out_suffix
-              or (f"{args.tier}_harness" if args.harness_check else args.tier))
     if subset_b_records is not None:  # audit record of the executed disjoint subset
         # The canonical audit file records the FULL 25-prompt subset B that the
         # registered EXP_010c-ROBUST runs used. A partial or resized run (e.g.

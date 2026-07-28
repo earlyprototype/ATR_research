@@ -31,6 +31,7 @@ ENTRY = re.compile(
 
 
 def load_all():
+    """Parse all 125 Stage 1 prompt records; abort on schema drift."""
     text = SOURCE.read_text()
     records = [
         {"id": m["pid"], "category": m["cat"], "prompt": m["prompt"]}

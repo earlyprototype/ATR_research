@@ -60,6 +60,7 @@ def content_function(tok):
 
 
 def load():
+    """All committed run records and terminal characterisations, merged."""
     results, chars = [], {}
     for f in RESULT_FILES:
         p = OUT / f
@@ -74,6 +75,7 @@ def load():
 
 
 def cell(arm, results, chars):
+    """One map cell: counts, plurality, both flag readings, basins, via-tail."""
     rs = [r for r in results if r["arm"] == arm]
     if not rs:
         return None
@@ -81,6 +83,13 @@ def cell(arm, results, chars):
     classes = Counter(token_class(r["terminal_token"]) for r in rs)
     plural_tok, plural_n = toks.most_common(1)[0]
     dom = classes.most_common(1)[0][0]
+    # "plurality lexical class" (registered wording) is read as the class holding
+    # the plurality of runs — `dom`. A second reading is possible: the class of
+    # the single plurality TOKEN. They can differ in principle (a punctuation
+    # plurality token alongside several less-frequent whole-word types). Both are
+    # recorded per cell and `main()` asserts they agree across the whole map, so
+    # no reported flag depends on the disambiguation. (PR #33 review.)
+    plurality_class = token_class(plural_tok)
     c = chars.get(arm, {})
     return {
         "arm": arm, "window": rs[0]["window"], "n": len(rs),
@@ -88,8 +97,10 @@ def cell(arm, results, chars):
         "whole_word_n": classes.get("whole-word", 0),
         "plurality_token": plural_tok, "plurality_n": plural_n,
         "dominant_class": dom,
+        "plurality_token_class": plurality_class,
         "plurality_content_function": content_function(plural_tok),
         "flag": (len(toks) >= 2) and dom == "whole-word",
+        "flag_by_plurality_token": (len(toks) >= 2) and plurality_class == "whole-word",
         "basins": c.get("tensor_basins", "-"),
         "via_tail": c.get("tail_agreement", "-"),
         "converged": sum(r["converged"] for r in rs),
@@ -104,6 +115,7 @@ LADDER_10 = [("X1015", 15), ("X1017", 17), ("X1019", 19), ("A4", 21), ("E22", 22
 
 
 def table(title, pairs, axis, results, chars):
+    """Print one markdown axis table and return its rows."""
     print(f"\n### {title}\n")
     print(f"| {axis} | arm | unique | whole-word | plurality token | content/function | basins | via-tail | flag |")
     print("|---|---|---|---|---|---|---|---|---|")
@@ -121,6 +133,7 @@ def table(title, pairs, axis, results, chars):
 
 
 def main():
+    """Build the three-axis map, check the flag readings agree, optionally save."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
@@ -131,6 +144,14 @@ def main():
         "extraction_ladder_inject8": table("Extraction ladder, injection 8", LADDER_8, "j", results, chars),
         "extraction_ladder_inject10": table("Extraction ladder, injection 10", LADDER_10, "j", results, chars),
     }
+    # The two readings of "plurality lexical class" must agree, or a reported
+    # flag would depend on which reading you take (PR #33 review). Checked, not
+    # assumed: this fails loudly if a future cell separates them.
+    split = [r["arm"] for rows in out.values() for r in rows
+             if r["flag"] != r["flag_by_plurality_token"]]
+    print(f"\nflag readings (dominant-class vs plurality-token) disagree on: "
+          f"{split or 'no cell'}")
+
     flagged = [r["arm"] for r in out["injection_axis_extract21"] if r["flag"]]
     print(f"\nFlagged cells on the injection axis: {flagged}")
     for r in out["injection_axis_extract21"]:

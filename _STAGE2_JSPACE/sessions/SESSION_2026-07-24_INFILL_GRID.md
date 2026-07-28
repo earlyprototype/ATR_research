@@ -35,9 +35,12 @@ resume-capable driver skipped the seven committed arms and finished the last two
 — the per-arm-commit house rule doing exactly its job.
 
 **4. The result, flat:** none of the 9 in-fill cells reproduced the seed cells'
-signature. Seven of nine funnel to a *single* terminal repeated across all 25
-prompts; the other two are punctuation-plurality. Zero cells pass the mechanical
+signature. Six of nine funnel to a *single* terminal repeated across all 25
+prompts; the other three are two- or seven-terminal cells with a
+fragment/punctuation plurality. Zero cells pass the mechanical
 whole-word-prompt-dependent flag.
+*(Corrected 2026-07-25 after the PR #33 review — this said "seven of nine",
+counting the two-terminal cell I9 inside a strict-single-terminal total.)*
 
 ## Interpretation (labelled as such — NOT a finding)
 
