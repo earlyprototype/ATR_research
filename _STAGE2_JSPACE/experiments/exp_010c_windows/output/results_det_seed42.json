@@ -1,0 +1,80 @@
+[
+  {
+    "terminal_token": "oooooooo",
+    "terminal_token_id": 26759,
+    "terminal_prob": 0.31420448422431946,
+    "lock_in_iter": 120,
+    "converged": true,
+    "n_iters": 120,
+    "final_cos_sim_mean": 0.9999542832374573,
+    "top_logit_margin": 0.13448333740234375,
+    "entropy": 2.454601287841797,
+    "lag_scan": {
+      "1": 0.9999387860298157,
+      "2": 0.9997562170028687,
+      "3": 0.9994542002677917,
+      "4": 0.9990360140800476,
+      "5": 0.9985063076019287,
+      "6": 0.9978706240653992,
+      "7": 0.9971352815628052,
+      "8": 0.9963076114654541
+    },
+    "arm": "I9",
+    "window": "9->21",
+    "prompt_id": "E01_politics",
+    "prompt": "NATO EU UN ASEAN BRICS G7 IMF WTO",
+    "category": "Acronyms"
+  },
+  {
+    "terminal_token": "\u2026",
+    "terminal_token_id": 1399,
+    "terminal_prob": 0.34182146191596985,
+    "lock_in_iter": 130,
+    "converged": true,
+    "n_iters": 130,
+    "final_cos_sim_mean": 0.9998215436935425,
+    "top_logit_margin": 0.4922218322753906,
+    "entropy": 2.5586304664611816,
+    "lag_scan": {
+      "1": 0.9998296499252319,
+      "2": 0.9993201494216919,
+      "3": 0.9984777569770813,
+      "4": 0.9973125457763672,
+      "5": 0.9958387613296509,
+      "6": 0.9940743446350098,
+      "7": 0.9920405149459839,
+      "8": 0.989760160446167
+    },
+    "arm": "I9",
+    "window": "9->21",
+    "prompt_id": "D01_water",
+    "prompt": "H2O NaCl CO2 O2 Fe2O3 CH4 NH3",
+    "category": "Chemical"
+  },
+  {
+    "terminal_token": "oooooooo",
+    "terminal_token_id": 26759,
+    "terminal_prob": 0.664807140827179,
+    "lock_in_iter": 120,
+    "converged": true,
+    "n_iters": 120,
+    "final_cos_sim_mean": 0.9999462366104126,
+    "top_logit_margin": 2.3048057556152344,
+    "entropy": 1.6609158515930176,
+    "lag_scan": {
+      "1": 0.9999439716339111,
+      "2": 0.999775767326355,
+      "3": 0.999495804309845,
+      "4": 0.9991067051887512,
+      "5": 0.9986122846603394,
+      "6": 0.9980180859565735,
+      "7": 0.9973313212394714,
+      "8": 0.9965599775314331
+    },
+    "arm": "I9",
+    "window": "9->21",
+    "prompt_id": "A01_physics",
+    "prompt": "The implications of quantum entanglement suggest that",
+    "category": "Complex"
+  }
+]

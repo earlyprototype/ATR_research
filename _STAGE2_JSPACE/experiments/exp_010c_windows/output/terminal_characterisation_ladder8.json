@@ -1,0 +1,81 @@
+[
+  {
+    "arm": "E822",
+    "window": "8->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      22,
+      3
+    ],
+    "decode_terminals": {
+      " \ufffd": 25
+    },
+    "offdiag_cos_mean": 0.9994,
+    "offdiag_cos_min": 0.9967,
+    "margin_mean": 0.891,
+    "margin_max": 1.616,
+    "entropy_mean": 1.763,
+    "tail_decode_terminals": {
+      " \ufffd": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "E823",
+    "window": "8->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " \ufffd": 10,
+      "<|endoftext|>": 6,
+      "\u2026": 6,
+      " to": 1,
+      "\n": 1,
+      " //": 1
+    },
+    "offdiag_cos_mean": 0.9083,
+    "offdiag_cos_min": 0.668,
+    "margin_mean": 0.795,
+    "margin_max": 2.137,
+    "entropy_mean": 3.354,
+    "tail_decode_terminals": {
+      " \ufffd": 10,
+      "<|endoftext|>": 6,
+      "\u2026": 6,
+      " to": 1,
+      "\n": 1,
+      " //": 1
+    },
+    "tail_agreement": "25/25"
+  }
+]
