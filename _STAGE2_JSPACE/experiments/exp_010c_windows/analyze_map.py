@@ -151,6 +151,18 @@ def main():
              if r["flag"] != r["flag_by_plurality_token"]]
     print(f"\nflag readings (dominant-class vs plurality-token) disagree on: "
           f"{split or 'no cell'}")
+    if split:
+        # Raise rather than print. A printed warning on a run that still exits 0
+        # is how the map would get regenerated, and the flagged set handed to the
+        # J-lens phase, with a cell whose flag depends on the disambiguation the
+        # registered wording never settled. Whoever hits this has to decide which
+        # reading the spec meant and record it — not scroll back through stdout.
+        raise SystemExit(
+            f"Flag readings disagree on {split}. The registered rule says "
+            f"'plurality lexical class'; dominant-class and plurality-token "
+            f"readings now differ on these cells, so the flagged set is "
+            f"ambiguous. Settle the reading in the spec before regenerating."
+        )
 
     flagged = [r["arm"] for r in out["injection_axis_extract21"] if r["flag"]]
     print(f"\nFlagged cells on the injection axis: {flagged}")
