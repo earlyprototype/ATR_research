@@ -29,6 +29,7 @@ sys.path.insert(0, str(HERE.parent))  # for atr_engine2
 from atr_engine2 import run_atr_gated  # noqa: E402
 from derive_prompts import select_subset, select_subset_b  # noqa: E402
 from derive_prompts_pythia import select_subset_pythia  # noqa: E402
+from derive_prompts_small import select_subset_small  # noqa: E402
 
 ARMS = {
     "A0": (0, 23),   # baseline / reproduction gate
@@ -50,6 +51,14 @@ ARMS = {
     "I1A0": (1, 23),   # i=1 variant of A0 (0->23)
     "I1O0": (1, 21),   # i=1 variant of O0 (0->21)
     "HP9": (10, 21),   # sanity: inject at blocks.9.hook_resid_post (see ARM_INJECT_HOOK)
+    # EXP_010b — window grid on GPT-2 Small (EXP_010b_SPEC.md §4, issue #16).
+    # 12-layer model: windows are RUNBOOK_PHASE1 §EXP_010b step 2 verbatim.
+    "SB": (0, 11),   # full-stack baseline — reproduction gate vs Stage 1
+    "S1": (0, 5),    # 6-layer early
+    "S2": (3, 8),    # 6-layer mid
+    "S3": (6, 11),   # 6-layer late
+    "S4": (0, 8),    # 9-layer front-heavy
+    "S5": (3, 11),   # 9-layer back-heavy
 }
 # Control A sanity arm: pre-registered expectation is that resid_post(9) is
 # the SAME residual value as resid_pre(10), so HP9 must reproduce A4 exactly.
@@ -72,6 +81,14 @@ TIERS = {
     # with a P- prefix (P-A0 ... P-O8) in the results register.
     "pythia": dict(n_prompts=25, max_iter=1000, check_start=100,
                    arms=["A0", "A1", "A2", "A3", "A4", "O8"]),
+    # EXP_010b (EXP_010b_SPEC.md §4/§6, issue #16): registered protocol on
+    # gpt2-small. SB runs alone first (reproduction gate — evaluated before
+    # any other arm; per-arm invocations via --arms). small_smoke is harness
+    # validation only, non-registered, no verdict weight.
+    "small010b": dict(n_prompts=25, max_iter=1000, check_start=100,
+                      arms=["SB", "S1", "S2", "S3", "S4", "S5"]),
+    "small_smoke": dict(n_prompts=2, max_iter=60, check_start=20,
+                        arms=["SB", "S2"]),
 }
 
 
@@ -188,13 +205,41 @@ def _load_pythia_from_local(path):
     return HookedTransformer.from_pretrained("pythia-410m", hf_model=hf, tokenizer=tok)
 
 
+def _load_small_from_local(path):
+    """Offline load for gpt2 (Small) — EXP_010b_SPEC.md §2/§6, issue #16.
+    Same cache-seeding pattern as the medium loader; local dir must hold
+    config.json, pytorch_model.bin, vocab.json, merges.txt."""
+    import os
+    import shutil
+
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
+    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+    cache = Path(os.environ.get("HF_HOME", Path.home() / ".cache" / "huggingface")) / "hub"
+    snap = cache / "models--gpt2" / "snapshots" / "local"
+    refs = cache / "models--gpt2" / "refs"
+    snap.mkdir(parents=True, exist_ok=True)
+    refs.mkdir(parents=True, exist_ok=True)
+    shutil.copy(Path(path) / "config.json", snap / "config.json")
+    (refs / "main").write_text("local")
+
+    from transformers import GPT2LMHeadModel, GPT2Tokenizer
+    from transformer_lens import HookedTransformer
+
+    hf = GPT2LMHeadModel.from_pretrained(path)
+    tok = GPT2Tokenizer.from_pretrained(path)
+    return HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok)
+
+
 def load_model_from_local(path, model_name):
     """Dispatch the offline local-dir load by --model-name (recorded diff,
-    issue #12). Defaults preserve the original gpt2-medium behaviour."""
+    issue #12; gpt2-small added per issue #16). Defaults preserve the
+    original gpt2-medium behaviour."""
     if model_name == "pythia-410m":
         return _load_pythia_from_local(path)
     if model_name == "gpt2-medium":
         return _load_medium_from_local(path)
+    if model_name == "gpt2":
+        return _load_small_from_local(path)
     raise ValueError(f"No local-load route for model {model_name!r}")
 
 
@@ -209,7 +254,7 @@ def main():
                     help="local dir with model files for offline load")
     # EXP_012-PYTHIA spec §3 (recorded diff, issue #12): model selection.
     # Default reproduces prior behaviour exactly.
-    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m"],
+    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m", "gpt2"],
                     default="gpt2-medium",
                     help="which model to load (default gpt2-medium)")
     ap.add_argument("--record-natural-norms", action="store_true",
@@ -220,9 +265,11 @@ def main():
     # artifact-suffix parameters. Defaults reproduce prior behaviour exactly.
     ap.add_argument("--seed", type=int, default=42,
                     help="global torch seed (registered runs used 42)")
-    ap.add_argument("--subset", choices=["registered", "B", "pythia"], default="registered",
+    ap.add_argument("--subset", choices=["registered", "B", "pythia", "small"],
+                    default="registered",
                     help="prompt subset: registered round-robin 25, disjoint B, "
-                         "or the EXP_012-PYTHIA core8+17 set")
+                         "the EXP_012-PYTHIA core8+17 set, or the EXP_010b "
+                         "5-Divine+20 Small set")
     ap.add_argument("--out-suffix", default=None,
                     help="artifact suffix override (e.g. robust_seed1337); "
                          "default keeps the tier-based naming")
@@ -244,6 +291,15 @@ def main():
             ap.error("--tier pythia requires --model-name pythia-410m")
         if args.subset != "pythia":
             ap.error("--tier pythia requires --subset pythia")
+    if args.tier in ("small010b", "small_smoke"):
+        # EXP_010b spec §5/§6: the norm-ratio record is part of the registered
+        # run, and the small tiers are bound to their model and subset so the
+        # gpt2-medium defaults cannot silently produce mislabeled artifacts.
+        args.record_natural_norms = True
+        if args.model_name != "gpt2":
+            ap.error(f"--tier {args.tier} requires --model-name gpt2")
+        if args.subset != "small":
+            ap.error(f"--tier {args.tier} requires --subset small")
 
     torch.manual_seed(args.seed)
     if args.harness_check:
@@ -263,6 +319,8 @@ def main():
         prompts = select_subset_b(tier["n_prompts"])
     elif args.subset == "pythia":
         prompts = select_subset_pythia(tier["n_prompts"])
+    elif args.subset == "small":
+        prompts = select_subset_small(tier["n_prompts"])
     else:
         prompts = select_subset(tier["n_prompts"])
     subset_b_records = prompts if args.subset == "B" else None

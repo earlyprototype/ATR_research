@@ -1,0 +1,30 @@
+prompt             stage1                 SB (this run)          match
+A08_linguistics    conv=False ' Divine'      conv=False ' Divine'      OK
+A14_kant           conv=False ' Divine'      conv=False ' Divine'      OK
+A15_sartre         conv=False ' Divine'      conv=False ' Divine'      OK
+A17_marx           conv=False ' Divine'      conv=False ' Divine'      OK
+A21_dickens        conv=False ' Divine'      conv=False ' Divine'      OK
+E01_politics       conv=True  ' prolet'      conv=True  ' prolet'      OK
+D01_water          conv=True  ' prolet'      conv=True  ' prolet'      OK
+A01_physics        conv=True  ' prolet'      conv=True  ' prolet'      OK
+B01_napoleon       conv=True  ' prolet'      conv=True  ' prolet'      OK
+C01_jack_jill      conv=True  ' prolet'      conv=True  ' prolet'      OK
+F01_anger          conv=False ' Divine'      conv=False ' Divine'      OK
+G01_punctuation    conv=True  ' till'        conv=True  ' till'        OK
+E02_tech           conv=False ' Divine'      conv=False ' Divine'      OK
+D02_periodic       conv=True  ' till'        conv=True  ' till'        OK
+A02_medical        conv=True  ' prolet'      conv=True  ' prolet'      OK
+B02_wwi            conv=True  ' prolet'      conv=True  ' prolet'      OK
+C02_king_cole      conv=True  ' prolet'      conv=True  ' prolet'      OK
+F02_insult         conv=False ' Divine'      conv=False ' Divine'      OK
+G02_brackets       conv=True  ' prolet'      conv=True  ' prolet'      OK
+E03_orgs           conv=False ' Divine'      conv=False ' Divine'      OK
+D03_organic        conv=True  ' till'        conv=True  ' till'        OK
+A03_neuro          conv=True  ' Anarch'      conv=True  ' Anarch'      OK
+B03_moon           conv=False ' Divine'      conv=False ' Divine'      OK
+C03_mary_lamb      conv=True  ' prolet'      conv=True  ' prolet'      OK
+F03_frustration    conv=False ' Divine'      conv=False ' Divine'      OK
+
+lock_in_iter values among converged: [120] (Stage 1: all 120; informational, not part of the gate)
+
+REPRODUCTION GATE: PASS — 25/25 exact (converged, terminal_token) match.

@@ -47,8 +47,9 @@ def main():
     ap.add_argument("--tier", default="full")
     ap.add_argument("--decode-via-tail", action="store_true")
     ap.add_argument("--model-path", default=None)
-    # EXP_012-PYTHIA spec §3 (recorded diff, issue #12); default unchanged.
-    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m"],
+    # EXP_012-PYTHIA spec §3 (recorded diff, issue #12); gpt2-small added per
+    # EXP_010b spec §6 (issue #16); default unchanged.
+    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m", "gpt2"],
                     default="gpt2-medium")
     ap.add_argument("--allow-legacy-pickle", action="store_true",
                     help="permit weights_only=False for pre-PR#4 tuple-keyed "
@@ -62,6 +63,13 @@ def main():
         # decode pythia-suffixed artifacts through the wrong model's tail.
         ap.error(f"tier {args.tier!r} holds pythia artifacts; pass "
                  "--model-name pythia-410m for --decode-via-tail")
+
+    if args.decode_via_tail and "small" in args.tier and args.model_name != "gpt2":
+        # Same binding for the EXP_010b gpt2-small artifacts (issue #16): the
+        # gpt2-medium default must not decode 768-dim terminals via the wrong
+        # model's tail.
+        ap.error(f"tier {args.tier!r} holds gpt2-small artifacts; pass "
+                 "--model-name gpt2 for --decode-via-tail")
 
     results = json.load(open(HERE / "output" / f"results_{args.tier}.json"))
     tpath = HERE / "output" / f"terminals_{args.tier}.pt"

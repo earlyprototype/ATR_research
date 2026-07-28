@@ -1,0 +1,40 @@
+Loading gpt2 from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-small (offline) ...
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 11968.01it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+Tier=small010b arms=['S3'] prompts=25 subset=small seed=42 renorm=seed_j max_iter=1000 check_start=100
+Natural per-layer resid_pre norms recorded -> natural_resid_norms_small010b_S3.json
+
+=== Arm S3: window 6->11 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [S3] A08_linguistics  -> '.'            lock=120 iters=120 margin=1.19
+  [S3] A14_kant         -> '.'            lock=120 iters=120 margin=1.32
+  [S3] A15_sartre       -> '.'            lock=120 iters=120 margin=1.43
+  [S3] A17_marx         -> '.'            lock=120 iters=120 margin=1.24
+  [S3] A21_dickens      -> '.'            lock=120 iters=120 margin=1.36
+  [S3] E01_politics     -> '.'            lock=120 iters=120 margin=0.75
+  [S3] D01_water        -> '.'            lock=120 iters=120 margin=0.66
+  [S3] A01_physics      -> '.'            lock=120 iters=120 margin=0.91
+  [S3] B01_napoleon     -> '.'            lock=120 iters=120 margin=0.89
+  [S3] C01_jack_jill    -> '.'            lock=120 iters=120 margin=1.11
+  [S3] F01_anger        -> '.'            lock=120 iters=120 margin=1.44
+  [S3] G01_punctuation  -> '.'            lock=120 iters=120 margin=1.36
+  [S3] E02_tech         -> '.'            lock=120 iters=120 margin=1.37
+  [S3] D02_periodic     -> '.'            lock=120 iters=120 margin=1.22
+  [S3] A02_medical      -> '.'            lock=120 iters=120 margin=0.85
+  [S3] B02_wwi          -> '.'            lock=120 iters=120 margin=0.54
+  [S3] C02_king_cole    -> '.'            lock=120 iters=120 margin=1.01
+  [S3] F02_insult       -> '.'            lock=120 iters=120 margin=1.42
+  [S3] G02_brackets     -> '.'            lock=120 iters=120 margin=1.09
+  [S3] E03_orgs         -> '.'            lock=120 iters=120 margin=1.43
+  [S3] D03_organic      -> '.'            lock=120 iters=120 margin=1.45
+  [S3] A03_neuro        -> '.'            lock=120 iters=120 margin=1.16
+  [S3] B03_moon         -> '.'            lock=120 iters=120 margin=1.28
+  [S3] C03_mary_lamb    -> '.'            lock=120 iters=120 margin=0.80
+  [S3] F03_frustration  -> '.'            lock=120 iters=120 margin=1.42
+
+=== Summary (611s) ===
+  S3  6->11 converged 25/25 unique_terminals=1 ['.']
+
+Artifacts: results_small010b_S3.json, terminals_small010b_S3.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output

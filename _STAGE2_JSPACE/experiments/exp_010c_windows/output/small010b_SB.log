@@ -1,0 +1,40 @@
+Loading gpt2 from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-small (offline) ...
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 8449.47it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+Tier=small010b arms=['SB'] prompts=25 subset=small seed=42 renorm=seed_j max_iter=1000 check_start=100
+Natural per-layer resid_pre norms recorded -> natural_resid_norms_small010b_SB.json
+
+=== Arm SB: window 0->11 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [SB] A08_linguistics  -> ' Divine'      lock=None iters=1000 margin=2.00
+  [SB] A14_kant         -> ' Divine'      lock=None iters=1000 margin=2.67
+  [SB] A15_sartre       -> ' Divine'      lock=None iters=1000 margin=2.02
+  [SB] A17_marx         -> ' Divine'      lock=None iters=1000 margin=1.88
+  [SB] A21_dickens      -> ' Divine'      lock=None iters=1000 margin=2.50
+  [SB] E01_politics     -> ' prolet'      lock=120 iters=120 margin=0.38
+  [SB] D01_water        -> ' prolet'      lock=120 iters=120 margin=0.50
+  [SB] A01_physics      -> ' prolet'      lock=120 iters=120 margin=0.23
+  [SB] B01_napoleon     -> ' prolet'      lock=120 iters=120 margin=0.25
+  [SB] C01_jack_jill    -> ' prolet'      lock=120 iters=120 margin=0.02
+  [SB] F01_anger        -> ' Divine'      lock=None iters=1000 margin=2.01
+  [SB] G01_punctuation  -> ' till'        lock=120 iters=120 margin=1.33
+  [SB] E02_tech         -> ' Divine'      lock=None iters=1000 margin=2.47
+  [SB] D02_periodic     -> ' till'        lock=120 iters=120 margin=1.12
+  [SB] A02_medical      -> ' prolet'      lock=120 iters=120 margin=0.28
+  [SB] B02_wwi          -> ' prolet'      lock=120 iters=120 margin=1.13
+  [SB] C02_king_cole    -> ' prolet'      lock=120 iters=120 margin=0.14
+  [SB] F02_insult       -> ' Divine'      lock=None iters=1000 margin=2.08
+  [SB] G02_brackets     -> ' prolet'      lock=120 iters=120 margin=0.05
+  [SB] E03_orgs         -> ' Divine'      lock=None iters=1000 margin=2.03
+  [SB] D03_organic      -> ' till'        lock=120 iters=120 margin=1.68
+  [SB] A03_neuro        -> ' Anarch'      lock=120 iters=120 margin=0.02
+  [SB] B03_moon         -> ' Divine'      lock=None iters=1000 margin=1.79
+  [SB] C03_mary_lamb    -> ' prolet'      lock=120 iters=120 margin=0.34
+  [SB] F03_frustration  -> ' Divine'      lock=None iters=1000 margin=2.05
+
+=== Summary (2515s) ===
+  SB  0->11 converged 14/25 unique_terminals=4 [' Anarch', ' Divine', ' prolet', ' till']
+
+Artifacts: results_small010b_SB.json, terminals_small010b_SB.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output
