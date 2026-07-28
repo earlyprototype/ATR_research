@@ -188,10 +188,25 @@ and executed:
 - **S1 sample:** N = 10,000 vectors drawn i.i.d. `torch.randn` at
   `torch.Generator().manual_seed(42)`, d = 1024, then passed through the real
   `ln_final` (γ, β from the same state dict, eps 1e-5) before the argmax.
-- **"scaled to a typical residual norm" is a NO-OP and was not applied.**
-  LayerNorm is scale-invariant, so the input norm cannot affect the argmax. The
-  phrase should not be read as an unrecorded free parameter; recorded here
-  rather than quietly dropped.
+- **"scaled to a typical residual norm": no scaling was applied** (the sampled
+  vectors go into `ln_final` as drawn, i.e. scale = 1.0). It is recorded rather
+  than quietly dropped so it cannot be mistaken for an unrecorded free
+  parameter.
+
+  **Correction (PR #33 review):** an earlier version of this addendum called the
+  scaling an *exact* no-op on the grounds that LayerNorm is scale-invariant.
+  That was an overstatement. With eps > 0,
+  `(x−μ)/√(var+eps) ≠ (cx−cμ)/√(c²·var+eps)`, so the invariance is near, not
+  exact — measured here at `|Δ| ≈ 2.2e-3` for c = 0.1 and `≈ 2.2e-5` for
+  c ∈ {10, 100}, which is large enough in principle to flip a near-tie argmax.
+
+  **Measured rather than argued** (`analyze_funnel_geometry.py --scale-check`,
+  recorded in `output/funnel_geometry.json`): rerunning the full N = 10,000
+  census at c ∈ {0.1, 1.0, 10.0, 100.0} gives **identical per-token argmax
+  counts at every scale** (100.00% agreement with c = 1.0), the same census
+  top-1, and unchanged collective shares (funnel 0.01%, word contrast 0.00%).
+  So the eps-induced departure is real but does not perturb this statistic over
+  a 1000× scale range; the S1 result does not depend on the scaling convention.
 - **S3 "mean-row direction":** the arithmetic **mean** (not median) over all
   50257 `wte` rows, L2-normalised; each token's statistic is the cosine between
   its own row and that direction. Percentiles for S2 and S3 are computed against
@@ -200,5 +215,10 @@ and executed:
   `n_directions`, `seed`, and `vocab` so the run is self-describing.
 
 The post-hoc natural-decode diagnostic (labelled as such in the results) uses
-the registered 25-prompt subset and one un-hooked forward pass per prompt,
-reading `blocks.{j}.hook_resid_post` at j ∈ {15, 17, 19, 21}.
+the registered 25-prompt subset and **one ordinary forward pass per prompt with
+no injection hook and no ATR loop**, capturing `blocks.{j}.hook_resid_post` at
+j ∈ {15, 17, 19, 21} through a name-filtered `run_with_cache`. An earlier
+wording called this "un-hooked", which is wrong as written: `run_with_cache`
+does install hooks — read-only caching hooks — and a rerun that took "un-hooked"
+literally would omit the capture and have nothing to decode. The property that
+matters is that nothing is *injected* or modified, not that no hook exists.

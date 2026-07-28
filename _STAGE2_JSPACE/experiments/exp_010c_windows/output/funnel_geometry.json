@@ -228,5 +228,35 @@
     }
   ],
   "funnel_collective_share_pct": 0.01,
-  "word_contrast_collective_share_pct": 0.0
+  "word_contrast_collective_share_pct": 0.0,
+  "scale_check": [
+    {
+      "scale": 0.1,
+      "funnel_collective_share_pct": 0.01,
+      "word_collective_share_pct": 0.0,
+      "argmax_agreement_vs_scale1": 100.0,
+      "top1_token": "\ufffd\ufffd"
+    },
+    {
+      "scale": 1.0,
+      "funnel_collective_share_pct": 0.01,
+      "word_collective_share_pct": 0.0,
+      "argmax_agreement_vs_scale1": 100.0,
+      "top1_token": "\ufffd\ufffd"
+    },
+    {
+      "scale": 10.0,
+      "funnel_collective_share_pct": 0.01,
+      "word_collective_share_pct": 0.0,
+      "argmax_agreement_vs_scale1": 100.0,
+      "top1_token": "\ufffd\ufffd"
+    },
+    {
+      "scale": 100.0,
+      "funnel_collective_share_pct": 0.01,
+      "word_collective_share_pct": 0.0,
+      "argmax_agreement_vs_scale1": 100.0,
+      "top1_token": "\ufffd\ufffd"
+    }
+  ]
 }

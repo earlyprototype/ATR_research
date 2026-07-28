@@ -65,15 +65,24 @@ def id_to_string(model_path, vocab_size):
     return [tok.decode([i]) for i in range(vocab_size)]
 
 
-def census(wte, g, b, n, seed=SEED, chunk=1000):
-    """S1: argmax token for n isotropic Gaussian directions through ln_final."""
+def census(wte, g, b, n, seed=SEED, chunk=1000, scale=1.0):
+    """S1: argmax token for n isotropic Gaussian directions through ln_final.
+
+    `scale` multiplies the sampled vector before the LayerNorm. The registered
+    run uses scale=1.0 (no scaling applied). LayerNorm is scale-invariant only
+    up to its eps term — (x-μ)/sqrt(var+eps) is not exactly (cx-cμ)/sqrt(c²var+eps)
+    for eps>0 — so the invariance is near, not exact, and at small c the
+    deviation is not negligible (|Δ| ≈ 2e-3 at c=0.1). `--scale-check` measures
+    whether that perturbs the reported statistic rather than assuming it cannot.
+    (PR #33 review.)
+    """
     d = wte.shape[1]
     gen = torch.Generator().manual_seed(seed)
     counts = torch.zeros(wte.shape[0], dtype=torch.long)
     with torch.no_grad():
         for start in range(0, n, chunk):
             m = min(chunk, n - start)
-            v = torch.randn(m, d, generator=gen)
+            v = torch.randn(m, d, generator=gen) * scale
             h = (v - v.mean(-1, keepdim=True)) / (v.var(-1, unbiased=False, keepdim=True) + 1e-5).sqrt()
             h = h * g + b
             counts += torch.bincount((h @ wte.T).argmax(-1), minlength=wte.shape[0])
@@ -85,6 +94,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model-path", required=True)
     ap.add_argument("--n", type=int, default=10000)
+    ap.add_argument("--scale-check", action="store_true",
+                    help="rerun the S1 census at several input scales and report "
+                         "whether the statistic moves (LayerNorm eps sensitivity)")
     args = ap.parse_args()
 
     wte, g, b = load_pieces(args.model_path)
@@ -142,6 +154,29 @@ def main():
         ids = [index[s] for s in names if s in index]
         report[f"{key}_collective_share_pct"] = round(
             100.0 * float(share[ids].sum()), 3)
+
+    if args.scale_check:
+        # Measured, not assumed: does the eps-induced departure from exact
+        # scale-invariance move the reported statistic? (PR #33 review.)
+        fids = [index[s] for s in FUNNEL if s in index]
+        wids = [index[s] for s in WORD if s in index]
+        rows_sc = []
+        for sc in (0.1, 1.0, 10.0, 100.0):
+            c = census(wte, g, b, args.n, scale=sc)
+            sh = c.float() / args.n
+            rows_sc.append({
+                "scale": sc,
+                "funnel_collective_share_pct": round(100.0 * float(sh[fids].sum()), 3),
+                "word_collective_share_pct": round(100.0 * float(sh[wids].sum()), 3),
+                "argmax_agreement_vs_scale1": round(
+                    100.0 * float((c == counts).float().mean()), 4),
+                "top1_token": strings[int(c.argmax())],
+            })
+        report["scale_check"] = rows_sc
+        print("\nscale sensitivity (S1 census at several input scales):")
+        for r in rows_sc:
+            print(f"  scale {r['scale']:>6}: funnel {r['funnel_collective_share_pct']}% "
+                  f"word {r['word_collective_share_pct']}% top1 {r['top1_token']!r}")
 
     out = HERE / "output" / "funnel_geometry.json"
     out.write_text(json.dumps(report, indent=2))
