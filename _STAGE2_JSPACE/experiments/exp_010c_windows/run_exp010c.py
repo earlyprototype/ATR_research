@@ -323,6 +323,12 @@ def main():
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
     n_prompts = args.n_prompts if args.n_prompts is not None else tier["n_prompts"]
+    # Artifact suffix: every output filename below is built from this, so it must
+    # stay defined ahead of the first use (the subset-B audit file). --tag and
+    # --out-suffix are aliases; a --harness-check run gets its own name so it can
+    # never land on a registered artifact.
+    suffix = (args.tag or args.out_suffix
+              or (f"{args.tier}_harness" if args.harness_check else args.tier))
     # A variant run must never land on the registered artifact names. Documenting
     # --tag as "required" did not enforce it: any parameter below changes the
     # results while the suffix still defaults to the tier name, so a variant could
@@ -330,10 +336,23 @@ def main():
     # BEFORE the model load, so it fails in a second rather than after a minute.
     # (PR #33 review, data-integrity finding; same principle as the subset-B
     # audit-file guard further down.)
-    if not (args.tag or args.out_suffix or args.harness_check):
+    # NOTE: --harness-check is NOT an exemption. Its artifacts are suffixed
+    # `<tier>_harness`, but those are committed files too, so a variant harness
+    # run (e.g. --harness-check --subset B) silently rewrote the registered
+    # results_smoke_harness.json / terminals_smoke_harness.pt. Observed, not
+    # hypothesised — it happened twice while verifying this merge.
+    # "Registered" is per tier, not globally: the pythia and small tiers are
+    # BOUND to their own subset below, so for them --subset pythia/small IS the
+    # registered configuration. Comparing against the literal "registered"
+    # instead made those tiers' own documented run commands unrunnable without
+    # --tag — i.e. it blocked the EXP_010b and EXP_012-PYTHIA registered runs.
+    tier_subset = {"pythia": "pythia",
+                   "small010b": "small", "small_smoke": "small"}.get(
+                       args.tier, "registered")
+    if not (args.tag or args.out_suffix):
         variant = [
             f"--seed {args.seed}" if args.seed != 42 else None,
-            f"--subset {args.subset}" if args.subset != "registered" else None,
+            f"--subset {args.subset}" if args.subset != tier_subset else None,
             f"--prompt-offset {args.prompt_offset}" if args.prompt_offset else None,
             f"--n-prompts {args.n_prompts}" if args.n_prompts is not None else None,
             f"--renorm {args.renorm}" if args.renorm != "seed_j" else None,
