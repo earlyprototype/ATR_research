@@ -547,8 +547,9 @@ sublist is maintained.
 
 **Spec:** `../../EXP_010c4_SPEC.md` (pre-registered 2026-07-24, committed
 before any census run; §6 amendment recorded pre-analysis after the PR #10
-review). Analysis: `build_final_map.py` (in this directory; refuses to run
-on a partial census).
+review). Analysis: `build_final_map.py` (in this directory; refuses a
+partial census by default — `--allow-partial` emits provisional
+diagnostics with the H12 verdict suppressed).
 
 **What ran:** `--tier census --resume`, 277 previously-unmeasured windows ×
 the registered 25-prompt subset = 6,925 runs, gated (0.999 ×3, check_every
@@ -732,3 +733,43 @@ high-agreement class. Recorded flat: (8→16) direct `dozen`/`darn` reads as
 disagree on most cells, so mid-stack terminal identities remain
 instrument-dependent. The J-lens re-decode (EXP_013m) is the registered
 arbiter; this table is the prior it will be compared against.
+
+### Post-review corrections (PR #51 review, 2026-07-29)
+
+The census closing changes were re-submitted as a narrow review-only PR
+(#51, base `claude/issue-6-akvuxp`) because PR #10's 554 generated data
+files push it past the reviewer's file limit. Four findings, all accepted;
+**no measured value changed** — `build_final_map.py` reproduces 300/300
+cells, 47/162/91 arm classes, the 21-cell target set, 8 non-convergence
+cells, `D` at (0,23) only, and H12 SUPPORTED 15/50 exactly as recorded
+above.
+
+1. **Partial-census guard was opt-in (major).** This section claimed the
+   analysis script "refuses to run on a partial census", but the guard sat
+   behind an optional `--require-complete` flag: run without it, a partial
+   artifact set emitted a final map and an H12 verdict indistinguishable
+   from the real one. The record over-claimed the code. Inverted: refusal
+   is now the default and `--allow-partial` is the explicit override,
+   which suppresses the H12 verdict (eligibility and the "differs from
+   every measured neighbour" test both read neighbours, so a partial
+   lattice can flip a verdict as cells land) and stamps the map
+   PROVISIONAL. Wording above corrected to match.
+2. **Machine-specific artifact path (major).** `BASE` was an absolute
+   `/home/user/...` path, so the analysis was unrunnable off this
+   container. Now derived from `__file__`, matching `analyze_terminals.py`.
+3. **Incomplete target-to-artifact manifest (major).** The runbook's §3a
+   hand-forward listed all 21 target cells against `terminals_census/`,
+   but only **19** are census arms: 8→21 is arm `O8` in
+   `terminals_scan.pt` and 10→21 is arm `A4` in `terminals_full.pt`. An
+   operator loading only `terminals_census/` would have silently dropped
+   two targets. §3a now carries an exact per-target manifest. The same
+   edit fixed a stale EXP_011m frozen-input reference to
+   `output/terminals.pt`, a file that does not exist.
+4. **Over-broad review filters (minor).** `.coderabbit.yaml` excluded
+   `**/output/...` repo-wide, which would have silently un-reviewed the
+   artifacts of every future experiment. Scoped to the `exp_010c_windows`
+   tree.
+
+Findings 1–3 are defects in the *instrument and its documentation*, not in
+the measurements; the census artifacts they read are unchanged and were
+never regenerated.

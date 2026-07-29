@@ -10,11 +10,16 @@
 #
 # Filters exclude generated run artifacts only. Everything that encodes a
 # decision — specs, scripts, RESULTS/session markdown — stays reviewable.
+#
+# Scoped to the EXP_010c experiment tree on purpose (PR #51 review). A
+# repo-wide `**/output/...` glob would silently un-review the artifacts of
+# every future experiment, including ones whose JSON *is* decision-bearing.
+# A new experiment that wants exclusions should add its own prefix here.
 reviews:
   path_filters:
-    - "!**/output/results_census/**"
-    - "!**/output/terminals_census/**"
-    - "!**/output/results_*.json"
-    - "!**/output/terminals_*.pt"
-    - "!**/output/terminal_characterisation_*.json"
-    - "!**/output/prompt_subset.json"
+    - "!_STAGE2_JSPACE/experiments/exp_010c_windows/output/results_census/**"
+    - "!_STAGE2_JSPACE/experiments/exp_010c_windows/output/terminals_census/**"
+    - "!_STAGE2_JSPACE/experiments/exp_010c_windows/output/results_*.json"
+    - "!_STAGE2_JSPACE/experiments/exp_010c_windows/output/terminals_*.pt"
+    - "!_STAGE2_JSPACE/experiments/exp_010c_windows/output/terminal_characterisation_*.json"
+    - "!_STAGE2_JSPACE/experiments/exp_010c_windows/output/prompt_subset.json"

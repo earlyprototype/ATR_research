@@ -58,13 +58,26 @@ complete data rather than a sampled grid. What the map hands forward
 (observations; see the 2026-07-29 section of RESULTS_EXP010C.md):
 
 - **Target set for EXP_011m/013m — 21 cells** with whole-word,
-  prompt-dependent terminals: 5→23, 6→23, 8→9, 8→11, 8→16, 8→21, 9→11,
-  9→20, 10→10, 10→16, 10→21, 12→15, 13→13, 13→21, 14→16, 15→17, 15→19,
-  16→18, 17→20, 20→20, 21→21. Terminal tensors for every one are in
-  `experiments/exp_010c_windows/output/terminals_census/<arm>.pt` (plus
-  `terminals_full.pt` / `terminals_scan.pt` / `terminals_infill.pt` for
-  the 23 pre-census cells). Note these are **not** a contiguous band and
+  prompt-dependent terminals. These are **not** a contiguous band and
   include single-layer windows (10→10, 13→13, 20→20, 21→21).
+
+  **Exact target-to-artifact manifest.** 19 of the 21 are census arms;
+  **two are not** — they were measured by earlier tiers and are absent
+  from `terminals_census/`. Loading only `terminals_census/` silently
+  drops 8→21 and 10→21. All paths are relative to
+  `experiments/exp_010c_windows/output/`; every tensor file is a dict
+  keyed `"<arm>|<prompt_id>"`.
+
+  | Cells | Arm | Artifact |
+  |---|---|---|
+  | 5→23, 6→23, 8→9, 8→11, 8→16, 9→11, 9→20, 10→10, 10→16, 12→15, 13→13, 13→21, 14→16, 15→17, 15→19, 16→18, 17→20, 20→20, 21→21 (19) | `W<i>_<j>` | `terminals_census/W<i>_<j>.pt` |
+  | 8→21 | `O8` | `terminals_scan.pt` |
+  | 10→21 | `A4` | `terminals_full.pt` |
+
+  The remaining pre-census cells (not targets) live in
+  `terminals_full.pt`, `terminals_scan.pt` and `terminals_infill.pt`;
+  `results_*.json` / `results_census/*.json` carry the matching
+  per-run records.
 - **Contrast set:** 91 punctuation-funnel cells and 26 whole-word funnel
   cells (prompt-*independent*) — the natural comparison classes for a
   projection test, alongside the A0 (0→23) `D` terminals.
@@ -103,8 +116,11 @@ logit-lens tokens), agreement-with-final-layer curve, and the layer range where
 lens ≫ logit-lens. Deliverable: Medium's empirical band `[L_lo, L_hi]` (or a
 recorded "no coherent band" verdict) + comparison against the 10–21 mapping.
 
-**EXP_011m — terminal projection.** Frozen input:
-`experiments/exp_010c_windows/output/terminals.pt`. For each (window, prompt)
+**EXP_011m — terminal projection.** Frozen input: the per-target artifacts
+named in the §3a manifest — `terminals_census/W<i>_<j>.pt` for 19 targets,
+plus `terminals_scan.pt` (arm `O8`, 8→21) and `terminals_full.pt` (arm `A4`,
+10→21). There is no aggregate `terminals.pt`; load per the manifest or the
+two non-census targets are silently missing. For each (window, prompt)
 terminal mean vector at the window's extract layer j: decompose into the J-space
 component (sparse nonnegative combination of ≤25 J-lens vectors at layer j, per
 the paper's construction) vs complement; record energy fractions. Null:
