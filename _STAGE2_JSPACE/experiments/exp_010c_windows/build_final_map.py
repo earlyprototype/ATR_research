@@ -5,15 +5,19 @@ infill tiers + census shards), applies the EXP_010c3_SPEC §3 arm-class
 rule, and evaluates H12 per the EXP_010c4_SPEC §6 amendment (eligible =
 census cells with >=1 already-measured neighbour on the valid lattice).
 
-Pure analysis, no model time. Usage: build_final_map.py [--require-complete]
+Pure analysis, no model time. Usage: build_final_map.py [--allow-partial]
+
+Refuses a partial census by default: a final map and an H12 verdict are
+only meaningful over all 300 cells. `--allow-partial` emits provisional
+diagnostics for an in-progress census and suppresses the H12 verdict.
 """
 import json
 import pathlib
 import sys
 from collections import Counter
 
-BASE = pathlib.Path("/home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output")
-REQUIRE_COMPLETE = "--require-complete" in sys.argv
+BASE = pathlib.Path(__file__).resolve().parent / "output"
+ALLOW_PARTIAL = "--allow-partial" in sys.argv
 
 
 def tok_class(t):
@@ -87,12 +91,40 @@ def neighbours(i, j):
             if 0 <= a <= b <= 23]
 
 
+def _print_map(cells, complete):
+    """Compact (i,j) classification map. '?' = unmeasured (only when partial)."""
+    label = "MAP" if complete else "PROVISIONAL MAP (? = unmeasured)"
+    print(f"\n{label} (rows=inject i, cols=extract j; "
+          f"W=whole-word, P=punct funnel, m=mixed):")
+    print("    " + "".join(f"{j:>3}" for j in range(24)))
+    for i in range(24):
+        row = f"{i:>3} "
+        for j in range(24):
+            if j < i:
+                row += "   "
+            elif (i, j) in cells:
+                c = cells[(i, j)]
+                ch = {"whole-word": "W", "punctuation funnel": "P", "mixed": "m"}[c["class"]]
+                row += f"  {ch if not (c['class']=='whole-word' and c['prompt_dependent']) else 'W*'}"[-3:]
+            else:
+                row += "  ?"
+        print(row)
+    print("W* = whole-word AND prompt-dependent")
+
+
 def main():
     cells = load_all()
     total_valid = 24 * 25 // 2  # 300
     print(f"cells measured: {len(cells)}/{total_valid}")
-    if REQUIRE_COMPLETE and len(cells) < total_valid:
-        raise SystemExit(f"INCOMPLETE: {total_valid - len(cells)} cells missing — not final")
+    complete = len(cells) == total_valid
+    if not complete and not ALLOW_PARTIAL:
+        raise SystemExit(
+            f"INCOMPLETE: {total_valid - len(cells)} cells missing — refusing to emit "
+            f"a final map or H12 verdict. Re-run with --allow-partial for provisional "
+            f"diagnostics (H12 suppressed).")
+    if not complete:
+        print(f"\n*** PROVISIONAL — {total_valid - len(cells)} of {total_valid} cells "
+              f"unmeasured. Not the final map; H12 suppressed. ***")
 
     runs = sum(c["n"] for c in cells.values())
     conv = sum(c["converged"] for c in cells.values())
@@ -123,6 +155,13 @@ def main():
     print(f"\ncells producing 'D' at all: {dcells}")
 
     # ---- H12 (as amended, EXP_010c4_SPEC §6) ----
+    # Only ever evaluated over the complete lattice: a cell's eligibility and its
+    # "differs from EVERY measured neighbour" test both read neighbours, so a
+    # partial census can flip a verdict as the missing cells land.
+    if not complete:
+        print("\nH12: SUPPRESSED (partial census).")
+        _print_map(cells, complete)
+        return
     census_cells = [k for k in cells if k not in PRIOR]
     eligible, differs = [], []
     for k in census_cells:
@@ -139,23 +178,7 @@ def main():
     print(f"\nH12 VERDICT: {'SUPPORTED' if differs else 'REFUTED'} "
           f"({len(differs)}/{len(eligible)} eligible cells differ from every measured neighbour)")
 
-    # compact map for the record
-    print("\nMAP (rows=inject i, cols=extract j; W=whole-word, P=punct funnel, m=mixed, .=n/a):")
-    hdr = "    " + "".join(f"{j:>3}" for j in range(24))
-    print(hdr)
-    for i in range(24):
-        row = f"{i:>3} "
-        for j in range(24):
-            if j < i:
-                row += "   "
-            elif (i, j) in cells:
-                c = cells[(i, j)]
-                ch = {"whole-word": "W", "punctuation funnel": "P", "mixed": "m"}[c["class"]]
-                row += f"  {ch if not (c['class']=='whole-word' and c['prompt_dependent']) else 'W*'}"[-3:]
-            else:
-                row += "  ?"
-        print(row)
-    print("W* = whole-word AND prompt-dependent")
+    _print_map(cells, complete)
 
 
 if __name__ == "__main__":
