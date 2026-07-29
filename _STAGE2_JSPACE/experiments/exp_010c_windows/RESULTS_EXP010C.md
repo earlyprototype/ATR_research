@@ -674,3 +674,61 @@ control for this tier is appended below when it completes; the J-lens
 re-decode (EXP_013m) remains the registered arbiter for all mid-stack
 terminal claims. The layer axes now carry **no sampling assumption**:
 every valid (i, j) is measured.
+
+### 2026-07-29 — Census terminal characterisation + decode-via-tail control
+
+`analyze_terminals.py --tier census --decode-via-tail` over all 277 census
+arms (6,925 terminal decodes plus cosine clustering at the gate threshold).
+Artifact: `output/terminal_characterisation_census.json`. Observations only.
+
+**Tensor basins:** 1–25 per arm, mean 10.6 (25 = fully prompt-private).
+
+**Direct-decode vs decode-via-tail agreement, aggregated by extraction
+depth j** (census arms only; **the j=23 row is not a via-tail measurement**
+— the tail is empty there, so the figure is the mean-vs-last-position
+decode check, same convention as the earlier tiers):
+
+| j | arms | mean agree /25 | arms ≥20/25 |
+|---|---|---|---|
+| 0–4 | 15 | 0.0–0.3 | 0 |
+| 5–9 | 40 | 1.5–3.3 | 0 |
+| 10–14 | 64 | 2.8–5.6 | 2 |
+| 15–19 | 83 | 4.8–8.9 | 11 |
+| 20 | 21 | 9.0 | 3 |
+| 21 | 11 | 6.6 | 1 |
+| 22 | 22 | 18.9 | 12 |
+| 23 | 21 | 24.8 *(not via-tail; see note)* | 21 |
+
+Per-depth means rise monotonically-with-noise from ~0 at j≤4 to 18.9 at
+j=22. The pre-census prior (high agreement only at j=21) is **not**
+reproduced across the full census: j=21's census arms average 6.6/25,
+while j=22 averages 18.9/25.
+
+**The 21 target cells (whole-word AND prompt-dependent), agreement and
+basins.** 19 are census-measured; (8→21) 17/25 and (10→21) 23/25 come from
+the earlier tiers:
+
+| Cell | Basins | Agree | Cell | Basins | Agree |
+|---|---|---|---|---|---|
+| 5→23 | 5 | 25/25 | 13→13 | 7 | 20/25 |
+| 6→23 | 5 | 25/25 | 13→21 | 13 | 16/25 |
+| 8→9 | 25 | 2/25 | 14→16 | 16 | 1/25 |
+| 8→11 | 7 | 0/25 | 15→17 | 10 | 0/25 |
+| 8→16 | 6 | 0/25 | 15→19 | 7 | 16/25 |
+| 9→11 | 13 | 16/25 | 16→18 | 3 | 12/25 |
+| 9→20 | 17 | 13/25 | 17→20 | 13 | 18/25 |
+| 10→10 | 20 | 0/25 | 20→20 | 13 | 25/25 |
+| 10→16 | 8 | 14/25 | 21→21 | 11 | 0/25 |
+| 12→15 | 11 | 1/25 | | | |
+
+Agreement within the target set spans the full range (0/25 to 25/25), so
+the whole-word prompt-dependent class does **not** coincide with the
+high-agreement class. Recorded flat: (8→16) direct `dozen`/`darn` reads as
+`' just'` ×25 through the tail; (10→10) direct `Tooth` reads as `' Imp'`;
+(15→19) direct `Quebec`/`Canadian` reads as `Quebec`/`Montreal`, and
+(16→18) as `Quebec`/`Ottawa`.
+
+**Standing caveat, reinforced:** at j<22 the two readout instruments
+disagree on most cells, so mid-stack terminal identities remain
+instrument-dependent. The J-lens re-decode (EXP_013m) is the registered
+arbiter; this table is the prior it will be compared against.
