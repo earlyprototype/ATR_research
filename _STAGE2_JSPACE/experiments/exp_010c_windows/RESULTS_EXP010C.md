@@ -497,3 +497,238 @@ covers 23/300 valid windows — single-layer structure demonstrated here
 full census `EXP_010c4_SPEC.md` (all 277 remaining cells, same protocol)
 addresses this. The J-lens re-decode (EXP_013m) remains the registered
 arbiter for all mid-stack terminal claims.
+
+## 2026-07-26 — EXP_010c-4 census checkpoint: priority block complete (observations only)
+
+**Spec:** `../../EXP_010c4_SPEC.md` (+ §6 amendment). Checkpoint note per
+spec §5 — counts and classes only; the full observations section, map, and
+H12 evaluation come at census completion. Status: 100/277 arms done (the
+complete 4 ≤ i ≤ 14, j ≥ 13 neighbourhood), 177-cell remainder in
+progress. Artifacts: per-arm shards `output/results_census/`,
+`output/terminals_census/`, all committed. Ops: sweep running across
+process relaunches (7 silent process deaths to date, each recovered by
+`--resume`; per-arm duty ≈ 92%).
+
+**Convergence:** 2,499/2,500 runs converged (lock 120–170). The single
+non-convergence — the first in the programme — is W7_14 (7→14),
+D01_water: 1000 iterations, final lag-1 cosine 0.99849 (just under the
+0.999 gate), lag_scan monotonically decaying 0.9974 → 0.8792 over lags
+1–8 (no multiples-of-p signature), terminal decode `' PLEASE'`. Below the
+spec's >5/25 systematic-non-convergence threshold; recorded flat.
+
+**Arm classes over the 100 cells (mechanical, the 010c-3 §3 rule):**
+21 whole-word, 53 mixed, 26 punctuation funnels; 58/100 prompt-dependent
+(≥2 unique terminals at n=25).
+
+**Whole-word AND prompt-dependent cells (the map's target signature) — 9,
+all previously unmeasured:** (5→23) `as`/`name` · (6→23) `dawn`/`once` ·
+(8→16) `dozen`/`darn` · (9→20) `enough`/`hopefully`/`survive`/
+`heartbeat`/`etc` · (10→16) `etc`/`Fas` · (12→15) `HuffPost`/`Interest` ·
+(13→13, single-layer window) `till` ×20 + 4 singles · (13→21)
+`Kra`/`until`/`today`/`ever` · (14→16) `impressed`/`anything`/`nor` + 2
+singles. Token-identity statements, recorded flat: `' until'` at (13→21)
+matches an A4 (10→21) terminal token; `' till'` at (13→13) matches the
+token of GPT-2 Small's Stage 1 basin. No relatedness asserted
+(anisotropy-corrected permutation control remains pending).
+
+**Whole-word single-terminal funnels — 12:** (5→22) `Happy` · (6→18)
+`Republican` · (8→14) `rant` (token shared with measured 8→15) · (8→18)
+`lol` · (9→13) `hopefully` · (9→14) and (9→15) `dreaded` · (10→13) `Fas`
+(shared with measured 10→15) · (11→14) `Amen` · (11→16) `Afgh` · (12→13)
+`evid` · (12→22) `or`.
+
+**Standing note:** all class labels are the character-based rule with its
+recorded edges (leading-space alphabetic non-words such as `Fas`, `Kra`,
+`Afgh`, `evid` class as whole-word by the rule; the 010c-3 classification
+notes apply). Full uncurated inventories live in the shards; no curated
+sublist is maintained.
+
+## 2026-07-29 — EXP_010c-4 FULL WINDOW CENSUS COMPLETE (300/300 cells)
+
+**Spec:** `../../EXP_010c4_SPEC.md` (pre-registered 2026-07-24, committed
+before any census run; §6 amendment recorded pre-analysis after the PR #10
+review). Analysis: `build_final_map.py` (in this directory; refuses to run
+on a partial census).
+
+**What ran:** `--tier census --resume`, 277 previously-unmeasured windows ×
+the registered 25-prompt subset = 6,925 runs, gated (0.999 ×3, check_every
+10, check_start 100, max_iter 1000), seed 42, L0 natural-pass seeding,
+identical protocol to every registered tier. With the 23 cells measured by
+the full/scan/infill tiers (not rerun, per the do-not-rerun convention),
+**all 300 valid windows 0 ≤ i ≤ j ≤ 23 are now measured**: 7,500 registered
+runs total, **7,435 converged**.
+
+**Ops (recorded):** the census executed across many process boundaries —
+**14 silent process deaths, 2 container restarts, and 1 filesystem
+rollback** (the local worktree reverted ~1 h behind origin; recovered by
+fast-forward from the remote, which holds every arm because each is pushed
+as it completes). Per-arm shard checkpointing plus artifact-verified
+`--resume` meant **zero measured cells were lost or recomputed
+inconsistently**; per-arm duty cycle ≈ 92 %. Deviation recorded: many
+processes, identical protocol parameters throughout.
+
+**Arm classes over all 300 cells (mechanical, the 010c-3 §3 rule):**
+47 whole-word · 162 mixed · 91 punctuation funnels.
+**172/300 prompt-dependent** (≥2 unique terminals at n=25).
+
+**`D` inventory:** across all 300 windows, `D` appears as a terminal in
+**exactly one cell — (0→23), the full stack.** 1→23, 2→23 and 3→23
+(near-full stacks omitting only layers 0, 0–1, 0–2) give `'name'` ×22,
+`'_'` ×25 and `' +'` ×23 respectively.
+
+**Non-convergence inventory (8 cells, 65 runs of 7,500):**
+
+| Cell | Non-converged | Note |
+|---|---|---|
+| 0→4 | 16/25 | systematic (>5/25) |
+| 0→5 | 14/25 | systematic |
+| 0→1 | 8/25 | systematic |
+| 0→6 | 8/25 | systematic |
+| 1→3 | 7/25 | systematic |
+| 1→2 | 6/25 | systematic |
+| 16→23 | 5/25 | below threshold |
+| 7→14 | 1/25 | isolated |
+
+All six systematic cells sit at i ≤ 1 in short windows. Where lag_scan was
+inspected (7→14) it decayed monotonically over lags 1–8 — no
+multiples-of-p signature.
+
+**Whole-word AND prompt-dependent cells — 21 (the J-lens target set):**
+
+| Cell | Terminals (top) | | Cell | Terminals (top) |
+|---|---|---|---|---|
+| 5→23 | `as` 24, `name` 1 | | 13→13 | `till` 20 +3 |
+| 6→23 | `dawn` 23, `once` 2 | | 13→21 | `Kra` 14, `until` 6, `today` 3 |
+| 8→9 | `slee` 9, `sensitive` 8 +2 | | 14→16 | `impressed` 12, `anything` 5 +3 |
+| 8→11 | `Carb` 15, `incent` 10 | | 15→17 | `manga` 20, `same` 3, `anime` 2 |
+| 8→16 | `dozen` 17, `darn` 8 | | 15→19 | `Quebec` 14, `Canadian` 11 |
+| 8→21 | `simultaneously` 17, `halfway` 8 | | 16→18 | `Quebec` 23, `same` 2 |
+| 9→11 | `Pros` 20, `gmaxwell` 4 +1 | | 17→20 | `but` 16, `lately` 6, `been` 3 |
+| 9→20 | `enough` 7, `hopefully` 7 +3 | | 20→20 | `about` 13, `into` 12 |
+| 10→10 | `Tooth` 24, `Overt` 1 | | 21→21 | `Mau` 22, `Mace` 2 +1 |
+| 10→16 | `etc` 16, `Fas` 9 | | 12→15 | `HuffPost` 23, `Interest` 2 |
+| 10→21 | `until` 19, `forever` 5, `since` 1 | | | |
+
+Full uncurated inventories in the per-arm shards. Token-identity
+statements only, no relatedness asserted (anisotropy control pending):
+`' until'` appears at 10→21, 13→21 and 15→21; `' till'` at 13→13 matches
+GPT-2 Small's Stage 1 basin token; `' rant'` at 8→12, 8→14, 8→15;
+`' Quebec'` at 15→18, 15→19, 16→18.
+
+**Whole-word single-terminal funnels — 26:** 0→3, 1→1, 1→22, 2→22, 3→22,
+5→22, 6→18, 8→14, 8→15, 8→18, 9→12, 9→13, 9→14, 9→15, 10→11, 10→13,
+10→15, 10→17, 11→14, 11→16, 12→13, 12→22, 15→18, 16→17, 16→19, 22→22.
+
+**H12 (aliasing materiality) — spec §6 amended criterion: SUPPORTED.**
+Eligible cells (census cells with ≥1 already-measured neighbour on the
+valid lattice): 50. Cells whose arm class differs from **every** measured
+neighbour: **15** — 0→10, 0→12, 4→22, 5→17, 5→22, 6→18, 7→15, 8→18, 8→22,
+9→20, 10→14, 11→15, 11→17, 12→22, 13→21. Support required ≥1; observed 15.
+(Cells with no measured neighbour are excluded from the evaluation and
+appear in the map only, per the amendment.)
+
+**Full map** (rows = inject i, cols = extract j; `W*` = whole-word AND
+prompt-dependent, `W` = whole-word funnel, `P` = punctuation funnel,
+`m` = mixed; blank = i > j, invalid):
+
+```
+      0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+  0   m  P  P  W  m  m  m  m  m  m  P  m  P  P  P  P  P  P  P  P  P  P  P  m
+  1      W  m  m  m  m  m  m  m  m  m  m  m  m  P  P  P  P  P  P  P  P  W  m
+  2         m  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  W  P
+  3            P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  P  W  m
+  4               m  m  m  m  m  m  m  m  m  P  P  P  P  P  P  P  P  P  m  m
+  5                  m  m  m  m  m  m  m  m  P  P  P  P  P  P  P  m  m  W W*
+  6                     m  m  m  m  m  m  m  P  P  P  m  m  W  m  m  m  m W*
+  7                        m  m  m  m  m  m  m  m  P  m  m  m  m  m  m  m  m
+  8                           m W*  m W*  m  m  W  W W*  m  W  m  m W*  P  m
+  9                              m  m W*  W  W  W  W  P  m  m  m W*  m  m  m
+ 10                                W*  W  P  W  m  W W*  W  m  m  m W*  m  m
+ 11                                    m  m  m  W  m  W  P  m  m  m  m  m  m
+ 12                                       m  W  m W*  P  P  m  m  m  m  W  m
+ 13                                         W*  m  m  m  m  m  m  m W*  P  m
+ 14                                             m  m W*  m  P  m  m  m  m  m
+ 15                                                m  m W*  W W*  m  m  m  m
+ 16                                                   m  W W*  W  m  m  m  m
+ 17                                                      m  P  m W*  m  P  m
+ 18                                                         m  m  m  m  m  m
+ 19                                                            m  m  m  m  m
+ 20                                                              W*  m  m  m
+ 21                                                                 W*  m  m
+ 22                                                                     W  m
+ 23                                                                        m
+```
+
+**Superseded by this section (recorded):** the 010c-3 hand-forward stated
+that whole-word prompt-dependent terminals occur "at exactly (8→21) and
+(10→21)". That was true of the 23 cells measured then; over all 300 cells
+the count is 21. The earlier statement is left in place above as the record
+of what the sampled data supported; this section is the complete map.
+
+**Caveats (standing):** single seed; one 25-prompt subset;
+cluster-threshold sensitivity unexplored; the §3 token-class rule is
+character-based with the recorded edges (leading-space alphabetic
+non-words such as `Fas`, `Kra`, `Mau` class as whole-word by the rule);
+direct decode at j<23 is a logit-lens-at-layer-j readout — the via-tail
+control for this tier is appended below when it completes; the J-lens
+re-decode (EXP_013m) remains the registered arbiter for all mid-stack
+terminal claims. The layer axes now carry **no sampling assumption**:
+every valid (i, j) is measured.
+
+### 2026-07-29 — Census terminal characterisation + decode-via-tail control
+
+`analyze_terminals.py --tier census --decode-via-tail` over all 277 census
+arms (6,925 terminal decodes plus cosine clustering at the gate threshold).
+Artifact: `output/terminal_characterisation_census.json`. Observations only.
+
+**Tensor basins:** 1–25 per arm, mean 10.6 (25 = fully prompt-private).
+
+**Direct-decode vs decode-via-tail agreement, aggregated by extraction
+depth j** (census arms only; **the j=23 row is not a via-tail measurement**
+— the tail is empty there, so the figure is the mean-vs-last-position
+decode check, same convention as the earlier tiers):
+
+| j | arms | mean agree /25 | arms ≥20/25 |
+|---|---|---|---|
+| 0–4 | 15 | 0.0–0.3 | 0 |
+| 5–9 | 40 | 1.5–3.3 | 0 |
+| 10–14 | 64 | 2.8–5.6 | 2 |
+| 15–19 | 83 | 4.8–8.9 | 11 |
+| 20 | 21 | 9.0 | 3 |
+| 21 | 11 | 6.6 | 1 |
+| 22 | 22 | 18.9 | 12 |
+| 23 | 21 | 24.8 *(not via-tail; see note)* | 21 |
+
+Per-depth means rise monotonically-with-noise from ~0 at j≤4 to 18.9 at
+j=22. The pre-census prior (high agreement only at j=21) is **not**
+reproduced across the full census: j=21's census arms average 6.6/25,
+while j=22 averages 18.9/25.
+
+**The 21 target cells (whole-word AND prompt-dependent), agreement and
+basins.** 19 are census-measured; (8→21) 17/25 and (10→21) 23/25 come from
+the earlier tiers:
+
+| Cell | Basins | Agree | Cell | Basins | Agree |
+|---|---|---|---|---|---|
+| 5→23 | 5 | 25/25 | 13→13 | 7 | 20/25 |
+| 6→23 | 5 | 25/25 | 13→21 | 13 | 16/25 |
+| 8→9 | 25 | 2/25 | 14→16 | 16 | 1/25 |
+| 8→11 | 7 | 0/25 | 15→17 | 10 | 0/25 |
+| 8→16 | 6 | 0/25 | 15→19 | 7 | 16/25 |
+| 9→11 | 13 | 16/25 | 16→18 | 3 | 12/25 |
+| 9→20 | 17 | 13/25 | 17→20 | 13 | 18/25 |
+| 10→10 | 20 | 0/25 | 20→20 | 13 | 25/25 |
+| 10→16 | 8 | 14/25 | 21→21 | 11 | 0/25 |
+| 12→15 | 11 | 1/25 | | | |
+
+Agreement within the target set spans the full range (0/25 to 25/25), so
+the whole-word prompt-dependent class does **not** coincide with the
+high-agreement class. Recorded flat: (8→16) direct `dozen`/`darn` reads as
+`' just'` ×25 through the tail; (10→10) direct `Tooth` reads as `' Imp'`;
+(15→19) direct `Quebec`/`Canadian` reads as `Quebec`/`Montreal`, and
+(16→18) as `Quebec`/`Ottawa`.
+
+**Standing caveat, reinforced:** at j<22 the two readout instruments
+disagree on most cells, so mid-stack terminal identities remain
+instrument-dependent. The J-lens re-decode (EXP_013m) is the registered
+arbiter; this table is the prior it will be compared against.

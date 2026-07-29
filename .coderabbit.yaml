@@ -1,0 +1,20 @@
+# CodeRabbit configuration.
+#
+# Added 2026-07-29: the EXP_010c-4 census commits one results JSON + one
+# terminal tensor per measured window (554 files for 277 arms). These are
+# experimental *data*, not code — they are the quantitative record, reviewed
+# by the analysis scripts and the results tables, not line by line. Left
+# unfiltered they push a PR past CodeRabbit's per-review file limit, which
+# skips review of the ~8 files that actually warrant it (specs, runner,
+# analysis, results record, session notes).
+#
+# Filters exclude generated run artifacts only. Everything that encodes a
+# decision — specs, scripts, RESULTS/session markdown — stays reviewable.
+reviews:
+  path_filters:
+    - "!**/output/results_census/**"
+    - "!**/output/terminals_census/**"
+    - "!**/output/results_*.json"
+    - "!**/output/terminals_*.pt"
+    - "!**/output/terminal_characterisation_*.json"
+    - "!**/output/prompt_subset.json"

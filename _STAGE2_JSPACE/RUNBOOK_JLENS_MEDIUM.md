@@ -49,6 +49,51 @@ The EXP_010c outcome table (spec §6) sets what to look at first:
 | H9 refuted (everything says `D`) | EXP_012m decides whether there was ever a band to find: a missing/incoherent band at 345M would *explain* the refutation inside the workspace frame (no workspace, nothing to rescue) and directly feeds H7's cross-model claim. EXP_013m on the baseline trajectory asks whether anything verbalizable moves beneath the constant `D`. |
 | Fragmentation everywhere / length confound | EXP_013m on fragmenting trajectories: is fragmentation motion *within* verbalizable directions or outside them? Defer EXP_011m until the ATR picture stabilises (no-splice control from spec §3). |
 
+## 3a. Census hand-forward (2026-07-29 — supersedes the §3 branch table's
+## input, not its logic)
+
+`EXP_010c4_SPEC.md`'s census has measured **all 300 valid (i, j) windows**
+at the registered protocol, so the branch table above is now entered with
+complete data rather than a sampled grid. What the map hands forward
+(observations; see the 2026-07-29 section of RESULTS_EXP010C.md):
+
+- **Target set for EXP_011m/013m — 21 cells** with whole-word,
+  prompt-dependent terminals: 5→23, 6→23, 8→9, 8→11, 8→16, 8→21, 9→11,
+  9→20, 10→10, 10→16, 10→21, 12→15, 13→13, 13→21, 14→16, 15→17, 15→19,
+  16→18, 17→20, 20→20, 21→21. Terminal tensors for every one are in
+  `experiments/exp_010c_windows/output/terminals_census/<arm>.pt` (plus
+  `terminals_full.pt` / `terminals_scan.pt` / `terminals_infill.pt` for
+  the 23 pre-census cells). Note these are **not** a contiguous band and
+  include single-layer windows (10→10, 13→13, 20→20, 21→21).
+- **Contrast set:** 91 punctuation-funnel cells and 26 whole-word funnel
+  cells (prompt-*independent*) — the natural comparison classes for a
+  projection test, alongside the A0 (0→23) `D` terminals.
+- **`D` is a single-cell phenomenon:** exactly one window in 300 produces
+  it (0→23). EXP_013m's baseline-trajectory question is therefore about
+  that one cut, not about deep windows generally.
+- **Readout-reliability prior (corrected by the census — read this, not
+  the sampled version):** the pre-census tiers suggested agreement was
+  high only at extraction 21 and collapsed at j ∈ {15,17,19}. **That does
+  not survive the full census.** Over all 277 census arms, direct-decode
+  vs via-tail agreement rises roughly monotonically with extraction depth
+  — ≈0/25 at j ≤ 4, ~5/25 at j ≈ 13, 18.9/25 at j=22 — and **j=21's
+  census arms average only 6.6/25** (the old prior rested on two cells;
+  there are eleven at j=21). The j=23 figure is not a via-tail
+  measurement at all (empty tail = mean-vs-last-position check). Full
+  table in the 2026-07-29 results section. Treat every sub-22 terminal
+  identity as instrument-dependent until the J-lens arbitrates.
+- **Dissociation to plan around:** agreement across the 21 target cells
+  spans 0/25 to 25/25 (25/25 at 5→23, 6→23, 20→20; 0/25 at 8→11, 8→16,
+  15→17, 21→21). The whole-word prompt-dependent class and the
+  high-agreement class are **not** the same set, so two-instrument
+  agreement cannot be used to validate the target cells — EXP_013m is
+  load-bearing, not confirmatory.
+- **New ATR-side priority, independent of the J-lens:** six cells at
+  i ≤ 1 show systematic non-convergence (drifting, not cycling). Together
+  with `D`'s isolation to the 0→23 splice, this makes the hook-point
+  control (`resid_post` at i−1 vs `resid_pre` at i; i=1 vs i=0) the
+  highest-value remaining control in the planned-controls list.
+
 ## 4. Procedures
 
 **EXP_012m — band census.** Apply the fitted lens layer-by-layer to a held-out
