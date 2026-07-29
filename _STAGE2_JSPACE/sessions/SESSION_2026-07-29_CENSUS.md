@@ -114,3 +114,56 @@ all at i ≤ 1 — the first non-convergences in the programme's history.
    run log rolled back with the filesystem while the committed shards did
    not. Run counts taken from logs were understated for one check-in; shard
    counts are the source of truth.
+
+## Addendum — the characterisation, and a prior of mine that died (same day)
+
+The census-tier characterisation (277 arms, 6,925 terminal decodes plus
+the via-tail control) landed after the results section was written. It
+corrected something I had put in the record hours earlier.
+
+**The correction, stated plainly:** from the sampled tiers I recorded a
+readout prior — "direct decode and via-tail agree at high rates only at
+extraction 21, collapsing at j ∈ {15,17,19}". Over the full census that
+does not hold. Agreement rises roughly monotonically with extraction
+depth (≈0/25 at j ≤ 4 → 18.9/25 at j=22), and **j=21's census arms
+average 6.6/25 while j=22 averages 18.9/25**. The old prior came from two
+cells; the census has eleven at j=21. The results record and this note
+carry the corrected version; the runbook's §3a prior must be read against
+the census table, not the sampled one.
+
+> **Interpretation (fenced — not in the register).**
+>
+> The prior died the same way the band picture and the two-cell picture
+> died: it was a statement about the cells that happened to be sampled,
+> stated as though it were about the plane. Three times in one programme.
+> The general lesson I keep re-learning here is that *every* summary
+> sentence carries an implicit "…among what we measured", and the honest
+> move is to write that clause explicitly until the measurement is
+> exhaustive.
+>
+> **The more interesting finding is a dissociation.** Agreement across the
+> 21 whole-word prompt-dependent target cells spans the entire range —
+> 25/25 at (5→23), (6→23), (20→20); 0/25 at (8→11), (8→16), (15→17),
+> (21→21). So the "produces words that vary by prompt" class and the "two
+> instruments agree" class are *not* the same set. That matters for the
+> J-lens phase in a specific way: agreement cannot be used to validate the
+> target cells, because the targets include both extremes. Had the two
+> classes coincided, EXP_013m would have been close to a formality; they
+> don't, so it has real discriminative work to do. This is the best
+> argument yet for the three-readout ladder as an instrument rather than a
+> ceremony.
+>
+> **Cells where the instruments disagree most sharply are the ones I would
+> look at first:** (8→16) direct `dozen`/`darn` → `' just'` ×25 via tail;
+> (10→10) direct `Tooth` → `' Imp'`; (12→15) direct `HuffPost` →
+> `<|endoftext|>` ×24. A state whose own-layer decode is a content word
+> and whose through-the-tail decode is a function word or EOT is exactly
+> the "workspace-poised vs motor-committed" contrast the ladder was built
+> to separate. Equally, it could be mid-stack decode noise. The J-lens
+> decides; I am recording the shortlist, not the conclusion.
+>
+> **One thing that did survive:** the (15→19)/(16→18) `Quebec` cells read
+> as `Quebec`/`Montreal` and `Quebec`/`Ottawa` through the tail — same
+> semantic neighbourhood under both instruments. If any of the token-
+> identity patterns survives the anisotropy control, I would bet on that
+> one. Betting is not evidence; the control runs when it runs.

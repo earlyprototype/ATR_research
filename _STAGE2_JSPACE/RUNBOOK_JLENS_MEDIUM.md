@@ -71,12 +71,23 @@ complete data rather than a sampled grid. What the map hands forward
 - **`D` is a single-cell phenomenon:** exactly one window in 300 produces
   it (0→23). EXP_013m's baseline-trajectory question is therefore about
   that one cut, not about deep windows generally.
-- **Readout-reliability prior:** in the pre-census tiers, direct-decode vs
-  decode-via-tail agreement was high only at extraction 21 (23/25 at
-  10→21, 17/25 at 8→21) and collapsed at j ∈ {15,17,19}. The census-tier
-  via-tail table (appended to the results record) extends this to all
-  cells; treat sub-21 terminal identities as instrument-dependent until
-  the J-lens arbitrates.
+- **Readout-reliability prior (corrected by the census — read this, not
+  the sampled version):** the pre-census tiers suggested agreement was
+  high only at extraction 21 and collapsed at j ∈ {15,17,19}. **That does
+  not survive the full census.** Over all 277 census arms, direct-decode
+  vs via-tail agreement rises roughly monotonically with extraction depth
+  — ≈0/25 at j ≤ 4, ~5/25 at j ≈ 13, 18.9/25 at j=22 — and **j=21's
+  census arms average only 6.6/25** (the old prior rested on two cells;
+  there are eleven at j=21). The j=23 figure is not a via-tail
+  measurement at all (empty tail = mean-vs-last-position check). Full
+  table in the 2026-07-29 results section. Treat every sub-22 terminal
+  identity as instrument-dependent until the J-lens arbitrates.
+- **Dissociation to plan around:** agreement across the 21 target cells
+  spans 0/25 to 25/25 (25/25 at 5→23, 6→23, 20→20; 0/25 at 8→11, 8→16,
+  15→17, 21→21). The whole-word prompt-dependent class and the
+  high-agreement class are **not** the same set, so two-instrument
+  agreement cannot be used to validate the target cells — EXP_013m is
+  load-bearing, not confirmatory.
 - **New ATR-side priority, independent of the J-lens:** six cells at
   i ≤ 1 show systematic non-convergence (drifting, not cycling). Together
   with `D`'s isolation to the 0→23 splice, this makes the hook-point
