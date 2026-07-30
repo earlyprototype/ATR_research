@@ -1,0 +1,78 @@
+{
+ "max_iter": 300,
+ "deviation": "max_iter 300 not 1000",
+ "arms": {
+  "6->18/seed_j": {
+   "converged": "25/25",
+   "terminals": [
+    [
+     " Republican",
+     25
+    ]
+   ],
+   "seed_over_natural_ratio_mean": 1.074501238382801
+  },
+  "6->18/natural_i": {
+   "converged": "25/25",
+   "terminals": [
+    [
+     " Republican",
+     21
+    ],
+    [
+     " source",
+     4
+    ]
+   ],
+   "seed_over_natural_ratio_mean": 1.074501238382801
+  },
+  "6->19/seed_j": {
+   "converged": "25/25",
+   "terminals": [
+    [
+     " Republican",
+     24
+    ],
+    [
+     "\n",
+     1
+    ]
+   ],
+   "seed_over_natural_ratio_mean": 1.0776071280616342
+  },
+  "6->19/natural_i": {
+   "converged": "25/25",
+   "terminals": [
+    [
+     " Republican",
+     24
+    ],
+    [
+     "\n",
+     1
+    ]
+   ],
+   "seed_over_natural_ratio_mean": 1.0776071280616342
+  },
+  "7->17/seed_j": {
+   "converged": "25/25",
+   "terminals": [
+    [
+     " GOP",
+     25
+    ]
+   ],
+   "seed_over_natural_ratio_mean": 1.0437701044183778
+  },
+  "7->17/natural_i": {
+   "converged": "25/25",
+   "terminals": [
+    [
+     " GOP",
+     25
+    ]
+   ],
+   "seed_over_natural_ratio_mean": 1.0437701044183778
+  }
+ }
+}

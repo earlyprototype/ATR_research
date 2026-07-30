@@ -6,7 +6,7 @@ labelled as such. **Status:** complete. **Model:** gpt2-medium, weights from hug
 recorded in `RESULTS_EXP010C.md` §Model acquisition.
 
 **Short answer: no, and the reason is that Medium has a political attractor of
-its own which captures the socialist state.**
+its own — energy-independent, unlike `D` — which captures the socialist state.**
 
 ---
 
@@ -91,6 +91,33 @@ FBI, Hillary, Gorsuch, Democrat, Republicans`.
 
 Median ranks inside those states: political-neutral **2,411–4,684**, non-political
 control 7,024–12,861, socialist **16,591–23,595**.
+
+## 4b. The Republican attractor survives the control that destroyed `D`
+
+`D` existed only under {layer-0 slot ∧ ≈218× natural energy}: EXP_010c-VARIANTS
+Control B re-ran it rescaled to the natural `resid_pre` norm at the injection
+layer and it vanished — 0/25 converged, `D` absent, arm class changed. Section 4
+reported ` Republican` without that control having been run on it, which left
+the positive finding carrying exactly the weakness of the thing it replaced.
+
+Run here on the same 25-prompt subset, registered protocol, `max_iter` 300
+rather than 1000 (deviation, recorded):
+
+| arm | window | `seed_j` | `natural_i` | conv | seed/natural |
+|---|---|---|---|---|---|
+| W6_18 | 6→18 | ` Republican` ×25 | ` Republican` ×21, ` source` ×4 | 25/25 both | **1.07×** |
+| W6_19 | 6→19 | ` Republican` ×24, `\n` ×1 | ` Republican` ×24, `\n` ×1 — **identical** | 25/25 both | **1.08×** |
+| W7_17 | 7→17 | ` GOP` ×25 | ` GOP` ×25 — **identical** | 25/25 both | **1.04×** |
+
+**The attractor is energy-independent.** Two of the three cells are identical
+under both conventions and all three converge 25/25 either way. The measured
+ratio explains why: mid-band injection at i ∈ {6,7} arrives at 1.04–1.08× the
+natural norm for that layer, so the two conventions are nearly the same
+operation there. At i=0 the same ratio is ≈218×, which is what made `D`
+conditional on it.
+
+So the finding in section 4 does not inherit `D`'s defect, and the contrast is
+now measured rather than assumed.
 
 ## 5. The tensor-level agreement with Small is real, and is not shallow
 
