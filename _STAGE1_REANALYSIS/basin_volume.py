@@ -11,6 +11,11 @@ import torch
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 SMALL, OUT = sys.argv[1], sys.argv[2]
 N_SEEDS, MAX_ITER, SEQ = int(sys.argv[3]), 300, 12
+# shell schedule is an argument so each committed artifact traces to its own run.
+# basin_volume.json was produced with "1800,3700"; basin_volume_energy.json with
+# the five-shell sweep below.
+SHELLS = [float(x) for x in (sys.argv[4] if len(sys.argv) > 4
+                             else "433,397,900,1800,3700").split(",")]
 m = GPT2LMHeadModel.from_pretrained(SMALL).eval()
 tok = GPT2TokenizerFast.from_pretrained(SMALL)
 ln_f, W_E, H = m.transformer.ln_f, m.transformer.wte.weight, m.transformer.h
@@ -41,7 +46,7 @@ def classify(v):
 counts = collections.Counter(); rows=[]
 for s in range(N_SEEDS):
     torch.manual_seed(1000+s)
-    shell = [125.0*SEQ**0.5, 397.0, 900.0, 1800.0, 3700.0][s % 5]
+    shell = SHELLS[s % len(SHELLS)]
     x = torch.randn(SEQ, D)*0.5
     x = x / x.norm() * shell; N0 = x.norm().item()
     for _ in range(MAX_ITER):
@@ -52,4 +57,5 @@ for s in range(N_SEEDS):
 
 print("\n=== basin counts over", N_SEEDS, "random seeds ===")
 for k,v in counts.most_common(): print(f"   {k:10} {v:>3}/{N_SEEDS}")
-json.dump({"counts":dict(counts),"rows":rows}, open(OUT,"w"), indent=1)
+json.dump({"shells":SHELLS,"n_seeds":N_SEEDS,"max_iter":MAX_ITER,
+           "counts":dict(counts),"rows":rows}, open(OUT,"w"), indent=1)

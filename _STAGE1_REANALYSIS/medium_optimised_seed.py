@@ -32,6 +32,8 @@ bid = [tok.encode(w)[0] for w in BASIN if len(tok.encode(w)) == 1]
 cid = [tok.encode(w)[0] for w in CONTROL if len(tok.encode(w)) == 1]
 
 # ---- optimise a residual state whose readout is the register ----
+RNG_SEED = 42
+torch.manual_seed(RNG_SEED)
 v = torch.randn(1024) * 0.5
 v.requires_grad_(True)
 opt = torch.optim.Adam([v], lr=0.05)
@@ -81,7 +83,7 @@ def top_of(vec, k=12):
         l = ln_f(vec) @ W_E.T
     return [tok.decode([int(i)]) for i in torch.topk(l, k).indices]
 
-results = {"seed_top20": seed_top, "seed_socialist_in_top12": in_reg, "runs": {}}
+results = {"rng_seed": RNG_SEED, "seed_top20": seed_top, "seed_socialist_in_top12": in_reg, "runs": {}}
 for name, shell in [("x73", 2200.0), ("x218", 6500.0), ("natural", 30.0)]:
     x = v.unsqueeze(0).repeat(SEQ, 1)
     x = x / x.norm() * (shell * (SEQ ** 0.5) * 0.5)

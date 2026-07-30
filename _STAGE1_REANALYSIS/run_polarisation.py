@@ -93,7 +93,7 @@ for label, text in PROMPTS.items():
 h.remove()
 
 settled = torch.load(os.path.join(CONF, "converged_tensors.pt"),
-                     map_location="cpu", weights_only=False)
+                     map_location="cpu", weights_only=True)
 committed = json.load(open(os.path.join(CONF, "confidence_results.json")))
 
 # ---- REPRODUCTION GATE ----

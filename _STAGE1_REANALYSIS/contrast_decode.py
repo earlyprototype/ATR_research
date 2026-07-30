@@ -12,7 +12,7 @@ is well defined despite ln_f being nonlinear.
 
 If Medium represents the distinction at all, this is where it shows.
 """
-import json, sys, collections
+import json, statistics, sys, collections
 import torch
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 
@@ -83,17 +83,18 @@ for arm in ["W3_23", "W5_23", "W6_23", "A0"]:
     order = torch.argsort(d, descending=True)
     pos = torch.empty_like(order); pos[order] = torch.arange(len(order))
     ranks = sorted(int(pos[i]) + 1 for i in soc_ids)
+    med = statistics.median(ranks)
     results["arms"][arm] = {
         "n_soc": len(soc), "n_rest": len(rest),
         "toward_socialist_cluster": [tok.decode([i]) for i in hi],
         "toward_rest": [tok.decode([i]) for i in lo],
-        "socialist_token_median_rank_in_contrast": ranks[len(ranks) // 2],
+        "socialist_token_median_rank_in_contrast": med,
         "socialist_token_ranks": ranks,
     }
     print(f"\n--- {arm}  ({len(soc)} socialist-side / {len(rest)} rest)")
     print(f"    toward socialist cluster: {[tok.decode([i]) for i in hi[:16]]}")
     print(f"    toward rest             : {[tok.decode([i]) for i in lo[:10]]}")
-    print(f"    socialist tokens median rank in contrast: {ranks[len(ranks)//2]} of 50257")
+    print(f"    socialist tokens median rank in contrast: {med} of 50257")
 
 json.dump(results, open(OUT, "w"), indent=1)
 print("\nwritten", OUT)

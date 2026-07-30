@@ -72,10 +72,13 @@ neutral-political vocabulary are each clearly elevated above non-political
 vocabulary. Rows 3–5 fail on their own terms (L ≉ R; L was not top-ranked at
 iter0). Row 6 was not measurable (below).
 
-The mechanical statement the table does support: **the loop raises political
-vocabulary as a class and suppresses non-political vocabulary below its
-pre-loop rank, and within the political class the socialist register is elevated
-about 19× above the rival set by median rank.**
+The mechanical statement the table does support, scoped to the four sampled
+12-token sets rather than to vocabulary classes at large: **the sampled L, R and
+N sets all improve in rank from iter0 to settlement while the sampled C set gets
+worse, and at settlement the sets order L (70) < R (1342) < N (4734) < C
+(15460).** Rank positions are quoted rather than a ratio: median rank is ordinal,
+so "19×" is not a meaningful multiple, and the R set is separately noted below as
+contaminated.
 
 ## Post-hoc note (NOT a finding; flagged for its own pre-registration)
 

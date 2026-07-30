@@ -137,10 +137,10 @@ absolute state is dominated by the arm's funnel.
 
 | arm | toward the socialist-side cluster | socialist median rank in contrast |
 |---|---|---|
-| W3_23 | ` scaling, McDonnell, Cuomo, Huge, DPR, Chef, Dunn` | 24,600 |
-| W5_23 | `'], maid, ]), '), zai, })` | 43,082 |
-| W6_23 | `iframe, handler, SPONSORED, vantage, ILLE` | 21,565 |
-| A0 | `appropriately, accompan, theless, BuyableInstoreAndOnline` | 17,747 |
+| W3_23 | ` scaling, McDonnell, Cuomo, Huge, DPR, Chef, Dunn` | 23,963 |
+| W5_23 | `'], maid, ]), '), zai, })` | 42,565 |
+| W6_23 | `iframe, handler, SPONSORED, vantage, ILLE` | 21,351 |
+| A0 | `appropriately, accompan, theless, BuyableInstoreAndOnline` | 17,516 |
 
 Proper nouns, code fragments and bracket punctuation. **No socialist content in
 the contrast at any arm.**
@@ -213,7 +213,7 @@ Lucier; the other three socialist prompts match to within a few ranks):
 No configuration held it. Energy modulates decay *rate*, not destination. At
 matched shells the destination is exactly `D`.
 
-Deviation recorded: 4 of 18 runs hit an early static-readout exit at iteration
+Deviation recorded: 2 of 18 runs hit an early static-readout exit at iteration
 120–136, so their iteration-160/300 entries are carried from the cut state
 rather than measured (flagged `from_lock` in the JSON). Sibling runs at the same
 shells locked naturally at 126–139 on the same attractor family.
@@ -346,11 +346,15 @@ linearly-decodable content in the difference of centroids. The registered
 arbiter for exactly this is the J-lens re-decode, EXP_013m, which has never run
 and whose Medium instrument gated MARGINAL.
 
-The control arm is the load-bearing result and it arrived last. A neutral
-random seed in Small reaches Divine or gaming, never socialism. So the socialist
-basin is not a generic attractor of these weights; it is what the model does
-with real language specifically. That is a stronger version of the original
-Stage 1 finding than the record currently claims, and it was cheap to get.
+SUPERSEDED — this paragraph asserted that a random seed "never" reaches
+socialism and that the basin is therefore language-specific. Section 8's
+CORRECTION overturns it: 28/40 random seeds reach the socialist register at the
+shells first tried, and the energy sweep then showed that rate is itself
+energy-dependent (0/10 at ~115 per position, 1/10 at Stage 1's ~125, 8/10 at
+~520). Retained struck-through rather than deleted so the retraction is legible.
+What replaces it: the register is broadly present in the high-energy attractor
+landscape, and the specific `prolet`-led basin is what language reaches — no
+random seed at any shell reached a `prolet`-led top-1.
 
 The convergence result is the cleanest thing here and I did not expect it. That
 a purpose-built socialist state falls into the Republican basin means the two
@@ -378,4 +382,7 @@ arbiter for every readout claim in this document.
 `medium_optimised_seed.py`, `optimised_seed.json`, `opt_seed.log` ·
 `political_cells_ranks.json`, `political_cells_viatail.json` ·
 `census_partition_scan.py/.json` · `contrast_decode.py/.json` ·
-`socialist_in_political_window.py`, `soc_window.log`
+`socialist_in_political_window.py`, `soc_window.log` ·
+`crossmodel_seed.py/.json` · `mirror_test.py/.json` ·
+`basin_volume.py`, `basin_volume.json`, `basin_volume_energy.json` ·
+`republican_energy_control.py/.json`

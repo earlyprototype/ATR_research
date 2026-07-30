@@ -45,8 +45,14 @@ for name, toks in SETS.items():
         (keep.update({t: ids[0]}) if len(ids) == 1 else drop.append(t))
     resolved[name], dropped[name] = keep, drop
 
+def arm_of(k):
+    """keys are ('ARM','PROMPT') tuples in pre-PR#4 files and 'ARM|PROMPT'
+    strings after. accept both, matching contrast_decode.parts()."""
+    return str(k[0]) if isinstance(k, (tuple, list)) else str(k).split("|")[0]
+
+
 term = torch.load(TERMINALS, map_location="cpu", weights_only=False)
-a0 = {k: v for k, v in term.items() if k.split("|")[0] == "A0"}
+a0 = {k: v for k, v in term.items() if arm_of(k) == "A0"}
 print(f"A0 terminals: {len(a0)}")
 
 
@@ -74,6 +80,9 @@ for k, v in a0.items():
 print("GATE argmax distribution:", dict(gate))
 gate_pass = gate.most_common(1)[0][0].strip() == "D" and gate.most_common(1)[0][1] == len(vecs)
 print("GATE:", "PASS" if gate_pass else "FAIL")
+if not gate_pass:
+    sys.exit("GATE FAILED: readout does not reproduce `D` on all A0 terminals; "
+             "no ranks reported")
 
 results = {"gate": dict(gate), "gate_pass": bool(gate_pass), "dropped": dropped, "per_prompt": {}}
 

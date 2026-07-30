@@ -37,6 +37,8 @@ sid = [tok.encode(w)[0] for w in BASIN if len(tok.encode(w)) == 1]
 rid = [tok.encode(w)[0] for w in RIVAL if len(tok.encode(w)) == 1]
 cid = [tok.encode(w)[0] for w in CONTROL if len(tok.encode(w)) == 1]
 
+RNG_SEED = 42
+torch.manual_seed(RNG_SEED)
 v = torch.randn(1024) * 0.5
 v.requires_grad_(True)
 opt = torch.optim.Adam([v], lr=0.05)
@@ -72,7 +74,8 @@ def window_step(x, i, j):
     return h[0]
 
 
-results = {"windows": {}}
+results = {"rng_seed": RNG_SEED, "seq": SEQ, "max_iter": MAX_ITER,
+           "windows_swept": WINDOWS, "windows": {}}
 print("seed top10:", top_of(v, 10), flush=True)
 
 for (i, j) in WINDOWS:
