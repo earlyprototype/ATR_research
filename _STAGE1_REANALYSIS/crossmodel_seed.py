@@ -188,9 +188,12 @@ MAPS = {
 # map quality: does a Small token embedding, mapped, retrieve its own token in
 # Medium's unembedding?
 g = torch.Generator().manual_seed(0)
-probe_ids = torch.randperm(50257, generator=g)[:1500]
+_probe_all = torch.randperm(50257, generator=g)
 map_quality = {}
 for name, (fn, desc) in MAPS.items():
+    # the readout-reconstruction operators build a dense 50257-wide intermediate
+    probe_ids = _probe_all[:250] if name in ("logit_lstsq", "logit_transfer") \
+        else _probe_all[:1500]
     u = fn(Ed_s[probe_ids].float())
     with torch.no_grad():
         lg = ln_m(u) @ E_m.T
@@ -203,14 +206,34 @@ for name, (fn, desc) in MAPS.items():
 
 
 # ---- map E: gradient descent to Small's own readout distribution -------------
-def readout_match(v, steps=300, topk=512, beta=3.0, tag=""):
+def readout_match(v, sampled_steps=250, full_steps=60, topk=512, beta=3.0,
+                  n_neg=8000):
+    """Optimise a Medium residual so its readout matches Small's own readout
+    distribution over the top-512 tokens. Cheap phase uses sampled negatives
+    (resampled every 25 steps); final phase uses the exact 50257 softmax."""
     Z = zlogits(v, ln_s, E_s).float()                 # [P,50257] standardised
     val, idx = torch.topk(Z, topk, dim=-1)
-    q = torch.zeros_like(Z)
-    q.scatter_(-1, idx, torch.softmax(beta * (val - val[:, :1]), dim=-1))
+    qs = torch.softmax(beta * (val - val[:, :1]), dim=-1)      # [P,topk]
     u = logit_lstsq(v).clone().requires_grad_(True)   # warm start from map D
     opt = torch.optim.Adam([u], lr=0.05)
-    for i in range(steps):
+    gg = torch.Generator().manual_seed(3)
+    pos_ids = torch.unique(idx)
+    for i in range(sampled_steps):
+        if i % 25 == 0:
+            neg = torch.randperm(50257, generator=gg)[:n_neg]
+            sub = torch.unique(torch.cat([pos_ids, neg]))
+            inv = torch.full((50257,), -1, dtype=torch.long)
+            inv[sub] = torch.arange(len(sub))
+            q_sub = torch.zeros(Z.shape[0], len(sub))
+            q_sub.scatter_(-1, inv[idx], qs)
+            E_sub = E_m[sub]
+        opt.zero_grad()
+        loss = -(q_sub * torch.log_softmax(ln_m(u) @ E_sub.T, -1)).sum(-1).mean()
+        loss.backward()
+        opt.step()
+    q = torch.zeros_like(Z)
+    q.scatter_(-1, idx, qs)
+    for i in range(full_steps):
         opt.zero_grad()
         loss = -(q * torch.log_softmax(ln_m(u) @ E_m.T, -1)).sum(-1).mean()
         loss.backward()
@@ -218,7 +241,8 @@ def readout_match(v, steps=300, topk=512, beta=3.0, tag=""):
     u = u.detach()
     cc = torch.nn.functional.cosine_similarity(
         zlogits(u, ln_m, E_m)[-1][None], zlogits(v, ln_s, E_s)[-1][None]).item()
-    print(f"    readout_match{tag}: loss {loss.item():.3f} logit_cos {cc:.4f}", flush=True)
+    print(f"    readout_match fit: loss {loss.item():.3f} logit_cos {cc:.4f}",
+          flush=True)
     return u
 
 

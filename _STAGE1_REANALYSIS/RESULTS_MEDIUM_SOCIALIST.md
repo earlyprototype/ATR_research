@@ -166,6 +166,59 @@ The socialist seed does not decay to noise. It decays *through* noise and lands
 in the rival register. **W6_19** holds socialism longest (~5 iterations, with
 ` Trotsky` still present at iteration 5) before the same decay.
 
+## 7b. Cross-model transplant, and what its gate revealed
+
+Small's actual converged state mapped into Medium's residual space and iterated.
+Ten maps 768→1024 were built and gated on whether the register still reads out
+in Medium's unembedding *before* any iteration.
+
+**Nine of ten failed the gate.** The ordering is the point:
+
+| map | basin rank after mapping | readout cos to Small | gate |
+|---|---|---|---|
+| `logit_lstsq` (direct 50257-d readout reconstruction) | 277 | **+0.907** | fail |
+| `readout_ls` | 420 | +0.899 | fail |
+| `procrustes` (orthogonal) | 377 | +0.787 | fail |
+| `readout_match` (gradient fit to Small's own readout) | **13** | +0.857 | **PASS** |
+| zeropad / randproj (controls) | 38,992 / 18,895 | −0.08 / +0.07 | fail |
+
+The map reconstructing Small's full readout to cosine **0.907** — the highest
+fidelity of any — still puts the register at rank 277, with a top-12 of
+` the, ,, in, of, to, and`. A *lower*-fidelity map reaches rank 13.
+
+**Global readout fidelity is not what carries the register.** The geometry:
+`cos(ln_f(Small's state), centred socialist-embedding direction) = 0.0423`,
+about 2.4° off orthogonal. Small reaches rank 13 of 50,257 on a component that
+weak, and any map with a 60–75% relative residual erases it.
+
+Recorded separately, because it bears on the seeds used elsewhere in this
+document: **averaging the socialist embeddings does not read out as socialist in
+either model** (Small rank 88, Medium 186; both top out at ` mathemat`,
+` horizont`, ` neighb`). The basin is not a centroid artefact, and it is not
+reachable by embedding-space arithmetic.
+
+Gate validity check: fed the *Syntactic* state, the passing map reproduces the
+*Syntactic* readout (` Divine, 【, Fairy, Falling`), not socialist vocabulary.
+It transplants whatever the source state says.
+
+**Loop result under the gate-passing map** (basin median rank by iteration,
+Lucier; the other three socialist prompts match to within a few ranks):
+
+| shell | 0 | 1 | 2 | 5 | 20 | 40 | settles to |
+|---|---|---|---|---|---|---|---|
+| natural (3.12) | 13 | 963 | 37,895 | 36,842 | 26,978 | 40,332 | never locks |
+| matched_ratio (873) | 13 | 247 | 728 | 14,593 | 38,737 | 39,213 | **`D, def, A, T, W, AB`** |
+| x73 (2,200) | 13 | 117 | 170 | 974 | 29,819 | 40,005 | **`def, D, W, I, host, A`** |
+| x218 (6,500) | 13 | 47 | 87 | 237 | 5,454 | 31,417 | `mat, rest, def, pl, Div, host` |
+
+No configuration held it. Energy modulates decay *rate*, not destination. At
+matched shells the destination is exactly `D`.
+
+Deviation recorded: 4 of 18 runs hit an early static-readout exit at iteration
+120–136, so their iteration-160/300 entries are carried from the cut state
+rather than measured (flagged `from_lock` in the JSON). Sibling runs at the same
+shells locked naturally at 126–139 on the same attractor family.
+
 ## 8. The mirror test, and the control that matters most
 
 Seeding **GPT-2 Small's** native full-stack loop, to ask whether the Medium

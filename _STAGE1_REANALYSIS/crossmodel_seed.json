@@ -1,0 +1,5861 @@
+{
+ "natural_layer0_per_token_norm": {
+  "small": 5.408491611480713,
+  "medium": 3.119256019592285
+ },
+ "map_quality": {
+  "anchor_ls": {
+   "desc": "lstsq E_s->E_m on residual",
+   "token_retrieval_top1": 0.5767,
+   "token_retrieval_median_rank": 1
+  },
+  "anchor_ls_b": {
+   "desc": "lstsq with intercept",
+   "token_retrieval_top1": 0.576,
+   "token_retrieval_median_rank": 1
+  },
+  "procrustes": {
+   "desc": "orthogonal, on residual",
+   "token_retrieval_top1": 0.932,
+   "token_retrieval_median_rank": 1
+  },
+  "readout_ls": {
+   "desc": "lstsq E_m->E_s, applied to ln_f(v)",
+   "token_retrieval_top1": 0.8087,
+   "token_retrieval_median_rank": 1
+  },
+  "readout_proc": {
+   "desc": "orthogonal, applied to ln_f(v)",
+   "token_retrieval_top1": 0.9633,
+   "token_retrieval_median_rank": 1
+  },
+  "logit_lstsq": {
+   "desc": "direct 50257-d readout reconstruction",
+   "token_retrieval_top1": 0.788,
+   "token_retrieval_median_rank": 1
+  },
+  "zeropad": {
+   "desc": "CONTROL zero-pad",
+   "token_retrieval_top1": 0.0,
+   "token_retrieval_median_rank": 24637
+  },
+  "randproj": {
+   "desc": "CONTROL random proj",
+   "token_retrieval_top1": 0.0,
+   "token_retrieval_median_rank": 25052
+  },
+  "logit_transfer": {
+   "desc": "CONTROL top-50 embedding re-synthesis",
+   "token_retrieval_top1": 0.992,
+   "token_retrieval_median_rank": 1
+  }
+ },
+ "gate": {
+  "Lucier": {
+   "source_small_readout": {
+    "top12": [
+     " prolet",
+     " Anarch",
+     " bourgeois",
+     " Marx",
+     " comrade",
+     " proletarian",
+     " socialist",
+     " anarchist",
+     " the",
+     " congress",
+     " movement",
+     " Lenin"
+    ],
+    "basin_median_rank": 13,
+    "control_median_rank": 17365,
+    "per_token_norm": 1518.1
+   },
+   "anchor_ls": {
+    "top12": [
+     " challeng",
+     " warr",
+     " juven",
+     " mathemat",
+     "accompan",
+     " incent",
+     " obser",
+     "repre",
+     " encount",
+     " seiz",
+     " sacrific",
+     " discrep"
+    ],
+    "basin_median_rank": 27124,
+    "control_median_rank": 38341,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": -0.0982
+   },
+   "anchor_ls_b": {
+    "top12": [
+     " Dise",
+     " Volunte",
+     "\u30e4",
+     " trave",
+     "\u3057",
+     "Translation",
+     "WB",
+     "Recomm",
+     " disadvant",
+     " condem",
+     " lawy",
+     "\ufffd"
+    ],
+    "basin_median_rank": 36640,
+    "control_median_rank": 41666,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": -0.0062
+   },
+   "procrustes": {
+    "top12": [
+     " the",
+     " position",
+     " of",
+     ",",
+     " point",
+     " that",
+     " in",
+     " necessary",
+     " movement",
+     " ideas",
+     " to",
+     " other"
+    ],
+    "basin_median_rank": 377,
+    "control_median_rank": 10389,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": 0.7872
+   },
+   "readout_ls": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " for",
+     "\n"
+    ],
+    "basin_median_rank": 420,
+    "control_median_rank": 12405,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": 0.8991
+   },
+   "readout_proc": {
+    "top12": [
+     " squared",
+     " incent",
+     "\u30c7",
+     " agre",
+     "\u30a3",
+     " materially",
+     " rel",
+     "hing",
+     " unemploy",
+     " divid",
+     " subdiv",
+     " SERV"
+    ],
+    "basin_median_rank": 14102,
+    "control_median_rank": 7434,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": 0.375
+   },
+   "logit_lstsq": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " (",
+     " \""
+    ],
+    "basin_median_rank": 277,
+    "control_median_rank": 13256,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": 0.9072
+   },
+   "zeropad": {
+    "top12": [
+     "ZE",
+     "WARE",
+     "yden",
+     "RC",
+     " RAND",
+     "ary",
+     "odo",
+     "jured",
+     "itals",
+     " Dahl",
+     "Portland",
+     " slices"
+    ],
+    "basin_median_rank": 38992,
+    "control_median_rank": 18981,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": -0.0799
+   },
+   "randproj": {
+    "top12": [
+     " statewide",
+     "ileged",
+     "vable",
+     "naires",
+     "tn",
+     "fam",
+     "naire",
+     "abad",
+     "vity",
+     "Orange",
+     "Democrats",
+     "reys"
+    ],
+    "basin_median_rank": 18895,
+    "control_median_rank": 21080,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 15,
+    "readout_cos_to_small": 0.0693
+   },
+   "logit_transfer": {
+    "top12": [
+     " mathemat",
+     " advoc",
+     " neighb",
+     " unden",
+     " nodd",
+     " challeng",
+     " prolet",
+     " horizont",
+     " condem",
+     " enthusi",
+     " arrang",
+     " psychiat"
+    ],
+    "basin_median_rank": 269,
+    "control_median_rank": 38254,
+    "basin_in_top12": 1,
+    "positions_with_basin_in_top12": 15,
+    "n_positions": 15,
+    "readout_cos_to_small": -0.1243
+   },
+   "readout_match": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " Marx",
+     " comrade",
+     " proletarian",
+     " socialist",
+     " anarchist",
+     " the",
+     " congress",
+     " movement",
+     " Lenin"
+    ],
+    "basin_median_rank": 13,
+    "control_median_rank": 19016,
+    "basin_in_top12": 9,
+    "positions_with_basin_in_top12": 15,
+    "n_positions": 15,
+    "readout_cos_to_small": 0.8571
+   }
+  },
+  "Semantic": {
+   "source_small_readout": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " comrade",
+     " Marx",
+     " proletarian",
+     " socialist",
+     " anarchist",
+     " congress",
+     " labour",
+     " anarchism",
+     " the"
+    ],
+    "basin_median_rank": 11,
+    "control_median_rank": 17590,
+    "per_token_norm": 1510.0
+   },
+   "anchor_ls": {
+    "top12": [
+     " challeng",
+     " warr",
+     " juven",
+     " mathemat",
+     " incent",
+     "accompan",
+     " obser",
+     "repre",
+     " encount",
+     " seiz",
+     " discrep",
+     " sacrific"
+    ],
+    "basin_median_rank": 27146,
+    "control_median_rank": 38237,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": -0.0947
+   },
+   "anchor_ls_b": {
+    "top12": [
+     " Dise",
+     " Volunte",
+     "\u3057",
+     "\u30e4",
+     " trave",
+     "Translation",
+     "WB",
+     "Recomm",
+     " disadvant",
+     " condem",
+     " lawy",
+     "\ufffd"
+    ],
+    "basin_median_rank": 36580,
+    "control_median_rank": 41563,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": -0.008
+   },
+   "procrustes": {
+    "top12": [
+     " the",
+     " position",
+     " of",
+     ",",
+     " that",
+     " necessary",
+     " point",
+     " in",
+     " movement",
+     " such",
+     " ideas",
+     " matter"
+    ],
+    "basin_median_rank": 376,
+    "control_median_rank": 11241,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": 0.7853
+   },
+   "readout_ls": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " as",
+     " ("
+    ],
+    "basin_median_rank": 388,
+    "control_median_rank": 11665,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": 0.8988
+   },
+   "readout_proc": {
+    "top12": [
+     " squared",
+     " incent",
+     "\u30c7",
+     " agre",
+     "\u30a3",
+     " materially",
+     " rel",
+     " unemploy",
+     " subdiv",
+     " divid",
+     "hing",
+     "arer"
+    ],
+    "basin_median_rank": 13536,
+    "control_median_rank": 7274,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": 0.3796
+   },
+   "logit_lstsq": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " (",
+     " as"
+    ],
+    "basin_median_rank": 282,
+    "control_median_rank": 12453,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": 0.9061
+   },
+   "zeropad": {
+    "top12": [
+     "WARE",
+     "ZE",
+     "yden",
+     "RC",
+     "ary",
+     " RAND",
+     "odo",
+     " slices",
+     "uti",
+     "itals",
+     "Portland",
+     "CNN"
+    ],
+    "basin_median_rank": 38527,
+    "control_median_rank": 18617,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": -0.0737
+   },
+   "randproj": {
+    "top12": [
+     " statewide",
+     "vable",
+     "ileged",
+     "naires",
+     "fam",
+     "tn",
+     "naire",
+     "vity",
+     "akh",
+     "Democrats",
+     "abad",
+     "reys"
+    ],
+    "basin_median_rank": 17245,
+    "control_median_rank": 20776,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 12,
+    "readout_cos_to_small": 0.0637
+   },
+   "logit_transfer": {
+    "top12": [
+     " mathemat",
+     " prolet",
+     " advoc",
+     " neighb",
+     " unden",
+     " nodd",
+     " challeng",
+     " condem",
+     " horizont",
+     " enthusi",
+     " psychiat",
+     " arrang"
+    ],
+    "basin_median_rank": 282,
+    "control_median_rank": 38393,
+    "basin_in_top12": 1,
+    "positions_with_basin_in_top12": 12,
+    "n_positions": 12,
+    "readout_cos_to_small": -0.1226
+   },
+   "readout_match": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " comrade",
+     " Marx",
+     " proletarian",
+     " anarchist",
+     " socialist",
+     " congress",
+     " labour",
+     " the",
+     " anarchism"
+    ],
+    "basin_median_rank": 12,
+    "control_median_rank": 19167,
+    "basin_in_top12": 10,
+    "positions_with_basin_in_top12": 12,
+    "n_positions": 12,
+    "readout_cos_to_small": 0.8537
+   }
+  },
+  "Syntactic": {
+   "source_small_readout": {
+    "top12": [
+     " Divine",
+     "\u3010",
+     " Fairy",
+     " Falling",
+     "\u2026\u2026",
+     "\u2015",
+     " \u300c",
+     " Elements",
+     " Darkness",
+     " Cancel",
+     "~",
+     " Yu"
+    ],
+    "basin_median_rank": 22484,
+    "control_median_rank": 36312,
+    "per_token_norm": 1612.2
+   },
+   "anchor_ls": {
+    "top12": [
+     " challeng",
+     "accompan",
+     " juven",
+     "repre",
+     " warr",
+     " mathemat",
+     " incent",
+     " seiz",
+     " obser",
+     " encount",
+     " rul",
+     " sacrific"
+    ],
+    "basin_median_rank": 29867,
+    "control_median_rank": 39621,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": -0.0947
+   },
+   "anchor_ls_b": {
+    "top12": [
+     " Dise",
+     " Volunte",
+     "Recomm",
+     "Translation",
+     "WB",
+     " trave",
+     "\u3057",
+     "\u30e4",
+     " disadvant",
+     " condem",
+     " Surviv",
+     " \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0 \u00a0"
+    ],
+    "basin_median_rank": 39391,
+    "control_median_rank": 42610,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.1676
+   },
+   "procrustes": {
+    "top12": [
+     ",",
+     ".",
+     " to",
+     " in",
+     "!",
+     " the",
+     " of",
+     " that",
+     " with",
+     " Divine",
+     " and",
+     "-"
+    ],
+    "basin_median_rank": 25593,
+    "control_median_rank": 18001,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.7482
+   },
+   "readout_ls": {
+    "top12": [
+     ",",
+     "\n",
+     " the",
+     ".",
+     " to",
+     " in",
+     " and",
+     " a",
+     " that",
+     " of",
+     " (",
+     ":"
+    ],
+    "basin_median_rank": 27791,
+    "control_median_rank": 20746,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.8655
+   },
+   "readout_proc": {
+    "top12": [
+     "\u30c7",
+     "\u30a3",
+     " squared",
+     "////////////////",
+     "esis",
+     " Kits",
+     " Bullets",
+     " Tsukuyomi",
+     "hing",
+     "yz",
+     " SERV",
+     "\u30f3"
+    ],
+    "basin_median_rank": 24855,
+    "control_median_rank": 11365,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.297
+   },
+   "logit_lstsq": {
+    "top12": [
+     ",",
+     "\n",
+     ".",
+     " the",
+     " to",
+     " in",
+     " and",
+     " a",
+     " that",
+     " (",
+     " of",
+     "!"
+    ],
+    "basin_median_rank": 26042,
+    "control_median_rank": 22416,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.8786
+   },
+   "zeropad": {
+    "top12": [
+     "PORT",
+     " Dahl",
+     "Dep",
+     "RC",
+     " DX",
+     "ZE",
+     "ports",
+     "UNCH",
+     "PI",
+     "Built",
+     " polling",
+     " Dart"
+    ],
+    "basin_median_rank": 38248,
+    "control_median_rank": 28337,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.0649
+   },
+   "randproj": {
+    "top12": [
+     "ierrez",
+     "itars",
+     "uthor",
+     "henko",
+     "anmar",
+     "irling",
+     "adesh",
+     "ilic",
+     "Requires",
+     " levied",
+     " accrued",
+     "cale"
+    ],
+    "basin_median_rank": 15671,
+    "control_median_rank": 28458,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": -0.0039
+   },
+   "logit_transfer": {
+    "top12": [
+     " Divine",
+     " mathemat",
+     " destro",
+     " unden",
+     " sacrific",
+     " conclud",
+     " cryst",
+     " confir",
+     " enthusi",
+     " streng",
+     "accompan",
+     " arrang"
+    ],
+    "basin_median_rank": 29078,
+    "control_median_rank": 44170,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": -0.1643
+   },
+   "readout_match": {
+    "top12": [
+     " Divine",
+     "\u3010",
+     " Fairy",
+     " Falling",
+     "\u2026\u2026",
+     "\u2015",
+     " Elements",
+     " \u300c",
+     " Darkness",
+     " Cancel",
+     "~",
+     " Yu"
+    ],
+    "basin_median_rank": 24351,
+    "control_median_rank": 37947,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 10,
+    "readout_cos_to_small": 0.8345
+   }
+  },
+  "Nonsense": {
+   "source_small_readout": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " comrade",
+     " Marx",
+     " proletarian",
+     " socialist",
+     " congress",
+     " anarchist",
+     " labour",
+     " the",
+     " anarchism"
+    ],
+    "basin_median_rank": 12,
+    "control_median_rank": 17554,
+    "per_token_norm": 1513.1
+   },
+   "anchor_ls": {
+    "top12": [
+     " challeng",
+     " warr",
+     " juven",
+     " mathemat",
+     " incent",
+     "accompan",
+     " obser",
+     "repre",
+     " encount",
+     " seiz",
+     " discrep",
+     " sacrific"
+    ],
+    "basin_median_rank": 27144,
+    "control_median_rank": 38261,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.096
+   },
+   "anchor_ls_b": {
+    "top12": [
+     " Dise",
+     " Volunte",
+     "\u3057",
+     "\u30e4",
+     " trave",
+     "Translation",
+     "WB",
+     "Recomm",
+     " disadvant",
+     " condem",
+     " lawy",
+     "\ufffd"
+    ],
+    "basin_median_rank": 36590,
+    "control_median_rank": 41595,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.0076
+   },
+   "procrustes": {
+    "top12": [
+     " the",
+     " position",
+     " of",
+     ",",
+     " that",
+     " point",
+     " necessary",
+     " in",
+     " movement",
+     " ideas",
+     " such",
+     " to"
+    ],
+    "basin_median_rank": 373,
+    "control_median_rank": 11032,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.7855
+   },
+   "readout_ls": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " for",
+     " as"
+    ],
+    "basin_median_rank": 396,
+    "control_median_rank": 11892,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.8987
+   },
+   "readout_proc": {
+    "top12": [
+     " squared",
+     " incent",
+     "\u30c7",
+     " agre",
+     "\u30a3",
+     " materially",
+     " rel",
+     " unemploy",
+     " subdiv",
+     "hing",
+     " divid",
+     "arer"
+    ],
+    "basin_median_rank": 13716,
+    "control_median_rank": 7312,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.378
+   },
+   "logit_lstsq": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " (",
+     " as"
+    ],
+    "basin_median_rank": 281,
+    "control_median_rank": 12684,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.9064
+   },
+   "zeropad": {
+    "top12": [
+     "ZE",
+     "WARE",
+     "yden",
+     "RC",
+     "ary",
+     " RAND",
+     "odo",
+     " slices",
+     "Portland",
+     "uti",
+     "itals",
+     " Dahl"
+    ],
+    "basin_median_rank": 38689,
+    "control_median_rank": 18670,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.0754
+   },
+   "randproj": {
+    "top12": [
+     " statewide",
+     "ileged",
+     "vable",
+     "naires",
+     "fam",
+     "tn",
+     "naire",
+     "vity",
+     "abad",
+     "Democrats",
+     "Orange",
+     "akh"
+    ],
+    "basin_median_rank": 17708,
+    "control_median_rank": 20991,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.0648
+   },
+   "logit_transfer": {
+    "top12": [
+     " mathemat",
+     " prolet",
+     " advoc",
+     " neighb",
+     " unden",
+     " nodd",
+     " challeng",
+     " condem",
+     " horizont",
+     " enthusi",
+     " arrang",
+     " psychiat"
+    ],
+    "basin_median_rank": 275,
+    "control_median_rank": 38514,
+    "basin_in_top12": 1,
+    "positions_with_basin_in_top12": 11,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.124
+   },
+   "readout_match": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " comrade",
+     " Marx",
+     " proletarian",
+     " socialist",
+     " anarchist",
+     " congress",
+     " labour",
+     " the",
+     " movement"
+    ],
+    "basin_median_rank": 13,
+    "control_median_rank": 20178,
+    "basin_in_top12": 9,
+    "positions_with_basin_in_top12": 11,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.8547
+   }
+  },
+  "Imperative": {
+   "source_small_readout": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " comrade",
+     " Marx",
+     " proletarian",
+     " socialist",
+     " congress",
+     " anarchist",
+     " labour",
+     " the",
+     " anarchism"
+    ],
+    "basin_median_rank": 12,
+    "control_median_rank": 17562,
+    "per_token_norm": 1512.5
+   },
+   "anchor_ls": {
+    "top12": [
+     " challeng",
+     " warr",
+     " juven",
+     " mathemat",
+     " incent",
+     "accompan",
+     " obser",
+     "repre",
+     " encount",
+     " seiz",
+     " discrep",
+     " sacrific"
+    ],
+    "basin_median_rank": 27143,
+    "control_median_rank": 38251,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.0957
+   },
+   "anchor_ls_b": {
+    "top12": [
+     " Dise",
+     " Volunte",
+     "\u3057",
+     "\u30e4",
+     " trave",
+     "Translation",
+     "WB",
+     "Recomm",
+     " disadvant",
+     " condem",
+     " lawy",
+     "\ufffd"
+    ],
+    "basin_median_rank": 36588,
+    "control_median_rank": 41585,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.0077
+   },
+   "procrustes": {
+    "top12": [
+     " the",
+     " position",
+     " of",
+     ",",
+     " that",
+     " point",
+     " necessary",
+     " in",
+     " movement",
+     " ideas",
+     " such",
+     " to"
+    ],
+    "basin_median_rank": 374,
+    "control_median_rank": 11079,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.7854
+   },
+   "readout_ls": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " as",
+     " for"
+    ],
+    "basin_median_rank": 394,
+    "control_median_rank": 11853,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.8987
+   },
+   "readout_proc": {
+    "top12": [
+     " squared",
+     " incent",
+     "\u30c7",
+     " agre",
+     "\u30a3",
+     " materially",
+     " rel",
+     " unemploy",
+     " subdiv",
+     " divid",
+     "hing",
+     "arer"
+    ],
+    "basin_median_rank": 13668,
+    "control_median_rank": 7303,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.3783
+   },
+   "logit_lstsq": {
+    "top12": [
+     " the",
+     ",",
+     " in",
+     " of",
+     " to",
+     " and",
+     " that",
+     " a",
+     ".",
+     " it",
+     " (",
+     " as"
+    ],
+    "basin_median_rank": 283,
+    "control_median_rank": 12638,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.9063
+   },
+   "zeropad": {
+    "top12": [
+     "WARE",
+     "ZE",
+     "yden",
+     "RC",
+     "ary",
+     " RAND",
+     "odo",
+     " slices",
+     "uti",
+     "Portland",
+     "itals",
+     "itized"
+    ],
+    "basin_median_rank": 38653,
+    "control_median_rank": 18650,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.075
+   },
+   "randproj": {
+    "top12": [
+     " statewide",
+     "ileged",
+     "vable",
+     "naires",
+     "fam",
+     "tn",
+     "naire",
+     "vity",
+     "abad",
+     "Democrats",
+     "akh",
+     "Orange"
+    ],
+    "basin_median_rank": 17607,
+    "control_median_rank": 20958,
+    "basin_in_top12": 0,
+    "positions_with_basin_in_top12": 0,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.0645
+   },
+   "logit_transfer": {
+    "top12": [
+     " mathemat",
+     " prolet",
+     " advoc",
+     " neighb",
+     " unden",
+     " nodd",
+     " challeng",
+     " condem",
+     " horizont",
+     " enthusi",
+     " arrang",
+     " psychiat"
+    ],
+    "basin_median_rank": 277,
+    "control_median_rank": 38484,
+    "basin_in_top12": 1,
+    "positions_with_basin_in_top12": 11,
+    "n_positions": 11,
+    "readout_cos_to_small": -0.1237
+   },
+   "readout_match": {
+    "top12": [
+     " prolet",
+     " bourgeois",
+     " Anarch",
+     " comrade",
+     " Marx",
+     " proletarian",
+     " socialist",
+     " anarchist",
+     " congress",
+     " labour",
+     " the",
+     " anarchism"
+    ],
+    "basin_median_rank": 12,
+    "control_median_rank": 20933,
+    "basin_in_top12": 10,
+    "positions_with_basin_in_top12": 11,
+    "n_positions": 11,
+    "readout_cos_to_small": 0.8527
+   }
+  }
+ },
+ "gate_verdict": {
+  "anchor_ls": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    27124,
+    27146,
+    27144,
+    27143
+   ],
+   "pass": false
+  },
+  "anchor_ls_b": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    36640,
+    36580,
+    36590,
+    36588
+   ],
+   "pass": false
+  },
+  "procrustes": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    377,
+    376,
+    373,
+    374
+   ],
+   "pass": false
+  },
+  "readout_ls": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    420,
+    388,
+    396,
+    394
+   ],
+   "pass": false
+  },
+  "readout_proc": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    14102,
+    13536,
+    13716,
+    13668
+   ],
+   "pass": false
+  },
+  "logit_lstsq": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    277,
+    282,
+    281,
+    283
+   ],
+   "pass": false
+  },
+  "zeropad": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    38992,
+    38527,
+    38689,
+    38653
+   ],
+   "pass": false
+  },
+  "randproj": {
+   "basin_in_top12_per_prompt": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "basin_median_rank_per_prompt": [
+    18895,
+    17245,
+    17708,
+    17607
+   ],
+   "pass": false
+  },
+  "logit_transfer": {
+   "basin_in_top12_per_prompt": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "basin_median_rank_per_prompt": [
+    269,
+    282,
+    275,
+    277
+   ],
+   "pass": false
+  },
+  "readout_match": {
+   "basin_in_top12_per_prompt": [
+    9,
+    10,
+    9,
+    10
+   ],
+   "basin_median_rank_per_prompt": [
+    13,
+    12,
+    13,
+    12
+   ],
+   "pass": true
+  }
+ },
+ "max_iter": 300,
+ "runs": {
+  "Lucier|readout_match|natural": {
+   "shell_total_norm": 12.083709716796875,
+   "locked_at": null,
+   "stopped_at": 300,
+   "stop_reason": "max_iter",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "This",
+    "The",
+    "It",
+    "But",
+    "They",
+    "You",
+    "That",
+    "Another",
+    "If",
+    "After",
+    "Now",
+    "Article"
+   ],
+   "final_basin_median_rank": 35009,
+   "final_control_median_rank": 44531,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 19015,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " Marx",
+      " comrade",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " the",
+      " congress",
+      " movement",
+      " Lenin"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 963,
+     "control": 29731,
+     "top": [
+      "information",
+      "existing",
+      "icals",
+      "notes",
+      "rates",
+      " organism",
+      ".\"[",
+      " individuality",
+      " organising",
+      " organisation",
+      "forces",
+      " anarchist"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": -0.0597
+    },
+    {
+     "iter": 2,
+     "basin": 37895,
+     "control": 33995,
+     "top": [
+      ",",
+      ".",
+      "\"",
+      " (",
+      " \"",
+      " the",
+      "\n",
+      " and",
+      " a",
+      " of",
+      " in",
+      "("
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3204
+    },
+    {
+     "iter": 5,
+     "basin": 36842,
+     "control": 38273,
+     "top": [
+      "A",
+      "S",
+      "H",
+      "I",
+      "If",
+      "An",
+      "The",
+      "It",
+      "T",
+      "M",
+      "This",
+      "P"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.2601
+    },
+    {
+     "iter": 10,
+     "basin": 35474,
+     "control": 38271,
+     "top": [
+      "A",
+      "An",
+      "S",
+      "I",
+      "The",
+      "If",
+      "H",
+      "\"",
+      "It",
+      "This",
+      "T",
+      "He"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.2873
+    },
+    {
+     "iter": 20,
+     "basin": 26978,
+     "control": 40576,
+     "top": [
+      "The",
+      "\n",
+      "This",
+      "<|endoftext|>",
+      "\"",
+      " This",
+      "It",
+      "An",
+      "\n\n",
+      "But",
+      "You",
+      " It"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3539
+    },
+    {
+     "iter": 40,
+     "basin": 40332,
+     "control": 36512,
+     "top": [
+      ",",
+      ".",
+      "\"",
+      " (",
+      "(",
+      " and",
+      " the",
+      " \"",
+      " in",
+      " '",
+      "-",
+      "'"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.2597
+    },
+    {
+     "iter": 80,
+     "basin": 38392,
+     "control": 38363,
+     "top": [
+      "G",
+      "19",
+      "S",
+      "D",
+      "#",
+      "1",
+      "F",
+      "H",
+      "2",
+      "I",
+      "A",
+      "18"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.2746
+    },
+    {
+     "iter": 160,
+     "basin": 40347,
+     "control": 36512,
+     "top": [
+      ",",
+      ".",
+      "\"",
+      " (",
+      "(",
+      " and",
+      " the",
+      " \"",
+      " in",
+      " '",
+      "-",
+      "'"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.2594
+    },
+    {
+     "iter": 300,
+     "basin": 35009,
+     "control": 44531,
+     "top": [
+      "This",
+      "The",
+      "It",
+      "But",
+      "They",
+      "You",
+      "That",
+      "Another",
+      "If",
+      "After",
+      "Now",
+      "Article"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": -0.2062
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "readout_match",
+   "shell": "natural",
+   "shell_per_token_norm": 3.12,
+   "gate_passed": true
+  },
+  "Lucier|readout_match|conv_natural": {
+   "shell_total_norm": 116.1895751953125,
+   "locked_at": null,
+   "stopped_at": 300,
+   "stop_reason": "max_iter",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "advertisement",
+    "Ide",
+    "Engineers",
+    "Ok",
+    "An",
+    "The",
+    "Democrats",
+    "Article",
+    "Equ",
+    "Alternative",
+    "Early",
+    "Dr"
+   ],
+   "final_basin_median_rank": 30498,
+   "final_control_median_rank": 45812,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 19016,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " Marx",
+      " comrade",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " the",
+      " congress",
+      " movement",
+      " Lenin"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 32706,
+     "control": 25655,
+     "top": [
+      "than",
+      "ka",
+      "ought",
+      "ter",
+      "1981",
+      "eno",
+      "been",
+      "ich",
+      "ither",
+      "au",
+      "ning",
+      "present"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.2239
+    },
+    {
+     "iter": 2,
+     "basin": 36817,
+     "control": 41729,
+     "top": [
+      "than",
+      "been",
+      "then",
+      "thank",
+      "I",
+      "you",
+      "got",
+      "now",
+      "$",
+      "this",
+      "he",
+      "Hello"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.4544
+    },
+    {
+     "iter": 5,
+     "basin": 29669,
+     "control": 46285,
+     "top": [
+      "Engineers",
+      "Austral",
+      "Ide",
+      "advertisement",
+      "An",
+      "Equ",
+      "The",
+      "Interest",
+      "Democrats",
+      "Alternative",
+      "It",
+      "Taking"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3669
+    },
+    {
+     "iter": 10,
+     "basin": 30366,
+     "control": 45772,
+     "top": [
+      "advertisement",
+      "Ide",
+      "The",
+      "An",
+      "Ok",
+      "Engineers",
+      "Democrats",
+      "Equ",
+      "Article",
+      "It",
+      "During",
+      "Dr"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3179
+    },
+    {
+     "iter": 20,
+     "basin": 30484,
+     "control": 45791,
+     "top": [
+      "advertisement",
+      "Ide",
+      "Ok",
+      "Engineers",
+      "The",
+      "An",
+      "Democrats",
+      "Article",
+      "Equ",
+      "Alternative",
+      "Early",
+      "Dr"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3102
+    },
+    {
+     "iter": 40,
+     "basin": 30498,
+     "control": 45812,
+     "top": [
+      "advertisement",
+      "Ide",
+      "Engineers",
+      "Ok",
+      "An",
+      "The",
+      "Democrats",
+      "Article",
+      "Equ",
+      "Alternative",
+      "Early",
+      "Dr"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3094
+    },
+    {
+     "iter": 80,
+     "basin": 30498,
+     "control": 45812,
+     "top": [
+      "advertisement",
+      "Ide",
+      "Engineers",
+      "Ok",
+      "An",
+      "The",
+      "Democrats",
+      "Article",
+      "Equ",
+      "Alternative",
+      "Early",
+      "Dr"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3094
+    },
+    {
+     "iter": 160,
+     "basin": 30498,
+     "control": 45812,
+     "top": [
+      "advertisement",
+      "Ide",
+      "Engineers",
+      "Ok",
+      "An",
+      "The",
+      "Democrats",
+      "Article",
+      "Equ",
+      "Alternative",
+      "Early",
+      "Dr"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3094
+    },
+    {
+     "iter": 300,
+     "basin": 30498,
+     "control": 45812,
+     "top": [
+      "advertisement",
+      "Ide",
+      "Engineers",
+      "Ok",
+      "An",
+      "The",
+      "Democrats",
+      "Article",
+      "Equ",
+      "Alternative",
+      "Early",
+      "Dr"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3094
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "readout_match",
+   "shell": "conv_natural",
+   "shell_per_token_norm": 30.0,
+   "gate_passed": true
+  },
+  "Lucier|readout_match|matched_ratio": {
+   "shell_total_norm": 3380.33984375,
+   "locked_at": 21,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "Am"
+   ],
+   "final_basin_median_rank": 39213,
+   "final_control_median_rank": 40699,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 19016,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " Marx",
+      " comrade",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " the",
+      " congress",
+      " movement",
+      " Lenin"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 247,
+     "control": 13644,
+     "top": [
+      " the",
+      " of",
+      " that",
+      ".",
+      ",",
+      " in",
+      " which",
+      " and",
+      " a",
+      " such",
+      " an",
+      " necessary"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8296
+    },
+    {
+     "iter": 2,
+     "basin": 728,
+     "control": 13881,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " necessary",
+      " existing",
+      ".",
+      " necessity",
+      " a",
+      " an",
+      " principle",
+      " \"",
+      " part"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7136
+    },
+    {
+     "iter": 5,
+     "basin": 14593,
+     "control": 17791,
+     "top": [
+      "laws",
+      "national",
+      "law",
+      "ext",
+      "mar",
+      "full",
+      "existence",
+      "t",
+      "action",
+      "local",
+      "private",
+      "class"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5917
+    },
+    {
+     "iter": 10,
+     "basin": 33307,
+     "control": 36963,
+     "top": [
+      "def",
+      "host",
+      "local",
+      "national",
+      "danger",
+      "creat",
+      "D",
+      "levels",
+      "mar",
+      "class",
+      "private",
+      "sh"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5758
+    },
+    {
+     "iter": 20,
+     "basin": 38737,
+     "control": 40762,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "T",
+      "W",
+      "local",
+      "host",
+      "I",
+      "The",
+      "AB",
+      "RAW",
+      "Am"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5827
+    },
+    {
+     "iter": 40,
+     "basin": 39213,
+     "control": 40699,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "T",
+      "W",
+      "AB",
+      "I",
+      "The",
+      "local",
+      "RAW",
+      "host",
+      "Am"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.583
+    },
+    {
+     "iter": 80,
+     "basin": 39213,
+     "control": 40699,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "T",
+      "W",
+      "AB",
+      "I",
+      "The",
+      "local",
+      "RAW",
+      "host",
+      "Am"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.583,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 39213,
+     "control": 40699,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "T",
+      "W",
+      "AB",
+      "I",
+      "The",
+      "local",
+      "RAW",
+      "host",
+      "Am"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.583,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 39213,
+     "control": 40699,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "T",
+      "W",
+      "AB",
+      "I",
+      "The",
+      "local",
+      "RAW",
+      "host",
+      "Am"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.583,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "readout_match",
+   "shell": "matched_ratio",
+   "shell_per_token_norm": 872.8,
+   "gate_passed": true
+  },
+  "Lucier|readout_match|matched_abs": {
+   "shell_total_norm": 5861.3759765625,
+   "locked_at": 34,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "local",
+    "C",
+    "The",
+    "0",
+    "host"
+   ],
+   "final_basin_median_rank": 40168,
+   "final_control_median_rank": 39178,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 19016,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " Marx",
+      " comrade",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " the",
+      " congress",
+      " movement",
+      " Lenin"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 157,
+     "control": 15444,
+     "top": [
+      " the",
+      " of",
+      " that",
+      ",",
+      " which",
+      " in",
+      ".",
+      " and",
+      " a",
+      " such",
+      " principles",
+      " necessary"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9078
+    },
+    {
+     "iter": 2,
+     "basin": 276,
+     "control": 14884,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      " a",
+      ".",
+      " in",
+      " such",
+      " necessary",
+      ",",
+      " and",
+      " what"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8077
+    },
+    {
+     "iter": 5,
+     "basin": 2129,
+     "control": 10508,
+     "top": [
+      " the",
+      " necessity",
+      " distinction",
+      " essence",
+      " of",
+      " reality",
+      " substance",
+      " that",
+      " relations",
+      " action",
+      " union",
+      " existing"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6575
+    },
+    {
+     "iter": 10,
+     "basin": 20988,
+     "control": 20952,
+     "top": [
+      "laws",
+      "national",
+      "mar",
+      "law",
+      "local",
+      "host",
+      "gun",
+      "ext",
+      "creat",
+      "action",
+      "story",
+      "rest"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5931
+    },
+    {
+     "iter": 20,
+     "basin": 36974,
+     "control": 38357,
+     "top": [
+      "def",
+      "host",
+      "local",
+      "D",
+      "national",
+      "creat",
+      "new",
+      "w",
+      "align",
+      "W",
+      "levels",
+      "I"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5935
+    },
+    {
+     "iter": 40,
+     "basin": 40168,
+     "control": 39178,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5976
+    },
+    {
+     "iter": 80,
+     "basin": 40168,
+     "control": 39178,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5976,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40168,
+     "control": 39178,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5976,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40168,
+     "control": 39178,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5976,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "readout_match",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": true
+  },
+  "Lucier|readout_match|x73": {
+   "shell_total_norm": 8520.5615234375,
+   "locked_at": 41,
+   "stopped_at": 41,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "def",
+    "D",
+    "W",
+    "I",
+    "host",
+    "A",
+    "local",
+    "T",
+    "w",
+    "0",
+    "C",
+    "Mon"
+   ],
+   "final_basin_median_rank": 40198,
+   "final_control_median_rank": 38778,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 19016,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " Marx",
+      " comrade",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " the",
+      " congress",
+      " movement",
+      " Lenin"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 117,
+     "control": 16459,
+     "top": [
+      " the",
+      " of",
+      " that",
+      ",",
+      " in",
+      " which",
+      ".",
+      " and",
+      " a",
+      " such",
+      " principles",
+      " bourgeois"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.9358
+    },
+    {
+     "iter": 2,
+     "basin": 170,
+     "control": 14763,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      " in",
+      ",",
+      " a",
+      ".",
+      " and",
+      " such",
+      " \"",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8501
+    },
+    {
+     "iter": 5,
+     "basin": 974,
+     "control": 13308,
+     "top": [
+      " the",
+      " of",
+      " necessity",
+      " that",
+      " existing",
+      " relations",
+      " distinction",
+      " principle",
+      " necessary",
+      " action",
+      " reality",
+      " substance"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7015
+    },
+    {
+     "iter": 10,
+     "basin": 10022,
+     "control": 9030,
+     "top": [
+      "laws",
+      "mar",
+      "law",
+      "ext",
+      "existence",
+      "national",
+      "ties",
+      "rest",
+      "nation",
+      "action",
+      "t",
+      "full"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.6087
+    },
+    {
+     "iter": 20,
+     "basin": 29819,
+     "control": 32144,
+     "top": [
+      "host",
+      "def",
+      "national",
+      "local",
+      "creat",
+      "mar",
+      "Div",
+      "class",
+      "story",
+      "rest",
+      "w",
+      "st"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5836
+    },
+    {
+     "iter": 40,
+     "basin": 40005,
+     "control": 38731,
+     "top": [
+      "def",
+      "D",
+      "W",
+      "host",
+      "I",
+      "local",
+      "A",
+      "w",
+      "T",
+      "0",
+      "C",
+      "align"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5953
+    },
+    {
+     "iter": 80,
+     "basin": 40198,
+     "control": 38778,
+     "top": [
+      "def",
+      "D",
+      "W",
+      "I",
+      "host",
+      "A",
+      "local",
+      "T",
+      "w",
+      "0",
+      "C",
+      "Mon"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5955,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40198,
+     "control": 38778,
+     "top": [
+      "def",
+      "D",
+      "W",
+      "I",
+      "host",
+      "A",
+      "local",
+      "T",
+      "w",
+      "0",
+      "C",
+      "Mon"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5955,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40198,
+     "control": 38778,
+     "top": [
+      "def",
+      "D",
+      "W",
+      "I",
+      "host",
+      "A",
+      "local",
+      "T",
+      "w",
+      "0",
+      "C",
+      "Mon"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5955,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "readout_match",
+   "shell": "x73",
+   "shell_per_token_norm": 2200.0,
+   "gate_passed": true
+  },
+  "Lucier|readout_match|x218": {
+   "shell_total_norm": 25174.388671875,
+   "locked_at": null,
+   "stopped_at": 120,
+   "stop_reason": "readout_static",
+   "last_iter_with_basin_in_top12": 1,
+   "final_top12": [
+    "mat",
+    "rest",
+    "def",
+    "pl",
+    "Div",
+    "host",
+    "w",
+    "fac",
+    "of",
+    "laws",
+    "caps",
+    "law"
+   ],
+   "final_basin_median_rank": 34184,
+   "final_control_median_rank": 35765,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 19016,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " Marx",
+      " comrade",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " the",
+      " congress",
+      " movement",
+      " Lenin"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 47,
+     "control": 16920,
+     "top": [
+      " the",
+      " bourgeois",
+      " Marx",
+      " that",
+      ",",
+      " of",
+      " in",
+      " which",
+      " principles",
+      " proletarian",
+      ".",
+      " socialist"
+     ],
+     "basin_in_top12": 4,
+     "cos_to_seed": 0.9753
+    },
+    {
+     "iter": 2,
+     "basin": 87,
+     "control": 17085,
+     "top": [
+      " the",
+      " that",
+      " of",
+      ",",
+      " in",
+      " and",
+      " which",
+      ".",
+      " a",
+      " principles",
+      " such",
+      " \""
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.931
+    },
+    {
+     "iter": 5,
+     "basin": 237,
+     "control": 15886,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " in",
+      " a",
+      ",",
+      " and",
+      " which",
+      ".",
+      " \"",
+      " such",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8158
+    },
+    {
+     "iter": 10,
+     "basin": 593,
+     "control": 15607,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " existing",
+      " a",
+      " \"",
+      " such",
+      " which",
+      " relations",
+      " in",
+      " those",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7128
+    },
+    {
+     "iter": 20,
+     "basin": 5454,
+     "control": 12765,
+     "top": [
+      " of",
+      " substance",
+      " the",
+      " issue",
+      " union",
+      " distinction",
+      " relations",
+      " continuation",
+      " state",
+      " exclusive",
+      " that",
+      " matter"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6131
+    },
+    {
+     "iter": 40,
+     "basin": 31417,
+     "control": 27126,
+     "top": [
+      "mar",
+      "rest",
+      "laws",
+      "Div",
+      "law",
+      "pl",
+      "mat",
+      "def",
+      "national",
+      "nation",
+      "sexual",
+      "gun"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5393
+    },
+    {
+     "iter": 80,
+     "basin": 37055,
+     "control": 33511,
+     "top": [
+      "mat",
+      "rest",
+      "def",
+      "Div",
+      "host",
+      "pl",
+      "law",
+      "caps",
+      "laws",
+      "self",
+      "hom",
+      "dri"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5275
+    },
+    {
+     "iter": 160,
+     "basin": 34184,
+     "control": 35765,
+     "top": [
+      "mat",
+      "rest",
+      "def",
+      "pl",
+      "Div",
+      "host",
+      "w",
+      "fac",
+      "of",
+      "laws",
+      "caps",
+      "law"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5371,
+     "from_lock": "readout_static"
+    },
+    {
+     "iter": 300,
+     "basin": 34184,
+     "control": 35765,
+     "top": [
+      "mat",
+      "rest",
+      "def",
+      "pl",
+      "Div",
+      "host",
+      "w",
+      "fac",
+      "of",
+      "laws",
+      "caps",
+      "law"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5371,
+     "from_lock": "readout_static"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "readout_match",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": true
+  },
+  "Semantic|readout_match|matched_abs": {
+   "shell_total_norm": 5242.5703125,
+   "locked_at": 34,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "local",
+    "C",
+    "The",
+    "0",
+    "host"
+   ],
+   "final_basin_median_rank": 40159,
+   "final_control_median_rank": 39182,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 12,
+     "control": 19167,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " comrade",
+      " Marx",
+      " proletarian",
+      " anarchist",
+      " socialist",
+      " congress",
+      " labour",
+      " the",
+      " anarchism"
+     ],
+     "basin_in_top12": 10,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 159,
+     "control": 14597,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      " in",
+      ",",
+      ".",
+      " a",
+      " and",
+      " such",
+      " an",
+      " it"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9041
+    },
+    {
+     "iter": 2,
+     "basin": 268,
+     "control": 14482,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      " a",
+      " such",
+      " in",
+      " an",
+      ".",
+      " principles",
+      ",",
+      " principle"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8007
+    },
+    {
+     "iter": 5,
+     "basin": 1682,
+     "control": 9632,
+     "top": [
+      " the",
+      " necessity",
+      " of",
+      " substance",
+      " distinction",
+      " reality",
+      " essence",
+      " relations",
+      " that",
+      " union",
+      " existing",
+      " principle"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6449
+    },
+    {
+     "iter": 10,
+     "basin": 20509,
+     "control": 20084,
+     "top": [
+      "laws",
+      "national",
+      "mar",
+      "law",
+      "local",
+      "host",
+      "gun",
+      "ext",
+      "story",
+      "action",
+      "rest",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5793
+    },
+    {
+     "iter": 20,
+     "basin": 36890,
+     "control": 38286,
+     "top": [
+      "def",
+      "host",
+      "local",
+      "D",
+      "national",
+      "creat",
+      "new",
+      "w",
+      "W",
+      "levels",
+      "align",
+      "I"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5791
+    },
+    {
+     "iter": 40,
+     "basin": 40159,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5832
+    },
+    {
+     "iter": 80,
+     "basin": 40159,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5832,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40159,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5832,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40159,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5832,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Semantic",
+   "map": "readout_match",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": true
+  },
+  "Semantic|readout_match|x218": {
+   "shell_total_norm": 22516.66015625,
+   "locked_at": 139,
+   "stopped_at": 139,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "def",
+    "mat",
+    "rest",
+    "pl",
+    "host",
+    "w",
+    "Div",
+    "fac",
+    "of",
+    "c",
+    "this",
+    "creat"
+   ],
+   "final_basin_median_rank": 35915,
+   "final_control_median_rank": 35257,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 12,
+     "control": 19167,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " comrade",
+      " Marx",
+      " proletarian",
+      " anarchist",
+      " socialist",
+      " congress",
+      " labour",
+      " the",
+      " anarchism"
+     ],
+     "basin_in_top12": 10,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 42,
+     "control": 16320,
+     "top": [
+      " the",
+      " of",
+      " bourgeois",
+      ",",
+      " that",
+      " which",
+      " Marx",
+      " in",
+      " principles",
+      ".",
+      " and",
+      " abstract"
+     ],
+     "basin_in_top12": 2,
+     "cos_to_seed": 0.9732
+    },
+    {
+     "iter": 2,
+     "basin": 87,
+     "control": 15941,
+     "top": [
+      " the",
+      " of",
+      " that",
+      ",",
+      " in",
+      " which",
+      " and",
+      " a",
+      ".",
+      " such",
+      " principles",
+      " it"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9271
+    },
+    {
+     "iter": 5,
+     "basin": 244,
+     "control": 15134,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " a",
+      " in",
+      ",",
+      " which",
+      " and",
+      " such",
+      ".",
+      " \"",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8109
+    },
+    {
+     "iter": 10,
+     "basin": 566,
+     "control": 14602,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " existing",
+      " a",
+      " such",
+      " those",
+      " relations",
+      " which",
+      " \"",
+      " ordinary",
+      " in"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7052
+    },
+    {
+     "iter": 20,
+     "basin": 4234,
+     "control": 13594,
+     "top": [
+      " of",
+      " substance",
+      " the",
+      " issue",
+      " union",
+      " relations",
+      " state",
+      " continuation",
+      " distinction",
+      " that",
+      " exclusive",
+      " subject"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6023
+    },
+    {
+     "iter": 40,
+     "basin": 30938,
+     "control": 25891,
+     "top": [
+      "mar",
+      "laws",
+      "rest",
+      "law",
+      "Div",
+      "pl",
+      "national",
+      "mat",
+      "def",
+      "nation",
+      "gun",
+      "sexual"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5292
+    },
+    {
+     "iter": 80,
+     "basin": 37135,
+     "control": 32580,
+     "top": [
+      "mat",
+      "def",
+      "rest",
+      "pl",
+      "host",
+      "Div",
+      "laws",
+      "hom",
+      "caps",
+      "law",
+      "dri",
+      "w"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5153
+    },
+    {
+     "iter": 160,
+     "basin": 35915,
+     "control": 35257,
+     "top": [
+      "def",
+      "mat",
+      "rest",
+      "pl",
+      "host",
+      "w",
+      "Div",
+      "fac",
+      "of",
+      "c",
+      "this",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5319,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 35915,
+     "control": 35257,
+     "top": [
+      "def",
+      "mat",
+      "rest",
+      "pl",
+      "host",
+      "w",
+      "Div",
+      "fac",
+      "of",
+      "c",
+      "this",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5319,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Semantic",
+   "map": "readout_match",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": true
+  },
+  "Nonsense|readout_match|matched_abs": {
+   "shell_total_norm": 5019.38134765625,
+   "locked_at": 35,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "local",
+    "C",
+    "The",
+    "0",
+    "host"
+   ],
+   "final_basin_median_rank": 40159,
+   "final_control_median_rank": 39181,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 20178,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " comrade",
+      " Marx",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " congress",
+      " labour",
+      " the",
+      " movement"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 156,
+     "control": 15092,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      ",",
+      " in",
+      ".",
+      " and",
+      " a",
+      " such",
+      " an",
+      " it"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9049
+    },
+    {
+     "iter": 2,
+     "basin": 254,
+     "control": 14502,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      " a",
+      " in",
+      " such",
+      " an",
+      ".",
+      ",",
+      " principles",
+      " and"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8025
+    },
+    {
+     "iter": 5,
+     "basin": 1752,
+     "control": 9087,
+     "top": [
+      " the",
+      " necessity",
+      " of",
+      " distinction",
+      " substance",
+      " reality",
+      " essence",
+      " relations",
+      " that",
+      " union",
+      " part",
+      " principle"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6486
+    },
+    {
+     "iter": 10,
+     "basin": 20714,
+     "control": 19955,
+     "top": [
+      "laws",
+      "national",
+      "mar",
+      "law",
+      "local",
+      "host",
+      "gun",
+      "story",
+      "action",
+      "ext",
+      "creat",
+      "rest"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5838
+    },
+    {
+     "iter": 20,
+     "basin": 36807,
+     "control": 38304,
+     "top": [
+      "def",
+      "host",
+      "local",
+      "D",
+      "national",
+      "creat",
+      "new",
+      "w",
+      "levels",
+      "W",
+      "align",
+      "I"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5833
+    },
+    {
+     "iter": 40,
+     "basin": 40159,
+     "control": 39181,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5874
+    },
+    {
+     "iter": 80,
+     "basin": 40159,
+     "control": 39181,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5874,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40159,
+     "control": 39181,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5874,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40159,
+     "control": 39181,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5874,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Nonsense",
+   "map": "readout_match",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": true
+  },
+  "Nonsense|readout_match|x218": {
+   "shell_total_norm": 21558.05859375,
+   "locked_at": null,
+   "stopped_at": 136,
+   "stop_reason": "readout_static",
+   "last_iter_with_basin_in_top12": 1,
+   "final_top12": [
+    "def",
+    "mat",
+    "pl",
+    "rest",
+    "w",
+    "host",
+    "Div",
+    "fac",
+    "c",
+    "of",
+    "this",
+    "creat"
+   ],
+   "final_basin_median_rank": 36451,
+   "final_control_median_rank": 35124,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 13,
+     "control": 20178,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " comrade",
+      " Marx",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " congress",
+      " labour",
+      " the",
+      " movement"
+     ],
+     "basin_in_top12": 9,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 42,
+     "control": 16993,
+     "top": [
+      " the",
+      " of",
+      ",",
+      " that",
+      " bourgeois",
+      " which",
+      " Marx",
+      " in",
+      " principles",
+      ".",
+      " and",
+      " proletarian"
+     ],
+     "basin_in_top12": 3,
+     "cos_to_seed": 0.9734
+    },
+    {
+     "iter": 2,
+     "basin": 90,
+     "control": 16109,
+     "top": [
+      " the",
+      " of",
+      " that",
+      ",",
+      " in",
+      " which",
+      " and",
+      ".",
+      " a",
+      " such",
+      " principles",
+      " it"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9273
+    },
+    {
+     "iter": 5,
+     "basin": 245,
+     "control": 15501,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " a",
+      " in",
+      ",",
+      " which",
+      " and",
+      ".",
+      " \"",
+      " such",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8102
+    },
+    {
+     "iter": 10,
+     "basin": 545,
+     "control": 14381,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " a",
+      " existing",
+      " which",
+      " relations",
+      " those",
+      " such",
+      " \"",
+      " in",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7049
+    },
+    {
+     "iter": 20,
+     "basin": 4184,
+     "control": 12149,
+     "top": [
+      " of",
+      " the",
+      " substance",
+      " issue",
+      " union",
+      " relations",
+      " state",
+      " distinction",
+      " continuation",
+      " that",
+      " subject",
+      " legal"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6041
+    },
+    {
+     "iter": 40,
+     "basin": 30092,
+     "control": 25797,
+     "top": [
+      "mar",
+      "laws",
+      "rest",
+      "law",
+      "Div",
+      "pl",
+      "national",
+      "mat",
+      "def",
+      "gun",
+      "sexual",
+      "nation"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5372
+    },
+    {
+     "iter": 80,
+     "basin": 36651,
+     "control": 32677,
+     "top": [
+      "mat",
+      "def",
+      "pl",
+      "host",
+      "rest",
+      "Div",
+      "hom",
+      "w",
+      "laws",
+      "dri",
+      "fac",
+      "caps"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5247
+    },
+    {
+     "iter": 160,
+     "basin": 36451,
+     "control": 35124,
+     "top": [
+      "def",
+      "mat",
+      "pl",
+      "rest",
+      "w",
+      "host",
+      "Div",
+      "fac",
+      "c",
+      "of",
+      "this",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5399,
+     "from_lock": "readout_static"
+    },
+    {
+     "iter": 300,
+     "basin": 36451,
+     "control": 35124,
+     "top": [
+      "def",
+      "mat",
+      "pl",
+      "rest",
+      "w",
+      "host",
+      "Div",
+      "fac",
+      "c",
+      "of",
+      "this",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5399,
+     "from_lock": "readout_static"
+    }
+   ],
+   "prompt": "Nonsense",
+   "map": "readout_match",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": true
+  },
+  "Imperative|readout_match|matched_abs": {
+   "shell_total_norm": 5019.38037109375,
+   "locked_at": 35,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "local",
+    "C",
+    "The",
+    "0",
+    "host"
+   ],
+   "final_basin_median_rank": 40158,
+   "final_control_median_rank": 39182,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 12,
+     "control": 20933,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " comrade",
+      " Marx",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " congress",
+      " labour",
+      " the",
+      " anarchism"
+     ],
+     "basin_in_top12": 10,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 154,
+     "control": 15681,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      ",",
+      " in",
+      ".",
+      " and",
+      " a",
+      " such",
+      " an",
+      " principles"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9054
+    },
+    {
+     "iter": 2,
+     "basin": 253,
+     "control": 14691,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " which",
+      " a",
+      " in",
+      " such",
+      " an",
+      ".",
+      ",",
+      " principles",
+      " and"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.803
+    },
+    {
+     "iter": 5,
+     "basin": 1771,
+     "control": 9145,
+     "top": [
+      " the",
+      " necessity",
+      " of",
+      " distinction",
+      " substance",
+      " reality",
+      " essence",
+      " relations",
+      " that",
+      " union",
+      " part",
+      " principle"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.6487
+    },
+    {
+     "iter": 10,
+     "basin": 20498,
+     "control": 19629,
+     "top": [
+      "laws",
+      "national",
+      "law",
+      "mar",
+      "local",
+      "host",
+      "gun",
+      "story",
+      "action",
+      "ext",
+      "creat",
+      "rest"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5838
+    },
+    {
+     "iter": 20,
+     "basin": 36808,
+     "control": 38301,
+     "top": [
+      "def",
+      "host",
+      "local",
+      "D",
+      "national",
+      "creat",
+      "new",
+      "w",
+      "levels",
+      "W",
+      "align",
+      "I"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5832
+    },
+    {
+     "iter": 40,
+     "basin": 40158,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5873
+    },
+    {
+     "iter": 80,
+     "basin": 40158,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5873,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40158,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5873,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40158,
+     "control": 39182,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "The",
+      "0",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5873,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Imperative",
+   "map": "readout_match",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": true
+  },
+  "Imperative|readout_match|x218": {
+   "shell_total_norm": 21558.052734375,
+   "locked_at": 126,
+   "stopped_at": 126,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 1,
+   "final_top12": [
+    "def",
+    "mat",
+    "pl",
+    "rest",
+    "host",
+    "w",
+    "Div",
+    "fac",
+    "c",
+    "of",
+    "this",
+    "creat"
+   ],
+   "final_basin_median_rank": 36463,
+   "final_control_median_rank": 34540,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 12,
+     "control": 20933,
+     "top": [
+      " prolet",
+      " bourgeois",
+      " Anarch",
+      " comrade",
+      " Marx",
+      " proletarian",
+      " socialist",
+      " anarchist",
+      " congress",
+      " labour",
+      " the",
+      " anarchism"
+     ],
+     "basin_in_top12": 10,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 42,
+     "control": 17576,
+     "top": [
+      " the",
+      " of",
+      ",",
+      " that",
+      " bourgeois",
+      " which",
+      " Marx",
+      " in",
+      " principles",
+      ".",
+      " and",
+      " proletarian"
+     ],
+     "basin_in_top12": 3,
+     "cos_to_seed": 0.9735
+    },
+    {
+     "iter": 2,
+     "basin": 88,
+     "control": 16525,
+     "top": [
+      " the",
+      " of",
+      " that",
+      ",",
+      " in",
+      " which",
+      " and",
+      ".",
+      " a",
+      " such",
+      " principles",
+      " it"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9274
+    },
+    {
+     "iter": 5,
+     "basin": 238,
+     "control": 15566,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " a",
+      " in",
+      ",",
+      " which",
+      " and",
+      ".",
+      " \"",
+      " such",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8105
+    },
+    {
+     "iter": 10,
+     "basin": 535,
+     "control": 14334,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " a",
+      " existing",
+      " relations",
+      " which",
+      " those",
+      " such",
+      " \"",
+      " in",
+      " an"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.705
+    },
+    {
+     "iter": 20,
+     "basin": 4159,
+     "control": 11753,
+     "top": [
+      " of",
+      " the",
+      " substance",
+      " issue",
+      " union",
+      " relations",
+      " state",
+      " distinction",
+      " continuation",
+      " that",
+      " subject",
+      " legal"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.604
+    },
+    {
+     "iter": 40,
+     "basin": 29629,
+     "control": 25184,
+     "top": [
+      "mar",
+      "laws",
+      "rest",
+      "law",
+      "Div",
+      "national",
+      "pl",
+      "mat",
+      "def",
+      "gun",
+      "sexual",
+      "nation"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5384
+    },
+    {
+     "iter": 80,
+     "basin": 36413,
+     "control": 32704,
+     "top": [
+      "mat",
+      "def",
+      "pl",
+      "host",
+      "rest",
+      "Div",
+      "hom",
+      "w",
+      "laws",
+      "dri",
+      "fac",
+      "c"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5265
+    },
+    {
+     "iter": 160,
+     "basin": 36463,
+     "control": 34540,
+     "top": [
+      "def",
+      "mat",
+      "pl",
+      "rest",
+      "host",
+      "w",
+      "Div",
+      "fac",
+      "c",
+      "of",
+      "this",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5387,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 36463,
+     "control": 34540,
+     "top": [
+      "def",
+      "mat",
+      "pl",
+      "rest",
+      "host",
+      "w",
+      "Div",
+      "fac",
+      "c",
+      "of",
+      "this",
+      "creat"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5387,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Imperative",
+   "map": "readout_match",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": true
+  },
+  "Syntactic|readout_match|matched_abs": {
+   "shell_total_norm": 4785.79052734375,
+   "locked_at": 24,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "A",
+    "def",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "C",
+    "0",
+    "The",
+    "local",
+    "host"
+   ],
+   "final_basin_median_rank": 40312,
+   "final_control_median_rank": 39137,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 24351,
+     "control": 37947,
+     "top": [
+      " Divine",
+      "\u3010",
+      " Fairy",
+      " Falling",
+      "\u2026\u2026",
+      "\u2015",
+      " Elements",
+      " \u300c",
+      " Darkness",
+      " Cancel",
+      "~",
+      " Yu"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 22925,
+     "control": 33993,
+     "top": [
+      ".",
+      ",",
+      "\n",
+      " the",
+      "!",
+      "~",
+      "?",
+      " to",
+      "\u2015",
+      " and",
+      " of",
+      " Divine"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7723
+    },
+    {
+     "iter": 2,
+     "basin": 21130,
+     "control": 31243,
+     "top": [
+      ".",
+      ",",
+      "\n",
+      " of",
+      " the",
+      " and",
+      "?",
+      "!",
+      " is",
+      "~",
+      " to",
+      "\u2026"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.6423
+    },
+    {
+     "iter": 5,
+     "basin": 30321,
+     "control": 28933,
+     "top": [
+      ".",
+      " of",
+      "~",
+      "\n",
+      "#",
+      "\"",
+      "s",
+      "-",
+      " I",
+      "\u2026",
+      "(",
+      " is"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5716
+    },
+    {
+     "iter": 10,
+     "basin": 37131,
+     "control": 39043,
+     "top": [
+      "local",
+      "D",
+      "def",
+      "creat",
+      "I",
+      "national",
+      "var",
+      "Mon",
+      "mar",
+      "w",
+      "Bar",
+      "Class"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5645
+    },
+    {
+     "iter": 20,
+     "basin": 39564,
+     "control": 39368,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "local",
+      "host",
+      "AB",
+      "T",
+      "C",
+      "The",
+      "0"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5644
+    },
+    {
+     "iter": 40,
+     "basin": 40312,
+     "control": 39137,
+     "top": [
+      "D",
+      "A",
+      "def",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "C",
+      "0",
+      "The",
+      "local",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.567
+    },
+    {
+     "iter": 80,
+     "basin": 40312,
+     "control": 39137,
+     "top": [
+      "D",
+      "A",
+      "def",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "C",
+      "0",
+      "The",
+      "local",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.567,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40312,
+     "control": 39137,
+     "top": [
+      "D",
+      "A",
+      "def",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "C",
+      "0",
+      "The",
+      "local",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.567,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40312,
+     "control": 39137,
+     "top": [
+      "D",
+      "A",
+      "def",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "C",
+      "0",
+      "The",
+      "local",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.567,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Syntactic",
+   "map": "readout_match",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": true
+  },
+  "Syntactic|readout_match|x218": {
+   "shell_total_norm": 20554.80078125,
+   "locked_at": 71,
+   "stopped_at": 71,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "def",
+    "Def",
+    "Div",
+    "Tr",
+    "w",
+    "host",
+    "T",
+    "W",
+    "Mon",
+    "text",
+    "c",
+    "pl"
+   ],
+   "final_basin_median_rank": 40472,
+   "final_control_median_rank": 36354,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 24351,
+     "control": 37947,
+     "top": [
+      " Divine",
+      "\u3010",
+      " Fairy",
+      " Falling",
+      "\u2026\u2026",
+      "\u2015",
+      " Elements",
+      " \u300c",
+      " Darkness",
+      " Cancel",
+      "~",
+      " Yu"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 21871,
+     "control": 35253,
+     "top": [
+      " Divine",
+      ",",
+      ".",
+      "\u2015",
+      "\n",
+      "\u2026\u2026",
+      "!",
+      "\u3010",
+      "~",
+      " Falling",
+      " \u300c",
+      " the"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8815
+    },
+    {
+     "iter": 2,
+     "basin": 21349,
+     "control": 33552,
+     "top": [
+      ",",
+      ".",
+      "\n",
+      " the",
+      " to",
+      "\u2015",
+      "!",
+      " and",
+      " Divine",
+      "?",
+      " in",
+      "~"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7349
+    },
+    {
+     "iter": 5,
+     "basin": 21101,
+     "control": 29608,
+     "top": [
+      ".",
+      ",",
+      " the",
+      "\n",
+      " and",
+      " of",
+      " to",
+      "?",
+      " in",
+      "!",
+      " that",
+      "-"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5327
+    },
+    {
+     "iter": 10,
+     "basin": 19460,
+     "control": 23593,
+     "top": [
+      ".",
+      " of",
+      ",",
+      " the",
+      "?",
+      "\n",
+      " and",
+      " I",
+      " that",
+      "\u2026",
+      "!",
+      " is"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.45
+    },
+    {
+     "iter": 20,
+     "basin": 33398,
+     "control": 18796,
+     "top": [
+      "s",
+      "st",
+      "mar",
+      " of",
+      "-",
+      "\"",
+      "\u2026",
+      "var",
+      ".",
+      "local",
+      "e",
+      "_"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.4517
+    },
+    {
+     "iter": 40,
+     "basin": 35986,
+     "control": 36475,
+     "top": [
+      "def",
+      "Mon",
+      "w",
+      "mar",
+      "rest",
+      "st",
+      "host",
+      "Div",
+      "D",
+      "c",
+      "d",
+      "I"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.4595
+    },
+    {
+     "iter": 80,
+     "basin": 40472,
+     "control": 36354,
+     "top": [
+      "def",
+      "Def",
+      "Div",
+      "Tr",
+      "w",
+      "host",
+      "T",
+      "W",
+      "Mon",
+      "text",
+      "c",
+      "pl"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.4573,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40472,
+     "control": 36354,
+     "top": [
+      "def",
+      "Def",
+      "Div",
+      "Tr",
+      "w",
+      "host",
+      "T",
+      "W",
+      "Mon",
+      "text",
+      "c",
+      "pl"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.4573,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40472,
+     "control": 36354,
+     "top": [
+      "def",
+      "Def",
+      "Div",
+      "Tr",
+      "w",
+      "host",
+      "T",
+      "W",
+      "Mon",
+      "text",
+      "c",
+      "pl"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.4573,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Syntactic",
+   "map": "readout_match",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": true
+  },
+  "Lucier|procrustes|matched_abs": {
+   "shell_total_norm": 5861.3720703125,
+   "locked_at": 31,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "local",
+    "C",
+    "0",
+    "The",
+    "host"
+   ],
+   "final_basin_median_rank": 40247,
+   "final_control_median_rank": 39144,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 377,
+     "control": 10389,
+     "top": [
+      " the",
+      " position",
+      " of",
+      ",",
+      " point",
+      " that",
+      " in",
+      " necessary",
+      " movement",
+      " ideas",
+      " to",
+      " other"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 660,
+     "control": 10582,
+     "top": [
+      " the",
+      ",",
+      " of",
+      ".",
+      " and",
+      " in",
+      " that",
+      "-",
+      " which",
+      " to",
+      " point",
+      " are"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8137
+    },
+    {
+     "iter": 2,
+     "basin": 778,
+     "control": 10847,
+     "top": [
+      " of",
+      " the",
+      ",",
+      ".",
+      " and",
+      " that",
+      " in",
+      "-",
+      " which",
+      " to",
+      " are",
+      " right"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.6722
+    },
+    {
+     "iter": 5,
+     "basin": 2342,
+     "control": 8695,
+     "top": [
+      " of",
+      " essence",
+      "full",
+      " the",
+      " necessity",
+      ".",
+      " union",
+      " laws",
+      " relations",
+      " action",
+      " that",
+      "-"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.457
+    },
+    {
+     "iter": 10,
+     "basin": 21455,
+     "control": 23911,
+     "top": [
+      "national",
+      "laws",
+      "mar",
+      "gun",
+      "host",
+      "local",
+      "story",
+      "law",
+      "action",
+      "creat",
+      "class",
+      "full"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3563
+    },
+    {
+     "iter": 20,
+     "basin": 37162,
+     "control": 38705,
+     "top": [
+      "def",
+      "host",
+      "local",
+      "D",
+      "national",
+      "w",
+      "W",
+      "I",
+      "new",
+      "creat",
+      "levels",
+      "align"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3408
+    },
+    {
+     "iter": 40,
+     "basin": 40247,
+     "control": 39144,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3411
+    },
+    {
+     "iter": 80,
+     "basin": 40247,
+     "control": 39144,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3411,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40247,
+     "control": 39144,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3411,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40247,
+     "control": 39144,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3411,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "procrustes",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": false
+  },
+  "Lucier|procrustes|x218": {
+   "shell_total_norm": 25174.396484375,
+   "locked_at": 103,
+   "stopped_at": 103,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "def",
+    "w",
+    "host",
+    "Def",
+    "pl",
+    "Div",
+    "text",
+    "c",
+    "rest",
+    "mat",
+    "q",
+    "fac"
+   ],
+   "final_basin_median_rank": 38697,
+   "final_control_median_rank": 35350,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 377,
+     "control": 10389,
+     "top": [
+      " the",
+      " position",
+      " of",
+      ",",
+      " point",
+      " that",
+      " in",
+      " necessary",
+      " movement",
+      " ideas",
+      " to",
+      " other"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 518,
+     "control": 10495,
+     "top": [
+      " the",
+      ",",
+      " of",
+      " that",
+      " in",
+      ".",
+      " to",
+      " and",
+      " point",
+      " position",
+      " which",
+      "-"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9317
+    },
+    {
+     "iter": 2,
+     "basin": 632,
+     "control": 9612,
+     "top": [
+      " the",
+      ",",
+      " of",
+      " in",
+      " that",
+      ".",
+      " and",
+      " to",
+      " which",
+      "-",
+      " a",
+      " point"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.832
+    },
+    {
+     "iter": 5,
+     "basin": 974,
+     "control": 11528,
+     "top": [
+      " the",
+      ",",
+      " of",
+      " and",
+      ".",
+      " in",
+      " that",
+      "-",
+      " to",
+      " which",
+      " \"",
+      " a"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.6418
+    },
+    {
+     "iter": 10,
+     "basin": 2073,
+     "control": 10056,
+     "top": [
+      " of",
+      " the",
+      ".",
+      " and",
+      ",",
+      " that",
+      " in",
+      "-",
+      " \"",
+      " which",
+      " to",
+      " right"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.5056
+    },
+    {
+     "iter": 20,
+     "basin": 8190,
+     "control": 9396,
+     "top": [
+      " of",
+      " issue",
+      " union",
+      "-",
+      " essence",
+      " substance",
+      " carn",
+      "full",
+      " issues",
+      " law",
+      ".",
+      " the"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.3837
+    },
+    {
+     "iter": 40,
+     "basin": 30351,
+     "control": 28415,
+     "top": [
+      "rest",
+      "mar",
+      "host",
+      "def",
+      "gun",
+      "national",
+      "w",
+      "mat",
+      "Div",
+      "c",
+      "ec",
+      "st"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3184
+    },
+    {
+     "iter": 80,
+     "basin": 39250,
+     "control": 35186,
+     "top": [
+      "def",
+      "Div",
+      "host",
+      "Def",
+      "mat",
+      "w",
+      "pl",
+      "rest",
+      "c",
+      "text",
+      "levels",
+      "fac"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.3122
+    },
+    {
+     "iter": 160,
+     "basin": 38697,
+     "control": 35350,
+     "top": [
+      "def",
+      "w",
+      "host",
+      "Def",
+      "pl",
+      "Div",
+      "text",
+      "c",
+      "rest",
+      "mat",
+      "q",
+      "fac"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.316,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 38697,
+     "control": 35350,
+     "top": [
+      "def",
+      "w",
+      "host",
+      "Def",
+      "pl",
+      "Div",
+      "text",
+      "c",
+      "rest",
+      "mat",
+      "q",
+      "fac"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.316,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "procrustes",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": false
+  },
+  "Lucier|logit_lstsq|matched_abs": {
+   "shell_total_norm": 5861.3701171875,
+   "locked_at": 30,
+   "stopped_at": 40,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "I",
+    "AB",
+    "T",
+    "local",
+    "C",
+    "0",
+    "The",
+    "host"
+   ],
+   "final_basin_median_rank": 40241,
+   "final_control_median_rank": 39154,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 277,
+     "control": 13256,
+     "top": [
+      " the",
+      ",",
+      " in",
+      " of",
+      " to",
+      " and",
+      " that",
+      " a",
+      ".",
+      " it",
+      " (",
+      " \""
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 208,
+     "control": 16332,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " in",
+      ",",
+      " and",
+      " to",
+      ".",
+      " there",
+      " a",
+      " which",
+      " further"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9667
+    },
+    {
+     "iter": 2,
+     "basin": 422,
+     "control": 14964,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " in",
+      ".",
+      " further",
+      ",",
+      " and",
+      " there",
+      " to",
+      " such",
+      " society"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9137
+    },
+    {
+     "iter": 5,
+     "basin": 3658,
+     "control": 8379,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " my",
+      " state",
+      " an",
+      " our",
+      " locality",
+      " legal",
+      " law",
+      " union",
+      " public"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.7808
+    },
+    {
+     "iter": 10,
+     "basin": 24731,
+     "control": 24597,
+     "top": [
+      "local",
+      "national",
+      "mar",
+      "def",
+      "class",
+      "host",
+      "gun",
+      "law",
+      "creat",
+      "ext",
+      "story",
+      "laws"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7401
+    },
+    {
+     "iter": 20,
+     "basin": 37505,
+     "control": 38511,
+     "top": [
+      "def",
+      "local",
+      "host",
+      "D",
+      "national",
+      "W",
+      "w",
+      "I",
+      "new",
+      "creat",
+      "A",
+      "align"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7439
+    },
+    {
+     "iter": 40,
+     "basin": 40241,
+     "control": 39154,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7465
+    },
+    {
+     "iter": 80,
+     "basin": 40241,
+     "control": 39154,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7465,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 160,
+     "basin": 40241,
+     "control": 39154,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7465,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 40241,
+     "control": 39154,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "I",
+      "AB",
+      "T",
+      "local",
+      "C",
+      "0",
+      "The",
+      "host"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7465,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "logit_lstsq",
+   "shell": "matched_abs",
+   "shell_per_token_norm": 1513.4,
+   "gate_passed": false
+  },
+  "Lucier|logit_lstsq|x218": {
+   "shell_total_norm": 25174.396484375,
+   "locked_at": 83,
+   "stopped_at": 83,
+   "stop_reason": "locked",
+   "last_iter_with_basin_in_top12": 0,
+   "final_top12": [
+    "def",
+    "Div",
+    "Def",
+    "host",
+    "w",
+    "mat",
+    "pl",
+    "text",
+    "rest",
+    "Tr",
+    "c",
+    "fac"
+   ],
+   "final_basin_median_rank": 39764,
+   "final_control_median_rank": 35278,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 277,
+     "control": 13256,
+     "top": [
+      " the",
+      ",",
+      " in",
+      " of",
+      " to",
+      " and",
+      " that",
+      " a",
+      ".",
+      " it",
+      " (",
+      " \""
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 1.0
+    },
+    {
+     "iter": 1,
+     "basin": 290,
+     "control": 12324,
+     "top": [
+      " the",
+      " of",
+      ",",
+      " in",
+      " that",
+      " to",
+      " and",
+      ".",
+      " a",
+      " it",
+      " which",
+      " for"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9915
+    },
+    {
+     "iter": 2,
+     "basin": 333,
+     "control": 13124,
+     "top": [
+      " the",
+      " of",
+      ",",
+      " in",
+      " that",
+      " to",
+      " and",
+      ".",
+      " a",
+      " which",
+      " it",
+      " for"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.9713
+    },
+    {
+     "iter": 5,
+     "basin": 452,
+     "control": 14098,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " in",
+      ",",
+      " to",
+      " and",
+      ".",
+      " a",
+      " which",
+      " further",
+      " with"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.8951
+    },
+    {
+     "iter": 10,
+     "basin": 1363,
+     "control": 11240,
+     "top": [
+      " the",
+      " of",
+      " that",
+      " in",
+      " further",
+      ".",
+      " such",
+      " our",
+      " relations",
+      " state",
+      " and",
+      " a"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7992
+    },
+    {
+     "iter": 20,
+     "basin": 7438,
+     "control": 8513,
+     "top": [
+      " the",
+      " of",
+      " state",
+      " that",
+      " my",
+      " union",
+      " a",
+      " legal",
+      " criminal",
+      " issue",
+      " law",
+      "-"
+     ],
+     "basin_in_top12": 1,
+     "cos_to_seed": 0.7258
+    },
+    {
+     "iter": 40,
+     "basin": 29027,
+     "control": 28165,
+     "top": [
+      "rest",
+      "mar",
+      "def",
+      "national",
+      "st",
+      "host",
+      "sh",
+      "Div",
+      "gun",
+      "ex",
+      "new",
+      "story"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.712
+    },
+    {
+     "iter": 80,
+     "basin": 39844,
+     "control": 35235,
+     "top": [
+      "def",
+      "Div",
+      "host",
+      "Def",
+      "w",
+      "mat",
+      "pl",
+      "Tr",
+      "rest",
+      "text",
+      "c",
+      "fac"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7068
+    },
+    {
+     "iter": 160,
+     "basin": 39764,
+     "control": 35278,
+     "top": [
+      "def",
+      "Div",
+      "Def",
+      "host",
+      "w",
+      "mat",
+      "pl",
+      "text",
+      "rest",
+      "Tr",
+      "c",
+      "fac"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7071,
+     "from_lock": "locked"
+    },
+    {
+     "iter": 300,
+     "basin": 39764,
+     "control": 35278,
+     "top": [
+      "def",
+      "Div",
+      "Def",
+      "host",
+      "w",
+      "mat",
+      "pl",
+      "text",
+      "rest",
+      "Tr",
+      "c",
+      "fac"
+     ],
+     "basin_in_top12": 0,
+     "cos_to_seed": 0.7071,
+     "from_lock": "locked"
+    }
+   ],
+   "prompt": "Lucier",
+   "map": "logit_lstsq",
+   "shell": "x218",
+   "shell_per_token_norm": 6500.0,
+   "gate_passed": false
+  }
+ },
+ "shells_per_token_norm": {
+  "natural": 3.12,
+  "conv_natural": 30.0,
+  "matched_ratio": 872.8,
+  "matched_abs": 1513.4,
+  "x73": 2200.0,
+  "x218": 6500.0
+ },
+ "small_converged_energy_ratio_vs_own_natural": 279.8,
+ "diagnostics": {
+  "why_the_gate_fails": {
+   "cos_smallstate_vs_uncentred_basin_embedding_mean": -0.1456,
+   "cos_lnf_smallstate_vs_centred_basin_embedding_mean": 0.0423,
+   "cos_lnf_smallstate_vs_centred_embedding_of_prolet": 0.0227,
+   "note": "Small's converged state reaches basin median rank 13 while sitting ~2.4 degrees off orthogonal to the socialist embedding direction. The register is a very weak, distributed component of the readout, so any lossy map erases it."
+  },
+  "embedding_centroid_readouts": {
+   "small_all_embeddings_centroid": {
+    "top10": [
+     " mathemat",
+     " challeng",
+     " destro",
+     " corrid",
+     " conduc",
+     " nodd",
+     " encount",
+     " enthusi",
+     " suspic",
+     " confir"
+    ],
+    "basin_median_rank": 21906
+   },
+   "medium_all_embeddings_centroid": {
+    "top10": [
+     " mathemat",
+     " nodd",
+     " unden",
+     " challeng",
+     " neighb",
+     " destro",
+     " conclud",
+     " trave",
+     " condem",
+     " confir"
+    ],
+    "basin_median_rank": 28204
+   },
+   "small_mean_of_basin_embeddings": {
+    "top10": [
+     " mathemat",
+     " horizont",
+     " corrid",
+     " destro",
+     " welf",
+     " millenn",
+     " advoc",
+     " conduc",
+     " challeng",
+     " enthusi"
+    ],
+    "basin_median_rank": 88
+   },
+   "medium_mean_of_basin_embeddings": {
+    "top10": [
+     " mathemat",
+     " neighb",
+     " nodd",
+     " advoc",
+     " prolet",
+     " enthusi",
+     " horizont",
+     " challeng",
+     " unden",
+     " arrang"
+    ],
+    "basin_median_rank": 186
+   },
+   "note": "In neither model does averaging the socialist embeddings read out as socialist; Small's basin is not a centroid artefact."
+  },
+  "map_fit_relative_residual": {
+   "anchor_ls_||E_s W - E_m||/||E_m||": 0.611,
+   "procrustes_||E_s W - E_m||/||E_m||": 0.7463
+  }
+ }
+}
