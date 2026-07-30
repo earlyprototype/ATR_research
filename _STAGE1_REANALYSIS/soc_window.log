@@ -104,3 +104,16 @@ seed top10: [' comrades', ' proletarian', ' labour', ' socialist', ' solidarity'
    it 200  soc  16444  riv     25  ctl  16519   [' Hillary', ' Trump', ' GOP', ' Republicans', ' Republican']
    it 300  soc  24494  riv     19  ctl  14064   [' Trump', ' GOP', ' Hillary', ' FBI', ' Republican']
 
+
+[0->23/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc    195  riv   1718  ctl  22300   [' labour', ' socialist', ' upwards', ' union', ' into']
+   it   2  soc  21751  riv  19646  ctl  39100   ['P', 'The', 'R', 'A', 'N']
+   it   5  soc  33190  riv  22692  ctl  42897   ['The', 'I', 'In', 'An', 'A']
+   it  10  soc  32777  riv  25600  ctl  44978   ['The', 'I', 'In', 'An', 'A']
+   it  20  soc  33408  riv  25077  ctl  44918   ['The', 'I', 'In', 'An', 'A']
+   it  50  soc  33536  riv  24965  ctl  44974   ['The', 'I', 'In', 'An', 'A']
+   it 100  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
+   it 200  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
+   it 300  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
+
