@@ -1,0 +1,46 @@
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 10362.18it/s]
+optimised seed readout: [' comrades', ' proletarian', ' solidarity', ' socialist', ' comrade', ' labour', ' union', ' bourgeois', ' prolet', ' Marx', ' Lenin', ' anarchism', ' revolution', ' anarchist']
+socialist tokens in seed top-12: 12/12
+
+[x73] shell=3811
+   iter   0  basin_rank     10  control  12763   [' comrades', ' proletarian', ' solidarity', ' socialist', ' comrade', ' labour']
+   iter   1  basin_rank     10  control  10192   [' comrade', ' bourgeois', ' revolution', ' anarchist', ' union', ' solidarity']
+   iter   2  basin_rank     12  control  13288   [' union', ' capitalist', ' bourgeois', ' anarchist', ' revolution', ' comrade']
+   iter   3  basin_rank    100  control  13835   [' union', ' carn', '-', 'activ', 'ist', ' capitalist']
+   iter   5  basin_rank   6668  control  13696   ['activ', 'mar', 'national', 'election', 'san', 'prov']
+   iter  10  basin_rank  31301  control  31854   ['local', 'def', 'national', 'host', 'creat', 'mar']
+   iter  20  basin_rank  38805  control  40112   ['D', 'def', 'local', 'A', 'host', 'W']
+   iter  40  basin_rank  39702  control  40019   ['D', 'def', 'A', 'W', 'AB', 'I']
+   iter  80  basin_rank  39728  control  40004   ['D', 'def', 'A', 'W', 'AB', 'I']
+   iter 160  basin_rank  39728  control  40004   ['D', 'def', 'A', 'W', 'AB', 'I']
+   iter 300  basin_rank  39728  control  40004   ['D', 'def', 'A', 'W', 'AB', 'I']
+
+
+[x218] shell=11258
+   iter   0  basin_rank     10  control  12763   [' comrades', ' proletarian', ' solidarity', ' socialist', ' comrade', ' labour']
+   iter   1  basin_rank     10  control  10525   [' anarchist', ' union', ' Marx', ' revolution', ' bourgeois', ' comrade']
+   iter   2  basin_rank     10  control  10392   [' anarchist', ' union', ' revolution', ' Marx', ' comrade', ' bourgeois']
+   iter   3  basin_rank     10  control  12070   [' union', ' anarchist', ' revolution', ' comrade', ' Marx', ' bourgeois']
+   iter   5  basin_rank     13  control  13484   [' union', ' anarchist', ' political', ' capitalist', ' labour', ' communist']
+   iter  10  basin_rank   3019  control  11436   ['-', ' carn', 'mar', 'election', 'activ', ' union']
+   iter  20  basin_rank  27299  control  24239   ['national', 'def', 'mar', 'local', 'creat', 'urban']
+   iter  40  basin_rank  39382  control  38569   ['def', 'host', 'w', 'D', 'local', 'align']
+   iter  80  basin_rank  41355  control  39439   ['D', 'def', 'W', 'I', 'T', 'A']
+   iter 160  basin_rank  41716  control  39503   ['D', 'def', 'W', 'I', 'T', 'A']
+   iter 300  basin_rank  41708  control  39500   ['D', 'def', 'W', 'I', 'T', 'A']
+
+
+[natural] shell=52
+   iter   0  basin_rank     10  control  12763   [' comrades', ' proletarian', ' solidarity', ' socialist', ' union', ' comrade']
+   iter   1  basin_rank  18801  control  28121   [' 5', ' Monday', ' 7', ' 1', ' 25', ' the']
+   iter   2  basin_rank  33224  control  43457   ['And', 'I', 'In', 'Again', 'The', 'But']
+   iter   3  basin_rank  28308  control  42628   ['The', 'I', 'In', 'A', 'It', 'On']
+   iter   5  basin_rank  40056  control  43714   ['Ide', 'A', 'I', 'If', 'It', 'Vol']
+   iter  10  basin_rank  32556  control  46499   ['The', 'It', 'An', 'In', 'On', 'This']
+   iter  20  basin_rank  32629  control  46390   ['The', 'Ide', 'An', 'It', 'Ok', 'In']
+   iter  40  basin_rank  32626  control  46388   ['The', 'Ide', 'An', 'It', 'Ok', 'In']
+   iter  80  basin_rank  32626  control  46388   ['The', 'Ide', 'An', 'It', 'Ok', 'In']
+   iter 160  basin_rank  32626  control  46388   ['The', 'Ide', 'An', 'It', 'Ok', 'In']
+   iter 300  basin_rank  32626  control  46388   ['The', 'Ide', 'An', 'It', 'Ok', 'In']
+
+written optimised_seed.json

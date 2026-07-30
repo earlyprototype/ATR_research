@@ -1,0 +1,537 @@
+{
+ "seed_top20": [
+  " comrades",
+  " proletarian",
+  " solidarity",
+  " socialist",
+  " comrade",
+  " labour",
+  " union",
+  " bourgeois",
+  " prolet",
+  " Marx",
+  " Lenin",
+  " anarchism",
+  " revolution",
+  " anarchist",
+  " Anarch",
+  " socialism",
+  " communist",
+  " workers",
+  " worker",
+  " anarchists"
+ ],
+ "seed_socialist_in_top12": 12,
+ "runs": {
+  "x73": {
+   "shell": 3810.510498046875,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 10,
+     "control": 12763,
+     "top": [
+      " comrades",
+      " proletarian",
+      " solidarity",
+      " socialist",
+      " comrade",
+      " labour",
+      " bourgeois",
+      " union"
+     ]
+    },
+    {
+     "iter": 1,
+     "basin": 10,
+     "control": 10192,
+     "top": [
+      " comrade",
+      " bourgeois",
+      " revolution",
+      " anarchist",
+      " union",
+      " solidarity",
+      " Marx",
+      " comrades"
+     ]
+    },
+    {
+     "iter": 2,
+     "basin": 12,
+     "control": 13288,
+     "top": [
+      " union",
+      " capitalist",
+      " bourgeois",
+      " anarchist",
+      " revolution",
+      " comrade",
+      " communist",
+      " solidarity"
+     ]
+    },
+    {
+     "iter": 3,
+     "basin": 100,
+     "control": 13835,
+     "top": [
+      " union",
+      " carn",
+      "-",
+      "activ",
+      "ist",
+      " capitalist",
+      " political",
+      "election"
+     ]
+    },
+    {
+     "iter": 5,
+     "basin": 6668,
+     "control": 13696,
+     "top": [
+      "activ",
+      "mar",
+      "national",
+      "election",
+      "san",
+      "prov",
+      "law",
+      "laws"
+     ]
+    },
+    {
+     "iter": 10,
+     "basin": 31301,
+     "control": 31854,
+     "top": [
+      "local",
+      "def",
+      "national",
+      "host",
+      "creat",
+      "mar",
+      "D",
+      "urban"
+     ]
+    },
+    {
+     "iter": 20,
+     "basin": 38805,
+     "control": 40112,
+     "top": [
+      "D",
+      "def",
+      "local",
+      "A",
+      "host",
+      "W",
+      "I",
+      "T"
+     ]
+    },
+    {
+     "iter": 40,
+     "basin": 39702,
+     "control": 40019,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "AB",
+      "I",
+      "T",
+      "The"
+     ]
+    },
+    {
+     "iter": 80,
+     "basin": 39728,
+     "control": 40004,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "AB",
+      "I",
+      "T",
+      "The"
+     ]
+    },
+    {
+     "iter": 160,
+     "basin": 39728,
+     "control": 40004,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "AB",
+      "I",
+      "T",
+      "The"
+     ]
+    },
+    {
+     "iter": 300,
+     "basin": 39728,
+     "control": 40004,
+     "top": [
+      "D",
+      "def",
+      "A",
+      "W",
+      "AB",
+      "I",
+      "T",
+      "The"
+     ]
+    }
+   ]
+  },
+  "x218": {
+   "shell": 11258.330078125,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 10,
+     "control": 12763,
+     "top": [
+      " comrades",
+      " proletarian",
+      " solidarity",
+      " socialist",
+      " comrade",
+      " labour",
+      " bourgeois",
+      " union"
+     ]
+    },
+    {
+     "iter": 1,
+     "basin": 10,
+     "control": 10525,
+     "top": [
+      " anarchist",
+      " union",
+      " Marx",
+      " revolution",
+      " bourgeois",
+      " comrade",
+      " Lenin",
+      " workers"
+     ]
+    },
+    {
+     "iter": 2,
+     "basin": 10,
+     "control": 10392,
+     "top": [
+      " anarchist",
+      " union",
+      " revolution",
+      " Marx",
+      " comrade",
+      " bourgeois",
+      " workers",
+      " solidarity"
+     ]
+    },
+    {
+     "iter": 3,
+     "basin": 10,
+     "control": 12070,
+     "top": [
+      " union",
+      " anarchist",
+      " revolution",
+      " comrade",
+      " Marx",
+      " bourgeois",
+      " communist",
+      " solidarity"
+     ]
+    },
+    {
+     "iter": 5,
+     "basin": 13,
+     "control": 13484,
+     "top": [
+      " union",
+      " anarchist",
+      " political",
+      " capitalist",
+      " labour",
+      " communist",
+      " revolution",
+      "-"
+     ]
+    },
+    {
+     "iter": 10,
+     "basin": 3019,
+     "control": 11436,
+     "top": [
+      "-",
+      " carn",
+      "mar",
+      "election",
+      "activ",
+      " union",
+      "t",
+      " federal"
+     ]
+    },
+    {
+     "iter": 20,
+     "basin": 27299,
+     "control": 24239,
+     "top": [
+      "national",
+      "def",
+      "mar",
+      "local",
+      "creat",
+      "urban",
+      "host",
+      "law"
+     ]
+    },
+    {
+     "iter": 40,
+     "basin": 39382,
+     "control": 38569,
+     "top": [
+      "def",
+      "host",
+      "w",
+      "D",
+      "local",
+      "align",
+      "Div",
+      "W"
+     ]
+    },
+    {
+     "iter": 80,
+     "basin": 41355,
+     "control": 39439,
+     "top": [
+      "D",
+      "def",
+      "W",
+      "I",
+      "T",
+      "A",
+      "0",
+      "C"
+     ]
+    },
+    {
+     "iter": 160,
+     "basin": 41716,
+     "control": 39503,
+     "top": [
+      "D",
+      "def",
+      "W",
+      "I",
+      "T",
+      "A",
+      "0",
+      "C"
+     ]
+    },
+    {
+     "iter": 300,
+     "basin": 41708,
+     "control": 39500,
+     "top": [
+      "D",
+      "def",
+      "W",
+      "I",
+      "T",
+      "A",
+      "0",
+      "C"
+     ]
+    }
+   ]
+  },
+  "natural": {
+   "shell": 51.96152114868164,
+   "trace": [
+    {
+     "iter": 0,
+     "basin": 10,
+     "control": 12763,
+     "top": [
+      " comrades",
+      " proletarian",
+      " solidarity",
+      " socialist",
+      " union",
+      " comrade",
+      " labour",
+      " bourgeois"
+     ]
+    },
+    {
+     "iter": 1,
+     "basin": 18801,
+     "control": 28121,
+     "top": [
+      " 5",
+      " Monday",
+      " 7",
+      " 1",
+      " 25",
+      " the",
+      " 22",
+      " 2"
+     ]
+    },
+    {
+     "iter": 2,
+     "basin": 33224,
+     "control": 43457,
+     "top": [
+      "And",
+      "I",
+      "In",
+      "Again",
+      "The",
+      "But",
+      "It",
+      "At"
+     ]
+    },
+    {
+     "iter": 3,
+     "basin": 28308,
+     "control": 42628,
+     "top": [
+      "The",
+      "I",
+      "In",
+      "A",
+      "It",
+      "On",
+      "S",
+      "We"
+     ]
+    },
+    {
+     "iter": 5,
+     "basin": 40056,
+     "control": 43714,
+     "top": [
+      "Ide",
+      "A",
+      "I",
+      "If",
+      "It",
+      "Vol",
+      "H",
+      "Sw"
+     ]
+    },
+    {
+     "iter": 10,
+     "basin": 32556,
+     "control": 46499,
+     "top": [
+      "The",
+      "It",
+      "An",
+      "In",
+      "On",
+      "This",
+      "If",
+      "We"
+     ]
+    },
+    {
+     "iter": 20,
+     "basin": 32629,
+     "control": 46390,
+     "top": [
+      "The",
+      "Ide",
+      "An",
+      "It",
+      "Ok",
+      "In",
+      "If",
+      "Democrats"
+     ]
+    },
+    {
+     "iter": 40,
+     "basin": 32626,
+     "control": 46388,
+     "top": [
+      "The",
+      "Ide",
+      "An",
+      "It",
+      "Ok",
+      "In",
+      "If",
+      "Democrats"
+     ]
+    },
+    {
+     "iter": 80,
+     "basin": 32626,
+     "control": 46388,
+     "top": [
+      "The",
+      "Ide",
+      "An",
+      "It",
+      "Ok",
+      "In",
+      "If",
+      "Democrats"
+     ]
+    },
+    {
+     "iter": 160,
+     "basin": 32626,
+     "control": 46388,
+     "top": [
+      "The",
+      "Ide",
+      "An",
+      "It",
+      "Ok",
+      "In",
+      "If",
+      "Democrats"
+     ]
+    },
+    {
+     "iter": 300,
+     "basin": 32626,
+     "control": 46388,
+     "top": [
+      "The",
+      "Ide",
+      "An",
+      "It",
+      "Ok",
+      "In",
+      "If",
+      "Democrats"
+     ]
+    }
+   ]
+  }
+ }
+}
