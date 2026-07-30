@@ -29,3 +29,5 @@ seed  26 shell 1800 -> other      [' Spells', ' spell', ' spells', ' sorcerer', 
 seed  27 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' everyday', ' organising']
 seed  28 shell 1800 -> socialist  [' solidarity', ' struggle', ' anarchism', ' consciousness', ' organising']
 seed  29 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' everyday', ' organising']
+seed  30 shell 1800 -> socialist  [' solidarity', ' struggle', ' anarchism', ' consciousness', ' organising']
+seed  31 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' everyday', ' organising']

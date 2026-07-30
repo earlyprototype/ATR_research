@@ -99,6 +99,26 @@ trial_07 `trader`; trial_11 `Hindu`/`Bombay`), but that is a top-20 observation,
 not the registered rank statistic. Reproducing the noise states requires re-running
 the seeded loop.
 
+## Addendum 2026-07-30 — rank is not alignment
+
+Recorded because the cross-model work (`RESULTS_MEDIUM_SOCIALIST.md` §7b) makes
+a misreading of this document available.
+
+Everything measured here is **rank in the readout distribution**. It is not a
+claim that the settled state points along a "socialist direction" in residual
+space, and that stronger claim is not supported. Measured: the cosine between
+`ln_f(Small's settled state)` and the centred socialist-embedding direction is
+**0.0423**, roughly 2.4° off orthogonal, while the same state reaches basin rank
+13 of 50,257. Rank 13 is achieved on a component that weak.
+
+Corollary, measured the same way: averaging the socialist token embeddings does
+**not** read out as socialist in either model (Small rank 88, Medium 186; both
+top out at ` mathemat`, ` horizont`, ` neighb`). So the basin is neither a
+centroid artefact nor reachable by embedding-space arithmetic.
+
+The elevation reported above is real and gate-verified. What it is not is
+evidence of geometric alignment with the vocabulary it elevates.
+
 ## Caveats (standing)
 
 Single readout convention (`ln_final → W_U` at the last position — the Stage 1
