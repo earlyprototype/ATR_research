@@ -166,6 +166,50 @@ The socialist seed does not decay to noise. It decays *through* noise and lands
 in the rival register. **W6_19** holds socialism longest (~5 iterations, with
 ` Trotsky` still present at iteration 5) before the same decay.
 
+## 8. The mirror test, and the control that matters most
+
+Seeding **GPT-2 Small's** native full-stack loop, to ask whether the Medium
+convergence is symmetric. Both seeds optimised in Small's own residual space.
+
+**Republican seed** (rival rank 9: `Republicans, GOP, Democrat, FBI, campaign,
+federal, Trump, presidential, Congress`), x73 shell:
+
+| iteration | rival rank | top tokens |
+|---|---|---|
+| 0 | 9 | Republicans, GOP, Democrat, FBI, campaign |
+| 2 | 10 | Hillary, election, Clinton, Democrats |
+| 5 | 574 | `.`, Hillary, `!`, Clinton |
+| 50 | 15,666 | player, Mana, opponent, tournament, cards |
+| 100–500 | 21,946 | **Zerg, player, I, i, tournament** (locked) |
+
+**No mirror.** Small does not pull the rival pole into socialism. It converges to
+a competitive-gaming attractor and locks there from iteration 100.
+
+**Neutral random seed** — the control:
+
+| shell | converges to |
+|---|---|
+| x73 | ` Divine, 【, Fairy, 「, ……` (locked from ~iteration 50) |
+| x150 | ` I, player, tournament, hero, opponent` (locked from ~iteration 50) |
+
+**The socialist basin is not reached from either.** Random states in the same
+model, same loop, same energy conventions, reach the `Divine` basin or the
+gaming basin instead.
+
+Small therefore has at least three distinct fixed points, with different
+reachability:
+
+| basin | readout | reached from |
+|---|---|---|
+| socialist | prolet, Anarch, bourgeois, Marx, comrade | natural language prompts (4/5) |
+| Divine | Divine, 【, Fairy, 「, …… | the Syntactic prompt; neutral random at x73 |
+| gaming | Zerg, player, tournament, Mana, opponent | Republican seed; neutral random at x150 |
+
+Recorded separately: the `Divine` basin's `【` (U+3010) and `「` (U+300C) are
+Japanese lenticular and corner brackets. `confidence_report.md` describes this
+basin's readout as "CJK typography debris"; it is a reachable fixed point, not
+debris.
+
 ## Interpretation (labelled as such — NOT a finding)
 
 ```thinking
@@ -191,14 +235,21 @@ linearly-decodable content in the difference of centroids. The registered
 arbiter for exactly this is the J-lens re-decode, EXP_013m, which has never run
 and whose Medium instrument gated MARGINAL.
 
+The control arm is the load-bearing result and it arrived last. A neutral
+random seed in Small reaches Divine or gaming, never socialism. So the socialist
+basin is not a generic attractor of these weights; it is what the model does
+with real language specifically. That is a stronger version of the original
+Stage 1 finding than the record currently claims, and it was cheap to get.
+
 The convergence result is the cleanest thing here and I did not expect it. That
 a purpose-built socialist state falls into the Republican basin means the two
 registers are not merely different attractors, they are ordered: one is inside
 the other's basin of attraction. That asymmetry is worth its own experiment —
-does the reverse hold? Seed Republican in Small and see whether it falls to
-prolet. If it does, the two models mirror each other and the corpus explanation
-gets much more interesting. If it does not, the asymmetry is a property of
-Medium alone.
+does the reverse hold? It does not. Seeded with Republican, Small goes to
+competitive gaming, so the two models do not mirror. What I had framed as 'each
+model owns a political pole' is wrong: Small has at least three basins and which
+one you land in depends on where you start. Medium's Republican attractor is
+real and via-tail robust, but the tidy symmetry I reached for is not there.
 ```
 
 ## Caveats (standing)
