@@ -1,4 +1,11 @@
 {
+ "shells": [
+  1800.0,
+  3700.0
+ ],
+ "n_seeds": 40,
+ "max_iter": 300,
+ "provenance": "produced by basin_volume.py before the shell schedule was parameterised; equivalent to `basin_volume.py <small> <out> 40 1800,3700`. SUPERSEDED by basin_volume_energy.json, which sweeps five shells including Stage 1's calibration. The 28/40 headline from this run is retracted (see RESULTS_MEDIUM_SOCIALIST.md \u00a78).",
  "counts": {
   "gaming": 5,
   "socialist": 28,
