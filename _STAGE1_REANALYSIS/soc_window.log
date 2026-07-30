@@ -117,3 +117,17 @@ seed top10: [' comrades', ' proletarian', ' labour', ' socialist', ' solidarity'
    it 200  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
    it 300  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
 
+
+[0->23/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2302  ctl   8728   [' union', ' labour', ' socialist', ' revolution', ' workers']
+   it   2  soc     10  riv   2909  ctl  10646   [' union', ' socialist', ' labour', ' revolution', ' proletarian']
+   it   5  soc    360  riv   1725  ctl  18268   [' union', '-', ' league', ' hell', ' nation']
+   it  10  soc  29671  riv  12361  ctl  28400   ['TR', 'national', 'AK', 'U', 'WR']
+   it  20  soc  36601  riv  20277  ctl  36567   ['def', 'T', 'W', 'D', 'RAW']
+   it  50  soc  40580  riv  23685  ctl  38849   ['D', 'def', 'W', 'A', 'I']
+   it 100  soc  40788  riv  23612  ctl  38787   ['D', 'A', 'W', 'def', 'I']
+   it 200  soc  40788  riv  23613  ctl  38788   ['D', 'A', 'W', 'def', 'I']
+   it 300  soc  40788  riv  23613  ctl  38788   ['D', 'A', 'W', 'def', 'I']
+
+written socialist_in_window.json
