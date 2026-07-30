@@ -16,3 +16,7 @@ seed  13 shell 1800 -> socialist  [' till', ' solidarity', ' agitation', ' BJP',
 seed  14 shell 3700 -> other      [' the', ' a', '\n', ',', ' I']
 seed  15 shell 433 -> other      ['ei', '―', 'fx', 'epad', ' expr']
 seed  16 shell 397 -> other      [' vertex', 'doc', 'tw', ' WP', 'ei']
+seed  17 shell 900 -> socialist  [' Rousse', ' equality', ' propositions', ' prolet', ' liberty']
+seed  18 shell 1800 -> socialist  [' solidarity', ' struggle', ' anarchism', ' consciousness', ' organising']
+seed  19 shell 3700 -> other      [' the', '\n', ' a', ',', ' of']
+seed  20 shell 433 -> other      ['dt', 'epad', 'tw', 'Dig', 'course']
