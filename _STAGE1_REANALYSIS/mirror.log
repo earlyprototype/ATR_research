@@ -1,3 +1,44 @@
 Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 22580.37it/s]
 
 ### seed republican: [' Republicans', ' GOP', ' Democrat', ' FBI', ' campaign', ' federal', ' Trump', ' presidential', ' Congress', ' Republican']
+[republican/x73] N0=1800
+   it   0  soc  13655  riv      9  ctl  18215   [' Republicans', ' GOP', ' Democrat', ' FBI', ' campaign']
+   it   1  soc  10024  riv      9  ctl  19888   [' Democrats', ' Republicans', ' Congress', ' Democrat', ' election']
+   it   2  soc  11999  riv     10  ctl  17289   [' Hillary', ' election', ' Clinton', ' Democrats', ' campaign']
+   it   5  soc  11695  riv    574  ctl  16587   ['.', ' Hillary', '!', ' Clinton', '\n']
+   it  10  soc  12266  riv   5254  ctl  17044   ['!', '.', ' tho', '\n', '\n\n']
+   it  20  soc  22108  riv  21345  ctl  22368   [' I', ' Hero', '\n', '.', ' Same']
+   it  50  soc  18325  riv  15666  ctl  28177   [' player', ' Mana', ' opponent', ' tournament', ' cards']
+   it 100  soc  20246  riv  21768  ctl  25600   [' Zerg', ' player', ' I', ' tournament', ' i']
+   it 200  soc  21041  riv  21946  ctl  25583   [' Zerg', ' player', ' I', ' i', ' tournament']
+   it 350  soc  21041  riv  21946  ctl  25583   [' Zerg', ' player', ' I', ' i', ' tournament']
+   it 500  soc  21041  riv  21946  ctl  25583   [' Zerg', ' player', ' I', ' i', ' tournament']
+
+[republican/x150] N0=3700
+   it   0  soc  13655  riv      9  ctl  18215   [' Republicans', ' Democrat', ' GOP', ' FBI', ' campaign']
+   it   1  soc  16085  riv      9  ctl  19942   [' Democrats', ' Democrat', ' Republicans', ' election', ' Hillary']
+   it   2  soc  14622  riv     11  ctl  18843   [' election', ' Hillary', ' Democrats', ' Democrat', ' campaign']
+   it   5  soc  13011  riv     30  ctl  24678   [' Clinton', ' Hillary', ' election', ' Trump', ' campaign']
+   it  10  soc   5381  riv   1374  ctl  20380   ['\n', '.', '\n\n', ' V', ':']
+   it  20  soc   8529  riv   5727  ctl  22299   ['\n', ' I', ' Same', ' Edit', ' Quality']
+   it  50  soc  11019  riv  11447  ctl  29713   [' Mana', ' Hero', ' I', '\n', ' Card']
+   it 100  soc  16357  riv  15463  ctl  25409   [' I', ' tournament', ' player', ' opponent', ' matchup']
+   it 200  soc  15576  riv  19001  ctl  24215   [' I', ' player', ' tournament', '\n\n', ' i']
+   it 350  soc  15704  riv  19866  ctl  24249   [' I', ' player', ' tournament', '\n\n', ' i']
+   it 500  soc  15700  riv  19914  ctl  24247   [' I', ' player', ' tournament', '\n\n', ' i']
+
+
+### seed neutral_control: ['epad', ' plur', ':{', 'uria', 'pez', ' ty', ' ego', 'odon', 'culus', ' vit']
+[neutral_control/x73] N0=1800
+   it   0  soc  26393  riv  36779  ctl  28021   ['epad', ' plur', ':{', 'uria', 'pez']
+   it   1  soc  28142  riv  35393  ctl  22438   ['epad', ':{', ' Pastebin', ' corp', ' snail']
+   it   2  soc  38146  riv  32848  ctl  29742   [' Pastebin', ' img', 'epad', 'px', ' EX']
+   it   5  soc  34071  riv  37907  ctl  33274   [' img', ' EX', ' Orig', ' Im', ' Lol']
+   it  10  soc  35250  riv  31846  ctl  31205   [' Jin', ' Hero', '\n', ' Liqu', ' Sak']
+   it  20  soc  27721  riv  23168  ctl  37202   [' Jin', ' Yu', ' Hero', ' Shu', ' Divine']
+   it  50  soc  18059  riv  22785  ctl  35846   [' Divine', '【', ' Fairy', ' 「', ' Yu']
+   it 100  soc  21213  riv  22022  ctl  36156   [' Divine', ' Fairy', '【', ' Cancel', ' 「']
+   it 200  soc  18463  riv  22555  ctl  36103   [' Divine', '【', ' Fairy', ' 「', '……']
+   it 350  soc  18813  riv  22468  ctl  36133   [' Divine', '【', ' Fairy', ' 「', '……']
+   it 500  soc  18816  riv  22463  ctl  36131   [' Divine', '【', ' Fairy', ' 「', '……']
+
