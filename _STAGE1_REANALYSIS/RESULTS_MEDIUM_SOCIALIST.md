@@ -245,18 +245,45 @@ a competitive-gaming attractor and locks there from iteration 100.
 | x73 | ` Divine, 【, Fairy, 「, ……` (locked from ~iteration 50) |
 | x150 | ` I, player, tournament, hero, opponent` (locked from ~iteration 50) |
 
-**The socialist basin is not reached from either.** Random states in the same
-model, same loop, same energy conventions, reach the `Divine` basin or the
-gaming basin instead.
+**CORRECTION (2026-07-30).** An earlier version of this section stated that the
+socialist basin "is not reached from either" random seed and that it is
+"language-specific". **That was wrong**, and it rested on one random seed at two
+energy shells. Running **40 random seeds** through the same loop:
 
-Small therefore has at least three distinct fixed points, with different
-reachability:
+| basin reached | count |
+|---|---|
+| **socialist register** | **28 / 40** |
+| other | 6 / 40 |
+| gaming | 5 / 40 |
+| Divine | 1 / 40 |
 
-| basin | readout | reached from |
-|---|---|---|
-| socialist | prolet, Anarch, bourgeois, Marx, comrade | natural language prompts (4/5) |
-| Divine | Divine, 【, Fairy, 「, …… | the Syntactic prompt; neutral random at x73 |
-| gaming | Zerg, player, tournament, Mana, opponent | Republican seed; neutral random at x150 |
+Random states reach socialist-register vocabulary about 70% of the time at the
+shells tested. The generalisation from n=1 did not hold.
+
+**What does survive: the random-reached attractor is not the language-reached
+one.** Language prompts settle on ` prolet, Anarch, bourgeois, Marx, comrade`.
+Random seeds settle on a ` solidarity`-led state — no random seed reaches a
+` prolet`-led top-1. Signatures over the 28:
+
+| top-3 | count |
+|---|---|
+| ` solidarity, struggle, organizing` | 15 |
+| ` solidarity, struggle, anarchism` | 8 |
+| ` till, solidarity, agitation` | 4 |
+| ` solidarity, anarchism, struggle` | 1 |
+
+(` till` is one of Small's own native basin decodes, so that third signature sits
+near a known basin.)
+
+**Open discrepancy, not yet resolved.** Stage 1's own 15 calibrated noise trials
+(`confidence_results.json`) reach `―, Dig, ei, !?, Eva` — typographic junk, no
+socialism. Same model, same loop, also isotropic Gaussian seeds. The difference
+is **energy**: Stage 1 calibrated to total norm 397 over 10 positions (~125 per
+position); the sweep above ran at 1800 and 3700 over 12 (~520 and ~1068), four
+to eight times hotter. So the 28/40 may be an energy effect rather than a
+property of the weights. A five-shell sweep including Stage 1's exact
+calibration is running; **until it reports, no claim about reachability from
+random states should be drawn from this section.**
 
 Recorded separately: the `Divine` basin's `【` (U+3010) and `「` (U+300C) are
 Japanese lenticular and corner brackets. `confidence_report.md` describes this

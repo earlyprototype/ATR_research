@@ -41,7 +41,7 @@ def classify(v):
 counts = collections.Counter(); rows=[]
 for s in range(N_SEEDS):
     torch.manual_seed(1000+s)
-    shell = 1800.0 if s % 2 == 0 else 3700.0
+    shell = [125.0*SEQ**0.5, 397.0, 900.0, 1800.0, 3700.0][s % 5]
     x = torch.randn(SEQ, D)*0.5
     x = x / x.norm() * shell; N0 = x.norm().item()
     for _ in range(MAX_ITER):

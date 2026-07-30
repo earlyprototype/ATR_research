@@ -38,3 +38,10 @@ seed  35 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' 
 seed  36 shell 1800 -> gaming     [' i', ' player', ' Zerg', ' im', ' hero']
 seed  37 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' everyday', ' organising']
 seed  38 shell 1800 -> socialist  [' solidarity', ' struggle', ' anarchism', ' consciousness', ' organising']
+seed  39 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' everyday', ' organising']
+
+=== basin counts over 40 random seeds ===
+   socialist   28/40
+   other        6/40
+   gaming       5/40
+   divine       1/40
