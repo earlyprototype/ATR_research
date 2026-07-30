@@ -1,8 +1,7 @@
 # Can GPT-2 Medium be made to reproduce GPT-2 Small's socialist basin?
 
 **Register:** observations only. Interpretation is fenced in the final section and
-labelled as such. **Status:** run in progress; sections below are complete unless
-marked otherwise. **Model:** gpt2-medium, weights from huggingface.co,
+labelled as such. **Status:** complete. **Model:** gpt2-medium, weights from huggingface.co,
 `pytorch_model.bin` 1,520,013,706 bytes — byte-size identical to the artifact
 recorded in `RESULTS_EXP010C.md` §Model acquisition.
 
@@ -275,15 +274,47 @@ Random seeds settle on a ` solidarity`-led state — no random seed reaches a
 (` till` is one of Small's own native basin decodes, so that third signature sits
 near a known basin.)
 
-**Open discrepancy, not yet resolved.** Stage 1's own 15 calibrated noise trials
-(`confidence_results.json`) reach `―, Dig, ei, !?, Eva` — typographic junk, no
-socialism. Same model, same loop, also isotropic Gaussian seeds. The difference
-is **energy**: Stage 1 calibrated to total norm 397 over 10 positions (~125 per
-position); the sweep above ran at 1800 and 3700 over 12 (~520 and ~1068), four
-to eight times hotter. So the 28/40 may be an energy effect rather than a
-property of the weights. A five-shell sweep including Stage 1's exact
-calibration is running; **until it reports, no claim about reachability from
-random states should be drawn from this section.**
+**Discrepancy resolved: it was energy.** Stage 1's own 15 calibrated noise
+trials reach typographic junk, not socialism, on the same model and loop. The
+sweep above ran four to eight times hotter. Re-running 50 random seeds across
+five shells, 10 per shell:
+
+| total norm | per position | socialist | gaming | Divine | other |
+|---|---|---|---|---|---|
+| 397 | ~115 | **0/10** | 0 | 0 | 10 |
+| 433 | ~125 (Stage 1's calibration) | **1/10** | 0 | 0 | 9 |
+| 900 | ~260 | 4/10 | 2 | 0 | 4 |
+| 1800 | ~520 | **8/10** | 1 | 0 | 1 |
+| 3700 | ~1068 | 6/10 | 0 | 0 | 4 |
+
+**The 28/40 reported above is an artifact of seeding energy.** At Stage 1's
+calibration the rate is 1 in 10. Which basin a random state reaches is
+energy-dependent, and this sits alongside the existing finding that the i=0
+energy convention is load-bearing for the `D` collapse.
+
+**Unplanned reproduction gate, passed.** At the low shells this harness — an
+independent HF implementation, not the TransformerLens original — reaches three
+distinct Stage 1 noise signatures verbatim:
+
+| shell | reached | matches |
+|---|---|---|
+| 397 | ` vertex, doc, tw, WP` | `confidence_results` trials 05 / 08 / 14 |
+| 433 | `―, ei, Dig, Eva` | trials 00 / 06 / 13 |
+| 433 | ` arbit, trader, trade, tribunal` | trial 07 |
+| 900 | ` till, Modi, Shiv, Hindu` | trial 11's Hindu/Bombay cluster |
+
+**What survives, stated precisely.** At matched high energy, random seeds and
+language prompts reach *different* socialist attractors. Language settles
+` prolet`-led (`prolet, Anarch, bourgeois, Marx, comrade`); no random seed at any
+shell reaches a ` prolet`-led top-1, they settle ` solidarity`-led
+(` solidarity, struggle, organizing/anarchism`). At 900 the socialist-classified
+hits read ` Rousse, equality, propositions, prolet, liberty` — Enlightenment
+political philosophy rather than the Marxist register.
+
+So the honest claim is not that the basin is language-specific, and not that
+random states reach it freely. It is that **the register is broadly present in
+the high-energy attractor landscape, and the specific `prolet`-led basin is what
+language reaches.**
 
 Recorded separately: the `Divine` basin's `【` (U+3010) and `「` (U+300C) are
 Japanese lenticular and corner brackets. `confidence_report.md` describes this

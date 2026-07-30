@@ -2,5 +2,3 @@
 __pycache__/
 *.pyc
 
-# in-flight run log, un-ignored and committed when the sweep completes
-_STAGE1_REANALYSIS/basin_energy.log
