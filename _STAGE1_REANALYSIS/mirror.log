@@ -42,3 +42,17 @@
    it 350  soc  18813  riv  22468  ctl  36133   [' Divine', '【', ' Fairy', ' 「', '……']
    it 500  soc  18816  riv  22463  ctl  36131   [' Divine', '【', ' Fairy', ' 「', '……']
 
+[neutral_control/x150] N0=3700
+   it   0  soc  26393  riv  36779  ctl  28021   ['epad', ' plur', ':{', 'uria', 'pez']
+   it   1  soc  30794  riv  36418  ctl  27180   ['epad', ':{', ' Pastebin', ' immedi', 'ebin']
+   it   2  soc  36301  riv  35455  ctl  28910   [':{', 'epad', ' Pastebin', 'px', ' corp']
+   it   5  soc  38127  riv  37525  ctl  36331   [' Im', ' EX', ' Evil', ' Abyssal', ' Pastebin']
+   it  10  soc  30389  riv  34515  ctl  36519   [' OP', ' Soul', ' Spirit', ' Im', '\n\n']
+   it  20  soc  22744  riv  24974  ctl  29122   [' Hero', ' OP', ' I', '~', '\n']
+   it  50  soc  17647  riv  19788  ctl  24064   [' I', ' player', ' tournament', ' hero', ' opponent']
+   it 100  soc  16548  riv  19909  ctl  24959   [' I', ' player', ' tournament', '\n\n', ' hero']
+   it 200  soc  15705  riv  19894  ctl  24255   [' I', ' player', ' tournament', '\n\n', ' i']
+   it 350  soc  15701  riv  19918  ctl  24247   [' I', ' player', ' tournament', '\n\n', ' i']
+   it 500  soc  15702  riv  19919  ctl  24247   [' I', ' player', ' tournament', '\n\n', ' i']
+
+written mirror_test.json
