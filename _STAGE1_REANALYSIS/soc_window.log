@@ -1,2 +1,41 @@
 Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 7540.93it/s]
 seed top10: [' comrades', ' proletarian', ' labour', ' socialist', ' solidarity', ' comrade', ' prolet', ' anarchist', ' revolution', ' union']
+
+[6->18/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc   1809  riv   9728  ctl  31855   [' Trotsky', "'", '�', ' Lenin', 'さ']
+   it   2  soc  21095  riv   8969  ctl  13430   ["'", '.\'"', ' �', 'ting', '\'."']
+   it   5  soc  20609  riv   5658  ctl  28164   ['))))', '"))', ')))', '))', '.)']
+   it  10  soc  31579  riv   8108  ctl  17205   [' Poc', '))))', ' Amar', ')),', ')).']
+   it  20  soc  28320  riv   9255  ctl  22351   ['urrency', 'ahoo', 'OOK', 'self', ' Poc']
+   it  50  soc  23966  riv  10604  ctl  29171   [')', '"))', ').', "'", '.']
+   it 100  soc  28884  riv   8921  ctl  19520   ['))))', ')))', ' Poc', ']).', ')).']
+   it 200  soc  23256  riv  13288  ctl  23664   ['))))', 'olulu', '?\'"', 'urrency', ' Amar']
+   it 300  soc  21304  riv  12530  ctl  17272   ['))))', ')),', 'urrency', ')].', ')).']
+
+
+[6->18/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2903  ctl   8332   [' socialist', ' labour', ' Lenin', ' bourgeois', ' revolution']
+   it   2  soc     10  riv   4630  ctl  10087   [' socialist', ' labour', ' Lenin', ' bourgeois', ' proletarian']
+   it   5  soc     32  riv  12208  ctl  12097   [' Trotsky', ' Lenin', '\'."', ')."', ' bourgeois']
+   it  10  soc   4727  riv  16633  ctl  27676   [')."', ').', '.).', '.)', "')."]
+   it  20  soc  29428  riv  10405  ctl  31935   ['.)', ' ).', ').', '.),', ' .)']
+   it  50  soc  34765  riv  11602  ctl  22226   [' PLEASE', ' Thank', ' Helpful', ' Instructions', ' Ups']
+   it 100  soc  19729  riv   6039  ctl  26453   [' Happy', ' Thanks', ' THANK', ' Welcome', ' EVE']
+   it 200  soc  18434  riv   6282  ctl  23408   [' Happy', ' Thanks', ' THANK', '=-=-=-=-', ' :)']
+   it 300  soc  20300  riv   6797  ctl  19281   [' :)', ' please', ' sir', ' PLEASE', ' THANK']
+
+
+[6->19/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc   2497  riv   8796  ctl  36082   ["'", ' Trotsky', '"', 'VI', 'ab']
+   it   2  soc  10806  riv   8194  ctl  15857   [' it', ' and', ' to', 'ly', ' �']
+   it   5  soc  30454  riv   8351  ctl  23207   [' apologize', "'", '"', '."', '0']
+   it  10  soc  22494  riv   4170  ctl  26400   ['.")', '.\'"', ']."', ')].', ' NBA']
+   it  20  soc  19012  riv   4211  ctl  30340   ['."', '!"', ']."', '\'."', '"!']
+   it  50  soc  26228  riv  17458  ctl  29643   ['\n', ',', 'The', '.', '"']
+   it 100  soc  28720  riv  16709  ctl  27803   [')', '"', ').', '.")', '").']
+   it 200  soc  26410  riv   5969  ctl  30320   ['―', ' –', "'", '—', '"']
+   it 300  soc  19838  riv   6947  ctl  12821   [')].', '))))', ']).', ')).', '"))']
+

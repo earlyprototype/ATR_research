@@ -171,9 +171,13 @@ def _pre(m, args, kwargs):
 
 medium.transformer.h[0].register_forward_pre_hook(_pre, with_kwargs=True)
 
-_cap_s = {}
+# layer-0 input capture on both models, for the natural-energy reference
+_cap_s, _cap_m0 = {}, {}
 small.transformer.h[0].register_forward_pre_hook(
     lambda m, a, kw: _cap_s.__setitem__(
+        "x", (a[0] if a else kw["hidden_states"]).detach()), with_kwargs=True)
+medium.transformer.h[0].register_forward_pre_hook(
+    lambda m, a, kw: _cap_m0.__setitem__(
         "x", (a[0] if a else kw["hidden_states"]).detach()), with_kwargs=True)
 
 
@@ -183,15 +187,22 @@ def natural_norm(model, cap, seq):
     return cap["x"][0].norm(dim=1).mean().item()
 
 
-NAT_M = natural_norm(medium, _cap, 12)
+NAT_M = natural_norm(medium, _cap_m0, 12)
 NAT_S = natural_norm(small, _cap_s, 12)
 print(f"natural layer-0 per-token norm: small {NAT_S:.2f}  medium {NAT_M:.2f}", flush=True)
 
 
+_scaf = {}
+
+
 def step(x, seq):
+    if seq not in _scaf:
+        _scaf[seq] = torch.full((1, seq), 262)
     _inj["x"] = x
     with torch.no_grad():
-        medium(input_ids=torch.full((1, seq), 262))
+        # .transformer, not the LM head: the head is ~15% of the flops and the
+        # loop never reads its output (readout is done explicitly below).
+        medium.transformer(input_ids=_scaf[seq])
     _inj["x"] = None
     return _cap["x"][0].clone()
 
@@ -260,73 +271,89 @@ json.dump(results, open(OUT, "w"), indent=1)
 #                    carried over to Medium
 #   matched_abs      Small's converged per-token norm transplanted unchanged
 #   x73 / x218       the registered convention's high shells
-SMALL_RATIO = 1518.1 / NAT_S
+SOC_MEAN_NORM = sum(states[p].norm(dim=1).mean().item() for p in SOC_PROMPTS) / 4
+SMALL_RATIO = SOC_MEAN_NORM / NAT_S
 SHELLS = [
     ("natural", NAT_M),
     ("conv_natural", 30.0),
-    ("matched_ratio", SMALL_RATIO * NAT_M),
-    ("matched_abs", 1518.0),
+    ("matched_ratio", round(SMALL_RATIO * NAT_M, 1)),
+    ("matched_abs", round(SOC_MEAN_NORM, 1)),
     ("x73", 2200.0),
     ("x218", 6500.0),
 ]
+results["shells_per_token_norm"] = dict(SHELLS)
+results["small_converged_energy_ratio_vs_own_natural"] = round(SMALL_RATIO, 1)
 
 LOCK_TOL = 1e-6   # 1 - cos between consecutive iterates
 
 
 def run_loop(u0, seq, max_iter=MAX_ITER):
+    """Registered ATR loop in Medium. Deterministic, so once the iterate locks
+    (cosine distance to the previous iterate below float32 noise) every later
+    state is identical; those checkpoints are filled and flagged `from_lock`.
+    Runs that have lost the register and whose top-1 has been static for 40
+    passes are also cut, flagged `readout_static`."""
     x = u0.clone()
     N0 = x.norm().item()
+    seed_flat = u0.reshape(-1)
     trace = []
     top, b, c = readout(x[-1], ln_m, E_m)
     trace.append({"iter": 0, "basin": b, "control": c, "top": top,
                   "basin_in_top12": in_basin(top), "cos_to_seed": 1.0})
-    seed_flat = u0.reshape(-1)
-    prev = None
-    locked_at = None
-    survived = 0
+    prev, locked_at, survived, cut = None, None, 0, None
+    top1_hist = []
     for it in range(1, max_iter + 1):
         x = x * (N0 / x.norm())
         x = step(x, seq)
-        if prev is not None:
+        if prev is not None and locked_at is None:
             d = 1 - torch.nn.functional.cosine_similarity(
                 x.reshape(1, -1), prev.reshape(1, -1)).item()
-            if d < LOCK_TOL and locked_at is None:
+            if d < LOCK_TOL:
                 locked_at = it
         prev = x.clone()
         top, b, c = readout(x[-1], ln_m, E_m)
-        if in_basin(top) >= 3:
+        hits = in_basin(top)
+        if hits >= 3:
             survived = it
+        top1_hist.append(top[0])
         if it in CHECKPOINTS:
             trace.append({
                 "iter": it, "basin": b, "control": c, "top": top,
-                "basin_in_top12": in_basin(top),
+                "basin_in_top12": hits,
                 "cos_to_seed": round(torch.nn.functional.cosine_similarity(
                     x.reshape(1, -1), seed_flat.reshape(1, -1)).item(), 4)})
-        if locked_at is not None and it >= max(CHECKPOINTS[:-1]):
+        if locked_at is not None and it >= 40:
+            cut = "locked"
             break
-    # fill any checkpoints past an exact lock (state is constant by then)
+        if (it >= 120 and hits == 0 and (survived == 0 or it - survived >= 60)
+                and len(set(top1_hist[-40:])) == 1):
+            cut = "readout_static"
+            break
+    cos_seed = round(torch.nn.functional.cosine_similarity(
+        x.reshape(1, -1), seed_flat.reshape(1, -1)).item(), 4)
     done = {t["iter"] for t in trace}
     for cp in CHECKPOINTS:
-        if cp not in done:
+        if cp not in done and cp > max(done):
             trace.append({"iter": cp, "basin": b, "control": c, "top": top,
-                          "basin_in_top12": in_basin(top),
-                          "cos_to_seed": round(torch.nn.functional.cosine_similarity(
-                              x.reshape(1, -1), seed_flat.reshape(1, -1)).item(), 4),
-                          "from_lock": True})
+                          "basin_in_top12": in_basin(top), "cos_to_seed": cos_seed,
+                          "from_lock": cut})
     trace.sort(key=lambda t: t["iter"])
-    return {"shell_total_norm": N0, "locked_at": locked_at,
-            "last_iter_with_basin_in_top12": survived, "trace": trace}
+    return {"shell_total_norm": N0, "locked_at": locked_at, "stopped_at": it,
+            "stop_reason": cut or "max_iter",
+            "last_iter_with_basin_in_top12": survived,
+            "final_top12": top, "final_basin_median_rank": b,
+            "final_control_median_rank": c, "trace": trace}
 
 
-# run matrix: every map on the flagship socialist prompt across all shells,
-# then the maps that passed the gate on the other prompts at two shells
-MATRIX = [(p, m, s) for m in MAPS for p, s in
-          [("Lucier", [n for n, _ in SHELLS])]
-          for s in s]
-EXTRA = [(p, m, s) for m in MAPS if gate_pass[m]["pass"] or m == "logit_transfer"
-         for p in ["Semantic", "Nonsense", "Imperative", "Syntactic"]
-         for s in ["matched_abs", "x218"]]
-MATRIX += EXTRA
+# Run matrix. Compute here is ~4 s / forward pass, so it is spent where the
+# question lives: both principled maps at every shell on the flagship socialist
+# prompt, then controls and the other prompts at the two most favourable shells.
+CORE = [("Lucier", m, s) for m in ("procrustes", "anchor_ls") for s, _ in SHELLS]
+CTRL = [("Lucier", m, s) for m in ("logit_transfer", "zeropad", "randproj")
+        for s in ("matched_abs", "x218")]
+OTHER = [(p, "procrustes", s) for p in ("Semantic", "Nonsense", "Imperative", "Syntactic")
+         for s in ("matched_abs", "x218")]
+MATRIX = CORE + CTRL + OTHER
 
 shell_of = dict(SHELLS)
 print(f"\n=== LOOP: {len(MATRIX)} runs, max {MAX_ITER} iters ===", flush=True)

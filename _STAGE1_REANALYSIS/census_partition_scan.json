@@ -59,7 +59,163 @@
       1,
       1,
       0
-    ]
+    ],
+    "decode_labels": [
+      " prolet",
+      " prolet",
+      " prolet",
+      " prolet",
+      " prolet",
+      " Divine",
+      " till",
+      " Divine",
+      " till",
+      " prolet",
+      " prolet",
+      " prolet",
+      " Divine",
+      " prolet",
+      " Divine",
+      " till",
+      " Anarch",
+      " Divine",
+      " prolet",
+      " Divine",
+      " prolet",
+      " Divine",
+      " Anarch",
+      " prolet",
+      " prolet"
+    ],
+    "socialist_binary": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "n_socialist": 15
+  },
+  "cross_arm_ari_top_family": {
+    "A0": {
+      "A0": 1.0,
+      "W3_23": 0.6306,
+      "W5_23": 0.6371,
+      "W6_23": 0.8269,
+      "W2_23": 0.9732,
+      "W11_19": -0.0121,
+      "W13_18": 0.0288,
+      "W12_22": 0.2002,
+      "W11_22": 0.0623
+    },
+    "W3_23": {
+      "A0": 0.6306,
+      "W3_23": 1.0,
+      "W5_23": 0.9931,
+      "W6_23": 0.7185,
+      "W2_23": 0.6184,
+      "W11_19": 0.0194,
+      "W13_18": 0.0764,
+      "W12_22": 0.2563,
+      "W11_22": 0.0931
+    },
+    "W5_23": {
+      "A0": 0.6371,
+      "W3_23": 0.9931,
+      "W5_23": 1.0,
+      "W6_23": 0.7118,
+      "W2_23": 0.6248,
+      "W11_19": 0.0184,
+      "W13_18": 0.0745,
+      "W12_22": 0.2515,
+      "W11_22": 0.0912
+    },
+    "W6_23": {
+      "A0": 0.8269,
+      "W3_23": 0.7185,
+      "W5_23": 0.7118,
+      "W6_23": 1.0,
+      "W2_23": 0.8536,
+      "W11_19": 0.0099,
+      "W13_18": 0.046,
+      "W12_22": 0.129,
+      "W11_22": 0.0519
+    },
+    "W2_23": {
+      "A0": 0.9732,
+      "W3_23": 0.6184,
+      "W5_23": 0.6248,
+      "W6_23": 0.8536,
+      "W2_23": 1.0,
+      "W11_19": -0.0008,
+      "W13_18": 0.0261,
+      "W12_22": 0.2051,
+      "W11_22": 0.0724
+    },
+    "W11_19": {
+      "A0": -0.0121,
+      "W3_23": 0.0194,
+      "W5_23": 0.0184,
+      "W6_23": 0.0099,
+      "W2_23": -0.0008,
+      "W11_19": 1.0,
+      "W13_18": 0.5457,
+      "W12_22": 0.1269,
+      "W11_22": 0.4651
+    },
+    "W13_18": {
+      "A0": 0.0288,
+      "W3_23": 0.0764,
+      "W5_23": 0.0745,
+      "W6_23": 0.046,
+      "W2_23": 0.0261,
+      "W11_19": 0.5457,
+      "W13_18": 1.0,
+      "W12_22": 0.1003,
+      "W11_22": 0.3363
+    },
+    "W12_22": {
+      "A0": 0.2002,
+      "W3_23": 0.2563,
+      "W5_23": 0.2515,
+      "W6_23": 0.129,
+      "W2_23": 0.2051,
+      "W11_19": 0.1269,
+      "W13_18": 0.1003,
+      "W12_22": 1.0,
+      "W11_22": 0.3547
+    },
+    "W11_22": {
+      "A0": 0.0623,
+      "W3_23": 0.0931,
+      "W5_23": 0.0912,
+      "W6_23": 0.0519,
+      "W2_23": 0.0724,
+      "W11_19": 0.4651,
+      "W13_18": 0.3363,
+      "W12_22": 0.3547,
+      "W11_22": 1.0
+    }
   },
   "reference_arms": {
     "A0": {
@@ -228,6 +384,8 @@
       "perm_p": 9.999000099990002e-05,
       "ari_vs_small_lastvec": 0.3292682926829269,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.2958748221906116,
+      "ari_vs_small_socialist_binary": 0.38666666666666666,
       "labels": [
         0,
         0,
@@ -289,7 +447,9 @@
           "ari_vs_small": 0.1648,
           "perm_p": 0.0047
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.006099390060993901,
+      "perm_p_socialist_binary": 0.0016998300169983002
     },
     {
       "arm": "W5_23",
@@ -315,6 +475,8 @@
       "perm_p": 9.999000099990002e-05,
       "ari_vs_small_lastvec": 0.3248710427834531,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.29034394663386476,
+      "ari_vs_small_socialist_binary": 0.38,
       "labels": [
         0,
         0,
@@ -376,7 +538,9 @@
           "ari_vs_small": 0.1648,
           "perm_p": 0.0047
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.006299370062993701,
+      "perm_p_socialist_binary": 0.0016998300169983002
     },
     {
       "arm": "W6_23",
@@ -402,6 +566,8 @@
       "perm_p": 9.999000099990002e-05,
       "ari_vs_small_lastvec": 0.2948833845597541,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.32099318752240946,
+      "ari_vs_small_socialist_binary": 0.41333333333333333,
       "labels": [
         0,
         0,
@@ -463,7 +629,9 @@
           "ari_vs_small": 0.1648,
           "perm_p": 0.0047
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.0037996200379962005,
+      "perm_p_socialist_binary": 0.0006999300069993001
     },
     {
       "arm": "W2_23",
@@ -487,6 +655,8 @@
       "perm_p": 0.00029997000299970003,
       "ari_vs_small_lastvec": 0.21928327645051196,
       "lastvec_basins": 4,
+      "ari_vs_small_decode_partition": 0.2359599477579452,
+      "ari_vs_small_socialist_binary": 0.30666666666666664,
       "labels": [
         0,
         0,
@@ -548,7 +718,9 @@
           "ari_vs_small": 0.2154,
           "perm_p": 0.0004
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.017998200179982,
+      "perm_p_socialist_binary": 0.0030996900309969004
     },
     {
       "arm": "W11_19",
@@ -587,6 +759,8 @@
       "perm_p": 0.0024997500249975004,
       "ari_vs_small_lastvec": 0.2048409681936387,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": 0.13225429257185056,
+      "ari_vs_small_socialist_binary": 0.06,
       "labels": [
         0,
         1,
@@ -648,7 +822,9 @@
           "ari_vs_small": 0.0407,
           "perm_p": 0.26787
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.010998900109989001,
+      "perm_p_socialist_binary": 0.06769323067693231
     },
     {
       "arm": "W13_18",
@@ -683,6 +859,8 @@
       "perm_p": 0.007999200079992,
       "ari_vs_small_lastvec": 0.18419144307469182,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.114278897769295,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -744,7 +922,9 @@
           "ari_vs_small": 0.028,
           "perm_p": 0.37406
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.031196880311968805,
+      "perm_p_socialist_binary": 0.22007799220077992
     },
     {
       "arm": "W12_22",
@@ -770,6 +950,8 @@
       "perm_p": 0.015998400159984,
       "ari_vs_small_lastvec": 0.17540755718438014,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.20158639043991022,
+      "ari_vs_small_socialist_binary": 0.16666666666666666,
       "labels": [
         0,
         1,
@@ -831,7 +1013,9 @@
           "ari_vs_small": 0.144,
           "perm_p": 0.027
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.028397160283971604,
+      "perm_p_socialist_binary": 0.020997900209979003
     },
     {
       "arm": "W11_22",
@@ -865,6 +1049,8 @@
       "perm_p": 0.0100989901009899,
       "ari_vs_small_lastvec": 0.1620905131603863,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.11076159941927288,
+      "ari_vs_small_socialist_binary": 0.1,
       "labels": [
         0,
         1,
@@ -926,7 +1112,9 @@
           "ari_vs_small": 0.1495,
           "perm_p": 0.0189
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.0198980101989801,
+      "perm_p_socialist_binary": 0.0091990800919908
     },
     {
       "arm": "W1_23",
@@ -953,6 +1141,8 @@
       "perm_p": 0.003999600039996,
       "ari_vs_small_lastvec": 0.15456978347254882,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.14761884568084474,
+      "ari_vs_small_socialist_binary": 0.20666666666666667,
       "labels": [
         0,
         0,
@@ -1014,7 +1204,9 @@
           "ari_vs_small": 0.2154,
           "perm_p": 0.0001
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.0806919308069193,
+      "perm_p_socialist_binary": 0.022297770222977704
     },
     {
       "arm": "W13_22",
@@ -1041,6 +1233,8 @@
       "perm_p": 0.0313968603139686,
       "ari_vs_small_lastvec": 0.13885180240320427,
       "lastvec_basins": 7,
+      "ari_vs_small_decode_partition": 0.11152614727854852,
+      "ari_vs_small_socialist_binary": 0.10666666666666667,
       "labels": [
         0,
         1,
@@ -1102,7 +1296,9 @@
           "ari_vs_small": -0.0133,
           "perm_p": 0.64844
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.09199080091990801,
+      "perm_p_socialist_binary": 0.052394760523947606
     },
     {
       "arm": "W12_19",
@@ -1134,6 +1330,8 @@
       "perm_p": 0.045795420457954206,
       "ari_vs_small_lastvec": 0.12038634011728182,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": 0.07613796339746597,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -1195,7 +1393,9 @@
           "ari_vs_small": 0.0328,
           "perm_p": 0.34027
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.097990200979902,
+      "perm_p_socialist_binary": 0.34506549345065496
     },
     {
       "arm": "W15_22",
@@ -1224,6 +1424,8 @@
       "perm_p": 0.053894610538946106,
       "ari_vs_small_lastvec": 0.11710037174721188,
       "lastvec_basins": 8,
+      "ari_vs_small_decode_partition": 0.05964079972890545,
+      "ari_vs_small_socialist_binary": 0.06666666666666667,
       "labels": [
         0,
         1,
@@ -1285,7 +1487,9 @@
           "ari_vs_small": 0.1383,
           "perm_p": 0.0238
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.1825817418258174,
+      "perm_p_socialist_binary": 0.0847915208479152
     },
     {
       "arm": "W11_20",
@@ -1321,6 +1525,8 @@
       "perm_p": 0.05629437056294371,
       "ari_vs_small_lastvec": 0.10528309032380233,
       "lastvec_basins": 14,
+      "ari_vs_small_decode_partition": 0.05631843203677939,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -1382,7 +1588,9 @@
           "ari_vs_small": 0.0977,
           "perm_p": 0.07079
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.12988701129887012,
+      "perm_p_socialist_binary": 0.6180381961803819
     },
     {
       "arm": "W15_19",
@@ -1410,6 +1618,8 @@
       "perm_p": 0.07879212078792121,
       "ari_vs_small_lastvec": 0.10186448385629832,
       "lastvec_basins": 7,
+      "ari_vs_small_decode_partition": 0.025046226256513676,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -1471,7 +1681,9 @@
           "ari_vs_small": 0.0123,
           "perm_p": 0.45325
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.33966603339666035,
+      "perm_p_socialist_binary": 0.4056594340565943
     },
     {
       "arm": "W18_18",
@@ -1502,6 +1714,8 @@
       "perm_p": 0.07889211078892111,
       "ari_vs_small_lastvec": 0.05926946933149553,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": 0.14990299193301337,
+      "ari_vs_small_socialist_binary": 0.05333333333333334,
       "labels": [
         0,
         0,
@@ -1563,7 +1777,9 @@
           "ari_vs_small": 0.1206,
           "perm_p": 0.0414
         }
-      ]
+      ],
+      "perm_p_decode_partition": 0.07629237076292371,
+      "perm_p_socialist_binary": 0.15298470152984703
     },
     {
       "arm": "W1_11",
@@ -1605,6 +1821,8 @@
       "perm_p": 0.09249075092490751,
       "ari_vs_small_lastvec": -0.019350380096751902,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": 0.015784586815227476,
+      "ari_vs_small_socialist_binary": 0.03333333333333333,
       "labels": [
         0,
         1,
@@ -1660,6 +1878,8 @@
       "perm_p": 0.0791920807919208,
       "ari_vs_small_lastvec": 0.0944372574385511,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.11575562700964633,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -1717,6 +1937,8 @@
       "perm_p": 0.09009099090090991,
       "ari_vs_small_lastvec": 0.09333708181051446,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.17501633631017208,
+      "ari_vs_small_socialist_binary": 0.10666666666666667,
       "labels": [
         0,
         1,
@@ -1775,6 +1997,8 @@
       "perm_p": 0.0908909109089091,
       "ari_vs_small_lastvec": 0.09206396652219401,
       "lastvec_basins": 7,
+      "ari_vs_small_decode_partition": 0.030154394961261936,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -1838,6 +2062,8 @@
       "perm_p": 0.09979002099790021,
       "ari_vs_small_lastvec": 0.08896492728828058,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": 0.03480549868382567,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -1894,6 +2120,8 @@
       "perm_p": 0.0978902109789021,
       "ari_vs_small_lastvec": 0.08888205443641398,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.03678251563116092,
+      "ari_vs_small_socialist_binary": 0.03333333333333333,
       "labels": [
         0,
         1,
@@ -1958,6 +2186,8 @@
       "perm_p": 0.08849115088491151,
       "ari_vs_small_lastvec": 0.08705274806344522,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.07329654510556623,
+      "ari_vs_small_socialist_binary": 0.08,
       "labels": [
         0,
         1,
@@ -2020,6 +2250,8 @@
       "perm_p": 0.1080891910808919,
       "ari_vs_small_lastvec": 0.037009063444108765,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.2389758179231863,
+      "ari_vs_small_socialist_binary": 0.16,
       "labels": [
         0,
         0,
@@ -2087,6 +2319,8 @@
       "perm_p": 0.101989801019898,
       "ari_vs_small_lastvec": 0.08466819221967962,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.006328739575323842,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -2152,6 +2386,8 @@
       "perm_p": 0.12208779122087791,
       "ari_vs_small_lastvec": 0.08193243022686471,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.05046901076135122,
+      "ari_vs_small_socialist_binary": 0.07333333333333333,
       "labels": [
         0,
         1,
@@ -2213,6 +2449,8 @@
       "perm_p": 0.11818818118188182,
       "ari_vs_small_lastvec": 0.12460209185993633,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": 0.02055416761299115,
+      "ari_vs_small_socialist_binary": 0.04,
       "labels": [
         0,
         1,
@@ -2274,6 +2512,8 @@
       "perm_p": 0.12058794120587941,
       "ari_vs_small_lastvec": 0.07812763091429535,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.022630752225260346,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -2330,6 +2570,8 @@
       "perm_p": 0.1441855814418558,
       "ari_vs_small_lastvec": 0.07326646314871346,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.023663743173920233,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -2394,6 +2636,8 @@
       "perm_p": 0.147985201479852,
       "ari_vs_small_lastvec": 0.07283661877714667,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.05140403805987468,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -2458,6 +2702,8 @@
       "perm_p": 0.14958504149585042,
       "ari_vs_small_lastvec": 0.07283661877714667,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.0688094685541889,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -2520,6 +2766,8 @@
       "perm_p": 0.16368363163683633,
       "ari_vs_small_lastvec": 0.06695660968949127,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.139402560455192,
+      "ari_vs_small_socialist_binary": 0.06666666666666667,
       "labels": [
         0,
         1,
@@ -2583,6 +2831,8 @@
       "perm_p": 0.16568343165683433,
       "ari_vs_small_lastvec": 0.06762804574838388,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": 0.04530463461204651,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -2643,6 +2893,8 @@
       "perm_p": 0.15528447155284472,
       "ari_vs_small_lastvec": 0.06668793873643906,
       "lastvec_basins": 8,
+      "ari_vs_small_decode_partition": 0.04954903527799976,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -2707,6 +2959,8 @@
       "perm_p": 0.1733826617338266,
       "ari_vs_small_lastvec": 0.06417112299465241,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": -0.02313167259786478,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -2759,6 +3013,8 @@
       "perm_p": 0.065993400659934,
       "ari_vs_small_lastvec": 0.0623766285037505,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.12091651542649724,
+      "ari_vs_small_socialist_binary": 0.16,
       "labels": [
         0,
         0,
@@ -2815,6 +3071,8 @@
       "perm_p": 0.18218178182181782,
       "ari_vs_small_lastvec": 0.05926946933149553,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.07592542556065927,
+      "ari_vs_small_socialist_binary": 0.06,
       "labels": [
         0,
         1,
@@ -2871,6 +3129,8 @@
       "perm_p": 0.20277972202779723,
       "ari_vs_small_lastvec": 0.056939501779359414,
       "lastvec_basins": 6,
+      "ari_vs_small_decode_partition": 0.06250000000000003,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         1,
@@ -2923,6 +3183,8 @@
       "perm_p": 0.1322867713228677,
       "ari_vs_small_lastvec": 0.05525697010413167,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.08670869677865103,
+      "ari_vs_small_socialist_binary": 0.09333333333333334,
       "labels": [
         0,
         0,
@@ -2975,6 +3237,8 @@
       "perm_p": 0.1322867713228677,
       "ari_vs_small_lastvec": 0.05525697010413167,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.08670869677865103,
+      "ari_vs_small_socialist_binary": 0.09333333333333334,
       "labels": [
         0,
         0,
@@ -3038,6 +3302,8 @@
       "perm_p": 0.20057994200579943,
       "ari_vs_small_lastvec": 0.04822335025380711,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": 0.048986183384173695,
+      "ari_vs_small_socialist_binary": 0.04666666666666667,
       "labels": [
         0,
         1,
@@ -3093,6 +3359,8 @@
       "perm_p": 0.22107789221077892,
       "ari_vs_small_lastvec": 0.05116671352263142,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.07699847527771729,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -3152,6 +3420,8 @@
       "perm_p": 0.18568143185681432,
       "ari_vs_small_lastvec": 0.022847432024169185,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.09311534040107293,
+      "ari_vs_small_socialist_binary": 0.1,
       "labels": [
         0,
         0,
@@ -3217,6 +3487,8 @@
       "perm_p": 0.23217678232176783,
       "ari_vs_small_lastvec": 0.04822335025380711,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.0069187641655731845,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -3287,6 +3559,8 @@
       "perm_p": 0.26417358264173585,
       "ari_vs_small_lastvec": 0.03669724770642202,
       "lastvec_basins": 20,
+      "ari_vs_small_decode_partition": 0.06059883096743409,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -3352,6 +3626,8 @@
       "perm_p": 0.24287571242875713,
       "ari_vs_small_lastvec": 0.04799165362545643,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.08240691724016234,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -3407,6 +3683,8 @@
       "perm_p": 0.22577742225777422,
       "ari_vs_small_lastvec": 0.045545880776959126,
       "lastvec_basins": 4,
+      "ari_vs_small_decode_partition": 0.1152481452467628,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -3460,6 +3738,8 @@
       "perm_p": 0.21227877212278773,
       "ari_vs_small_lastvec": 0.04267757965507164,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.10421225382932162,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -3513,6 +3793,8 @@
       "perm_p": 0.21227877212278773,
       "ari_vs_small_lastvec": 0.045480067377877575,
       "lastvec_basins": 3,
+      "ari_vs_small_decode_partition": 0.10421225382932162,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -3587,6 +3869,8 @@
       "perm_p": 0.12738726127387262,
       "ari_vs_small_lastvec": 0.042844120328167735,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.0503900754572196,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -3656,6 +3940,8 @@
       "perm_p": 0.21097890210978903,
       "ari_vs_small_lastvec": 0.04282933160285529,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": 0.017199017199017202,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -3725,6 +4011,8 @@
       "perm_p": 0.24797520247975202,
       "ari_vs_small_lastvec": 0.04281597365170852,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": 0.04084926744474795,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -3792,6 +4080,8 @@
       "perm_p": 0.2521747825217478,
       "ari_vs_small_lastvec": 0.04280384841939917,
       "lastvec_basins": 15,
+      "ari_vs_small_decode_partition": 0.04546288931040812,
+      "ari_vs_small_socialist_binary": 0.03333333333333333,
       "labels": [
         0,
         1,
@@ -3856,6 +4146,8 @@
       "perm_p": 0.26117388261173885,
       "ari_vs_small_lastvec": 0.04278267122056445,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.018616546719800148,
+      "ari_vs_small_socialist_binary": 0.03333333333333333,
       "labels": [
         0,
         1,
@@ -3919,6 +4211,8 @@
       "perm_p": 0.27017298270172985,
       "ari_vs_small_lastvec": 0.04277337012763022,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": 0.040943219145940866,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -3971,6 +4265,8 @@
       "perm_p": 0.14328567143285673,
       "ari_vs_small_lastvec": 0.04263718910382946,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": -0.06057168784029042,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         0,
@@ -4032,6 +4328,8 @@
       "perm_p": 0.2943705629437056,
       "ari_vs_small_lastvec": 0.03763900769888794,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": 0.06990348054986836,
+      "ari_vs_small_socialist_binary": 0.03333333333333333,
       "labels": [
         0,
         1,
@@ -4099,6 +4397,8 @@
       "perm_p": 0.283971602839716,
       "ari_vs_small_lastvec": 0.03696498054474708,
       "lastvec_basins": 15,
+      "ari_vs_small_decode_partition": -0.015863331299572903,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         1,
@@ -4154,6 +4454,8 @@
       "perm_p": 0.2645735426457354,
       "ari_vs_small_lastvec": 0.036751630112625965,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.010387422796181947,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         0,
@@ -4207,6 +4509,8 @@
       "perm_p": 0.25707429257074293,
       "ari_vs_small_lastvec": 0.03439396726135735,
       "lastvec_basins": 3,
+      "ari_vs_small_decode_partition": 0.08470439341891163,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         1,
@@ -4266,6 +4570,8 @@
       "perm_p": 0.31486851314868514,
       "ari_vs_small_lastvec": 0.03365165984538427,
       "lastvec_basins": 7,
+      "ari_vs_small_decode_partition": 0.058665321902840795,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -4321,6 +4627,8 @@
       "perm_p": 0.30116988301169884,
       "ari_vs_small_lastvec": 0.03242379267039618,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.07041831175970813,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -4380,6 +4688,8 @@
       "perm_p": 0.33656634336566343,
       "ari_vs_small_lastvec": 0.029199277543648396,
       "lastvec_basins": 8,
+      "ari_vs_small_decode_partition": 0.052755113445847795,
+      "ari_vs_small_socialist_binary": 0.06666666666666667,
       "labels": [
         0,
         0,
@@ -4442,6 +4752,8 @@
       "perm_p": 0.3398660133986601,
       "ari_vs_small_lastvec": 0.028709627086909034,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": 0.08262075995243219,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -4503,6 +4815,8 @@
       "perm_p": 0.3421657834216578,
       "ari_vs_small_lastvec": 0.028709627086909034,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.08262075995243219,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -4571,6 +4885,8 @@
       "perm_p": 0.33666633336666335,
       "ari_vs_small_lastvec": 0.002313475997686526,
       "lastvec_basins": 19,
+      "ari_vs_small_decode_partition": -0.004844787367665522,
+      "ari_vs_small_socialist_binary": 0.04666666666666667,
       "labels": [
         0,
         1,
@@ -4630,6 +4946,8 @@
       "perm_p": 0.36896310368963103,
       "ari_vs_small_lastvec": 0.02416356877323418,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.09352761775669265,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -4700,6 +5018,8 @@
       "perm_p": 0.3604639536046395,
       "ari_vs_small_lastvec": 0.023929471032745588,
       "lastvec_basins": 18,
+      "ari_vs_small_decode_partition": -0.02098164106406894,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -4764,6 +5084,8 @@
       "perm_p": 0.38766123387661233,
       "ari_vs_small_lastvec": 0.02271967925158703,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.05140403805987468,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -4826,6 +5148,8 @@
       "perm_p": 0.40285971402859716,
       "ari_vs_small_lastvec": 0.021891010712622266,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": 0.07849218656805439,
+      "ari_vs_small_socialist_binary": 0.04,
       "labels": [
         0,
         1,
@@ -4880,6 +5204,8 @@
       "perm_p": 0.33226677332266774,
       "ari_vs_small_lastvec": 0.019189765458422145,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.04208005473828256,
+      "ari_vs_small_socialist_binary": 0.04666666666666667,
       "labels": [
         0,
         0,
@@ -4938,6 +5264,8 @@
       "perm_p": 0.39276072392760725,
       "ari_vs_small_lastvec": 0.018595041322314022,
       "lastvec_basins": 8,
+      "ari_vs_small_decode_partition": 0.060715359182446645,
+      "ari_vs_small_socialist_binary": -0.05333333333333334,
       "labels": [
         0,
         1,
@@ -5006,6 +5334,8 @@
       "perm_p": 0.4233576642335766,
       "ari_vs_small_lastvec": -0.047008547008546994,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": 0.028703069547350732,
+      "ari_vs_small_socialist_binary": 0.03333333333333333,
       "labels": [
         0,
         1,
@@ -5076,6 +5406,8 @@
       "perm_p": 0.45315468453154684,
       "ari_vs_small_lastvec": 0.016608391608391605,
       "lastvec_basins": 18,
+      "ari_vs_small_decode_partition": 0.023758372298748897,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -5128,6 +5460,8 @@
       "perm_p": 0.33086691330866913,
       "ari_vs_small_lastvec": 0.015317286652078788,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.08857682959762357,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -5202,6 +5536,8 @@
       "perm_p": 0.46565343465653436,
       "ari_vs_small_lastvec": -0.03349586601653593,
       "lastvec_basins": 20,
+      "ari_vs_small_decode_partition": -0.0005772561092938238,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -5267,6 +5603,8 @@
       "perm_p": 0.43655634436556345,
       "ari_vs_small_lastvec": 0.014639639639639629,
       "lastvec_basins": 14,
+      "ari_vs_small_decode_partition": 0.031849439015562794,
+      "ari_vs_small_socialist_binary": 0.04,
       "labels": [
         0,
         1,
@@ -5330,6 +5668,8 @@
       "perm_p": 0.4477552244775522,
       "ari_vs_small_lastvec": 0.013351659139996067,
       "lastvec_basins": 14,
+      "ari_vs_small_decode_partition": 0.013753166847629386,
+      "ari_vs_small_socialist_binary": 0.02666666666666667,
       "labels": [
         0,
         1,
@@ -5385,6 +5725,8 @@
       "perm_p": 0.40675932406759324,
       "ari_vs_small_lastvec": 0.013446360713241767,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.051736159531446106,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -5450,6 +5792,8 @@
       "perm_p": 0.4627537246275372,
       "ari_vs_small_lastvec": 0.013351659139996067,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.04546288931040812,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -5502,6 +5846,8 @@
       "perm_p": 0.32886711328867113,
       "ari_vs_small_lastvec": 0.013333333333333334,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.06,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         0,
@@ -5563,6 +5909,8 @@
       "perm_p": 0.44915508449155084,
       "ari_vs_small_lastvec": -0.0136869118905047,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": -0.00029248318221703704,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -5621,6 +5969,8 @@
       "perm_p": 0.42055794420557946,
       "ari_vs_small_lastvec": 0.09904388330473153,
       "lastvec_basins": 7,
+      "ari_vs_small_decode_partition": -0.0516699243647489,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         0,
@@ -5692,6 +6042,8 @@
       "perm_p": 0.48535146485351466,
       "ari_vs_small_lastvec": 0.010382868267358859,
       "lastvec_basins": 19,
+      "ari_vs_small_decode_partition": 0.017199017199017202,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -5744,6 +6096,8 @@
       "perm_p": 0.36366363363663634,
       "ari_vs_small_lastvec": 0.010124751401193267,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.05207959842237363,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         0,
@@ -5809,6 +6163,8 @@
       "perm_p": 0.4861513848615138,
       "ari_vs_small_lastvec": 0.04274265360641139,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": 0.043609022556390965,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -5883,6 +6239,8 @@
       "perm_p": 0.5786421357864213,
       "ari_vs_small_lastvec": 0.008659981768459434,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.031206036577567466,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -5946,6 +6304,8 @@
       "perm_p": 0.5094490550944906,
       "ari_vs_small_lastvec": 0.0077821011673151735,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.020744356314826122,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -6002,6 +6362,8 @@
       "perm_p": 0.4540545945405459,
       "ari_vs_small_lastvec": 0.007113218731475999,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": -0.01768669286917459,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         1,
@@ -6074,6 +6436,8 @@
       "perm_p": 0.49845015498450157,
       "ari_vs_small_lastvec": -0.004016064257028116,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.03435468895078922,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -6142,6 +6506,8 @@
       "perm_p": 0.5341465853414659,
       "ari_vs_small_lastvec": 0.021909233176838804,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": 0.015784586815227476,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -6200,6 +6566,8 @@
       "perm_p": 0.5070492950704929,
       "ari_vs_small_lastvec": -0.024754862562289037,
       "lastvec_basins": 8,
+      "ari_vs_small_decode_partition": 0.08262075995243219,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -6269,6 +6637,8 @@
       "perm_p": 0.5883411658834117,
       "ari_vs_small_lastvec": 0.004282655246252676,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": -0.008165829145728639,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -6336,6 +6706,8 @@
       "perm_p": 0.5243475652434757,
       "ari_vs_small_lastvec": 0.0040575433419402385,
       "lastvec_basins": 15,
+      "ari_vs_small_decode_partition": 0.019313819577735137,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -6393,6 +6765,8 @@
       "perm_p": 0.5169483051694831,
       "ari_vs_small_lastvec": 0.05525697010413167,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.08031882280809322,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -6447,6 +6821,8 @@
       "perm_p": 0.48385161483851613,
       "ari_vs_small_lastvec": 0.0015661707126076582,
       "lastvec_basins": 3,
+      "ari_vs_small_decode_partition": 0.0426721326749278,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         1,
@@ -6515,6 +6891,8 @@
       "perm_p": 0.5867413258674132,
       "ari_vs_small_lastvec": -0.02446483180428134,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": 0.04641402296012838,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -6566,6 +6944,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6617,6 +6997,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6668,6 +7050,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6719,6 +7103,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6770,6 +7156,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6821,6 +7209,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6872,6 +7262,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6923,6 +7315,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -6974,6 +7368,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -7025,6 +7421,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -7076,6 +7474,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -7127,6 +7527,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -7178,6 +7580,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -7229,6 +7633,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -7306,6 +7712,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7383,6 +7791,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7460,6 +7870,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7537,6 +7949,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7614,6 +8028,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7691,6 +8107,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7768,6 +8186,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7843,6 +8263,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7920,6 +8342,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -7997,6 +8421,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -8074,6 +8500,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -8151,6 +8579,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -8202,6 +8632,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8279,6 +8711,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -8356,6 +8790,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -8407,6 +8843,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8458,6 +8896,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8509,6 +8949,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8560,6 +9002,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8611,6 +9055,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8662,6 +9108,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8713,6 +9161,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8790,6 +9240,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.006592889098186956,
       "lastvec_basins": 24,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -8841,6 +9293,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8892,6 +9346,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -8943,6 +9399,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9020,6 +9478,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -9071,6 +9531,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9122,6 +9584,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9173,6 +9637,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9224,6 +9690,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9275,6 +9743,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9326,6 +9796,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9377,6 +9849,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9428,6 +9902,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9479,6 +9955,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9530,6 +10008,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9581,6 +10061,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9632,6 +10114,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9683,6 +10167,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9734,6 +10220,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9785,6 +10273,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9836,6 +10326,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9887,6 +10379,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9938,6 +10432,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -9989,6 +10485,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10040,6 +10538,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10091,6 +10591,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10142,6 +10644,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10193,6 +10697,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10244,6 +10750,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10295,6 +10803,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10346,6 +10856,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10397,6 +10909,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10448,6 +10962,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10499,6 +11015,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10550,6 +11068,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10601,6 +11121,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10652,6 +11174,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10703,6 +11227,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10754,6 +11280,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10805,6 +11333,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10856,6 +11386,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10907,6 +11439,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -10958,6 +11492,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11009,6 +11545,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11060,6 +11598,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11137,6 +11677,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -11188,6 +11730,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11239,6 +11783,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11290,6 +11836,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11341,6 +11889,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11392,6 +11942,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11443,6 +11995,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11494,6 +12048,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11545,6 +12101,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11597,6 +12155,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -11674,6 +12234,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -11751,6 +12313,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -11828,6 +12392,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -11905,6 +12471,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -11982,6 +12550,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12059,6 +12629,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12136,6 +12708,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12213,6 +12787,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12264,6 +12840,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.004192872117400393,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -12315,6 +12893,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -12366,6 +12946,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -12417,6 +12999,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -12468,6 +13052,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -12520,6 +13106,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.004192872117400393,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -12597,6 +13185,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12674,6 +13264,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12751,6 +13343,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12828,6 +13422,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12905,6 +13501,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -12982,6 +13580,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13033,6 +13633,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -13085,6 +13687,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -13136,6 +13740,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 1,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -13213,6 +13819,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13290,6 +13898,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13367,6 +13977,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13444,6 +14056,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13521,6 +14135,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13598,6 +14214,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13675,6 +14293,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13752,6 +14372,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13829,6 +14451,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13906,6 +14530,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -13983,6 +14609,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": 0.0,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -14037,6 +14665,8 @@
       "perm_p": 0.5534446555344466,
       "ari_vs_small_lastvec": -0.0011954572624028436,
       "lastvec_basins": 4,
+      "ari_vs_small_decode_partition": 0.04208005473828256,
+      "ari_vs_small_socialist_binary": 0.04666666666666667,
       "labels": [
         0,
         0,
@@ -14091,6 +14721,8 @@
       "perm_p": 0.6081391860813918,
       "ari_vs_small_lastvec": 0.03865311815102613,
       "lastvec_basins": 4,
+      "ari_vs_small_decode_partition": -0.020445484803043007,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         0,
@@ -14144,6 +14776,8 @@
       "perm_p": 0.6174382561743825,
       "ari_vs_small_lastvec": -0.002112982412528742,
       "lastvec_basins": 3,
+      "ari_vs_small_decode_partition": -0.020445484803043007,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         0,
@@ -14218,6 +14852,8 @@
       "perm_p": 0.7659234076592341,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": -0.0011441647597254015,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -14277,6 +14913,8 @@
       "perm_p": 0.5747425257474252,
       "ari_vs_small_lastvec": -0.002338790511192793,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": -0.01895193515241467,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         1,
@@ -14343,6 +14981,8 @@
       "perm_p": 0.641035896410359,
       "ari_vs_small_lastvec": 0.006116207951070342,
       "lastvec_basins": 15,
+      "ari_vs_small_decode_partition": 0.021478244815065536,
+      "ari_vs_small_socialist_binary": 0.02,
       "labels": [
         0,
         1,
@@ -14419,6 +15059,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.006592889098186956,
       "lastvec_basins": 24,
+      "ari_vs_small_decode_partition": -0.0066464476995547524,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -14495,6 +15137,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.006592889098186956,
       "lastvec_basins": 24,
+      "ari_vs_small_decode_partition": -0.0066464476995547524,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -14571,6 +15215,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.028726159642100308,
       "lastvec_basins": 24,
+      "ari_vs_small_decode_partition": -0.0066464476995547524,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -14647,6 +15293,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.006592889098186956,
       "lastvec_basins": 24,
+      "ari_vs_small_decode_partition": -0.0066464476995547524,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -14704,6 +15352,8 @@
       "perm_p": 0.581941805819418,
       "ari_vs_small_lastvec": -0.008207160039620773,
       "lastvec_basins": 7,
+      "ari_vs_small_decode_partition": 0.0009280995796255131,
+      "ari_vs_small_socialist_binary": -0.03333333333333333,
       "labels": [
         0,
         1,
@@ -14760,6 +15410,8 @@
       "perm_p": 0.5840415958404159,
       "ari_vs_small_lastvec": -0.008207160039620773,
       "lastvec_basins": 5,
+      "ari_vs_small_decode_partition": 0.06644101108260088,
+      "ari_vs_small_socialist_binary": 0.04666666666666667,
       "labels": [
         0,
         1,
@@ -14833,6 +15485,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.01304145319049837,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": 0.025347400926402475,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -14908,6 +15562,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.01304145319049837,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.013252702007205353,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -14983,6 +15639,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.0,
       "lastvec_basins": 25,
+      "ari_vs_small_decode_partition": -0.013252702007205353,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -15035,6 +15693,8 @@
       "perm_p": 0.638936106389361,
       "ari_vs_small_lastvec": 0.011446409989594161,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.02,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         0,
@@ -15102,6 +15762,8 @@
       "perm_p": 0.7096290370962903,
       "ari_vs_small_lastvec": -0.03156708004509583,
       "lastvec_basins": 21,
+      "ari_vs_small_decode_partition": 0.008749923514654591,
+      "ari_vs_small_socialist_binary": -0.02,
       "labels": [
         0,
         1,
@@ -15174,6 +15836,8 @@
       "perm_p": 0.8463153684631537,
       "ari_vs_small_lastvec": -0.016171328671328672,
       "lastvec_basins": 20,
+      "ari_vs_small_decode_partition": 0.023758372298748897,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -15235,6 +15899,8 @@
       "perm_p": 0.665033496650335,
       "ari_vs_small_lastvec": -0.01809954751131222,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": 0.09960926439775752,
+      "ari_vs_small_socialist_binary": 0.06,
       "labels": [
         0,
         1,
@@ -15300,6 +15966,8 @@
       "perm_p": 0.7082291770822917,
       "ari_vs_small_lastvec": -0.018604651162790704,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.043609022556390965,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15364,6 +16032,8 @@
       "perm_p": 0.7152284771522848,
       "ari_vs_small_lastvec": -0.018604651162790704,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": 0.007518796992481193,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15438,6 +16108,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.042844120328167735,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.01866461420050029,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15512,6 +16184,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.019350380096751902,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.01866461420050029,
+      "ari_vs_small_socialist_binary": 0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15586,6 +16260,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.021891010712622266,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.0005772561092938238,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15661,6 +16337,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.015203870076019348,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.019819126419087937,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15736,6 +16414,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.019350380096751902,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.019819126419087937,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15798,6 +16478,8 @@
       "perm_p": 0.6853314668533147,
       "ari_vs_small_lastvec": -0.01599477721560307,
       "lastvec_basins": 10,
+      "ari_vs_small_decode_partition": -0.007231404958677685,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -15852,6 +16534,8 @@
       "perm_p": 0.6782321767823217,
       "ari_vs_small_lastvec": -0.02203043379513967,
       "lastvec_basins": 3,
+      "ari_vs_small_decode_partition": -0.039589150378939,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         0,
@@ -15924,6 +16608,8 @@
       "perm_p": 0.8875112488751125,
       "ari_vs_small_lastvec": -0.004016064257028116,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.017199017199017202,
+      "ari_vs_small_socialist_binary": -0.006666666666666667,
       "labels": [
         0,
         1,
@@ -15997,6 +16683,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.02552415679124886,
       "lastvec_basins": 21,
+      "ari_vs_small_decode_partition": -0.007162041181736794,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -16071,6 +16759,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.01304145319049837,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.007162041181736794,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -16123,6 +16813,8 @@
       "perm_p": 0.7925207479252074,
       "ari_vs_small_lastvec": -0.02573529411764709,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": -0.06841046277666002,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         0,
@@ -16193,6 +16885,8 @@
       "perm_p": 0.9023097690230977,
       "ari_vs_small_lastvec": -0.0278372591006424,
       "lastvec_basins": 18,
+      "ari_vs_small_decode_partition": 0.010678391959798998,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -16264,6 +16958,8 @@
       "perm_p": 0.8413158684131586,
       "ari_vs_small_lastvec": -0.010701545778834717,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": -0.009134674731514626,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -16318,6 +17014,8 @@
       "perm_p": 0.9069093090690931,
       "ari_vs_small_lastvec": 0.004622725917089182,
       "lastvec_basins": 3,
+      "ari_vs_small_decode_partition": -0.07530814527632489,
+      "ari_vs_small_socialist_binary": -0.04666666666666667,
       "labels": [
         0,
         0,
@@ -16390,6 +17088,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.01304145319049837,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.013707363723302517,
+      "ari_vs_small_socialist_binary": -0.02,
       "labels": [
         0,
         1,
@@ -16455,6 +17155,8 @@
       "perm_p": 0.8237176282371763,
       "ari_vs_small_lastvec": -0.03171570500573175,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": 0.008129094879883517,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -16507,6 +17209,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.031726360143760075,
       "lastvec_basins": 2,
+      "ari_vs_small_decode_partition": 0.030597341901562762,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         0,
@@ -16573,6 +17277,8 @@
       "perm_p": 0.767023297670233,
       "ari_vs_small_lastvec": -0.029748283752860424,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": -0.05892399658411613,
+      "ari_vs_small_socialist_binary": -0.03333333333333333,
       "labels": [
         0,
         1,
@@ -16644,6 +17350,8 @@
       "perm_p": 0.939006099390061,
       "ari_vs_small_lastvec": 0.008659981768459434,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": -0.052170100832968,
+      "ari_vs_small_socialist_binary": -0.02,
       "labels": [
         0,
         0,
@@ -16709,6 +17417,8 @@
       "perm_p": 0.8717128287171283,
       "ari_vs_small_lastvec": -0.03520704140828165,
       "lastvec_basins": 14,
+      "ari_vs_small_decode_partition": 0.0030155701889346995,
+      "ari_vs_small_socialist_binary": -0.02,
       "labels": [
         0,
         1,
@@ -16776,6 +17486,8 @@
       "perm_p": 0.8431156884311569,
       "ari_vs_small_lastvec": -0.01893783449979415,
       "lastvec_basins": 17,
+      "ari_vs_small_decode_partition": 0.0018752646542858902,
+      "ari_vs_small_socialist_binary": -0.02,
       "labels": [
         0,
         1,
@@ -16838,6 +17550,8 @@
       "perm_p": 0.8533146685331466,
       "ari_vs_small_lastvec": -0.04555271941881014,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": -0.016272457806545276,
+      "ari_vs_small_socialist_binary": -0.04666666666666667,
       "labels": [
         0,
         1,
@@ -16910,6 +17624,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.019350380096751902,
       "lastvec_basins": 23,
+      "ari_vs_small_decode_partition": -0.02021357742181541,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -16982,6 +17698,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": -0.019350380096751902,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": -0.0011441647597254015,
+      "ari_vs_small_socialist_binary": 0.0,
       "labels": [
         0,
         1,
@@ -17047,6 +17765,8 @@
       "perm_p": 0.8044195580441956,
       "ari_vs_small_lastvec": -0.04881769641495043,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": -0.012241054613935988,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -17111,6 +17831,8 @@
       "perm_p": 0.935006499350065,
       "ari_vs_small_lastvec": -0.040428061831153383,
       "lastvec_basins": 15,
+      "ari_vs_small_decode_partition": 0.03904820012202563,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -17179,6 +17901,8 @@
       "perm_p": 0.9353064693530647,
       "ari_vs_small_lastvec": -0.004016064257028116,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": 0.05735204392922515,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         1,
@@ -17243,6 +17967,8 @@
       "perm_p": 0.9151084891510849,
       "ari_vs_small_lastvec": -0.05127259313906308,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": -0.01667466410748559,
+      "ari_vs_small_socialist_binary": -0.04,
       "labels": [
         0,
         1,
@@ -17315,6 +18041,8 @@
       "perm_p": 1.0,
       "ari_vs_small_lastvec": 0.008659981768459434,
       "lastvec_basins": 22,
+      "ari_vs_small_decode_partition": -0.0395010395010395,
+      "ari_vs_small_socialist_binary": -0.02,
       "labels": [
         0,
         1,
@@ -17382,6 +18110,8 @@
       "perm_p": 0.9823017698230176,
       "ari_vs_small_lastvec": -0.0652130426085217,
       "lastvec_basins": 15,
+      "ari_vs_small_decode_partition": -0.009134674731514626,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -17452,6 +18182,8 @@
       "perm_p": 0.9605039496050395,
       "ari_vs_small_lastvec": -0.0603744745892243,
       "lastvec_basins": 18,
+      "ari_vs_small_decode_partition": -0.010070371269109446,
+      "ari_vs_small_socialist_binary": 0.013333333333333334,
       "labels": [
         0,
         0,
@@ -17517,6 +18249,8 @@
       "perm_p": 0.9614038596140386,
       "ari_vs_small_lastvec": -0.0603744745892243,
       "lastvec_basins": 13,
+      "ari_vs_small_decode_partition": -0.010070371269109446,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
@@ -17581,6 +18315,8 @@
       "perm_p": 0.89001099890011,
       "ari_vs_small_lastvec": -0.061107766405779654,
       "lastvec_basins": 12,
+      "ari_vs_small_decode_partition": -0.04783726388733651,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         1,
@@ -17638,6 +18374,8 @@
       "perm_p": 0.9512048795120488,
       "ari_vs_small_lastvec": -0.08155146693187469,
       "lastvec_basins": 9,
+      "ari_vs_small_decode_partition": -0.007231404958677685,
+      "ari_vs_small_socialist_binary": -0.02666666666666667,
       "labels": [
         0,
         1,
@@ -17701,6 +18439,8 @@
       "perm_p": 0.9758024197580242,
       "ari_vs_small_lastvec": -0.06981981981981984,
       "lastvec_basins": 11,
+      "ari_vs_small_decode_partition": -0.022439377488237426,
+      "ari_vs_small_socialist_binary": -0.013333333333333334,
       "labels": [
         0,
         1,
