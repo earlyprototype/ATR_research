@@ -78,3 +78,29 @@ seed top10: [' comrades', ' proletarian', ' labour', ' socialist', ' solidarity'
    it 200  soc  31200  riv  16732  ctl  24601   ['oooo', 'ooo', '!', 'aaaa', '...']
    it 300  soc  31225  riv  16036  ctl  24647   ['oooo', 'ooo', '!', '...', 'aaaa']
 
+
+[7->17/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc  14098  riv   6833  ctl  24181   [' \xad', ' Jo', ' Crunch', ' Dur', ' Lastly']
+   it   2  soc  36067  riv   7505  ctl  13424   [' Rest', ' Marijuana', ' Sh', ' Iss', '.*']
+   it   5  soc  34598  riv   7800  ctl  15945   [' darn', '@#', ' damn', ' Kits', 'esh']
+   it  10  soc  30857  riv  12708  ctl  22733   ['@#', '")', '").', ')"', 'wh']
+   it  20  soc  33493  riv   6357  ctl  25776   [' .)', 'bec', 'uben', 'ac', 'amar']
+   it  50  soc  25747  riv  16401  ctl   9451   ['").', '-"', '")', 'mo', '"),']
+   it 100  soc  24495  riv  12589  ctl  19925   [')"', '").', '.")', '")', '…)']
+   it 200  soc  24882  riv  10624  ctl   7517   ['")', '").', 'tf', 'yy', 'ac']
+   it 300  soc  30991  riv   7790  ctl  22613   [' .)', 'uben', '.)', 'esse', 'ra']
+
+
+[7->17/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2932  ctl   7079   [' socialist', ' labour', ' revolution', ' bourgeois', ' Lenin']
+   it   2  soc     10  riv   3567  ctl   7125   [' socialist', ' labour', ' bourgeois', ' Lenin', ' proletarian']
+   it   5  soc     24  riv   9222  ctl  12286   [' bourgeois', ' Marx', ' labour', ' Lenin', ' comrade']
+   it  10  soc   3802  riv  20170  ctl  17440   [')."', '\'."', '…)', ')"', ' ال']
+   it  20  soc  20813  riv  20867  ctl  26703   ['.)', '…)', ' .)', '/)', "')"]
+   it  50  soc  28791  riv  23351  ctl  34217   ['…)', '』', ').[', 'pl', ']),']
+   it 100  soc  31658  riv  19926  ctl  22862   ['…)', ' TL', ' Taken', ' Granted', '\xa0']
+   it 200  soc  16444  riv     25  ctl  16519   [' Hillary', ' Trump', ' GOP', ' Republicans', ' Republican']
+   it 300  soc  24494  riv     19  ctl  14064   [' Trump', ' GOP', ' Hillary', ' FBI', ' Republican']
+
