@@ -1,3 +1,6 @@
 Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 12211.93it/s]
 seed   0 shell 433 -> other      [' arbit', ' trader', 'trade', ' tribunal', 'fat']
 seed   1 shell 397 -> other      ['tw', ' vertex', 'doc', 'ei', 'Dig']
+seed   2 shell 900 -> gaming     [' Nath', ' Kov', ' finals', 'vp', ' Zerg']
+seed   3 shell 1800 -> gaming     [' Zerg', ' player', ' I', ' i', ' tournament']
+seed   4 shell 3700 -> socialist  [' solidarity', ' struggle', ' organizing', ' everyday', ' organising']
