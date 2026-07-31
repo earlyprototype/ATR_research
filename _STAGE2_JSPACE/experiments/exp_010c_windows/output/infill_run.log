@@ -1,0 +1,211 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user-ATR-research/7e472327-54ae-54ea-8f69-618842ecc6bb/scratchpad/gpt2-medium-local (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 16222.54it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=infill arms=['I9', 'I11', 'I7', 'I5', 'X1019', 'X1017', 'X1015', 'X819', 'X817'] prompts=25 max_iter=1000 check_start=100
+
+=== Arm I9: window 9->21 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [I9] E01_politics     -> 'oooooooo'     lock=120 iters=120 margin=0.13
+  [I9] D01_water        -> '…'            lock=130 iters=130 margin=0.49
+  [I9] A01_physics      -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I9] B01_napoleon     -> 'oooooooo'     lock=120 iters=120 margin=2.22
+  [I9] C01_jack_jill    -> 'oooooooo'     lock=120 iters=120 margin=2.22
+  [I9] F01_anger        -> 'oooooooo'     lock=120 iters=120 margin=2.24
+  [I9] G01_punctuation  -> '…'            lock=120 iters=120 margin=0.50
+  [I9] E02_tech         -> 'oooooooo'     lock=120 iters=120 margin=2.13
+  [I9] D02_periodic     -> 'oooooooo'     lock=120 iters=120 margin=1.07
+  [I9] A02_medical      -> 'oooooooo'     lock=120 iters=120 margin=1.88
+  [I9] B02_wwi          -> '…'            lock=120 iters=120 margin=0.19
+  [I9] C02_king_cole    -> 'oooooooo'     lock=120 iters=120 margin=2.24
+  [I9] F02_insult       -> 'oooooooo'     lock=120 iters=120 margin=2.21
+  [I9] G02_brackets     -> '…'            lock=120 iters=120 margin=1.24
+  [I9] E03_orgs         -> 'oooooooo'     lock=120 iters=120 margin=2.21
+  [I9] D03_organic      -> '…'            lock=130 iters=130 margin=0.22
+  [I9] A03_neuro        -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I9] B03_moon         -> 'oooooooo'     lock=120 iters=120 margin=2.29
+  [I9] C03_mary_lamb    -> 'oooooooo'     lock=120 iters=120 margin=2.24
+  [I9] F03_frustration  -> 'oooooooo'     lock=120 iters=120 margin=2.20
+  [I9] G03_counting     -> 'oooooooo'     lock=120 iters=120 margin=2.28
+  [I9] E04_internet     -> '…'            lock=130 iters=130 margin=1.76
+  [I9] D04_equation     -> '…'            lock=130 iters=130 margin=1.63
+  [I9] A04_climate      -> 'oooooooo'     lock=120 iters=120 margin=1.90
+  [I9] B04_rome         -> 'oooooooo'     lock=120 iters=120 margin=2.26
+
+=== Arm I11: window 11->21 ===
+  [I11] E01_politics     -> '<|endoftext|>' lock=120 iters=120 margin=1.83
+  [I11] D01_water        -> '<|endoftext|>' lock=120 iters=120 margin=2.13
+  [I11] A01_physics      -> '<|endoftext|>' lock=120 iters=120 margin=1.78
+  [I11] B01_napoleon     -> '<|endoftext|>' lock=120 iters=120 margin=1.78
+  [I11] C01_jack_jill    -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] F01_anger        -> '<|endoftext|>' lock=120 iters=120 margin=1.76
+  [I11] G01_punctuation  -> '<|endoftext|>' lock=120 iters=120 margin=1.83
+  [I11] E02_tech         -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] D02_periodic     -> '<|endoftext|>' lock=120 iters=120 margin=1.91
+  [I11] A02_medical      -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] B02_wwi          -> '<|endoftext|>' lock=120 iters=120 margin=1.89
+  [I11] C02_king_cole    -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] F02_insult       -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] G02_brackets     -> '<|endoftext|>' lock=120 iters=120 margin=1.87
+  [I11] E03_orgs         -> '<|endoftext|>' lock=120 iters=120 margin=1.76
+  [I11] D03_organic      -> '<|endoftext|>' lock=120 iters=120 margin=2.17
+  [I11] A03_neuro        -> '<|endoftext|>' lock=120 iters=120 margin=1.75
+  [I11] B03_moon         -> '<|endoftext|>' lock=120 iters=120 margin=1.78
+  [I11] C03_mary_lamb    -> '<|endoftext|>' lock=120 iters=120 margin=1.76
+  [I11] F03_frustration  -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] G03_counting     -> '<|endoftext|>' lock=120 iters=120 margin=1.78
+  [I11] E04_internet     -> '<|endoftext|>' lock=120 iters=120 margin=2.01
+  [I11] D04_equation     -> '<|endoftext|>' lock=120 iters=120 margin=1.95
+  [I11] A04_climate      -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+  [I11] B04_rome         -> '<|endoftext|>' lock=120 iters=120 margin=1.77
+
+=== Arm I7: window 7->21 ===
+  [I7] E01_politics     -> 'oooooooo'     lock=120 iters=120 margin=2.50
+  [I7] D01_water        -> 'oooooooo'     lock=120 iters=120 margin=2.47
+  [I7] A01_physics      -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I7] B01_napoleon     -> 'oooooooo'     lock=120 iters=120 margin=2.31
+  [I7] C01_jack_jill    -> 'oooooooo'     lock=120 iters=120 margin=2.39
+  [I7] F01_anger        -> 'oooooooo'     lock=120 iters=120 margin=2.39
+  [I7] G01_punctuation  -> 'oooooooo'     lock=120 iters=120 margin=2.51
+  [I7] E02_tech         -> 'oooooooo'     lock=120 iters=120 margin=2.43
+  [I7] D02_periodic     -> 'oooooooo'     lock=120 iters=120 margin=2.38
+  [I7] A02_medical      -> 'oooooooo'     lock=120 iters=120 margin=2.29
+  [I7] B02_wwi          -> 'oooooooo'     lock=120 iters=120 margin=2.54
+  [I7] C02_king_cole    -> 'oooooooo'     lock=120 iters=120 margin=2.41
+  [I7] F02_insult       -> 'oooooooo'     lock=120 iters=120 margin=2.40
+  [I7] G02_brackets     -> 'oooooooo'     lock=120 iters=120 margin=2.54
+  [I7] E03_orgs         -> 'oooooooo'     lock=120 iters=120 margin=2.42
+  [I7] D03_organic      -> 'oooooooo'     lock=120 iters=120 margin=2.43
+  [I7] A03_neuro        -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I7] B03_moon         -> 'oooooooo'     lock=120 iters=120 margin=2.35
+  [I7] C03_mary_lamb    -> 'oooooooo'     lock=120 iters=120 margin=2.30
+  [I7] F03_frustration  -> 'oooooooo'     lock=120 iters=120 margin=2.29
+  [I7] G03_counting     -> 'oooooooo'     lock=120 iters=120 margin=2.31
+  [I7] E04_internet     -> 'oooooooo'     lock=120 iters=120 margin=2.54
+  [I7] D04_equation     -> 'oooooooo'     lock=120 iters=120 margin=2.57
+  [I7] A04_climate      -> 'oooooooo'     lock=120 iters=120 margin=2.28
+  [I7] B04_rome         -> 'oooooooo'     lock=120 iters=120 margin=2.39
+
+=== Arm I5: window 5->21 ===
+  [I5] E01_politics     -> ' Congratulations' lock=120 iters=120 margin=0.82
+  [I5] D01_water        -> '...'          lock=120 iters=120 margin=0.60
+  [I5] A01_physics      -> '…'            lock=150 iters=150 margin=0.29
+  [I5] B01_napoleon     -> '...'          lock=170 iters=170 margin=0.35
+  [I5] C01_jack_jill    -> 'been'         lock=120 iters=120 margin=1.40
+  [I5] F01_anger        -> '...'          lock=150 iters=150 margin=0.27
+  [I5] G01_punctuation  -> ' Congratulations' lock=120 iters=120 margin=0.08
+  [I5] E02_tech         -> '…'            lock=170 iters=170 margin=0.01
+  [I5] D02_periodic     -> ' Congratulations' lock=120 iters=120 margin=2.06
+  [I5] A02_medical      -> '!!'           lock=120 iters=120 margin=0.09
+  [I5] B02_wwi          -> ' Congratulations' lock=120 iters=120 margin=0.05
+  [I5] C02_king_cole    -> '...'          lock=150 iters=150 margin=0.57
+  [I5] F02_insult       -> 'been'         lock=120 iters=120 margin=0.29
+  [I5] G02_brackets     -> '...'          lock=120 iters=120 margin=0.17
+  [I5] E03_orgs         -> '…'            lock=170 iters=170 margin=0.22
+  [I5] D03_organic      -> ' Welcome'     lock=120 iters=120 margin=0.17
+  [I5] A03_neuro        -> '…'            lock=150 iters=150 margin=0.29
+  [I5] B03_moon         -> '...'          lock=170 iters=170 margin=0.14
+  [I5] C03_mary_lamb    -> '…'            lock=150 iters=150 margin=0.03
+  [I5] F03_frustration  -> ' been'        lock=120 iters=120 margin=0.81
+  [I5] G03_counting     -> '…'            lock=150 iters=150 margin=0.64
+  [I5] E04_internet     -> ' Welcome'     lock=120 iters=120 margin=0.81
+  [I5] D04_equation     -> ' Welcome'     lock=120 iters=120 margin=0.03
+  [I5] A04_climate      -> '!!'           lock=120 iters=120 margin=0.21
+  [I5] B04_rome         -> '...'          lock=170 iters=170 margin=0.04
+
+=== Arm X1019: window 10->19 ===
+  [X1019] E01_politics     -> '…)'           lock=120 iters=120 margin=1.99
+  [X1019] D01_water        -> ' […]'         lock=120 iters=120 margin=0.97
+  [X1019] A01_physics      -> '…)'           lock=120 iters=120 margin=1.80
+  [X1019] B01_napoleon     -> '…)'           lock=120 iters=120 margin=0.34
+  [X1019] C01_jack_jill    -> ' […]'         lock=120 iters=120 margin=0.95
+  [X1019] F01_anger        -> '…)'           lock=120 iters=120 margin=0.13
+  [X1019] G01_punctuation  -> '…)'           lock=120 iters=120 margin=0.17
+  [X1019] E02_tech         -> ' […]'         lock=120 iters=120 margin=1.37
+  [X1019] D02_periodic     -> '…)'           lock=120 iters=120 margin=1.75
+  [X1019] A02_medical      -> '…)'           lock=120 iters=120 margin=1.33
+  [X1019] B02_wwi          -> '…)'           lock=120 iters=120 margin=0.71
+  [X1019] C02_king_cole    -> ' […]'         lock=120 iters=120 margin=0.77
+  [X1019] F02_insult       -> ' […]'         lock=120 iters=120 margin=0.66
+  [X1019] G02_brackets     -> '…)'           lock=120 iters=120 margin=0.25
+  [X1019] E03_orgs         -> ' […]'         lock=120 iters=120 margin=1.19
+  [X1019] D03_organic      -> ' […]'         lock=120 iters=120 margin=0.95
+  [X1019] A03_neuro        -> '…)'           lock=120 iters=120 margin=1.46
+  [X1019] B03_moon         -> ' […]'         lock=120 iters=120 margin=0.93
+  [X1019] C03_mary_lamb    -> '…)'           lock=120 iters=120 margin=0.91
+  [X1019] F03_frustration  -> '…)'           lock=120 iters=120 margin=2.05
+  [X1019] G03_counting     -> '…)'           lock=120 iters=120 margin=1.09
+  [X1019] E04_internet     -> ' […]'         lock=120 iters=120 margin=0.68
+  [X1019] D04_equation     -> '…)'           lock=120 iters=120 margin=0.02
+  [X1019] A04_climate      -> '…)'           lock=120 iters=120 margin=1.55
+  [X1019] B04_rome         -> ' […]'         lock=120 iters=120 margin=1.29
+
+=== Arm X1017: window 10->17 ===
+  [X1017] E01_politics     -> ' Bhar'        lock=120 iters=120 margin=1.16
+  [X1017] D01_water        -> ' Bhar'        lock=120 iters=120 margin=0.97
+  [X1017] A01_physics      -> ' Bhar'        lock=120 iters=120 margin=1.40
+  [X1017] B01_napoleon     -> ' Bhar'        lock=120 iters=120 margin=1.36
+  [X1017] C01_jack_jill    -> ' Bhar'        lock=120 iters=120 margin=1.44
+  [X1017] F01_anger        -> ' Bhar'        lock=120 iters=120 margin=1.46
+  [X1017] G01_punctuation  -> ' Bhar'        lock=120 iters=120 margin=1.12
+  [X1017] E02_tech         -> ' Bhar'        lock=120 iters=120 margin=1.47
+  [X1017] D02_periodic     -> ' Bhar'        lock=120 iters=120 margin=1.30
+  [X1017] A02_medical      -> ' Bhar'        lock=120 iters=120 margin=1.35
+  [X1017] B02_wwi          -> ' Bhar'        lock=120 iters=120 margin=1.19
+  [X1017] C02_king_cole    -> ' Bhar'        lock=120 iters=120 margin=1.45
+  [X1017] F02_insult       -> ' Bhar'        lock=120 iters=120 margin=1.46
+  [X1017] G02_brackets     -> ' Bhar'        lock=120 iters=120 margin=1.11
+  [X1017] E03_orgs         -> ' Bhar'        lock=120 iters=120 margin=1.47
+  [X1017] D03_organic      -> ' Bhar'        lock=120 iters=120 margin=0.97
+  [X1017] A03_neuro        -> ' Bhar'        lock=120 iters=120 margin=1.39
+  [X1017] B03_moon         -> ' Bhar'        lock=120 iters=120 margin=1.47
+  [X1017] C03_mary_lamb    -> ' Bhar'        lock=120 iters=120 margin=1.40
+  [X1017] F03_frustration  -> ' Bhar'        lock=120 iters=120 margin=1.41
+  [X1017] G03_counting     -> ' Bhar'        lock=120 iters=120 margin=1.41
+  [X1017] E04_internet     -> ' Bhar'        lock=120 iters=120 margin=1.03
+  [X1017] D04_equation     -> ' Bhar'        lock=120 iters=120 margin=1.08
+  [X1017] A04_climate      -> ' Bhar'        lock=120 iters=120 margin=1.35
+  [X1017] B04_rome         -> ' Bhar'        lock=120 iters=120 margin=1.47
+
+=== Arm X1015: window 10->15 ===
+  [X1015] E01_politics     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] D01_water        -> ' Fas'         lock=120 iters=120 margin=1.43
+  [X1015] A01_physics      -> ' Fas'         lock=120 iters=120 margin=1.90
+  [X1015] B01_napoleon     -> ' Fas'         lock=120 iters=120 margin=1.89
+  [X1015] C01_jack_jill    -> ' Fas'         lock=120 iters=120 margin=2.25
+  [X1015] F01_anger        -> ' Fas'         lock=120 iters=120 margin=2.22
+  [X1015] G01_punctuation  -> ' Fas'         lock=120 iters=120 margin=1.37
+  [X1015] E02_tech         -> ' Fas'         lock=120 iters=120 margin=2.20
+  [X1015] D02_periodic     -> ' Fas'         lock=120 iters=120 margin=1.58
+  [X1015] A02_medical      -> ' Fas'         lock=120 iters=120 margin=1.65
+  [X1015] B02_wwi          -> ' Fas'         lock=120 iters=120 margin=1.39
+  [X1015] C02_king_cole    -> ' Fas'         lock=120 iters=120 margin=2.17
+  [X1015] F02_insult       -> ' Fas'         lock=120 iters=120 margin=2.23
+  [X1015] G02_brackets     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] E03_orgs         -> ' Fas'         lock=120 iters=120 margin=2.20
+  [X1015] D03_organic      -> ' Fas'         lock=120 iters=120 margin=1.41
+  [X1015] A03_neuro        -> ' Fas'         lock=120 iters=120 margin=1.92
+  [X1015] B03_moon         -> ' Fas'         lock=120 iters=120 margin=2.21
+  [X1015] C03_mary_lamb    -> ' Fas'         lock=120 iters=120 margin=1.93
+  [X1015] F03_frustration  -> ' Fas'         lock=120 iters=120 margin=1.94
+  [X1015] G03_counting     -> ' Fas'         lock=120 iters=120 margin=1.96
+  [X1015] E04_internet     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] D04_equation     -> ' Fas'         lock=120 iters=120 margin=1.38
+  [X1015] A04_climate      -> ' Fas'         lock=120 iters=120 margin=1.67
+  [X1015] B04_rome         -> ' Fas'         lock=120 iters=120 margin=2.26
+
+=== Arm X819: window 8->19 ===
+  [X819] E01_politics     -> "'d"           lock=120 iters=120 margin=1.34
+  [X819] D01_water        -> "'d"           lock=120 iters=120 margin=2.06
+  [X819] A01_physics      -> "'d"           lock=120 iters=120 margin=2.96
+  [X819] B01_napoleon     -> "'d"           lock=120 iters=120 margin=2.98
+  [X819] C01_jack_jill    -> "'d"           lock=120 iters=120 margin=3.54
+  [X819] F01_anger        -> "'d"           lock=120 iters=120 margin=3.52
+  [X819] G01_punctuation  -> "'d"           lock=120 iters=120 margin=1.26
+  [X819] E02_tech         -> "'d"           lock=120 iters=120 margin=3.65
+  [X819] D02_periodic     -> "'d"           lock=120 iters=120 margin=1.43
+  [X819] A02_medical      -> "'d"           lock=120 iters=120 margin=2.35
+  [X819] B02_wwi          -> "'d"           lock=120 iters=120 margin=1.13
+  [X819] C02_king_cole    -> "'d"           lock=120 iters=120 margin=3.56
+  [X819] F02_insult       -> "'d"           lock=120 iters=120 margin=3.54

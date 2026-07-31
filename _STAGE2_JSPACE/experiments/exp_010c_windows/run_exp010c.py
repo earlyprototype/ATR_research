@@ -18,6 +18,7 @@ import argparse
 import json
 import sys
 import time
+from collections import Counter
 from pathlib import Path
 
 import torch
@@ -82,6 +83,37 @@ INFILL_ORDER = ["I5", "I7", "I9", "I11",  # EXP_010c3_SPEC.md §5 execution orde
                 "X817", "X819", "X1015", "X1017", "X1019"]
 LADDER8_ORDER = ["E822", "E823"]          # EXP_010c3b_SPEC.md §4
 
+# EXP_010c-4 full census (EXP_010c4_SPEC.md): every valid window 0<=i<=j<=23
+# not already measured at the registered protocol by the tiers above. Arm
+# names are positional (W{i}_{j}); ARMS stays the single source of truth.
+#
+# PINNED, NOT DERIVED — do not replace with `set(ARMS.values())`. When the
+# census was defined, ARMS held exactly these 23 gpt2-medium windows, and the
+# 277 committed shards in output/results_census/ were generated against this
+# exact set. ARMS has since gained windows from other experiments and other
+# models — E822 (8,22), E823 (8,23), I1A0 (1,23), I1O0 (1,21) on medium, and
+# the gpt2-SMALL arms S1 (0,5), S2 (3,8), S3 (6,11), S4 (0,8), S5 (3,11),
+# which are a different model entirely and never measured these cells on
+# medium. Deriving from ARMS today would silently shrink the census from 277
+# to 268 arms, so it would no longer match the shards on disk: --resume would
+# consider the missing 9 unmeasured and the analysis would lose 9 real cells.
+_MEASURED = {(0,23),(10,21),(0,11),(6,17),(12,23),(8,15),
+             (10,22),(10,23),(0,21),(4,21),(6,21),(8,21),(12,21),(14,21),
+             (9,21),(11,21),(7,21),(5,21),(10,19),(10,17),(10,15),(8,19),(8,17)}
+CENSUS = {
+    f"W{i}_{j}": (i, j)
+    for i in range(24) for j in range(i, 24)
+    if (i, j) not in _MEASURED
+}
+ARMS.update(CENSUS)
+# Execution order (spec §3): the neighbourhood of all known structure first
+# (4<=i<=14, j>=13), then the remainder row-major — pure risk management for
+# a multi-day run; every arm runs regardless.
+CENSUS_ORDER = sorted(
+    CENSUS, key=lambda a: (not (4 <= CENSUS[a][0] <= 14 and CENSUS[a][1] >= 13),
+                           CENSUS[a][0], CENSUS[a][1])
+)
+
 TIERS = {
     "smoke": dict(n_prompts=2, max_iter=60, check_start=20, arms=["A0", "A4"]),
     "pilot": dict(n_prompts=5, max_iter=300, check_start=50, arms=ARM_ORDER),
@@ -89,6 +121,12 @@ TIERS = {
     "scan": dict(n_prompts=25, max_iter=1000, check_start=100, arms=SCAN_ORDER),
     "infill": dict(n_prompts=25, max_iter=1000, check_start=100, arms=INFILL_ORDER),
     "ladder8": dict(n_prompts=25, max_iter=1000, check_start=100, arms=LADDER8_ORDER),
+    # census shards artifacts per arm: at 277 arms a single rewritten
+    # results/terminals pair would put ~55 MB .pt blobs into git on every
+    # per-arm commit; shards are written once and committed once (each stays
+    # ~200 KB, inside the repo's ~2 MB artifact convention).
+    "census": dict(n_prompts=25, max_iter=1000, check_start=100, arms=CENSUS_ORDER,
+                   shard=True),
     # EXP_010c3b_SPEC.md §5 — settle-time variant. check_start=10 is a RECORDED
     # protocol deviation (earliest reportable lock drops 120 -> 30); it exists to
     # measure settle time and draws no verdicts on the registered questions.
@@ -275,6 +313,12 @@ def main():
                     help="random-init toy model; validates the harness, draws no verdicts")
     ap.add_argument("--model-path", default=None,
                     help="local dir with model files for offline load")
+    ap.add_argument("--resume", action="store_true",
+                    help="load this tier's existing artifacts, skip arms already "
+                         "complete, and append new arms to the same files")
+    ap.add_argument("--shard", action="store_true",
+                    help="force per-arm artifact shards (results_<tier>/<arm>.json, "
+                         "terminals_<tier>/<arm>.pt) for any tier")
     # EXP_012-PYTHIA spec §3 (recorded diff, issue #12): model selection.
     # Default reproduces prior behaviour exactly.
     ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m", "gpt2"],
@@ -436,6 +480,71 @@ def main():
 
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
+
+    # Sharded artifacts: on by tier (census) or forced with --shard.
+    shard = bool(tier.get("shard")) or args.shard
+
+    # Resume: per-run results are deterministic and independent of process
+    # boundaries (verified 350/350 on the full+scan regeneration and 13/13 on
+    # the X819 rerun), and the per-arm checkpoint only ever writes COMPLETE
+    # arms, so skipping arms already on disk is exact, not approximate.
+    # An arm counts as complete only if BOTH artifacts verify: full record
+    # count AND a terminal entry per record (PR #10 review: a crash between
+    # the two writes must not mark the arm done; terminals are written first
+    # and the results JSON is the completion marker, but resume re-verifies
+    # the pair regardless).
+    # MERGE NOTE: this check sits after the model load rather than before it
+    # (where it lived on the census branch), because on main the prompt set —
+    # which gives the expected per-arm record count — is derived after the
+    # model is constructed. The cost is one model load on a no-op resume; the
+    # verification semantics are unchanged.
+    results, terminals = [], {}
+    if args.resume:
+        if shard:
+            done = set()
+            for arm in arms:
+                rshard = outdir / f"results_{suffix}" / f"{arm}.json"
+                tshard = outdir / f"terminals_{suffix}" / f"{arm}.pt"
+                try:
+                    recs = json.load(open(rshard))
+                    if len(recs) < len(prompts) or not tshard.exists():
+                        continue
+                    keys = set(torch.load(tshard, map_location="cpu", weights_only=True))
+                    if keys >= {f"{arm}|{r['prompt_id']}" for r in recs}:
+                        done.add(arm)
+                except FileNotFoundError:
+                    pass  # arm not attempted yet
+                except Exception as e:
+                    print(f"Resume: shard for {arm} failed verification ({e!r}); "
+                          "will rerun.", flush=True)
+            arms = [a for a in arms if a not in done]
+            print(f"Resume (sharded): {len(done)} arms verified complete on disk; "
+                  f"{len(arms)} remaining.", flush=True)
+        else:
+            rpath = outdir / f"results_{suffix}.json"
+            tpath = outdir / f"terminals_{suffix}.pt"
+            if rpath.exists():
+                results = json.load(open(rpath))
+                if tpath.exists():
+                    terminals = torch.load(tpath, map_location="cpu", weights_only=True)
+                done = set()
+                for a, n in Counter(r["arm"] for r in results).items():
+                    if n >= len(prompts) and all(
+                        f"{a}|{r['prompt_id']}" in terminals
+                        for r in results if r["arm"] == a
+                    ):
+                        done.add(a)
+                # drop anything not verified so reruns cannot duplicate records
+                results = [r for r in results if r["arm"] in done]
+                terminals = {k: v for k, v in terminals.items()
+                             if k.split("|", 1)[0] in done}
+                arms = [a for a in arms if a not in done]
+                print(f"Resume: {len(done)} arms verified complete on disk; "
+                      f"{len(arms)} remaining.", flush=True)
+        if not arms:
+            print("Resume: nothing to run — all requested arms complete.")
+            return
+
     if subset_b_records is not None:  # audit record of the executed disjoint subset
         # The canonical audit file records the FULL 25-prompt subset B that the
         # registered EXP_010c-ROBUST runs used. A partial or resized run (e.g.
@@ -465,32 +574,45 @@ def main():
             json.dumps(norm_rec, indent=2))
         print(f"Natural per-layer resid_pre norms recorded -> "
               f"natural_resid_norms_{suffix}.json", flush=True)
-    results, terminals = [], {}
     t0 = time.time()
     for arm in arms:
         i, j = ARMS[arm]
         inject_hook = ARM_INJECT_HOOK.get(arm)
         print(f"\n=== Arm {arm}: window {i}->{j}"
               f"{' inject_hook=' + inject_hook if inject_hook else ''} ===", flush=True)
+        arm_results, arm_terminals = [], {}
         for rec in prompts:
             p = rec["prompt"]
             p_text = p if isinstance(p, str) else "harness-check-tokens"
             r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], tier["check_start"],
                                       inject_hook_name=inject_hook, renorm=args.renorm)
             # string keys ("ARM|PROMPT_ID") so the .pt loads with weights_only=True
-            terminals[f"{arm}|{rec['id']}"] = {
+            arm_terminals[f"{arm}|{rec['id']}"] = {
                 "mean": r.pop("terminal_mean_vec"),
                 "last": r.pop("terminal_last_vec"),
             }
             r.update(arm=arm, window=f"{i}->{j}", prompt_id=rec["id"], prompt=p_text,
                      category=rec["category"])
-            results.append(r)
+            arm_results.append(r)
             print(f"  [{arm}] {rec['id']:<16} -> {r['terminal_token']!r:14} "
                   f"lock={r['lock_in_iter']} iters={r['n_iters']} "
                   f"margin={r['top_logit_margin']:.2f}", flush=True)
-        # checkpoint after every arm
-        json.dump(results, open(outdir / f"results_{suffix}.json", "w"), indent=2)
-        torch.save(terminals, outdir / f"terminals_{suffix}.pt")
+        results.extend(arm_results)
+        terminals.update(arm_terminals)
+        # checkpoint after every arm: sharded tiers write the arm's own files
+        # once (stable per-arm blobs for git); monolith tiers rewrite the pair.
+        # Terminals are written FIRST so the results JSON acts as the
+        # completion marker — a crash between the writes leaves an arm that
+        # resume treats as incomplete, never one missing its tensors.
+        if shard:
+            (outdir / f"results_{suffix}").mkdir(exist_ok=True)
+            (outdir / f"terminals_{suffix}").mkdir(exist_ok=True)
+            torch.save(arm_terminals, outdir / f"terminals_{suffix}" / f"{arm}.pt")
+            json.dump(arm_results,
+                      open(outdir / f"results_{suffix}" / f"{arm}.json", "w"), indent=2)
+        else:
+            torch.save(terminals, outdir / f"terminals_{suffix}.pt")
+            json.dump(results, open(outdir / f"results_{suffix}.json", "w"), indent=2)
 
     # summary table
     print(f"\n=== Summary ({time.time()-t0:.0f}s) ===")
@@ -500,7 +622,10 @@ def main():
         conv = sum(r["converged"] for r in rs)
         print(f"  {arm} {ARMS[arm][0]:>2}->{ARMS[arm][1]:<2} converged {conv}/{len(rs)} "
               f"unique_terminals={len(toks)} {toks[:8]}")
-    print(f"\nArtifacts: results_{suffix}.json, terminals_{suffix}.pt in {outdir}")
+    if shard:
+        print(f"\nArtifacts: results_{suffix}/<arm>.json, terminals_{suffix}/<arm>.pt in {outdir}")
+    else:
+        print(f"\nArtifacts: results_{suffix}.json, terminals_{suffix}.pt in {outdir}")
 
 
 if __name__ == "__main__":
