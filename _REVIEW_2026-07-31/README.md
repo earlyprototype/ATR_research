@@ -1,0 +1,7 @@
+# Source reports for the 2026-07-31 project review
+
+These twelve files are the raw working reports behind `PROJECT_REVIEW_2026-07-31.md` at the repository root. They were produced on 2026-07-31 by twelve separate review passes, each reading a different slice of the project and checking claims against primary sources: the committed files, the artifact data, the GitHub issues and pull requests, and the peer board record.
+
+The nine files named `reader_*.md` each cover one slice: the founding documents, the experiment specifications and identifier register, the two halves of the results record, the issues, the open pull requests, the pull request history, the peer board, and a direct verification of code and data artifacts. The three files named `audit_*.md` cross-examined the readers on register integrity, on the strength of the scientific evidence, and on process health, re-checking any point where readers disagreed.
+
+Two cautions for anyone reading these. First, they are agent-written working notes in a technical register, not polished conclusions; where a report and the synthesis disagree, the synthesis and the audits took precedence because they re-checked the disputed points. Second, they describe the repository as it stood at commit `eb86404` on the morning of 2026-07-31, before the census pull request, the identifier register, and the record corrections landed later that day, so some of the problems they describe have since been fixed.
