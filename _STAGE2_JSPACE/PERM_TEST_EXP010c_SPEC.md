@@ -1,6 +1,22 @@
 # Permutation Test — Terminal-Token Relatedness (pre-registered spec)
 
-**Status:** PRE-REGISTERED — recorded before any computation.
+> **SUPERSEDED — 2026-07-31.** The executed registration of record for the
+> issue #7 permutation control is **`EXP_010c_PERM_SPEC.md`** (committed
+> `0ca5829`, 2026-07-25; results in `RESULTS_EXP010C.md`
+> §"2026-07-25 — EXP_010c-PERM"). This spec was the first of two concurrent
+> registrations of the same control, and it **was executed**: its run
+> (seed 2026, α = 0.00625) was committed at `e734ba0` on 2026-07-24, and its
+> results section was deleted from `RESULTS_EXP010C.md` at merge `359c622`
+> without a supersession marker — a house-convention violation now recorded
+> in `REGISTER.md` erratum (b) and in a dated erratum note in
+> `RESULTS_EXP010C.md`. The deleted run was concordant with the run of
+> record (A4 ≈ +4.6σ, significant, in both; all other shared sets null in
+> both). Recoverable at `git show e734ba0`. Original text intact below.
+> Executed under TC's in-session direction of 2026-07-31 (delegation
+> recorded in the session that produced PR #55).
+
+**Status:** ~~PRE-REGISTERED — recorded before any computation.~~ SUPERSEDED
+(see header note; the pre-registration was genuine and preceded its run).
 **Created:** 2026-07-24
 **Parent:** RESULTS_EXP010C.md §Planned controls, item 1.
 **Pattern:** Stage 1 `02b_permutation_test.py` (Lucier repo), adapted for
