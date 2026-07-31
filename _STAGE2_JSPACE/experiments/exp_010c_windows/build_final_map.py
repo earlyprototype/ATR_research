@@ -1,15 +1,20 @@
-"""EXP_010c-4 final map + mechanical H12 evaluation.
+"""EXP_010c-4 final map + mechanical H14 evaluation.
 
 Builds the complete (i,j) map from ALL registered artifacts (full, scan,
 infill tiers + census shards), applies the EXP_010c3_SPEC §3 arm-class
-rule, and evaluates H12 per the EXP_010c4_SPEC §6 amendment (eligible =
+rule, and evaluates H14 per the EXP_010c4_SPEC §6 amendment (eligible =
 census cells with >=1 already-measured neighbour on the valid lattice).
 
 Pure analysis, no model time. Usage: build_final_map.py [--allow-partial]
 
-Refuses a partial census by default: a final map and an H12 verdict are
+Refuses a partial census by default: a final map and an H14 verdict are
 only meaningful over all 300 cells. `--allow-partial` emits provisional
-diagnostics for an in-progress census and suppresses the H12 verdict.
+diagnostics for an in-progress census and suppresses the H14 verdict.
+
+NUMBERING: this hypothesis was renumbered H12 -> H14 per the H11 ruling on
+board discussion #37 (main's H12 is the in-fill injection-zone continuity
+hypothesis). Label change only — the verdict is computed from cell classes
+and the neighbour lattice, never from the label. See issue #52.
 """
 import json
 import pathlib
@@ -79,7 +84,7 @@ def load_all():
     return cells
 
 
-# Cells measured by the pre-census registered tiers (H12's "already-measured")
+# Cells measured by the pre-census registered tiers (H14's "already-measured")
 PRIOR = {(0, 23), (10, 21), (0, 11), (6, 17), (12, 23), (8, 15),
          (10, 22), (10, 23), (0, 21), (4, 21), (6, 21), (8, 21), (12, 21), (14, 21),
          (9, 21), (11, 21), (7, 21), (5, 21), (10, 19), (10, 17), (10, 15), (8, 19), (8, 17)}
@@ -120,11 +125,11 @@ def main():
     if not complete and not ALLOW_PARTIAL:
         raise SystemExit(
             f"INCOMPLETE: {total_valid - len(cells)} cells missing — refusing to emit "
-            f"a final map or H12 verdict. Re-run with --allow-partial for provisional "
-            f"diagnostics (H12 suppressed).")
+            f"a final map or H14 verdict. Re-run with --allow-partial for provisional "
+            f"diagnostics (H14 suppressed).")
     if not complete:
         print(f"\n*** PROVISIONAL — {total_valid - len(cells)} of {total_valid} cells "
-              f"unmeasured. Not the final map; H12 suppressed. ***")
+              f"unmeasured. Not the final map; H14 suppressed. ***")
 
     runs = sum(c["n"] for c in cells.values())
     conv = sum(c["converged"] for c in cells.values())
@@ -154,12 +159,12 @@ def main():
     dcells = [k for k, c in cells.items() if "D" in c["toks"]]
     print(f"\ncells producing 'D' at all: {dcells}")
 
-    # ---- H12 (as amended, EXP_010c4_SPEC §6) ----
+    # ---- H14 (as amended, EXP_010c4_SPEC §6) ----
     # Only ever evaluated over the complete lattice: a cell's eligibility and its
     # "differs from EVERY measured neighbour" test both read neighbours, so a
     # partial census can flip a verdict as the missing cells land.
     if not complete:
-        print("\nH12: SUPPRESSED (partial census).")
+        print("\nH14: SUPPRESSED (partial census).")
         _print_map(cells, complete)
         return
     census_cells = [k for k in cells if k not in PRIOR]
@@ -171,11 +176,11 @@ def main():
         eligible.append(k)
         if all(cells[k]["class"] != cells[n]["class"] for n in meas_nb if n in cells):
             differs.append((k, cells[k]["class"], [(n, cells[n]["class"]) for n in meas_nb if n in cells]))
-    print(f"\nH12 (amended): eligible cells (>=1 already-measured neighbour): {len(eligible)}")
-    print(f"H12: cells differing in class from EVERY measured neighbour: {len(differs)}")
+    print(f"\nH14 (amended): eligible cells (>=1 already-measured neighbour): {len(eligible)}")
+    print(f"H14: cells differing in class from EVERY measured neighbour: {len(differs)}")
     for k, cl, nbs in sorted(differs):
         print(f"  {k[0]:>2}->{k[1]:<2} {cl} vs " + ", ".join(f"{n[0]}->{n[1]} {c}" for n, c in nbs))
-    print(f"\nH12 VERDICT: {'SUPPORTED' if differs else 'REFUTED'} "
+    print(f"\nH14 VERDICT: {'SUPPORTED' if differs else 'REFUTED'} "
           f"({len(differs)}/{len(eligible)} eligible cells differ from every measured neighbour)")
 
     _print_map(cells, complete)

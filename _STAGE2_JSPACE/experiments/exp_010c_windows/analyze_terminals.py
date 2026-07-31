@@ -47,9 +47,29 @@ def main():
     ap.add_argument("--tier", default="full")
     ap.add_argument("--decode-via-tail", action="store_true")
     ap.add_argument("--model-path", default=None)
+    # EXP_012-PYTHIA spec §3 (recorded diff, issue #12); gpt2-small added per
+    # EXP_010b spec §6 (issue #16); default unchanged.
+    ap.add_argument("--model-name", choices=["gpt2-medium", "pythia-410m", "gpt2"],
+                    default="gpt2-medium")
+    ap.add_argument("--allow-legacy-pickle", action="store_true",
+                    help="permit weights_only=False for pre-PR#4 tuple-keyed "
+                         ".pt archives (explicit opt-in; PR #39 review)")
     args = ap.parse_args()
     if args.decode_via_tail and not args.model_path:
         ap.error("--decode-via-tail requires --model-path")
+
+    if args.decode_via_tail and "pythia" in args.tier and args.model_name != "pythia-410m":
+        # PR #39 review round 2: the gpt2-medium default must not silently
+        # decode pythia-suffixed artifacts through the wrong model's tail.
+        ap.error(f"tier {args.tier!r} holds pythia artifacts; pass "
+                 "--model-name pythia-410m for --decode-via-tail")
+
+    if args.decode_via_tail and "small" in args.tier and args.model_name != "gpt2":
+        # Same binding for the EXP_010b gpt2-small artifacts (issue #16): the
+        # gpt2-medium default must not decode 768-dim terminals via the wrong
+        # model's tail.
+        ap.error(f"tier {args.tier!r} holds gpt2-small artifacts; pass "
+                 "--model-name gpt2 for --decode-via-tail")
 
     rpath = HERE / "output" / f"results_{args.tier}.json"
     rdir = HERE / "output" / f"results_{args.tier}"
@@ -72,11 +92,13 @@ def main():
         raise SystemExit(f"no results for tier {args.tier!r} (neither {rpath} nor {rdir}/)")
 
     if tpath.exists():
-        try:  # new format: string keys "ARM|PROMPT_ID", loads safely
-            terminals = torch.load(tpath, map_location="cpu", weights_only=True)
-        except Exception:  # legacy tuple-keyed files
+        if args.allow_legacy_pickle:
+            # Legacy tuple-keyed archives (pre-PR#4) need full unpickling; only
+            # on explicit request (PR #39 review round 2).
             terminals = torch.load(tpath, map_location="cpu", weights_only=False)
             terminals = {f"{k[0]}|{k[1]}": v for k, v in terminals.items()}
+        else:  # post-PR#4 format: string keys "ARM|PROMPT_ID", loads safely
+            terminals = torch.load(tpath, map_location="cpu", weights_only=True)
     elif tdir.is_dir():  # sharded tier: one .pt per arm, string-keyed
         terminals = {}
         for f in sorted(tdir.glob("*.pt")):
@@ -86,8 +108,8 @@ def main():
 
     model = None
     if args.decode_via_tail:
-        from run_exp010c import _load_medium_from_local
-        model = _load_medium_from_local(args.model_path)
+        from run_exp010c import load_model_from_local
+        model = load_model_from_local(args.model_path, args.model_name)
         model.eval()
 
     report = []

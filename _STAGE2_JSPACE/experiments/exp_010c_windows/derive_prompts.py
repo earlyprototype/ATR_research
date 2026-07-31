@@ -31,6 +31,7 @@ ENTRY = re.compile(
 
 
 def load_all():
+    """Parse all 125 Stage 1 prompt records; abort on schema drift."""
     text = SOURCE.read_text()
     records = [
         {"id": m["pid"], "category": m["cat"], "prompt": m["prompt"]}
@@ -44,26 +45,64 @@ def load_all():
     return records
 
 
-def select_subset(n=25):
+def round_robin_order():
+    """The full 125 prompts in the spec §5 order: round-robin across the 7
+    categories, alphabetical by prompt ID within category. The registered
+    subset is the first 25 of this ordering."""
     by_cat = {}
     for rec in load_all():
         by_cat.setdefault(rec["category"], []).append(rec)
     for cat in by_cat:
         by_cat[cat].sort(key=lambda r: r["id"])  # alphabetical by prompt ID
     cats = sorted(by_cat)
-    picked, idx = [], 0
-    while len(picked) < n:
+    order, idx = [], 0
+    while True:
         progressed = False
         for cat in cats:
-            if len(picked) >= n:
-                break
             if idx < len(by_cat[cat]):
-                picked.append(by_cat[cat][idx])
+                order.append(by_cat[cat][idx])
                 progressed = True
         if not progressed:
-            break
+            return order
         idx += 1
-    return picked
+
+
+def select_subset(n=25, offset=0):
+    """n prompts from the deterministic round-robin ordering, starting at
+    `offset`.
+
+    offset=0 reproduces the registered subset exactly (verified against the
+    committed output/prompt_subset.json) — the default path is unchanged, so
+    every registered run stays reproducible.
+
+    offset is the disjoint-subset mechanism for EXP_010c-3b §2b: offset=25
+    gives the next 25 by the same rule, with no overlap and no hand-picking.
+    """
+    return round_robin_order()[offset:offset + n]
+
+
+def select_subset_b(n=25):
+    """Disjoint subset B (EXP_010c-ROBUST spec §3): the NEXT n prompts under
+    the identical round-robin/alphabetical ordering, i.e. positions 26..25+n —
+    deterministic, no hand-picking, disjoint from the registered subset.
+
+    MERGE NOTE: EXP_010c-ROBUST (#11) and EXP_010c-3b (#21) added this helper
+    and `select_subset(n, offset=)` in parallel for the same need. They are the
+    same selection — `select_subset_b(n) == select_subset(n, offset=25)` — so
+    this now delegates rather than re-deriving, leaving ONE implementation.
+    Both call sites are kept because each experiment's committed artifacts were
+    produced through its own entry point. The disjointness assertion is
+    retained: it is a cheap guard that would catch any future change to the
+    ordering rule silently overlapping the registered subset.
+    """
+    subset_b = select_subset(n, offset=25)
+    if len(subset_b) != n:
+        raise SystemExit(f"Could not derive {n} prompts at offset 25 (got {len(subset_b)})")
+    reg_ids = {r["id"] for r in select_subset(25)}
+    overlap = reg_ids & {r["id"] for r in subset_b}
+    if overlap:
+        raise SystemExit(f"Subset B overlaps registered subset: {overlap}")
+    return subset_b
 
 
 if __name__ == "__main__":

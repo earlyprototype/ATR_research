@@ -1,0 +1,39 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user/cd28417a-3486-5d42-833b-768f561daa85/scratchpad/gpt2-medium (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 12070.18it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=hookpoint arms=['I1A0'] prompts=25 subset=registered seed=42 renorm=seed_j max_iter=1000 check_start=100
+
+=== Arm I1A0: window 1->23 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [I1A0] E01_politics     -> 'name'         lock=120 iters=120 margin=0.09
+  [I1A0] D01_water        -> 'name'         lock=120 iters=120 margin=0.03
+  [I1A0] A01_physics      -> 'name'         lock=120 iters=120 margin=0.08
+  [I1A0] B01_napoleon     -> 'name'         lock=120 iters=120 margin=0.04
+  [I1A0] C01_jack_jill    -> 'name'         lock=120 iters=120 margin=0.08
+  [I1A0] F01_anger        -> 'name'         lock=120 iters=120 margin=0.20
+  [I1A0] G01_punctuation  -> 'name'         lock=120 iters=120 margin=0.29
+  [I1A0] E02_tech         -> 'name'         lock=120 iters=120 margin=0.09
+  [I1A0] D02_periodic     -> 'name'         lock=120 iters=120 margin=0.23
+  [I1A0] A02_medical      -> 'name'         lock=120 iters=120 margin=0.11
+  [I1A0] B02_wwi          -> 'Class'        lock=120 iters=120 margin=0.16
+  [I1A0] C02_king_cole    -> 'name'         lock=120 iters=120 margin=0.07
+  [I1A0] F02_insult       -> 'name'         lock=120 iters=120 margin=0.25
+  [I1A0] G02_brackets     -> 'name'         lock=120 iters=120 margin=0.21
+  [I1A0] E03_orgs         -> 'name'         lock=120 iters=120 margin=0.27
+  [I1A0] D03_organic      -> 'name'         lock=120 iters=120 margin=0.09
+  [I1A0] A03_neuro        -> 'name'         lock=120 iters=120 margin=0.13
+  [I1A0] B03_moon         -> 'Class'        lock=120 iters=120 margin=0.11
+  [I1A0] C03_mary_lamb    -> 'name'         lock=120 iters=120 margin=0.05
+  [I1A0] F03_frustration  -> 'name'         lock=120 iters=120 margin=0.22
+  [I1A0] G03_counting     -> 'name'         lock=120 iters=120 margin=0.18
+  [I1A0] E04_internet     -> 'host'         lock=120 iters=120 margin=0.70
+  [I1A0] D04_equation     -> 'name'         lock=120 iters=120 margin=0.09
+  [I1A0] A04_climate      -> 'name'         lock=120 iters=120 margin=0.08
+  [I1A0] B04_rome         -> 'name'         lock=120 iters=120 margin=0.07
+
+=== Summary (1103s) ===
+  I1A0  1->23 converged 25/25 unique_terminals=3 ['Class', 'host', 'name']
+
+Artifacts: results_hookpoint_I1A0.json, terminals_hookpoint_I1A0.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output

@@ -35,7 +35,12 @@ replaces the sampled inventory.
 
 One mechanical hypothesis makes the aliasing question falsifiable:
 
-- **H12 (aliasing materiality):** the census contains at least one cell
+> **Numbering note:** this hypothesis was registered as **H12** and renumbered
+> to **H14** at the PR #10 / PR #33 merge, per the H11 ruling on board
+> discussion #37 (H12/H12a/H13 belong to the in-fill window grid). Label
+> change only — the criterion below is unaltered. Tracking: issue #52.
+
+- **H14 (aliasing materiality):** the census contains at least one cell
   whose arm class (per the 010c-3 §3 token-class rule) differs from the
   arm class of **every** already-measured cell adjacent to it on the (i, j)
   lattice (4-neighbourhood: (i±1, j), (i, j±1)). Supported = at least one
@@ -119,22 +124,25 @@ run is interrupted. No reduced-prompt recon tier is used (directive above).
 
 ## 6. Amendment — 2026-07-24, pre-analysis (PR #10 review)
 
-Recorded before any census analysis or H12 evaluation (census execution
-~1 arm in; no characterisation run). The review found a hole in H12 as
+Recorded before any census analysis or H14 evaluation (census execution
+~1 arm in; no characterisation run). The review found a hole in H14 as
 written in §2: a census cell with **no** already-measured adjacent cell
 (e.g. 0→0 — most cells outside the measured region) satisfies "differs
-from every measured neighbour" **vacuously**, making H12 unfalsifiable as
+from every measured neighbour" **vacuously**, making H14 unfalsifiable as
 stated. Correction, replacing the eligibility condition only (the
 support/refutation logic is unchanged):
 
-> **H12 (amended):** evaluated over the subset of census cells having at
+> **H14 (amended):** evaluated over the subset of census cells having at
 > least one already-measured adjacent cell on the valid (i ≤ j) lattice
 > (4-neighbourhood: (i±1, j), (i, j±1), restricted to valid cells).
 > Supported = at least one eligible cell's arm class (010c-3 §3 rule)
 > differs from the arm class of **every** already-measured neighbour.
 > Refuted = every eligible cell matches at least one measured neighbour's
-> class. Cells with no measured neighbour are excluded from the H12
+> class. Cells with no measured neighbour are excluded from the H14
 > evaluation and reported in the map only.
 
 The original §2 text stands above as written (append-don't-rewrite); this
 amendment governs.
+
+Numbering note: the amended hypothesis is **H14** (renumbered from H12 per the
+discussion #37 ruling; issue #52). The criterion is unchanged by the renumber.
