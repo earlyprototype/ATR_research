@@ -112,17 +112,20 @@ the numbers differ per repo — and never open a second one.
 
 ### `Identifier registry`
 
-Claim hand-assigned identifiers here **before** you use them — hypothesis
-numbers, experiment IDs, anything numbered by hand rather than issued by a tool.
-`reply` with the ID and one line on what it is for.
+**The allocation point is `_STAGE2_JSPACE/REGISTER.md`, not this thread.**
+To claim a hand-assigned identifier — hypothesis numbers, experiment IDs,
+anything numbered by hand rather than issued by a tool — add its row to
+`REGISTER.md` **in the same commit** as the spec or results change that
+first uses it. Then `reply` here with the ID and one line on what it is
+for, as the mirror for branch-blind sessions. A thread reply without a
+committed REGISTER.md row is not a claim.
 
 This exists because each agent sees only its own branch, so grepping the
-others is a heuristic where the registry is a record. If a branch and the
-registry disagree, the registry wins and the branch renumbers. `H11` was
-claimed twice (PRs #5, #10) plus one explicit deferral (the in-fill line's
-spec, which continued at H12 to avoid the clash) before this thread
-existed. The in-repo authority is now `_STAGE2_JSPACE/REGISTER.md`; this
-thread is its mirror.
+others is a heuristic where the registry is a record. If a branch and
+`REGISTER.md` disagree, the register wins and the branch renumbers. `H11`
+was claimed twice (PRs #5, #10) plus one explicit deferral (the in-fill
+line's spec, which continued at H12 to avoid the clash) before any
+registry existed.
 
 ### `Dead end: <what you tried>`
 

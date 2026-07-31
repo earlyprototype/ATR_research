@@ -86,7 +86,7 @@ wrote at the time; read them against this table.
 | EXP_010c-3b | Follow-up checks on the in-fill (issue #21) | COMPLETE | `EXP_010c3b_SPEC.md` | `RESULTS_EXP010C.md` |
 | EXP_010c-4 | Full 300-cell single-step window census (H14), PR #10 | COMPLETE | `EXP_010c4_SPEC.md` | `RESULTS_EXP010C.md` 2026-07-29 census sections |
 | EXP_010c-PERM | Anisotropy-corrected permutation control (issue #7) | COMPLETE — **executed control of record** | `EXP_010c_PERM_SPEC.md` (`0ca5829`, 2026-07-25) | `RESULTS_EXP010C.md` §"2026-07-25 — EXP_010c-PERM" |
-| PERM_TEST_EXP010c | Duplicate registration of the same control (PR #9 line) | **SUPERSEDED — executed 2026-07-24; its results section was deleted at merge `359c622`** — see erratum (b) | `PERM_TEST_EXP010c_SPEC.md` (`97aeb20`, 2026-07-24; now carries a dated SUPERSEDED header) | Run recoverable at `git show e734ba0`; concordant with the control of record |
+| PERM_TEST_EXP010c | Duplicate registration of the same control (PR #9 line) | **SUPERSEDED — executed 2026-07-24; its results section was deleted at merge `359c622`** — see erratum (b) | `PERM_TEST_EXP010c_SPEC.md` (`97aeb20`, 2026-07-24; now carries a dated SUPERSEDED header) | Run restored in-tree: results section (archival restoration in `RESULTS_EXP010C.md`) and artifact `experiments/exp_010c_windows/output/permutation_results_2026-07-24_seed2026.json`; concordant with the control of record |
 | EXP_010c-ROBUST | Seed and prompt-subset robustness (issue #11) | COMPLETE | `EXP_010c_ROBUST_SPEC.md` | `RESULTS_EXP010C.md` |
 | EXP_010c-VARIANTS | Hook-point and energy-normalisation controls | COMPLETE | `EXP_010c_VARIANTS_SPEC.md` | `RESULTS_EXP010C.md` VARIANTS sections |
 | EXP_010d | Small-partition capstone (H11/H11a) | COMPLETE | `EXP_010d_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP010D.md` |
@@ -150,9 +150,12 @@ Same failure class as (a), previously unflagged, **with record deletion**:
   second spec is the registration of record for the second run, its
   recorded reading stands.
 - **Remediation (2026-07-31):** dated SUPERSEDED header on
-  `PERM_TEST_EXP010c_SPEC.md`; dated erratum note in `RESULTS_EXP010C.md`
-  restoring the fact of the deleted run; both runs' records now reachable
-  from main (the first via `git show e734ba0`).
+  `PERM_TEST_EXP010c_SPEC.md`; dated erratum in `RESULTS_EXP010C.md` with
+  the deleted section restored verbatim in-tree (archival restoration) and
+  the run's artifact restored as
+  `experiments/exp_010c_windows/output/permutation_results_2026-07-24_seed2026.json`;
+  both runs' records now live in the current tree, no historical-commit
+  lookup required.
 
 ### (c) Discussion #37 registry-table correction: H11a is not vacated
 

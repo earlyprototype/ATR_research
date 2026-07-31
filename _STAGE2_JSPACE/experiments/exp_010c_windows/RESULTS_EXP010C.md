@@ -1099,12 +1099,91 @@ recorded flat: A1_tail (p = 0.00620) was tested only in the run of record;
 it is significant under the first spec's α = 0.00625 and not under the
 second's α\* = 0.00556. The run of record's registered reading stands.
 
-The full deleted section and its artifacts are recoverable at
-`git show e734ba0` (results text and `output/permutation_results.json` as
-of that commit). This note records existence, verdict, and location; it
-does not reconstruct the section. Registered in `../../REGISTER.md`
-erratum (b). Executed under TC's in-session direction of 2026-07-31
-(delegation recorded in the session that produced PR #55).
+The deleted section is restored verbatim below (archival restoration,
+2026-07-31), and the run's artifact is restored in-tree at
+`output/permutation_results_2026-07-24_seed2026.json` — byte-for-byte the
+`output/permutation_results.json` of commit `e734ba0`, renamed so it
+cannot collide with the run of record's artifact. Registered in
+`../../REGISTER.md` erratum (b). Executed under TC's in-session direction
+of 2026-07-31 (delegation recorded in the session that produced PR #55).
+
+### ARCHIVAL RESTORATION (2026-07-31) — the 2026-07-24 section deleted at `359c622`, restored verbatim from `e734ba0`
+
+> Registration status: SUPERSEDED. This run's spec
+> (`PERM_TEST_EXP010c_SPEC.md`) is the superseded duplicate; the
+> registration of record is `EXP_010c_PERM_SPEC.md` and its 2026-07-25 run
+> above. Restored for the record, not as the control of record. The
+> "Artifacts" line below refers to the path as of `e734ba0`; the restored
+> copy lives at `output/permutation_results_2026-07-24_seed2026.json`.
+
+## 2026-07-24 — Anisotropy-corrected permutation test (planned control 1)
+
+**Spec:** `../../PERM_TEST_EXP010c_SPEC.md` (pre-registered and committed
+before any computation).
+**Script:** `permutation_test.py` (this directory).
+**Artifacts:** `output/permutation_results.json`.
+**Pattern:** Stage 1 `02b_permutation_test.py` (Lucier repo), extended with
+per-token matching on leading-space status, string length (±1 char), and
+BPE merge-rank frequency decile.
+
+**Design:** 10,000 permutations per set; seed 2026; Bonferroni correction
+across 8 testable sets (α = 0.00625). Token sets from the full uncurated
+inventories (`results_full.json`, `results_scan.json`,
+`terminal_characterisation_full.json`, `terminal_characterisation_scan.json`).
+See spec for complete set definitions.
+
+**Weight tying (recorded):** GPT-2 Medium ties W_E = W_U (no separate
+`lm_head.weight` in the state dict). The spec pre-registered both spaces
+side by side; since they are identical, one column is reported. Global
+mean pairwise cosine (unmatched, 200k pairs): 0.307.
+
+**Results (observations only):**
+
+| Set | Description | n | Observed | Null μ±σ | Effect | p | Sig |
+|---|---|---|---|---|---|---|---|
+| S1 | A4 direct (`until`/`forever`/`since`) | 3 | 0.4121 | 0.2746±0.0300 | 4.59σ | 0.0022 | **yes** |
+| S2 | O8 direct (`simultaneously`/`halfway`) | 2 | 0.2972 | 0.3017±0.0416 | −0.11σ | 0.510 | no |
+| S3 | A5 direct (`rant`) | 1 | — | — | — | — | degenerate |
+| S4 | Pooled word-arms direct (A4+O8+A5) | 6 | 0.3180 | 0.2832±0.0176 | 1.98σ | 0.034 | no |
+| S5 | A1 contrast (`,`/`ing`) | 2 | 0.3937 | 0.3264±0.0711 | 0.95σ | 0.136 | no |
+| S6 | A4 via-tail (`until`/`forever`/`since`) | 3 | 0.4121 | 0.2745±0.0299 | 4.60σ | 0.0019 | **yes** |
+| S7 | O8 via-tail (`simultaneously`/`just`/`'`) | 3 | 0.2993 | 0.2880±0.0407 | 0.28σ | 0.298 | no |
+| S8 | A5 via-tail (`endless`/`'`) | 2 | 0.2863 | 0.3026±0.0629 | −0.26σ | 0.525 | no |
+| S9 | Pooled via-tail (S6+S7+S8) | 7 | 0.3320 | 0.2830±0.0204 | 2.40σ | 0.027 | no |
+
+Notes: "Sig" = significant after Bonferroni at α = 0.00625. Pool-size
+warning: token 11640 (` simultaneously`) had only 43 matches at ±1 char;
+relaxed to ±2 chars (108 matches) — affects S2, S4, S7, S9. S6 = S1
+numerically (same three token IDs under both readouts); the via-tail
+readout for A4 recovers the same three types.
+
+**Pre-registered readings applied mechanically:**
+
+- **S1, S6 (A4: `until`/`forever`/`since`):** observed ≫ null (4.6σ,
+  p < 0.00625). The pre-registered reading: **the relatedness pattern
+  survives its first anisotropy control.** These three tokens are more
+  clustered in embedding space than matched random tokens in the same
+  structural class (same leading-space status, similar length, similar
+  frequency). The word "semantic" stays quarantined — this is an
+  embedding-geometry observation, not a semantic claim.
+
+- **S2, S7 (O8: `simultaneously`/`halfway`), S8 (A5 via-tail),
+  S4 (pooled direct), S9 (pooled tail):** observed ≈ null. The
+  pre-registered reading: **the apparent relatedness of these tokens
+  does not exceed the baseline anisotropy of matched random sets.** The
+  broader "temporal/durative family" reading across all word-producing
+  arms does not survive this control. The pooled sets (S4, S9) show
+  marginal effects (2.0–2.4σ) that are driven entirely by the A4
+  cluster and do not survive Bonferroni correction.
+
+- **S5 (A1 contrast: punctuation funnel):** null (p = 0.14). The
+  within-experiment negative control behaves as expected.
+
+**Summary observation (flat, no interpretation):** of the three
+word-producing arms, only A4 (10→21) produces terminal tokens that are
+more related than chance under the matched null. O8 (8→21) and A5
+(8→15) do not. The signal is arm-specific, not a property of the
+word-producing zone as a whole.
 
 ## 2026-07-25 — EXP_010c-ROBUST: seed and prompt-subset robustness (planned control 2)
 
