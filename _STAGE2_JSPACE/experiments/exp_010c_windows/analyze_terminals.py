@@ -71,15 +71,40 @@ def main():
         ap.error(f"tier {args.tier!r} holds gpt2-small artifacts; pass "
                  "--model-name gpt2 for --decode-via-tail")
 
-    results = json.load(open(HERE / "output" / f"results_{args.tier}.json"))
+    rpath = HERE / "output" / f"results_{args.tier}.json"
+    rdir = HERE / "output" / f"results_{args.tier}"
     tpath = HERE / "output" / f"terminals_{args.tier}.pt"
-    if args.allow_legacy_pickle:
-        # Legacy tuple-keyed archives (pre-PR#4) need full unpickling; only
-        # on explicit request (PR #39 review round 2).
-        terminals = torch.load(tpath, map_location="cpu", weights_only=False)
-        terminals = {f"{k[0]}|{k[1]}": v for k, v in terminals.items()}
-    else:  # post-PR#4 format: string keys "ARM|PROMPT_ID", loads safely
-        terminals = torch.load(tpath, map_location="cpu", weights_only=True)
+    tdir = HERE / "output" / f"terminals_{args.tier}"
+    # Mixed layouts are ambiguous (a re-run in the other mode could leave one
+    # stale) — refuse rather than silently prefer one (PR #10 review).
+    if rpath.exists() and rdir.is_dir():
+        raise SystemExit(f"both {rpath} and {rdir}/ exist — ambiguous layout, remove one")
+    if tpath.exists() and tdir.is_dir():
+        raise SystemExit(f"both {tpath} and {tdir}/ exist — ambiguous layout, remove one")
+
+    if rpath.exists():
+        results = json.load(open(rpath))
+    elif rdir.is_dir():  # sharded tier (census): one json per arm
+        results = []
+        for f in sorted(rdir.glob("*.json")):
+            results.extend(json.load(open(f)))
+    else:
+        raise SystemExit(f"no results for tier {args.tier!r} (neither {rpath} nor {rdir}/)")
+
+    if tpath.exists():
+        if args.allow_legacy_pickle:
+            # Legacy tuple-keyed archives (pre-PR#4) need full unpickling; only
+            # on explicit request (PR #39 review round 2).
+            terminals = torch.load(tpath, map_location="cpu", weights_only=False)
+            terminals = {f"{k[0]}|{k[1]}": v for k, v in terminals.items()}
+        else:  # post-PR#4 format: string keys "ARM|PROMPT_ID", loads safely
+            terminals = torch.load(tpath, map_location="cpu", weights_only=True)
+    elif tdir.is_dir():  # sharded tier: one .pt per arm, string-keyed
+        terminals = {}
+        for f in sorted(tdir.glob("*.pt")):
+            terminals.update(torch.load(f, map_location="cpu", weights_only=True))
+    else:
+        raise SystemExit(f"no terminals for tier {args.tier!r} (neither {tpath} nor {tdir}/)")
 
     model = None
     if args.decode_via_tail:

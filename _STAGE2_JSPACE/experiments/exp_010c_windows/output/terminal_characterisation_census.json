@@ -1,0 +1,10923 @@
+[
+  {
+    "arm": "W0_0",
+    "window": "0->0",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "fall": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.435,
+    "margin_max": 0.439,
+    "entropy_mean": 7.95,
+    "tail_decode_terminals": {
+      " it": 23,
+      "usa": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_1",
+    "window": "0->1",
+    "n": 25,
+    "converged": 17,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      6,
+      3,
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9758,
+    "offdiag_cos_min": 0.9237,
+    "margin_mean": 0.53,
+    "margin_max": 0.807,
+    "entropy_mean": 7.515,
+    "tail_decode_terminals": {
+      "run": 13,
+      "app": 12
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_2",
+    "window": "0->2",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      16,
+      6,
+      3
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9954,
+    "offdiag_cos_min": 0.9825,
+    "margin_mean": 0.89,
+    "margin_max": 1.195,
+    "entropy_mean": 7.603,
+    "tail_decode_terminals": {
+      "Find": 8,
+      "Unit": 7,
+      "File": 4,
+      " File": 4,
+      "App": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_3",
+    "window": "0->3",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      8,
+      6,
+      4,
+      3,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " directly": 25
+    },
+    "offdiag_cos_mean": 0.9824,
+    "offdiag_cos_min": 0.9337,
+    "margin_mean": 0.502,
+    "margin_max": 0.546,
+    "entropy_mean": 6.437,
+    "tail_decode_terminals": {
+      " definition": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_4",
+    "window": "0->4",
+    "n": 25,
+    "converged": 9,
+    "tensor_basins": 19,
+    "basin_sizes": [
+      6,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " gener": 8,
+      " Osc": 7,
+      " directly": 5,
+      ".": 2,
+      " u": 1,
+      " Sky": 1,
+      " closely": 1
+    },
+    "offdiag_cos_mean": 0.9222,
+    "offdiag_cos_min": 0.6815,
+    "margin_mean": 0.391,
+    "margin_max": 0.82,
+    "entropy_mean": 6.872,
+    "tail_decode_terminals": {
+      "notation": 8,
+      " definition": 4,
+      "]]": 3,
+      "etimes": 2,
+      " //": 2,
+      "arium": 2,
+      "Definition": 1,
+      "oing": 1,
+      "athing": 1,
+      "js": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_5",
+    "window": "0->5",
+    "n": 25,
+    "converged": 11,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ".": 8,
+      " architecture": 6,
+      ",": 6,
+      " directly": 2,
+      " Sky": 1,
+      "ned": 1,
+      "fall": 1
+    },
+    "offdiag_cos_mean": 0.9128,
+    "offdiag_cos_min": 0.6533,
+    "margin_mean": 0.402,
+    "margin_max": 1.647,
+    "entropy_mean": 7.367,
+    "tail_decode_terminals": {
+      "================================================================": 6,
+      "plex": 5,
+      "notation": 4,
+      "election": 3,
+      "\u00a0": 2,
+      " the": 2,
+      " html": 1,
+      " cp": 1,
+      "onym": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_6",
+    "window": "0->6",
+    "n": 25,
+    "converged": 17,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " u": 10,
+      ",": 5,
+      " Sky": 3,
+      "urn": 3,
+      ".": 2,
+      "ned": 1,
+      " architecture": 1
+    },
+    "offdiag_cos_mean": 0.9274,
+    "offdiag_cos_min": 0.708,
+    "margin_mean": 0.442,
+    "margin_max": 1.248,
+    "entropy_mean": 7.378,
+    "tail_decode_terminals": {
+      " cp": 8,
+      "================================================================": 3,
+      "election": 2,
+      "plex": 2,
+      " ----------------------------------------------------------------": 2,
+      "notation": 2,
+      " @@": 1,
+      " =================================================================": 1,
+      "ERN": 1,
+      " the": 1,
+      " Updated": 1,
+      "steamapps": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_7",
+    "window": "0->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      6,
+      4,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Sky": 21,
+      ".": 2,
+      " u": 1,
+      ",": 1
+    },
+    "offdiag_cos_mean": 0.9475,
+    "offdiag_cos_min": 0.7202,
+    "margin_mean": 0.507,
+    "margin_max": 1.182,
+    "entropy_mean": 7.182,
+    "tail_decode_terminals": {
+      " cp": 22,
+      " protocol": 2,
+      "================================================================": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_8",
+    "window": "0->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      5,
+      4,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ".": 7,
+      " Sky": 6,
+      ",": 3,
+      " u": 3,
+      " crop": 3,
+      "(": 2,
+      "ning": 1
+    },
+    "offdiag_cos_mean": 0.8718,
+    "offdiag_cos_min": 0.594,
+    "margin_mean": 0.437,
+    "margin_max": 1.619,
+    "entropy_mean": 7.409,
+    "tail_decode_terminals": {
+      " node": 8,
+      "plex": 6,
+      "ERN": 2,
+      "utils": 2,
+      " the": 1,
+      "module": 1,
+      "eworthy": 1,
+      "rates": 1,
+      "election": 1,
+      " cp": 1,
+      "\u00a0": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_9",
+    "window": "0->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      5,
+      5,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " u": 13,
+      ".": 10,
+      ",": 1,
+      "DR": 1
+    },
+    "offdiag_cos_mean": 0.9668,
+    "offdiag_cos_min": 0.6754,
+    "margin_mean": 0.619,
+    "margin_max": 1.451,
+    "entropy_mean": 6.767,
+    "tail_decode_terminals": {
+      "plex": 4,
+      "ERN": 4,
+      "eworthy": 4,
+      "utils": 3,
+      "steamapps": 3,
+      "Politics": 2,
+      " the": 2,
+      " delete": 1,
+      "\u00a0": 1,
+      "Definition": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_10",
+    "window": "0->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9999,
+    "margin_mean": 0.278,
+    "margin_max": 0.285,
+    "entropy_mean": 9.336,
+    "tail_decode_terminals": {
+      ".": 14,
+      " the": 11
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_12",
+    "window": "0->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9995,
+    "margin_mean": 0.283,
+    "margin_max": 0.289,
+    "entropy_mean": 9.328,
+    "tail_decode_terminals": {
+      ".": 16,
+      " the": 9
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_13",
+    "window": "0->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.279,
+    "margin_max": 0.285,
+    "entropy_mean": 9.33,
+    "tail_decode_terminals": {
+      ".": 17,
+      " the": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_14",
+    "window": "0->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.275,
+    "margin_max": 0.282,
+    "entropy_mean": 9.315,
+    "tail_decode_terminals": {
+      ".": 17,
+      " the": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_15",
+    "window": "0->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.286,
+    "margin_max": 0.293,
+    "entropy_mean": 9.303,
+    "tail_decode_terminals": {
+      ".": 21,
+      " the": 4
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_16",
+    "window": "0->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.29,
+    "margin_max": 0.296,
+    "entropy_mean": 9.291,
+    "tail_decode_terminals": {
+      ".": 22,
+      " the": 3
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_17",
+    "window": "0->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.288,
+    "margin_max": 0.294,
+    "entropy_mean": 9.296,
+    "tail_decode_terminals": {
+      ".": 24,
+      " the": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_18",
+    "window": "0->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.286,
+    "margin_max": 0.293,
+    "entropy_mean": 9.301,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_19",
+    "window": "0->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.274,
+    "margin_max": 0.28,
+    "entropy_mean": 9.314,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_20",
+    "window": "0->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.26,
+    "margin_max": 0.267,
+    "entropy_mean": 9.329,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W0_22",
+    "window": "0->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ".": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9993,
+    "margin_mean": 0.184,
+    "margin_max": 0.249,
+    "entropy_mean": 9.799,
+    "tail_decode_terminals": {
+      "GR": 22,
+      "RAW": 3
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_1",
+    "window": "1->1",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " at": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9998,
+    "margin_mean": 0.193,
+    "margin_max": 0.204,
+    "entropy_mean": 7.466,
+    "tail_decode_terminals": {
+      " Than": 16,
+      " Trump": 9
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_2",
+    "window": "1->2",
+    "n": 25,
+    "converged": 19,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "SOURCE": 4,
+      "andra": 1,
+      " STR": 1,
+      " the": 1,
+      " be": 1,
+      " guys": 1,
+      " awakening": 1,
+      "(": 1,
+      " likely": 1,
+      " Dragon": 1,
+      " may": 1,
+      "ve": 1,
+      "ourt": 1,
+      "edia": 1,
+      "-": 1,
+      " att": 1,
+      " bound": 1,
+      "ist": 1,
+      "back": 1,
+      " Dunk": 1,
+      "ott": 1,
+      " =": 1
+    },
+    "offdiag_cos_mean": 0.4339,
+    "offdiag_cos_min": -0.4835,
+    "margin_mean": 0.625,
+    "margin_max": 1.561,
+    "entropy_mean": 5.418,
+    "tail_decode_terminals": {
+      " the": 7,
+      "Marsh": 3,
+      " a": 3,
+      "\n": 2,
+      " to": 2,
+      " The": 2,
+      " |": 1,
+      "Station": 1,
+      " Than": 1,
+      ",\"": 1,
+      "\">": 1,
+      " right": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W1_3",
+    "window": "1->3",
+    "n": 25,
+    "converged": 18,
+    "tensor_basins": 16,
+    "basin_sizes": [
+      3,
+      3,
+      3,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "Interstitial": 10,
+      " covered": 8,
+      " Federation": 4,
+      " protected": 1,
+      " else": 1,
+      " correct": 1
+    },
+    "offdiag_cos_mean": 0.5489,
+    "offdiag_cos_min": -0.2409,
+    "margin_mean": 2.057,
+    "margin_max": 3.802,
+    "entropy_mean": 3.941,
+    "tail_decode_terminals": {
+      ",": 8,
+      " James": 8,
+      " the": 8,
+      "Marsh": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_4",
+    "window": "1->4",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 16,
+    "basin_sizes": [
+      5,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " covered": 17,
+      " directly": 5,
+      ",": 2,
+      " scrub": 1
+    },
+    "offdiag_cos_mean": 0.8693,
+    "offdiag_cos_min": 0.303,
+    "margin_mean": 0.372,
+    "margin_max": 0.705,
+    "entropy_mean": 7.035,
+    "tail_decode_terminals": {
+      " to": 9,
+      " James": 9,
+      " a": 3,
+      " A": 2,
+      ",": 1,
+      ".": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W1_5",
+    "window": "1->5",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 16,
+    "basin_sizes": [
+      6,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 6,
+      " scrub": 3,
+      " covered": 3,
+      " crop": 2,
+      " material": 1,
+      " closely": 1,
+      " matched": 1,
+      " a": 1,
+      " smack": 1,
+      " fact": 1,
+      " directly": 1,
+      "rea": 1,
+      " pressed": 1,
+      "1": 1,
+      "ica": 1
+    },
+    "offdiag_cos_mean": 0.9203,
+    "offdiag_cos_min": 0.6101,
+    "margin_mean": 0.503,
+    "margin_max": 2.516,
+    "entropy_mean": 6.721,
+    "tail_decode_terminals": {
+      ".": 7,
+      " a": 4,
+      " to": 3,
+      " A": 2,
+      "\n": 2,
+      " with": 1,
+      " Baker": 1,
+      ".\"": 1,
+      " App": 1,
+      " new": 1,
+      " today": 1,
+      " The": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_6",
+    "window": "1->6",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      4,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Sky": 6,
+      "eed": 3,
+      " crop": 2,
+      ".": 2,
+      "cil": 1,
+      " Sach": 1,
+      "za": 1,
+      " Osc": 1,
+      ",": 1,
+      " Brisbane": 1,
+      " tick": 1,
+      "ji": 1,
+      " AAA": 1,
+      " 1": 1,
+      "RI": 1,
+      "rea": 1
+    },
+    "offdiag_cos_mean": 0.9139,
+    "offdiag_cos_min": 0.631,
+    "margin_mean": 0.69,
+    "margin_max": 1.907,
+    "entropy_mean": 6.406,
+    "tail_decode_terminals": {
+      " Jan": 3,
+      ".": 3,
+      " App": 3,
+      "\n": 2,
+      " @@": 2,
+      "App": 2,
+      " The": 2,
+      "...": 1,
+      "Register": 1,
+      " religion": 1,
+      " Name": 1,
+      "htm": 1,
+      " |": 1,
+      " 1": 1,
+      " Trans": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W1_7",
+    "window": "1->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 18,
+    "basin_sizes": [
+      8,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 6,
+      " Sky": 4,
+      "lore": 1,
+      " clusters": 1,
+      ".": 1,
+      " Laksh": 1,
+      "tery": 1,
+      " scrub": 1,
+      "ensis": 1,
+      "s": 1,
+      "ation": 1,
+      "jay": 1,
+      "za": 1,
+      "AA": 1,
+      "aries": 1,
+      "ees": 1,
+      "istry": 1
+    },
+    "offdiag_cos_mean": 0.9491,
+    "offdiag_cos_min": 0.7225,
+    "margin_mean": 0.635,
+    "margin_max": 2.048,
+    "entropy_mean": 6.973,
+    "tail_decode_terminals": {
+      "\n": 7,
+      ".": 7,
+      "The": 2,
+      "es": 2,
+      " Armor": 1,
+      " the": 1,
+      "Name": 1,
+      " Name": 1,
+      " The": 1,
+      "123": 1,
+      "Gen": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_8",
+    "window": "1->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      4,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 4,
+      "es": 2,
+      "rav": 1,
+      "uminati": 1,
+      "-": 1,
+      "ed": 1,
+      "bed": 1,
+      "er": 1,
+      " II": 1,
+      "ire": 1,
+      "al": 1,
+      "ry": 1,
+      " targeting": 1,
+      "am": 1,
+      " Kat": 1,
+      "alyst": 1,
+      "s": 1,
+      "v": 1,
+      "ures": 1,
+      "ure": 1,
+      "ster": 1
+    },
+    "offdiag_cos_mean": 0.9826,
+    "offdiag_cos_min": 0.9252,
+    "margin_mean": 0.869,
+    "margin_max": 3.303,
+    "entropy_mean": 5.445,
+    "tail_decode_terminals": {
+      "\n": 7,
+      ".": 4,
+      "us": 2,
+      "obos": 1,
+      "ahime": 1,
+      " The": 1,
+      "es": 1,
+      " Author": 1,
+      "an": 1,
+      " Kinnikuman": 1,
+      "otype": 1,
+      " IA": 1,
+      "io": 1,
+      "Filename": 1,
+      "iasis": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_9",
+    "window": "1->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      6,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 4,
+      ".": 3,
+      " .": 2,
+      "es": 1,
+      " Techn": 1,
+      "OR": 1,
+      "tery": 1,
+      " roles": 1,
+      "EEE": 1,
+      " decks": 1,
+      "rd": 1,
+      "m": 1,
+      " ": 1,
+      "s": 1,
+      "ace": 1,
+      " 0": 1,
+      "-": 1,
+      "ings": 1,
+      "ies": 1
+    },
+    "offdiag_cos_mean": 0.9796,
+    "offdiag_cos_min": 0.9224,
+    "margin_mean": 1.094,
+    "margin_max": 3.539,
+    "entropy_mean": 5.334,
+    "tail_decode_terminals": {
+      ".": 8,
+      "\n": 4,
+      "ES": 3,
+      ":": 2,
+      " the": 1,
+      " \\": 1,
+      "om": 1,
+      " 1": 1,
+      "_": 1,
+      "To": 1,
+      " #": 1,
+      "Spell": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W1_10",
+    "window": "1->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 5,
+      "s": 3,
+      " -": 2,
+      "ASH": 1,
+      "th": 1,
+      "icago": 1,
+      "ber": 1,
+      "eers": 1,
+      "imal": 1,
+      "er": 1,
+      "abb": 1,
+      " L": 1,
+      " +": 1,
+      "otion": 1,
+      "ules": 1,
+      "o": 1,
+      "ller": 1,
+      " then": 1
+    },
+    "offdiag_cos_mean": 0.9847,
+    "offdiag_cos_min": 0.946,
+    "margin_mean": 1.997,
+    "margin_max": 18.584,
+    "entropy_mean": 4.675,
+    "tail_decode_terminals": {
+      "\n": 3,
+      ".": 3,
+      " the": 3,
+      "s": 3,
+      ":": 2,
+      " of": 1,
+      "orah": 1,
+      "NAME": 1,
+      " The": 1,
+      "]": 1,
+      "ES": 1,
+      " is": 1,
+      "ibus": 1,
+      "on": 1,
+      " >": 1,
+      "C": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W1_11",
+    "window": "1->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      6,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 3,
+      "s": 2,
+      " Republic": 1,
+      "80": 1,
+      "er": 1,
+      "ridge": 1,
+      "ps": 1,
+      "!": 1,
+      "+": 1,
+      "like": 1,
+      "..": 1,
+      "ite": 1,
+      " 1": 1,
+      "ing": 1,
+      "ley": 1,
+      "smith": 1,
+      " Type": 1,
+      "olor": 1,
+      "'m": 1,
+      "00": 1,
+      "sn": 1,
+      "rd": 1
+    },
+    "offdiag_cos_mean": 0.9841,
+    "offdiag_cos_min": 0.9476,
+    "margin_mean": 0.921,
+    "margin_max": 3.773,
+    "entropy_mean": 4.567,
+    "tail_decode_terminals": {
+      ".": 8,
+      "s": 3,
+      " +": 3,
+      ":": 2,
+      " the": 2,
+      "\n": 1,
+      " is": 1,
+      "ES": 1,
+      " 1": 1,
+      "(": 1,
+      "A": 1,
+      " =": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W1_12",
+    "window": "1->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 16,
+    "basin_sizes": [
+      7,
+      4,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 9,
+      " guys": 2,
+      " not": 2,
+      " HR": 1,
+      " is": 1,
+      " zero": 1,
+      "$$": 1,
+      "\u00a0": 1,
+      "onies": 1,
+      ".": 1,
+      "-": 1,
+      " range": 1,
+      " >": 1,
+      " of": 1,
+      "=>": 1
+    },
+    "offdiag_cos_mean": 0.9856,
+    "offdiag_cos_min": 0.9442,
+    "margin_mean": 0.932,
+    "margin_max": 4.28,
+    "entropy_mean": 5.42,
+    "tail_decode_terminals": {
+      ".": 15,
+      " the": 3,
+      "IT": 1,
+      " is": 1,
+      " =": 1,
+      " {": 1,
+      " a": 1,
+      " 1": 1,
+      " D": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W1_13",
+    "window": "1->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      19,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 19,
+      " get": 1,
+      "pee": 1,
+      ".": 1,
+      " Dragon": 1,
+      "ings": 1,
+      "up": 1
+    },
+    "offdiag_cos_mean": 0.9959,
+    "offdiag_cos_min": 0.9758,
+    "margin_mean": 0.407,
+    "margin_max": 1.911,
+    "entropy_mean": 7.932,
+    "tail_decode_terminals": {
+      ".": 17,
+      " the": 6,
+      ":": 1,
+      "OR": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W1_14",
+    "window": "1->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9998,
+    "offdiag_cos_min": 0.9994,
+    "margin_mean": 0.311,
+    "margin_max": 0.334,
+    "entropy_mean": 9.29,
+    "tail_decode_terminals": {
+      ".": 19,
+      " the": 6
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_15",
+    "window": "1->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9999,
+    "margin_mean": 0.326,
+    "margin_max": 0.334,
+    "entropy_mean": 9.287,
+    "tail_decode_terminals": {
+      ".": 22,
+      " the": 3
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_16",
+    "window": "1->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.329,
+    "margin_max": 0.346,
+    "entropy_mean": 9.268,
+    "tail_decode_terminals": {
+      ".": 23,
+      " the": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_17",
+    "window": "1->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.319,
+    "margin_max": 0.32,
+    "entropy_mean": 9.257,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_18",
+    "window": "1->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.303,
+    "margin_max": 0.303,
+    "entropy_mean": 9.241,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_19",
+    "window": "1->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.268,
+    "margin_max": 0.269,
+    "entropy_mean": 9.219,
+    "tail_decode_terminals": {
+      ".": 23,
+      " the": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_20",
+    "window": "1->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.222,
+    "margin_max": 0.225,
+    "entropy_mean": 9.179,
+    "tail_decode_terminals": {
+      ".": 17,
+      " the": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_21",
+    "window": "1->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.138,
+    "margin_max": 0.145,
+    "entropy_mean": 9.145,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W1_22",
+    "window": "1->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " the": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9992,
+    "margin_mean": 0.617,
+    "margin_max": 0.619,
+    "entropy_mean": 8.817,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W1_23",
+    "window": "1->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      19,
+      2,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "name": 22,
+      "Class": 2,
+      "host": 1
+    },
+    "offdiag_cos_mean": 0.9923,
+    "offdiag_cos_min": 0.9138,
+    "margin_mean": 0.156,
+    "margin_max": 0.696,
+    "entropy_mean": 6.98,
+    "tail_decode_terminals": {
+      "name": 23,
+      "Class": 2
+    },
+    "tail_agreement": "24/25"
+  },
+  {
+    "arm": "W2_2",
+    "window": "2->2",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      16,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 21,
+      "ciation": 1,
+      "uses": 1,
+      "adish": 1,
+      " adj": 1
+    },
+    "offdiag_cos_mean": 0.9662,
+    "offdiag_cos_min": 0.5899,
+    "margin_mean": 0.388,
+    "margin_max": 3.356,
+    "entropy_mean": 7.58,
+    "tail_decode_terminals": {
+      " the": 18,
+      ".": 6,
+      " Han": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_3",
+    "window": "2->3",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.261,
+    "margin_max": 0.263,
+    "entropy_mean": 9.594,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_4",
+    "window": "2->4",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.242,
+    "margin_max": 0.244,
+    "entropy_mean": 9.494,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_5",
+    "window": "2->5",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.241,
+    "margin_max": 0.243,
+    "entropy_mean": 9.493,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_6",
+    "window": "2->6",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.252,
+    "margin_max": 0.254,
+    "entropy_mean": 9.478,
+    "tail_decode_terminals": {
+      " the": 17,
+      ".": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_7",
+    "window": "2->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.252,
+    "margin_max": 0.254,
+    "entropy_mean": 9.464,
+    "tail_decode_terminals": {
+      " the": 17,
+      ".": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_8",
+    "window": "2->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.263,
+    "margin_max": 0.265,
+    "entropy_mean": 9.451,
+    "tail_decode_terminals": {
+      " the": 17,
+      ".": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_9",
+    "window": "2->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.268,
+    "margin_max": 0.269,
+    "entropy_mean": 9.437,
+    "tail_decode_terminals": {
+      " the": 17,
+      ",": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_10",
+    "window": "2->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.271,
+    "margin_max": 0.272,
+    "entropy_mean": 9.435,
+    "tail_decode_terminals": {
+      " the": 17,
+      ",": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_11",
+    "window": "2->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.28,
+    "margin_max": 0.281,
+    "entropy_mean": 9.419,
+    "tail_decode_terminals": {
+      " the": 17,
+      ",": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_12",
+    "window": "2->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.282,
+    "margin_max": 0.282,
+    "entropy_mean": 9.412,
+    "tail_decode_terminals": {
+      " the": 17,
+      ",": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_13",
+    "window": "2->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.28,
+    "margin_max": 0.281,
+    "entropy_mean": 9.404,
+    "tail_decode_terminals": {
+      " the": 11,
+      ",": 8,
+      ".": 6
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_14",
+    "window": "2->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.281,
+    "margin_max": 0.281,
+    "entropy_mean": 9.384,
+    "tail_decode_terminals": {
+      " the": 9,
+      ".": 8,
+      ",": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_15",
+    "window": "2->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.284,
+    "margin_max": 0.284,
+    "entropy_mean": 9.368,
+    "tail_decode_terminals": {
+      ".": 17,
+      " the": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_16",
+    "window": "2->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.282,
+    "margin_max": 0.282,
+    "entropy_mean": 9.344,
+    "tail_decode_terminals": {
+      ".": 20,
+      " the": 5
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_17",
+    "window": "2->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.279,
+    "margin_max": 0.279,
+    "entropy_mean": 9.326,
+    "tail_decode_terminals": {
+      ".": 22,
+      " the": 3
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_18",
+    "window": "2->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.276,
+    "margin_max": 0.276,
+    "entropy_mean": 9.304,
+    "tail_decode_terminals": {
+      ".": 16,
+      ",": 8,
+      " the": 1
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W2_19",
+    "window": "2->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.253,
+    "margin_max": 0.254,
+    "entropy_mean": 9.279,
+    "tail_decode_terminals": {
+      ".": 24,
+      " the": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_20",
+    "window": "2->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.226,
+    "margin_max": 0.229,
+    "entropy_mean": 9.232,
+    "tail_decode_terminals": {
+      ".": 20,
+      " the": 3,
+      ",": 2
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W2_21",
+    "window": "2->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.172,
+    "margin_max": 0.179,
+    "entropy_mean": 9.179,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W2_22",
+    "window": "2->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " the": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9997,
+    "margin_mean": 0.645,
+    "margin_max": 0.651,
+    "entropy_mean": 8.204,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W2_23",
+    "window": "2->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 4,
+    "basin_sizes": [
+      18,
+      4,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      "_": 25
+    },
+    "offdiag_cos_mean": 0.9982,
+    "offdiag_cos_min": 0.9784,
+    "margin_mean": 0.44,
+    "margin_max": 0.571,
+    "entropy_mean": 6.518,
+    "tail_decode_terminals": {
+      "_": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W3_3",
+    "window": "3->3",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.189,
+    "margin_max": 0.189,
+    "entropy_mean": 9.672,
+    "tail_decode_terminals": {
+      "\n": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W3_4",
+    "window": "3->4",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.196,
+    "margin_max": 0.197,
+    "entropy_mean": 9.551,
+    "tail_decode_terminals": {
+      "\n": 17,
+      " the": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W3_5",
+    "window": "3->5",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.19,
+    "margin_max": 0.19,
+    "entropy_mean": 9.541,
+    "tail_decode_terminals": {
+      " the": 17,
+      ",": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W3_6",
+    "window": "3->6",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.2,
+    "margin_max": 0.2,
+    "entropy_mean": 9.522,
+    "tail_decode_terminals": {
+      ",": 14,
+      " the": 11
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W3_7",
+    "window": "3->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.2,
+    "margin_max": 0.2,
+    "entropy_mean": 9.511,
+    "tail_decode_terminals": {
+      ",": 14,
+      " the": 11
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W3_8",
+    "window": "3->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.212,
+    "margin_max": 0.212,
+    "entropy_mean": 9.496,
+    "tail_decode_terminals": {
+      ",": 14,
+      " the": 11
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W3_9",
+    "window": "3->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.218,
+    "margin_max": 0.218,
+    "entropy_mean": 9.482,
+    "tail_decode_terminals": {
+      ",": 14,
+      " the": 11
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W3_10",
+    "window": "3->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.224,
+    "margin_max": 0.224,
+    "entropy_mean": 9.472,
+    "tail_decode_terminals": {
+      ",": 14,
+      " the": 11
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W3_11",
+    "window": "3->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.233,
+    "margin_max": 0.233,
+    "entropy_mean": 9.456,
+    "tail_decode_terminals": {
+      ",": 16,
+      " the": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_12",
+    "window": "3->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.237,
+    "margin_max": 0.237,
+    "entropy_mean": 9.444,
+    "tail_decode_terminals": {
+      ",": 16,
+      " the": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_13",
+    "window": "3->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.236,
+    "margin_max": 0.237,
+    "entropy_mean": 9.432,
+    "tail_decode_terminals": {
+      ",": 17,
+      " the": 8
+    },
+    "tail_agreement": "17/25"
+  },
+  {
+    "arm": "W3_14",
+    "window": "3->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.24,
+    "margin_max": 0.24,
+    "entropy_mean": 9.408,
+    "tail_decode_terminals": {
+      ",": 17,
+      " the": 8
+    },
+    "tail_agreement": "17/25"
+  },
+  {
+    "arm": "W3_15",
+    "window": "3->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.244,
+    "margin_max": 0.244,
+    "entropy_mean": 9.391,
+    "tail_decode_terminals": {
+      ",": 17,
+      " the": 6,
+      ".": 2
+    },
+    "tail_agreement": "17/25"
+  },
+  {
+    "arm": "W3_16",
+    "window": "3->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.242,
+    "margin_max": 0.243,
+    "entropy_mean": 9.367,
+    "tail_decode_terminals": {
+      ",": 16,
+      ".": 6,
+      " the": 3
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_17",
+    "window": "3->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.241,
+    "margin_max": 0.241,
+    "entropy_mean": 9.346,
+    "tail_decode_terminals": {
+      ",": 16,
+      ".": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_18",
+    "window": "3->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.246,
+    "margin_max": 0.246,
+    "entropy_mean": 9.321,
+    "tail_decode_terminals": {
+      ",": 16,
+      ".": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_19",
+    "window": "3->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.232,
+    "margin_max": 0.232,
+    "entropy_mean": 9.293,
+    "tail_decode_terminals": {
+      ",": 16,
+      ".": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_20",
+    "window": "3->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.21,
+    "margin_max": 0.213,
+    "entropy_mean": 9.242,
+    "tail_decode_terminals": {
+      ",": 16,
+      ".": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W3_21",
+    "window": "3->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.168,
+    "margin_max": 0.173,
+    "entropy_mean": 9.181,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W3_22",
+    "window": "3->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " the": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9997,
+    "margin_mean": 0.362,
+    "margin_max": 0.385,
+    "entropy_mean": 7.859,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W3_23",
+    "window": "3->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      15,
+      6,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " +": 23,
+      "law": 2
+    },
+    "offdiag_cos_mean": 0.9963,
+    "offdiag_cos_min": 0.9606,
+    "margin_mean": 0.625,
+    "margin_max": 0.966,
+    "entropy_mean": 6.367,
+    "tail_decode_terminals": {
+      " +": 23,
+      "law": 2
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W4_4",
+    "window": "4->4",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      7,
+      5,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 14,
+      " the": 2,
+      "lihood": 1,
+      "verning": 1,
+      "schild": 1,
+      " serpent": 1,
+      " unsus": 1,
+      " pract": 1,
+      " warm": 1,
+      " Ing": 1,
+      "iHUD": 1
+    },
+    "offdiag_cos_mean": 0.9905,
+    "offdiag_cos_min": 0.9393,
+    "margin_mean": 0.37,
+    "margin_max": 1.523,
+    "entropy_mean": 7.92,
+    "tail_decode_terminals": {
+      "ress": 4,
+      "orse": 3,
+      "ockey": 3,
+      "ond": 2,
+      "and": 1,
+      "-": 1,
+      "S": 1,
+      "/": 1,
+      " Download": 1,
+      " Ast": 1,
+      "\u00b7\u00b7": 1,
+      " Ad": 1,
+      "ginx": 1,
+      "Dial": 1,
+      "andi": 1,
+      "theme": 1,
+      "LS": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_5",
+    "window": "4->5",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 3,
+      "ageddon": 2,
+      " organs": 2,
+      " supers": 1,
+      " Revis": 1,
+      " Bran": 1,
+      " Muse": 1,
+      "atural": 1,
+      " restraints": 1,
+      "uration": 1,
+      " prob": 1,
+      " sur": 1,
+      " Nav": 1,
+      "Domain": 1,
+      " intermediate": 1,
+      " wrink": 1,
+      " manifold": 1,
+      " politic": 1,
+      " decimal": 1,
+      "\n": 1,
+      " Ukrain": 1
+    },
+    "offdiag_cos_mean": 0.9763,
+    "offdiag_cos_min": 0.8977,
+    "margin_mean": 0.697,
+    "margin_max": 3.606,
+    "entropy_mean": 6.328,
+    "tail_decode_terminals": {
+      "and": 3,
+      ".": 2,
+      "And": 2,
+      ";": 2,
+      "Eye": 1,
+      "Display": 1,
+      "Never": 1,
+      " Archdemon": 1,
+      "Server": 1,
+      "quickShipAvailable": 1,
+      " aroused": 1,
+      "Enabled": 1,
+      "ooked": 1,
+      " -": 1,
+      "Ra": 1,
+      " ,": 1,
+      "We": 1,
+      "();": 1,
+      "Back": 1,
+      " back": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_6",
+    "window": "4->6",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 2,
+      ")).": 1,
+      " FX": 1,
+      " laptop": 1,
+      " Yose": 1,
+      " quot": 1,
+      "ross": 1,
+      "atural": 1,
+      "ist": 1,
+      " Shib": 1,
+      " qualifiers": 1,
+      " obligatory": 1,
+      " cent": 1,
+      " speakers": 1,
+      " vanishing": 1,
+      " (": 1,
+      " Remote": 1,
+      " Trident": 1,
+      " jury": 1,
+      " ratios": 1,
+      " courts": 1,
+      "gie": 1,
+      ".--": 1,
+      " manif": 1
+    },
+    "offdiag_cos_mean": 0.9658,
+    "offdiag_cos_min": 0.9046,
+    "margin_mean": 0.808,
+    "margin_max": 2.993,
+    "entropy_mean": 5.727,
+    "tail_decode_terminals": {
+      "Re": 4,
+      " )": 3,
+      ".": 2,
+      "()": 2,
+      "Ra": 2,
+      "OR": 2,
+      "0": 1,
+      "();": 1,
+      "(": 1,
+      ").": 1,
+      "().": 1,
+      "\ufffd": 1,
+      "ION": 1,
+      "\";": 1,
+      " !": 1,
+      "B": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_7",
+    "window": "4->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 2,
+      "hip": 2,
+      " Base": 1,
+      " Ug": 1,
+      "yne": 1,
+      "sea": 1,
+      " br": 1,
+      " allowed": 1,
+      "eer": 1,
+      "omen": 1,
+      "oba": 1,
+      "Builder": 1,
+      " Nec": 1,
+      "_-": 1,
+      " duty": 1,
+      "){": 1,
+      " bound": 1,
+      " Antar": 1,
+      " strategies": 1,
+      " synt": 1,
+      "ulated": 1,
+      "age": 1,
+      " lake": 1
+    },
+    "offdiag_cos_mean": 0.9634,
+    "offdiag_cos_min": 0.9125,
+    "margin_mean": 0.838,
+    "margin_max": 2.308,
+    "entropy_mean": 5.267,
+    "tail_decode_terminals": {
+      " )": 4,
+      "Me": 2,
+      "Re": 2,
+      ".": 2,
+      ";": 2,
+      "Ra": 2,
+      " fast": 1,
+      "Obs": 1,
+      "Ex": 1,
+      "()": 1,
+      " I": 1,
+      "ium": 1,
+      " );": 1,
+      "None": 1,
+      "Line": 1,
+      "Sp": 1,
+      "Administ": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_8",
+    "window": "4->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "ageddon": 2,
+      " open": 2,
+      "itt": 1,
+      "semble": 1,
+      ":": 1,
+      " Moonlight": 1,
+      " bound": 1,
+      "rio": 1,
+      "ing": 1,
+      " background": 1,
+      "ause": 1,
+      "ensen": 1,
+      "ition": 1,
+      "uler": 1,
+      " quot": 1,
+      " -": 1,
+      " void": 1,
+      "IX": 1,
+      "econom": 1,
+      "/": 1,
+      " mas": 1,
+      " duty": 1,
+      "'": 1
+    },
+    "offdiag_cos_mean": 0.972,
+    "offdiag_cos_min": 0.9478,
+    "margin_mean": 0.782,
+    "margin_max": 2.267,
+    "entropy_mean": 5.258,
+    "tail_decode_terminals": {
+      "Me": 7,
+      ".": 4,
+      " )": 3,
+      " -": 2,
+      ";": 2,
+      "()": 1,
+      "Ra": 1,
+      "Main": 1,
+      "Server": 1,
+      "\"": 1,
+      "}": 1,
+      "I": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_9",
+    "window": "4->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 2,
+      "s": 2,
+      "RNA": 1,
+      "tle": 1,
+      "igious": 1,
+      "UM": 1,
+      " bust": 1,
+      "ERE": 1,
+      "OC": 1,
+      "EC": 1,
+      " thrown": 1,
+      "MN": 1,
+      " pitch": 1,
+      "ill": 1,
+      "ledged": 1,
+      "ership": 1,
+      " patch": 1,
+      " fishes": 1,
+      "yip": 1,
+      " Et": 1,
+      " conditions": 1,
+      " '": 1,
+      "ison": 1
+    },
+    "offdiag_cos_mean": 0.9724,
+    "offdiag_cos_min": 0.9443,
+    "margin_mean": 0.76,
+    "margin_max": 2.436,
+    "entropy_mean": 5.093,
+    "tail_decode_terminals": {
+      ".": 4,
+      " )": 3,
+      ";": 3,
+      "Me": 2,
+      " (": 2,
+      ",": 1,
+      ")": 1,
+      "None": 1,
+      "i": 1,
+      " =": 1,
+      "I": 1,
+      "Op": 1,
+      "O": 1,
+      "\u2022": 1,
+      "(": 1,
+      "Y": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_10",
+    "window": "4->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "_": 2,
+      "s": 2,
+      "-": 2,
+      ",": 2,
+      "esson": 1,
+      "TER": 1,
+      "ized": 1,
+      "tal": 1,
+      " {": 1,
+      " condition": 1,
+      " mut": 1,
+      " and": 1,
+      " x": 1,
+      " extracts": 1,
+      "othing": 1,
+      " hypot": 1,
+      "nex": 1,
+      "igious": 1,
+      "Ra": 1,
+      " raised": 1,
+      " (": 1
+    },
+    "offdiag_cos_mean": 0.9717,
+    "offdiag_cos_min": 0.9441,
+    "margin_mean": 1.691,
+    "margin_max": 26.454,
+    "entropy_mean": 5.205,
+    "tail_decode_terminals": {
+      "I": 5,
+      "(": 4,
+      ".": 3,
+      "O": 2,
+      ";": 2,
+      " {": 1,
+      "}": 1,
+      "\u00a7": 1,
+      "OR": 1,
+      ",": 1,
+      "s": 1,
+      "The": 1,
+      "Mark": 1,
+      " ,": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_11",
+    "window": "4->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 23,
+    "basin_sizes": [
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 9,
+      " Meg": 1,
+      " labour": 1,
+      "ing": 1,
+      " Grid": 1,
+      " Docker": 1,
+      "LY": 1,
+      "onte": 1,
+      " Answer": 1,
+      " ]": 1,
+      "_": 1,
+      " util": 1,
+      "\ufffd": 1,
+      " '": 1,
+      "s": 1,
+      "ascular": 1,
+      " Anarchy": 1
+    },
+    "offdiag_cos_mean": 0.982,
+    "offdiag_cos_min": 0.9316,
+    "margin_mean": 0.802,
+    "margin_max": 3.469,
+    "entropy_mean": 6.417,
+    "tail_decode_terminals": {
+      "I": 4,
+      ".": 4,
+      "\"": 3,
+      "(": 2,
+      "s": 2,
+      "OR": 1,
+      "Bet": 1,
+      "The": 1,
+      ":": 1,
+      " ,": 1,
+      " -": 1,
+      ",": 1,
+      " is": 1,
+      "Obama": 1,
+      "New": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_12",
+    "window": "4->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      16,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 18,
+      " Kyl": 1,
+      "'": 1,
+      "YS": 1,
+      "s": 1,
+      " degree": 1,
+      "J": 1,
+      ".": 1
+    },
+    "offdiag_cos_mean": 0.9959,
+    "offdiag_cos_min": 0.9642,
+    "margin_mean": 0.575,
+    "margin_max": 3.511,
+    "entropy_mean": 7.736,
+    "tail_decode_terminals": {
+      ".": 9,
+      "\"": 6,
+      "I": 3,
+      "That": 2,
+      "OR": 2,
+      "LE": 1,
+      "s": 1,
+      " that": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_13",
+    "window": "4->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9997,
+    "margin_mean": 0.339,
+    "margin_max": 0.401,
+    "entropy_mean": 9.206,
+    "tail_decode_terminals": {
+      ".": 24,
+      " the": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_14",
+    "window": "4->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.335,
+    "margin_max": 0.34,
+    "entropy_mean": 9.187,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_15",
+    "window": "4->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.335,
+    "margin_max": 0.34,
+    "entropy_mean": 9.154,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_16",
+    "window": "4->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.334,
+    "margin_max": 0.336,
+    "entropy_mean": 9.114,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_17",
+    "window": "4->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.338,
+    "margin_max": 0.34,
+    "entropy_mean": 9.079,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_18",
+    "window": "4->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.336,
+    "margin_max": 0.339,
+    "entropy_mean": 9.045,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_19",
+    "window": "4->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.285,
+    "margin_max": 0.293,
+    "entropy_mean": 8.982,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_20",
+    "window": "4->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 1.0,
+    "margin_mean": 0.196,
+    "margin_max": 0.212,
+    "entropy_mean": 8.888,
+    "tail_decode_terminals": {
+      ".": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W4_22",
+    "window": "4->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ".": 14,
+      "The": 11
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9992,
+    "margin_mean": 0.173,
+    "margin_max": 0.385,
+    "entropy_mean": 7.154,
+    "tail_decode_terminals": {
+      "The": 25
+    },
+    "tail_agreement": "11/25"
+  },
+  {
+    "arm": "W4_23",
+    "window": "4->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      7,
+      7,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " of": 24,
+      "ist": 1
+    },
+    "offdiag_cos_mean": 0.981,
+    "offdiag_cos_min": 0.9124,
+    "margin_mean": 0.929,
+    "margin_max": 2.293,
+    "entropy_mean": 5.875,
+    "tail_decode_terminals": {
+      " of": 24,
+      "ist": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W5_5",
+    "window": "5->5",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 6,
+      " Fors": 2,
+      "acco": 1,
+      " Ukrain": 1,
+      "atre": 1,
+      " axe": 1,
+      "aternity": 1,
+      " permanently": 1,
+      " arrang": 1,
+      " Mut": 1,
+      " lightly": 1,
+      "ntil": 1,
+      "rocal": 1,
+      " NE": 1,
+      " interf": 1,
+      " combinations": 1,
+      " \ufffd": 1,
+      " a": 1,
+      " laun": 1
+    },
+    "offdiag_cos_mean": 0.9569,
+    "offdiag_cos_min": 0.9047,
+    "margin_mean": 0.942,
+    "margin_max": 3.994,
+    "entropy_mean": 6.651,
+    "tail_decode_terminals": {
+      "The": 6,
+      "S": 4,
+      ".": 3,
+      " (": 2,
+      "-": 2,
+      "mar": 1,
+      "--": 1,
+      "Pre": 1,
+      "]:": 1,
+      " -": 1,
+      "1": 1,
+      " a": 1,
+      "?": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W5_6",
+    "window": "5->6",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Weir": 3,
+      "arag": 2,
+      " \"": 2,
+      "ass": 1,
+      " polyg": 1,
+      "uca": 1,
+      " web": 1,
+      " Leone": 1,
+      " RAW": 1,
+      "Assembly": 1,
+      " HOU": 1,
+      " Cap": 1,
+      "versible": 1,
+      "otte": 1,
+      "enegger": 1,
+      ",": 1,
+      " States": 1,
+      " Clarks": 1,
+      "je": 1,
+      " Miko": 1,
+      " Brad": 1
+    },
+    "offdiag_cos_mean": 0.9546,
+    "offdiag_cos_min": 0.8929,
+    "margin_mean": 0.86,
+    "margin_max": 2.128,
+    "entropy_mean": 5.437,
+    "tail_decode_terminals": {
+      "O": 13,
+      ".": 5,
+      "\"": 3,
+      " (": 2,
+      "Qu": 1,
+      "6": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_7",
+    "window": "5->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "ston": 2,
+      ",": 2,
+      " hus": 1,
+      "////////": 1,
+      "acid": 1,
+      " ro": 1,
+      "lied": 1,
+      " Ellis": 1,
+      " JACK": 1,
+      "\ufffd": 1,
+      "_-": 1,
+      " Cary": 1,
+      "eer": 1,
+      "puter": 1,
+      "?": 1,
+      " Bottle": 1,
+      "tex": 1,
+      "erson": 1,
+      " Supporters": 1,
+      "atural": 1,
+      " delay": 1,
+      " RD": 1,
+      " balance": 1
+    },
+    "offdiag_cos_mean": 0.9404,
+    "offdiag_cos_min": 0.8475,
+    "margin_mean": 0.901,
+    "margin_max": 5.983,
+    "entropy_mean": 4.824,
+    "tail_decode_terminals": {
+      "O": 7,
+      ";": 5,
+      " (": 2,
+      "S": 1,
+      " d": 1,
+      "ou": 1,
+      " I": 1,
+      ":(": 1,
+      " {": 1,
+      ")": 1,
+      " )": 1,
+      "'t": 1,
+      "ory": 1,
+      "ay": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_8",
+    "window": "5->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Wrest": 1,
+      " directed": 1,
+      "ston": 1,
+      " first": 1,
+      " Jeb": 1,
+      "es": 1,
+      " pub": 1,
+      "fol": 1,
+      " phenotype": 1,
+      " summon": 1,
+      " circumstances": 1,
+      "ack": 1,
+      "OPE": 1,
+      " bad": 1,
+      "ores": 1,
+      " Buck": 1,
+      " Gru": 1,
+      "ate": 1,
+      " cart": 1,
+      " TER": 1,
+      " Pot": 1,
+      " Harvey": 1,
+      "\u30d8": 1,
+      " Aud": 1,
+      " bree": 1
+    },
+    "offdiag_cos_mean": 0.9472,
+    "offdiag_cos_min": 0.9112,
+    "margin_mean": 0.8,
+    "margin_max": 2.421,
+    "entropy_mean": 5.084,
+    "tail_decode_terminals": {
+      " )": 3,
+      " ,": 3,
+      ")": 3,
+      " (": 3,
+      " m": 2,
+      "LE": 1,
+      "ION": 1,
+      " -": 1,
+      ",": 1,
+      " Texas": 1,
+      "i": 1,
+      " y": 1,
+      "fill": 1,
+      "!": 1,
+      ";": 1,
+      "O": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_9",
+    "window": "5->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " El": 2,
+      "\u30d8": 2,
+      " hell": 1,
+      ",": 1,
+      " bruising": 1,
+      "OR": 1,
+      " Edition": 1,
+      " Defence": 1,
+      " fix": 1,
+      "ax": 1,
+      "und": 1,
+      "rod": 1,
+      "igi": 1,
+      "ing": 1,
+      " (": 1,
+      "_": 1,
+      " DOT": 1,
+      " C": 1,
+      " OPEN": 1,
+      " </": 1,
+      ":": 1,
+      "OUN": 1,
+      "y": 1
+    },
+    "offdiag_cos_mean": 0.95,
+    "offdiag_cos_min": 0.9203,
+    "margin_mean": 0.796,
+    "margin_max": 3.969,
+    "entropy_mean": 4.775,
+    "tail_decode_terminals": {
+      " (": 2,
+      "I": 2,
+      " )": 2,
+      "A": 2,
+      ",": 2,
+      "O": 1,
+      "ays": 1,
+      " ": 1,
+      "IS": 1,
+      ";": 1,
+      "Al": 1,
+      "mat": 1,
+      " ,": 1,
+      "\u00ad": 1,
+      " ar": 1,
+      "\u2014": 1,
+      " =": 1,
+      " OF": 1,
+      ")": 1,
+      " \u2014": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_10",
+    "window": "5->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "/": 2,
+      " with": 2,
+      "o": 2,
+      ",": 2,
+      " HD": 1,
+      "alph": 1,
+      "odes": 1,
+      " attended": 1,
+      "Mat": 1,
+      " J": 1,
+      " Director": 1,
+      "_": 1,
+      "ity": 1,
+      " {": 1,
+      "ies": 1,
+      " mat": 1,
+      "s": 1,
+      "ment": 1,
+      "\u00ad": 1,
+      " mc": 1,
+      " \u200b": 1
+    },
+    "offdiag_cos_mean": 0.952,
+    "offdiag_cos_min": 0.9172,
+    "margin_mean": 1.123,
+    "margin_max": 14.382,
+    "entropy_mean": 4.664,
+    "tail_decode_terminals": {
+      "s": 4,
+      "(": 3,
+      "A": 2,
+      " I": 2,
+      ".": 2,
+      "AND": 1,
+      " (": 1,
+      " ,": 1,
+      ",": 1,
+      "B": 1,
+      "\u2014": 1,
+      "i": 1,
+      " -": 1,
+      "O": 1,
+      "Al": 1,
+      "@": 1,
+      "I": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W5_11",
+    "window": "5->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 7,
+      "ome": 2,
+      "s": 2,
+      "\n": 1,
+      "\u30b9": 1,
+      " \ufffd": 1,
+      " realise": 1,
+      "_": 1,
+      " \\\\": 1,
+      "\u00a0": 1,
+      " MR": 1,
+      "|": 1,
+      "\u2010": 1,
+      "++": 1,
+      " U": 1,
+      "KNOWN": 1,
+      "ois": 1
+    },
+    "offdiag_cos_mean": 0.9477,
+    "offdiag_cos_min": 0.8696,
+    "margin_mean": 1.598,
+    "margin_max": 18.294,
+    "entropy_mean": 5.599,
+    "tail_decode_terminals": {
+      "\n": 4,
+      "(": 2,
+      "I": 2,
+      "The": 2,
+      "?": 2,
+      "___": 1,
+      "ABC": 1,
+      ".": 1,
+      "~": 1,
+      "s": 1,
+      " ": 1,
+      "'": 1,
+      "Y": 1,
+      "Donald": 1,
+      " AND": 1,
+      " in": 1,
+      "Australia": 1,
+      "!": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W5_12",
+    "window": "5->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 14,
+      "ername": 1,
+      "\u200b": 1,
+      " REUTERS": 1,
+      " Mercury": 1,
+      " [\u2026]": 1,
+      " Hover": 1,
+      " ID": 1,
+      "-(": 1,
+      " Crossref": 1,
+      " Written": 1,
+      ".": 1
+    },
+    "offdiag_cos_mean": 0.9373,
+    "offdiag_cos_min": 0.695,
+    "margin_mean": 0.595,
+    "margin_max": 2.425,
+    "entropy_mean": 6.91,
+    "tail_decode_terminals": {
+      "\"": 4,
+      "Y": 3,
+      ".": 3,
+      "\n": 2,
+      "The": 2,
+      "'": 2,
+      "(": 2,
+      "!": 1,
+      "s": 1,
+      "I": 1,
+      "\u00ad": 1,
+      " \u200b": 1,
+      " \ufffd": 1,
+      " THE": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_13",
+    "window": "5->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 16,
+    "basin_sizes": [
+      10,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9923,
+    "offdiag_cos_min": 0.9532,
+    "margin_mean": 0.422,
+    "margin_max": 0.634,
+    "entropy_mean": 8.784,
+    "tail_decode_terminals": {
+      "\"": 18,
+      " the": 3,
+      "The": 2,
+      "\n": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_14",
+    "window": "5->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9993,
+    "margin_mean": 0.452,
+    "margin_max": 0.483,
+    "entropy_mean": 8.674,
+    "tail_decode_terminals": {
+      "\"": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_15",
+    "window": "5->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      23,
+      2
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9984,
+    "offdiag_cos_min": 0.989,
+    "margin_mean": 0.405,
+    "margin_max": 0.64,
+    "entropy_mean": 8.474,
+    "tail_decode_terminals": {
+      "\"": 23,
+      " the": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_16",
+    "window": "5->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9999,
+    "margin_mean": 0.357,
+    "margin_max": 0.37,
+    "entropy_mean": 8.397,
+    "tail_decode_terminals": {
+      "\"": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_17",
+    "window": "5->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9999,
+    "margin_mean": 0.224,
+    "margin_max": 0.242,
+    "entropy_mean": 8.349,
+    "tail_decode_terminals": {
+      "\"": 14,
+      "The": 11
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_18",
+    "window": "5->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "\n": 25
+    },
+    "offdiag_cos_mean": 1.0,
+    "offdiag_cos_min": 0.9999,
+    "margin_mean": 0.321,
+    "margin_max": 0.376,
+    "entropy_mean": 8.26,
+    "tail_decode_terminals": {
+      "The": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_19",
+    "window": "5->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "\n": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9998,
+    "margin_mean": 0.633,
+    "margin_max": 0.74,
+    "entropy_mean": 7.999,
+    "tail_decode_terminals": {
+      "The": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W5_20",
+    "window": "5->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " Republican": 24,
+      "-": 1
+    },
+    "offdiag_cos_mean": 0.9998,
+    "offdiag_cos_min": 0.999,
+    "margin_mean": 0.241,
+    "margin_max": 0.37,
+    "entropy_mean": 8.367,
+    "tail_decode_terminals": {
+      " Republican": 21,
+      " source": 4
+    },
+    "tail_agreement": "20/25"
+  },
+  {
+    "arm": "W5_22",
+    "window": "5->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      16,
+      4,
+      3,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Happy": 25
+    },
+    "offdiag_cos_mean": 0.9908,
+    "offdiag_cos_min": 0.9497,
+    "margin_mean": 1.53,
+    "margin_max": 1.925,
+    "entropy_mean": 4.033,
+    "tail_decode_terminals": {
+      " Happy": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W5_23",
+    "window": "5->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      15,
+      6,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " as": 24,
+      " name": 1
+    },
+    "offdiag_cos_mean": 0.9973,
+    "offdiag_cos_min": 0.9689,
+    "margin_mean": 0.332,
+    "margin_max": 0.456,
+    "entropy_mean": 4.771,
+    "tail_decode_terminals": {
+      " as": 24,
+      " name": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W6_6",
+    "window": "6->6",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Fitzgerald": 3,
+      "\u9ed2": 2,
+      "jas": 1,
+      " partName": 1,
+      " STATS": 1,
+      " corp": 1,
+      "gamer": 1,
+      "\u4f5c": 1,
+      "son": 1,
+      " nodd": 1,
+      " overboard": 1,
+      "\u30a2": 1,
+      "\\/\\/": 1,
+      " crim": 1,
+      "Dro": 1,
+      "ENC": 1,
+      "laws": 1,
+      "zzle": 1,
+      " (": 1,
+      "bite": 1,
+      "tsky": 1,
+      " feminists": 1
+    },
+    "offdiag_cos_mean": 0.8709,
+    "offdiag_cos_min": 0.7205,
+    "margin_mean": 0.997,
+    "margin_max": 3.586,
+    "entropy_mean": 3.966,
+    "tail_decode_terminals": {
+      "'": 3,
+      "\"": 3,
+      "pl": 1,
+      " Brother": 1,
+      "s": 1,
+      "ILA": 1,
+      "DVD": 1,
+      " 2": 1,
+      " Russia": 1,
+      "\ufffd": 1,
+      " SP": 1,
+      "down": 1,
+      "7": 1,
+      " [": 1,
+      "weed": 1,
+      "th": 1,
+      "Or": 1,
+      "d": 1,
+      "info": 1,
+      "2": 1,
+      "is": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_7",
+    "window": "6->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " pub": 2,
+      " rub": 2,
+      "mary": 2,
+      " Cas": 1,
+      " von": 1,
+      " outlook": 1,
+      " Judd": 1,
+      " disse": 1,
+      "linger": 1,
+      "ison": 1,
+      "ps": 1,
+      " nos": 1,
+      " Turing": 1,
+      "UME": 1,
+      ")]": 1,
+      " QB": 1,
+      "\u9ed2": 1,
+      "stained": 1,
+      " bias": 1,
+      "]).": 1,
+      "').": 1,
+      " Emmanuel": 1
+    },
+    "offdiag_cos_mean": 0.8639,
+    "offdiag_cos_min": 0.6454,
+    "margin_mean": 0.631,
+    "margin_max": 2.035,
+    "entropy_mean": 4.624,
+    "tail_decode_terminals": {
+      ")": 5,
+      "'": 5,
+      "ais": 4,
+      ".)": 2,
+      "ful": 2,
+      "pr": 1,
+      "ever": 1,
+      "m": 1,
+      "s": 1,
+      "y": 1,
+      " S": 1,
+      "son": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_8",
+    "window": "6->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "UCK": 9,
+      "akes": 2,
+      "\u014d": 1,
+      " AK": 1,
+      " Mormon": 1,
+      " Mosque": 1,
+      " CH": 1,
+      " CA": 1,
+      " Appeals": 1,
+      "\ufffd": 1,
+      " OK": 1,
+      "OK": 1,
+      " Raiders": 1,
+      " \u30b5": 1,
+      "ES": 1,
+      " Carrier": 1
+    },
+    "offdiag_cos_mean": 0.9141,
+    "offdiag_cos_min": 0.7662,
+    "margin_mean": 1.014,
+    "margin_max": 2.99,
+    "entropy_mean": 4.957,
+    "tail_decode_terminals": {
+      "I": 3,
+      "\n\n": 3,
+      " ~": 3,
+      "UCK": 3,
+      "<|endoftext|>": 3,
+      " ": 3,
+      " ----------------------------------------------------------------": 1,
+      " WORK": 1,
+      " CH": 1,
+      " DISTRICT": 1,
+      " I": 1,
+      " Appeals": 1,
+      " PROC": 1
+    },
+    "tail_agreement": "4/25"
+  },
+  {
+    "arm": "W6_9",
+    "window": "6->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ")).": 10,
+      ".)": 2,
+      " Republican": 1,
+      " AC": 1,
+      " BUS": 1,
+      "ports": 1,
+      " Mitt": 1,
+      " EFF": 1,
+      " FAT": 1,
+      " Fargo": 1,
+      " AK": 1,
+      " Brav": 1,
+      " Carmen": 1,
+      ")\u2014": 1,
+      " Cas": 1
+    },
+    "offdiag_cos_mean": 0.8728,
+    "offdiag_cos_min": 0.5294,
+    "margin_mean": 1.387,
+    "margin_max": 3.759,
+    "entropy_mean": 3.255,
+    "tail_decode_terminals": {
+      ")).": 10,
+      ")),": 7,
+      ").": 2,
+      "!": 2,
+      "),": 1,
+      ".)": 1,
+      ")\u2014": 1,
+      "))": 1
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W6_10",
+    "window": "6->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ")).": 9,
+      "\"),": 3,
+      " )": 2,
+      "\"))": 2,
+      " agrees": 1,
+      " AC": 1,
+      "\ufffd\ufffd": 1,
+      " meets": 1,
+      " reviews": 1,
+      " Requ": 1,
+      " Sub": 1,
+      " Type": 1,
+      " Contra": 1
+    },
+    "offdiag_cos_mean": 0.8754,
+    "offdiag_cos_min": 0.6102,
+    "margin_mean": 0.85,
+    "margin_max": 2.845,
+    "entropy_mean": 3.424,
+    "tail_decode_terminals": {
+      ")),": 12,
+      " )": 8,
+      " Sub": 5
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W6_11",
+    "window": "6->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 23,
+    "basin_sizes": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " acronym": 10,
+      " arguments": 5,
+      " twists": 3,
+      " multiple": 1,
+      " nerd": 1,
+      "ror": 1,
+      "...": 1,
+      "uu": 1,
+      " unintended": 1,
+      " reviews": 1
+    },
+    "offdiag_cos_mean": 0.9428,
+    "offdiag_cos_min": 0.7307,
+    "margin_mean": 0.664,
+    "margin_max": 2.063,
+    "entropy_mean": 4.036,
+    "tail_decode_terminals": {
+      " multiple": 13,
+      " argument": 4,
+      "'": 3,
+      "!": 1,
+      ")": 1,
+      " ": 1,
+      "uu": 1,
+      "!!!!!": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W6_12",
+    "window": "6->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      4,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ")!": 8,
+      " Kickstarter": 8,
+      " purchase": 2,
+      ")": 2,
+      ",": 2,
+      "!).": 1,
+      "').": 1,
+      " FAQ": 1
+    },
+    "offdiag_cos_mean": 0.9089,
+    "offdiag_cos_min": 0.4736,
+    "margin_mean": 0.736,
+    "margin_max": 2.207,
+    "entropy_mean": 4.83,
+    "tail_decode_terminals": {
+      "!)": 23,
+      ")": 1,
+      " is": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_13",
+    "window": "6->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9997,
+    "offdiag_cos_min": 0.9984,
+    "margin_mean": 0.535,
+    "margin_max": 0.547,
+    "entropy_mean": 8.056,
+    "tail_decode_terminals": {
+      "\u2026": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_14",
+    "window": "6->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 4,
+    "basin_sizes": [
+      22,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9988,
+    "offdiag_cos_min": 0.9935,
+    "margin_mean": 0.562,
+    "margin_max": 0.625,
+    "entropy_mean": 8.122,
+    "tail_decode_terminals": {
+      "\u2026": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_15",
+    "window": "6->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      23,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ",": 25
+    },
+    "offdiag_cos_mean": 0.9987,
+    "offdiag_cos_min": 0.9862,
+    "margin_mean": 0.484,
+    "margin_max": 0.528,
+    "entropy_mean": 7.871,
+    "tail_decode_terminals": {
+      "\"": 24,
+      "\u2026\"": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_16",
+    "window": "6->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "\n": 17,
+      ",": 8
+    },
+    "offdiag_cos_mean": 0.9998,
+    "offdiag_cos_min": 0.9991,
+    "margin_mean": 0.079,
+    "margin_max": 0.114,
+    "entropy_mean": 8.005,
+    "tail_decode_terminals": {
+      "\"": 23,
+      "I": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W6_18",
+    "window": "6->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      17,
+      8
+    ],
+    "decode_terminals": {
+      " Republican": 25
+    },
+    "offdiag_cos_mean": 0.9993,
+    "offdiag_cos_min": 0.9973,
+    "margin_mean": 0.363,
+    "margin_max": 0.543,
+    "entropy_mean": 7.656,
+    "tail_decode_terminals": {
+      " Republican": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W6_19",
+    "window": "6->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      23,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Republican": 24,
+      "\n": 1
+    },
+    "offdiag_cos_mean": 0.997,
+    "offdiag_cos_min": 0.9683,
+    "margin_mean": 0.838,
+    "margin_max": 1.148,
+    "entropy_mean": 7.051,
+    "tail_decode_terminals": {
+      " Republican": 24,
+      "\n": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W6_20",
+    "window": "6->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 24,
+    "basin_sizes": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " ribbon": 6,
+      "oooo": 5,
+      " goddamn": 3,
+      " evenly": 3,
+      " uh": 1,
+      "!": 1,
+      " Instructions": 1,
+      " Trump": 1,
+      "yy": 1,
+      "uu": 1,
+      ".\")": 1,
+      " edge": 1
+    },
+    "offdiag_cos_mean": 0.7411,
+    "offdiag_cos_min": 0.4842,
+    "margin_mean": 1.383,
+    "margin_max": 3.161,
+    "entropy_mean": 2.57,
+    "tail_decode_terminals": {
+      "!": 6,
+      " edge": 4,
+      " I": 2,
+      " or": 2,
+      " hopefully": 2,
+      " evenly": 2,
+      "uu": 1,
+      "*": 1,
+      " Instructions": 1,
+      " ends": 1,
+      " length": 1,
+      " fucking": 1,
+      " would": 1
+    },
+    "tail_agreement": "5/25"
+  },
+  {
+    "arm": "W6_22",
+    "window": "6->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "<|endoftext|>": 25
+    },
+    "offdiag_cos_mean": 0.9996,
+    "offdiag_cos_min": 0.998,
+    "margin_mean": 1.053,
+    "margin_max": 1.071,
+    "entropy_mean": 2.359,
+    "tail_decode_terminals": {
+      "<|endoftext|>": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W6_23",
+    "window": "6->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      17,
+      5,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " dawn": 23,
+      " once": 2
+    },
+    "offdiag_cos_mean": 0.9974,
+    "offdiag_cos_min": 0.972,
+    "margin_mean": 0.319,
+    "margin_max": 0.732,
+    "entropy_mean": 3.79,
+    "tail_decode_terminals": {
+      " dawn": 23,
+      " once": 2
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W7_7",
+    "window": "7->7",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Typh": 2,
+      " Fors": 2,
+      "\u00c2": 2,
+      "atu": 2,
+      "mans": 1,
+      "yip": 1,
+      " vul": 1,
+      " Mush": 1,
+      "!": 1,
+      " Britann": 1,
+      "\ufffd": 1,
+      " thous": 1,
+      " Trash": 1,
+      " Huck": 1,
+      " Ukrain": 1,
+      " tox": 1,
+      " livest": 1,
+      "rodu": 1,
+      " behav": 1,
+      " drying": 1,
+      "culosis": 1
+    },
+    "offdiag_cos_mean": 0.8594,
+    "offdiag_cos_min": 0.6501,
+    "margin_mean": 0.748,
+    "margin_max": 2.84,
+    "entropy_mean": 3.874,
+    "tail_decode_terminals": {
+      " [": 17,
+      " \u2026": 4,
+      " \u2015": 1,
+      "\u2026": 1,
+      " \u2013": 1,
+      " Salt": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W7_8",
+    "window": "7->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ")].": 10,
+      " coli": 6,
+      " Image": 3,
+      " Expedition": 1,
+      "osph": 1,
+      "hello": 1,
+      "\ufffd\ufffd": 1,
+      "odo": 1,
+      ")).": 1
+    },
+    "offdiag_cos_mean": 0.9396,
+    "offdiag_cos_min": 0.7522,
+    "margin_mean": 1.581,
+    "margin_max": 3.408,
+    "entropy_mean": 3.281,
+    "tail_decode_terminals": {
+      ")": 11,
+      " OK": 3,
+      " Image": 2,
+      "]": 2,
+      "y": 2,
+      "ke": 1,
+      "act": 1,
+      " '": 1,
+      " )": 1,
+      "h": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W7_9",
+    "window": "7->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 23,
+    "basin_sizes": [
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ")).": 10,
+      ").\"": 4,
+      ".\u300d": 3,
+      "\\)": 2,
+      " prepared": 2,
+      ").[": 1,
+      " zombie": 1,
+      " POW": 1,
+      " holder": 1
+    },
+    "offdiag_cos_mean": 0.9349,
+    "offdiag_cos_min": 0.7719,
+    "margin_mean": 0.577,
+    "margin_max": 2.635,
+    "entropy_mean": 3.088,
+    "tail_decode_terminals": {
+      ")": 13,
+      ").": 6,
+      " inventory": 2,
+      ",": 1,
+      "*": 1,
+      " bag": 1,
+      ");": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W7_10",
+    "window": "7->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " mu": 18,
+      ").[": 4,
+      " O": 1,
+      " Owner": 1,
+      " STAR": 1
+    },
+    "offdiag_cos_mean": 0.9482,
+    "offdiag_cos_min": 0.7902,
+    "margin_mean": 1.236,
+    "margin_max": 2.484,
+    "entropy_mean": 4.387,
+    "tail_decode_terminals": {
+      "/": 18,
+      " /": 5,
+      ")": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W7_11",
+    "window": "7->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 8,
+    "basin_sizes": [
+      7,
+      6,
+      3,
+      3,
+      2,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u300f": 13,
+      " ya": 12
+    },
+    "offdiag_cos_mean": 0.9742,
+    "offdiag_cos_min": 0.8794,
+    "margin_mean": 0.696,
+    "margin_max": 2.032,
+    "entropy_mean": 4.09,
+    "tail_decode_terminals": {
+      " TL": 17,
+      " n": 6,
+      "s": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W7_12",
+    "window": "7->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 24,
+    "basin_sizes": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u300f": 8,
+      ").[": 4,
+      " TL": 4,
+      " Below": 2,
+      " godd": 2,
+      " POP": 2,
+      " COMPLE": 1,
+      " ACT": 1,
+      " SUP": 1
+    },
+    "offdiag_cos_mean": 0.7048,
+    "offdiag_cos_min": 0.1016,
+    "margin_mean": 0.447,
+    "margin_max": 2.295,
+    "entropy_mean": 3.062,
+    "tail_decode_terminals": {
+      ").": 8,
+      "'": 5,
+      " TL": 5,
+      " Below": 2,
+      " SUP": 2,
+      " COMPLE": 1,
+      "\u2026": 1,
+      " Chapter": 1
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W7_13",
+    "window": "7->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      10,
+      4,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "oooo": 15,
+      " Gorge": 3,
+      " \u200b": 3,
+      " [\u2026]": 1,
+      " blah": 1,
+      "\u2010": 1,
+      " Image": 1
+    },
+    "offdiag_cos_mean": 0.6422,
+    "offdiag_cos_min": 0.2174,
+    "margin_mean": 0.395,
+    "margin_max": 1.239,
+    "entropy_mean": 4.112,
+    "tail_decode_terminals": {
+      "oooo": 15,
+      "\u2026": 4,
+      " spect": 1,
+      " Below": 1,
+      " shit": 1,
+      "!?": 1,
+      " END": 1,
+      "\u00a0": 1
+    },
+    "tail_agreement": "15/25"
+  },
+  {
+    "arm": "W7_14",
+    "window": "7->14",
+    "n": 25,
+    "converged": 24,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      5,
+      4,
+      4,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " ''": 14,
+      " Thr": 7,
+      "\u00b6": 2,
+      " PLEASE": 1,
+      " [\u2026]": 1
+    },
+    "offdiag_cos_mean": 0.9584,
+    "offdiag_cos_min": 0.7252,
+    "margin_mean": 0.472,
+    "margin_max": 1.523,
+    "entropy_mean": 5.833,
+    "tail_decode_terminals": {
+      "\u2014": 9,
+      " ''": 7,
+      "!": 7,
+      "...": 1,
+      " El": 1
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W7_15",
+    "window": "7->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 8,
+    "basin_sizes": [
+      14,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u2014\"": 25
+    },
+    "offdiag_cos_mean": 0.9778,
+    "offdiag_cos_min": 0.9246,
+    "margin_mean": 2.533,
+    "margin_max": 3.89,
+    "entropy_mean": 3.536,
+    "tail_decode_terminals": {
+      "\u2014\"": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W7_16",
+    "window": "7->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      7,
+      6,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u300f": 9,
+      "\u00a0": 8,
+      ").\"": 3,
+      " faintly": 1,
+      " Earthquake": 1,
+      "oooo": 1,
+      " dread": 1,
+      " whispers": 1
+    },
+    "offdiag_cos_mean": 0.7243,
+    "offdiag_cos_min": -0.0263,
+    "margin_mean": 0.726,
+    "margin_max": 1.879,
+    "entropy_mean": 3.325,
+    "tail_decode_terminals": {
+      "-": 13,
+      "\u00a0": 7,
+      "\u2026": 2,
+      ".": 1,
+      " A": 1,
+      "oooo": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W7_17",
+    "window": "7->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      14,
+      6,
+      2,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " GOP": 25
+    },
+    "offdiag_cos_mean": 0.9971,
+    "offdiag_cos_min": 0.9897,
+    "margin_mean": 0.622,
+    "margin_max": 0.984,
+    "entropy_mean": 5.25,
+    "tail_decode_terminals": {
+      " Trump": 24,
+      " Republican": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W7_18",
+    "window": "7->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 24,
+    "basin_sizes": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " DUI": 4,
+      "\u2026\"": 4,
+      " multiple": 4,
+      " goddamn": 4,
+      " Below": 2,
+      " Instructions": 2,
+      " etc": 1,
+      " attorney": 1,
+      "\"?": 1,
+      " preferably": 1,
+      " Thank": 1
+    },
+    "offdiag_cos_mean": 0.7143,
+    "offdiag_cos_min": 0.3159,
+    "margin_mean": 0.679,
+    "margin_max": 1.692,
+    "entropy_mean": 4.137,
+    "tail_decode_terminals": {
+      " no": 6,
+      " multiple": 6,
+      " would": 3,
+      " Below": 3,
+      ",": 2,
+      " portion": 1,
+      "\u2014\"": 1,
+      " roughly": 1,
+      "\u2026\"": 1,
+      " Thank": 1
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W7_19",
+    "window": "7->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 17,
+    "basin_sizes": [
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "oooo": 13,
+      " Below": 7,
+      " apologies": 4,
+      " hopefully": 1
+    },
+    "offdiag_cos_mean": 0.8866,
+    "offdiag_cos_min": 0.659,
+    "margin_mean": 0.842,
+    "margin_max": 1.437,
+    "entropy_mean": 2.063,
+    "tail_decode_terminals": {
+      "oooo": 14,
+      "\u2026": 4,
+      "uu": 3,
+      " Below": 2,
+      "...": 1,
+      " hopefully": 1
+    },
+    "tail_agreement": "13/25"
+  },
+  {
+    "arm": "W7_20",
+    "window": "7->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      4,
+      4,
+      4,
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Next": 12,
+      " roughly": 6,
+      " Instructions": 4,
+      " Replace": 1,
+      " should": 1,
+      "'d": 1
+    },
+    "offdiag_cos_mean": 0.9492,
+    "offdiag_cos_min": 0.8057,
+    "margin_mean": 0.428,
+    "margin_max": 1.098,
+    "entropy_mean": 3.218,
+    "tail_decode_terminals": {
+      " should": 13,
+      " Next": 8,
+      "'d": 4
+    },
+    "tail_agreement": "10/25"
+  },
+  {
+    "arm": "W7_22",
+    "window": "7->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 18,
+    "basin_sizes": [
+      7,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "...": 14,
+      " Che": 7,
+      " Eater": 3,
+      "oooooooo": 1
+    },
+    "offdiag_cos_mean": 0.791,
+    "offdiag_cos_min": 0.5175,
+    "margin_mean": 1.083,
+    "margin_max": 2.976,
+    "entropy_mean": 2.551,
+    "tail_decode_terminals": {
+      "...": 17,
+      "<|endoftext|>": 7,
+      " Eater": 1
+    },
+    "tail_agreement": "15/25"
+  },
+  {
+    "arm": "W7_23",
+    "window": "7->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      5,
+      4,
+      4,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " \ufffd": 16,
+      "\u2026": 7,
+      " xx": 2
+    },
+    "offdiag_cos_mean": 0.961,
+    "offdiag_cos_min": 0.8568,
+    "margin_mean": 0.635,
+    "margin_max": 1.482,
+    "entropy_mean": 2.997,
+    "tail_decode_terminals": {
+      " \ufffd": 16,
+      "\u2026": 7,
+      " xx": 2
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W8_8",
+    "window": "8->8",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u00b6": 19,
+      " NH": 3,
+      " Spoiler": 2,
+      " FINAL": 1
+    },
+    "offdiag_cos_mean": 0.9738,
+    "offdiag_cos_min": 0.8917,
+    "margin_mean": 1.179,
+    "margin_max": 2.796,
+    "entropy_mean": 3.018,
+    "tail_decode_terminals": {
+      "\n": 16,
+      "\n\n": 8,
+      " Wa": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W8_9",
+    "window": "8->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " slee": 9,
+      " sensitive": 8,
+      " intelligence": 2,
+      " quiet": 1,
+      " darkness": 1,
+      " treason": 1,
+      " darkest": 1,
+      " rough": 1,
+      " short": 1
+    },
+    "offdiag_cos_mean": 0.8407,
+    "offdiag_cos_min": 0.5022,
+    "margin_mean": 1.243,
+    "margin_max": 3.463,
+    "entropy_mean": 2.903,
+    "tail_decode_terminals": {
+      " dark": 13,
+      " Dark": 6,
+      " come": 2,
+      " rough": 1,
+      " forever": 1,
+      " short": 1,
+      " \\\"": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W8_10",
+    "window": "8->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " acronym": 15,
+      " FAQ": 5,
+      " Wiki": 2,
+      " acron": 1,
+      " \u00af": 1,
+      " Easter": 1
+    },
+    "offdiag_cos_mean": 0.8832,
+    "offdiag_cos_min": 0.6505,
+    "margin_mean": 0.941,
+    "margin_max": 2.197,
+    "entropy_mean": 3.054,
+    "tail_decode_terminals": {
+      " Qu": 10,
+      " Sp": 6,
+      " Tw": 2,
+      " List": 2,
+      " All": 1,
+      " An": 1,
+      " New": 1,
+      " term": 1,
+      " Easter": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W8_11",
+    "window": "8->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      8,
+      4,
+      4,
+      3,
+      3,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " Carb": 15,
+      " incent": 10
+    },
+    "offdiag_cos_mean": 0.9837,
+    "offdiag_cos_min": 0.9534,
+    "margin_mean": 0.841,
+    "margin_max": 1.862,
+    "entropy_mean": 3.311,
+    "tail_decode_terminals": {
+      "\u00a0": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W8_12",
+    "window": "8->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      7,
+      3,
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " rant": 16,
+      "\u00a0": 8,
+      " FAQ": 1
+    },
+    "offdiag_cos_mean": 0.96,
+    "offdiag_cos_min": 0.5747,
+    "margin_mean": 0.837,
+    "margin_max": 1.532,
+    "entropy_mean": 3.618,
+    "tail_decode_terminals": {
+      " TL": 17,
+      "\u00a0": 6,
+      " FAQ": 1,
+      " I": 1
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W8_13",
+    "window": "8->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      5,
+      5,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Ez": 7,
+      " EC": 7,
+      " Edit": 5,
+      "uld": 3,
+      " Quote": 3
+    },
+    "offdiag_cos_mean": 0.9109,
+    "offdiag_cos_min": 0.7691,
+    "margin_mean": 0.837,
+    "margin_max": 2.022,
+    "entropy_mean": 3.806,
+    "tail_decode_terminals": {
+      "...": 9,
+      " Edit": 8,
+      " \u200b": 8
+    },
+    "tail_agreement": "5/25"
+  },
+  {
+    "arm": "W8_14",
+    "window": "8->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      16,
+      7,
+      2
+    ],
+    "decode_terminals": {
+      " rant": 25
+    },
+    "offdiag_cos_mean": 0.9973,
+    "offdiag_cos_min": 0.9906,
+    "margin_mean": 1.11,
+    "margin_max": 2.524,
+    "entropy_mean": 3.212,
+    "tail_decode_terminals": {
+      " endless": 11,
+      " etc": 10,
+      "...": 4
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W8_16",
+    "window": "8->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      10,
+      4,
+      4,
+      3,
+      2,
+      2
+    ],
+    "decode_terminals": {
+      " dozen": 17,
+      " darn": 8
+    },
+    "offdiag_cos_mean": 0.9837,
+    "offdiag_cos_min": 0.9371,
+    "margin_mean": 0.815,
+    "margin_max": 1.059,
+    "entropy_mean": 4.048,
+    "tail_decode_terminals": {
+      " just": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W8_18",
+    "window": "8->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      13,
+      6,
+      3,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " lol": 25
+    },
+    "offdiag_cos_mean": 0.9953,
+    "offdiag_cos_min": 0.9829,
+    "margin_mean": 0.617,
+    "margin_max": 0.846,
+    "entropy_mean": 4.553,
+    "tail_decode_terminals": {
+      " would": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W8_20",
+    "window": "8->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      4,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " longest": 8,
+      " sorry": 3,
+      "...": 3,
+      " postseason": 3,
+      "!!": 2,
+      "is": 1,
+      " juggling": 1,
+      " fiscal": 1,
+      " math": 1,
+      " should": 1,
+      " NYU": 1
+    },
+    "offdiag_cos_mean": 0.6794,
+    "offdiag_cos_min": 0.3904,
+    "margin_mean": 1.245,
+    "margin_max": 2.49,
+    "entropy_mean": 2.727,
+    "tail_decode_terminals": {
+      " I": 9,
+      "...": 3,
+      " of": 2,
+      "!!": 2,
+      "!": 2,
+      "\u2014": 2,
+      " is": 1,
+      " staff": 1,
+      "\u00ad": 1,
+      " should": 1,
+      ".)": 1
+    },
+    "tail_agreement": "5/25"
+  },
+  {
+    "arm": "W8_22",
+    "window": "8->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      22,
+      3
+    ],
+    "decode_terminals": {
+      " \ufffd": 25
+    },
+    "offdiag_cos_mean": 0.9994,
+    "offdiag_cos_min": 0.9967,
+    "margin_mean": 0.891,
+    "margin_max": 1.616,
+    "entropy_mean": 1.763,
+    "tail_decode_terminals": {
+      " \ufffd": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W8_23",
+    "window": "8->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " \ufffd": 10,
+      "<|endoftext|>": 6,
+      "\u2026": 6,
+      " to": 1,
+      "\n": 1,
+      " //": 1
+    },
+    "offdiag_cos_mean": 0.9083,
+    "offdiag_cos_min": 0.668,
+    "margin_mean": 0.795,
+    "margin_max": 2.137,
+    "entropy_mean": 3.354,
+    "tail_decode_terminals": {
+      " \ufffd": 10,
+      "<|endoftext|>": 6,
+      "\u2026": 6,
+      " to": 1,
+      "\n": 1,
+      " //": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W9_9",
+    "window": "9->9",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Takeru": 5,
+      " des": 4,
+      " Creation": 4,
+      "\u30b7\u30e3": 3,
+      " ACTIONS": 2,
+      " la": 2,
+      " Trigger": 2,
+      " Properties": 1,
+      "flake": 1,
+      " redu": 1
+    },
+    "offdiag_cos_mean": 0.8314,
+    "offdiag_cos_min": 0.5797,
+    "margin_mean": 1.013,
+    "margin_max": 3.0,
+    "entropy_mean": 2.711,
+    "tail_decode_terminals": {
+      " \ufffd": 10,
+      " de": 5,
+      "\u30e9": 5,
+      "!": 2,
+      "ooo": 2,
+      " wa": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W9_10",
+    "window": "9->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " rightfully": 17,
+      " [": 2,
+      " somet": 2,
+      " Assassin": 1,
+      " potato": 1,
+      " anyways": 1,
+      " vanity": 1
+    },
+    "offdiag_cos_mean": 0.7711,
+    "offdiag_cos_min": 0.2177,
+    "margin_mean": 0.939,
+    "margin_max": 1.676,
+    "entropy_mean": 2.831,
+    "tail_decode_terminals": {
+      " eventually": 15,
+      " Lets": 3,
+      " [": 2,
+      " FOX": 1,
+      " As": 1,
+      " potato": 1,
+      " happy": 1,
+      " related": 1
+    },
+    "tail_agreement": "3/25"
+  },
+  {
+    "arm": "W9_11",
+    "window": "9->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      5,
+      4,
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Pros": 20,
+      " gmaxwell": 4,
+      " Assassins": 1
+    },
+    "offdiag_cos_mean": 0.8951,
+    "offdiag_cos_min": 0.6902,
+    "margin_mean": 3.532,
+    "margin_max": 5.386,
+    "entropy_mean": 1.387,
+    "tail_decode_terminals": {
+      " Pros": 16,
+      " ": 8,
+      " TL": 1
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W9_12",
+    "window": "9->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      7,
+      4,
+      4,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Ult": 25
+    },
+    "offdiag_cos_mean": 0.9797,
+    "offdiag_cos_min": 0.9204,
+    "margin_mean": 1.901,
+    "margin_max": 2.464,
+    "entropy_mean": 2.797,
+    "tail_decode_terminals": {
+      " etc": 12,
+      " Vegas": 12,
+      " Ult": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W9_13",
+    "window": "9->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      15,
+      7,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " hopefully": 25
+    },
+    "offdiag_cos_mean": 0.9957,
+    "offdiag_cos_min": 0.9793,
+    "margin_mean": 0.591,
+    "margin_max": 1.541,
+    "entropy_mean": 3.43,
+    "tail_decode_terminals": {
+      " win": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W9_14",
+    "window": "9->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      10,
+      4,
+      4,
+      3,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " dreaded": 25
+    },
+    "offdiag_cos_mean": 0.9862,
+    "offdiag_cos_min": 0.9481,
+    "margin_mean": 4.371,
+    "margin_max": 5.195,
+    "entropy_mean": 0.302,
+    "tail_decode_terminals": {
+      " dreaded": 24,
+      "\u2026": 1
+    },
+    "tail_agreement": "24/25"
+  },
+  {
+    "arm": "W9_15",
+    "window": "9->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      15,
+      10
+    ],
+    "decode_terminals": {
+      " dreaded": 25
+    },
+    "offdiag_cos_mean": 0.9979,
+    "offdiag_cos_min": 0.9924,
+    "margin_mean": 1.69,
+    "margin_max": 1.977,
+    "entropy_mean": 1.262,
+    "tail_decode_terminals": {
+      " dreaded": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W9_16",
+    "window": "9->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      8,
+      7,
+      4,
+      4,
+      2
+    ],
+    "decode_terminals": {
+      "\u00a0": 25
+    },
+    "offdiag_cos_mean": 0.9935,
+    "offdiag_cos_min": 0.9786,
+    "margin_mean": 3.202,
+    "margin_max": 3.938,
+    "entropy_mean": 0.718,
+    "tail_decode_terminals": {
+      "\u00a0": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W9_17",
+    "window": "9->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 4,
+    "basin_sizes": [
+      16,
+      5,
+      3,
+      1
+    ],
+    "decode_terminals": {
+      "ooo": 16,
+      "ratulations": 9
+    },
+    "offdiag_cos_mean": 0.9951,
+    "offdiag_cos_min": 0.98,
+    "margin_mean": 0.303,
+    "margin_max": 0.623,
+    "entropy_mean": 2.991,
+    "tail_decode_terminals": {
+      "ooo": 17,
+      "hew": 8
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W9_18",
+    "window": "9->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      7,
+      7,
+      6,
+      3,
+      2
+    ],
+    "decode_terminals": {
+      "\u2026)": 23,
+      "qi": 2
+    },
+    "offdiag_cos_mean": 0.9934,
+    "offdiag_cos_min": 0.9795,
+    "margin_mean": 1.63,
+    "margin_max": 3.041,
+    "entropy_mean": 3.136,
+    "tail_decode_terminals": {
+      " would": 17,
+      "'d": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W9_19",
+    "window": "9->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      5,
+      4,
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " till": 8,
+      "oooooooo": 7,
+      " next": 3,
+      " ever": 2,
+      "oooo": 2,
+      " countdown": 2,
+      " eternity": 1
+    },
+    "offdiag_cos_mean": 0.8904,
+    "offdiag_cos_min": 0.7356,
+    "margin_mean": 0.755,
+    "margin_max": 3.627,
+    "entropy_mean": 2.009,
+    "tail_decode_terminals": {
+      "\u2026": 15,
+      " ever": 9,
+      " until": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W9_20",
+    "window": "9->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 17,
+    "basin_sizes": [
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " enough": 7,
+      " hopefully": 7,
+      " survive": 6,
+      " heartbeat": 3,
+      " etc": 2
+    },
+    "offdiag_cos_mean": 0.8164,
+    "offdiag_cos_min": 0.5749,
+    "margin_mean": 1.027,
+    "margin_max": 4.017,
+    "entropy_mean": 3.231,
+    "tail_decode_terminals": {
+      " enough": 12,
+      " survive": 11,
+      " until": 1,
+      " exist": 1
+    },
+    "tail_agreement": "13/25"
+  },
+  {
+    "arm": "W9_22",
+    "window": "9->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 5,
+    "basin_sizes": [
+      15,
+      7,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "oooooooo": 21,
+      " \ufffd": 4
+    },
+    "offdiag_cos_mean": 0.9903,
+    "offdiag_cos_min": 0.933,
+    "margin_mean": 0.795,
+    "margin_max": 1.43,
+    "entropy_mean": 1.465,
+    "tail_decode_terminals": {
+      "oooooooo": 14,
+      " \ufffd": 11
+    },
+    "tail_agreement": "18/25"
+  },
+  {
+    "arm": "W9_23",
+    "window": "9->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " &": 11,
+      " \"": 4,
+      " /": 2,
+      "\u2026": 2,
+      " \ufffd": 2,
+      " forever": 1,
+      " Ass": 1,
+      " Most": 1,
+      "<|endoftext|>": 1
+    },
+    "offdiag_cos_mean": 0.7757,
+    "offdiag_cos_min": 0.4891,
+    "margin_mean": 0.933,
+    "margin_max": 1.717,
+    "entropy_mean": 4.051,
+    "tail_decode_terminals": {
+      " &": 11,
+      " \"": 4,
+      " /": 2,
+      "\u2026": 2,
+      " \ufffd": 2,
+      " forever": 1,
+      " Ass": 1,
+      " Most": 1,
+      "<|endoftext|>": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W10_10",
+    "window": "10->10",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      5,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Tooth": 24,
+      " Overt": 1
+    },
+    "offdiag_cos_mean": 0.9822,
+    "offdiag_cos_min": 0.928,
+    "margin_mean": 1.222,
+    "margin_max": 2.392,
+    "entropy_mean": 2.212,
+    "tail_decode_terminals": {
+      " Imp": 20,
+      " Mon": 5
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W10_11",
+    "window": "10->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      6,
+      5,
+      5,
+      3,
+      3,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " Overt": 25
+    },
+    "offdiag_cos_mean": 0.9885,
+    "offdiag_cos_min": 0.9542,
+    "margin_mean": 2.24,
+    "margin_max": 3.227,
+    "entropy_mean": 1.128,
+    "tail_decode_terminals": {
+      " Car": 15,
+      " Inf": 6,
+      " '": 4
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W10_12",
+    "window": "10->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      13,
+      12
+    ],
+    "decode_terminals": {
+      " [\u2026]": 25
+    },
+    "offdiag_cos_mean": 0.9988,
+    "offdiag_cos_min": 0.9949,
+    "margin_mean": 1.211,
+    "margin_max": 1.387,
+    "entropy_mean": 0.89,
+    "tail_decode_terminals": {
+      " '": 17,
+      " [\u2026]": 8
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W10_13",
+    "window": "10->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      " Fas": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9997,
+    "margin_mean": 0.386,
+    "margin_max": 0.42,
+    "entropy_mean": 4.044,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W10_14",
+    "window": "10->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "advertisement": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9997,
+    "margin_mean": 1.597,
+    "margin_max": 1.634,
+    "entropy_mean": 2.949,
+    "tail_decode_terminals": {
+      " the": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W10_16",
+    "window": "10->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 8,
+    "basin_sizes": [
+      9,
+      4,
+      4,
+      3,
+      2,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " etc": 16,
+      " Fas": 9
+    },
+    "offdiag_cos_mean": 0.9401,
+    "offdiag_cos_min": 0.8092,
+    "margin_mean": 1.755,
+    "margin_max": 3.667,
+    "entropy_mean": 2.308,
+    "tail_decode_terminals": {
+      " etc": 14,
+      " '": 10,
+      "-": 1
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W10_18",
+    "window": "10->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      5,
+      4,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "oooooooo": 13,
+      " [\u2026]": 7,
+      " until": 3,
+      " etc": 2
+    },
+    "offdiag_cos_mean": 0.4991,
+    "offdiag_cos_min": -0.2568,
+    "margin_mean": 0.815,
+    "margin_max": 3.239,
+    "entropy_mean": 1.739,
+    "tail_decode_terminals": {
+      " until": 17,
+      "-": 6,
+      "\u2026": 1,
+      " [\u2026]": 1
+    },
+    "tail_agreement": "4/25"
+  },
+  {
+    "arm": "W10_20",
+    "window": "10->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      4,
+      4,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Mobile": 8,
+      " Raspberry": 7,
+      " appliance": 4,
+      " until": 2,
+      "<|endoftext|>": 2,
+      " GOT": 1,
+      " countdown": 1
+    },
+    "offdiag_cos_mean": 0.8288,
+    "offdiag_cos_min": 0.4183,
+    "margin_mean": 1.14,
+    "margin_max": 4.589,
+    "entropy_mean": 4.281,
+    "tail_decode_terminals": {
+      " full": 6,
+      "<|endoftext|>": 6,
+      " in": 5,
+      " :": 2,
+      " until": 2,
+      " appliance": 2,
+      " GOT": 2
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W11_11",
+    "window": "11->11",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Ara": 6,
+      "]": 3,
+      " EG": 2,
+      " EFF": 2,
+      " blah": 1,
+      "...]": 1,
+      " Prairie": 1,
+      " inexpl": 1,
+      " egreg": 1,
+      " Reserv": 1,
+      " gri": 1,
+      "ror": 1,
+      " Cindy": 1,
+      " SF": 1,
+      " CJ": 1,
+      " THR": 1
+    },
+    "offdiag_cos_mean": 0.8748,
+    "offdiag_cos_min": 0.4153,
+    "margin_mean": 1.008,
+    "margin_max": 4.596,
+    "entropy_mean": 2.988,
+    "tail_decode_terminals": {
+      " J": 13,
+      "-": 4,
+      "]": 4,
+      " (": 2,
+      " SC": 2
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W11_12",
+    "window": "11->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 20,
+    "basin_sizes": [
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u00a0": 13,
+      " namely": 11,
+      "ror": 1
+    },
+    "offdiag_cos_mean": 0.8964,
+    "offdiag_cos_min": 0.448,
+    "margin_mean": 2.408,
+    "margin_max": 5.089,
+    "entropy_mean": 1.748,
+    "tail_decode_terminals": {
+      "\u00a0": 15,
+      " the": 5,
+      ",": 4,
+      " EC": 1
+    },
+    "tail_agreement": "13/25"
+  },
+  {
+    "arm": "W11_13",
+    "window": "11->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      13,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " evid": 13,
+      " shit": 6,
+      " goddamn": 3,
+      " [\u2026]": 1,
+      " rave": 1,
+      " aforementioned": 1
+    },
+    "offdiag_cos_mean": 0.764,
+    "offdiag_cos_min": 0.2423,
+    "margin_mean": 3.656,
+    "margin_max": 6.693,
+    "entropy_mean": 1.548,
+    "tail_decode_terminals": {
+      " evid": 14,
+      "\u2026": 7,
+      " the": 4
+    },
+    "tail_agreement": "13/25"
+  },
+  {
+    "arm": "W11_14",
+    "window": "11->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      13,
+      4,
+      3,
+      3,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Amen": 25
+    },
+    "offdiag_cos_mean": 0.9935,
+    "offdiag_cos_min": 0.9694,
+    "margin_mean": 1.195,
+    "margin_max": 1.627,
+    "entropy_mean": 4.411,
+    "tail_decode_terminals": {
+      " and": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W11_15",
+    "window": "11->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 14,
+    "basin_sizes": [
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " etc": 10,
+      " suspic": 6,
+      "\u2026)": 4,
+      " among": 3,
+      " [\u2026]": 2
+    },
+    "offdiag_cos_mean": 0.9643,
+    "offdiag_cos_min": 0.859,
+    "margin_mean": 0.632,
+    "margin_max": 2.035,
+    "entropy_mean": 3.239,
+    "tail_decode_terminals": {
+      " the": 13,
+      " among": 10,
+      " etc": 2
+    },
+    "tail_agreement": "4/25"
+  },
+  {
+    "arm": "W11_16",
+    "window": "11->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      20,
+      5
+    ],
+    "decode_terminals": {
+      " Afgh": 25
+    },
+    "offdiag_cos_mean": 0.9992,
+    "offdiag_cos_min": 0.9957,
+    "margin_mean": 1.26,
+    "margin_max": 1.407,
+    "entropy_mean": 3.923,
+    "tail_decode_terminals": {
+      " the": 22,
+      " among": 3
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W11_17",
+    "window": "11->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      17,
+      8
+    ],
+    "decode_terminals": {
+      "\u00a0": 25
+    },
+    "offdiag_cos_mean": 0.9992,
+    "offdiag_cos_min": 0.9967,
+    "margin_mean": 1.346,
+    "margin_max": 1.495,
+    "entropy_mean": 4.924,
+    "tail_decode_terminals": {
+      " the": 17,
+      ")": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W11_18",
+    "window": "11->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      11,
+      8,
+      6
+    ],
+    "decode_terminals": {
+      "\u2026)": 15,
+      " ": 10
+    },
+    "offdiag_cos_mean": 0.9956,
+    "offdiag_cos_min": 0.9842,
+    "margin_mean": 0.312,
+    "margin_max": 0.662,
+    "entropy_mean": 5.722,
+    "tail_decode_terminals": {
+      ")": 19,
+      ",": 6
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W11_19",
+    "window": "11->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 17,
+    "basin_sizes": [
+      5,
+      4,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " among": 6,
+      " [\u2026]": 5,
+      " UNESCO": 3,
+      " etc": 3,
+      "\u2026)": 2,
+      " recommended": 2,
+      " \u2026\"": 1,
+      " excluding": 1,
+      " North": 1,
+      " timeframe": 1
+    },
+    "offdiag_cos_mean": 0.6729,
+    "offdiag_cos_min": -0.1806,
+    "margin_mean": 0.568,
+    "margin_max": 1.267,
+    "entropy_mean": 4.309,
+    "tail_decode_terminals": {
+      ",": 6,
+      " among": 6,
+      " ": 3,
+      " or": 3,
+      "?": 2,
+      " would": 1,
+      " except": 1,
+      " and": 1,
+      " North": 1,
+      " still": 1
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W11_20",
+    "window": "11->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 14,
+    "basin_sizes": [
+      5,
+      5,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Besides": 14,
+      " belongs": 4,
+      " Apart": 3,
+      " wouldn": 1,
+      "\u2026.\"": 1,
+      " among": 1,
+      "mentioned": 1
+    },
+    "offdiag_cos_mean": 0.8291,
+    "offdiag_cos_min": 0.1443,
+    "margin_mean": 0.69,
+    "margin_max": 2.028,
+    "entropy_mean": 2.084,
+    "tail_decode_terminals": {
+      " belongs": 12,
+      " among": 9,
+      "<|endoftext|>": 2,
+      " to": 1,
+      " and": 1
+    },
+    "tail_agreement": "5/25"
+  },
+  {
+    "arm": "W11_22",
+    "window": "11->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      5,
+      4,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "es": 15,
+      ",": 5,
+      " is": 3,
+      " Body": 1,
+      " in": 1
+    },
+    "offdiag_cos_mean": 0.9728,
+    "offdiag_cos_min": 0.8907,
+    "margin_mean": 0.363,
+    "margin_max": 0.774,
+    "entropy_mean": 4.327,
+    "tail_decode_terminals": {
+      " in": 14,
+      ",": 8,
+      " is": 3
+    },
+    "tail_agreement": "9/25"
+  },
+  {
+    "arm": "W11_23",
+    "window": "11->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 21,
+    "basin_sizes": [
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " to": 9,
+      " the": 6,
+      " until": 5,
+      " and": 2,
+      ",": 2,
+      "s": 1
+    },
+    "offdiag_cos_mean": 0.8867,
+    "offdiag_cos_min": 0.7444,
+    "margin_mean": 1.011,
+    "margin_max": 4.564,
+    "entropy_mean": 4.096,
+    "tail_decode_terminals": {
+      " to": 9,
+      " the": 6,
+      " until": 5,
+      " and": 2,
+      ",": 2,
+      "s": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W12_12",
+    "window": "12->12",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " threatening": 3,
+      " malicious": 2,
+      " Osama": 1,
+      " defic": 1,
+      " vulner": 1,
+      " witnessing": 1,
+      " Coff": 1,
+      " Grateful": 1,
+      " stand": 1,
+      " participates": 1,
+      " Logged": 1,
+      " Norton": 1,
+      "ellen": 1,
+      " HQ": 1,
+      " transporter": 1,
+      " McKenna": 1,
+      " Miche": 1,
+      " Fitzgerald": 1,
+      " Trinidad": 1,
+      "aples": 1,
+      " Wass": 1,
+      " resurg": 1
+    },
+    "offdiag_cos_mean": 0.6028,
+    "offdiag_cos_min": 0.1804,
+    "margin_mean": 1.534,
+    "margin_max": 5.56,
+    "entropy_mean": 2.226,
+    "tail_decode_terminals": {
+      ",": 11,
+      "\n": 6,
+      " I": 3,
+      "<|endoftext|>": 2,
+      "\u200b": 1,
+      " He": 1,
+      " Sh": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W12_13",
+    "window": "12->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 4,
+    "basin_sizes": [
+      22,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " evid": 25
+    },
+    "offdiag_cos_mean": 0.9861,
+    "offdiag_cos_min": 0.8621,
+    "margin_mean": 3.979,
+    "margin_max": 4.076,
+    "entropy_mean": 0.151,
+    "tail_decode_terminals": {
+      " till": 24,
+      " is": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W12_14",
+    "window": "12->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 9,
+    "basin_sizes": [
+      8,
+      5,
+      4,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " \ufffd": 18,
+      "Nob": 4,
+      " Happy": 3
+    },
+    "offdiag_cos_mean": 0.6126,
+    "offdiag_cos_min": -0.4079,
+    "margin_mean": 0.249,
+    "margin_max": 0.861,
+    "entropy_mean": 2.292,
+    "tail_decode_terminals": {
+      "<|endoftext|>": 21,
+      ",": 4
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W12_15",
+    "window": "12->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      5,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " HuffPost": 23,
+      " Interest": 2
+    },
+    "offdiag_cos_mean": 0.9661,
+    "offdiag_cos_min": 0.8564,
+    "margin_mean": 1.534,
+    "margin_max": 2.981,
+    "entropy_mean": 1.82,
+    "tail_decode_terminals": {
+      "<|endoftext|>": 24,
+      " Interest": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W12_16",
+    "window": "12->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      16,
+      6,
+      3
+    ],
+    "decode_terminals": {
+      "\u00b6": 25
+    },
+    "offdiag_cos_mean": 0.9967,
+    "offdiag_cos_min": 0.9878,
+    "margin_mean": 2.226,
+    "margin_max": 3.21,
+    "entropy_mean": 1.598,
+    "tail_decode_terminals": {
+      "<|endoftext|>": 13,
+      " Happy": 10,
+      "\n": 2
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W12_17",
+    "window": "12->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 9,
+    "basin_sizes": [
+      8,
+      6,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u00b6": 25
+    },
+    "offdiag_cos_mean": 0.9728,
+    "offdiag_cos_min": 0.8866,
+    "margin_mean": 7.289,
+    "margin_max": 9.392,
+    "entropy_mean": 0.123,
+    "tail_decode_terminals": {
+      "\u00b6": 17,
+      " or": 8
+    },
+    "tail_agreement": "17/25"
+  },
+  {
+    "arm": "W12_18",
+    "window": "12->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 9,
+    "basin_sizes": [
+      8,
+      6,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "lav": 15,
+      " approx": 8,
+      "al": 2
+    },
+    "offdiag_cos_mean": 0.9641,
+    "offdiag_cos_min": 0.8931,
+    "margin_mean": 1.225,
+    "margin_max": 3.014,
+    "entropy_mean": 4.601,
+    "tail_decode_terminals": {
+      "al": 17,
+      ",": 8
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W12_19",
+    "window": "12->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      7,
+      4,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " [\u2026]": 23,
+      "911": 1,
+      " EMS": 1
+    },
+    "offdiag_cos_mean": 0.9377,
+    "offdiag_cos_min": 0.8201,
+    "margin_mean": 1.579,
+    "margin_max": 2.967,
+    "entropy_mean": 3.258,
+    "tail_decode_terminals": {
+      " from": 16,
+      " (": 8,
+      " on": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W12_20",
+    "window": "12->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      6,
+      6,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " [\u2026]": 14,
+      " Us": 6,
+      " Shal": 3,
+      " \ufffd": 2
+    },
+    "offdiag_cos_mean": 0.9209,
+    "offdiag_cos_min": 0.7557,
+    "margin_mean": 0.465,
+    "margin_max": 1.395,
+    "entropy_mean": 4.117,
+    "tail_decode_terminals": {
+      " \u2014": 16,
+      " like": 5,
+      " (": 3,
+      " Us": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W12_22",
+    "window": "12->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      12,
+      4,
+      3,
+      3,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " or": 25
+    },
+    "offdiag_cos_mean": 0.9971,
+    "offdiag_cos_min": 0.9881,
+    "margin_mean": 1.899,
+    "margin_max": 2.641,
+    "entropy_mean": 2.894,
+    "tail_decode_terminals": {
+      " or": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W13_13",
+    "window": "13->13",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      19,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " till": 20,
+      " artif": 1,
+      " storefront": 1,
+      " clients": 1,
+      " mosqu": 1,
+      " himself": 1
+    },
+    "offdiag_cos_mean": 0.852,
+    "offdiag_cos_min": 0.2383,
+    "margin_mean": 0.682,
+    "margin_max": 2.755,
+    "entropy_mean": 1.952,
+    "tail_decode_terminals": {
+      " till": 21,
+      " \"": 2,
+      " \u00ad": 1,
+      " \u2013": 1
+    },
+    "tail_agreement": "20/25"
+  },
+  {
+    "arm": "W13_14",
+    "window": "13->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      15,
+      10
+    ],
+    "decode_terminals": {
+      "avascript": 25
+    },
+    "offdiag_cos_mean": 0.9986,
+    "offdiag_cos_min": 0.9941,
+    "margin_mean": 1.579,
+    "margin_max": 1.917,
+    "entropy_mean": 2.055,
+    "tail_decode_terminals": {
+      " busy": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W13_15",
+    "window": "13->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 18,
+    "basin_sizes": [
+      4,
+      3,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Sev": 8,
+      " \ufffd": 6,
+      " \u00ad": 4,
+      "\u30c4": 3,
+      " instance": 2,
+      " demonstrations": 1,
+      " respectively": 1
+    },
+    "offdiag_cos_mean": 0.8947,
+    "offdiag_cos_min": 0.4184,
+    "margin_mean": 1.211,
+    "margin_max": 5.051,
+    "entropy_mean": 3.352,
+    "tail_decode_terminals": {
+      " \"": 24,
+      " respectively": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W13_16",
+    "window": "13->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      5,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " respectively": 17,
+      " \u00ad": 8
+    },
+    "offdiag_cos_mean": 0.7451,
+    "offdiag_cos_min": 0.3575,
+    "margin_mean": 3.572,
+    "margin_max": 7.448,
+    "entropy_mean": 1.41,
+    "tail_decode_terminals": {
+      " respectively": 14,
+      " (": 8,
+      " I": 3
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W13_17",
+    "window": "13->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      7,
+      6,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " citation": 11,
+      " Ichigo": 8,
+      " later": 3,
+      " Designs": 2,
+      "~": 1
+    },
+    "offdiag_cos_mean": 0.9506,
+    "offdiag_cos_min": 0.8317,
+    "margin_mean": 0.909,
+    "margin_max": 3.012,
+    "entropy_mean": 3.419,
+    "tail_decode_terminals": {
+      "<|endoftext|>": 17,
+      " later": 8
+    },
+    "tail_agreement": "3/25"
+  },
+  {
+    "arm": "W13_18",
+    "window": "13->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      6,
+      5,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " until": 16,
+      " respectively": 8,
+      "nick": 1
+    },
+    "offdiag_cos_mean": 0.7787,
+    "offdiag_cos_min": 0.4831,
+    "margin_mean": 4.764,
+    "margin_max": 11.526,
+    "entropy_mean": 1.523,
+    "tail_decode_terminals": {
+      " until": 16,
+      " respectively": 8,
+      ".": 1
+    },
+    "tail_agreement": "24/25"
+  },
+  {
+    "arm": "W13_19",
+    "window": "13->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      4,
+      4,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " until": 24,
+      ".).": 1
+    },
+    "offdiag_cos_mean": 0.932,
+    "offdiag_cos_min": 0.7954,
+    "margin_mean": 1.221,
+    "margin_max": 1.624,
+    "entropy_mean": 0.881,
+    "tail_decode_terminals": {
+      " until": 24,
+      ".": 1
+    },
+    "tail_agreement": "24/25"
+  },
+  {
+    "arm": "W13_20",
+    "window": "13->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 24,
+    "basin_sizes": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "<|endoftext|>": 7,
+      " [\u2026]": 4,
+      " Wedding": 4,
+      " or": 3,
+      " \ufffd": 2,
+      ".": 1,
+      " Flor": 1,
+      " Zip": 1,
+      " newborn": 1,
+      " ASAP": 1
+    },
+    "offdiag_cos_mean": 0.7303,
+    "offdiag_cos_min": 0.5302,
+    "margin_mean": 1.462,
+    "margin_max": 3.911,
+    "entropy_mean": 1.981,
+    "tail_decode_terminals": {
+      "<|endoftext|>": 8,
+      " or": 4,
+      "\n": 3,
+      " [\u2026]": 3,
+      ",": 3,
+      " Personal": 2,
+      ".": 1,
+      " again": 1
+    },
+    "tail_agreement": "13/25"
+  },
+  {
+    "arm": "W13_21",
+    "window": "13->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      6,
+      5,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Kra": 14,
+      " until": 6,
+      " today": 3,
+      " ever": 2
+    },
+    "offdiag_cos_mean": 0.8541,
+    "offdiag_cos_min": 0.6228,
+    "margin_mean": 1.392,
+    "margin_max": 4.937,
+    "entropy_mean": 2.362,
+    "tail_decode_terminals": {
+      " Kra": 7,
+      ".": 5,
+      " until": 4,
+      " today": 4,
+      " ever": 2,
+      " her": 1,
+      " and": 1,
+      " for": 1
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W13_22",
+    "window": "13->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      11,
+      5,
+      3,
+      2,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\":": 25
+    },
+    "offdiag_cos_mean": 0.993,
+    "offdiag_cos_min": 0.9691,
+    "margin_mean": 0.949,
+    "margin_max": 2.773,
+    "entropy_mean": 1.033,
+    "tail_decode_terminals": {
+      "\":": 23,
+      ":": 2
+    },
+    "tail_agreement": "23/25"
+  },
+  {
+    "arm": "W13_23",
+    "window": "13->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 18,
+    "basin_sizes": [
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\"": 12,
+      "I": 5,
+      "my": 3,
+      ",": 2,
+      " Sr": 2,
+      "s": 1
+    },
+    "offdiag_cos_mean": 0.9115,
+    "offdiag_cos_min": 0.8198,
+    "margin_mean": 0.415,
+    "margin_max": 0.932,
+    "entropy_mean": 4.47,
+    "tail_decode_terminals": {
+      "\"": 12,
+      "I": 5,
+      "my": 3,
+      ",": 2,
+      " Sr": 2,
+      "s": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W14_14",
+    "window": "14->14",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "ospace": 5,
+      "ascus": 2,
+      " twitter": 2,
+      "ail": 2,
+      " condolences": 2,
+      " mourn": 2,
+      "ells": 1,
+      "urch": 1,
+      " please": 1,
+      " UAE": 1,
+      " wor": 1,
+      "yright": 1,
+      " hail": 1,
+      " feared": 1,
+      "\ufffd": 1,
+      " prayers": 1
+    },
+    "offdiag_cos_mean": 0.8041,
+    "offdiag_cos_min": 0.4509,
+    "margin_mean": 1.364,
+    "margin_max": 4.579,
+    "entropy_mean": 2.489,
+    "tail_decode_terminals": {
+      "'": 8,
+      ":": 6,
+      "<|endoftext|>": 4,
+      "EST": 1,
+      " -": 1,
+      "@": 1,
+      " say": 1,
+      "rest": 1,
+      " alarm": 1,
+      " pic": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W14_15",
+    "window": "14->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      4,
+      4,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Photo": 15,
+      "sonian": 4,
+      ".": 4,
+      " fluent": 1,
+      " hect": 1
+    },
+    "offdiag_cos_mean": 0.9131,
+    "offdiag_cos_min": 0.6838,
+    "margin_mean": 0.897,
+    "margin_max": 2.379,
+    "entropy_mean": 2.262,
+    "tail_decode_terminals": {
+      ".": 13,
+      " Photo": 12
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W14_16",
+    "window": "14->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 16,
+    "basin_sizes": [
+      5,
+      3,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " impressed": 12,
+      " anything": 5,
+      " nor": 4,
+      " Iss": 2,
+      " mourn": 1,
+      " buds": 1
+    },
+    "offdiag_cos_mean": 0.8762,
+    "offdiag_cos_min": 0.4302,
+    "margin_mean": 0.93,
+    "margin_max": 2.024,
+    "entropy_mean": 2.654,
+    "tail_decode_terminals": {
+      " nor": 8,
+      " anything": 5,
+      " doubt": 4,
+      " Show": 3,
+      " or": 2,
+      " Nor": 1,
+      "\n": 1,
+      " Re": 1
+    },
+    "tail_agreement": "1/25"
+  },
+  {
+    "arm": "W14_17",
+    "window": "14->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      6,
+      4,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " or": 9,
+      " \ufffd": 8,
+      " signal": 3,
+      " favor": 3,
+      " favoring": 2
+    },
+    "offdiag_cos_mean": 0.8968,
+    "offdiag_cos_min": 0.6265,
+    "margin_mean": 1.057,
+    "margin_max": 3.126,
+    "entropy_mean": 2.446,
+    "tail_decode_terminals": {
+      " or": 17,
+      " S": 4,
+      " signal": 3,
+      " .": 1
+    },
+    "tail_agreement": "12/25"
+  },
+  {
+    "arm": "W14_18",
+    "window": "14->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      14,
+      11
+    ],
+    "decode_terminals": {
+      "\"?": 25
+    },
+    "offdiag_cos_mean": 0.9984,
+    "offdiag_cos_min": 0.9931,
+    "margin_mean": 2.642,
+    "margin_max": 2.75,
+    "entropy_mean": 0.349,
+    "tail_decode_terminals": {
+      "\"?": 16,
+      "?": 9
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W14_19",
+    "window": "14->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      14,
+      9,
+      2
+    ],
+    "decode_terminals": {
+      ")?": 22,
+      "\"?": 3
+    },
+    "offdiag_cos_mean": 0.9978,
+    "offdiag_cos_min": 0.9907,
+    "margin_mean": 0.98,
+    "margin_max": 1.448,
+    "entropy_mean": 0.974,
+    "tail_decode_terminals": {
+      "?": 25
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W14_20",
+    "window": "14->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      8,
+      6,
+      3,
+      3,
+      2,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " Than": 9,
+      ".).": 8,
+      ".]": 5,
+      " than": 3
+    },
+    "offdiag_cos_mean": 0.9611,
+    "offdiag_cos_min": 0.8758,
+    "margin_mean": 0.434,
+    "margin_max": 1.265,
+    "entropy_mean": 2.205,
+    "tail_decode_terminals": {
+      ".": 16,
+      " than": 9
+    },
+    "tail_agreement": "3/25"
+  },
+  {
+    "arm": "W14_22",
+    "window": "14->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 14,
+    "basin_sizes": [
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " or": 18,
+      "\":": 7
+    },
+    "offdiag_cos_mean": 0.9441,
+    "offdiag_cos_min": 0.8327,
+    "margin_mean": 2.344,
+    "margin_max": 7.122,
+    "entropy_mean": 0.653,
+    "tail_decode_terminals": {
+      " or": 24,
+      "\":": 1
+    },
+    "tail_agreement": "19/25"
+  },
+  {
+    "arm": "W14_23",
+    "window": "14->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\"": 12,
+      "like": 6,
+      "no": 2,
+      "\":": 2,
+      " is": 1,
+      "rat": 1,
+      "Appearance": 1
+    },
+    "offdiag_cos_mean": 0.8826,
+    "offdiag_cos_min": 0.7125,
+    "margin_mean": 0.559,
+    "margin_max": 1.796,
+    "entropy_mean": 4.325,
+    "tail_decode_terminals": {
+      "\"": 12,
+      "like": 6,
+      "no": 2,
+      "\":": 2,
+      " is": 1,
+      "rat": 1,
+      "Appearance": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W15_15",
+    "window": "15->15",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "olls": 2,
+      " (\u00a3": 2,
+      " until": 1,
+      "canon": 1,
+      " awhile": 1,
+      " Metro": 1,
+      " eval": 1,
+      " Burgess": 1,
+      "ollo": 1,
+      " FIFA": 1,
+      " archaeological": 1,
+      "ADVERTISEMENT": 1,
+      " \u00b5": 1,
+      " ].": 1,
+      " Setup": 1,
+      " contempor": 1,
+      "\u30ea": 1,
+      " dates": 1,
+      " rumors": 1,
+      "idon": 1,
+      " RPM": 1,
+      " MLB": 1,
+      "IRO": 1
+    },
+    "offdiag_cos_mean": 0.703,
+    "offdiag_cos_min": 0.343,
+    "margin_mean": 1.394,
+    "margin_max": 3.462,
+    "entropy_mean": 1.771,
+    "tail_decode_terminals": {
+      " and": 19,
+      " again": 1,
+      " give": 1,
+      " Han": 1,
+      " ]": 1,
+      " \u00a3": 1,
+      " .\"": 1
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W15_16",
+    "window": "15->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " or": 6,
+      " spokeswoman": 5,
+      " McCarthy": 3,
+      " NR": 3,
+      " likewise": 3,
+      " Network": 1,
+      " Brookings": 1,
+      " \u00ad": 1,
+      " Paramount": 1,
+      "ometime": 1
+    },
+    "offdiag_cos_mean": 0.7303,
+    "offdiag_cos_min": -0.0055,
+    "margin_mean": 1.826,
+    "margin_max": 8.428,
+    "entropy_mean": 2.72,
+    "tail_decode_terminals": {
+      " or": 22,
+      " comment": 1,
+      " early": 1,
+      " likewise": 1
+    },
+    "tail_agreement": "7/25"
+  },
+  {
+    "arm": "W15_17",
+    "window": "15->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      7,
+      5,
+      5,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " manga": 20,
+      " same": 3,
+      " anime": 2
+    },
+    "offdiag_cos_mean": 0.8577,
+    "offdiag_cos_min": 0.2005,
+    "margin_mean": 0.838,
+    "margin_max": 1.427,
+    "entropy_mean": 0.792,
+    "tail_decode_terminals": {
+      " cute": 17,
+      " Shin": 5,
+      " too": 3
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W15_18",
+    "window": "15->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      8,
+      7,
+      3,
+      3,
+      2,
+      2
+    ],
+    "decode_terminals": {
+      " Quebec": 25
+    },
+    "offdiag_cos_mean": 0.9793,
+    "offdiag_cos_min": 0.9055,
+    "margin_mean": 2.397,
+    "margin_max": 3.391,
+    "entropy_mean": 0.794,
+    "tail_decode_terminals": {
+      " Quebec": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W15_19",
+    "window": "15->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      8,
+      6,
+      3,
+      3,
+      2,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " Quebec": 14,
+      " Canadian": 11
+    },
+    "offdiag_cos_mean": 0.9774,
+    "offdiag_cos_min": 0.9213,
+    "margin_mean": 0.471,
+    "margin_max": 1.043,
+    "entropy_mean": 1.931,
+    "tail_decode_terminals": {
+      " Quebec": 19,
+      " Montreal": 4,
+      " Canadian": 2
+    },
+    "tail_agreement": "16/25"
+  },
+  {
+    "arm": "W15_20",
+    "window": "15->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      7,
+      6,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Israeli": 9,
+      " Rav": 8,
+      " inf": 5,
+      " again": 1,
+      " metro": 1,
+      "mingham": 1
+    },
+    "offdiag_cos_mean": 0.7677,
+    "offdiag_cos_min": 0.1404,
+    "margin_mean": 1.049,
+    "margin_max": 7.286,
+    "entropy_mean": 3.07,
+    "tail_decode_terminals": {
+      " Israeli": 8,
+      " El": 8,
+      " inf": 6,
+      " again": 1,
+      " once": 1,
+      " \u00ad": 1
+    },
+    "tail_agreement": "14/25"
+  },
+  {
+    "arm": "W15_21",
+    "window": "15->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " until": 6,
+      " than": 3,
+      " \u2014": 3,
+      " if": 2,
+      " brake": 1,
+      " Sakura": 1,
+      " Pound": 1,
+      " Instagram": 1,
+      "?\u300d": 1,
+      " dent": 1,
+      " today": 1,
+      " Israeli": 1,
+      " veh": 1,
+      " chest": 1,
+      " bypass": 1
+    },
+    "offdiag_cos_mean": 0.3864,
+    "offdiag_cos_min": 0.1098,
+    "margin_mean": 1.937,
+    "margin_max": 9.013,
+    "entropy_mean": 1.817,
+    "tail_decode_terminals": {
+      " until": 7,
+      " \u2014": 5,
+      " than": 3,
+      " if": 2,
+      " Sakura": 1,
+      "\u2014": 1,
+      " or": 1,
+      " more": 1,
+      "?": 1,
+      " today": 1,
+      " chest": 1,
+      " bypass": 1
+    },
+    "tail_agreement": "18/25"
+  },
+  {
+    "arm": "W15_22",
+    "window": "15->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 8,
+    "basin_sizes": [
+      9,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      "\":": 22,
+      " or": 3
+    },
+    "offdiag_cos_mean": 0.9835,
+    "offdiag_cos_min": 0.9485,
+    "margin_mean": 1.14,
+    "margin_max": 3.703,
+    "entropy_mean": 2.415,
+    "tail_decode_terminals": {
+      " or": 16,
+      "\":": 9
+    },
+    "tail_agreement": "12/25"
+  },
+  {
+    "arm": "W15_23",
+    "window": "15->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      7,
+      3,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\"": 23,
+      "Y": 2
+    },
+    "offdiag_cos_mean": 0.9231,
+    "offdiag_cos_min": 0.7699,
+    "margin_mean": 1.029,
+    "margin_max": 2.169,
+    "entropy_mean": 4.915,
+    "tail_decode_terminals": {
+      "\"": 23,
+      "Y": 2
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W16_16",
+    "window": "16->16",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " likewise": 18,
+      " \u20ac": 3,
+      " M\u00fc": 3,
+      " twice": 1
+    },
+    "offdiag_cos_mean": 0.8898,
+    "offdiag_cos_min": 0.5502,
+    "margin_mean": 3.493,
+    "margin_max": 9.029,
+    "entropy_mean": 0.222,
+    "tail_decode_terminals": {
+      " too": 20,
+      " M\u00fc": 2,
+      " also": 2,
+      " \u20ac": 1
+    },
+    "tail_agreement": "3/25"
+  },
+  {
+    "arm": "W16_17",
+    "window": "16->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " same": 25
+    },
+    "offdiag_cos_mean": 0.917,
+    "offdiag_cos_min": 0.6369,
+    "margin_mean": 2.873,
+    "margin_max": 7.976,
+    "entropy_mean": 0.279,
+    "tail_decode_terminals": {
+      " same": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W16_18",
+    "window": "16->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 3,
+    "basin_sizes": [
+      23,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Quebec": 23,
+      " same": 2
+    },
+    "offdiag_cos_mean": 0.9152,
+    "offdiag_cos_min": 0.2586,
+    "margin_mean": 0.573,
+    "margin_max": 2.45,
+    "entropy_mean": 1.273,
+    "tail_decode_terminals": {
+      " Quebec": 12,
+      " Ottawa": 11,
+      " too": 2
+    },
+    "tail_agreement": "12/25"
+  },
+  {
+    "arm": "W16_19",
+    "window": "16->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 2,
+    "basin_sizes": [
+      22,
+      3
+    ],
+    "decode_terminals": {
+      " M\u00fc": 25
+    },
+    "offdiag_cos_mean": 0.9995,
+    "offdiag_cos_min": 0.9981,
+    "margin_mean": 0.843,
+    "margin_max": 0.89,
+    "entropy_mean": 1.217,
+    "tail_decode_terminals": {
+      " M\u00fc": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W16_20",
+    "window": "16->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 19,
+    "basin_sizes": [
+      4,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " innings": 5,
+      " Yu": 4,
+      " Sweden": 2,
+      " Nationals": 2,
+      " Belgian": 1,
+      " ,\"": 1,
+      " would": 1,
+      "CBC": 1,
+      "ctive": 1,
+      ",\"": 1,
+      " Quebec": 1,
+      " pop": 1,
+      " euro": 1,
+      " Sloven": 1,
+      " websites": 1,
+      "igh": 1
+    },
+    "offdiag_cos_mean": 0.3863,
+    "offdiag_cos_min": 0.001,
+    "margin_mean": 0.387,
+    "margin_max": 1.361,
+    "entropy_mean": 2.367,
+    "tail_decode_terminals": {
+      " can": 11,
+      ",\"": 3,
+      " -": 2,
+      " Montreal": 2,
+      "\u00f8": 2,
+      " would": 1,
+      "\"": 1,
+      " soon": 1,
+      " than": 1,
+      " .": 1
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W16_21",
+    "window": "16->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Israeli": 6,
+      " Ireland": 3,
+      " .": 2,
+      " Ulster": 2,
+      " Sweden": 1,
+      " Irish": 1,
+      " Yorkshire": 1,
+      " likely": 1,
+      ".\u2014": 1,
+      " Dublin": 1,
+      " EVs": 1,
+      " if": 1,
+      " Belfast": 1,
+      " today": 1,
+      " until": 1,
+      " Anne": 1
+    },
+    "offdiag_cos_mean": 0.43,
+    "offdiag_cos_min": 0.0138,
+    "margin_mean": 1.178,
+    "margin_max": 5.523,
+    "entropy_mean": 1.714,
+    "tail_decode_terminals": {
+      " .": 5,
+      " will": 5,
+      " Irish": 3,
+      "\u2014": 2,
+      " likely": 2,
+      " Anne": 2,
+      " Sweden": 1,
+      " ,": 1,
+      " if": 1,
+      " \ufffd": 1,
+      " today": 1,
+      " until": 1
+    },
+    "tail_agreement": "8/25"
+  },
+  {
+    "arm": "W16_22",
+    "window": "16->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\u00ad": 3,
+      "\"": 3,
+      " Irish": 3,
+      " Sean": 3,
+      "grad": 2,
+      "\u00ed": 1,
+      "agu": 1,
+      "_": 1,
+      " Munich": 1,
+      "ji": 1,
+      "ending": 1,
+      "Fl": 1,
+      "gest": 1,
+      " Sammy": 1,
+      "Y": 1,
+      "cru": 1
+    },
+    "offdiag_cos_mean": 0.621,
+    "offdiag_cos_min": 0.3204,
+    "margin_mean": 0.798,
+    "margin_max": 2.576,
+    "entropy_mean": 3.724,
+    "tail_decode_terminals": {
+      "\"": 5,
+      "\u00ad": 3,
+      " Sean": 3,
+      " \ufffd": 2,
+      "agu": 1,
+      "-": 1,
+      " Munich": 1,
+      "grad": 1,
+      " as": 1,
+      "G": 1,
+      " \"": 1,
+      " \u2014": 1,
+      "so": 1,
+      " -": 1,
+      "Y": 1,
+      " .": 1
+    },
+    "tail_agreement": "11/25"
+  },
+  {
+    "arm": "W16_23",
+    "window": "16->23",
+    "n": 25,
+    "converged": 20,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\"": 14,
+      "s": 6,
+      " \"": 2,
+      "before": 1,
+      "rew": 1,
+      " BRE": 1
+    },
+    "offdiag_cos_mean": 0.766,
+    "offdiag_cos_min": 0.5023,
+    "margin_mean": 1.308,
+    "margin_max": 2.883,
+    "entropy_mean": 3.929,
+    "tail_decode_terminals": {
+      "\"": 14,
+      "s": 6,
+      " \"": 2,
+      "before": 1,
+      "rew": 1,
+      " BRE": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W17_17",
+    "window": "17->17",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " however": 6,
+      " often": 5,
+      " same": 5,
+      " HUN": 1,
+      " yearly": 1,
+      " occasionally": 1,
+      " Ulster": 1,
+      "EST": 1,
+      " call": 1,
+      "same": 1,
+      "occ": 1,
+      " CALL": 1
+    },
+    "offdiag_cos_mean": 0.4959,
+    "offdiag_cos_min": -0.0181,
+    "margin_mean": 3.471,
+    "margin_max": 14.027,
+    "entropy_mean": 0.881,
+    "tail_decode_terminals": {
+      " however": 7,
+      " same": 6,
+      " often": 5,
+      " QU": 1,
+      " occasionally": 1,
+      " SH": 1,
+      " PER": 1,
+      " imp": 1,
+      " \u2212": 1,
+      " CALL": 1
+    },
+    "tail_agreement": "12/25"
+  },
+  {
+    "arm": "W17_18",
+    "window": "17->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 1,
+    "basin_sizes": [
+      25
+    ],
+    "decode_terminals": {
+      "':": 25
+    },
+    "offdiag_cos_mean": 0.9999,
+    "offdiag_cos_min": 0.9995,
+    "margin_mean": 1.817,
+    "margin_max": 1.841,
+    "entropy_mean": 0.486,
+    "tail_decode_terminals": {
+      "':": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W17_19",
+    "window": "17->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 17,
+    "basin_sizes": [
+      4,
+      4,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ".).": 16,
+      " Tottenham": 5,
+      " Emirates": 2,
+      "alf": 1,
+      ".\"": 1
+    },
+    "offdiag_cos_mean": 0.6597,
+    "offdiag_cos_min": 0.1508,
+    "margin_mean": 2.477,
+    "margin_max": 7.646,
+    "entropy_mean": 1.917,
+    "tail_decode_terminals": {
+      ".\"": 13,
+      " Tottenham": 5,
+      " same": 4,
+      ".": 3
+    },
+    "tail_agreement": "6/25"
+  },
+  {
+    "arm": "W17_20",
+    "window": "17->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      7,
+      5,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " but": 16,
+      " lately": 6,
+      " been": 3
+    },
+    "offdiag_cos_mean": 0.858,
+    "offdiag_cos_min": 0.6069,
+    "margin_mean": 2.846,
+    "margin_max": 4.416,
+    "entropy_mean": 0.692,
+    "tail_decode_terminals": {
+      " but": 16,
+      " now": 6,
+      " been": 2,
+      " had": 1
+    },
+    "tail_agreement": "18/25"
+  },
+  {
+    "arm": "W17_21",
+    "window": "17->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      6,
+      5,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " but": 12,
+      " today": 3,
+      " \u00a3": 2,
+      " \u2014": 2,
+      " if": 2,
+      " now": 1,
+      "\":": 1,
+      " cle": 1,
+      " Arsenal": 1
+    },
+    "offdiag_cos_mean": 0.7338,
+    "offdiag_cos_min": 0.4125,
+    "margin_mean": 2.173,
+    "margin_max": 3.773,
+    "entropy_mean": 0.93,
+    "tail_decode_terminals": {
+      " but": 12,
+      " now": 3,
+      " if": 3,
+      "\u2014": 2,
+      " \u2014": 2,
+      " today": 2,
+      " \u00a3": 1
+    },
+    "tail_agreement": "20/25"
+  },
+  {
+    "arm": "W17_22",
+    "window": "17->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 23,
+    "basin_sizes": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\"": 25
+    },
+    "offdiag_cos_mean": 0.9367,
+    "offdiag_cos_min": 0.8365,
+    "margin_mean": 2.435,
+    "margin_max": 3.966,
+    "entropy_mean": 2.491,
+    "tail_decode_terminals": {
+      "\"": 23,
+      " \"": 2
+    },
+    "tail_agreement": "23/25"
+  },
+  {
+    "arm": "W17_23",
+    "window": "17->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 15,
+    "basin_sizes": [
+      5,
+      4,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " to": 15,
+      "\"": 8,
+      "s": 1,
+      "my": 1
+    },
+    "offdiag_cos_mean": 0.8624,
+    "offdiag_cos_min": 0.6862,
+    "margin_mean": 0.94,
+    "margin_max": 2.276,
+    "entropy_mean": 4.247,
+    "tail_decode_terminals": {
+      " to": 15,
+      "\"": 8,
+      "s": 1,
+      "my": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W18_18",
+    "window": "18->18",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 9,
+    "basin_sizes": [
+      13,
+      5,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      ")?": 19,
+      " because": 4,
+      "\"?": 2
+    },
+    "offdiag_cos_mean": 0.9121,
+    "offdiag_cos_min": 0.4521,
+    "margin_mean": 1.54,
+    "margin_max": 6.127,
+    "entropy_mean": 0.571,
+    "tail_decode_terminals": {
+      "?\"": 20,
+      " because": 4,
+      ")?": 1
+    },
+    "tail_agreement": "5/25"
+  },
+  {
+    "arm": "W18_19",
+    "window": "18->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      7,
+      6,
+      4,
+      3,
+      3,
+      2
+    ],
+    "decode_terminals": {
+      "pport": 25
+    },
+    "offdiag_cos_mean": 0.9828,
+    "offdiag_cos_min": 0.9318,
+    "margin_mean": 2.523,
+    "margin_max": 3.101,
+    "entropy_mean": 1.562,
+    "tail_decode_terminals": {
+      ".\"": 17,
+      "\".": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W18_20",
+    "window": "18->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      6,
+      4,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " except": 18,
+      " will": 3,
+      "!": 2,
+      "),\"": 1,
+      "\u200e": 1
+    },
+    "offdiag_cos_mean": 0.7448,
+    "offdiag_cos_min": 0.2579,
+    "margin_mean": 1.296,
+    "margin_max": 2.855,
+    "entropy_mean": 2.219,
+    "tail_decode_terminals": {
+      " except": 16,
+      " will": 3,
+      ",": 2,
+      "!": 2,
+      ",\"": 1,
+      " and": 1
+    },
+    "tail_agreement": "21/25"
+  },
+  {
+    "arm": "W18_21",
+    "window": "18->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 12,
+    "basin_sizes": [
+      7,
+      6,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "\":\"": 11,
+      ":[": 10,
+      "\":": 2,
+      "\":[": 2
+    },
+    "offdiag_cos_mean": 0.8875,
+    "offdiag_cos_min": 0.6642,
+    "margin_mean": 0.686,
+    "margin_max": 5.222,
+    "entropy_mean": 2.612,
+    "tail_decode_terminals": {
+      " or": 16,
+      ":": 7,
+      "\":": 2
+    },
+    "tail_agreement": "2/25"
+  },
+  {
+    "arm": "W18_22",
+    "window": "18->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 8,
+    "basin_sizes": [
+      8,
+      4,
+      3,
+      3,
+      3,
+      2,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " by": 16,
+      " [": 5,
+      "izes": 2,
+      " before": 2
+    },
+    "offdiag_cos_mean": 0.9874,
+    "offdiag_cos_min": 0.9598,
+    "margin_mean": 0.584,
+    "margin_max": 1.441,
+    "entropy_mean": 4.914,
+    "tail_decode_terminals": {
+      " by": 16,
+      " \"": 5,
+      " [": 4
+    },
+    "tail_agreement": "20/25"
+  },
+  {
+    "arm": "W18_23",
+    "window": "18->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 23,
+    "basin_sizes": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " in": 6,
+      "ac": 4,
+      " is": 4,
+      " and": 3,
+      " ,": 3,
+      "re": 2,
+      "her": 2,
+      " burst": 1
+    },
+    "offdiag_cos_mean": 0.8579,
+    "offdiag_cos_min": 0.6153,
+    "margin_mean": 0.496,
+    "margin_max": 1.656,
+    "entropy_mean": 4.58,
+    "tail_decode_terminals": {
+      " in": 6,
+      "ac": 4,
+      " is": 4,
+      " and": 3,
+      " ,": 3,
+      "re": 2,
+      "her": 2,
+      " burst": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W19_19",
+    "window": "19->19",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " may": 5,
+      " YOUR": 4,
+      " your": 3,
+      " yourself": 2,
+      " Directions": 2,
+      " would": 2,
+      " Ms": 2,
+      "''": 1,
+      "NOW": 1,
+      " WOM": 1,
+      " neigh": 1,
+      " are": 1
+    },
+    "offdiag_cos_mean": 0.6891,
+    "offdiag_cos_min": 0.1434,
+    "margin_mean": 1.204,
+    "margin_max": 3.71,
+    "entropy_mean": 2.032,
+    "tail_decode_terminals": {
+      "s": 14,
+      " your": 5,
+      " may": 3,
+      " would": 1,
+      " are": 1,
+      "'": 1
+    },
+    "tail_agreement": "5/25"
+  },
+  {
+    "arm": "W19_20",
+    "window": "19->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " would": 15,
+      "'d": 10
+    },
+    "offdiag_cos_mean": 0.972,
+    "offdiag_cos_min": 0.8959,
+    "margin_mean": 1.312,
+    "margin_max": 3.425,
+    "entropy_mean": 1.178,
+    "tail_decode_terminals": {
+      " --": 14,
+      "'d": 10,
+      " would": 1
+    },
+    "tail_agreement": "10/25"
+  },
+  {
+    "arm": "W19_21",
+    "window": "19->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Riders": 4,
+      " Woodward": 3,
+      " Wright": 3,
+      " mass": 2,
+      " Bra": 2,
+      " len": 2,
+      " from": 2,
+      " Chero": 1,
+      " if": 1,
+      " '": 1,
+      " into": 1,
+      " will": 1,
+      " Brave": 1,
+      " Sp": 1
+    },
+    "offdiag_cos_mean": 0.6502,
+    "offdiag_cos_min": 0.3286,
+    "margin_mean": 1.264,
+    "margin_max": 4.754,
+    "entropy_mean": 3.338,
+    "tail_decode_terminals": {
+      " from": 4,
+      "'s": 2,
+      " \"": 2,
+      " Riders": 2,
+      " if": 2,
+      " to": 2,
+      " Sp": 2,
+      " at": 1,
+      " Wright": 1,
+      ":": 1,
+      " truly": 1,
+      " len": 1,
+      " Brave": 1,
+      ",": 1,
+      " Bra": 1,
+      " most": 1
+    },
+    "tail_agreement": "9/25"
+  },
+  {
+    "arm": "W19_22",
+    "window": "19->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 9,
+    "basin_sizes": [
+      7,
+      4,
+      3,
+      3,
+      3,
+      2,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "Us": 19,
+      "Gu": 5,
+      "rights": 1
+    },
+    "offdiag_cos_mean": 0.9619,
+    "offdiag_cos_min": 0.8555,
+    "margin_mean": 1.055,
+    "margin_max": 2.073,
+    "entropy_mean": 5.014,
+    "tail_decode_terminals": {
+      "Us": 21,
+      "Gu": 4
+    },
+    "tail_agreement": "23/25"
+  },
+  {
+    "arm": "W19_23",
+    "window": "19->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 18,
+    "basin_sizes": [
+      4,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "BU": 15,
+      "BIT": 9,
+      " --": 1
+    },
+    "offdiag_cos_mean": 0.9299,
+    "offdiag_cos_min": 0.7736,
+    "margin_mean": 1.208,
+    "margin_max": 2.778,
+    "entropy_mean": 2.801,
+    "tail_decode_terminals": {
+      "BU": 15,
+      "BIT": 9,
+      " --": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W20_20",
+    "window": "20->20",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      6,
+      4,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " about": 13,
+      " into": 12
+    },
+    "offdiag_cos_mean": 0.8631,
+    "offdiag_cos_min": 0.4483,
+    "margin_mean": 5.962,
+    "margin_max": 8.152,
+    "entropy_mean": 0.028,
+    "tail_decode_terminals": {
+      " about": 13,
+      " into": 12
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W20_21",
+    "window": "20->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 10,
+    "basin_sizes": [
+      8,
+      6,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "Bron": 20,
+      "from": 4,
+      "rite": 1
+    },
+    "offdiag_cos_mean": 0.9584,
+    "offdiag_cos_min": 0.8307,
+    "margin_mean": 0.634,
+    "margin_max": 1.798,
+    "entropy_mean": 2.479,
+    "tail_decode_terminals": {
+      " from": 17,
+      "from": 8
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W20_22",
+    "window": "20->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "'s": 5,
+      " down": 4,
+      "'": 4,
+      "burg": 3,
+      " Down": 2,
+      " [[": 2,
+      ":": 2,
+      "activ": 1,
+      " Confederation": 1,
+      "s": 1
+    },
+    "offdiag_cos_mean": 0.8536,
+    "offdiag_cos_min": 0.7054,
+    "margin_mean": 0.485,
+    "margin_max": 1.556,
+    "entropy_mean": 5.129,
+    "tail_decode_terminals": {
+      "'s": 8,
+      "'": 6,
+      " Down": 3,
+      " the": 2,
+      ":": 2,
+      " [[": 1,
+      " down": 1,
+      ",": 1,
+      ".": 1
+    },
+    "tail_agreement": "12/25"
+  },
+  {
+    "arm": "W20_23",
+    "window": "20->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 22,
+    "basin_sizes": [
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "s": 7,
+      "J": 5,
+      "Pr": 3,
+      "S": 2,
+      "\"": 2,
+      "w": 2,
+      "Sport": 1,
+      "I": 1,
+      "SA": 1,
+      "av": 1
+    },
+    "offdiag_cos_mean": 0.9357,
+    "offdiag_cos_min": 0.8121,
+    "margin_mean": 0.463,
+    "margin_max": 2.218,
+    "entropy_mean": 5.048,
+    "tail_decode_terminals": {
+      "s": 7,
+      "J": 5,
+      "Pr": 3,
+      "S": 2,
+      "\"": 2,
+      "w": 2,
+      "Sport": 1,
+      "I": 1,
+      "SA": 1,
+      "av": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W21_21",
+    "window": "21->21",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 11,
+    "basin_sizes": [
+      6,
+      6,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " Mau": 22,
+      " Mace": 2,
+      " McKenzie": 1
+    },
+    "offdiag_cos_mean": 0.9247,
+    "offdiag_cos_min": 0.7124,
+    "margin_mean": 0.964,
+    "margin_max": 2.105,
+    "entropy_mean": 2.615,
+    "tail_decode_terminals": {
+      " '": 13,
+      "-": 12
+    },
+    "tail_agreement": "0/25"
+  },
+  {
+    "arm": "W21_22",
+    "window": "21->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 7,
+    "basin_sizes": [
+      9,
+      4,
+      4,
+      3,
+      2,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " Sah": 24,
+      "iss": 1
+    },
+    "offdiag_cos_mean": 0.9823,
+    "offdiag_cos_min": 0.9218,
+    "margin_mean": 3.391,
+    "margin_max": 4.394,
+    "entropy_mean": 0.989,
+    "tail_decode_terminals": {
+      " Sah": 18,
+      "iss": 7
+    },
+    "tail_agreement": "19/25"
+  },
+  {
+    "arm": "W21_23",
+    "window": "21->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 13,
+    "basin_sizes": [
+      9,
+      3,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      "w": 17,
+      "cl": 6,
+      "S": 1,
+      "SA": 1
+    },
+    "offdiag_cos_mean": 0.9461,
+    "offdiag_cos_min": 0.7531,
+    "margin_mean": 0.562,
+    "margin_max": 1.193,
+    "entropy_mean": 5.27,
+    "tail_decode_terminals": {
+      "w": 17,
+      "cl": 6,
+      "S": 1,
+      "SA": 1
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W22_22",
+    "window": "22->22",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 6,
+    "basin_sizes": [
+      10,
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
+    "decode_terminals": {
+      " S": 25
+    },
+    "offdiag_cos_mean": 0.9926,
+    "offdiag_cos_min": 0.9642,
+    "margin_mean": 5.244,
+    "margin_max": 5.96,
+    "entropy_mean": 0.037,
+    "tail_decode_terminals": {
+      " S": 25
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W22_23",
+    "window": "22->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 14,
+    "basin_sizes": [
+      6,
+      4,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " S": 22,
+      "S": 3
+    },
+    "offdiag_cos_mean": 0.9505,
+    "offdiag_cos_min": 0.7264,
+    "margin_mean": 1.574,
+    "margin_max": 4.278,
+    "entropy_mean": 0.659,
+    "tail_decode_terminals": {
+      " S": 22,
+      "S": 3
+    },
+    "tail_agreement": "25/25"
+  },
+  {
+    "arm": "W23_23",
+    "window": "23->23",
+    "n": 25,
+    "converged": 25,
+    "tensor_basins": 25,
+    "basin_sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "decode_terminals": {
+      " g": 13,
+      " an": 9,
+      "an": 1,
+      "on": 1,
+      " G": 1
+    },
+    "offdiag_cos_mean": 0.7926,
+    "offdiag_cos_min": 0.4205,
+    "margin_mean": 2.608,
+    "margin_max": 6.953,
+    "entropy_mean": 0.625,
+    "tail_decode_terminals": {
+      " g": 14,
+      " an": 7,
+      " G": 3,
+      "on": 1
+    },
+    "tail_agreement": "22/25"
+  }
+]

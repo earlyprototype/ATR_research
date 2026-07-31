@@ -1,0 +1,39 @@
+Loading gpt2-medium from local path /tmp/claude-0/-home-user-ATR-research/7e472327-54ae-54ea-8f69-618842ecc6bb/scratchpad/gpt2-medium-local (offline) ...
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 14217.15it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+Tier=infill arms=['X817'] prompts=25 max_iter=1000 check_start=100
+
+=== Arm X817: window 8->17 ===
+/home/user/ATR_research/_STAGE2_JSPACE/experiments/atr_engine2.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [X817] E01_politics     -> ' GOP'         lock=120 iters=120 margin=1.28
+  [X817] D01_water        -> ' GOP'         lock=120 iters=120 margin=1.43
+  [X817] A01_physics      -> ' GOP'         lock=120 iters=120 margin=1.07
+  [X817] B01_napoleon     -> ' GOP'         lock=120 iters=120 margin=1.08
+  [X817] C01_jack_jill    -> ' GOP'         lock=120 iters=120 margin=1.02
+  [X817] F01_anger        -> ' GOP'         lock=120 iters=120 margin=1.01
+  [X817] G01_punctuation  -> ' GOP'         lock=120 iters=120 margin=1.32
+  [X817] E02_tech         -> ' GOP'         lock=120 iters=120 margin=1.00
+  [X817] D02_periodic     -> ' GOP'         lock=120 iters=120 margin=1.18
+  [X817] A02_medical      -> ' GOP'         lock=120 iters=120 margin=1.14
+  [X817] B02_wwi          -> ' GOP'         lock=120 iters=120 margin=1.28
+  [X817] C02_king_cole    -> ' GOP'         lock=120 iters=120 margin=1.01
+  [X817] F02_insult       -> ' GOP'         lock=120 iters=120 margin=1.01
+  [X817] G02_brackets     -> ' GOP'         lock=120 iters=120 margin=1.33
+  [X817] E03_orgs         -> ' GOP'         lock=120 iters=120 margin=1.00
+  [X817] D03_organic      -> ' GOP'         lock=120 iters=120 margin=1.45
+  [X817] A03_neuro        -> ' GOP'         lock=120 iters=120 margin=1.08
+  [X817] B03_moon         -> ' GOP'         lock=120 iters=120 margin=1.01
+  [X817] C03_mary_lamb    -> ' GOP'         lock=120 iters=120 margin=1.07
+  [X817] F03_frustration  -> ' GOP'         lock=120 iters=120 margin=1.07
+  [X817] G03_counting     -> ' GOP'         lock=120 iters=120 margin=1.08
+  [X817] E04_internet     -> ' GOP'         lock=120 iters=120 margin=1.41
+  [X817] D04_equation     -> ' GOP'         lock=120 iters=120 margin=1.36
+  [X817] A04_climate      -> ' GOP'         lock=120 iters=120 margin=1.14
+  [X817] B04_rome         -> ' GOP'         lock=120 iters=120 margin=1.00
+
+=== Summary (1691s) ===
+  X817  8->17 converged 25/25 unique_terminals=1 [' GOP']
+
+Artifacts: results_infill.json, terminals_infill.pt in /home/user/ATR_research/_STAGE2_JSPACE/experiments/exp_010c_windows/output

@@ -42,16 +42,33 @@ From `results_small010b.json` + `terminal_characterisation_small010b.json`
 
 | arm | window | conv | locks | tensor basins (sizes) | decode terminals | via-tail agree |
 |---|---|---|---|---|---|---|
-| SB | 0→11 | 14/25 | all 120 | 7 (6,5,4,3,3,2,2) | ` Divine`×11, ` prolet`×10, ` till`×3, ` Anarch`×1 | 25/25 (tail empty) |
+| SB | 0→11 | 14/25 | all 120 | 7 (6,5,4,3,3,3,1)† | ` Divine`×11, ` prolet`×10, ` till`×3, ` Anarch`×1 | 25/25 (tail empty) |
 | S1 | 0→5 | 25/25 | all 120 | 1 (25) | ` the`×25 | 25/25 |
 | S2 | 3→8 | 25/25 | all 120 | 25 (all singletons) | 21 unique: fragments/punct (`er`×3, ` ,`×2, `ur`×2, `lex`, ` just`, ` how`, ` Animated`, ` )`, `'`, `:`, `pan`, NBSP-run, `,`, `o`, ` Sky`, ` the`, `ison`, `y`, `-`, `]`, `Yes`) | **2/25** |
 | S3 | 6→11 | 25/25 | all 120 | 5 (13,5,4,2,1) | `.`×25 | 25/25 (tail empty) |
 | S4 | 0→8 | 25/25 | all 120 | 1 (25) | ` the`×25 | 25/25 |
 | S5 | 3→11 | **1/25** | D02 @180 | 7 (11,5,5,1,1,1,1) | `<\|endoftext\|>`×23, `.`×1 (G01, capped), ` to`×1 (D02, converged) | 25/25 (tail empty) |
 
-Cross-prompt terminal cosine (off-diagonal mean / min): SB 0.849 / 0.339;
-S1 1.000 / 1.000; S2 0.853 / 0.514; S3 0.997 / 0.984; S4 1.000 / 1.000;
-S5 0.950 / 0.869.
+Cross-prompt terminal cosine (off-diagonal mean / min): SB 0.849 / 0.692;
+S1 1.000 / 1.000; S2 0.853 / 0.498; S3 0.997 / 0.970; S4 1.000 / 1.000;
+S5 0.950 / 0.441.†
+
+> † **Correction, 2026-07-31 (dated erratum; superseded values kept
+> visible).** Five numbers in this block, as originally committed, matched
+> no committed artifact. Corrected against
+> `../exp_010c_windows/output/terminal_characterisation_small010b.json`
+> (the committed characterisation artifact, which is the authority):
+> SB basin sizes were written as ~~(6,5,4,3,3,2,2)~~ — the artifact says
+> **[6,5,4,3,3,3,1]** (count 7 and sum 25 unchanged); the off-diagonal
+> cosine minima were written as SB ~~0.339~~ → **0.6921**, S2 ~~0.514~~ →
+> **0.4983**, S3 ~~0.984~~ → **0.970**, S5 ~~0.869~~ → **0.441**. All
+> off-diagonal means, all other table fields, and every verdict-bearing
+> number match the artifact; the discrepancies were descriptive only and
+> no verdict changes. Verified by reading the JSON directly (torch was not
+> available in the correcting session, so the tensor-level recompute was
+> not re-run; the JSON is the committed output of `analyze_terminals.py`
+> over `terminals_small010b_*.pt`). Registered in `../../REGISTER.md`
+> (EXP_010b row).
 
 Flat notes:
 
