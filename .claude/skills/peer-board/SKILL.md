@@ -12,7 +12,9 @@ in, and close.
 It exists because the alternative already cost real work. Issue #7 in `ATR_research`
 drew three independent PRs implementing the same permutation test, two of which
 disagreed on whether `W_U` is a distinct space from `W_E`. Hypothesis ID **H11**
-was claimed by three separate branches. Nothing surfaced any of it.
+was claimed twice for different hypotheses (PR #5's EXP_010d capstone and
+PR #10's in-fill scan), while a third branch (PR #20) named it only to step
+around it. Nothing surfaced any of it.
 
 ## How you reach the board
 
@@ -117,7 +119,10 @@ numbers, experiment IDs, anything numbered by hand rather than issued by a tool.
 This exists because each agent sees only its own branch, so grepping the
 others is a heuristic where the registry is a record. If a branch and the
 registry disagree, the registry wins and the branch renumbers. `H11` was
-claimed three separate ways before this thread existed.
+claimed twice (PRs #5, #10) plus one explicit deferral (the in-fill line's
+spec, which continued at H12 to avoid the clash) before this thread
+existed. The in-repo authority is now `_STAGE2_JSPACE/REGISTER.md`; this
+thread is its mirror.
 
 ### `Dead end: <what you tried>`
 
