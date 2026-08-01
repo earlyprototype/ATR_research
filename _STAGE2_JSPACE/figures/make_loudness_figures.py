@@ -30,10 +30,10 @@ natural norm ratios 217.8 / 306.7 / 1.04 / 1.05 for Medium, 73.0 / 153.7 /
 Run:  python3 make_loudness_figures.py   (needs matplotlib only)
 """
 
+import hashlib
 import json
 import statistics
 import sys
-from datetime import date
 from pathlib import Path
 
 import matplotlib
@@ -89,18 +89,20 @@ def load(model_key):
     raw = json.loads((DATA / cfg["file"]).read_text())
     layers = list(range(cfg["n_layers"]))
     prompts = sorted(raw)
-    curves = {p: [raw[p][str(l)] for l in layers] for p in prompts}
+    curves = {p: [raw[p][str(layer)] for layer in layers] for p in prompts}
     return layers, prompts, curves
 
 
 def summarise(layers, prompts, curves):
-    mean = [statistics.mean(curves[p][l] for p in prompts) for l in layers]
-    lo = [min(curves[p][l] for p in prompts) for l in layers]
-    hi = [max(curves[p][l] for p in prompts) for l in layers]
+    mean = [statistics.mean(curves[p][layer] for p in prompts) for layer in layers]
+    lo = [min(curves[p][layer] for p in prompts) for layer in layers]
+    hi = [max(curves[p][layer] for p in prompts) for layer in layers]
     last = layers[-1]
     full = [curves[p][last] / curves[p][0] for p in prompts]
-    step_mean = [mean[l] / mean[l - 1] for l in layers[1:]]
+    step_mean = [statistics.mean(curves[p][layer] / curves[p][layer - 1] for p in prompts)
+                 for layer in layers[1:]]
     return dict(
+        n_prompts=len(prompts),
         mean=[round(v, 1) for v in mean],
         min=[round(v, 1) for v in lo],
         max=[round(v, 1) for v in hi],
@@ -146,11 +148,11 @@ def draw_profile(ax, layers, prompts, curves, mean, log=False):
 def draw_delta(ax, layers, prompts, curves):
     xs = layers[1:]
     for p in prompts:
-        ratios = [curves[p][l] / curves[p][l - 1] for l in xs]
+        ratios = [curves[p][layer] / curves[p][layer - 1] for layer in xs]
         ax.plot(xs, ratios, color=PROMPT_LINE, linewidth=0.8, alpha=0.55,
                 zorder=2)
-    mean_ratio = [statistics.mean(curves[p][l] / curves[p][l - 1]
-                                  for p in prompts) for l in xs]
+    mean_ratio = [statistics.mean(curves[p][layer] / curves[p][layer - 1]
+                                  for p in prompts) for layer in xs]
     ax.plot(xs, mean_ratio, color=MEAN_LINE, linewidth=2.2, zorder=3)
     ax.axhline(1.0, color=MUTED, linewidth=0.9, linestyle=(0, (4, 3)),
                zorder=1)
@@ -172,7 +174,7 @@ def make_figure(model_key, out_png, annotator):
     cfg = MODELS[model_key]
     layers, prompts, curves = load(model_key)
     stats = summarise(layers, prompts, curves)
-    mean = [statistics.mean(curves[p][l] for p in prompts) for l in layers]
+    mean = [statistics.mean(curves[p][layer] for p in prompts) for layer in layers]
 
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8.8, 11.8))
     fig.patch.set_facecolor(SURFACE)
@@ -398,8 +400,9 @@ def main():
         all_stats[model_key] = dict(
             source_file=str(Path("experiments/exp_010c_windows/output")
                             / MODELS[model_key]["file"]),
-            n_prompts=25,
             n_layers=MODELS[model_key]["n_layers"],
+            source_sha256=hashlib.sha256(
+                (DATA / MODELS[model_key]["file"]).read_bytes()).hexdigest(),
             **stats,
         )
         print(f"[{model_key}] wrote {png}")
@@ -413,7 +416,6 @@ def main():
     out = dict(
         provenance=dict(
             produced_by="figures/make_loudness_figures.py",
-            produced_on=str(date.today()),
             task="issue #62 (layer-loudness profile documentation)",
             method=(
                 "Derived statistics only: arithmetic over the committed "
