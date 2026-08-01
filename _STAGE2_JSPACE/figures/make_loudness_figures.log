@@ -1,0 +1,7 @@
+[gpt2-medium] wrote loudness_profile_gpt2_medium.png
+  layer-0 entry mean 13.1, last-layer entry mean 3065.3, full-stack entry ratio mean 235.1 (range 194.5 to 268.3)
+[gpt2-small] wrote loudness_profile_gpt2_small.png
+  layer-0 entry mean 19.9, last-layer entry mean 3249.1, full-stack entry ratio mean 164.4 (range 138.8 to 180.1)
+[pythia-410m] wrote loudness_profile_pythia410m.png
+  layer-0 entry mean 2.5, last-layer entry mean 451.0, full-stack entry ratio mean 182.4 (range 145.7 to 225.0)
+wrote loudness_profile_stats.json
