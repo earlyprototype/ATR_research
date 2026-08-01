@@ -51,7 +51,7 @@ order tracks time order. Do not backfill; continue at H16.
 | H12a | EXP_010c-3 (in-fill) | The flanking odd layers land on an identifiable one-layer injection edge | **SUPPORTED on the onset side, with a recorded caveat** | same section |
 | H13 | EXP_010c-3 (in-fill) | At fixed injection i ∈ {8,10}, whole-word + via-tail-robust character is lost below an identifiable extraction depth | **SUPPORTED; edge at j=21, sharp** — scoped to i ∈ {8,10}; see erratum (d) before generalising | same section |
 | H14 | EXP_010c-4 (census) | Aliasing materiality (amended criterion): ≥1 census cell with ≥1 measured neighbour differs in arm class from every measured neighbour | **SUPPORTED (15/50 eligible cells)** | `RESULTS_EXP010C.md` 2026-07-29 census section |
-| H15 | EXP_015 | The Small-like tensor partition of Medium's full-stack loop end states survives natural-strength injection: ARI vs Small above chance (perm p < 0.05 at gate threshold 0.999) on the natural_i A0 terminals | UNTESTED (pre-registered) | `EXP_015_SPEC.md` |
+| H15 | EXP_015 | The Small-like tensor partition of Medium's full-stack loop end states survives natural-strength injection: ARI vs Small above chance (perm p < 0.05 at gate threshold 0.999) on the natural_i A0 terminals | **REFUTED** (ARI -0.113, perm p 1.000 at the gate threshold; at/below chance at every sweep threshold) | `experiments/exp_010c_windows/RESULTS_EXP015.md` |
 
 ### Retired bindings (kept visible; never reuse)
 
@@ -99,7 +99,7 @@ wrote at the time; read them against this table.
 | EXP_013 | J-corrected readout for ATR trajectories | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
 | EXP_013m | J-corrected readout, Medium variant | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
 | EXP_014 | Held-out political-vocabulary rank test on the Small settled basin | **PROVISIONAL — lives on PR #53's branch** (`_STAGE1_REANALYSIS/POLARISATION_SPEC.md` @ `e505963`); not yet on main. **EXP_014 and hypothesis H14 are unrelated despite the number** — different namespaces, no collision | PR #53 branch | PR #53 branch |
-| EXP_015 | Natural-loudness ARI comparison vs Small (H15): the direct apparatus-mask test named in the 2026-07-27 session note; analysis-only, issue #59 | **PRE-REGISTERED** | `EXP_015_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP015.md` (pending) |
+| EXP_015 | Natural-loudness ARI comparison vs Small (H15): the direct apparatus-mask test named in the 2026-07-27 session note; analysis-only, issue #59 | COMPLETE | `EXP_015_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP015.md` |
 
 ---
 

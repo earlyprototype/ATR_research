@@ -1,0 +1,14 @@
+/tmp/claude-0/-home-user-ATR-research/8ec02ed1-53e3-5b9e-826c-742a77eb2779/scratchpad/venv59/lib/python3.11/site-packages/torch/_subclasses/functional_tensor.py:368: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+[gate] Small basins 7, loud A0 basins 4, ARI 0.2001, perm p 0.00090 -> PASS
+[primary] Small basins 7, natural A0 basins 14
+[primary] ARI(Small, A0-natural) = -0.1134, perm p = 1.00000
+[primary] H15 (spec §6, mechanical): REFUTED
+
+[sweep] thr    S_basins  N_basins  ARI      perm_p
+[sweep] 0.99   4         8         -0.053   0.87161
+[sweep] 0.995  5         10        -0.0263  0.79682
+[sweep] 0.999  7         14        -0.1134  1.0
+[sweep] 0.9995 8         17        -0.0563  1.0
+
+Saved -> /tmp/claude-0/-home-user-ATR-research/8ec02ed1-53e3-5b9e-826c-742a77eb2779/scratchpad/wt59/_STAGE2_JSPACE/experiments/exp_010c_windows/output/exp015_natural_ari.json
