@@ -91,6 +91,7 @@ wrote at the time; read them against this table.
 | PERM_TEST_EXP010c | Duplicate registration of the same control (PR #9 line) | **SUPERSEDED — executed 2026-07-24; its results section was deleted at merge `359c622`** — see erratum (b) | `PERM_TEST_EXP010c_SPEC.md` (`97aeb20`, 2026-07-24; now carries a dated SUPERSEDED header) | Run restored in-tree: results section (archival restoration in `RESULTS_EXP010C.md`) and artifact `experiments/exp_010c_windows/output/permutation_results_2026-07-24_seed2026.json`; concordant with the control of record |
 | EXP_010c-ROBUST | Seed and prompt-subset robustness (issue #11) | COMPLETE | `EXP_010c_ROBUST_SPEC.md` | `RESULTS_EXP010C.md` |
 | EXP_010c-VARIANTS | Hook-point and energy-normalisation controls | COMPLETE | `EXP_010c_VARIANTS_SPEC.md` | `RESULTS_EXP010C.md` VARIANTS sections |
+| EXP_010c-STOPRULE | Stopping-rule stability control at the flagship word cells A4 (10 to 21) and O8 (8 to 21), issue #71; a control with pre-registered readings, no new hypothesis number | PRE-REGISTERED, running | `EXP_010c_STOPRULE_SPEC.md` | pending |
 | EXP_010d | Small-partition capstone (H11/H11a) | COMPLETE | `EXP_010d_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP010D.md` |
 | EXP_011 | J-space overlap, GPT-2 Small (H6) | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
 | EXP_011m | J-space overlap, Medium variant. **PRIMARY ARBITER for workspace-content claims about Medium terminal states** (promoted 2026-08-02; see erratum (e)) | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
