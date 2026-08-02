@@ -40,6 +40,14 @@ patterns, so the taxonomy carries over:
 
 ## 3. Refinement priors — branch on EXP_010c's outcome
 
+**DEMOTED to non-authoritative sketch, 2026-08-02** (issue #52 proposals
+N3, ratified under TC's in-session direction of 2026-08-02): the realized
+outcome combination, H9 supported and H9a supported and EXP_012m finding
+no coherent band, falls outside every row of this table. Its first row
+presupposes a band exists to check against, and none was found. The table
+stays visible as the plan that was written; no row of it binds any
+decision. The arbiter for what follows is REGISTER.md erratum (e).
+
 The EXP_010c outcome table (spec §6) sets what to look at first:
 
 | EXP_010c outcome | J-lens focus |
@@ -57,9 +65,13 @@ at the registered protocol, so the branch table above is now entered with
 complete data rather than a sampled grid. What the map hands forward
 (observations; see the 2026-07-29 section of RESULTS_EXP010C.md):
 
-- **Target set for EXP_011m/013m — 21 cells** with whole-word,
-  prompt-dependent terminals. These are **not** a contiguous band and
-  include single-layer windows (10→10, 13→13, 20→20, 21→21).
+- **[Reframed as a flat observation, 2026-08-02, per issue #52 proposal
+  N2 as ratified: 21 of 300 census cells satisfy the §3 whole-word +
+  prompt-dependent rule; manifest below. Whether terminal class or
+  readout reliability selects the J-lens phase's cells is an open
+  selector choice, recorded, not decided here.]** The 21 cells with
+  whole-word, prompt-dependent terminals are **not** a contiguous band
+  and include single-layer windows (10→10, 13→13, 20→20, 21→21).
 
   **Exact target-to-artifact manifest.** 19 of the 21 are census arms;
   **two are not** — they were measured by earlier tiers and are absent
@@ -115,6 +127,14 @@ subset). Per layer record: readout interpretability (top-k lens tokens vs
 logit-lens tokens), agreement-with-final-layer curve, and the layer range where
 lens ≫ logit-lens. Deliverable: Medium's empirical band `[L_lo, L_hi]` (or a
 recorded "no coherent band" verdict) + comparison against the 10–21 mapping.
+
+**Arbiter note, 2026-08-02:** EXP_011m below is now the PRIMARY ARBITER
+for workspace-content claims about Medium terminal states, and EXP_013m is
+demoted to a supporting probe (with a MARGINAL gate and no coherent band,
+a null from a re-decode is pre-declared ambiguous, so it can rule content
+in but never out). Ruling and grounds: `REGISTER.md` erratum (e). Any
+earlier line in this runbook or its result record that defers to EXP_013m
+as arbiter is read against that erratum.
 
 **EXP_011m — terminal projection.** Frozen input: the per-target artifacts
 named in the §3a manifest — `terminals_census/W<i>_<j>.pt` for 19 targets,
