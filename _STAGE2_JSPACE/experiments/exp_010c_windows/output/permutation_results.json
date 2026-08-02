@@ -1,6 +1,11 @@
 {
  "spec": "_STAGE2_JSPACE/EXP_010c_PERM_SPEC.md",
  "issue": "earlyprototype/ATR_research#7",
+ "input_sha256": {
+  "pytorch_model.bin": "98c7b0558df2c732799e509a8157d392251b3a6b06e2c72eefb3a00eb10f8318",
+  "vocab.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+  "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+ },
  "seed": 20260725,
  "n_null": 10000,
  "space_note": "checkpoint has wte.weight only (no lm_head): GPT-2 tied weights, W_U = wte^T; W_U-column cosines are identical to W_E-row cosines by identity, so one test per set (spec section 4)",
