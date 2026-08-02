@@ -1,0 +1,56 @@
+# CI enforcement of the standing rules in CLAUDE.md (adopted 2026-08-02).
+# R1: base-branch rule. R3: identifier register. R4: closing keyword.
+# R5: run-log-with-artifacts. The checker's own parser tests run first,
+# so the check never blocks on a grammar it has not just proven.
+name: PR rules (R1, R3, R4, R5)
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  pr-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: R1 base-branch rule
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_REF: ${{ github.base_ref }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ "$BASE_REF" = "main" ]; then
+            echo "R1: bases on main."
+            exit 0
+          fi
+          DECL=$(printf '%s' "$PR_BODY" | grep -oE 'STACKED ON #[0-9]+' | head -1 || true)
+          if [ -z "$DECL" ]; then
+            echo "R1 FAIL: PR does not base on main and carries no 'STACKED ON #N' declaration."
+            exit 1
+          fi
+          N=${DECL##*#}
+          PARENT_HEAD=$(gh api "repos/$REPO/pulls/$N" --jq .head.ref)
+          if [ "$PARENT_HEAD" != "$BASE_REF" ]; then
+            echo "R1 FAIL: declared parent PR #$N has head '$PARENT_HEAD' but this PR bases on '$BASE_REF'."
+            exit 1
+          fi
+          echo "R1: valid stacked PR on #$N."
+
+      - name: Checker self-tests (parser grammar, register inventory)
+        run: python3 .github/scripts/check_pr_rules.py --self-test
+
+      - name: R3 + R4 + R5
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          git fetch origin "$BASE_REF" --depth=200 || git fetch origin "$BASE_REF"
+          python3 .github/scripts/check_pr_rules.py
