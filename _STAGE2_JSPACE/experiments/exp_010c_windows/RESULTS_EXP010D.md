@@ -3,6 +3,16 @@
 **Spec:** `../../EXP_010d_SPEC.md` (pre-registered before the Small run).
 **Status:** run complete; primary verdict recorded with threshold-robustness sweep.
 
+**Arbiter note, 2026-08-02:** sentences below naming the J-lens re-decode
+(EXP_013m) as "the registered arbiter" are historical text and stay as
+written; as of 2026-08-02 EXP_011m (subspace overlap) is the primary
+arbiter, with the registered scope "workspace-content claims about Medium
+terminal states". In this record that scope covers the Medium-side
+terminals (the A0 baseline and A4 window states); the native GPT-2 Small
+results compared against them are outside it, and claims about Small go
+through EXP_011 per the plan. EXP_013m is demoted to a supporting probe.
+Ruling and grounds: `../../REGISTER.md` erratum (e).
+
 ---
 
 ## 2026-07-24 — Native GPT-2 Small vs windowed Medium, matched 25-prompt subset

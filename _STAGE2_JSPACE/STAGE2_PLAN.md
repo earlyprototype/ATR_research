@@ -26,10 +26,39 @@ kill criteria stated up front.
 
 ## Kill criteria (what would end the workspace framing)
 
-- EXP_010 shows **no** qualitative window-dependence, **and** EXP_011 shows basins
+**Re-registered 2026-08-02** under TC's in-session direction of that date,
+per the defect recorded in `PROJECT_REVIEW_2026-07-31.md` §2 and the
+proposal in its §6.2 item 6. The original rule (kept visible below, struck
+through) began with a condition that was already false by 2026-07-23, so
+it could never fire in either direction: the framing could be neither
+killed nor saved by its own registered test.
+
+**The rule now in force:** the workspace framing ends if EXP_011 (Small)
+and EXP_011m (Medium) both show basin or window terminals projecting onto
+the J-space no differently than matched nulls. The two "given" clauses
+are recorded facts, not predicates awaiting measurement: the Medium band
+null is EXP_012m's recorded NO COHERENT BAND verdict
+(`RESULTS_JLENS_MEDIUM.md`), and the absence of a Small candidate band is
+the recorded EXP_010b finding that no sub-window of Small carries the
+Stage 1 landscape (`experiments/exp_010b_small/RESULTS_EXP010B.md`).
+Operationalisation is deliberately delegated to the two specs and gated:
+neither experiment may execute until its spec has pre-registered, with
+the rigour of the EXP_010c-PERM spec, the projection measure, the
+matched-null construction, and the numeric thresholds, all fixed before
+any projection is computed; the kill rule then fires mechanically on the
+two recorded verdicts, with no discretion at fire time. Either
+experiment alone failing does not end the framing; the conjunction does.
+If the framing ends, Stage 2 closes with the apparatus-conditionality and
+island results written up as the finding, per the house rule that
+negatives are findings.
+
+- ~~EXP_010 shows **no** qualitative window-dependence, **and** EXP_011 shows basins
   project no differently than noise basins → the band-structure theory is dead for
   these models; Stage 2 closes as a classical-dynamics characterisation and the
-  anomaly stands unexplained.
+  anomaly stands unexplained.~~ **SUPERSEDED 2026-08-02:** the first
+  conjunct was already false (window-dependence is trivially present, and
+  the Pythia placebo showed it carries no workspace meaning), so the rule
+  was unfireable as written.
 - Any single experiment failing does NOT kill the frame alone; the conjunction does.
 - EXP-D (Divine) is unconditional: any outcome is a finding.
 

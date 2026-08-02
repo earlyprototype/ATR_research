@@ -289,8 +289,28 @@ the gate did not demand it on the saturation evidence, §1).
    The band verdict is identical under both runs.
 4. **Prompts carry a leading BOS throughout** (fitting and readout) — the
    instrument's documented `force_bos=True` default, kept as-is for
-   fidelity to the reference implementation; noted because the ATR engine
-   does not prepend BOS.
+   fidelity to the reference implementation; ~~noted because the ATR engine
+   does not prepend BOS~~.
+
+   **CORRECTION, 2026-08-02 (review §4.4 item 3, verified):** the struck
+   clause was backwards. The ATR engine passes raw prompt strings to
+   `model.run_with_cache(prompt)` with no `prepend_bos` argument
+   (`experiments/atr_engine2.py`, all four call sites), and the pinned
+   transformer_lens 3.5.1 defaults `default_prepend_bos=True` for string
+   input (verified 2026-08-02 by inspection of the pinned wheel's
+   `HookedTransformer.py` and `hooked_transformer_config.py`, which
+   document and assert the True default; the engine sets no override
+   anywhere). So the ATR engine DOES prepend BOS. Independent empirical
+   corroboration already exists in the record: the EXP_014 harness gate
+   (PR #53 branch) found iteration-0 reconstruction broke 5/5 precisely
+   because TransformerLens prepends BOS for GPT-2 while the raw HF
+   tokenizer does not. Consequence for the seam this note guards: the two
+   instruments agree, both the lens (`force_bos=True`) and the ATR
+   trajectories (TL default) carry a leading BOS, so lens-on-terminals
+   work (EXP_011m, EXP_013m) reads consistently tokenized states. The
+   position convention still matters: ATR terminal mean vectors average
+   over all positions including the BOS position, and any lens readout of
+   them inherits that averaging.
 
 ---
 

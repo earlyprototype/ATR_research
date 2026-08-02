@@ -79,6 +79,7 @@ wrote at the time; read them against this table.
 
 | ID | What it is | Status | Spec | Results |
 |---|---|---|---|---|
+| EXP_010 | Legacy family shorthand in the 2026-07-11 plan text for the window-loop line that became EXP_010a/b/c/c-2/c-3/c-3b/c-4/d | **HISTORICAL — never an executed experiment ID.** Appears only in quoted or superseded plan text (e.g. the struck original kill criteria); do not use in new text | `STAGE2_PLAN.md` (original wording) | — |
 | EXP_010a | Pythia-410m depth control (H8) | **SUPERSEDED — never ran under its own ID.** Executed as arms P-A0/P-A1 of EXP_012-PYTHIA | `RUNBOOK_PHASE1.md` §EXP_010a; absorbed by `EXP_012_PYTHIA_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP012_PYTHIA.md` |
 | EXP_010b | GPT-2 Small window grid (H5 coarse) | COMPLETE | `EXP_010b_SPEC.md` | `experiments/exp_010b_small/RESULTS_EXP010B.md` (see the 2026-07-31 correction note there) |
 | EXP_010c | GPT-2 Medium window loops (H9/H9a) | COMPLETE | `EXP_010c_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP010C.md` |
@@ -92,12 +93,12 @@ wrote at the time; read them against this table.
 | EXP_010c-VARIANTS | Hook-point and energy-normalisation controls | COMPLETE | `EXP_010c_VARIANTS_SPEC.md` | `RESULTS_EXP010C.md` VARIANTS sections |
 | EXP_010d | Small-partition capstone (H11/H11a) | COMPLETE | `EXP_010d_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP010D.md` |
 | EXP_011 | J-space overlap, GPT-2 Small (H6) | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
-| EXP_011m | J-space overlap, Medium variant | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
+| EXP_011m | J-space overlap, Medium variant. **PRIMARY ARBITER for workspace-content claims about Medium terminal states** (promoted 2026-08-02; see erratum (e)) | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
 | EXP_012 | **The H7 cross-model band census ONLY.** Unqualified use of "EXP_012" for anything else is deprecated | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
 | EXP_012-PYTHIA | Pythia placebo window grid (absorbed EXP_010a as arms P-A0/P-A1) | COMPLETE | `EXP_012_PYTHIA_SPEC.md` | `RESULTS_EXP012_PYTHIA.md` |
 | EXP_012m | Medium J-lens band census | COMPLETE (NO COHERENT BAND) | `RUNBOOK_JLENS_MEDIUM.md` | `RESULTS_JLENS_MEDIUM.md` |
 | EXP_013 | J-corrected readout for ATR trajectories | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
-| EXP_013m | J-corrected readout, Medium variant | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
+| EXP_013m | J-corrected readout, Medium variant. **DEMOTED from arbiter status** (2026-08-02; see erratum (e)): it can rule latent content in but can never rule it out | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
 | EXP_014 | Held-out political-vocabulary rank test on the Small settled basin | **PROVISIONAL — lives on PR #53's branch** (`_STAGE1_REANALYSIS/POLARISATION_SPEC.md` @ `e505963`); not yet on main. **EXP_014 and hypothesis H14 are unrelated despite the number** — different namespaces, no collision | PR #53 branch | PR #53 branch |
 | EXP_015 | Natural-loudness ARI comparison vs Small (H15): the direct apparatus-mask test named in the 2026-07-27 session note; analysis-only, issue #59 | COMPLETE | `EXP_015_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP015.md` |
 
@@ -187,6 +188,32 @@ the only reliable depth" — the pre-census hand-forward phrasing — must not
 be drawn as a general prior; the J-lens runbook's readout prior was
 corrected from census data at the census merge, and this register carries
 the same scoping on H13's row above.
+
+### (e) Arbiter swap: EXP_011m promoted, EXP_013m demoted (ratified 2026-08-02)
+
+Roughly fifteen places in the record (RESULTS_EXP010C.md,
+RESULTS_EXP010D.md, the EXP_010c-series specs, and session notes) defer to
+EXP_013m, the J-corrected re-decode, as "the registered arbiter" for
+mid-stack terminal claims. That deferral predates two facts now on the
+record: the Medium lens's validation gate returned MARGINAL, and EXP_012m
+found NO COHERENT BAND. Under those two facts a null from EXP_013m is
+pre-declared ambiguous between "no latent content" and "the instrument
+cannot see it" (the 2026-07-27 session note says this itself), so EXP_013m
+can rule latent content in but can never rule it out. An arbiter that
+cannot adjudicate negatively cannot arbitrate.
+
+**The ruling, executed under TC's in-session direction of 2026-08-02
+(delegation asserted, pending the `TC-RULING:` confirmation described in
+`sessions/SESSION_2026-08-02_GOVERNANCE.md` §3), per the review's §6.2
+item 8 and the operator report's decision item 5:**
+EXP_011m (subspace overlap), which bypasses word readouts entirely and can
+deliver both outcomes, is the primary arbiter for workspace-content claims
+about Medium terminal states. EXP_013m is demoted to a supporting probe.
+Historical sentences reading "EXP_013m remains the registered arbiter"
+stay as written per the visible-supersession convention and are read
+against this erratum; dated pointer notes have been added to
+RESULTS_EXP010C.md, RESULTS_EXP010D.md, and RUNBOOK_JLENS_MEDIUM.md.
+Issues #45 and #46 are re-chartered accordingly.
 
 ---
 
