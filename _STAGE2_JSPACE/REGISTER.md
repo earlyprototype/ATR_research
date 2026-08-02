@@ -49,7 +49,7 @@ order tracks time order. Do not backfill; continue at H16.
 | H11b | — | **VACATED.** Sole binding was the retired parallel registration (below). Do not reallocate. | — | — |
 | H12 | EXP_010c-3 (in-fill) | The whole-word prompt-dependent injection zone is contiguous across i ∈ {8,9,10} | **REFUTED** (islands, not a band) | `RESULTS_EXP010C.md` 2026-07-25 in-fill section |
 | H12a | EXP_010c-3 (in-fill) | The flanking odd layers land on an identifiable one-layer injection edge | **SUPPORTED on the onset side, with a recorded caveat** | same section |
-| H13 | EXP_010c-3 (in-fill) | At fixed injection i ∈ {8,10}, whole-word + via-tail-robust character is lost below an identifiable extraction depth | **SUPPORTED; edge at j=21, sharp** — scoped to i ∈ {8,10}; see erratum (d) before generalising | same section |
+| H13 | EXP_010c-3 (in-fill) | At fixed injection i ∈ {8,10}, whole-word + via-tail-robust character is lost below an identifiable extraction depth | **SUPPORTED; edge at j=21, sharp** — scoped to i ∈ {8, 10}; see erratum (d) before generalising | same section |
 | H14 | EXP_010c-4 (census) | Aliasing materiality (amended criterion): ≥1 census cell with ≥1 measured neighbour differs in arm class from every measured neighbour | **SUPPORTED (15/50 eligible cells)** | `RESULTS_EXP010C.md` 2026-07-29 census section |
 | H15 | EXP_015 | The Small-like tensor partition of Medium's full-stack loop end states survives natural-strength injection: ARI vs Small above chance (perm p < 0.05 at gate threshold 0.999) on the natural_i A0 terminals | **REFUTED** (ARI -0.113, perm p 1.000 at the gate threshold; at/below chance at every sweep threshold) | `experiments/exp_010c_windows/RESULTS_EXP015.md` |
 
@@ -203,7 +203,8 @@ can rule latent content in but can never rule it out. An arbiter that
 cannot adjudicate negatively cannot arbitrate.
 
 **The ruling, executed under TC's in-session direction of 2026-08-02
-(delegation asserted, pending the `TC-RULING:` confirmation described in
+(delegation confirmed: `TC-RULING:` comment 5157581115 on PR #69,
+2026-08-02, ratifying the 2026-07-31 and 2026-08-02 delegations; see
 `sessions/SESSION_2026-08-02_GOVERNANCE.md` §3), per the review's §6.2
 item 8 and the operator report's decision item 5:**
 EXP_011m (subspace overlap), which bypasses word readouts entirely and can
