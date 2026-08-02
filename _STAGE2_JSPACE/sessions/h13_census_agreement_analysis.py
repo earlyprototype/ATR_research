@@ -62,7 +62,14 @@ def load_cells():
     for tier in ("census", "full", "scan", "infill"):
         for rec in json.load(open(OUT_DIR / f"terminal_characterisation_{tier}.json")):
             i, j = (int(x) for x in rec["window"].split("->"))
-            agree = int(rec["tail_agreement"].split("/")[0])
+            agree, denom = (int(x) for x in rec["tail_agreement"].split("/"))
+            assert denom == rec["n"] == 25, (
+                f"{tier} arm {rec['arm']}: expected 25 prompts, "
+                f"got n={rec['n']}, agreement denominator={denom}")
+            if (i, j) in cells:
+                raise ValueError(
+                    f"duplicate window {rec['window']}: already loaded from "
+                    f"tier {cells[(i, j)]['tier']}, seen again in tier {tier}")
             toks = list(rec["decode_terminals"])
             cells[(i, j)] = {
                 "tier": tier,
