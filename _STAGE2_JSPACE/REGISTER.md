@@ -189,6 +189,18 @@ be drawn as a general prior; the J-lens runbook's readout prior was
 corrected from census data at the census merge, and this register carries
 the same scoping on H13's row above.
 
+*Pointer added 2026-08-02:* the forward-looking half of this tension,
+namely whether the two flagship cells' high agreement is a property of
+their whole-word prompt-dependent class or an outlier property of the two
+cells, and which extraction-depth prior downstream readout work may
+consume, was adjudicated under issue #73; the adjudication record, with
+its committed analysis script and output, is
+`sessions/SESSION_2026-08-02_H13_CENSUS_ADJUDICATION.md`. In one line:
+high agreement is a per-cell property, neither class-borne nor
+flagship-exclusive, and no extraction-depth prior is licensed; the record
+is provisional on the issue #71 stopping-rule check in the sense stated
+inside it.
+
 ### (e) Arbiter swap: EXP_011m promoted, EXP_013m demoted (ratified 2026-08-02)
 
 Roughly fifteen places in the record (RESULTS_EXP010C.md,
