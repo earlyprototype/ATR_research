@@ -15,6 +15,14 @@
 #   seed norm at the extraction layer, Control B). Defaults reproduce the
 #   registered path exactly; the return dict now always carries inject_hook,
 #   renorm, target_norm, seed_norm_at_j (metadata only).
+# RECORDED DIFF 3 (2026-08-02, EXP_010c_STOPRULE_SPEC.md §2, issue #71):
+#   run_atr_gated gains no_stop=False (compute the convergence gate every
+#   check as before and record the iteration at which it would first have
+#   fired, but never break on it: the loop always runs to max_iter,
+#   lock_in_iter stays None and converged stays False) and
+#   checkpoint_iters=None (an iterable of iteration numbers at which the
+#   last-position readout is recorded into a "checkpoints" dict on the
+#   return value). Defaults reproduce the registered path exactly.
 """
 ATR Engine: Activation Tensor Resonance
 =========================================
@@ -262,7 +270,8 @@ def run_atr_loop(model, prompt, layer_start, layer_end, max_iter, schedule, verb
 def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
                   threshold=0.999, patience=3, check_every=10, check_start=100,
                   verbose=False, gate_lag=1, capture_terminal=False,
-                  inject_hook_name=None, renorm="seed_j"):
+                  inject_hook_name=None, renorm="seed_j",
+                  no_stop=False, checkpoint_iters=None):
     """Convergence-gated ATR loop (early-stop variant of run_atr_loop).
 
     Iterates the full-tensor re-injection until the tensor stops moving, then
@@ -322,6 +331,9 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
 
     consecutive = 0
     lock_in_iter = None
+    gate_first_satisfied_iter = None  # no_stop only: when the gate WOULD have fired
+    checkpoint_iters = set(checkpoint_iters) if checkpoint_iters else None
+    checkpoint_readouts = {}
     final_cos = 1.0
     i = 0
 
@@ -352,6 +364,16 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
             if len(recent_means) > 9:
                 recent_means.pop(0)
 
+        if checkpoint_iters and i in checkpoint_iters:
+            cp = get_readout_detail(model, current_tensor[-1, :], k=1)
+            checkpoint_readouts[str(i)] = {
+                "terminal_token": cp["top_token_strings"][0],
+                "terminal_token_id": cp["top_token_ids"][0],
+                "terminal_prob": cp["top_token_probs"][0],
+                "top_logit_margin": cp["top_logit_margin"],
+                "entropy": cp["entropy"],
+            }
+
         if i >= check_start and i % check_every == 0:
             cos = F.cosine_similarity(
                 mean_vec.unsqueeze(0), mean_history[0].unsqueeze(0)
@@ -361,8 +383,12 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
             if verbose:
                 print(f"    iter {i:>4}: cos_mean={cos:.5f} streak={consecutive}")
             if consecutive >= patience:
-                lock_in_iter = i
-                break
+                if no_stop:
+                    if gate_first_satisfied_iter is None:
+                        gate_first_satisfied_iter = i
+                else:
+                    lock_in_iter = i
+                    break
 
         mean_history.append(mean_vec)
         if len(mean_history) > gate_lag:
@@ -386,6 +412,11 @@ def run_atr_gated(model, prompt, layer_start, layer_end, max_iter=1000,
         "target_norm": target_norm,
         "seed_norm_at_j": initial_norm,
     }
+    if no_stop:
+        out["no_stop"] = True
+        out["gate_first_satisfied_iter"] = gate_first_satisfied_iter
+    if checkpoint_readouts:
+        out["checkpoints"] = checkpoint_readouts
     if capture_terminal:
         out["terminal_mean_vec"] = current_tensor.mean(dim=0).clone()
         out["terminal_last_vec"] = last_vec

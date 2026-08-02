@@ -154,7 +154,8 @@ TIERS = {
 
 
 def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start,
-                          inject_hook_name=None, renorm="seed_j"):
+                          inject_hook_name=None, renorm="seed_j",
+                          no_stop=False, checkpoint_iters=None):
     """Thin wrapper: the gated protocol lives ONLY in atr_engine2.run_atr_gated
     (capture_terminal=True adds terminal tensors + a real lag_scan dict — the
     recorded diff vs the upstream engine; see atr_engine2.py header).
@@ -166,7 +167,8 @@ def run_arm_with_terminal(model, prompt, i, j, max_iter, check_start,
     """
     r = run_atr_gated(model, prompt, i, j, max_iter=max_iter,
                       check_start=check_start, capture_terminal=True,
-                      inject_hook_name=inject_hook_name, renorm=renorm)
+                      inject_hook_name=inject_hook_name, renorm=renorm,
+                      no_stop=no_stop, checkpoint_iters=checkpoint_iters)
     # lag_scan arrives as {lag: mean_cosine}; keep the mapping explicit.
     if r.get("lag_scan") is not None:
         r["lag_scan"] = {str(k): v for k, v in r["lag_scan"].items()}
@@ -363,10 +365,32 @@ def main():
     ap.add_argument("--renorm", choices=["seed_j", "natural_i"], default="seed_j",
                     help="loop rescale target: seed norm at extraction layer j "
                          "(registered) or natural resid_pre norm at injection layer i")
+    # EXP_010c_STOPRULE_SPEC.md §2 (recorded diff, issue #71): stopping-rule
+    # variants. Defaults reproduce the registered behaviour exactly.
+    ap.add_argument("--check-start", type=int, default=None,
+                    help="override the tier's check_start (registered gpt2-medium "
+                         "tiers use 100; the settle-tier precedent used 10)")
+    ap.add_argument("--no-stop", action="store_true",
+                    help="disable the convergence gate's early stop: run every "
+                         "prompt to the tier's max_iter, recording when the gate "
+                         "would first have fired and the readout at --checkpoints")
+    ap.add_argument("--checkpoints", default="120,300,600,1000",
+                    help="comma-separated iteration numbers at which a --no-stop "
+                         "run records the last-position readout")
     args = ap.parse_args()
     tier = TIERS[args.tier]
     arms = args.arms.split(",") if args.arms else tier["arms"]
     n_prompts = args.n_prompts if args.n_prompts is not None else tier["n_prompts"]
+    # Stopping-rule variant resolution (issue #71). check_start defaults to the
+    # tier's registered value; --no-stop parses its checkpoint list up front so
+    # a bad value fails before the model load.
+    check_start = args.check_start if args.check_start is not None else tier["check_start"]
+    checkpoint_iters = None
+    if args.no_stop:
+        checkpoint_iters = sorted(int(x) for x in args.checkpoints.split(","))
+        if max(checkpoint_iters) > tier["max_iter"]:
+            ap.error(f"--checkpoints max {max(checkpoint_iters)} exceeds the "
+                     f"tier's max_iter {tier['max_iter']}; it would never be recorded")
     # Artifact suffix: every output filename below is built from this, so it must
     # stay defined ahead of the first use (the subset-B audit file). --tag and
     # --out-suffix are aliases; a --harness-check run gets its own name so it can
@@ -404,6 +428,9 @@ def main():
             # Without this, `--tier full --arms A5` silently replaced the
             # registered 150-record results_full.json with a 25-record file.
             f"--arms {args.arms}" if args.arms else None,
+            # 2026-08-02 (issue #71): stopping-rule variants are variants.
+            f"--check-start {args.check_start}" if args.check_start is not None else None,
+            "--no-stop" if args.no_stop else None,
         ]
         variant = [v for v in variant if v]
         if variant:
@@ -491,7 +518,8 @@ def main():
         prompts = [dict(rec, prompt=_toy_tokens(rec["prompt"])) for rec in prompts]
     print(f"Tier={args.tier} arms={arms} prompts={len(prompts)} subset={args.subset} "
           f"prompt_offset={offset} seed={args.seed} renorm={args.renorm} "
-          f"max_iter={tier['max_iter']} check_start={tier['check_start']}")
+          f"max_iter={tier['max_iter']} check_start={check_start} "
+          f"no_stop={args.no_stop} checkpoints={checkpoint_iters}")
 
     outdir = HERE / "output"
     outdir.mkdir(exist_ok=True)
@@ -599,8 +627,10 @@ def main():
         for rec in prompts:
             p = rec["prompt"]
             p_text = p if isinstance(p, str) else "harness-check-tokens"
-            r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], tier["check_start"],
-                                      inject_hook_name=inject_hook, renorm=args.renorm)
+            r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], check_start,
+                                      inject_hook_name=inject_hook, renorm=args.renorm,
+                                      no_stop=args.no_stop,
+                                      checkpoint_iters=checkpoint_iters)
             # string keys ("ARM|PROMPT_ID") so the .pt loads with weights_only=True
             arm_terminals[f"{arm}|{rec['id']}"] = {
                 "mean": r.pop("terminal_mean_vec"),
