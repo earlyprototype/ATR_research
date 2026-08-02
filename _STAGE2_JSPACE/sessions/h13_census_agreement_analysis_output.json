@@ -1,0 +1,474 @@
+{
+ "cells_total": 300,
+ "via_tail_cells": 276,
+ "wstar_cells_total": 21,
+ "wstar_cells": [
+  "5->23",
+  "6->23",
+  "8->9",
+  "8->11",
+  "8->16",
+  "8->21",
+  "9->11",
+  "9->20",
+  "10->10",
+  "10->16",
+  "10->21",
+  "12->15",
+  "13->13",
+  "13->21",
+  "14->16",
+  "15->17",
+  "15->19",
+  "16->18",
+  "17->20",
+  "20->20",
+  "21->21"
+ ],
+ "census_class_comparison_raw": {
+  "wstar_n": 17,
+  "wstar_mean": 9.06,
+  "wstar_values_sorted": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   1,
+   2,
+   12,
+   13,
+   14,
+   16,
+   16,
+   16,
+   18,
+   20,
+   25
+  ],
+  "other_n": 239,
+  "other_mean": 6.15,
+  "note": "raw means, not depth-adjusted; scale 0 to 25 prompts"
+ },
+ "census_depth_stratified_class_test": {
+  "wstar_mean_excess_over_same_depth_mean": 2.91,
+  "permutations": 10000,
+  "p_one_sided": 0.0604,
+  "note": "excess is in prompts out of 25; positive means W* census cells agree more than same-depth census cells overall"
+ },
+ "census_mean_agreement_by_depth": {
+  "0": {
+   "arms": 1,
+   "mean": 0
+  },
+  "1": {
+   "arms": 2,
+   "mean": 0
+  },
+  "2": {
+   "arms": 3,
+   "mean": 0.3
+  },
+  "3": {
+   "arms": 4,
+   "mean": 0
+  },
+  "4": {
+   "arms": 5,
+   "mean": 0.2
+  },
+  "5": {
+   "arms": 6,
+   "mean": 1.5
+  },
+  "6": {
+   "arms": 7,
+   "mean": 2.3
+  },
+  "7": {
+   "arms": 8,
+   "mean": 1.8
+  },
+  "8": {
+   "arms": 9,
+   "mean": 2.1
+  },
+  "9": {
+   "arms": 10,
+   "mean": 3.3
+  },
+  "10": {
+   "arms": 11,
+   "mean": 2.8
+  },
+  "11": {
+   "arms": 11,
+   "mean": 4.2
+  },
+  "12": {
+   "arms": 13,
+   "mean": 4.7
+  },
+  "13": {
+   "arms": 14,
+   "mean": 5.6
+  },
+  "14": {
+   "arms": 15,
+   "mean": 3.7
+  },
+  "15": {
+   "arms": 14,
+   "mean": 6.4
+  },
+  "16": {
+   "arms": 17,
+   "mean": 4.8
+  },
+  "17": {
+   "arms": 15,
+   "mean": 6.7
+  },
+  "18": {
+   "arms": 19,
+   "mean": 8.9
+  },
+  "19": {
+   "arms": 18,
+   "mean": 7.7
+  },
+  "20": {
+   "arms": 21,
+   "mean": 9.0
+  },
+  "21": {
+   "arms": 11,
+   "mean": 6.6
+  },
+  "22": {
+   "arms": 22,
+   "mean": 18.9
+  }
+ },
+ "j21_column_all_tiers": [
+  {
+   "cell": "7->21",
+   "tier": "infill",
+   "class": "mixed",
+   "prompt_dependent": false,
+   "agree": 25,
+   "flagship": false
+  },
+  {
+   "cell": "11->21",
+   "tier": "infill",
+   "class": "mixed",
+   "prompt_dependent": false,
+   "agree": 25,
+   "flagship": false
+  },
+  {
+   "cell": "10->21",
+   "tier": "full",
+   "class": "whole-word",
+   "prompt_dependent": true,
+   "agree": 23,
+   "flagship": true
+  },
+  {
+   "cell": "17->21",
+   "tier": "census",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 20,
+   "flagship": false
+  },
+  {
+   "cell": "15->21",
+   "tier": "census",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 18,
+   "flagship": false
+  },
+  {
+   "cell": "8->21",
+   "tier": "scan",
+   "class": "whole-word",
+   "prompt_dependent": true,
+   "agree": 17,
+   "flagship": true
+  },
+  {
+   "cell": "14->21",
+   "tier": "scan",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 17,
+   "flagship": false
+  },
+  {
+   "cell": "13->21",
+   "tier": "census",
+   "class": "whole-word",
+   "prompt_dependent": true,
+   "agree": 16,
+   "flagship": false
+  },
+  {
+   "cell": "19->21",
+   "tier": "census",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 9,
+   "flagship": false
+  },
+  {
+   "cell": "12->21",
+   "tier": "scan",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 9,
+   "flagship": false
+  },
+  {
+   "cell": "16->21",
+   "tier": "census",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 8,
+   "flagship": false
+  },
+  {
+   "cell": "6->21",
+   "tier": "scan",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 7,
+   "flagship": false
+  },
+  {
+   "cell": "9->21",
+   "tier": "infill",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 7,
+   "flagship": false
+  },
+  {
+   "cell": "5->21",
+   "tier": "infill",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 6,
+   "flagship": false
+  },
+  {
+   "cell": "18->21",
+   "tier": "census",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 2,
+   "flagship": false
+  },
+  {
+   "cell": "1->21",
+   "tier": "census",
+   "class": "punctuation funnel",
+   "prompt_dependent": false,
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "2->21",
+   "tier": "census",
+   "class": "punctuation funnel",
+   "prompt_dependent": false,
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "3->21",
+   "tier": "census",
+   "class": "punctuation funnel",
+   "prompt_dependent": false,
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "20->21",
+   "tier": "census",
+   "class": "mixed",
+   "prompt_dependent": true,
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "21->21",
+   "tier": "census",
+   "class": "whole-word",
+   "prompt_dependent": true,
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "0->21",
+   "tier": "scan",
+   "class": "punctuation funnel",
+   "prompt_dependent": false,
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "4->21",
+   "tier": "scan",
+   "class": "punctuation funnel",
+   "prompt_dependent": false,
+   "agree": 0,
+   "flagship": false
+  }
+ ],
+ "j21_column_summary": {
+  "cells": 22,
+  "non_flagship_mean": 8.4,
+  "non_flagship_median": 7.0,
+  "rank_of_10_21": 3,
+  "rank_of_8_21": 6,
+  "non_flagship_at_or_above_17": 5,
+  "non_flagship_at_or_above_23": 2
+ },
+ "wstar_via_tail_distribution": [
+  {
+   "cell": "20->20",
+   "agree": 25,
+   "flagship": false
+  },
+  {
+   "cell": "10->21",
+   "agree": 23,
+   "flagship": true
+  },
+  {
+   "cell": "13->13",
+   "agree": 20,
+   "flagship": false
+  },
+  {
+   "cell": "17->20",
+   "agree": 18,
+   "flagship": false
+  },
+  {
+   "cell": "8->21",
+   "agree": 17,
+   "flagship": true
+  },
+  {
+   "cell": "9->11",
+   "agree": 16,
+   "flagship": false
+  },
+  {
+   "cell": "13->21",
+   "agree": 16,
+   "flagship": false
+  },
+  {
+   "cell": "15->19",
+   "agree": 16,
+   "flagship": false
+  },
+  {
+   "cell": "10->16",
+   "agree": 14,
+   "flagship": false
+  },
+  {
+   "cell": "9->20",
+   "agree": 13,
+   "flagship": false
+  },
+  {
+   "cell": "16->18",
+   "agree": 12,
+   "flagship": false
+  },
+  {
+   "cell": "8->9",
+   "agree": 2,
+   "flagship": false
+  },
+  {
+   "cell": "12->15",
+   "agree": 1,
+   "flagship": false
+  },
+  {
+   "cell": "14->16",
+   "agree": 1,
+   "flagship": false
+  },
+  {
+   "cell": "8->11",
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "8->16",
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "10->10",
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "15->17",
+   "agree": 0,
+   "flagship": false
+  },
+  {
+   "cell": "21->21",
+   "agree": 0,
+   "flagship": false
+  }
+ ],
+ "wstar_via_tail_summary": {
+  "n": 19,
+  "mean": 10.2,
+  "median": 13,
+  "min": 0,
+  "max": 25
+ },
+ "late_depth_class_split_all_tiers": {
+  "20": {
+   "wstar_n": 3,
+   "wstar_values": [
+    13,
+    18,
+    25
+   ],
+   "other_n": 18,
+   "other_mean": 7.4
+  },
+  "21": {
+   "wstar_n": 4,
+   "wstar_values": [
+    0,
+    16,
+    17,
+    23
+   ],
+   "other_n": 18,
+   "other_mean": 8.5
+  },
+  "22": {
+   "wstar_n": 0,
+   "wstar_values": [],
+   "other_n": 23,
+   "other_mean": 19.0
+  }
+ }
+}
