@@ -400,6 +400,10 @@ def main():
             f"--prompt-offset {args.prompt_offset}" if args.prompt_offset else None,
             f"--n-prompts {args.n_prompts}" if args.n_prompts is not None else None,
             f"--renorm {args.renorm}" if args.renorm != "seed_j" else None,
+            # 2026-08-02 (review §4.4 item 2): a per-arm rerun is a variant.
+            # Without this, `--tier full --arms A5` silently replaced the
+            # registered 150-record results_full.json with a 25-record file.
+            f"--arms {args.arms}" if args.arms else None,
         ]
         variant = [v for v in variant if v]
         if variant:
@@ -408,6 +412,17 @@ def main():
                 f"write to the registered artifact names results_{args.tier}.json / "
                 f"terminals_{args.tier}.pt. Pass --tag (or --out-suffix) to give "
                 "this run its own artifacts.")
+    else:
+        # 2026-08-02 (review §4.4 item 2, second half): a --tag / --out-suffix
+        # value that collides with a tier name (or a tier's harness-check name)
+        # writes straight onto that tier's registered artifacts, which defeats
+        # the guard above. Reserved names are rejected outright.
+        reserved = set(TIERS) | {f"{t}_harness" for t in TIERS}
+        if suffix in reserved:
+            ap.error(
+                f"--tag/--out-suffix value '{suffix}' collides with a "
+                "registered artifact name (tier or tier_harness). Choose a "
+                "suffix that is not a tier name.")
     if args.tier == "pythia":
         # EXP_012-PYTHIA spec §4 promises the natural-norm record for the
         # registered seed_j run — implied, not flag-dependent (PR #39 review).
