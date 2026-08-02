@@ -624,7 +624,32 @@ def main():
         print(f"\n=== Arm {arm}: window {i}->{j}"
               f"{' inject_hook=' + inject_hook if inject_hook else ''} ===", flush=True)
         arm_results, arm_terminals = [], {}
+        # Per-prompt partial checkpoint (ops-only diff, 2026-08-02, issue #71).
+        # Two silent process deaths each killed an in-progress arm; the census
+        # answer (per-arm shards) still loses the whole in-flight arm. Each
+        # completed prompt is appended to a sidecar pair and reloaded on the
+        # next invocation; per-run results are deterministic and independent
+        # of process boundaries (verified for --resume above), so skipping
+        # completed prompts is exact. Terminals are written first, the JSON is
+        # the completion marker (same convention as the per-arm checkpoint).
+        # The sidecar pair is deleted when the arm completes. No protocol
+        # parameter is touched.
+        ppath = outdir / f"partial_{suffix}_{arm}.json"
+        tppath = outdir / f"partial_{suffix}_{arm}.pt"
+        done_ids = set()
+        if ppath.exists():
+            arm_results = json.load(open(ppath))
+            if tppath.exists():
+                arm_terminals = torch.load(tppath, map_location="cpu",
+                                           weights_only=True)
+            done_ids = {r["prompt_id"] for r in arm_results
+                        if f"{arm}|{r['prompt_id']}" in arm_terminals}
+            arm_results = [r for r in arm_results if r["prompt_id"] in done_ids]
+            print(f"  [{arm}] partial resume: {len(done_ids)} prompts already "
+                  "complete in the sidecar", flush=True)
         for rec in prompts:
+            if rec["id"] in done_ids:
+                continue
             p = rec["prompt"]
             p_text = p if isinstance(p, str) else "harness-check-tokens"
             r = run_arm_with_terminal(model, p, i, j, tier["max_iter"], check_start,
@@ -639,6 +664,8 @@ def main():
             r.update(arm=arm, window=f"{i}->{j}", prompt_id=rec["id"], prompt=p_text,
                      category=rec["category"])
             arm_results.append(r)
+            torch.save(arm_terminals, tppath)
+            json.dump(arm_results, open(ppath, "w"), indent=2)
             print(f"  [{arm}] {rec['id']:<16} -> {r['terminal_token']!r:14} "
                   f"lock={r['lock_in_iter']} iters={r['n_iters']} "
                   f"margin={r['top_logit_margin']:.2f}", flush=True)
@@ -658,6 +685,9 @@ def main():
         else:
             torch.save(terminals, outdir / f"terminals_{suffix}.pt")
             json.dump(results, open(outdir / f"results_{suffix}.json", "w"), indent=2)
+        # the arm is durably checkpointed above; drop its per-prompt sidecar
+        ppath.unlink(missing_ok=True)
+        tppath.unlink(missing_ok=True)
 
     # summary table
     print(f"\n=== Summary ({time.time()-t0:.0f}s) ===")
