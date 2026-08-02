@@ -35,11 +35,18 @@ killed nor saved by its own registered test.
 
 **The rule now in force:** the workspace framing ends if EXP_011 (Small)
 and EXP_011m (Medium) both show basin or window terminals projecting onto
-the J-space no differently than matched nulls, given the recorded Medium
-band null (EXP_012m: NO COHERENT BAND) and the absence of a Small
-candidate band. The nulls for both experiments are pre-registered in their
-specs with the rigour of the EXP_010c-PERM spec (matched permutation
-nulls, thresholds fixed before any projection is computed). Either
+the J-space no differently than matched nulls. The two "given" clauses
+are recorded facts, not predicates awaiting measurement: the Medium band
+null is EXP_012m's recorded NO COHERENT BAND verdict
+(`RESULTS_JLENS_MEDIUM.md`), and the absence of a Small candidate band is
+the recorded EXP_010b finding that no sub-window of Small carries the
+Stage 1 landscape (`experiments/exp_010b_small/RESULTS_EXP010B.md`).
+Operationalisation is deliberately delegated to the two specs and gated:
+neither experiment may execute until its spec has pre-registered, with
+the rigour of the EXP_010c-PERM spec, the projection measure, the
+matched-null construction, and the numeric thresholds, all fixed before
+any projection is computed; the kill rule then fires mechanically on the
+two recorded verdicts, with no discretion at fire time. Either
 experiment alone failing does not end the framing; the conjunction does.
 If the framing ends, Stage 2 closes with the apparatus-conditionality and
 island results written up as the finding, per the house rule that

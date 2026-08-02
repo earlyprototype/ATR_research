@@ -6,11 +6,11 @@
 **Arbiter note, 2026-08-02:** sentences below reading "the J-lens re-decode
 (EXP_013m) remains the registered arbiter" are historical text and stay as
 written, but the arbiter status changed on 2026-08-02: EXP_011m (subspace
-overlap) is now the primary arbiter for mid-stack terminal claims and
-EXP_013m is demoted to a supporting probe, because with a MARGINAL
-instrument gate and no coherent band it can rule latent content in but can
-never rule it out. The ruling and its grounds are `../../REGISTER.md`
-erratum (e).
+overlap) is now the primary arbiter, with the registered scope
+"workspace-content claims about Medium terminal states", and EXP_013m is
+demoted to a supporting probe, because with a MARGINAL instrument gate and
+no coherent band it can rule latent content in but can never rule it out.
+The ruling and its grounds are `../../REGISTER.md` erratum (e).
 
 ---
 

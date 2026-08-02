@@ -93,15 +93,19 @@ def added_lines_by_file(diff_text):
 
 
 def new_files(diff_text):
+    """New paths from the diff --git headers. The path must come from the
+    header, not the +++ b/ line: git emits no +++ line for a binary file
+    (it prints 'Binary files ... differ' instead), and .pt artifacts are
+    binary, which is R5's main use case."""
     files = []
-    cur_new = False
+    cur_path = None
     for raw in diff_text.splitlines():
         if raw.startswith("diff --git"):
-            cur_new = False
-        elif raw.startswith("new file mode"):
-            cur_new = True
-        elif raw.startswith("+++ b/") and cur_new:
-            files.append(raw[6:])
+            m = re.match(r"diff --git a/.+ b/(.+)$", raw)
+            cur_path = m.group(1) if m else None
+        elif raw.startswith("new file mode") and cur_path:
+            files.append(cur_path)
+            cur_path = None
     return files
 
 
@@ -290,6 +294,18 @@ def self_test():
                          "+++ b/e/experiments/x/run.log\n"
                          "@@ -0,0 +1,1 @@\n+ok\n")
             self.assertFalse(check_r5(d_log, ""))
+
+        def test_r5_binary_artifact(self):
+            # A new .pt file: git emits no +++ line for binary content,
+            # so the path must be recovered from the diff --git header.
+            d_bin = ("diff --git a/e/experiments/x/output/t.pt "
+                     "b/e/experiments/x/output/t.pt\n"
+                     "new file mode 100644\n"
+                     "Binary files /dev/null and b/e/experiments/x/output/"
+                     "t.pt differ\n")
+            self.assertEqual(new_files(d_bin),
+                             ["e/experiments/x/output/t.pt"])
+            self.assertTrue(check_r5(d_bin, ""))
 
     suite = unittest.TestLoader().loadTestsFromTestCase(Grammar)
     suite.addTests(

@@ -69,9 +69,14 @@ complete data rather than a sampled grid. What the map hands forward
   N2 as ratified: 21 of 300 census cells satisfy the §3 whole-word +
   prompt-dependent rule; manifest below. Whether terminal class or
   readout reliability selects the J-lens phase's cells is an open
-  selector choice, recorded, not decided here.]** The 21 cells with
-  whole-word, prompt-dependent terminals are **not** a contiguous band
-  and include single-layer windows (10→10, 13→13, 20→20, 21→21).
+  selector choice, recorded, not decided here. Selector freeze rule: the
+  EXP_011m spec commits its target set before any projection is
+  computed, and the default that requires no further ruling is the whole
+  frozen manifest, all 21 cells plus the two non-census flagship
+  artifacts, so no post-observation subset selection is possible.]** The
+  21 cells with whole-word, prompt-dependent terminals are **not** a
+  contiguous band and include single-layer windows (10→10, 13→13,
+  20→20, 21→21).
 
   **Exact target-to-artifact manifest.** 19 of the 21 are census arms;
   **two are not** — they were measured by earlier tiers and are absent
@@ -164,6 +169,11 @@ Final line: `MEDIUM J-TRACK COMPLETE — H9-mechanism: <verdict> · EXP_012m ban
 <[lo,hi] or none> · EXP_011m overlap: <verdict> · EXP_013m readout: <verdict>`.
 
 Kill-criteria note: this track feeds, but does not replace, the plan-level kill
-criteria in STAGE2_PLAN.md — a dead band on Medium plus a dead window grid on
+criteria in STAGE2_PLAN.md — ~~a dead band on Medium plus a dead window grid on
 Small plus null EXP_011 overlap on Small is the conjunction that ends the
-workspace framing.
+workspace framing~~. **Updated 2026-08-02:** the conjunction that ends the
+workspace framing is now the re-registered rule in STAGE2_PLAN.md §Kill
+criteria: EXP_011 (Small) and EXP_011m (Medium) both showing terminals
+projecting onto J-space no differently than matched nulls, given the
+recorded Medium band null and the absence of a Small candidate band. The
+struck wording above is the pre-2026-08-02 paraphrase, kept visible.

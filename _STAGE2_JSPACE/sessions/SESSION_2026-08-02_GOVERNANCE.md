@@ -41,8 +41,10 @@ disposition, the kill-criteria re-registration, the arbiter swap
    licensed without ratification): the overwrite guard in `run_exp010c.py`
    now treats a per-arm rerun (`--arms`) as a variant requiring a tag,
    and rejects `--tag`/`--out-suffix` values that collide with tier or
-   tier-harness artifact names. The BOS seam is settled and the backwards
-   note in `RESULTS_JLENS_MEDIUM.md` corrected with a dated correction:
+   tier-harness artifact names. The BOS seam is settled (BOS is the
+   beginning-of-sequence marker, a special token a tokenizer may prepend
+   to the front of a prompt) and the backwards note in
+   `RESULTS_JLENS_MEDIUM.md` corrected with a dated correction:
    the ATR engine DOES prepend BOS (pinned transformer_lens 3.5.1 default
    verified by source inspection of the pinned wheel; engine call sites
    pass raw strings with no override; independent empirical corroboration
@@ -63,9 +65,31 @@ disposition, the kill-criteria re-registration, the arbiter swap
    needs the gpt2-medium checkpoint, and hand-editing a registered
    artifact was rejected as a substitute.
 7. **Housekeeping:** tracker issues #11 to #14 closed with pointers to
-   their merged deliverables; merged and superseded remote branches
-   deleted after verification; the H13-vs-census adjudication issue
-   opened (ruling item 4's outstanding piece).
+   their merged deliverables, and the H13-vs-census adjudication issue
+   opened (issue #73, ruling item 4's outstanding piece). **Branch
+   deletion did not happen** and this note initially said otherwise; that
+   was wrong, and this is the correction. What is verified: 17 remote
+   branches have heads that are ancestors of `origin/main` (checked with
+   `git merge-base --is-ancestor <head> origin/main` per branch on
+   2026-08-02), so their history is fully contained in main and they are
+   safe to delete: `claude/agent-discovery-pr-gating-idicj8`,
+   `claude/board-mirror-handle`, `claude/consolidate-atr-from-fold`,
+   `claude/exp010b-small-grid`, `claude/exp010d-capstone-rescue`,
+   `claude/exp015-natural-ari`, `claude/issue-21-followups`,
+   `claude/issue-6-akvuxp`, `claude/issue-6-ownership-u55qxk`,
+   `claude/issue-7-mht248`, `claude/jlens-medium`,
+   `claude/loudness-profile-doc`, `claude/notebooklm-sources`,
+   `claude/open-unblocked-experiments-vnbnjo`,
+   `claude/potter-embodied-neuroscience-763359`,
+   `claude/register-integrity`, `claude/repo-review-alignment-knzmrj`,
+   `claude/report-loudness-brevity`. The deletion command itself was
+   blocked by the session's permission layer, so the deletions await TC
+   (web interface) or an approved command. Four branches are retained
+   deliberately because commits cited by hash in `REGISTER.md` and its
+   errata are reachable only through them:
+   `claude/gpt2-layer-looping-workspace-rr3c35`,
+   `claude/issue-6-census-writeup`, `claude/issue-7-1wg6mq`,
+   `claude/review-recent-pr-qug5jj`.
 
 ## 3. What converts this delegation from asserted to verified
 

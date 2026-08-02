@@ -202,8 +202,10 @@ cannot see it" (the 2026-07-27 session note says this itself), so EXP_013m
 can rule latent content in but can never rule it out. An arbiter that
 cannot adjudicate negatively cannot arbitrate.
 
-**The ruling, ratified under TC's in-session direction of 2026-08-02, per
-the review's §6.2 item 8 and the operator report's decision item 5:**
+**The ruling, executed under TC's in-session direction of 2026-08-02
+(delegation asserted, pending the `TC-RULING:` confirmation described in
+`sessions/SESSION_2026-08-02_GOVERNANCE.md` §3), per the review's §6.2
+item 8 and the operator report's decision item 5:**
 EXP_011m (subspace overlap), which bypasses word readouts entirely and can
 deliver both outcomes, is the primary arbiter for workspace-content claims
 about Medium terminal states. EXP_013m is demoted to a supporting probe.
