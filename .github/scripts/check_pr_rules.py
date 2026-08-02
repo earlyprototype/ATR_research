@@ -145,9 +145,18 @@ def check_r4(diff_text, pr_body):
             "Resolves #N) and no 'No-Close:' line in the body (R4)"]
 
 
+def all_touched_files(diff_text):
+    """Every path named in a diff --git header, new or modified, text or
+    binary. Needed because a modified binary artifact has neither added
+    lines nor a new-file marker, yet must still count for R5."""
+    return [m.group(1) for m in
+            re.finditer(r"^diff --git a/.+ b/(.+)$", diff_text, re.MULTILINE)]
+
+
 def check_r5(diff_text, pr_body):
     by_file = added_lines_by_file(diff_text)
-    touched = set(by_file) | set(new_files(diff_text))
+    touched = (set(by_file) | set(new_files(diff_text))
+               | set(all_touched_files(diff_text)))
     artifact_dirs = set()
     log_dirs = set()
     for p in touched:
@@ -306,6 +315,19 @@ def self_test():
             self.assertEqual(new_files(d_bin),
                              ["e/experiments/x/output/t.pt"])
             self.assertTrue(check_r5(d_bin, ""))
+
+        def test_r5_modified_binary_artifact(self):
+            # A MODIFIED .pt file: no added lines, no new-file marker,
+            # only the diff --git header names it. Must still trip R5.
+            d_mod = ("diff --git a/e/experiments/x/output/t.pt "
+                     "b/e/experiments/x/output/t.pt\n"
+                     "index 1111111..2222222 100644\n"
+                     "Binary files a/e/experiments/x/output/t.pt and "
+                     "b/e/experiments/x/output/t.pt differ\n")
+            self.assertEqual(new_files(d_mod), [])
+            self.assertEqual(all_touched_files(d_mod),
+                             ["e/experiments/x/output/t.pt"])
+            self.assertTrue(check_r5(d_mod, ""))
 
     suite = unittest.TestLoader().loadTestsFromTestCase(Grammar)
     suite.addTests(
