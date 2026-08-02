@@ -92,10 +92,6 @@ disposition, the kill-criteria re-registration, the arbiter swap
    `claude/find-voice-md-real4m`. Completion evidence: `git ls-remote`
    afterwards shows only `main`, `board-state`, PR #53's live branch,
    and the four retained provenance branches.]
-8. **Housekeeping:** tracker issues #11 to #14 closed with pointers to
-   their merged deliverables; merged and superseded remote branches
-   deleted after verification; the H13-vs-census adjudication issue
-   opened (ruling item 4's outstanding piece).
 
 ## 3. What converts this delegation from asserted to verified
 
