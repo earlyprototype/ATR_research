@@ -79,6 +79,7 @@ wrote at the time; read them against this table.
 
 | ID | What it is | Status | Spec | Results |
 |---|---|---|---|---|
+| EXP_010 | Legacy family shorthand in the 2026-07-11 plan text for the window-loop line that became EXP_010a/b/c/c-2/c-3/c-3b/c-4/d | **HISTORICAL — never an executed experiment ID.** Appears only in quoted or superseded plan text (e.g. the struck original kill criteria); do not use in new text | `STAGE2_PLAN.md` (original wording) | — |
 | EXP_010a | Pythia-410m depth control (H8) | **SUPERSEDED — never ran under its own ID.** Executed as arms P-A0/P-A1 of EXP_012-PYTHIA | `RUNBOOK_PHASE1.md` §EXP_010a; absorbed by `EXP_012_PYTHIA_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP012_PYTHIA.md` |
 | EXP_010b | GPT-2 Small window grid (H5 coarse) | COMPLETE | `EXP_010b_SPEC.md` | `experiments/exp_010b_small/RESULTS_EXP010B.md` (see the 2026-07-31 correction note there) |
 | EXP_010c | GPT-2 Medium window loops (H9/H9a) | COMPLETE | `EXP_010c_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP010C.md` |
