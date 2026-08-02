@@ -91,7 +91,12 @@ disposition, the kill-criteria re-registration, the arbiter swap
    and its first run deleted all 17 plus the merged working branch
    `claude/find-voice-md-real4m`. Completion evidence: `git ls-remote`
    afterwards shows only `main`, `board-state`, PR #53's live branch,
-   and the four retained provenance branches.]
+   and the four retained provenance branches.] Four branches are retained
+   deliberately because commits cited by hash in `REGISTER.md` and its
+   errata are reachable only through them:
+   `claude/gpt2-layer-looping-workspace-rr3c35`,
+   `claude/issue-6-census-writeup`, `claude/issue-7-1wg6mq`,
+   `claude/review-recent-pr-qug5jj`.
 
 ## 3. What converts this delegation from asserted to verified
 
