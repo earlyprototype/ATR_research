@@ -1,0 +1,40 @@
+# Deletes remote branches, but only after re-verifying each one is fully
+# merged into main (its head is an ancestor of main). Anything unmerged is
+# refused and reported, never deleted. Supports CLAUDE.md rule R6
+# (merged branches are deleted at merge). Manual dispatch only.
+name: Branch cleanup (merged branches only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      branches:
+        description: Space-separated branch names; each is deleted only if fully merged into main
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Delete verified-merged branches
+        env:
+          BRANCHES: ${{ github.event.inputs.branches }}
+        run: |
+          for b in $BRANCHES; do
+            sha=$(git ls-remote origin "refs/heads/$b" | cut -f1)
+            if [ -z "$sha" ]; then
+              echo "SKIP $b: no such remote branch"
+              continue
+            fi
+            if git merge-base --is-ancestor "$sha" origin/main; then
+              git push origin --delete "$b"
+              echo "DELETED $b ($sha)"
+            else
+              echo "REFUSED $b: head $sha is not fully merged into main"
+            fi
+          done
