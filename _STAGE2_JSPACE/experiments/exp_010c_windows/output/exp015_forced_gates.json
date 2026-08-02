@@ -1,0 +1,24 @@
+{
+  "G1_E01_politics": {
+    "terminal_token": "D",
+    "token_id": 35,
+    "lock_in_iter": 120,
+    "cos_vs_committed_mean": 0.9999998807907104,
+    "pass": true
+  },
+  "G1_D01_water": {
+    "terminal_token": "D",
+    "token_id": 35,
+    "lock_in_iter": 120,
+    "cos_vs_committed_mean": 1.0,
+    "pass": true
+  },
+  "G2_E01_politics": {
+    "max_abs_diff": 0.0,
+    "pass": true
+  },
+  "G2_D01_water": {
+    "max_abs_diff": 0.0,
+    "pass": true
+  }
+}

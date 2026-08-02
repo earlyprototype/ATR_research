@@ -1,0 +1,12 @@
+input digests match the EXP_010c_PERM_SPEC.md addendum
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 13969.85it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+/home/user/ATR_research/.claude/worktrees/agent-afca15b8411740295/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+G1 E01_politics: token='D' id=35 lock=120 cos=1.000000 -> PASS
+G1 D01_water: token='D' id=35 lock=120 cos=1.000000 -> PASS
+G2 E01_politics: max abs diff engine vs local = 0.00e+00 -> PASS
+G2 D01_water: max abs diff engine vs local = 0.00e+00 -> PASS
+norm cross-check: 25 prompts match the Control B record
+gates: PASS
