@@ -1,0 +1,89 @@
+input digests match the EXP_010c_PERM_SPEC.md addendum
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 41759.98it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+norm cross-check: 25 prompts match the Control B record
+/home/user/ATR_research/.claude/worktrees/agent-afca15b8411740295/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [attempt 1] E01_politics     -> 'A'            id=32 lock=None iters=300 cos=0.8064
+  [attempt 1] D01_water        -> ','            id=11 lock=None iters=300 cos=0.4631
+  [attempt 1] A01_physics      -> 'An'           id=2025 lock=None iters=300 cos=0.8040
+input digests match the EXP_010c_PERM_SPEC.md addendum
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 31254.45it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+norm cross-check: 25 prompts match the Control B record
+input digests match the EXP_010c_PERM_SPEC.md addendum
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 31963.27it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+norm cross-check: 25 prompts match the Control B record
+/home/user/ATR_research/.claude/worktrees/agent-afca15b8411740295/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [attempt 1] E01_politics     -> 'A'            id=32 lock=None iters=300 cos=0.8064
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 16116.02it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+  [attempt 1] E01_politics     resumed from shard ('A' id=32)
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 31428.49it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+  [attempt 1] E01_politics     resumed from shard ('A' id=32)
+    (resumed at iteration 101)
+/home/user/ATR_research/.claude/worktrees/agent-afca15b8411740295/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [attempt 1] D01_water        -> ','            id=11 lock=None iters=300 cos=0.4631
+  [attempt 1] A01_physics      -> 'An'           id=2025 lock=None iters=300 cos=0.8040
+  [attempt 1] B01_napoleon     -> 'The'          id=464 lock=None iters=300 cos=0.7944
+  [attempt 1] C01_jack_jill    -> 'A'            id=32 lock=None iters=300 cos=0.8327
+  [attempt 1] F01_anger        -> 'A'            id=32 lock=None iters=300 cos=0.8383
+  [attempt 1] G01_punctuation  -> 'A'            id=32 lock=None iters=300 cos=0.8256
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 24087.18it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+  [attempt 1] E01_politics     resumed from shard ('A' id=32)
+  [attempt 1] D01_water        resumed from shard (',' id=11)
+  [attempt 1] A01_physics      resumed from shard ('An' id=2025)
+  [attempt 1] B01_napoleon     resumed from shard ('The' id=464)
+  [attempt 1] C01_jack_jill    resumed from shard ('A' id=32)
+  [attempt 1] F01_anger        resumed from shard ('A' id=32)
+  [attempt 1] G01_punctuation  resumed from shard ('A' id=32)
+/home/user/ATR_research/.claude/worktrees/agent-afca15b8411740295/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [attempt 1] E02_tech         -> 'The'          id=464 lock=None iters=300 cos=0.7733
+  [attempt 1] D02_periodic     -> 'A'            id=32 lock=None iters=300 cos=0.8091
+  [attempt 1] A02_medical      -> 'A'            id=32 lock=None iters=300 cos=0.8123
+  [attempt 1] B02_wwi          -> 'An'           id=2025 lock=None iters=300 cos=0.8021
+  [attempt 1] C02_king_cole    -> 'An'           id=2025 lock=None iters=300 cos=0.8011
+  [attempt 1] F02_insult       -> 'A'            id=32 lock=None iters=300 cos=0.8364
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 10644.52it/s]
+Loaded pretrained model gpt2-medium into HookedTransformer
+  [attempt 1] E01_politics     resumed from shard ('A' id=32)
+  [attempt 1] D01_water        resumed from shard (',' id=11)
+  [attempt 1] A01_physics      resumed from shard ('An' id=2025)
+  [attempt 1] B01_napoleon     resumed from shard ('The' id=464)
+  [attempt 1] C01_jack_jill    resumed from shard ('A' id=32)
+  [attempt 1] F01_anger        resumed from shard ('A' id=32)
+  [attempt 1] G01_punctuation  resumed from shard ('A' id=32)
+  [attempt 1] E02_tech         resumed from shard ('The' id=464)
+  [attempt 1] D02_periodic     resumed from shard ('A' id=32)
+  [attempt 1] A02_medical      resumed from shard ('A' id=32)
+  [attempt 1] B02_wwi          resumed from shard ('An' id=2025)
+  [attempt 1] C02_king_cole    resumed from shard ('An' id=2025)
+  [attempt 1] F02_insult       resumed from shard ('A' id=32)
+    (resumed at iteration 51)
+/home/user/ATR_research/.claude/worktrees/agent-afca15b8411740295/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [attempt 1] G02_brackets     -> 'A'            id=32 lock=None iters=300 cos=0.8471
+  [attempt 1] E03_orgs         -> 'The'          id=464 lock=None iters=300 cos=0.7661
+  [attempt 1] D03_organic      -> 'A'            id=32 lock=None iters=300 cos=0.8466
+  [attempt 1] A03_neuro        -> 'A'            id=32 lock=None iters=300 cos=0.8288
+  [attempt 1] B03_moon         -> 'A'            id=32 lock=None iters=300 cos=0.8350
+  [attempt 1] C03_mary_lamb    -> 'A'            id=32 lock=None iters=300 cos=0.8158
+  [attempt 1] F03_frustration  -> 'A'            id=32 lock=None iters=300 cos=0.8260
+  [attempt 1] G03_counting     -> 'A'            id=32 lock=None iters=300 cos=0.8922
+  [attempt 1] E04_internet     -> 'A'            id=32 lock=None iters=300 cos=0.8115
+  [attempt 1] D04_equation     -> '1'            id=16 lock=None iters=300 cos=0.5192
+  [attempt 1] A04_climate      -> 'A'            id=32 lock=None iters=300 cos=0.8170
+  [attempt 1] B04_rome         -> 'A'            id=32 lock=None iters=300 cos=0.8369
+attempt 1: D readout on 0/25, converged 0/25 -> criterion FAIL
+Artifacts: exp015_forced_attempt1.json, terminals_exp015_forced_attempt1.pt
