@@ -1,0 +1,86 @@
+{
+ "W6_18": {
+  "window": "6->18",
+  "direct": [
+   [
+    " Republican",
+    25
+   ]
+  ],
+  "via_tail": [
+   [
+    " Republican",
+    25
+   ]
+  ],
+  "agree": "25/25"
+ },
+ "W5_20": {
+  "window": "5->20",
+  "direct": [
+   [
+    " Republican",
+    24
+   ],
+   [
+    " \"",
+    1
+   ]
+  ],
+  "via_tail": [
+   [
+    " Republican",
+    21
+   ],
+   [
+    " source",
+    4
+   ]
+  ],
+  "agree": "20/25"
+ },
+ "W6_19": {
+  "window": "6->19",
+  "direct": [
+   [
+    " Republican",
+    24
+   ],
+   [
+    "\n",
+    1
+   ]
+  ],
+  "via_tail": [
+   [
+    " Republican",
+    24
+   ],
+   [
+    "\n",
+    1
+   ]
+  ],
+  "agree": "25/25"
+ },
+ "W7_17": {
+  "window": "7->17",
+  "direct": [
+   [
+    " GOP",
+    25
+   ]
+  ],
+  "via_tail": [
+   [
+    " Trump",
+    24
+   ],
+   [
+    " Republican",
+    1
+   ]
+  ],
+  "agree": "0/25"
+ }
+}

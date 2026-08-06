@@ -1,0 +1,133 @@
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 7540.93it/s]
+seed top10: [' comrades', ' proletarian', ' labour', ' socialist', ' solidarity', ' comrade', ' prolet', ' anarchist', ' revolution', ' union']
+
+[6->18/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc   1809  riv   9728  ctl  31855   [' Trotsky', "'", '�', ' Lenin', 'さ']
+   it   2  soc  21095  riv   8969  ctl  13430   ["'", '.\'"', ' �', 'ting', '\'."']
+   it   5  soc  20609  riv   5658  ctl  28164   ['))))', '"))', ')))', '))', '.)']
+   it  10  soc  31579  riv   8108  ctl  17205   [' Poc', '))))', ' Amar', ')),', ')).']
+   it  20  soc  28320  riv   9255  ctl  22351   ['urrency', 'ahoo', 'OOK', 'self', ' Poc']
+   it  50  soc  23966  riv  10604  ctl  29171   [')', '"))', ').', "'", '.']
+   it 100  soc  28884  riv   8921  ctl  19520   ['))))', ')))', ' Poc', ']).', ')).']
+   it 200  soc  23256  riv  13288  ctl  23664   ['))))', 'olulu', '?\'"', 'urrency', ' Amar']
+   it 300  soc  21304  riv  12530  ctl  17272   ['))))', ')),', 'urrency', ')].', ')).']
+
+
+[6->18/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2903  ctl   8332   [' socialist', ' labour', ' Lenin', ' bourgeois', ' revolution']
+   it   2  soc     10  riv   4630  ctl  10087   [' socialist', ' labour', ' Lenin', ' bourgeois', ' proletarian']
+   it   5  soc     32  riv  12208  ctl  12097   [' Trotsky', ' Lenin', '\'."', ')."', ' bourgeois']
+   it  10  soc   4727  riv  16633  ctl  27676   [')."', ').', '.).', '.)', "')."]
+   it  20  soc  29428  riv  10405  ctl  31935   ['.)', ' ).', ').', '.),', ' .)']
+   it  50  soc  34765  riv  11602  ctl  22226   [' PLEASE', ' Thank', ' Helpful', ' Instructions', ' Ups']
+   it 100  soc  19729  riv   6039  ctl  26453   [' Happy', ' Thanks', ' THANK', ' Welcome', ' EVE']
+   it 200  soc  18434  riv   6282  ctl  23408   [' Happy', ' Thanks', ' THANK', '=-=-=-=-', ' :)']
+   it 300  soc  20300  riv   6797  ctl  19281   [' :)', ' please', ' sir', ' PLEASE', ' THANK']
+
+
+[6->19/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc   2497  riv   8796  ctl  36082   ["'", ' Trotsky', '"', 'VI', 'ab']
+   it   2  soc  10806  riv   8194  ctl  15857   [' it', ' and', ' to', 'ly', ' �']
+   it   5  soc  30454  riv   8351  ctl  23207   [' apologize', "'", '"', '."', '0']
+   it  10  soc  22494  riv   4170  ctl  26400   ['.")', '.\'"', ']."', ')].', ' NBA']
+   it  20  soc  19012  riv   4211  ctl  30340   ['."', '!"', ']."', '\'."', '"!']
+   it  50  soc  26228  riv  17458  ctl  29643   ['\n', ',', 'The', '.', '"']
+   it 100  soc  28720  riv  16709  ctl  27803   [')', '"', ').', '.")', '").']
+   it 200  soc  26410  riv   5969  ctl  30320   ['―', ' –', "'", '—', '"']
+   it 300  soc  19838  riv   6947  ctl  12821   [')].', '))))', ']).', ')).', '"))']
+
+
+[6->19/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   3207  ctl   9096   [' socialist', ' Lenin', ' bourgeois', ' proletarian', ' revolution']
+   it   2  soc     10  riv   4740  ctl  11411   [' socialist', ' Lenin', ' bourgeois', ' Marx', ' labour']
+   it   5  soc     26  riv  14029  ctl  13453   [' Lenin', ')."', ' Trotsky', ' Marx', ' bourgeois']
+   it  10  soc   5447  riv  22183  ctl  24724   [')."', '.)', ')"', ').', '.")']
+   it  20  soc  32920  riv  12969  ctl  30407   ['.)', ').', '.).', ' ).', ')).']
+   it  50  soc  34897  riv   9018  ctl  31464   [' USPS', '.)', ' Website', '\xa0', ' http']
+   it 100  soc  38867  riv   4654  ctl  15089   ['®', ' �', ' Width', ' �', ' Affordable']
+   it 200  soc  39578  riv   3291  ctl  25871   [' Really', "'d", ' I', '\n', '…"']
+   it 300  soc  42352  riv   3208  ctl  24562   ['\n', ' can', ' have', ' are', ' I']
+
+
+[5->20/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc  15514  riv   4538  ctl  24944   [' the', ' and', ' /', ' most', ' &']
+   it   2  soc  34634  riv   4312  ctl  22930   ["'", "'d", '…', '..', ' …']
+   it   5  soc  36143  riv   4185  ctl  27566   ["'", '\xad', ' ....', 'ou', 'oft']
+   it  10  soc  33959  riv   6680  ctl  32725   ["'", '\xad', ' ....', ' Tobacco', 'oft']
+   it  20  soc  33126  riv   5051  ctl  35915   ["'", ' ....', '\xad', '\xa0', ' Tobacco']
+   it  50  soc  32887  riv   5183  ctl  35858   ["'", ' ....', '\xad', '\xa0', ' Tobacco']
+   it 100  soc  32709  riv   5209  ctl  36004   ["'", ' ....', '\xad', '\xa0', ' Tobacco']
+   it 200  soc  32692  riv   5211  ctl  36027   ["'", ' ....', '\xad', '\xa0', ' Tobacco']
+   it 300  soc  32692  riv   5211  ctl  36027   ["'", ' ....', '\xad', '\xa0', ' Tobacco']
+
+
+[5->20/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2876  ctl  10472   [' socialist', ' Lenin', ' labour', ' bourgeois', ' revolution']
+   it   2  soc     10  riv   3640  ctl  15151   [' socialist', ' Lenin', ' bourgeois', ' labour', ' Marx']
+   it   5  soc     65  riv   9565  ctl  13328   [')."', ' Trotsky', ').', ' Lenin', ' etc']
+   it  10  soc  14011  riv  10179  ctl  29742   [').', "').", ')."', '").', '.)']
+   it  20  soc  34127  riv  10914  ctl  31570   [' Address', ' URL', "').", 'ー', ' Username']
+   it  50  soc  27232  riv   8003  ctl  20255   [' Welcome', '...', 'reetings', 'oooo', '..."']
+   it 100  soc  30933  riv  16644  ctl  23984   ['oooo', 'ooo', 'oooooooo', '!', '...']
+   it 200  soc  31200  riv  16732  ctl  24601   ['oooo', 'ooo', '!', 'aaaa', '...']
+   it 300  soc  31225  riv  16036  ctl  24647   ['oooo', 'ooo', '!', '...', 'aaaa']
+
+
+[7->17/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc  14098  riv   6833  ctl  24181   [' \xad', ' Jo', ' Crunch', ' Dur', ' Lastly']
+   it   2  soc  36067  riv   7505  ctl  13424   [' Rest', ' Marijuana', ' Sh', ' Iss', '.*']
+   it   5  soc  34598  riv   7800  ctl  15945   [' darn', '@#', ' damn', ' Kits', 'esh']
+   it  10  soc  30857  riv  12708  ctl  22733   ['@#', '")', '").', ')"', 'wh']
+   it  20  soc  33493  riv   6357  ctl  25776   [' .)', 'bec', 'uben', 'ac', 'amar']
+   it  50  soc  25747  riv  16401  ctl   9451   ['").', '-"', '")', 'mo', '"),']
+   it 100  soc  24495  riv  12589  ctl  19925   [')"', '").', '.")', '")', '…)']
+   it 200  soc  24882  riv  10624  ctl   7517   ['")', '").', 'tf', 'yy', 'ac']
+   it 300  soc  30991  riv   7790  ctl  22613   [' .)', 'uben', '.)', 'esse', 'ra']
+
+
+[7->17/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2932  ctl   7079   [' socialist', ' labour', ' revolution', ' bourgeois', ' Lenin']
+   it   2  soc     10  riv   3567  ctl   7125   [' socialist', ' labour', ' bourgeois', ' Lenin', ' proletarian']
+   it   5  soc     24  riv   9222  ctl  12286   [' bourgeois', ' Marx', ' labour', ' Lenin', ' comrade']
+   it  10  soc   3802  riv  20170  ctl  17440   [')."', '\'."', '…)', ')"', ' ال']
+   it  20  soc  20813  riv  20867  ctl  26703   ['.)', '…)', ' .)', '/)', "')"]
+   it  50  soc  28791  riv  23351  ctl  34217   ['…)', '』', ').[', 'pl', ']),']
+   it 100  soc  31658  riv  19926  ctl  22862   ['…)', ' TL', ' Taken', ' Granted', '\xa0']
+   it 200  soc  16444  riv     25  ctl  16519   [' Hillary', ' Trump', ' GOP', ' Republicans', ' Republican']
+   it 300  soc  24494  riv     19  ctl  14064   [' Trump', ' GOP', ' Hillary', ' FBI', ' Republican']
+
+
+[0->23/lo] N0=300
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc    195  riv   1718  ctl  22300   [' labour', ' socialist', ' upwards', ' union', ' into']
+   it   2  soc  21751  riv  19646  ctl  39100   ['P', 'The', 'R', 'A', 'N']
+   it   5  soc  33190  riv  22692  ctl  42897   ['The', 'I', 'In', 'An', 'A']
+   it  10  soc  32777  riv  25600  ctl  44978   ['The', 'I', 'In', 'An', 'A']
+   it  20  soc  33408  riv  25077  ctl  44918   ['The', 'I', 'In', 'An', 'A']
+   it  50  soc  33536  riv  24965  ctl  44974   ['The', 'I', 'In', 'An', 'A']
+   it 100  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
+   it 200  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
+   it 300  soc  33536  riv  24965  ctl  44975   ['The', 'I', 'In', 'An', 'A']
+
+
+[0->23/hi] N0=6000
+   it   0  soc     10  riv   4924  ctl   8250   [' comrades', ' proletarian', ' socialist', ' labour', ' solidarity']
+   it   1  soc     10  riv   2302  ctl   8728   [' union', ' labour', ' socialist', ' revolution', ' workers']
+   it   2  soc     10  riv   2909  ctl  10646   [' union', ' socialist', ' labour', ' revolution', ' proletarian']
+   it   5  soc    360  riv   1725  ctl  18268   [' union', '-', ' league', ' hell', ' nation']
+   it  10  soc  29671  riv  12361  ctl  28400   ['TR', 'national', 'AK', 'U', 'WR']
+   it  20  soc  36601  riv  20277  ctl  36567   ['def', 'T', 'W', 'D', 'RAW']
+   it  50  soc  40580  riv  23685  ctl  38849   ['D', 'def', 'W', 'A', 'I']
+   it 100  soc  40788  riv  23612  ctl  38787   ['D', 'A', 'W', 'def', 'I']
+   it 200  soc  40788  riv  23613  ctl  38788   ['D', 'A', 'W', 'def', 'I']
+   it 300  soc  40788  riv  23613  ctl  38788   ['D', 'A', 'W', 'def', 'I']
+
+written socialist_in_window.json

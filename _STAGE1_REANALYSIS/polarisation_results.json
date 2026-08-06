@@ -1,0 +1,772 @@
+{
+ "gate": {
+  "Lucier": {
+   "settled_match": true,
+   "iter0_match": true
+  },
+  "Semantic": {
+   "settled_match": true,
+   "iter0_match": true
+  },
+  "Syntactic": {
+   "settled_match": true,
+   "iter0_match": true
+  },
+  "Nonsense": {
+   "settled_match": true,
+   "iter0_match": true
+  },
+  "Imperative": {
+   "settled_match": true,
+   "iter0_match": true
+  }
+ },
+ "dropped_tokens": {
+  "L_heldout_socialist": [],
+  "R_rival_pole": [],
+  "N_political_neutral": [],
+  "C_nonpolitical": []
+ },
+ "states": {
+  "Lucier/iter0": {
+   "L_heldout_socialist": {
+    "median_rank": 15998.0,
+    "n": 12,
+    "ranks": {
+     " communist": 8013,
+     " communism": 17023,
+     " socialism": 30531,
+     " Marxism": 26866,
+     " Trotsky": 14973,
+     " Engels": 33130,
+     " revolution": 5948,
+     " workers": 7995,
+     " strike": 13659,
+     " solidarity": 31412,
+     " union": 11109,
+     " collective": 29864
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 24003.5,
+    "n": 12,
+    "ranks": {
+     " capitalist": 10078,
+     " capitalism": 6567,
+     " conservative": 5923,
+     " conservatism": 23944,
+     " fascist": 24063,
+     " fascism": 24465,
+     " nationalist": 36099,
+     " nationalism": 39949,
+     " libertarian": 10983,
+     " monarchy": 36936,
+     " Reagan": 13170,
+     " Thatcher": 27702
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 18595.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 26591,
+     " election": 7794,
+     " senate": 29148,
+     " mayor": 12641,
+     " ballot": 37390,
+     " legislation": 16982,
+     " governor": 15712,
+     " referendum": 31739,
+     " candidate": 13116,
+     " voter": 20209,
+     " committee": 9725,
+     " constitution": 24690
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 7660.5,
+    "n": 12,
+    "ranks": {
+     " kitchen": 2814,
+     " tomato": 14033,
+     " bicycle": 15199,
+     " weather": 3340,
+     " hospital": 4802,
+     " guitar": 8990,
+     " forest": 7233,
+     " sandwich": 7324,
+     " ocean": 9437,
+     " furniture": 7997,
+     " camera": 4855,
+     " blanket": 8749
+    }
+   }
+  },
+  "Lucier/settled": {
+   "L_heldout_socialist": {
+    "median_rank": 70.0,
+    "n": 12,
+    "ranks": {
+     " communist": 31,
+     " communism": 36,
+     " socialism": 25,
+     " Marxism": 79,
+     " Trotsky": 393,
+     " Engels": 27,
+     " revolution": 106,
+     " workers": 61,
+     " strike": 789,
+     " solidarity": 24,
+     " union": 452,
+     " collective": 801
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 1341.5,
+    "n": 12,
+    "ranks": {
+     " capitalist": 60,
+     " capitalism": 577,
+     " conservative": 5227,
+     " conservatism": 6959,
+     " fascist": 1294,
+     " fascism": 1275,
+     " nationalist": 1389,
+     " nationalism": 982,
+     " libertarian": 83,
+     " monarchy": 1664,
+     " Reagan": 37618,
+     " Thatcher": 28553
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 4734.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 1023,
+     " election": 998,
+     " senate": 5945,
+     " mayor": 20442,
+     " ballot": 5313,
+     " legislation": 1363,
+     " governor": 15037,
+     " referendum": 7446,
+     " candidate": 4156,
+     " voter": 6284,
+     " committee": 2949,
+     " constitution": 274
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 15460.5,
+    "n": 12,
+    "ranks": {
+     " kitchen": 30114,
+     " tomato": 30213,
+     " bicycle": 19628,
+     " weather": 19540,
+     " hospital": 12010,
+     " guitar": 34454,
+     " forest": 12824,
+     " sandwich": 10748,
+     " ocean": 13556,
+     " furniture": 10914,
+     " camera": 17365,
+     " blanket": 12143
+    }
+   }
+  },
+  "Semantic/iter0": {
+   "L_heldout_socialist": {
+    "median_rank": 12900.5,
+    "n": 12,
+    "ranks": {
+     " communist": 16504,
+     " communism": 23406,
+     " socialism": 20728,
+     " Marxism": 13417,
+     " Trotsky": 9193,
+     " Engels": 4333,
+     " revolution": 11324,
+     " workers": 12384,
+     " strike": 17975,
+     " solidarity": 7523,
+     " union": 10171,
+     " collective": 20153
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 19649.0,
+    "n": 12,
+    "ranks": {
+     " capitalist": 19701,
+     " capitalism": 15451,
+     " conservative": 8438,
+     " conservatism": 29468,
+     " fascist": 25824,
+     " fascism": 26339,
+     " nationalist": 20732,
+     " nationalism": 29975,
+     " libertarian": 17828,
+     " monarchy": 19597,
+     " Reagan": 1939,
+     " Thatcher": 5216
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 17653.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 6721,
+     " election": 12347,
+     " senate": 36748,
+     " mayor": 9349,
+     " ballot": 21677,
+     " legislation": 21802,
+     " governor": 19592,
+     " referendum": 15715,
+     " candidate": 10128,
+     " voter": 22033,
+     " committee": 15205,
+     " constitution": 20160
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 17076.0,
+    "n": 12,
+    "ranks": {
+     " kitchen": 20835,
+     " tomato": 22637,
+     " bicycle": 16527,
+     " weather": 18775,
+     " hospital": 6000,
+     " guitar": 23497,
+     " forest": 8519,
+     " sandwich": 12606,
+     " ocean": 17625,
+     " furniture": 15461,
+     " camera": 16116,
+     " blanket": 20974
+    }
+   }
+  },
+  "Semantic/settled": {
+   "L_heldout_socialist": {
+    "median_rank": 75.0,
+    "n": 12,
+    "ranks": {
+     " communist": 37,
+     " communism": 41,
+     " socialism": 30,
+     " Marxism": 96,
+     " Trotsky": 461,
+     " Engels": 27,
+     " revolution": 136,
+     " workers": 54,
+     " strike": 830,
+     " solidarity": 29,
+     " union": 407,
+     " collective": 961
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 1470.5,
+    "n": 12,
+    "ranks": {
+     " capitalist": 57,
+     " capitalism": 703,
+     " conservative": 5788,
+     " conservatism": 7489,
+     " fascist": 1398,
+     " fascism": 1509,
+     " nationalist": 1432,
+     " nationalism": 1046,
+     " libertarian": 80,
+     " monarchy": 1733,
+     " Reagan": 38436,
+     " Thatcher": 28547
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 4530.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 968,
+     " election": 952,
+     " senate": 5810,
+     " mayor": 21084,
+     " ballot": 4881,
+     " legislation": 1305,
+     " governor": 14112,
+     " referendum": 6757,
+     " candidate": 4180,
+     " voter": 5941,
+     " committee": 3274,
+     " constitution": 265
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 15380.5,
+    "n": 12,
+    "ranks": {
+     " kitchen": 31417,
+     " tomato": 30552,
+     " bicycle": 18868,
+     " weather": 18413,
+     " hospital": 12294,
+     " guitar": 34402,
+     " forest": 12496,
+     " sandwich": 10317,
+     " ocean": 13171,
+     " furniture": 10620,
+     " camera": 17590,
+     " blanket": 10724
+    }
+   }
+  },
+  "Syntactic/iter0": {
+   "L_heldout_socialist": {
+    "median_rank": 16261.0,
+    "n": 12,
+    "ranks": {
+     " communist": 10929,
+     " communism": 30372,
+     " socialism": 27767,
+     " Marxism": 32243,
+     " Trotsky": 28056,
+     " Engels": 22824,
+     " revolution": 9001,
+     " workers": 1494,
+     " strike": 2950,
+     " solidarity": 21593,
+     " union": 5627,
+     " collective": 7140
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 20794.5,
+    "n": 12,
+    "ranks": {
+     " capitalist": 10657,
+     " capitalism": 26698,
+     " conservative": 4142,
+     " conservatism": 26428,
+     " fascist": 13551,
+     " fascism": 28250,
+     " nationalist": 13420,
+     " nationalism": 23638,
+     " libertarian": 17579,
+     " monarchy": 17951,
+     " Reagan": 24252,
+     " Thatcher": 30858
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 7236.0,
+    "n": 12,
+    "ranks": {
+     " parliament": 8538,
+     " election": 7291,
+     " senate": 8909,
+     " mayor": 3717,
+     " ballot": 4267,
+     " legislation": 12807,
+     " governor": 4214,
+     " referendum": 17180,
+     " candidate": 4807,
+     " voter": 7181,
+     " committee": 3166,
+     " constitution": 17697
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 1234.0,
+    "n": 12,
+    "ranks": {
+     " kitchen": 231,
+     " tomato": 2266,
+     " bicycle": 1432,
+     " weather": 1289,
+     " hospital": 2763,
+     " guitar": 661,
+     " forest": 1422,
+     " sandwich": 1179,
+     " ocean": 1601,
+     " furniture": 785,
+     " camera": 34,
+     " blanket": 139
+    }
+   }
+  },
+  "Syntactic/settled": {
+   "L_heldout_socialist": {
+    "median_rank": 18902.5,
+    "n": 12,
+    "ranks": {
+     " communist": 33345,
+     " communism": 39064,
+     " socialism": 37801,
+     " Marxism": 29894,
+     " Trotsky": 15294,
+     " Engels": 15321,
+     " revolution": 22484,
+     " workers": 25450,
+     " strike": 476,
+     " solidarity": 9954,
+     " union": 7949,
+     " collective": 9310
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 32327.0,
+    "n": 12,
+    "ranks": {
+     " capitalist": 30603,
+     " capitalism": 33898,
+     " conservative": 38823,
+     " conservatism": 47204,
+     " fascist": 18229,
+     " fascism": 20362,
+     " nationalist": 29059,
+     " nationalism": 30756,
+     " libertarian": 47870,
+     " monarchy": 18181,
+     " Reagan": 34963,
+     " Thatcher": 47871
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 30589.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 21212,
+     " election": 21045,
+     " senate": 37402,
+     " mayor": 40571,
+     " ballot": 30406,
+     " legislation": 18966,
+     " governor": 35333,
+     " referendum": 40112,
+     " candidate": 36499,
+     " voter": 30773,
+     " committee": 25703,
+     " constitution": 9459
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 34059.5,
+    "n": 12,
+    "ranks": {
+     " kitchen": 44007,
+     " tomato": 47774,
+     " bicycle": 40824,
+     " weather": 18439,
+     " hospital": 31807,
+     " guitar": 36312,
+     " forest": 11024,
+     " sandwich": 38489,
+     " ocean": 7426,
+     " furniture": 38123,
+     " camera": 24597,
+     " blanket": 20095
+    }
+   }
+  },
+  "Nonsense/iter0": {
+   "L_heldout_socialist": {
+    "median_rank": 28806.5,
+    "n": 12,
+    "ranks": {
+     " communist": 29301,
+     " communism": 28312,
+     " socialism": 31914,
+     " Marxism": 44869,
+     " Trotsky": 34881,
+     " Engels": 39170,
+     " revolution": 10331,
+     " workers": 6589,
+     " strike": 6455,
+     " solidarity": 34340,
+     " union": 6815,
+     " collective": 9874
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 36675.5,
+    "n": 12,
+    "ranks": {
+     " capitalist": 29391,
+     " capitalism": 30383,
+     " conservative": 18106,
+     " conservatism": 45938,
+     " fascist": 33332,
+     " fascism": 37448,
+     " nationalist": 35903,
+     " nationalism": 39483,
+     " libertarian": 40203,
+     " monarchy": 46171,
+     " Reagan": 35387,
+     " Thatcher": 44340
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 27722.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 34967,
+     " election": 22424,
+     " senate": 42368,
+     " mayor": 19895,
+     " ballot": 23775,
+     " legislation": 25166,
+     " governor": 24459,
+     " referendum": 36275,
+     " candidate": 22665,
+     " voter": 31492,
+     " committee": 31034,
+     " constitution": 30279
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 6609.0,
+    "n": 12,
+    "ranks": {
+     " kitchen": 7725,
+     " tomato": 10684,
+     " bicycle": 10376,
+     " weather": 4390,
+     " hospital": 16870,
+     " guitar": 3073,
+     " forest": 1937,
+     " sandwich": 7462,
+     " ocean": 18772,
+     " furniture": 3585,
+     " camera": 4300,
+     " blanket": 5756
+    }
+   }
+  },
+  "Nonsense/settled": {
+   "L_heldout_socialist": {
+    "median_rank": 72.0,
+    "n": 12,
+    "ranks": {
+     " communist": 35,
+     " communism": 41,
+     " socialism": 30,
+     " Marxism": 89,
+     " Trotsky": 433,
+     " Engels": 26,
+     " revolution": 128,
+     " workers": 55,
+     " strike": 817,
+     " solidarity": 27,
+     " union": 417,
+     " collective": 923
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 1437.0,
+    "n": 12,
+    "ranks": {
+     " capitalist": 57,
+     " capitalism": 671,
+     " conservative": 5673,
+     " conservatism": 7416,
+     " fascist": 1361,
+     " fascism": 1448,
+     " nationalist": 1426,
+     " nationalism": 1040,
+     " libertarian": 79,
+     " monarchy": 1702,
+     " Reagan": 38385,
+     " Thatcher": 28783
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 4529.0,
+    "n": 12,
+    "ranks": {
+     " parliament": 977,
+     " election": 962,
+     " senate": 5749,
+     " mayor": 20943,
+     " ballot": 4922,
+     " legislation": 1316,
+     " governor": 14265,
+     " referendum": 6976,
+     " candidate": 4136,
+     " voter": 6043,
+     " committee": 3103,
+     " constitution": 261
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 15398.5,
+    "n": 12,
+    "ranks": {
+     " kitchen": 31099,
+     " tomato": 30516,
+     " bicycle": 19042,
+     " weather": 18697,
+     " hospital": 12203,
+     " guitar": 34507,
+     " forest": 12611,
+     " sandwich": 10413,
+     " ocean": 13243,
+     " furniture": 10650,
+     " camera": 17554,
+     " blanket": 11170
+    }
+   }
+  },
+  "Imperative/iter0": {
+   "L_heldout_socialist": {
+    "median_rank": 21989.5,
+    "n": 12,
+    "ranks": {
+     " communist": 20446,
+     " communism": 24275,
+     " socialism": 22967,
+     " Marxism": 21012,
+     " Trotsky": 26558,
+     " Engels": 24238,
+     " revolution": 9675,
+     " workers": 10697,
+     " strike": 7466,
+     " solidarity": 42201,
+     " union": 4613,
+     " collective": 24691
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 25313.0,
+    "n": 12,
+    "ranks": {
+     " capitalist": 21512,
+     " capitalism": 13342,
+     " conservative": 2470,
+     " conservatism": 31927,
+     " fascist": 30264,
+     " fascism": 23497,
+     " nationalist": 35774,
+     " nationalism": 33427,
+     " libertarian": 23398,
+     " monarchy": 27129,
+     " Reagan": 7948,
+     " Thatcher": 27255
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 18721.5,
+    "n": 12,
+    "ranks": {
+     " parliament": 13533,
+     " election": 6299,
+     " senate": 40717,
+     " mayor": 29154,
+     " ballot": 19030,
+     " legislation": 8974,
+     " governor": 18591,
+     " referendum": 32382,
+     " candidate": 5219,
+     " voter": 15157,
+     " committee": 18852,
+     " constitution": 20784
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 14497.5,
+    "n": 12,
+    "ranks": {
+     " kitchen": 14888,
+     " tomato": 22078,
+     " bicycle": 14432,
+     " weather": 14563,
+     " hospital": 13260,
+     " guitar": 6632,
+     " forest": 9769,
+     " sandwich": 19121,
+     " ocean": 4956,
+     " furniture": 29728,
+     " camera": 7527,
+     " blanket": 32377
+    }
+   }
+  },
+  "Imperative/settled": {
+   "L_heldout_socialist": {
+    "median_rank": 72.5,
+    "n": 12,
+    "ranks": {
+     " communist": 34,
+     " communism": 42,
+     " socialism": 30,
+     " Marxism": 91,
+     " Trotsky": 439,
+     " Engels": 26,
+     " revolution": 130,
+     " workers": 54,
+     " strike": 815,
+     " solidarity": 27,
+     " union": 412,
+     " collective": 935
+    }
+   },
+   "R_rival_pole": {
+    "median_rank": 1449.5,
+    "n": 12,
+    "ranks": {
+     " capitalist": 57,
+     " capitalism": 680,
+     " conservative": 5702,
+     " conservatism": 7434,
+     " fascist": 1368,
+     " fascism": 1468,
+     " nationalist": 1431,
+     " nationalism": 1040,
+     " libertarian": 80,
+     " monarchy": 1712,
+     " Reagan": 38399,
+     " Thatcher": 28734
+    }
+   },
+   "N_political_neutral": {
+    "median_rank": 4526.0,
+    "n": 12,
+    "ranks": {
+     " parliament": 971,
+     " election": 957,
+     " senate": 5756,
+     " mayor": 20966,
+     " ballot": 4908,
+     " legislation": 1316,
+     " governor": 14226,
+     " referendum": 6924,
+     " candidate": 4144,
+     " voter": 6021,
+     " committee": 3126,
+     " constitution": 262
+    }
+   },
+   "C_nonpolitical": {
+    "median_rank": 15390.0,
+    "n": 12,
+    "ranks": {
+     " kitchen": 31193,
+     " tomato": 30530,
+     " bicycle": 19005,
+     " weather": 18630,
+     " hospital": 12225,
+     " guitar": 34475,
+     " forest": 12578,
+     " sandwich": 10397,
+     " ocean": 13218,
+     " furniture": 10638,
+     " camera": 17562,
+     " blanket": 11054
+    }
+   }
+  }
+ }
+}

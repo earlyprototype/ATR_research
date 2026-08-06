@@ -1,0 +1,697 @@
+{
+ "shells": [
+  1800.0,
+  3700.0
+ ],
+ "n_seeds": 40,
+ "max_iter": 300,
+ "provenance": "produced by basin_volume.py before the shell schedule was parameterised; equivalent to `basin_volume.py <small> <out> 40 1800,3700`. SUPERSEDED by basin_volume_energy.json, which sweeps five shells including Stage 1's calibration. The 28/40 headline from this run is retracted (see RESULTS_MEDIUM_SOCIALIST.md \u00a78).",
+ "counts": {
+  "gaming": 5,
+  "socialist": 28,
+  "divine": 1,
+  "other": 6
+ },
+ "rows": [
+  {
+   "seed": 0,
+   "shell": 1800.0,
+   "basin": "gaming",
+   "med": {
+    "socialist": 24383,
+    "divine": 9028,
+    "gaming": 8
+   },
+   "top": [
+    " i",
+    " player",
+    " Zerg",
+    " im",
+    " hero"
+   ]
+  },
+  {
+   "seed": 1,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15665,
+    "gaming": 27589
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 2,
+   "shell": 1800.0,
+   "basin": "divine",
+   "med": {
+    "socialist": 15748,
+    "divine": 7,
+    "gaming": 11161
+   },
+   "top": [
+    " Divine",
+    "\u3010",
+    " Fairy",
+    " \u300c",
+    "\u2026\u2026"
+   ]
+  },
+  {
+   "seed": 3,
+   "shell": 3700.0,
+   "basin": "other",
+   "med": {
+    "socialist": 13002,
+    "divine": 6147,
+    "gaming": 2566
+   },
+   "top": [
+    " the",
+    " I",
+    " a",
+    " it",
+    " is"
+   ]
+  },
+  {
+   "seed": 4,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 337,
+    "divine": 10689,
+    "gaming": 20822
+   },
+   "top": [
+    " till",
+    " solidarity",
+    " agitation",
+    " BJP",
+    " Congress"
+   ]
+  },
+  {
+   "seed": 5,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15666,
+    "gaming": 27591
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 6,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 337,
+    "divine": 10689,
+    "gaming": 20822
+   },
+   "top": [
+    " till",
+    " solidarity",
+    " agitation",
+    " BJP",
+    " Congress"
+   ]
+  },
+  {
+   "seed": 7,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 275,
+    "divine": 15636,
+    "gaming": 27569
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 8,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 149,
+    "divine": 22122,
+    "gaming": 29214
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 9,
+   "shell": 3700.0,
+   "basin": "other",
+   "med": {
+    "socialist": 25901,
+    "divine": 3465,
+    "gaming": 4069
+   },
+   "top": [
+    " the",
+    "\n",
+    " a",
+    ",",
+    " of"
+   ]
+  },
+  {
+   "seed": 10,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 337,
+    "divine": 10689,
+    "gaming": 20822
+   },
+   "top": [
+    " till",
+    " solidarity",
+    " agitation",
+    " BJP",
+    " Congress"
+   ]
+  },
+  {
+   "seed": 11,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15670,
+    "gaming": 27594
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 12,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 337,
+    "divine": 10689,
+    "gaming": 20822
+   },
+   "top": [
+    " till",
+    " solidarity",
+    " agitation",
+    " BJP",
+    " Congress"
+   ]
+  },
+  {
+   "seed": 13,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15662,
+    "gaming": 27589
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 14,
+   "shell": 1800.0,
+   "basin": "gaming",
+   "med": {
+    "socialist": 24383,
+    "divine": 9028,
+    "gaming": 8
+   },
+   "top": [
+    " i",
+    " player",
+    " Zerg",
+    " im",
+    " hero"
+   ]
+  },
+  {
+   "seed": 15,
+   "shell": 3700.0,
+   "basin": "other",
+   "med": {
+    "socialist": 15327,
+    "divine": 7090,
+    "gaming": 3628
+   },
+   "top": [
+    " the",
+    " a",
+    "\n",
+    " I",
+    " to"
+   ]
+  },
+  {
+   "seed": 16,
+   "shell": 1800.0,
+   "basin": "gaming",
+   "med": {
+    "socialist": 24383,
+    "divine": 9028,
+    "gaming": 8
+   },
+   "top": [
+    " i",
+    " player",
+    " Zerg",
+    " im",
+    " hero"
+   ]
+  },
+  {
+   "seed": 17,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 275,
+    "divine": 15638,
+    "gaming": 27569
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 18,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 150,
+    "divine": 22084,
+    "gaming": 29186
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 19,
+   "shell": 3700.0,
+   "basin": "other",
+   "med": {
+    "socialist": 24369,
+    "divine": 3423,
+    "gaming": 3438
+   },
+   "top": [
+    " the",
+    "\n",
+    " a",
+    ",",
+    " of"
+   ]
+  },
+  {
+   "seed": 20,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 150,
+    "divine": 22081,
+    "gaming": 29191
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 21,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15657,
+    "gaming": 27586
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 22,
+   "shell": 1800.0,
+   "basin": "gaming",
+   "med": {
+    "socialist": 24383,
+    "divine": 9028,
+    "gaming": 8
+   },
+   "top": [
+    " i",
+    " player",
+    " Zerg",
+    " im",
+    " hero"
+   ]
+  },
+  {
+   "seed": 23,
+   "shell": 3700.0,
+   "basin": "other",
+   "med": {
+    "socialist": 16928,
+    "divine": 8750,
+    "gaming": 3908
+   },
+   "top": [
+    " the",
+    " a",
+    "\n",
+    " I",
+    ","
+   ]
+  },
+  {
+   "seed": 24,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 145,
+    "divine": 22212,
+    "gaming": 29235
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 25,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15664,
+    "gaming": 27588
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 26,
+   "shell": 1800.0,
+   "basin": "other",
+   "med": {
+    "socialist": 40983,
+    "divine": 3704,
+    "gaming": 5014
+   },
+   "top": [
+    " Spells",
+    " spell",
+    " spells",
+    " sorcerer",
+    " arcane"
+   ]
+  },
+  {
+   "seed": 27,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15651,
+    "gaming": 27581
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 28,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 145,
+    "divine": 22237,
+    "gaming": 29235
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 29,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15665,
+    "gaming": 27588
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 30,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 150,
+    "divine": 22089,
+    "gaming": 29191
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 31,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15655,
+    "gaming": 27583
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 32,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 170,
+    "divine": 21956,
+    "gaming": 28858
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 33,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 275,
+    "divine": 15632,
+    "gaming": 27570
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 34,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 147,
+    "divine": 22539,
+    "gaming": 29169
+   },
+   "top": [
+    " solidarity",
+    " anarchism",
+    " struggle",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 35,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15656,
+    "gaming": 27586
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 36,
+   "shell": 1800.0,
+   "basin": "gaming",
+   "med": {
+    "socialist": 24383,
+    "divine": 9028,
+    "gaming": 8
+   },
+   "top": [
+    " i",
+    " player",
+    " Zerg",
+    " im",
+    " hero"
+   ]
+  },
+  {
+   "seed": 37,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15660,
+    "gaming": 27587
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  },
+  {
+   "seed": 38,
+   "shell": 1800.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 145,
+    "divine": 22198,
+    "gaming": 29230
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " anarchism",
+    " consciousness",
+    " organising"
+   ]
+  },
+  {
+   "seed": 39,
+   "shell": 3700.0,
+   "basin": "socialist",
+   "med": {
+    "socialist": 274,
+    "divine": 15660,
+    "gaming": 27587
+   },
+   "top": [
+    " solidarity",
+    " struggle",
+    " organizing",
+    " everyday",
+    " organising"
+   ]
+  }
+ ]
+}

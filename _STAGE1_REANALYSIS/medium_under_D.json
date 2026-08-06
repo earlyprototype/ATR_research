@@ -1,0 +1,2997 @@
+{
+ "gate": {
+  "D": 25
+ },
+ "gate_pass": true,
+ "dropped": {
+  "SMALL_BASIN": [],
+  "L_heldout": [],
+  "R_rival": [],
+  "N_political": [],
+  "C_control": []
+ },
+ "per_prompt": {
+  "A0|E01_politics": {
+   "SMALL_BASIN": {
+    "median_rank": 39176.5,
+    "ranks": {
+     " prolet": 43387,
+     " Anarch": 24824,
+     " bourgeois": 40492,
+     " Marx": 34440,
+     " comrade": 38674,
+     " proletarian": 40253,
+     " socialist": 33773,
+     " anarchist": 39679,
+     " Lenin": 42808,
+     " anarchism": 41241,
+     " comrades": 35250,
+     " labour": 27427
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37520.0,
+    "ranks": {
+     " communist": 41198,
+     " communism": 48272,
+     " socialism": 41467,
+     " Marxism": 29674,
+     " Trotsky": 46529,
+     " Engels": 45901,
+     " revolution": 37196,
+     " workers": 27788,
+     " strike": 27064,
+     " solidarity": 37844,
+     " union": 18371,
+     " collective": 23804
+    }
+   },
+   "R_rival": {
+    "median_rank": 40193.5,
+    "ranks": {
+     " capitalist": 30037,
+     " capitalism": 43882,
+     " conservative": 31878,
+     " conservatism": 48949,
+     " fascist": 40216,
+     " fascism": 46921,
+     " nationalist": 37989,
+     " nationalism": 40171,
+     " libertarian": 35586,
+     " monarchy": 48802,
+     " Reagan": 23631,
+     " Thatcher": 41633
+    }
+   },
+   "N_political": {
+    "median_rank": 27993.5,
+    "ranks": {
+     " parliament": 30041,
+     " election": 21273,
+     " senate": 25369,
+     " mayor": 39567,
+     " ballot": 32929,
+     " legislation": 25946,
+     " governor": 34262,
+     " referendum": 36808,
+     " candidate": 22539,
+     " voter": 33442,
+     " committee": 19409,
+     " constitution": 21846
+    }
+   },
+   "C_control": {
+    "median_rank": 37999.0,
+    "ranks": {
+     " kitchen": 33859,
+     " tomato": 43578,
+     " bicycle": 43138,
+     " weather": 28715,
+     " hospital": 25354,
+     " guitar": 40895,
+     " forest": 35103,
+     " sandwich": 43673,
+     " ocean": 25056,
+     " furniture": 48502,
+     " camera": 24686,
+     " blanket": 44226
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "C",
+    "Class",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "0",
+    "E",
+    "national",
+    "You",
+    "2016",
+    "align",
+    "Level",
+    "2015",
+    "new"
+   ]
+  },
+  "A0|D01_water": {
+   "SMALL_BASIN": {
+    "median_rank": 39009.0,
+    "ranks": {
+     " prolet": 43373,
+     " Anarch": 25244,
+     " bourgeois": 40423,
+     " Marx": 34442,
+     " comrade": 38329,
+     " proletarian": 40194,
+     " socialist": 33605,
+     " anarchist": 39689,
+     " Lenin": 42767,
+     " anarchism": 41122,
+     " comrades": 35183,
+     " labour": 27147
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37347.5,
+    "ranks": {
+     " communist": 41213,
+     " communism": 48191,
+     " socialism": 41105,
+     " Marxism": 29562,
+     " Trotsky": 46604,
+     " Engels": 45936,
+     " revolution": 37055,
+     " workers": 27670,
+     " strike": 26948,
+     " solidarity": 37640,
+     " union": 18457,
+     " collective": 23537
+    }
+   },
+   "R_rival": {
+    "median_rank": 40076.5,
+    "ranks": {
+     " capitalist": 29908,
+     " capitalism": 43727,
+     " conservative": 31792,
+     " conservatism": 48901,
+     " fascist": 39977,
+     " fascism": 46702,
+     " nationalist": 37890,
+     " nationalism": 40176,
+     " libertarian": 35312,
+     " monarchy": 48795,
+     " Reagan": 23585,
+     " Thatcher": 41488
+    }
+   },
+   "N_political": {
+    "median_rank": 27662.0,
+    "ranks": {
+     " parliament": 29670,
+     " election": 21082,
+     " senate": 25181,
+     " mayor": 39376,
+     " ballot": 32871,
+     " legislation": 25654,
+     " governor": 34014,
+     " referendum": 36601,
+     " candidate": 22384,
+     " voter": 33044,
+     " committee": 19288,
+     " constitution": 21637
+    }
+   },
+   "C_control": {
+    "median_rank": 37967.0,
+    "ranks": {
+     " kitchen": 33853,
+     " tomato": 43687,
+     " bicycle": 43220,
+     " weather": 28438,
+     " hospital": 25140,
+     " guitar": 41030,
+     " forest": 34904,
+     " sandwich": 43814,
+     " ocean": 25013,
+     " furniture": 48515,
+     " camera": 24904,
+     " blanket": 44237
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "The",
+    "I",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Dev",
+    "Un",
+    "Sh",
+    "Chapter",
+    "Q",
+    "E",
+    "0",
+    "You",
+    "national",
+    "2016",
+    "Level",
+    "2015",
+    "new",
+    "East"
+   ]
+  },
+  "A0|A01_physics": {
+   "SMALL_BASIN": {
+    "median_rank": 39158.5,
+    "ranks": {
+     " prolet": 43385,
+     " Anarch": 24885,
+     " bourgeois": 40484,
+     " Marx": 34443,
+     " comrade": 38636,
+     " proletarian": 40247,
+     " socialist": 33747,
+     " anarchist": 39681,
+     " Lenin": 42804,
+     " anarchism": 41231,
+     " comrades": 35248,
+     " labour": 27391
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37501.5,
+    "ranks": {
+     " communist": 41206,
+     " communism": 48260,
+     " socialism": 41418,
+     " Marxism": 29664,
+     " Trotsky": 46536,
+     " Engels": 45903,
+     " revolution": 37176,
+     " workers": 27777,
+     " strike": 27049,
+     " solidarity": 37827,
+     " union": 18382,
+     " collective": 23779
+    }
+   },
+   "R_rival": {
+    "median_rank": 40175.0,
+    "ranks": {
+     " capitalist": 30022,
+     " capitalism": 43861,
+     " conservative": 31870,
+     " conservatism": 48947,
+     " fascist": 40187,
+     " fascism": 46893,
+     " nationalist": 37974,
+     " nationalism": 40163,
+     " libertarian": 35543,
+     " monarchy": 48800,
+     " Reagan": 23621,
+     " Thatcher": 41614
+    }
+   },
+   "N_political": {
+    "median_rank": 27954.5,
+    "ranks": {
+     " parliament": 29997,
+     " election": 21249,
+     " senate": 25354,
+     " mayor": 39542,
+     " ballot": 32920,
+     " legislation": 25912,
+     " governor": 34221,
+     " referendum": 36780,
+     " candidate": 22520,
+     " voter": 33396,
+     " committee": 19390,
+     " constitution": 21822
+    }
+   },
+   "C_control": {
+    "median_rank": 37991.5,
+    "ranks": {
+     " kitchen": 33857,
+     " tomato": 43597,
+     " bicycle": 43143,
+     " weather": 28680,
+     " hospital": 25326,
+     " guitar": 40908,
+     " forest": 35075,
+     " sandwich": 43685,
+     " ocean": 25052,
+     " furniture": 48504,
+     " camera": 24723,
+     " blanket": 44223
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "align",
+    "2015",
+    "new"
+   ]
+  },
+  "A0|B01_napoleon": {
+   "SMALL_BASIN": {
+    "median_rank": 39022.0,
+    "ranks": {
+     " prolet": 43375,
+     " Anarch": 25213,
+     " bourgeois": 40427,
+     " Marx": 34445,
+     " comrade": 38358,
+     " proletarian": 40195,
+     " socialist": 33618,
+     " anarchist": 39686,
+     " Lenin": 42766,
+     " anarchism": 41131,
+     " comrades": 35196,
+     " labour": 27166
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37360.0,
+    "ranks": {
+     " communist": 41217,
+     " communism": 48199,
+     " socialism": 41141,
+     " Marxism": 29572,
+     " Trotsky": 46596,
+     " Engels": 45932,
+     " revolution": 37064,
+     " workers": 27684,
+     " strike": 26960,
+     " solidarity": 37656,
+     " union": 18451,
+     " collective": 23563
+    }
+   },
+   "R_rival": {
+    "median_rank": 40086.0,
+    "ranks": {
+     " capitalist": 29926,
+     " capitalism": 43737,
+     " conservative": 31796,
+     " conservatism": 48905,
+     " fascist": 39994,
+     " fascism": 46725,
+     " nationalist": 37902,
+     " nationalism": 40178,
+     " libertarian": 35342,
+     " monarchy": 48797,
+     " Reagan": 23591,
+     " Thatcher": 41497
+    }
+   },
+   "N_political": {
+    "median_rank": 27690.5,
+    "ranks": {
+     " parliament": 29696,
+     " election": 21092,
+     " senate": 25197,
+     " mayor": 39387,
+     " ballot": 32872,
+     " legislation": 25685,
+     " governor": 34039,
+     " referendum": 36615,
+     " candidate": 22397,
+     " voter": 33075,
+     " committee": 19301,
+     " constitution": 21657
+    }
+   },
+   "C_control": {
+    "median_rank": 37969.0,
+    "ranks": {
+     " kitchen": 33852,
+     " tomato": 43674,
+     " bicycle": 43211,
+     " weather": 28462,
+     " hospital": 25155,
+     " guitar": 41019,
+     " forest": 34919,
+     " sandwich": 43794,
+     " ocean": 25015,
+     " furniture": 48513,
+     " camera": 24887,
+     " blanket": 44236
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "The",
+    "I",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Dev",
+    "Un",
+    "Sh",
+    "Chapter",
+    "Q",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "2015",
+    "new",
+    "un"
+   ]
+  },
+  "A0|C01_jack_jill": {
+   "SMALL_BASIN": {
+    "median_rank": 39170.0,
+    "ranks": {
+     " prolet": 43390,
+     " Anarch": 24847,
+     " bourgeois": 40487,
+     " Marx": 34440,
+     " comrade": 38658,
+     " proletarian": 40251,
+     " socialist": 33765,
+     " anarchist": 39682,
+     " Lenin": 42808,
+     " anarchism": 41238,
+     " comrades": 35248,
+     " labour": 27408
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37509.5,
+    "ranks": {
+     " communist": 41202,
+     " communism": 48269,
+     " socialism": 41448,
+     " Marxism": 29673,
+     " Trotsky": 46532,
+     " Engels": 45900,
+     " revolution": 37184,
+     " workers": 27787,
+     " strike": 27058,
+     " solidarity": 37835,
+     " union": 18376,
+     " collective": 23793
+    }
+   },
+   "R_rival": {
+    "median_rank": 40186.0,
+    "ranks": {
+     " capitalist": 30028,
+     " capitalism": 43875,
+     " conservative": 31879,
+     " conservatism": 48949,
+     " fascist": 40203,
+     " fascism": 46905,
+     " nationalist": 37981,
+     " nationalism": 40169,
+     " libertarian": 35565,
+     " monarchy": 48802,
+     " Reagan": 23624,
+     " Thatcher": 41626
+    }
+   },
+   "N_political": {
+    "median_rank": 27974.5,
+    "ranks": {
+     " parliament": 30021,
+     " election": 21263,
+     " senate": 25364,
+     " mayor": 39555,
+     " ballot": 32925,
+     " legislation": 25928,
+     " governor": 34245,
+     " referendum": 36791,
+     " candidate": 22537,
+     " voter": 33426,
+     " committee": 19399,
+     " constitution": 21835
+    }
+   },
+   "C_control": {
+    "median_rank": 37997.0,
+    "ranks": {
+     " kitchen": 33860,
+     " tomato": 43585,
+     " bicycle": 43140,
+     " weather": 28702,
+     " hospital": 25344,
+     " guitar": 40901,
+     " forest": 35093,
+     " sandwich": 43680,
+     " ocean": 25056,
+     " furniture": 48504,
+     " camera": 24698,
+     " blanket": 44221
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "align",
+    "2015",
+    "new"
+   ]
+  },
+  "A0|F01_anger": {
+   "SMALL_BASIN": {
+    "median_rank": 39535.5,
+    "ranks": {
+     " prolet": 43421,
+     " Anarch": 23980,
+     " bourgeois": 40611,
+     " Marx": 34411,
+     " comrade": 39409,
+     " proletarian": 40449,
+     " socialist": 34168,
+     " anarchist": 39662,
+     " Lenin": 42899,
+     " anarchism": 41536,
+     " comrades": 35412,
+     " labour": 28019
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37830.5,
+    "ranks": {
+     " communist": 41216,
+     " communism": 48430,
+     " socialism": 42155,
+     " Marxism": 29879,
+     " Trotsky": 46341,
+     " Engels": 45837,
+     " revolution": 37446,
+     " workers": 28073,
+     " strike": 27360,
+     " solidarity": 38215,
+     " union": 18275,
+     " collective": 24420
+    }
+   },
+   "R_rival": {
+    "median_rank": 40459.0,
+    "ranks": {
+     " capitalist": 30286,
+     " capitalism": 44269,
+     " conservative": 32067,
+     " conservatism": 49046,
+     " fascist": 40715,
+     " fascism": 47307,
+     " nationalist": 38150,
+     " nationalism": 40203,
+     " libertarian": 36138,
+     " monarchy": 48841,
+     " Reagan": 23753,
+     " Thatcher": 41854
+    }
+   },
+   "N_political": {
+    "median_rank": 28651.5,
+    "ranks": {
+     " parliament": 30776,
+     " election": 21679,
+     " senate": 25871,
+     " mayor": 39940,
+     " ballot": 33107,
+     " legislation": 26527,
+     " governor": 34731,
+     " referendum": 37125,
+     " candidate": 22856,
+     " voter": 34226,
+     " committee": 19689,
+     " constitution": 22395
+    }
+   },
+   "C_control": {
+    "median_rank": 38073.5,
+    "ranks": {
+     " kitchen": 33913,
+     " tomato": 43359,
+     " bicycle": 42990,
+     " weather": 29301,
+     " hospital": 25898,
+     " guitar": 40614,
+     " forest": 35533,
+     " sandwich": 43345,
+     " ocean": 25129,
+     " furniture": 48438,
+     " camera": 24248,
+     " blanket": 44199
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "T",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "Am",
+    "C",
+    "S",
+    "Class",
+    "U",
+    "Un",
+    "Dev",
+    "0",
+    "Sh",
+    "Q",
+    "E",
+    "Chapter",
+    "national",
+    "You",
+    "align",
+    "new",
+    "2016",
+    "Att",
+    "2015"
+   ]
+  },
+  "A0|G01_punctuation": {
+   "SMALL_BASIN": {
+    "median_rank": 40179.0,
+    "ranks": {
+     " prolet": 43496,
+     " Anarch": 22660,
+     " bourgeois": 40861,
+     " Marx": 34435,
+     " comrade": 40632,
+     " proletarian": 40819,
+     " socialist": 34860,
+     " anarchist": 39726,
+     " Lenin": 43069,
+     " anarchism": 42174,
+     " comrades": 35780,
+     " labour": 29309
+    }
+   },
+   "L_heldout": {
+    "median_rank": 38297.5,
+    "ranks": {
+     " communist": 41257,
+     " communism": 48667,
+     " socialism": 43372,
+     " Marxism": 30332,
+     " Trotsky": 45886,
+     " Engels": 45839,
+     " revolution": 37786,
+     " workers": 28717,
+     " strike": 27768,
+     " solidarity": 38809,
+     " union": 18204,
+     " collective": 25462
+    }
+   },
+   "R_rival": {
+    "median_rank": 40841.5,
+    "ranks": {
+     " capitalist": 30825,
+     " capitalism": 44869,
+     " conservative": 32350,
+     " conservatism": 49174,
+     " fascist": 41524,
+     " fascism": 47845,
+     " nationalist": 38426,
+     " nationalism": 40159,
+     " libertarian": 37091,
+     " monarchy": 48888,
+     " Reagan": 24048,
+     " Thatcher": 42238
+    }
+   },
+   "N_political": {
+    "median_rank": 29785.0,
+    "ranks": {
+     " parliament": 32087,
+     " election": 22404,
+     " senate": 26947,
+     " mayor": 40488,
+     " ballot": 33378,
+     " legislation": 27483,
+     " governor": 35570,
+     " referendum": 37553,
+     " candidate": 23343,
+     " voter": 35622,
+     " committee": 20322,
+     " constitution": 23569
+    }
+   },
+   "C_control": {
+    "median_rank": 38138.5,
+    "ranks": {
+     " kitchen": 34023,
+     " tomato": 42952,
+     " bicycle": 42658,
+     " weather": 30404,
+     " hospital": 27058,
+     " guitar": 40017,
+     " forest": 36260,
+     " sandwich": 42701,
+     " ocean": 25221,
+     " furniture": 48287,
+     " camera": 23540,
+     " blanket": 44007
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "AB",
+    "T",
+    "I",
+    "The",
+    "local",
+    "C",
+    "host",
+    "Am",
+    "RAW",
+    "S",
+    "U",
+    "0",
+    "Un",
+    "E",
+    "Q",
+    "Dev",
+    "Class",
+    "align",
+    "Sh",
+    "new",
+    "Mon",
+    "You",
+    "national",
+    "w",
+    "Att",
+    "Chapter"
+   ]
+  },
+  "A0|E02_tech": {
+   "SMALL_BASIN": {
+    "median_rank": 39201.5,
+    "ranks": {
+     " prolet": 43391,
+     " Anarch": 24767,
+     " bourgeois": 40503,
+     " Marx": 34429,
+     " comrade": 38727,
+     " proletarian": 40266,
+     " socialist": 33803,
+     " anarchist": 39676,
+     " Lenin": 42814,
+     " anarchism": 41260,
+     " comrades": 35267,
+     " labour": 27481
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37538.5,
+    "ranks": {
+     " communist": 41194,
+     " communism": 48286,
+     " socialism": 41528,
+     " Marxism": 29686,
+     " Trotsky": 46515,
+     " Engels": 45898,
+     " revolution": 37210,
+     " workers": 27814,
+     " strike": 27082,
+     " solidarity": 37867,
+     " union": 18360,
+     " collective": 23845
+    }
+   },
+   "R_rival": {
+    "median_rank": 40209.0,
+    "ranks": {
+     " capitalist": 30050,
+     " capitalism": 43920,
+     " conservative": 31882,
+     " conservatism": 48953,
+     " fascist": 40250,
+     " fascism": 46954,
+     " nationalist": 38013,
+     " nationalism": 40168,
+     " libertarian": 35620,
+     " monarchy": 48803,
+     " Reagan": 23639,
+     " Thatcher": 41652
+    }
+   },
+   "N_political": {
+    "median_rank": 28047.5,
+    "ranks": {
+     " parliament": 30091,
+     " election": 21311,
+     " senate": 25397,
+     " mayor": 39598,
+     " ballot": 32936,
+     " legislation": 26004,
+     " governor": 34297,
+     " referendum": 36839,
+     " candidate": 22557,
+     " voter": 33499,
+     " committee": 19428,
+     " constitution": 21883
+    }
+   },
+   "C_control": {
+    "median_rank": 38003.0,
+    "ranks": {
+     " kitchen": 33857,
+     " tomato": 43556,
+     " bicycle": 43122,
+     " weather": 28749,
+     " hospital": 25387,
+     " guitar": 40875,
+     " forest": 35131,
+     " sandwich": 43639,
+     " ocean": 25062,
+     " furniture": 48499,
+     " camera": 24645,
+     " blanket": 44216
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "C",
+    "Class",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "0",
+    "E",
+    "national",
+    "You",
+    "2016",
+    "align",
+    "Level",
+    "new",
+    "2015"
+   ]
+  },
+  "A0|D02_periodic": {
+   "SMALL_BASIN": {
+    "median_rank": 39615.0,
+    "ranks": {
+     " prolet": 43427,
+     " Anarch": 23812,
+     " bourgeois": 40625,
+     " Marx": 34412,
+     " comrade": 39566,
+     " proletarian": 40501,
+     " socialist": 34243,
+     " anarchist": 39664,
+     " Lenin": 42913,
+     " anarchism": 41601,
+     " comrades": 35452,
+     " labour": 28175
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37896.0,
+    "ranks": {
+     " communist": 41229,
+     " communism": 48466,
+     " socialism": 42315,
+     " Marxism": 29927,
+     " Trotsky": 46289,
+     " Engels": 45821,
+     " revolution": 37489,
+     " workers": 28142,
+     " strike": 27408,
+     " solidarity": 38303,
+     " union": 18257,
+     " collective": 24579
+    }
+   },
+   "R_rival": {
+    "median_rank": 40519.5,
+    "ranks": {
+     " capitalist": 30357,
+     " capitalism": 44343,
+     " conservative": 32097,
+     " conservatism": 49060,
+     " fascist": 40837,
+     " fascism": 47400,
+     " nationalist": 38189,
+     " nationalism": 40202,
+     " libertarian": 36256,
+     " monarchy": 48848,
+     " Reagan": 23792,
+     " Thatcher": 41906
+    }
+   },
+   "N_political": {
+    "median_rank": 28795.5,
+    "ranks": {
+     " parliament": 30934,
+     " election": 21777,
+     " senate": 25985,
+     " mayor": 40013,
+     " ballot": 33153,
+     " legislation": 26657,
+     " governor": 34832,
+     " referendum": 37196,
+     " candidate": 22915,
+     " voter": 34404,
+     " committee": 19768,
+     " constitution": 22535
+    }
+   },
+   "C_control": {
+    "median_rank": 38089.0,
+    "ranks": {
+     " kitchen": 33926,
+     " tomato": 43298,
+     " bicycle": 42956,
+     " weather": 29430,
+     " hospital": 26032,
+     " guitar": 40544,
+     " forest": 35634,
+     " sandwich": 43265,
+     " ocean": 25155,
+     " furniture": 48431,
+     " camera": 24143,
+     " blanket": 44180
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "T",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "C",
+    "Am",
+    "S",
+    "U",
+    "Class",
+    "Un",
+    "Dev",
+    "0",
+    "Sh",
+    "Q",
+    "E",
+    "Chapter",
+    "national",
+    "align",
+    "You",
+    "new",
+    "Att",
+    "2016",
+    "Mon"
+   ]
+  },
+  "A0|A02_medical": {
+   "SMALL_BASIN": {
+    "median_rank": 39248.0,
+    "ranks": {
+     " prolet": 43396,
+     " Anarch": 24649,
+     " bourgeois": 40522,
+     " Marx": 34428,
+     " comrade": 38821,
+     " proletarian": 40297,
+     " socialist": 33864,
+     " anarchist": 39675,
+     " Lenin": 42822,
+     " anarchism": 41296,
+     " comrades": 35284,
+     " labour": 27548
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37581.5,
+    "ranks": {
+     " communist": 41196,
+     " communism": 48307,
+     " socialism": 41611,
+     " Marxism": 29713,
+     " Trotsky": 46495,
+     " Engels": 45883,
+     " revolution": 37234,
+     " workers": 27843,
+     " strike": 27117,
+     " solidarity": 37929,
+     " union": 18343,
+     " collective": 23920
+    }
+   },
+   "R_rival": {
+    "median_rank": 40244.0,
+    "ranks": {
+     " capitalist": 30076,
+     " capitalism": 43959,
+     " conservative": 31901,
+     " conservatism": 48968,
+     " fascist": 40319,
+     " fascism": 46998,
+     " nationalist": 38015,
+     " nationalism": 40169,
+     " libertarian": 35682,
+     " monarchy": 48805,
+     " Reagan": 23647,
+     " Thatcher": 41673
+    }
+   },
+   "N_political": {
+    "median_rank": 28137.0,
+    "ranks": {
+     " parliament": 30187,
+     " election": 21369,
+     " senate": 25464,
+     " mayor": 39646,
+     " ballot": 32961,
+     " legislation": 26087,
+     " governor": 34365,
+     " referendum": 36882,
+     " candidate": 22594,
+     " voter": 33605,
+     " committee": 19462,
+     " constitution": 21953
+    }
+   },
+   "C_control": {
+    "median_rank": 38014.0,
+    "ranks": {
+     " kitchen": 33871,
+     " tomato": 43522,
+     " bicycle": 43103,
+     " weather": 28837,
+     " hospital": 25458,
+     " guitar": 40844,
+     " forest": 35184,
+     " sandwich": 43601,
+     " ocean": 25070,
+     " furniture": 48495,
+     " camera": 24583,
+     " blanket": 44212
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "C",
+    "Class",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "0",
+    "E",
+    "Chapter",
+    "national",
+    "You",
+    "align",
+    "2016",
+    "new",
+    "Level",
+    "2015"
+   ]
+  },
+  "A0|B02_wwi": {
+   "SMALL_BASIN": {
+    "median_rank": 38173.0,
+    "ranks": {
+     " prolet": 43127,
+     " Anarch": 27413,
+     " bourgeois": 40179,
+     " Marx": 34400,
+     " comrade": 36526,
+     " proletarian": 39888,
+     " socialist": 32952,
+     " anarchist": 39820,
+     " Lenin": 42447,
+     " anarchism": 40615,
+     " comrades": 34981,
+     " labour": 26265
+    }
+   },
+   "L_heldout": {
+    "median_rank": 36440.5,
+    "ranks": {
+     " communist": 41227,
+     " communism": 47807,
+     " socialism": 39372,
+     " Marxism": 28925,
+     " Trotsky": 46831,
+     " Engels": 46049,
+     " revolution": 36133,
+     " workers": 27285,
+     " strike": 26521,
+     " solidarity": 36748,
+     " union": 19097,
+     " collective": 22426
+    }
+   },
+   "R_rival": {
+    "median_rank": 39497.5,
+    "ranks": {
+     " capitalist": 29664,
+     " capitalism": 42938,
+     " conservative": 31456,
+     " conservatism": 48726,
+     " fascist": 38821,
+     " fascism": 45599,
+     " nationalist": 37549,
+     " nationalism": 40174,
+     " libertarian": 34178,
+     " monarchy": 48715,
+     " Reagan": 23433,
+     " Thatcher": 40559
+    }
+   },
+   "N_political": {
+    "median_rank": 26302.0,
+    "ranks": {
+     " parliament": 27985,
+     " election": 20287,
+     " senate": 24619,
+     " mayor": 38593,
+     " ballot": 32638,
+     " legislation": 24336,
+     " governor": 33131,
+     " referendum": 35587,
+     " candidate": 21792,
+     " voter": 31272,
+     " committee": 18979,
+     " constitution": 20913
+    }
+   },
+   "C_control": {
+    "median_rank": 37890.0,
+    "ranks": {
+     " kitchen": 34086,
+     " tomato": 44216,
+     " bicycle": 43545,
+     " weather": 27453,
+     " hospital": 24475,
+     " guitar": 41517,
+     " forest": 34263,
+     " sandwich": 44462,
+     " ocean": 25047,
+     " furniture": 48571,
+     " camera": 26151,
+     " blanket": 44388
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "The",
+    "RAW",
+    "W",
+    "I",
+    "AB",
+    "Class",
+    "S",
+    "Am",
+    "Sh",
+    "host",
+    "Chapter",
+    "C",
+    "Dev",
+    "Un",
+    "local",
+    "You",
+    "U",
+    "Q",
+    "E",
+    "national",
+    "Level",
+    "East",
+    "2016",
+    "2014",
+    "Dark",
+    "2015"
+   ]
+  },
+  "A0|C02_king_cole": {
+   "SMALL_BASIN": {
+    "median_rank": 39121.0,
+    "ranks": {
+     " prolet": 43383,
+     " Anarch": 24982,
+     " bourgeois": 40476,
+     " Marx": 34446,
+     " comrade": 38567,
+     " proletarian": 40230,
+     " socialist": 33710,
+     " anarchist": 39675,
+     " Lenin": 42795,
+     " anarchism": 41211,
+     " comrades": 35231,
+     " labour": 27322
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37468.0,
+    "ranks": {
+     " communist": 41216,
+     " communism": 48246,
+     " socialism": 41345,
+     " Marxism": 29632,
+     " Trotsky": 46549,
+     " Engels": 45907,
+     " revolution": 37150,
+     " workers": 27752,
+     " strike": 27030,
+     " solidarity": 37786,
+     " union": 18402,
+     " collective": 23718
+    }
+   },
+   "R_rival": {
+    "median_rank": 40154.5,
+    "ranks": {
+     " capitalist": 29988,
+     " capitalism": 43828,
+     " conservative": 31843,
+     " conservatism": 48939,
+     " fascist": 40141,
+     " fascism": 46852,
+     " nationalist": 37947,
+     " nationalism": 40168,
+     " libertarian": 35483,
+     " monarchy": 48802,
+     " Reagan": 23614,
+     " Thatcher": 41586
+    }
+   },
+   "N_political": {
+    "median_rank": 27880.0,
+    "ranks": {
+     " parliament": 29907,
+     " election": 21193,
+     " senate": 25300,
+     " mayor": 39501,
+     " ballot": 32910,
+     " legislation": 25853,
+     " governor": 34171,
+     " referendum": 36735,
+     " candidate": 22484,
+     " voter": 33297,
+     " committee": 19367,
+     " constitution": 21781
+    }
+   },
+   "C_control": {
+    "median_rank": 37979.5,
+    "ranks": {
+     " kitchen": 33858,
+     " tomato": 43624,
+     " bicycle": 43163,
+     " weather": 28621,
+     " hospital": 25267,
+     " guitar": 40937,
+     " forest": 35022,
+     " sandwich": 43717,
+     " ocean": 25036,
+     " furniture": 48502,
+     " camera": 24762,
+     " blanket": 44228
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "The",
+    "I",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Chapter",
+    "Q",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "2015",
+    "align",
+    "new"
+   ]
+  },
+  "A0|F02_insult": {
+   "SMALL_BASIN": {
+    "median_rank": 39657.0,
+    "ranks": {
+     " prolet": 43431,
+     " Anarch": 23739,
+     " bourgeois": 40650,
+     " Marx": 34406,
+     " comrade": 39649,
+     " proletarian": 40517,
+     " socialist": 34286,
+     " anarchist": 39665,
+     " Lenin": 42923,
+     " anarchism": 41639,
+     " comrades": 35473,
+     " labour": 28267
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37932.5,
+    "ranks": {
+     " communist": 41237,
+     " communism": 48486,
+     " socialism": 42402,
+     " Marxism": 29947,
+     " Trotsky": 46259,
+     " Engels": 45816,
+     " revolution": 37515,
+     " workers": 28189,
+     " strike": 27444,
+     " solidarity": 38350,
+     " union": 18241,
+     " collective": 24649
+    }
+   },
+   "R_rival": {
+    "median_rank": 40547.5,
+    "ranks": {
+     " capitalist": 30385,
+     " capitalism": 44375,
+     " conservative": 32117,
+     " conservatism": 49072,
+     " fascist": 40894,
+     " fascism": 47433,
+     " nationalist": 38217,
+     " nationalism": 40201,
+     " libertarian": 36320,
+     " monarchy": 48855,
+     " Reagan": 23809,
+     " Thatcher": 41923
+    }
+   },
+   "N_political": {
+    "median_rank": 28871.5,
+    "ranks": {
+     " parliament": 31013,
+     " election": 21815,
+     " senate": 26042,
+     " mayor": 40047,
+     " ballot": 33158,
+     " legislation": 26730,
+     " governor": 34900,
+     " referendum": 37227,
+     " candidate": 22944,
+     " voter": 34476,
+     " committee": 19812,
+     " constitution": 22605
+    }
+   },
+   "C_control": {
+    "median_rank": 38100.0,
+    "ranks": {
+     " kitchen": 33932,
+     " tomato": 43279,
+     " bicycle": 42938,
+     " weather": 29494,
+     " hospital": 26095,
+     " guitar": 40512,
+     " forest": 35688,
+     " sandwich": 43226,
+     " ocean": 25157,
+     " furniture": 48431,
+     " camera": 24097,
+     " blanket": 44175
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "T",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "C",
+    "Am",
+    "S",
+    "U",
+    "Class",
+    "Un",
+    "0",
+    "Dev",
+    "Sh",
+    "Q",
+    "E",
+    "align",
+    "national",
+    "Chapter",
+    "You",
+    "new",
+    "Att",
+    "Mon",
+    "2016"
+   ]
+  },
+  "A0|G02_brackets": {
+   "SMALL_BASIN": {
+    "median_rank": 39538.0,
+    "ranks": {
+     " prolet": 43420,
+     " Anarch": 23968,
+     " bourgeois": 40614,
+     " Marx": 34411,
+     " comrade": 39415,
+     " proletarian": 40449,
+     " socialist": 34169,
+     " anarchist": 39661,
+     " Lenin": 42901,
+     " anarchism": 41538,
+     " comrades": 35415,
+     " labour": 28029
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37833.0,
+    "ranks": {
+     " communist": 41215,
+     " communism": 48432,
+     " socialism": 42158,
+     " Marxism": 29881,
+     " Trotsky": 46338,
+     " Engels": 45837,
+     " revolution": 37449,
+     " workers": 28075,
+     " strike": 27361,
+     " solidarity": 38217,
+     " union": 18275,
+     " collective": 24423
+    }
+   },
+   "R_rival": {
+    "median_rank": 40461.5,
+    "ranks": {
+     " capitalist": 30288,
+     " capitalism": 44271,
+     " conservative": 32068,
+     " conservatism": 49046,
+     " fascist": 40720,
+     " fascism": 47314,
+     " nationalist": 38152,
+     " nationalism": 40203,
+     " libertarian": 36142,
+     " monarchy": 48839,
+     " Reagan": 23756,
+     " Thatcher": 41857
+    }
+   },
+   "N_political": {
+    "median_rank": 28656.0,
+    "ranks": {
+     " parliament": 30783,
+     " election": 21682,
+     " senate": 25876,
+     " mayor": 39943,
+     " ballot": 33111,
+     " legislation": 26529,
+     " governor": 34735,
+     " referendum": 37126,
+     " candidate": 22859,
+     " voter": 34236,
+     " committee": 19690,
+     " constitution": 22401
+    }
+   },
+   "C_control": {
+    "median_rank": 38073.5,
+    "ranks": {
+     " kitchen": 33914,
+     " tomato": 43355,
+     " bicycle": 42990,
+     " weather": 29305,
+     " hospital": 25906,
+     " guitar": 40612,
+     " forest": 35535,
+     " sandwich": 43341,
+     " ocean": 25132,
+     " furniture": 48436,
+     " camera": 24248,
+     " blanket": 44199
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "T",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "Am",
+    "C",
+    "S",
+    "Class",
+    "U",
+    "Un",
+    "Dev",
+    "0",
+    "Sh",
+    "Q",
+    "E",
+    "Chapter",
+    "national",
+    "You",
+    "align",
+    "new",
+    "2016",
+    "Att",
+    "2015"
+   ]
+  },
+  "A0|E03_orgs": {
+   "SMALL_BASIN": {
+    "median_rank": 39828.0,
+    "ranks": {
+     " prolet": 43466,
+     " Anarch": 23352,
+     " bourgeois": 40748,
+     " Marx": 34403,
+     " comrade": 39982,
+     " proletarian": 40636,
+     " socialist": 34445,
+     " anarchist": 39674,
+     " Lenin": 42962,
+     " anarchism": 41808,
+     " comrades": 35579,
+     " labour": 28647
+    }
+   },
+   "L_heldout": {
+    "median_rank": 38066.5,
+    "ranks": {
+     " communist": 41233,
+     " communism": 48564,
+     " socialism": 42758,
+     " Marxism": 30054,
+     " Trotsky": 46130,
+     " Engels": 45820,
+     " revolution": 37611,
+     " workers": 28369,
+     " strike": 27550,
+     " solidarity": 38522,
+     " union": 18218,
+     " collective": 24930
+    }
+   },
+   "R_rival": {
+    "median_rank": 40664.5,
+    "ranks": {
+     " capitalist": 30532,
+     " capitalism": 44543,
+     " conservative": 32203,
+     " conservatism": 49113,
+     " fascist": 41135,
+     " fascism": 47569,
+     " nationalist": 38296,
+     " nationalism": 40194,
+     " libertarian": 36580,
+     " monarchy": 48868,
+     " Reagan": 23882,
+     " Thatcher": 42042
+    }
+   },
+   "N_political": {
+    "median_rank": 29199.5,
+    "ranks": {
+     " parliament": 31368,
+     " election": 22026,
+     " senate": 26324,
+     " mayor": 40196,
+     " ballot": 33250,
+     " legislation": 27031,
+     " governor": 35159,
+     " referendum": 37350,
+     " candidate": 23094,
+     " voter": 34899,
+     " committee": 19965,
+     " constitution": 22907
+    }
+   },
+   "C_control": {
+    "median_rank": 38131.5,
+    "ranks": {
+     " kitchen": 33970,
+     " tomato": 43175,
+     " bicycle": 42843,
+     " weather": 29805,
+     " hospital": 26396,
+     " guitar": 40389,
+     " forest": 35874,
+     " sandwich": 43068,
+     " ocean": 25189,
+     " furniture": 48381,
+     " camera": 23904,
+     " blanket": 44127
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "AB",
+    "T",
+    "I",
+    "The",
+    "local",
+    "host",
+    "RAW",
+    "C",
+    "Am",
+    "S",
+    "U",
+    "Un",
+    "0",
+    "Class",
+    "Dev",
+    "E",
+    "Q",
+    "Sh",
+    "align",
+    "national",
+    "You",
+    "Chapter",
+    "new",
+    "Mon",
+    "Att",
+    "Al"
+   ]
+  },
+  "A0|D03_organic": {
+   "SMALL_BASIN": {
+    "median_rank": 39178.5,
+    "ranks": {
+     " prolet": 43386,
+     " Anarch": 24810,
+     " bourgeois": 40491,
+     " Marx": 34439,
+     " comrade": 38682,
+     " proletarian": 40257,
+     " socialist": 33782,
+     " anarchist": 39675,
+     " Lenin": 42810,
+     " anarchism": 41244,
+     " comrades": 35256,
+     " labour": 27438
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37524.5,
+    "ranks": {
+     " communist": 41198,
+     " communism": 48276,
+     " socialism": 41485,
+     " Marxism": 29678,
+     " Trotsky": 46528,
+     " Engels": 45901,
+     " revolution": 37198,
+     " workers": 27797,
+     " strike": 27064,
+     " solidarity": 37851,
+     " union": 18368,
+     " collective": 23820
+    }
+   },
+   "R_rival": {
+    "median_rank": 40194.5,
+    "ranks": {
+     " capitalist": 30039,
+     " capitalism": 43890,
+     " conservative": 31876,
+     " conservatism": 48949,
+     " fascist": 40222,
+     " fascism": 46927,
+     " nationalist": 37989,
+     " nationalism": 40167,
+     " libertarian": 35592,
+     " monarchy": 48803,
+     " Reagan": 23633,
+     " Thatcher": 41638
+    }
+   },
+   "N_political": {
+    "median_rank": 28007.5,
+    "ranks": {
+     " parliament": 30053,
+     " election": 21286,
+     " senate": 25380,
+     " mayor": 39575,
+     " ballot": 32925,
+     " legislation": 25962,
+     " governor": 34271,
+     " referendum": 36814,
+     " candidate": 22546,
+     " voter": 33458,
+     " committee": 19415,
+     " constitution": 21855
+    }
+   },
+   "C_control": {
+    "median_rank": 38001.0,
+    "ranks": {
+     " kitchen": 33859,
+     " tomato": 43576,
+     " bicycle": 43131,
+     " weather": 28722,
+     " hospital": 25361,
+     " guitar": 40892,
+     " forest": 35110,
+     " sandwich": 43669,
+     " ocean": 25061,
+     " furniture": 48501,
+     " camera": 24675,
+     " blanket": 44223
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "C",
+    "Class",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "0",
+    "E",
+    "national",
+    "You",
+    "2016",
+    "align",
+    "Level",
+    "2015",
+    "new"
+   ]
+  },
+  "A0|A03_neuro": {
+   "SMALL_BASIN": {
+    "median_rank": 39322.0,
+    "ranks": {
+     " prolet": 43398,
+     " Anarch": 24501,
+     " bourgeois": 40545,
+     " Marx": 34416,
+     " comrade": 38973,
+     " proletarian": 40329,
+     " socialist": 33941,
+     " anarchist": 39671,
+     " Lenin": 42833,
+     " anarchism": 41350,
+     " comrades": 35313,
+     " labour": 27659
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37632.0,
+    "ranks": {
+     " communist": 41201,
+     " communism": 48327,
+     " socialism": 41718,
+     " Marxism": 29750,
+     " Trotsky": 46457,
+     " Engels": 45872,
+     " revolution": 37275,
+     " workers": 27890,
+     " strike": 27174,
+     " solidarity": 37989,
+     " union": 18328,
+     " collective": 24035
+    }
+   },
+   "R_rival": {
+    "median_rank": 40294.0,
+    "ranks": {
+     " capitalist": 30117,
+     " capitalism": 44021,
+     " conservative": 31937,
+     " conservatism": 48986,
+     " fascist": 40412,
+     " fascism": 47066,
+     " nationalist": 38050,
+     " nationalism": 40176,
+     " libertarian": 35782,
+     " monarchy": 48815,
+     " Reagan": 23660,
+     " Thatcher": 41723
+    }
+   },
+   "N_political": {
+    "median_rank": 28244.0,
+    "ranks": {
+     " parliament": 30308,
+     " election": 21425,
+     " senate": 25556,
+     " mayor": 39704,
+     " ballot": 32993,
+     " legislation": 26180,
+     " governor": 34435,
+     " referendum": 36931,
+     " candidate": 22648,
+     " voter": 33731,
+     " committee": 19510,
+     " constitution": 22044
+    }
+   },
+   "C_control": {
+    "median_rank": 38034.0,
+    "ranks": {
+     " kitchen": 33886,
+     " tomato": 43471,
+     " bicycle": 43084,
+     " weather": 28932,
+     " hospital": 25553,
+     " guitar": 40806,
+     " forest": 35262,
+     " sandwich": 43535,
+     " ocean": 25084,
+     " furniture": 48482,
+     " camera": 24512,
+     " blanket": 44207
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "C",
+    "Class",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "0",
+    "Q",
+    "E",
+    "Chapter",
+    "national",
+    "You",
+    "align",
+    "2016",
+    "new",
+    "Level",
+    "2015"
+   ]
+  },
+  "A0|B03_moon": {
+   "SMALL_BASIN": {
+    "median_rank": 38538.5,
+    "ranks": {
+     " prolet": 43257,
+     " Anarch": 26546,
+     " bourgeois": 40281,
+     " Marx": 34459,
+     " comrade": 37337,
+     " proletarian": 39966,
+     " socialist": 33200,
+     " anarchist": 39740,
+     " Lenin": 42595,
+     " anarchism": 40785,
+     " comrades": 35043,
+     " labour": 26533
+    }
+   },
+   "L_heldout": {
+    "median_rank": 36835.5,
+    "ranks": {
+     " communist": 41230,
+     " communism": 47967,
+     " socialism": 40030,
+     " Marxism": 29226,
+     " Trotsky": 46767,
+     " Engels": 46019,
+     " revolution": 36526,
+     " workers": 27387,
+     " strike": 26635,
+     " solidarity": 37145,
+     " union": 18752,
+     " collective": 22826
+    }
+   },
+   "R_rival": {
+    "median_rank": 39725.5,
+    "ranks": {
+     " capitalist": 29701,
+     " capitalism": 43282,
+     " conservative": 31573,
+     " conservatism": 48801,
+     " fascist": 39298,
+     " fascism": 46084,
+     " nationalist": 37676,
+     " nationalism": 40153,
+     " libertarian": 34610,
+     " monarchy": 48753,
+     " Reagan": 23475,
+     " Thatcher": 41012
+    }
+   },
+   "N_political": {
+    "median_rank": 26735.0,
+    "ranks": {
+     " parliament": 28649,
+     " election": 20592,
+     " senate": 24746,
+     " mayor": 38888,
+     " ballot": 32703,
+     " legislation": 24821,
+     " governor": 33440,
+     " referendum": 35980,
+     " candidate": 22003,
+     " voter": 31995,
+     " committee": 19036,
+     " constitution": 21122
+    }
+   },
+   "C_control": {
+    "median_rank": 37902.5,
+    "ranks": {
+     " kitchen": 33923,
+     " tomato": 43974,
+     " bicycle": 43459,
+     " weather": 27795,
+     " hospital": 24644,
+     " guitar": 41333,
+     " forest": 34472,
+     " sandwich": 44201,
+     " ocean": 24970,
+     " furniture": 48566,
+     " camera": 25604,
+     " blanket": 44301
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "The",
+    "W",
+    "RAW",
+    "I",
+    "AB",
+    "Class",
+    "Am",
+    "host",
+    "S",
+    "local",
+    "C",
+    "Sh",
+    "Dev",
+    "Chapter",
+    "Un",
+    "U",
+    "Q",
+    "You",
+    "E",
+    "national",
+    "2016",
+    "0",
+    "Level",
+    "East",
+    "2015",
+    "2014"
+   ]
+  },
+  "A0|C03_mary_lamb": {
+   "SMALL_BASIN": {
+    "median_rank": 39079.5,
+    "ranks": {
+     " prolet": 43378,
+     " Anarch": 25063,
+     " bourgeois": 40458,
+     " Marx": 34444,
+     " comrade": 38477,
+     " proletarian": 40216,
+     " socialist": 33681,
+     " anarchist": 39682,
+     " Lenin": 42790,
+     " anarchism": 41181,
+     " comrades": 35208,
+     " labour": 27252
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37434.5,
+    "ranks": {
+     " communist": 41209,
+     " communism": 48227,
+     " socialism": 41263,
+     " Marxism": 29599,
+     " Trotsky": 46571,
+     " Engels": 45919,
+     " revolution": 37126,
+     " workers": 27726,
+     " strike": 27002,
+     " solidarity": 37743,
+     " union": 18426,
+     " collective": 23647
+    }
+   },
+   "R_rival": {
+    "median_rank": 40123.0,
+    "ranks": {
+     " capitalist": 29956,
+     " capitalism": 43786,
+     " conservative": 31815,
+     " conservatism": 48929,
+     " fascist": 40075,
+     " fascism": 46806,
+     " nationalist": 37928,
+     " nationalism": 40171,
+     " libertarian": 35424,
+     " monarchy": 48803,
+     " Reagan": 23600,
+     " Thatcher": 41546
+    }
+   },
+   "N_political": {
+    "median_rank": 27805.5,
+    "ranks": {
+     " parliament": 29830,
+     " election": 21153,
+     " senate": 25253,
+     " mayor": 39456,
+     " ballot": 32895,
+     " legislation": 25781,
+     " governor": 34130,
+     " referendum": 36701,
+     " candidate": 22447,
+     " voter": 33204,
+     " committee": 19338,
+     " constitution": 21730
+    }
+   },
+   "C_control": {
+    "median_rank": 37976.0,
+    "ranks": {
+     " kitchen": 33845,
+     " tomato": 43647,
+     " bicycle": 43186,
+     " weather": 28554,
+     " hospital": 25215,
+     " guitar": 40970,
+     " forest": 34982,
+     " sandwich": 43739,
+     " ocean": 25031,
+     " furniture": 48508,
+     " camera": 24816,
+     " blanket": 44232
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "The",
+    "I",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Chapter",
+    "Q",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "2015",
+    "new",
+    "align"
+   ]
+  },
+  "A0|F03_frustration": {
+   "SMALL_BASIN": {
+    "median_rank": 39566.5,
+    "ranks": {
+     " prolet": 43420,
+     " Anarch": 23913,
+     " bourgeois": 40625,
+     " Marx": 34414,
+     " comrade": 39468,
+     " proletarian": 40465,
+     " socialist": 34191,
+     " anarchist": 39665,
+     " Lenin": 42910,
+     " anarchism": 41564,
+     " comrades": 35430,
+     " labour": 28087
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37855.0,
+    "ranks": {
+     " communist": 41229,
+     " communism": 48446,
+     " socialism": 42212,
+     " Marxism": 29897,
+     " Trotsky": 46320,
+     " Engels": 45822,
+     " revolution": 37459,
+     " workers": 28104,
+     " strike": 27375,
+     " solidarity": 38251,
+     " union": 18265,
+     " collective": 24481
+    }
+   },
+   "R_rival": {
+    "median_rank": 40483.5,
+    "ranks": {
+     " capitalist": 30313,
+     " capitalism": 44299,
+     " conservative": 32076,
+     " conservatism": 49051,
+     " fascist": 40762,
+     " fascism": 47354,
+     " nationalist": 38167,
+     " nationalism": 40205,
+     " libertarian": 36187,
+     " monarchy": 48843,
+     " Reagan": 23772,
+     " Thatcher": 41874
+    }
+   },
+   "N_political": {
+    "median_rank": 28713.5,
+    "ranks": {
+     " parliament": 30841,
+     " election": 21719,
+     " senate": 25912,
+     " mayor": 39971,
+     " ballot": 33122,
+     " legislation": 26586,
+     " governor": 34777,
+     " referendum": 37151,
+     " candidate": 22878,
+     " voter": 34301,
+     " committee": 19730,
+     " constitution": 22449
+    }
+   },
+   "C_control": {
+    "median_rank": 38079.5,
+    "ranks": {
+     " kitchen": 33924,
+     " tomato": 43338,
+     " bicycle": 42975,
+     " weather": 29350,
+     " hospital": 25957,
+     " guitar": 40581,
+     " forest": 35578,
+     " sandwich": 43314,
+     " ocean": 25138,
+     " furniture": 48435,
+     " camera": 24202,
+     " blanket": 44197
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "T",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "C",
+    "Am",
+    "S",
+    "Class",
+    "U",
+    "Un",
+    "Dev",
+    "0",
+    "Sh",
+    "Q",
+    "E",
+    "Chapter",
+    "national",
+    "You",
+    "align",
+    "new",
+    "2016",
+    "Att",
+    "Mon"
+   ]
+  },
+  "A0|G03_counting": {
+   "SMALL_BASIN": {
+    "median_rank": 39469.5,
+    "ranks": {
+     " prolet": 43419,
+     " Anarch": 24125,
+     " bourgeois": 40600,
+     " Marx": 34411,
+     " comrade": 39277,
+     " proletarian": 40412,
+     " socialist": 34108,
+     " anarchist": 39662,
+     " Lenin": 42880,
+     " anarchism": 41487,
+     " comrades": 35378,
+     " labour": 27924
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37778.5,
+    "ranks": {
+     " communist": 41212,
+     " communism": 48400,
+     " socialism": 42010,
+     " Marxism": 29843,
+     " Trotsky": 46385,
+     " Engels": 45848,
+     " revolution": 37402,
+     " workers": 28026,
+     " strike": 27304,
+     " solidarity": 38155,
+     " union": 18288,
+     " collective": 24326
+    }
+   },
+   "R_rival": {
+    "median_rank": 40412.5,
+    "ranks": {
+     " capitalist": 30227,
+     " capitalism": 44204,
+     " conservative": 32026,
+     " conservatism": 49026,
+     " fascist": 40633,
+     " fascism": 47237,
+     " nationalist": 38127,
+     " nationalism": 40192,
+     " libertarian": 36030,
+     " monarchy": 48835,
+     " Reagan": 23719,
+     " Thatcher": 41827
+    }
+   },
+   "N_political": {
+    "median_rank": 28530.5,
+    "ranks": {
+     " parliament": 30642,
+     " election": 21608,
+     " senate": 25782,
+     " mayor": 39873,
+     " ballot": 33070,
+     " legislation": 26419,
+     " governor": 34642,
+     " referendum": 37070,
+     " candidate": 22791,
+     " voter": 34114,
+     " committee": 19638,
+     " constitution": 22290
+    }
+   },
+   "C_control": {
+    "median_rank": 38066.0,
+    "ranks": {
+     " kitchen": 33916,
+     " tomato": 43383,
+     " bicycle": 43015,
+     " weather": 29181,
+     " hospital": 25804,
+     " guitar": 40672,
+     " forest": 35460,
+     " sandwich": 43394,
+     " ocean": 25123,
+     " furniture": 48454,
+     " camera": 24329,
+     " blanket": 44205
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "Am",
+    "C",
+    "S",
+    "Class",
+    "U",
+    "Un",
+    "Dev",
+    "0",
+    "Sh",
+    "Q",
+    "E",
+    "Chapter",
+    "national",
+    "You",
+    "align",
+    "new",
+    "2016",
+    "Level",
+    "2015"
+   ]
+  },
+  "A0|E04_internet": {
+   "SMALL_BASIN": {
+    "median_rank": 39665.0,
+    "ranks": {
+     " prolet": 43438,
+     " Anarch": 23717,
+     " bourgeois": 40654,
+     " Marx": 34411,
+     " comrade": 39664,
+     " proletarian": 40521,
+     " socialist": 34290,
+     " anarchist": 39666,
+     " Lenin": 42926,
+     " anarchism": 41651,
+     " comrades": 35473,
+     " labour": 28281
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37940.0,
+    "ranks": {
+     " communist": 41238,
+     " communism": 48495,
+     " socialism": 42421,
+     " Marxism": 29948,
+     " Trotsky": 46253,
+     " Engels": 45818,
+     " revolution": 37521,
+     " workers": 28205,
+     " strike": 27448,
+     " solidarity": 38359,
+     " union": 18242,
+     " collective": 24667
+    }
+   },
+   "R_rival": {
+    "median_rank": 40552.5,
+    "ranks": {
+     " capitalist": 30391,
+     " capitalism": 44381,
+     " conservative": 32125,
+     " conservatism": 49073,
+     " fascist": 40903,
+     " fascism": 47439,
+     " nationalist": 38224,
+     " nationalism": 40202,
+     " libertarian": 36332,
+     " monarchy": 48854,
+     " Reagan": 23810,
+     " Thatcher": 41927
+    }
+   },
+   "N_political": {
+    "median_rank": 28890.0,
+    "ranks": {
+     " parliament": 31030,
+     " election": 21827,
+     " senate": 26057,
+     " mayor": 40054,
+     " ballot": 33161,
+     " legislation": 26750,
+     " governor": 34919,
+     " referendum": 37236,
+     " candidate": 22951,
+     " voter": 34492,
+     " committee": 19818,
+     " constitution": 22616
+    }
+   },
+   "C_control": {
+    "median_rank": 38100.0,
+    "ranks": {
+     " kitchen": 33939,
+     " tomato": 43274,
+     " bicycle": 42933,
+     " weather": 29505,
+     " hospital": 26104,
+     " guitar": 40504,
+     " forest": 35696,
+     " sandwich": 43219,
+     " ocean": 25163,
+     " furniture": 48430,
+     " camera": 24084,
+     " blanket": 44182
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "W",
+    "T",
+    "AB",
+    "I",
+    "The",
+    "local",
+    "RAW",
+    "host",
+    "C",
+    "Am",
+    "S",
+    "U",
+    "Class",
+    "Un",
+    "0",
+    "Dev",
+    "Q",
+    "Sh",
+    "E",
+    "align",
+    "national",
+    "Chapter",
+    "You",
+    "new",
+    "Att",
+    "Mon",
+    "2016"
+   ]
+  },
+  "A0|D04_equation": {
+   "SMALL_BASIN": {
+    "median_rank": 39204.0,
+    "ranks": {
+     " prolet": 43392,
+     " Anarch": 24760,
+     " bourgeois": 40502,
+     " Marx": 34427,
+     " comrade": 38733,
+     " proletarian": 40268,
+     " socialist": 33804,
+     " anarchist": 39675,
+     " Lenin": 42816,
+     " anarchism": 41263,
+     " comrades": 35265,
+     " labour": 27482
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37541.5,
+    "ranks": {
+     " communist": 41195,
+     " communism": 48288,
+     " socialism": 41534,
+     " Marxism": 29686,
+     " Trotsky": 46513,
+     " Engels": 45896,
+     " revolution": 37211,
+     " workers": 27815,
+     " strike": 27085,
+     " solidarity": 37872,
+     " union": 18359,
+     " collective": 23850
+    }
+   },
+   "R_rival": {
+    "median_rank": 40210.5,
+    "ranks": {
+     " capitalist": 30052,
+     " capitalism": 43922,
+     " conservative": 31883,
+     " conservatism": 48953,
+     " fascist": 40251,
+     " fascism": 46956,
+     " nationalist": 38012,
+     " nationalism": 40170,
+     " libertarian": 35626,
+     " monarchy": 48803,
+     " Reagan": 23639,
+     " Thatcher": 41654
+    }
+   },
+   "N_political": {
+    "median_rank": 28053.0,
+    "ranks": {
+     " parliament": 30094,
+     " election": 21316,
+     " senate": 25400,
+     " mayor": 39601,
+     " ballot": 32938,
+     " legislation": 26012,
+     " governor": 34299,
+     " referendum": 36842,
+     " candidate": 22560,
+     " voter": 33500,
+     " committee": 19431,
+     " constitution": 21886
+    }
+   },
+   "C_control": {
+    "median_rank": 38004.5,
+    "ranks": {
+     " kitchen": 33856,
+     " tomato": 43554,
+     " bicycle": 43121,
+     " weather": 28751,
+     " hospital": 25389,
+     " guitar": 40872,
+     " forest": 35137,
+     " sandwich": 43638,
+     " ocean": 25063,
+     " furniture": 48499,
+     " camera": 24641,
+     " blanket": 44216
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "C",
+    "Class",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "0",
+    "E",
+    "national",
+    "You",
+    "2016",
+    "align",
+    "Level",
+    "new",
+    "2015"
+   ]
+  },
+  "A0|A04_climate": {
+   "SMALL_BASIN": {
+    "median_rank": 39148.5,
+    "ranks": {
+     " prolet": 43385,
+     " Anarch": 24910,
+     " bourgeois": 40483,
+     " Marx": 34443,
+     " comrade": 38617,
+     " proletarian": 40241,
+     " socialist": 33738,
+     " anarchist": 39680,
+     " Lenin": 42802,
+     " anarchism": 41231,
+     " comrades": 35247,
+     " labour": 27366
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37494.5,
+    "ranks": {
+     " communist": 41210,
+     " communism": 48258,
+     " socialism": 41396,
+     " Marxism": 29654,
+     " Trotsky": 46539,
+     " Engels": 45902,
+     " revolution": 37171,
+     " workers": 27773,
+     " strike": 27047,
+     " solidarity": 37818,
+     " union": 18387,
+     " collective": 23757
+    }
+   },
+   "R_rival": {
+    "median_rank": 40166.0,
+    "ranks": {
+     " capitalist": 30018,
+     " capitalism": 43853,
+     " conservative": 31863,
+     " conservatism": 48945,
+     " fascist": 40169,
+     " fascism": 46885,
+     " nationalist": 37965,
+     " nationalism": 40163,
+     " libertarian": 35532,
+     " monarchy": 48801,
+     " Reagan": 23617,
+     " Thatcher": 41607
+    }
+   },
+   "N_political": {
+    "median_rank": 27931.0,
+    "ranks": {
+     " parliament": 29967,
+     " election": 21230,
+     " senate": 25336,
+     " mayor": 39537,
+     " ballot": 32915,
+     " legislation": 25895,
+     " governor": 34209,
+     " referendum": 36761,
+     " candidate": 22508,
+     " voter": 33372,
+     " committee": 19385,
+     " constitution": 21810
+    }
+   },
+   "C_control": {
+    "median_rank": 37983.0,
+    "ranks": {
+     " kitchen": 33859,
+     " tomato": 43602,
+     " bicycle": 43148,
+     " weather": 28662,
+     " hospital": 25311,
+     " guitar": 40910,
+     " forest": 35056,
+     " sandwich": 43697,
+     " ocean": 25046,
+     " furniture": 48502,
+     " camera": 24733,
+     " blanket": 44221
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "I",
+    "The",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Q",
+    "Chapter",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "align",
+    "2015",
+    "new"
+   ]
+  },
+  "A0|B04_rome": {
+   "SMALL_BASIN": {
+    "median_rank": 39115.5,
+    "ranks": {
+     " prolet": 43382,
+     " Anarch": 24987,
+     " bourgeois": 40475,
+     " Marx": 34448,
+     " comrade": 38554,
+     " proletarian": 40229,
+     " socialist": 33706,
+     " anarchist": 39677,
+     " Lenin": 42796,
+     " anarchism": 41208,
+     " comrades": 35228,
+     " labour": 27317
+    }
+   },
+   "L_heldout": {
+    "median_rank": 37464.0,
+    "ranks": {
+     " communist": 41215,
+     " communism": 48244,
+     " socialism": 41334,
+     " Marxism": 29629,
+     " Trotsky": 46552,
+     " Engels": 45908,
+     " revolution": 37147,
+     " workers": 27750,
+     " strike": 27027,
+     " solidarity": 37781,
+     " union": 18401,
+     " collective": 23715
+    }
+   },
+   "R_rival": {
+    "median_rank": 40153.0,
+    "ranks": {
+     " capitalist": 29983,
+     " capitalism": 43825,
+     " conservative": 31842,
+     " conservatism": 48939,
+     " fascist": 40136,
+     " fascism": 46849,
+     " nationalist": 37946,
+     " nationalism": 40170,
+     " libertarian": 35475,
+     " monarchy": 48802,
+     " Reagan": 23611,
+     " Thatcher": 41581
+    }
+   },
+   "N_political": {
+    "median_rank": 27872.5,
+    "ranks": {
+     " parliament": 29898,
+     " election": 21191,
+     " senate": 25296,
+     " mayor": 39498,
+     " ballot": 32911,
+     " legislation": 25847,
+     " governor": 34167,
+     " referendum": 36734,
+     " candidate": 22483,
+     " voter": 33291,
+     " committee": 19368,
+     " constitution": 21779
+    }
+   },
+   "C_control": {
+    "median_rank": 37979.0,
+    "ranks": {
+     " kitchen": 33856,
+     " tomato": 43629,
+     " bicycle": 43164,
+     " weather": 28617,
+     " hospital": 25263,
+     " guitar": 40939,
+     " forest": 35019,
+     " sandwich": 43719,
+     " ocean": 25037,
+     " furniture": 48502,
+     " camera": 24766,
+     " blanket": 44227
+    }
+   },
+   "top30": [
+    "D",
+    "def",
+    "A",
+    "T",
+    "W",
+    "AB",
+    "The",
+    "I",
+    "RAW",
+    "local",
+    "host",
+    "Am",
+    "Class",
+    "C",
+    "S",
+    "U",
+    "Un",
+    "Dev",
+    "Sh",
+    "Chapter",
+    "Q",
+    "E",
+    "0",
+    "national",
+    "You",
+    "2016",
+    "Level",
+    "2015",
+    "align",
+    "new"
+   ]
+  }
+ },
+ "aggregate_median_of_medians": {
+  "SMALL_BASIN": 39201.5,
+  "L_heldout": 37538.5,
+  "R_rival": 40209.0,
+  "N_political": 28047.5,
+  "C_control": 38003.0
+ }
+}

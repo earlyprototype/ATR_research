@@ -1,0 +1,26 @@
+{
+ "W6_18": {
+  "L_socialist": 19208,
+  "R_rival": 20645,
+  "N_political": 2542,
+  "C_control": 8140
+ },
+ "W5_20": {
+  "L_socialist": 16591,
+  "R_rival": 14586,
+  "N_political": 2411,
+  "C_control": 7024
+ },
+ "W6_19": {
+  "L_socialist": 17458,
+  "R_rival": 29510,
+  "N_political": 4684,
+  "C_control": 12861
+ },
+ "W7_17": {
+  "L_socialist": 23595,
+  "R_rival": 25956,
+  "N_political": 14008,
+  "C_control": 15271
+ }
+}

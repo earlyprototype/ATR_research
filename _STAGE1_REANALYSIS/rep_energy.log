@@ -1,0 +1,15 @@
+Loading weights:   0%|          | 0/292 [00:00<?, ?it/s]Loading weights: 100%|██████████| 292/292 [00:00<00:00, 9873.33it/s]
+25 prompts, 24 layers
+[6->18/seed_j] conv 25/25  seed/natural ratio 1.07x
+    [(' Republican', 25)]
+[6->18/natural_i] conv 25/25  seed/natural ratio 1.07x
+    [(' Republican', 21), (' source', 4)]
+[6->19/seed_j] conv 25/25  seed/natural ratio 1.08x
+    [(' Republican', 24), ('\n', 1)]
+[6->19/natural_i] conv 25/25  seed/natural ratio 1.08x
+    [(' Republican', 24), ('\n', 1)]
+[7->17/seed_j] conv 25/25  seed/natural ratio 1.04x
+    [(' GOP', 25)]
+[7->17/natural_i] conv 25/25  seed/natural ratio 1.04x
+    [(' GOP', 25)]
+written republican_energy_control.json
