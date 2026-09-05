@@ -12,6 +12,12 @@ Stages, in the order they are meant to run:
   states   Per-layer states for the J-space test (H19b): inject each settled
            tensor at the layer-0 entry and read every scored layer, and run the
            same prompts clean for the comparison arm.
+  lagscan  Supplementary observation, no hypothesis attached: rerun a few
+           prompts keeping every mean position vector, then report the average
+           cosine between repetitions k apart for k = 1 to 8. A state that has
+           stopped moving scores about 1.0 at every k; a state that alternates
+           between p values scores about 1.0 only at multiples of p; a state
+           that wanders scores below 1.0 everywhere and falls off with k.
 
 Usage: python3 run_exp018.py --stage probe|loop|states [--arm bare|chat] ...
 """
@@ -49,8 +55,16 @@ EARLY_LAYERS = [2, 5]
 SCORED_LAYERS = sorted(EARLY_LAYERS + BAND_LAYERS)
 
 
-def load_prompts(n: int | None = None, arm: str = "bare") -> list[dict]:
+def load_prompts(n: int | None = None, arm: str = "bare",
+                 n_chat: int = 5) -> list[dict]:
+    """The registered Small subset, in file order.
+
+    The main arm runs all 25. The pilot arm runs the first `n_chat` of the same
+    25, which the specification fixes at 5, unless `--n-prompts` overrides it.
+    """
     records = json.loads(SUBSET.read_text())
+    if n is None and arm == "chat":
+        n = n_chat
     if n is not None:
         records = records[:n]
     return records
@@ -175,7 +189,7 @@ def stage_loop(args) -> None:
     print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB", flush=True)
     cfg = LoopConfig(max_iter=args.max_iter, check_start=args.check_start,
                      check_every=args.check_every, seed=args.seed)
-    records = load_prompts(args.n_prompts)
+    records = load_prompts(args.n_prompts, args.arm, args.n_chat)
     OUT.mkdir(parents=True, exist_ok=True)
     res_path = OUT / f"results_{args.arm}.json"
     npz_path = OUT / f"terminal_states_{args.arm}.npz"
@@ -286,9 +300,60 @@ def stage_states(args) -> None:
           f"peak={peak_gb():.2f} GB", flush=True)
 
 
+@torch.no_grad()
+def stage_lagscan(args) -> None:
+    """Supplementary: is the non-settling trajectory periodic or wandering?
+
+    Draws no verdicts. Uses the same instrument the registered engine uses,
+    `atr_engine2.lag_scan`, on the mean position vector of the last iterations.
+    """
+    import torch.nn.functional as F
+    model = load_model(dtype=torch.float32 if args.dtype == "float32"
+                       else torch.bfloat16)
+    inject_name, extract_name = hook_names(model)
+    records = load_prompts(args.n_prompts, args.arm, args.n_chat)
+    out = {"arm": args.arm, "iterations": args.max_iter, "max_lag": 8,
+           "prompts": {}}
+    for rec in records:
+        text = rec["prompt"] if args.arm == "bare" else chat_wrap(model, rec["prompt"])
+        tokens = tokenise(model, text)
+        _, cache = model.run_with_cache(
+            tokens, names_filter=lambda n: n in (inject_name, extract_name))
+        target = float(cache[inject_name][0].float()[1:].norm())
+        x = cache[extract_name][0].float().clone()
+        del cache
+        means = []
+        for _ in range(args.max_iter):
+            x = x * (target / float(x[1:].norm()))
+            model.add_hook(inject_name, make_injection_hook(x))
+            try:
+                _, cache = model.run_with_cache(
+                    tokens, names_filter=lambda n: n == extract_name)
+            finally:
+                model.reset_hooks()
+            x = cache[extract_name][0].float().clone()
+            del cache
+            means.append(x.mean(dim=0).clone())
+        tail = torch.stack(means[-args.lag_window:])
+        scan = {}
+        for k in range(1, 9):
+            if k < tail.shape[0]:
+                scan[k] = float(F.cosine_similarity(tail[k:], tail[:-k], dim=-1).mean())
+        out["prompts"][rec["id"]] = {"n_tokens": int(tokens.shape[1]),
+                                     "lag_window": int(tail.shape[0]),
+                                     "lag_scan": {str(k): round(v, 6)
+                                                  for k, v in scan.items()}}
+        print(f"  {rec['id']:20s} " + "  ".join(
+            f"k={k}:{v:.4f}" for k, v in scan.items()), flush=True)
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / f"lagscan_{args.arm}.json").write_text(json.dumps(out, indent=2))
+    print(f"wrote {OUT / f'lagscan_{args.arm}.json'}", flush=True)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["probe", "loop", "states"])
+    ap.add_argument("--stage", required=True,
+                    choices=["probe", "loop", "states", "lagscan"])
     ap.add_argument("--arm", default="bare", choices=["bare", "chat"])
     ap.add_argument("--dtype", default="float32", choices=["float32", "bfloat16"])
     ap.add_argument("--max-iter", type=int, default=200)
@@ -300,9 +365,11 @@ def main() -> None:
     ap.add_argument("--time-iters", type=int, default=10)
     ap.add_argument("--states-dir", default=str(HERE / "_states"))
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--lag-window", type=int, default=40)
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
-    {"probe": stage_probe, "loop": stage_loop, "states": stage_states}[args.stage](args)
+    {"probe": stage_probe, "loop": stage_loop, "states": stage_states,
+     "lagscan": stage_lagscan}[args.stage](args)
 
 
 if __name__ == "__main__":
