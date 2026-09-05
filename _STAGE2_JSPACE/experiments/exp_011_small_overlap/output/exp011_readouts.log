@@ -37,3 +37,21 @@ Loaded pretrained model gpt2 into HookedTransformer
 [12:06:54]   prolet1000 L10: share 0.0147; causal top-1 at alpha [(' the', 0.0494), (' comrade', 0.0393), (' prolet', 0.0858), (' prolet', 0.5686)]
 [12:06:55]   phaseA L10: share 0.0363; causal top-1 at alpha [(' Divine', 0.2007), (' Divine', 0.324), (' Divine', 0.2252), ('【', 0.0661)]
 [12:06:55] wrote top_atoms.json and clamping_check.json
+
+=== 2026-09-05, note added on a fourth review of pull request 84, no run ===
+readouts.py was changed and was NOT re-run, so the two artifacts beside this log,
+output/top_atoms.json and output/clamping_check.json, are still the ones the run
+above wrote. The change is a gate, not a measurement. This stage loads the lens a
+second time, after the decomposition, and combines the atom indices and weights
+the decomposition saved in output/atom_records.json with a dictionary it rebuilds
+for itself, which it uses to rank atoms by contributed length and to do the
+clamping. It now passes through the same pinned-lens check as decompose.py,
+sharing one copy of the pinned digest in lens_gate.py: the file must match the
+digest and byte count specification section 3 pins, checked again on this date at
+d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762 and 12,980,477
+bytes, and it must match the digest output/shares.json records for the
+decomposition that chose the atoms. The committed shares file predates that field,
+so the second check reports that it cannot be applied rather than passing
+silently. From the next run both outputs carry a metadata block naming the lens
+they were computed against; the two committed files predate that block and do not
+carry it.

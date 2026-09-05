@@ -9,6 +9,15 @@ t = json.load(open(os.path.join(OUT, "per_layer_tables.json")))
 BAND = [5, 6, 7, 8, 9, 10]
 ALL = list(range(12))
 
+# A scoring run over an incomplete shares file stamps its verdict file, and these
+# tables must not be readable as final when it did. Say so at the top and stop,
+# because the tables below index every one of the twelve layers.
+if not v.get("input_completeness", {}).get("input_complete", True):
+    print("**PARTIAL DIAGNOSTIC SCORING. The verdict file these tables are built "
+          "from was produced from a shares file that does not cover layers 0 to 11 "
+          "for every scoring arm, so nothing below is a verdict on the "
+          "pre-registered rules.**\n")
+
 
 def band_mark(l):
     return f"**{l}**" if l in BAND else str(l)
@@ -26,14 +35,22 @@ for l in ALL:
           f"{t['control_rotation_pooled']['lang'][str(l)]['median']:.4f} | "
           f"{t['control_gaussian_pooled']['lang'][str(l)]['median']:.4f} |")
 
+# The last three columns are the comparison specification section 7.1 asks to be
+# reported alongside the rule and kept out of it: the same one-sided test run on
+# the two families' shares against the norm-matched random dictionary, pooled over
+# its three seeds.
 print("\n### TABLE B: H6, five basin representatives against eighteen null-model basins\n")
 print("| layer | five basins, median | eighteen null basins, median | "
-      "one-sided p (basins greater) | five basins, random-dictionary control |")
-print("|---|---|---|---|---|")
+      "one-sided p (basins greater) | five basins, random-dictionary control | "
+      "eighteen null basins, random-dictionary control | "
+      "one-sided p under the random-dictionary control (basins greater) |")
+print("|---|---|---|---|---|---|---|")
 for l in ALL:
     e = v["H6"]["per_layer"][str(l)]
     print(f"| {band_mark(l)} | {e['basin_median']:.4f} | {e['null_median']:.4f} | "
-          f"{e['p_greater']:.4f} | {e['basin_control_gaussian_median']:.4f} |")
+          f"{e['p_greater']:.4f} | {e['basin_control_gaussian_median']:.4f} | "
+          f"{e['null_control_gaussian_median']:.4f} | "
+          f"{e['control_gaussian_p_greater']:.4f} |")
 
 print("\n### TABLE C: H16, language terminals against run-17 noise terminals\n")
 print("| layer | language, median | noise, median | difference | permutation p | "

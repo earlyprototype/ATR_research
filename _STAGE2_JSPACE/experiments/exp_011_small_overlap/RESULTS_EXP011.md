@@ -131,20 +131,20 @@ basin is highest, chosen by a rule written down before any share was seen. Both
 sides are read at iteration 100 of their own original sweep, which is what makes
 them comparable.
 
-| layer | five basins, median | eighteen null basins, median | one-sided p (basins greater) | five basins, random-dictionary control |
-|---|---|---|---|---|
-| 0 | 0.0305 | 0.0706 | 0.9999 | 0.3681 |
-| 1 | 0.0442 | 0.0718 | 0.9998 | 0.3672 |
-| 2 | 0.0254 | 0.0262 | 0.6808 | 0.3715 |
-| 3 | 0.0155 | 0.0149 | 0.5715 | 0.3733 |
-| 4 | 0.0149 | 0.0112 | 0.2016 | 0.3744 |
-| **5** | 0.0213 | 0.0106 | 0.0229 | 0.3730 |
-| **6** | 0.0149 | 0.0076 | 0.0151 | 0.3701 |
-| **7** | 0.0203 | 0.0120 | 0.0151 | 0.3717 |
-| **8** | 0.0135 | 0.0144 | 0.4856 | 0.3746 |
-| **9** | 0.0152 | 0.0172 | 0.5431 | 0.3749 |
-| **10** | 0.0145 | 0.0288 | 0.9723 | 0.3748 |
-| 11 | 0.0878 | 0.0102 | 0.0045 | 0.3714 |
+| layer | five basins, median | eighteen null basins, median | one-sided p (basins greater) | five basins, random-dictionary control | eighteen null basins, random-dictionary control | one-sided p under the random-dictionary control (basins greater) |
+|---|---|---|---|---|---|---|
+| 0 | 0.0305 | 0.0706 | 0.9999 | 0.3681 | 0.3702 | 0.9035 |
+| 1 | 0.0442 | 0.0718 | 0.9998 | 0.3672 | 0.3713 | 0.9748 |
+| 2 | 0.0254 | 0.0262 | 0.6808 | 0.3715 | 0.3734 | 0.5949 |
+| 3 | 0.0155 | 0.0149 | 0.5715 | 0.3733 | 0.3738 | 0.4450 |
+| 4 | 0.0149 | 0.0112 | 0.2016 | 0.3744 | 0.3755 | 0.5892 |
+| **5** | 0.0213 | 0.0106 | 0.0229 | 0.3730 | 0.3775 | 0.8184 |
+| **6** | 0.0149 | 0.0076 | 0.0151 | 0.3701 | 0.3744 | 0.7775 |
+| **7** | 0.0203 | 0.0120 | 0.0151 | 0.3717 | 0.3733 | 0.8792 |
+| **8** | 0.0135 | 0.0144 | 0.4856 | 0.3746 | 0.3722 | 0.4336 |
+| **9** | 0.0152 | 0.0172 | 0.5431 | 0.3749 | 0.3727 | 0.1298 |
+| **10** | 0.0145 | 0.0288 | 0.9723 | 0.3748 | 0.3714 | 0.2357 |
+| 11 | 0.0878 | 0.0102 | 0.0045 | 0.3714 | 0.3703 | 0.5203 |
 
 The five basins beat the eighteen at layers 5, 6 and 7 with one-sided p of
 0.023, 0.015 and 0.015, and lose at layer 10 with p of 0.033 in the reverse
@@ -160,6 +160,53 @@ original-noise terminals gives one-sided p of 2e-14, 7e-12 and 5e-12 at layers 5
 the language-versus-original-noise difference is real and large in the first half
 of the band and real and large in the opposite direction in the second half. A
 single verdict on this comparison would have been the wrong shape of answer.
+
+**The other comparison section 7.1 asks to be reported alongside, the same test
+under control (b), was omitted from the first version of this record and is now
+run. It separates nothing, which is the reassuring result.** Control (b) is the
+norm-matched random dictionary: every lens direction replaced by an independent
+random direction of the same length, at seeds 4242, 4243 and 4244. The
+specification's section 7.1 asks for "the same comparison against control (b)",
+meaning the same one-sided Mann-Whitney U test of the five basin representatives
+against the eighteen null-model representatives, carried out on the shares those
+same 23 states score against that random dictionary. The first version of this
+record's table printed the basins' control median alone, the scoring script
+recorded both families' control medians, and neither ran the test on them; the
+test was added on 2026-09-05 in review, is recorded as deviation 14 below, and
+is stored in `output/verdicts.json` under
+`H6.per_layer.<layer>.control_gaussian_p_greater` with the per-seed values
+beside it. Pooling the three seeds, which is the level the control medians in
+the table above are already reported at, gives 15 basin shares against 54 null
+shares at each layer. No band layer separates the two families in either
+direction: the one-sided p in the basins-greater direction is 0.8184 at layer 5,
+0.7775 at layer 6, 0.8792 at layer 7, 0.4336 at layer 8, 0.1298 at layer 9 and
+0.2357 at layer 10, and in the reverse direction the six run from 0.1237 to
+0.8733, so none of the twelve tests comes near the 0.05 threshold. Each family's
+median share against that dictionary lies between 0.3701 and 0.3775 at the six
+band layers on the 0-to-1 share scale, where against the real lens the same 23
+states' medians lie between 0.0076 and 0.0288. What that shows is inferred
+rather than established, and it is modest: a dictionary of 50,257 directions
+with no lens content in it ranks these 23 states indistinguishably, so the
+separation the real lens finds at layers 5, 6 and 7 is not something a
+dictionary of that size produces for these states by itself. Read seed by seed
+the control is unstable, and that is stated here rather than left to be found:
+within the single seed 4242 the eighteen nulls sit above the five basins at
+eight of the twelve layers with p below 0.05, band layers 5, 6 and 7 among them
+at 0.0034, 0.0034 and 0.0075, while seed 4244 puts the basins above the nulls at
+layer 6 at p of 0.0121. The individual control shares of these 23 states at the
+band layers all lie between 0.3493 and 0.4030, and the two families' medians
+there differ by at most 0.0045 on the 0-to-1 scale, which is about one part in
+eighty of the share itself, so a single seed's test is ranking differences in
+the third decimal place and three seeds are too few to read a per-seed p-value
+from, exactly as the same limitation is recorded for control (a) under H16
+below. **None of this bears on the H6 verdict, and that is the specification's
+arrangement rather than a choice made here.** Section 7.1's rule sentence scores
+the lens comparison alone and lists this one under "Reported alongside, not as
+part of the rule". Control (b) enters a scoring rule only in section 7.2, where
+the language median exceeding the language states' own control (b) median is the
+third of H16's three conditions. So H6 remains NOT SUPPORTED at three supporting
+band layers against a required four, unchanged and unchangeable by this
+comparison.
 
 **Read this verdict with the caveat the register already carries.** The 18-basin
 arm is the one lucier finding F4 records as mis-scaled. Measured here from the
@@ -935,6 +982,55 @@ interrupted one can destroy work already done. The committed shares file is a
 complete run: it holds all twelve layers for all eight arms, which the
 decomposition log shows end to end.
 
+**Three further provenance checks, added on second review, 2026-09-05.** Again
+none of them changes a number, and each closes a way for a future run to go
+wrong quietly. First, the readout stage now passes through the same pinned-lens
+gate as the decomposition, and the two share one copy of the pinned digest, in
+`lens_gate.py`, rather than the constant being written down twice. It matters
+because that stage mixes two things: the atom indices and weights the
+decomposition saved in `output/atom_records.json`, chosen against the dictionary
+the decomposition saw, and a dictionary this stage builds for itself, used to
+rank the atoms by the length each contributes and to do the clamping. Had the
+lens file changed between the two stages, those would have come from different
+dictionaries and the readout would have been meaningless while looking normal.
+Two checks now close that: the file must match the digest and byte count
+specification section 3 pins, and it must match the digest `output/shares.json`
+records for the decomposition that chose the atoms. The committed lens file
+passes the first, checked again for this note at
+`d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762` and
+12,980,477 bytes; the committed shares file predates the digest field, so the
+second check reports that it cannot be applied rather than passing silently.
+From the next run the two readout outputs, `output/top_atoms.json` and
+`output/clamping_check.json`, carry a metadata block naming the lens they were
+computed against, and the committed ones predate that block. Second, the scoring
+script's safety-bound check now counts the decompositions that carry the flag
+and the decompositions that do not, and refuses a file holding both. The check
+as first written turned itself on as soon as one entry carried the flag, and
+then reported it "present and clear in every arm, family and layer" while
+scoring the entries that lacked it and whose termination status was therefore
+unknown. That is exactly the shape a partial decomposition merged into the
+committed pre-flag file would have. The three cases are now distinct: every
+entry carrying the flag is a real check, no entry carrying it is the committed
+file's case and is reported as inapplicable, which is 672 arm-family-layer
+groups none of which carries the field, and a mixed file is refused with the
+arms, families and layers that lack it named in the refusal. Third, the scoring
+script now refuses to produce final verdicts, tables or a figure from a partial
+decomposition. Every verdict is scored on band layers 5 to 10, so a
+decomposition run over those six layers alone would have supplied every layer a
+verdict needs, and the script took its layer list from whichever layers the file
+happened to hold, so it would have emitted final-looking verdicts, tables and a
+figure with layers 0 to 4 and 11 absent and the file marked partial. It now
+requires layers 0 to 11 for every arm the scoring reads and refuses a file that
+marks itself `partial_run: true`. The option `--allow-partial` permits a
+diagnostic scoring, which writes every file under a `.partial.` name, stamps
+both JSON files, labels the figure and the comma-separated table, and rewrites
+each verdict string to say plainly that it is not a verdict. The committed
+shares file passes as complete: all twelve layers for every family in all seven
+arms the scoring reads, which is the lens and the six controls, checked at the
+top of this run's scoring log. Both facts about the input are now written into
+`output/verdicts.json` beside the verdicts, under `input_completeness` and
+`iteration_safety_bound_flag_coverage`.
+
 **The decomposition self-test.** Before every run, the decomposition is asked to
 recover a state deliberately built from five known dictionary atoms with positive
 weights. It recovers share 1.000000 using exactly those five atoms, while a
@@ -1277,6 +1373,28 @@ Recorded flat, whether or not they helped.
     layer 6 from 0.0039 to 0.0038, at layer 8 from 0.8270 to 0.8328 and at layer 10
     from 0.9982 to 0.9985. The reverse-direction p-value for H16 at layer 9 moved
     from 0.0858 to 0.0839 and is not quoted in this record.
+
+14. **One comparison the specification asks to be reported alongside H6 was
+    omitted from the first version of this record, and is now run.** Section 7.1
+    lists two readings to be reported beside the H6 rule and kept out of it: the
+    same five-against-eighteen comparison against control (b), the norm-matched
+    random dictionary, and the same comparison using all 125 language states
+    against all 125 original-noise states. The second was run and reported from
+    the start. The first was not: the scoring script recorded the two control
+    medians and never ran the test on them, so a reading the pre-registration
+    asked for was missing. It was added on 2026-09-05 in review and is reported
+    in the H6 section above and in the two new columns of that section's table.
+    Under section 9 item 5 a test added after the specification is exploratory
+    and carries no verdict; this one is not in that class, because the
+    specification asks for it by name, so what is recorded here is the omission
+    and its repair rather than an addition. It changes no verdict and could not:
+    section 7.1's rule scores the lens comparison alone. What it shows is that
+    the two families are indistinguishable against a dictionary with no lens
+    content in it, with the one-sided p between 0.1298 and 0.8792 across the six
+    band layers in the basins-greater direction and between 0.1237 and 0.8733 in
+    the reverse direction, none of them near the 0.05 threshold. No number
+    already in this record is superseded by it; two columns and one paragraph
+    are added.
 
 No reduction was taken under the specification's stopping rule, which triggers only
 on a projected cost above four hours: the run took 3,472 seconds of decomposition

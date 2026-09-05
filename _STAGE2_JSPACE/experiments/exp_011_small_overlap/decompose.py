@@ -10,7 +10,6 @@ Run: python3 decompose.py [--layers 0,1,...] [--quick]
 """
 import argparse
 import copy
-import hashlib
 import json
 import os
 import resource
@@ -27,14 +26,13 @@ OUT = os.path.join(HERE, "output")
 sys.path.insert(0, HERE)
 from jspace import (decompose, unit_rows, random_rotation,          # noqa: E402
                     gaussian_dictionary_like, K_ATOMS, _self_test)
+from lens_gate import LENS_PT, verify_lens                          # noqa: E402
 
-LENS_PT = "/home/user/ATR_research/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt"
-# The digest and size the specification's section 3 pins. They are checked here,
-# at the point where the lens is actually loaded for decomposition, and not only
-# in build_states.py: a lens file swapped between the two stages would otherwise be
-# analysed while shares.json inherited the earlier stage's attribution.
-LENS_SHA256 = "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762"
-LENS_BYTES = 12980477
+# The lens path, digest and size the specification's section 3 pins live in
+# lens_gate.py, and every stage that opens the lens calls the same gate: a lens
+# file swapped between two stages would otherwise be analysed while shares.json
+# inherited the earlier stage's attribution. The readouts stage shares this gate
+# rather than a second copy of the constant.
 N_LAYERS = 12
 ROT_SEEDS = [2026, 2027, 2028]
 GAUSS_SEEDS = [4242, 4243, 4244]
@@ -44,14 +42,6 @@ RECORD_ATOMS_FAMILIES = {"named", "lang", "clean_last"}
 
 def log(msg):
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
-
-
-def sha256(path):
-    h = hashlib.sha256()
-    with open(path, "rb") as fh:
-        for chunk in iter(lambda: fh.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
 
 
 def merge_into(base, new):
@@ -111,14 +101,7 @@ def main():
 
     from jlens.lens import JacobianLens
     from transformers import AutoModelForCausalLM
-    lens_sha, lens_bytes = sha256(LENS_PT), os.path.getsize(LENS_PT)
-    log(f"lens file {LENS_PT}")
-    log(f"  SHA-256 {lens_sha} ({lens_bytes} bytes)")
-    if lens_sha != LENS_SHA256 or lens_bytes != LENS_BYTES:
-        raise SystemExit(
-            "GATE FAILED: the lens file does not match the digest and size the "
-            f"specification pins ({LENS_SHA256}, {LENS_BYTES} bytes). Refusing to "
-            "decompose against an unattributed instrument.")
+    lens_id = verify_lens(log=log, stage="decomposition")
     lens = JacobianLens.load(LENS_PT)
     hf = AutoModelForCausalLM.from_pretrained("gpt2", dtype=torch.float32)
     W_U = hf.lm_head.weight.detach().clone().contiguous()      # [50257, 768]
@@ -141,10 +124,10 @@ def main():
     results = {"k_atoms": K_ATOMS, "layers": layers, "arms": {},
                "centring_check": centring,
                "rotation_seeds": ROT_SEEDS, "gaussian_seeds": GAUSS_SEEDS,
-               "lens_file": LENS_PT,
-               "lens_sha256": lens_sha,
-               "lens_bytes": lens_bytes,
-               "lens_digest_matches_spec": True,
+               "lens_file": lens_id["lens_file"],
+               "lens_sha256": lens_id["lens_sha256"],
+               "lens_bytes": lens_id["lens_bytes"],
+               "lens_digest_matches_spec": lens_id["lens_digest_matches_spec"],
                "partial_run": partial}
     atom_records = {}
     identity_check = {}

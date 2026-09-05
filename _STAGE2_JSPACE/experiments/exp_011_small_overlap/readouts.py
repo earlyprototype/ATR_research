@@ -25,8 +25,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "output")
 sys.path.insert(0, HERE)
 from jspace import decompose, unit_rows  # noqa: E402
+from lens_gate import (LENS_PT, check_against_decomposition,  # noqa: E402
+                       verify_lens)
 
-LENS_PT = "/home/user/ATR_research/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt"
 BAND = [5, 6, 7, 8, 9, 10]
 ALPHAS = [0.0, 0.5, 1.0, 2.0]
 CLAMP_STATES = ["prolet1000", "phaseA"]
@@ -37,9 +38,24 @@ def log(msg):
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
+# The pinned-lens gate, shared with decompose.py through lens_gate.py. This stage
+# loads the lens a second time, after the decomposition has already run, and it
+# mixes two things: the atom indices and coefficients saved in
+# output/atom_records.json, which were chosen against the dictionary the
+# decomposition saw, and this stage's own dictionary, which ranks the atoms by
+# contributed length and does the clamping. If the lens file changed in between,
+# those two would come from different dictionaries and the readout would be
+# meaningless. Two checks close that: the file must match the digest and size the
+# specification pins, and it must match the digest the shares file records for the
+# decomposition that produced the atom records.
+LENS_ID = verify_lens(log=log, stage="readouts")
+
 meta = json.load(open(os.path.join(OUT, "states_meta.json")))
 atom_records = json.load(open(os.path.join(OUT, "atom_records.json")))
 npz = np.load(os.path.join(OUT, "states.npz"))
+
+DECOMPOSITION_LENS_SHA256 = check_against_decomposition(
+    os.path.join(OUT, "shares.json"), LENS_ID, log=log)
 named_keys = meta["named"]["keys"]
 NIDX = {k: i for i, k in enumerate(named_keys)}
 LAYERS = sorted(int(x) for x in atom_records["named"].keys())
@@ -82,6 +98,13 @@ for l in LAYERS:
              "coefficient": float(c), "contributed_length": float(w)}
             for w, a, c in contrib[:TOP_N]]
     del D
+top_atoms["_meta"] = dict(
+    LENS_ID,
+    decomposition_lens_sha256=DECOMPOSITION_LENS_SHA256,
+    note=("The lens file was checked against the digest and size specification "
+          "section 3 pins before this readout was written, and against the digest "
+          "output/shares.json records for the decomposition that chose these "
+          "atoms. Every other key is a named state."))
 with open(os.path.join(OUT, "top_atoms.json"), "w") as fh:
     json.dump(top_atoms, fh, indent=1)
 for key in ("prolet1000", "phaseA", "phaseB", "pivotM"):
@@ -150,6 +173,12 @@ for l in BAND:
         log(f"  {key} L{l}: share {entry['share']:.4f}; causal top-1 at alpha "
             f"{[entry['alphas'][str(a)]['causal_top5'][0] for a in ALPHAS]}")
     del D, Dn
+clamp["_meta"] = dict(
+    LENS_ID,
+    decomposition_lens_sha256=DECOMPOSITION_LENS_SHA256,
+    note=("The lens file was checked against the digest and size specification "
+          "section 3 pins before this check was written. Every other key is a "
+          "clamped state."))
 with open(os.path.join(OUT, "clamping_check.json"), "w") as fh:
     json.dump(clamp, fh, indent=1)
 log("wrote top_atoms.json and clamping_check.json")

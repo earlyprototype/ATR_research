@@ -11,6 +11,86 @@
  "alpha": 0.05,
  "n_permutations": 10000,
  "permutation_seed": 11011,
+ "input_completeness": {
+  "layers_required": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "layers_present_in_lens_arm": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "arms_required": [
+   "lens",
+   "rot2026",
+   "rot2027",
+   "rot2028",
+   "gauss4242",
+   "gauss4243",
+   "gauss4244"
+  ],
+  "partial_run_flag_in_shares": null,
+  "gaps_by_arm": {},
+  "input_complete": true,
+  "allow_partial_used": false
+ },
+ "iteration_safety_bound_flag_coverage": {
+  "groups_with_flag": 0,
+  "groups_without_flag": 672,
+  "arms_without_flag": [
+   "gauss4242",
+   "gauss4243",
+   "gauss4244",
+   "lens",
+   "lens_centred",
+   "rot2026",
+   "rot2027",
+   "rot2028"
+  ],
+  "families_without_flag": [
+   "clean_last",
+   "clean_mean",
+   "directions",
+   "lang",
+   "named",
+   "noise17",
+   "nullold"
+  ],
+  "layers_without_flag": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ },
  "H6": {
   "basin_representatives": {
    " Anarch": "D04_equation",
@@ -74,7 +154,31 @@
     "p_less": 0.00020802995631370917,
     "basin_control_gaussian_median": 0.36808425,
     "basin_control_rotation_median": 0.01435828,
-    "null_control_gaussian_median": 0.370191455
+    "null_control_gaussian_median": 0.370191455,
+    "control_gaussian_p_greater": 0.9035475179179031,
+    "control_gaussian_p_less": 0.09896255105557861,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.35438889,
+      "null_median": 0.37182673499999996,
+      "p_greater": 0.9991381616095575,
+      "p_less": 0.0012481797378822552
+     },
+     "gauss4243": {
+      "basin_median": 0.37199199,
+      "null_median": 0.373341975,
+      "p_greater": 0.5430770602395317,
+      "p_less": 0.48563107373176023
+     },
+     "gauss4244": {
+      "basin_median": 0.36895287,
+      "null_median": 0.365981665,
+      "p_greater": 0.22300811316829625,
+      "p_less": 0.7983595352016404
+     }
+    }
    },
    "1": {
     "basin_median": 0.04416347,
@@ -110,7 +214,31 @@
     "p_less": 0.00035662278225207287,
     "basin_control_gaussian_median": 0.36723125,
     "basin_control_rotation_median": 0.018767,
-    "null_control_gaussian_median": 0.371287135
+    "null_control_gaussian_median": 0.371287135,
+    "control_gaussian_p_greater": 0.974807865228978,
+    "control_gaussian_p_less": 0.026060124149218208,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.3607657,
+      "null_median": 0.36719343,
+      "p_greater": 0.9813367410621415,
+      "p_less": 0.022853576629320336
+     },
+     "gauss4243": {
+      "basin_median": 0.37119395,
+      "null_median": 0.37668112,
+      "p_greater": 0.9132217896519955,
+      "p_less": 0.09946803768314066
+     },
+     "gauss4244": {
+      "basin_median": 0.36856562,
+      "null_median": 0.37035635,
+      "p_greater": 0.6807631727540194,
+      "p_less": 0.34556747600225857
+     }
+    }
    },
    "2": {
     "basin_median": 0.02536291,
@@ -146,7 +274,31 @@
     "p_less": 0.34556747600225857,
     "basin_control_gaussian_median": 0.37147933,
     "basin_control_rotation_median": 0.02089244,
-    "null_control_gaussian_median": 0.37335288499999997
+    "null_control_gaussian_median": 0.37335288499999997,
+    "control_gaussian_p_greater": 0.594850251964852,
+    "control_gaussian_p_less": 0.4107983441451996,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.36718661,
+      "null_median": 0.37208778,
+      "p_greater": 0.9903711848791941,
+      "p_less": 0.012125174596570478
+     },
+     "gauss4243": {
+      "basin_median": 0.37064153,
+      "null_median": 0.369369,
+      "p_greater": 0.24547534845017682,
+      "p_less": 0.7769918868317037
+     },
+     "gauss4244": {
+      "basin_median": 0.38563693,
+      "null_median": 0.37622902,
+      "p_greater": 0.11340604475615917,
+      "p_less": 0.9005319623168594
+     }
+    }
    },
    "3": {
     "basin_median": 0.01545173,
@@ -182,7 +334,31 @@
     "p_less": 0.4569229397604684,
     "basin_control_gaussian_median": 0.37327343,
     "basin_control_rotation_median": 0.01697391,
-    "null_control_gaussian_median": 0.37375825500000004
+    "null_control_gaussian_median": 0.37375825500000004,
+    "control_gaussian_p_greater": 0.44503933463933804,
+    "control_gaussian_p_less": 0.5607032803724292,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.3640607,
+      "null_median": 0.374836565,
+      "p_greater": 0.9975333590894231,
+      "p_less": 0.0033581978662070196
+     },
+     "gauss4243": {
+      "basin_median": 0.37327343,
+      "null_median": 0.370496365,
+      "p_greater": 0.20164046479835954,
+      "p_less": 0.818479003833695
+     },
+     "gauss4244": {
+      "basin_median": 0.38306189,
+      "null_median": 0.37866524,
+      "p_greater": 0.047163362952836636,
+      "p_less": 0.9602068412137063
+     }
+    }
    },
    "4": {
     "basin_median": 0.01488221,
@@ -218,7 +394,31 @@
     "p_less": 0.818479003833695,
     "basin_control_gaussian_median": 0.37439126,
     "basin_control_rotation_median": 0.01169515,
-    "null_control_gaussian_median": 0.375547465
+    "null_control_gaussian_median": 0.375547465,
+    "control_gaussian_p_greater": 0.5892016558548004,
+    "control_gaussian_p_less": 0.41646550013958883,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.35935485,
+      "null_median": 0.374999105,
+      "p_greater": 0.9955422152218492,
+      "p_less": 0.00585455734197153
+     },
+     "gauss4243": {
+      "basin_median": 0.37439126,
+      "null_median": 0.37358892,
+      "p_greater": 0.24547534845017682,
+      "p_less": 0.7769918868317037
+     },
+     "gauss4244": {
+      "basin_median": 0.38548201,
+      "null_median": 0.37973246,
+      "p_greater": 0.11340604475615917,
+      "p_less": 0.9005319623168594
+     }
+    }
    },
    "5": {
     "basin_median": 0.02134246,
@@ -254,7 +454,31 @@
     "p_less": 0.9813367410621415,
     "basin_control_gaussian_median": 0.37302566,
     "basin_control_rotation_median": 0.01319915,
-    "null_control_gaussian_median": 0.37751689499999996
+    "null_control_gaussian_median": 0.37751689499999996,
+    "control_gaussian_p_greater": 0.8183885920028764,
+    "control_gaussian_p_less": 0.18547551726654832,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.36031592,
+      "null_median": 0.37517094500000003,
+      "p_greater": 0.9975333590894231,
+      "p_less": 0.0033581978662070196
+     },
+     "gauss4243": {
+      "basin_median": 0.37318486,
+      "null_median": 0.37578558500000003,
+      "p_greater": 0.42848227287586554,
+      "p_less": 0.5996909269220483
+     },
+     "gauss4244": {
+      "basin_median": 0.38676023,
+      "null_median": 0.380622685,
+      "p_greater": 0.1815209961663051,
+      "p_less": 0.8374097298582424
+     }
+    }
    },
    "6": {
     "basin_median": 0.0149191,
@@ -290,7 +514,31 @@
     "p_less": 0.9878748254034295,
     "basin_control_gaussian_median": 0.370094,
     "basin_control_rotation_median": 0.01332188,
-    "null_control_gaussian_median": 0.37436223
+    "null_control_gaussian_median": 0.37436223,
+    "control_gaussian_p_greater": 0.777495640626632,
+    "control_gaussian_p_less": 0.22686388821572545,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.36060637,
+      "null_median": 0.37212953,
+      "p_greater": 0.9975333590894231,
+      "p_less": 0.0033581978662070196
+     },
+     "gauss4243": {
+      "basin_median": 0.370094,
+      "null_median": 0.37344295000000005,
+      "p_greater": 0.7063211388154181,
+      "p_less": 0.3192368272459805
+     },
+     "gauss4244": {
+      "basin_median": 0.38433427,
+      "null_median": 0.37902251,
+      "p_greater": 0.012125174596570478,
+      "p_less": 0.9903711848791941
+     }
+    }
    },
    "7": {
     "basin_median": 0.02027112,
@@ -326,7 +574,31 @@
     "p_less": 0.9878748254034295,
     "basin_control_gaussian_median": 0.37167567,
     "basin_control_rotation_median": 0.01398575,
-    "null_control_gaussian_median": 0.3733049
+    "null_control_gaussian_median": 0.3733049,
+    "control_gaussian_p_greater": 0.8792212461387015,
+    "control_gaussian_p_less": 0.12372714538238777,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.36217564,
+      "null_median": 0.37394923,
+      "p_greater": 0.9941454426580285,
+      "p_less": 0.007548515557668876
+     },
+     "gauss4243": {
+      "basin_median": 0.37167567,
+      "null_median": 0.37191069,
+      "p_greater": 0.7545246515498232,
+      "p_less": 0.26910160777437664
+     },
+     "gauss4244": {
+      "basin_median": 0.37858617,
+      "null_median": 0.376667885,
+      "p_greater": 0.20164046479835954,
+      "p_less": 0.818479003833695
+     }
+    }
    },
    "8": {
     "basin_median": 0.01354438,
@@ -362,7 +634,31 @@
     "p_less": 0.5430770602395317,
     "basin_control_gaussian_median": 0.37461573,
     "basin_control_rotation_median": 0.01372534,
-    "null_control_gaussian_median": 0.37220465999999996
+    "null_control_gaussian_median": 0.37220465999999996,
+    "control_gaussian_p_greater": 0.4335668515891303,
+    "control_gaussian_p_less": 0.5721490879413075,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.36990035,
+      "null_median": 0.37195435,
+      "p_greater": 0.6807631727540194,
+      "p_less": 0.34556747600225857
+     },
+     "gauss4243": {
+      "basin_median": 0.37592733,
+      "null_median": 0.36980789999999997,
+      "p_greater": 0.37267080745341613,
+      "p_less": 0.6544325239977413
+     },
+     "gauss4244": {
+      "basin_median": 0.37827617,
+      "null_median": 0.376561135,
+      "p_greater": 0.24547534845017682,
+      "p_less": 0.7769918868317037
+     }
+    }
    },
    "9": {
     "basin_median": 0.01520741,
@@ -398,7 +694,31 @@
     "p_less": 0.48563107373176023,
     "basin_control_gaussian_median": 0.37494314,
     "basin_control_rotation_median": 0.01317489,
-    "null_control_gaussian_median": 0.37265167
+    "null_control_gaussian_median": 0.37265167,
+    "control_gaussian_p_greater": 0.12977421193735644,
+    "control_gaussian_p_less": 0.873274436442501,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.37419742,
+      "null_median": 0.37265167,
+      "p_greater": 0.5430770602395317,
+      "p_less": 0.48563107373176023
+     },
+     "gauss4243": {
+      "basin_median": 0.37449002,
+      "null_median": 0.37163528999999995,
+      "p_greater": 0.1815209961663051,
+      "p_less": 0.8374097298582424
+     },
+     "gauss4244": {
+      "basin_median": 0.37816203,
+      "null_median": 0.374284385,
+      "p_greater": 0.11340604475615917,
+      "p_less": 0.9005319623168594
+     }
+    }
    },
    "10": {
     "basin_median": 0.01453209,
@@ -434,7 +754,31 @@
     "p_less": 0.03334423014056881,
     "basin_control_gaussian_median": 0.37475961,
     "basin_control_rotation_median": 0.01543814,
-    "null_control_gaussian_median": 0.37138351999999997
+    "null_control_gaussian_median": 0.37138351999999997,
+    "control_gaussian_p_greater": 0.2357258534194635,
+    "control_gaussian_p_less": 0.7687288073353211,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.36567682,
+      "null_median": 0.371652755,
+      "p_greater": 0.9247823115100003,
+      "p_less": 0.0867782103480044
+     },
+     "gauss4243": {
+      "basin_median": 0.37533826,
+      "null_median": 0.36971006,
+      "p_greater": 0.022853576629320336,
+      "p_less": 0.9813367410621415
+     },
+     "gauss4244": {
+      "basin_median": 0.37765288,
+      "null_median": 0.37299171,
+      "p_greater": 0.34556747600225857,
+      "p_less": 0.6807631727540194
+     }
+    }
    },
    "11": {
     "basin_median": 0.08780897,
@@ -470,7 +814,31 @@
     "p_less": 0.9966418021337929,
     "basin_control_gaussian_median": 0.37137175,
     "basin_control_rotation_median": 0.04836178,
-    "null_control_gaussian_median": 0.370330035
+    "null_control_gaussian_median": 0.370330035,
+    "control_gaussian_p_greater": 0.5203043727696143,
+    "control_gaussian_p_less": 0.48549380762548106,
+    "control_gaussian_n_basin": 15,
+    "control_gaussian_n_null": 54,
+    "control_gaussian_per_seed": {
+     "gauss4242": {
+      "basin_median": 0.3582015,
+      "null_median": 0.367702005,
+      "p_greater": 0.9445451573598027,
+      "p_less": 0.06481619067431424
+     },
+     "gauss4243": {
+      "basin_median": 0.37878907,
+      "null_median": 0.374612655,
+      "p_greater": 0.16259027014175756,
+      "p_less": 0.8550328390145324
+     },
+     "gauss4244": {
+      "basin_median": 0.3697269,
+      "null_median": 0.36668184,
+      "p_greater": 0.40030907307795177,
+      "p_less": 0.6273291925465839
+     }
+    }
    }
   },
   "band_layers_supporting": [
@@ -482,6 +850,12 @@
    10
   ],
   "verdict": "NOT SUPPORTED",
+  "control_gaussian_comparison": {
+   "what": "The same one-sided Mann-Whitney U test as the rule, five basin representatives against eighteen null-model representatives, applied to the norm-matched random-dictionary control shares of the same states, pooled over seeds 4242, 4243 and 4244 (15 against 54 shares). Specification section 7.1 asks for it as a reported comparison and keeps it out of the scoring rule.",
+   "scoring": false,
+   "band_layers_control_p_greater_below_alpha": [],
+   "band_layers_control_p_less_below_alpha": []
+  },
   "all_states_secondary": {
    "5": {
     "median_difference": 0.010925409999999998,

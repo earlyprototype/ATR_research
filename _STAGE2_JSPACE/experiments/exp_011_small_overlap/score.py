@@ -4,8 +4,14 @@ Reads output/shares.json and output/states_meta.json, applies exactly the rules
 written in _STAGE2_JSPACE/EXP_011_SPEC.md section 7, and writes the verdict JSON,
 the per-layer tables (JSON and CSV) and the figures.
 
-Run: python3 score.py
+The shares file must cover layers 0 to 11 for every arm the scoring reads and must
+not mark itself partial: no final verdict, table or figure is produced from a
+partial decomposition. Pass --allow-partial for a diagnostic scoring, whose four
+outputs are renamed and stamped partial and carry no verdict.
+
+Run: python3 score.py [--allow-partial]
 """
+import argparse
 import json
 import os
 import sys
@@ -38,34 +44,133 @@ def log(msg):
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
+ap = argparse.ArgumentParser(description="Score EXP_011 on the pre-registered rules.")
+ap.add_argument("--allow-partial", action="store_true",
+                help="score a shares file that does not cover all twelve layers. "
+                     "Diagnostic only: every file written is renamed and stamped "
+                     "partial, and no verdict it contains is final.")
+ARGS = ap.parse_args()
+
 shares = json.load(open(os.path.join(OUT, "shares.json")))
 meta = json.load(open(os.path.join(OUT, "states_meta.json")))
 LAYERS = sorted(int(x) for x in shares["arms"]["lens"]["lang"].keys())
 
+# ------------------------------------------------------- completeness gate ---
+# Every verdict in specification section 7 is scored on the six band layers, so a
+# shares file holding only layers 5 to 10 would let this script emit final
+# verdicts, tables and a figure from an admittedly partial decomposition. It must
+# not. The verdicts, the tables and the figure all cover layers 0 to 11, the
+# descriptive readings of section 7.5 item 1 name all twelve, and decompose.py
+# marks a run that did not cover them with partial_run: true. So require both: the
+# flag must not be set, and every arm the scoring reads must carry all twelve
+# layers for every family it holds. --allow-partial permits a diagnostic run, and
+# then every output is written under a different name and stamped.
+ALL_LAYERS = list(range(12))
+SCORING_ARMS = ["lens"] + ROT + GAUSS
+_gaps = {}
+for _arm in SCORING_ARMS:
+    if _arm not in shares["arms"]:
+        _gaps[_arm] = "the arm is absent from the file"
+        continue
+    for _fam, _layers in sorted(shares["arms"][_arm].items()):
+        _have = {int(x) for x in _layers}
+        _absent = [l for l in ALL_LAYERS if l not in _have]
+        if _absent:
+            _gaps.setdefault(_arm, {})[_fam] = _absent
+PARTIAL_FLAG = shares.get("partial_run")     # absent in files written before 2026-09-05
+INCOMPLETE = bool(_gaps) or PARTIAL_FLAG is True
+# The same gaps in one line, for a refusal a person has to read.
+_missing_layers = sorted({l for v in _gaps.values() if isinstance(v, dict)
+                          for ls in v.values() for l in ls})
+_gap_summary = ("no layer gaps; the file marks itself partial" if not _gaps else
+                "arms with gaps {}, layers missing somewhere {}, for example {}"
+                .format(sorted(_gaps), _missing_layers,
+                        {a: (v if isinstance(v, str) else
+                             {f: ls for f, ls in list(v.items())[:1]})
+                         for a, v in list(_gaps.items())[:1]}))
+COMPLETENESS = {
+    "layers_required": ALL_LAYERS,
+    "layers_present_in_lens_arm": LAYERS,
+    "arms_required": SCORING_ARMS,
+    "partial_run_flag_in_shares": PARTIAL_FLAG,
+    "gaps_by_arm": _gaps,
+    "input_complete": not INCOMPLETE,
+    "allow_partial_used": bool(ARGS.allow_partial),
+}
+if INCOMPLETE and not ARGS.allow_partial:
+    raise SystemExit(
+        "REFUSING TO SCORE: the shares file does not cover layers 0 to 11 for "
+        "every arm the scoring reads, or it is marked partial_run: {}. Gaps: {}. "
+        "Final verdicts, tables and figures are not produced from a partial "
+        "decomposition. Complete the decomposition, or pass --allow-partial for a "
+        "diagnostic scoring whose outputs are renamed and stamped partial."
+        .format(PARTIAL_FLAG, _gap_summary))
+if INCOMPLETE:
+    log("PARTIAL DIAGNOSTIC SCORING: the shares file is incomplete "
+        f"(partial_run flag {PARTIAL_FLAG}; {_gap_summary}). Every output is "
+        "written under a .partial. name and carries no verdict.")
+else:
+    log(f"completeness check: layers {LAYERS[0]} to {LAYERS[-1]} present for every "
+        f"family in all {len(SCORING_ARMS)} scoring arms, and the file is "
+        + ("not marked partial" if PARTIAL_FLAG is False else
+           "from before the partial_run flag existed, which decompose.py began "
+           "writing on 2026-09-05"))
+
+
+def outpath(name):
+    """Where an output goes: its own name, or a stamped one for a partial run."""
+    return os.path.join(OUT, name if not INCOMPLETE else name.replace(".", ".partial.", 1))
+
+
+# ------------------------------------------------ iteration-safety-bound gate ---
 # The decomposition's search carries a safety bound on the number of rounds. A
 # decomposition that stops only because it reached that bound has not met any real
 # stopping condition, so its share is not the number this experiment means to
-# report. Refuse to score a file containing one, and say plainly when the field is
-# absent, which is the case for any file written before 2026-09-05.
-_flag_present, _flagged = False, []
+# report. Refuse to score a file containing one. The field is absent from any file
+# written before 2026-09-05, and a file can also be mixed, because a partial
+# decomposition merges into an existing shares file entry by entry: the refreshed
+# entries then carry the flag and the untouched ones do not. Counting the two
+# cases apart is what keeps a mixed file from being reported as clear everywhere
+# while the untouched entries are scored with their termination status unknown.
+_with, _without, _flagged = [], [], []
 for _arm, _fams in shares["arms"].items():
     for _fam, _layers in _fams.items():
         for _l, _entry in _layers.items():
             if "hit_max_iter" in _entry:
-                _flag_present = True
+                _with.append((_arm, _fam, _l))
                 if any(_entry["hit_max_iter"]):
                     _flagged.append((_arm, _fam, _l, int(sum(_entry["hit_max_iter"]))))
+            else:
+                _without.append((_arm, _fam, _l))
 if _flagged:
     raise SystemExit(
         "REFUSING TO SCORE: {} arm-family-layer groups contain decompositions that "
         "stopped on the iteration safety bound rather than a real stopping "
         "condition, for example {}. Re-run the decomposition before scoring."
         .format(len(_flagged), _flagged[:5]))
+FLAG_COVERAGE = {"groups_with_flag": len(_with), "groups_without_flag": len(_without),
+                 "arms_without_flag": sorted({a for a, _, _ in _without}),
+                 "families_without_flag": sorted({f for _, f, _ in _without}),
+                 "layers_without_flag": sorted({int(l) for _, _, l in _without})}
+if _with and _without:
+    raise SystemExit(
+        "REFUSING TO SCORE: the shares file is mixed. {} arm-family-layer groups "
+        "carry the iteration-safety-bound flag and {} do not, so the ones that do "
+        "not have an unknown termination status and would be scored blind. The "
+        "groups lacking the flag are in arms {}, families {} and layers {}; for "
+        "example {}. This is what a partial decomposition merged into a file "
+        "written before 2026-09-05 looks like. Re-run the decomposition over the "
+        "arms, families and layers named above before scoring."
+        .format(len(_with), len(_without), FLAG_COVERAGE["arms_without_flag"],
+                FLAG_COVERAGE["families_without_flag"],
+                FLAG_COVERAGE["layers_without_flag"], _without[:5]))
 log("iteration-safety-bound check: " + (
-    "present and clear in every arm, family and layer" if _flag_present else
+    f"present and clear in every arm, family and layer ({len(_with)} groups)"
+    if _with else
     "the committed shares.json predates the flag and does not carry it, so this "
     "check cannot be applied to it; the flag was added to decompose.py on "
-    "2026-09-05 and applies from the next decomposition run"))
+    "2026-09-05 and applies from the next decomposition run "
+    f"({len(_without)} groups, none carrying the field)"))
 
 
 def arr(arm, fam, layer):
@@ -148,6 +253,11 @@ for label, arms in (("control_rotation_pooled", ROT), ("control_gaussian_pooled"
 
 verdicts = {"band_layers": BAND, "majority_needed": MAJORITY, "alpha": ALPHA,
             "n_permutations": N_PERM, "permutation_seed": PERM_SEED}
+# What the input was, recorded beside the verdicts it produced: which layers the
+# shares file covered, whether it marked itself partial, and whether every
+# decomposition in it carried the iteration-safety-bound flag.
+verdicts["input_completeness"] = COMPLETENESS
+verdicts["iteration_safety_bound_flag_coverage"] = FLAG_COVERAGE
 
 named_keys = meta["named"]["keys"]
 NIDX = {k: i for i, k in enumerate(named_keys)}
@@ -212,6 +322,37 @@ for l in LAYERS:
         "null_control_gaussian_median": float(np.median(
             np.concatenate([arr(a, "nullold", l)[oi] for a in GAUSS]))),
     }
+    # Specification section 7.1, reported alongside and explicitly not part of the
+    # rule: "the same comparison against control (b)". Control (b) is the
+    # norm-matched random dictionary at seeds 4242, 4243 and 4244. The same test
+    # the rule uses, a one-sided Mann-Whitney U test of the five basin
+    # representatives against the eighteen null representatives, is run here on
+    # those control shares: once on the three seeds pooled, which is the level the
+    # control medians beside it are already reported at, and once per seed. The
+    # first version of this script recorded only the two control medians and never
+    # ran the test, which is recorded as a deviation in the results record. It
+    # cannot move the H6 verdict, because section 7.1's rule sentence scores the
+    # lens comparison alone; control (b) enters a scoring rule only in section 7.2,
+    # as the third condition of H16.
+    xb = np.concatenate([arr(a, "lang", l)[li] for a in GAUSS])
+    yb = np.concatenate([arr(a, "nullold", l)[oi] for a in GAUSS])
+    per_seed_b = {}
+    for a in GAUSS:
+        xs, ys = arr(a, "lang", l)[li], arr(a, "nullold", l)[oi]
+        per_seed_b[a] = {
+            "basin_median": float(np.median(xs)),
+            "null_median": float(np.median(ys)),
+            "p_greater": float(mannwhitneyu(xs, ys, alternative="greater").pvalue),
+            "p_less": float(mannwhitneyu(xs, ys, alternative="less").pvalue)}
+    h6["per_layer"][str(l)].update({
+        "control_gaussian_p_greater": float(
+            mannwhitneyu(xb, yb, alternative="greater").pvalue),
+        "control_gaussian_p_less": float(
+            mannwhitneyu(xb, yb, alternative="less").pvalue),
+        "control_gaussian_n_basin": int(len(xb)),
+        "control_gaussian_n_null": int(len(yb)),
+        "control_gaussian_per_seed": per_seed_b,
+    })
 hits_g = [l for l in BAND if h6["per_layer"][str(l)]["basin_median"] > h6["per_layer"][str(l)]["null_median"]
           and h6["per_layer"][str(l)]["p_greater"] < ALPHA]
 hits_l = [l for l in BAND if h6["per_layer"][str(l)]["null_median"] > h6["per_layer"][str(l)]["basin_median"]
@@ -220,6 +361,21 @@ h6["band_layers_supporting"] = hits_g
 h6["band_layers_refuting"] = hits_l
 h6["verdict"] = ("SUPPORTED" if len(hits_g) >= MAJORITY else
                  "REFUTED" if len(hits_l) >= MAJORITY else "NOT SUPPORTED")
+# Reported alongside, not scoring: the same five-against-eighteen test carried out
+# on the control (b) shares, summarised over the band.
+h6["control_gaussian_comparison"] = {
+    "what": ("The same one-sided Mann-Whitney U test as the rule, five basin "
+             "representatives against eighteen null-model representatives, applied "
+             "to the norm-matched random-dictionary control shares of the same "
+             "states, pooled over seeds 4242, 4243 and 4244 (15 against 54 "
+             "shares). Specification section 7.1 asks for it as a reported "
+             "comparison and keeps it out of the scoring rule."),
+    "scoring": False,
+    "band_layers_control_p_greater_below_alpha": [
+        l for l in BAND if h6["per_layer"][str(l)]["control_gaussian_p_greater"] < ALPHA],
+    "band_layers_control_p_less_below_alpha": [
+        l for l in BAND if h6["per_layer"][str(l)]["control_gaussian_p_less"] < ALPHA],
+}
 # reported alongside, not scoring: all 125 against all 125
 h6["all_states_secondary"] = {}
 rng = np.random.default_rng(PERM_SEED)
@@ -234,6 +390,11 @@ for l in BAND:
         "nullold_median": float(np.median(arr("lens", "nullold", l)))}
 verdicts["H6"] = h6
 log(f"  H6 verdict: {h6['verdict']} (supporting layers {hits_g}, refuting {hits_l})")
+log("  H6 under control (b), reported not scoring: band layers with the basins "
+    f"above the nulls at p below {ALPHA}: "
+    f"{h6['control_gaussian_comparison']['band_layers_control_p_greater_below_alpha']}; "
+    "below them: "
+    f"{h6['control_gaussian_comparison']['band_layers_control_p_less_below_alpha']}")
 
 # ------------------------------------------------------------------ H16 ------
 log("H16: language terminals against the run-17 matched-scale noise terminals")
@@ -447,20 +608,39 @@ verdicts["descriptive"] = {
                                "and layers 0 to 10 are intermediate residuals of one "
                                "loop step rather than either phase re-probed."),
 }
-with open(os.path.join(OUT, "per_layer_tables.json"), "w") as fh:
+# A diagnostic run on an incomplete shares file writes nothing that could be read
+# as final: every file goes to its own .partial. name, both JSON files carry a
+# stamp, and each hypothesis's verdict string says plainly that it is not one.
+if INCOMPLETE:
+    stamp = {"partial_diagnostic_scoring": True,
+             "why": ("The shares file this was scored from does not cover layers 0 "
+                     "to 11 for every scoring arm, or marks itself partial. Nothing "
+                     "here is a verdict on the pre-registered rules."),
+             "input_completeness": COMPLETENESS}
+    verdicts["PARTIAL_DIAGNOSTIC_SCORING"] = stamp
+    table["_partial_diagnostic_scoring"] = stamp
+    for _h in ("H6", "H16", "H16a", "H16b"):
+        verdicts[_h]["verdict"] = (
+            f"NO VERDICT, PARTIAL INPUT ({verdicts[_h]['verdict']} computed for "
+            "diagnosis only)")
+with open(outpath("per_layer_tables.json"), "w") as fh:
     json.dump(table, fh, indent=1)
-with open(os.path.join(OUT, "verdicts.json"), "w") as fh:
+with open(outpath("verdicts.json"), "w") as fh:
     json.dump(verdicts, fh, indent=1)
 
-rows = ["arm,family,layer,n,median_share,q25,q75,mean_share,median_n_atoms"]
-for arm in sorted(table):
+rows = ([] if not INCOMPLETE else
+        ["# PARTIAL DIAGNOSTIC SCORING: the shares file did not cover layers 0 to "
+         "11 for every scoring arm. Not a verdict table."])
+rows.append("arm,family,layer,n,median_share,q25,q75,mean_share,median_n_atoms")
+# Keys beginning with an underscore are stamps, not arms, so they carry no rows.
+for arm in sorted(k for k in table if not k.startswith("_")):
     for fam in sorted(table[arm]):
         for l in LAYERS:
             e = table[arm][fam][str(l)]
             rows.append(f"{arm},{fam},{l},{e['n']},{e['median']:.6f},{e['q25']:.6f},"
                         f"{e['q75']:.6f},{e.get('mean', float('nan')):.6f},"
                         f"{e.get('median_n_atoms', float('nan')):.1f}")
-with open(os.path.join(OUT, "per_layer_shares.csv"), "w") as fh:
+with open(outpath("per_layer_shares.csv"), "w") as fh:
     fh.write("\n".join(rows) + "\n")
 
 # --------------------------------------------------------------- figures ----
@@ -525,7 +705,12 @@ ax.set_title("Against the rotated-lens chance level\n(above 0 = more lens-expres
              fontsize=9)
 ax.legend(fontsize=7)
 ax.grid(alpha=0.25)
+if INCOMPLETE:
+    fig.suptitle("PARTIAL DIAGNOSTIC SCORING, not a verdict figure: the shares "
+                 "file did not cover layers 0 to 11 for every scoring arm",
+                 fontsize=9, color="#b22222")
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "exp011_share_curves.png"), dpi=150)
-log("wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, "
-    "exp011_share_curves.png")
+fig.savefig(outpath("exp011_share_curves.png"), dpi=150)
+log("wrote " + ", ".join(os.path.basename(outpath(n)) for n in (
+    "per_layer_tables.json", "verdicts.json", "per_layer_shares.csv",
+    "exp011_share_curves.png")))
