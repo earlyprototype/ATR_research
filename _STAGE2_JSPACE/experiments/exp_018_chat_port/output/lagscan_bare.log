@@ -1,0 +1,3 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 25599.62it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.   A08_linguistics      k=1:0.6249  k=2:0.9039  k=3:0.6513  k=4:0.8553  k=5:0.7115  k=6:0.7943  k=7:0.7399  k=8:0.7523   A14_kant             k=1:0.8699  k=2:0.9339  k=3:0.8688  k=4:0.9473  k=5:0.8805  k=6:0.9206  k=7:0.8840  k=8:0.9275   A15_sartre           k=1:0.6065  k=2:0.9146  k=3:0.6569  k=4:0.8640  k=5:0.6920  k=6:0.8174  k=7:0.7396  k=8:0.7771
+wrote /home/user/wt/exp018/_STAGE2_JSPACE/experiments/exp_018_chat_port/output/lagscan_bare.json

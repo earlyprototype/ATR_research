@@ -77,9 +77,9 @@ def jspace_table() -> None:
     v = d["verdict"]
     seeds = d["rotation_seeds"]
     print("\n### H19b: how much of each state the lens can express\n")
-    head = ("| Layer | In the band? | Settled median | Ordinary median | "
+    head = ("| Layer | In the band? | Terminal median | Ordinary median | "
             "Difference | Permutation p | ")
-    head += " | ".join(f"Settled, rotated lens (seed {s})" for s in seeds) + " | "
+    head += " | ".join(f"Terminal, rotated lens (seed {s})" for s in seeds) + " | "
     head += " | ".join(f"Ordinary, rotated lens (seed {s})" for s in seeds) + " |"
     print(head)
     print("|---" * (6 + 2 * len(seeds)) + "|")
@@ -92,7 +92,7 @@ def jspace_table() -> None:
         row += " | ".join(f"{e[f'median_settled_rot{s}']:.4f}" for s in seeds) + " | "
         row += " | ".join(f"{e[f'median_clean_rot{s}']:.4f}" for s in seeds) + " |"
         print(row)
-    print(f"\nBand layers where the settled median is below the ordinary median: "
+    print(f"\nBand layers where the terminal median is below the ordinary median: "
           f"**{v['band_layers_below']} of {v['n_band_layers']}**. "
           f"Of those, with a permutation p-value below 0.05: "
           f"**{v['band_layers_below_p05']}**. "
@@ -102,7 +102,8 @@ def jspace_table() -> None:
     for layer, row in d["layers"].items():
         if "exact_check" in row:
             for cond, ex in row["exact_check"].items():
-                print(f"\nApproximation check at layer {layer}, {cond} states: the "
+                label = {"settled": "terminal", "clean": "ordinary"}[cond]
+            print(f"\nApproximation check at layer {layer}, {label} states: the "
                       f"largest difference between the share computed over the "
                       f"whole 151,936-word-piece vocabulary and the share computed "
                       f"over the 4,096 best-correlating directions is "

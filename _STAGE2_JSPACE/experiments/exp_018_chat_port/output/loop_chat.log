@@ -6,3 +6,10 @@ loaded rss=1.23 GB peak=1.69 GB
 [3/25] A15_sartre           T= 21 lock=None iters=150 collapse_all=0.8330 collapse_ex0=0.8675 top='\n' (829s, 5.53 s/pass, rss=3.7 GB, free=8.8 GB)
 [4/25] A17_marx             T= 22 lock=None iters=150 collapse_all=0.6971 collapse_ex0=0.7192 top='\n' (609s, 4.06 s/pass, rss=3.7 GB, free=10.2 GB)
 [5/25] A21_dickens          T= 21 lock=None iters=150 collapse_all=0.7669 collapse_ex0=0.7827 top='\n' (466s, 3.11 s/pass, rss=3.7 GB, free=11.5 GB)
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  82%|████████▏ | 254/311 [00:00<00:00, 2535.07it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 2757.76it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+loaded rss=1.23 GB peak=1.69 GB
+resume: 5 done, 0 to go
+
+arm chat done in 0.1 min, peak=1.69 GB
+ALL LOOPS DONE
