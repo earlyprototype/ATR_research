@@ -1,11 +1,13 @@
 """Second clean-accuracy pilot for EXP_016: more two-hop items, and the
 country gate arithmetic. No swaps are performed here."""
 import json, sys, time, torch
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import (load_model, single_token_id, first_token_id, clean_run,
                         rank_of)
-OUT = "/home/user/wt/exp016/experiments/exp_016_swaps_small/output/pilot_clean2.json"
-P1 = json.load(open("/home/user/wt/exp016/experiments/exp_016_swaps_small/output/pilot_clean.json"))
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, "output", "pilot_clean2.json")
+P1 = json.load(open(os.path.join(HERE, "output", "pilot_clean.json")))
 t0 = time.time(); model = load_model()
 
 EXTRA = [

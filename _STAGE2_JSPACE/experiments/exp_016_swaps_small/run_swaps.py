@@ -7,12 +7,13 @@ output/records_<battery>.csv and a small provenance JSON beside it.
 """
 from __future__ import annotations
 import csv, json, sys, time, torch
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import (load_model, load_lens, lens_vectors, LENS_SHA256,
                         JLENS_COMMIT)
 from swap_engine import SwapPlan, random_pair, run_plan
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 LAYERS = list(range(3, 11))
 SETS_FULL = [(l,) for l in LAYERS] + [(5,6),(6,7),(7,8),(8,9),(6,7,8),(7,8,9)]
 SETS_B2 = [(l,) for l in LAYERS] + [(6,7,8),(7,8,9)]

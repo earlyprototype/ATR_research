@@ -19,8 +19,11 @@ torch.set_num_threads(1)
 os.environ.setdefault("HF_HUB_OFFLINE", "1")
 os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
-LENS_PATH = ("/home/user/ATR_research/_STAGE2_JSPACE/artifacts/"
-             "jlens_gpt2_small_neuronpedia.pt")
+# The lens lives in the gitignored artifacts folder of the Stage 2 tree that
+# contains this script; EXP016_LENS_PATH overrides it for another checkout.
+LENS_PATH = os.environ.get("EXP016_LENS_PATH") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    "artifacts", "jlens_gpt2_small_neuronpedia.pt")
 LENS_SHA256 = "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762"
 JLENS_COMMIT = "581d398613e5602a5af361e1c34d3a92ea82ba8e"
 

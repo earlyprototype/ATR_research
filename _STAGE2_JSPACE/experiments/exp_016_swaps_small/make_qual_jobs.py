@@ -1,10 +1,11 @@
 """Pick the qualitative examples to re-run: for each battery, the tuned
 setting and a handful of items, chosen to include successes and failures."""
 import csv, json, sys
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import analyse
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 jobs = []
 for b in ("h17", "h17a", "h17b"):
     s = json.load(open(D + f"output/summary_{b}.json"))

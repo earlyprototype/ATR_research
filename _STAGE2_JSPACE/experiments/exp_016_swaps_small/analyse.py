@@ -3,9 +3,10 @@ reports. Applies the pre-registered tuning-then-held-out selection rule from
 section 4 of `_STAGE2_JSPACE/EXP_016_SPEC.md`."""
 from __future__ import annotations
 import csv, json, sys
+import os
 from collections import defaultdict
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 SCORE = {"h17": "in_top5", "h17a": "in_top5", "h17b": "is_top1"}
 
 

@@ -5,10 +5,10 @@ No swaps are performed here. Every selection rule is the one written into
 so the committed battery files are reproducible from the pilot outputs.
 """
 import json, sys
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import load_model, single_token_id, first_token_id
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 P1 = json.load(open(D + "output/pilot_clean.json"))
 P2 = json.load(open(D + "output/pilot_clean2.json"))
 model = load_model()

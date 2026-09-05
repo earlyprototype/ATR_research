@@ -1,12 +1,13 @@
 """Two small figures for the EXP_016 results record: success rate against
 layer for each battery, and the lens arm against both controls."""
 import json, sys
+import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 TITLES = {"h17": "H17 report swap: target word enters the top five",
           "h17a": "H17a country swap: target answer enters the top five",
           "h17b": "H17b two-step swap: answer becomes the alternative"}

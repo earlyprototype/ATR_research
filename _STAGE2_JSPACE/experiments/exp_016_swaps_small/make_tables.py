@@ -1,11 +1,12 @@
 """Print the markdown tables used in RESULTS_EXP016.md, straight from the
 record files, so that no number in the results record is typed by hand."""
 import json, sys
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import analyse
 from collections import defaultdict
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 NAME = {"lens": "lens swap", "randdir": "control A (random directions)",
         "randnorm": "control B (size matched)"}
 

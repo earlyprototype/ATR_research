@@ -3,11 +3,12 @@ model produces before and after a swap, so that a reader without a
 machine-learning background can see what changed."""
 from __future__ import annotations
 import json, sys, torch
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import load_model, load_lens, lens_vectors
 from swap_engine import SwapPlan, random_pair, run_plan
 
-D = "/home/user/wt/exp016/experiments/exp_016_swaps_small/"
+D = os.path.dirname(os.path.abspath(__file__)) + "/"
 LAYERS = list(range(3, 11))
 model = load_model(); lens = load_lens()
 

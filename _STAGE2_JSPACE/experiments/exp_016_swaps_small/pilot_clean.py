@@ -6,12 +6,13 @@ model can actually answer. Its output is the gate recorded in
 `_STAGE2_JSPACE/EXP_016_SPEC.md`.
 """
 import json, sys, time, torch
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import (load_model, load_lens, lens_vectors, lens_logits_at,
                         single_token_id, first_token_id, clean_topk, clean_run,
                         rank_of)
 
-OUT = "/home/user/wt/exp016/experiments/exp_016_swaps_small/output/pilot_clean.json"
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "pilot_clean.json")
 t_start = time.time()
 model = load_model()
 lens = load_lens()

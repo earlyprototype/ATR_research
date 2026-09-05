@@ -6,7 +6,8 @@ the residual stream lies in the plane spanned by the two lens vectors, and
 (4) the batched path agrees with a single-element path.
 """
 import sys, torch
-sys.path.insert(0, "/home/user/wt/exp016/experiments/exp_016_swaps_small")
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import load_model, load_lens, lens_vectors
 from swap_engine import SwapPlan, pinv2, random_pair, run_plan
 
