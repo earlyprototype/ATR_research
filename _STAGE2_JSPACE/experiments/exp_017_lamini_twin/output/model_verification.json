@@ -1,0 +1,310 @@
+{
+  "experiment": "EXP_017",
+  "generated": "2026-09-05T10:48:19Z",
+  "versions": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.16.1",
+    "python": "3.11.15",
+    "transformer_lens": "3.8.1",
+    "jlens": "0.1.0"
+  },
+  "config_comparison": {
+    "n_fields": 41,
+    "n_identical": 37,
+    "differing": {
+      "_name_or_path": {
+        "twin": "MBZUAI/LaMini-GPT-124M",
+        "base": "gpt2"
+      },
+      "dtype": {
+        "twin": "float32",
+        "base": null
+      },
+      "use_cache": {
+        "twin": false,
+        "base": true
+      },
+      "vocab_size": {
+        "twin": 50258,
+        "base": 50257
+      }
+    },
+    "architecture_fields": {
+      "n_layer": {
+        "twin": 12,
+        "base": 12
+      },
+      "n_embd": {
+        "twin": 768,
+        "base": 768
+      },
+      "n_head": {
+        "twin": 12,
+        "base": 12
+      },
+      "n_positions": {
+        "twin": 1024,
+        "base": 1024
+      },
+      "n_ctx": {
+        "twin": 1024,
+        "base": 1024
+      },
+      "vocab_size": {
+        "twin": 50258,
+        "base": 50257
+      },
+      "activation_function": {
+        "twin": "gelu_new",
+        "base": "gelu_new"
+      },
+      "layer_norm_epsilon": {
+        "twin": 1e-05,
+        "base": 1e-05
+      },
+      "architectures": {
+        "twin": [
+          "GPT2LMHeadModel"
+        ],
+        "base": [
+          "GPT2LMHeadModel"
+        ]
+      },
+      "model_type": {
+        "twin": "gpt2",
+        "base": "gpt2"
+      },
+      "scale_attn_weights": {
+        "twin": true,
+        "base": true
+      },
+      "reorder_and_upcast_attn": {
+        "twin": false,
+        "base": false
+      },
+      "scale_attn_by_inverse_layer_idx": {
+        "twin": false,
+        "base": false
+      }
+    }
+  },
+  "files": {
+    "MBZUAI/LaMini-GPT-124M": [
+      {
+        "file": "added_tokens.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 21,
+        "sha256": "89fb9810499a987be5ae390c02f096ad47ade990fe2e7a4e8ea2f2e3487ed232"
+      },
+      {
+        "file": "config.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 952,
+        "sha256": "8f70dfc1ba0cc621f9065ce6c39f70f70eb9360c9577c1a3d65c718779d0c7bd"
+      },
+      {
+        "file": "generation_config.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 119,
+        "sha256": "21fedebc67b68392cd4ccf54f640e7cfcef2de8ec2f55d72bba5de14c41621d6"
+      },
+      {
+        "file": "merges.txt",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 456356,
+        "sha256": "fe36cab26d4f4421ed725e10a2e9ddb7f799449c603a96e7f29b5a3c82a95862"
+      },
+      {
+        "file": "model.safetensors",
+        "revision": "fc740804ff49f50fe3ef871b31eb2d5a5584132c",
+        "bytes": 510362696,
+        "sha256": "0f3781c76d1b983cd98824c490e08da956a9dc6ca33bdd0a54986ebabedc1d91"
+      },
+      {
+        "file": "pytorch_model.bin",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 510398653,
+        "sha256": "a99218a6f54834c149da8d175c3dd5b2bef18436eced7136caef52bb02773720"
+      },
+      {
+        "file": "special_tokens_map.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 462,
+        "sha256": "6698088ab5d3196219bc68cf0c4d47a2820a0a3ca2047c6e242c2dea1855f668"
+      },
+      {
+        "file": "tokenizer.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 2107805,
+        "sha256": "6bf41b63e5bdd5d0451c4d75cb32c29e4ecaa1a3d4761bc4b33780c4d2faffb5"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 748,
+        "sha256": "d05008cf96b2237a3d47b6d2d8e232366b2467ddd4e706d66dd629d07812b831"
+      },
+      {
+        "file": "vocab.json",
+        "revision": "5c67c8c03c08e82d6138ce2a1eddf5317fac3a6b",
+        "bytes": 798156,
+        "sha256": "3ba3c3109ff33976c4bd966589c11ee14fcaa1f4c9e5e154c2ed7f99d80709e7"
+      }
+    ],
+    "gpt2": [
+      {
+        "file": "config.json",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 665,
+        "sha256": "0daed7749b4f02b8f76240d5444551d7b08712dab4d0adb8239c56ba823bb7b4"
+      },
+      {
+        "file": "generation_config.json",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 124,
+        "sha256": "ed0b32ac72c0f5f44a719abb2d7786ea5146c871f83717b7f2018065954de02b"
+      },
+      {
+        "file": "merges.txt",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 456318,
+        "sha256": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+      },
+      {
+        "file": "model.safetensors",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 548105171,
+        "sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+      },
+      {
+        "file": "tokenizer.json",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 1355256,
+        "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 26,
+        "sha256": "5e04eb606e3a1583530a42e36c2a6b6615c86f34fe77e44d9ddeb43ff940931f"
+      },
+      {
+        "file": "vocab.json",
+        "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "bytes": 1042301,
+        "sha256": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783"
+      }
+    ]
+  },
+  "state_dict": {
+    "twin_n_tensors": 149,
+    "base_n_tensors": 149,
+    "keys_only_in_twin": [],
+    "keys_only_in_base": [],
+    "shape_mismatches": {
+      "transformer.wte.weight": [
+        [
+          50258,
+          768
+        ],
+        [
+          50257,
+          768
+        ]
+      ],
+      "lm_head.weight": [
+        [
+          50258,
+          768
+        ],
+        [
+          50257,
+          768
+        ]
+      ]
+    },
+    "twin_params": 124440576,
+    "base_params": 124439808
+  },
+  "tokenizer": {
+    "twin_vocab_size": 50258,
+    "base_vocab_size": 50257,
+    "identical_on_probe": true
+  },
+  "weight_drift_relative_frobenius": {
+    "n_shared_tensors": 147,
+    "mean": 0.031143,
+    "max": [
+      "transformer.h.0.ln_1.bias",
+      0.190163
+    ],
+    "min": [
+      "transformer.h.4.mlp.c_proj.bias",
+      0.00399
+    ],
+    "per_tensor_sample": {
+      "transformer.h.0.attn.c_attn.bias": 0.036172,
+      "transformer.h.0.attn.c_attn.weight": 0.023209,
+      "transformer.h.0.attn.c_proj.bias": 0.007046,
+      "transformer.h.0.attn.c_proj.weight": 0.022379,
+      "transformer.h.0.ln_1.bias": 0.190163,
+      "transformer.h.0.ln_1.weight": 0.040169,
+      "transformer.h.0.ln_2.bias": 0.031068,
+      "transformer.h.0.ln_2.weight": 0.006135
+    },
+    "wte": null,
+    "wpe": 0.014004
+  },
+  "instruction_sanity": {
+    "template": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nExplain in one sentence why the sky appears blue.\n\n### Response:",
+    "instruction": "Explain in one sentence why the sky appears blue.",
+    "decoding": "greedy, max_new_tokens=60, do_sample=False",
+    "response_verbatim": "Blue appears when the sun is shining and the sky is blue.",
+    "full_output_verbatim": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nExplain in one sentence why the sky appears blue.\n\n### Response:Blue appears when the sun is shining and the sky is blue.",
+    "base_response_verbatim": "\n\nThe sky appears blue.\n\n### Response:\n\nThe sky appears blue.\n\n### Response:\n\nThe sky appears blue.\n\n### Response:\n\nThe sky appears blue.\n\n### Response:\n\nThe sky appears blue.\n\n### Response:"
+  },
+  "transformerlens_conversion": {
+    "twin": {
+      "hf_logits_shape": [
+        9,
+        50258
+      ],
+      "hooked_logits_shape": [
+        9,
+        50258
+      ],
+      "compared_vocab_columns": 50258,
+      "max_abs_logit_difference": 26.624902725219727,
+      "hf_top1_last_position": " it",
+      "hooked_top1_last_position": " it",
+      "top1_agree": true,
+      "cfg": {
+        "n_layers": 12,
+        "d_model": 768,
+        "d_vocab": 50258,
+        "n_heads": 12
+      }
+    },
+    "base": {
+      "hf_logits_shape": [
+        9,
+        50257
+      ],
+      "hooked_logits_shape": [
+        9,
+        50257
+      ],
+      "compared_vocab_columns": 50257,
+      "max_abs_logit_difference": 111.3336410522461,
+      "hf_top1_last_position": " the",
+      "hooked_top1_last_position": " the",
+      "top1_agree": true,
+      "cfg": {
+        "n_layers": 12,
+        "d_model": 768,
+        "d_vocab": 50257,
+        "n_heads": 12
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+base lens: {'n_prompts': 277, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+twin lens: {'n_prompts': 5, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 6380.64it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+twin: per-layer states read, rescale factor mean 0.269268
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights:  20%|██        | 30/148 [00:00<00:00, 281.96it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 961.91it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+base: per-layer states read, rescale factor mean 0.281368

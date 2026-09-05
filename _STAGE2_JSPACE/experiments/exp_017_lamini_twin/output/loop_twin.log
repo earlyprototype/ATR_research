@@ -1,0 +1,42 @@
+EXP_017 loop | model=twin (MBZUAI/LaMini-GPT-124M) threads=1 seed=42
+params: {'layer_start': 0, 'layer_end': 11, 'max_iter': 1000, 'threshold': 0.999, 'patience': 3, 'check_every': 10, 'check_start': 100, 'gate_lag': 2, 'renorm': 'seed_j'}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 17578.51it/s]
+/home/user/wt/exp017/_STAGE2_JSPACE/experiments/exp_017_lamini_twin/run_loop.py:54: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok,
+Loaded pretrained model gpt2 into HookedTransformer
+loaded: n_layers=12 d_model=768 d_vocab=50258
+natural entry sizes recorded -> natural_resid_norms_twin.json
+/home/user/wt/exp017/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [ 1/25] A08_linguistics  lock=  120 conv=True  top1=' anarchism'   p=0.108 loud=59.6x 37s
+  [ 2/25] A14_kant         lock=  120 conv=True  top1=' anarchism'   p=0.117 loud=65.3x 38s
+  [ 3/25] A15_sartre       lock=  120 conv=True  top1=' anarchism'   p=0.119 loud=67.2x 39s
+  [ 4/25] A17_marx         lock=  120 conv=True  top1=' anarchism'   p=0.116 loud=63.9x 35s
+  [ 5/25] A21_dickens      lock=  120 conv=True  top1=' anarchism'   p=0.118 loud=70.9x 42s
+  [ 6/25] E01_politics     lock=  120 conv=True  top1=' anarchism'   p=0.102 loud=58.7x 46s
+  [ 7/25] D01_water        lock=  120 conv=True  top1=' anarchism'   p=0.091 loud=60.0x 38s
+  [ 8/25] A01_physics      lock=  120 conv=True  top1=' anarchism'   p=0.104 loud=57.3x 38s
+  [ 9/25] B01_napoleon     lock=  120 conv=True  top1=' anarchism'   p=0.109 loud=58.3x 38s
+  [10/25] C01_jack_jill    lock=  120 conv=True  top1=' anarchism'   p=0.114 loud=63.1x 35s
+  [11/25] F01_anger        lock=  120 conv=True  top1=' anarchism'   p=0.117 loud=66.8x 36s
+  [12/25] G01_punctuation  lock=  120 conv=True  top1=' anarchism'   p=0.122 loud=73.8x 42s
+  [13/25] E02_tech         lock=  120 conv=True  top1=' anarchism'   p=0.113 loud=60.2x 40s
+  [14/25] D02_periodic     lock=  120 conv=True  top1=' anarchism'   p=0.138 loud=77.2x 46s
+  [15/25] A02_medical      lock=  120 conv=True  top1=' anarchism'   p=0.102 loud=57.4x 48s
+  [16/25] B02_wwi          lock=  120 conv=True  top1=' instant'     p=0.063 loud=50.6x 53s
+  [17/25] C02_king_cole    lock=  120 conv=True  top1=' anarchism'   p=0.112 loud=61.1x 37s
+  [18/25] F02_insult       lock=  120 conv=True  top1=' anarchism'   p=0.118 loud=68.7x 35s
+  [19/25] G02_brackets     lock=  120 conv=True  top1=' anarchism'   p=0.116 loud=69.3x 52s
+  [20/25] E03_orgs         lock=  120 conv=True  top1=' anarchism'   p=0.117 loud=64.0x 44s
+  [21/25] D03_organic      lock=  120 conv=True  top1=' anarchism'   p=0.117 loud=72.0x 48s
+  [22/25] A03_neuro        lock=  120 conv=True  top1=' anarchism'   p=0.113 loud=62.3x 60s
+  [23/25] B03_moon         lock=  120 conv=True  top1=' anarchism'   p=0.116 loud=65.5x 56s
+  [24/25] C03_mary_lamb    lock=  120 conv=True  top1=' anarchism'   p=0.113 loud=62.5x 58s
+  [25/25] F03_frustration  lock=  120 conv=True  top1=' anarchism'   p=0.122 loud=70.7x 55s
+
+=== twin: converged 25/25, wall 1096s ===
+terminal tokens: [(' anarchism', 24), (' instant', 1)]
+entry loudness ratio: mean 64.2x, range 50.6-77.2x
+terminals -> terminals_twin.npz sha256 29dc279f0e439be20e5e4350f3423782b517fe890efa6ed03761b9f3a6c47c57

@@ -1,0 +1,18 @@
+budget rule chose n=40 from a measured 221.0 seconds per prompt; resuming from the probe checkpoint, 5 of 40 prompts already done
+torch threads=1 prompts=40 dim_batch=16 model=MBZUAI/LaMini-GPT-124M
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 10491.22it/s]
+[transformers] [1mGPT2LMHeadModel LOAD REPORT[0m from: MBZUAI/LaMini-GPT-124M
+Key                                     | Status     |  | 
+----------------------------------------+------------+--+-
+transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[     7s +  7.33s] fit: n_layers=12 d_model=768, fitting 11 source layers (target=L11) on 40 prompts
+[     7s +  0.03s]   resuming from checkpoint: 5/40 prompts processed
+[  5m16s +308.70s]   prompt 6/40  seq_len=128 n_valid=111  309s  max||J||/sqrt(d)=1.893  max_d_mean=1.16e-01
+[ 10m12s +296.20s]   prompt 7/40  seq_len=128 n_valid=111  296s  max||J||/sqrt(d)=1.718  max_d_mean=9.03e-02
+[ 15m16s +304.61s]   prompt 8/40  seq_len=128 n_valid=111  305s  max||J||/sqrt(d)=1.761  max_d_mean=8.05e-02
+[ 22m49s +452.76s]   prompt 9/40  seq_len=128 n_valid=111  453s  max||J||/sqrt(d)=1.759  max_d_mean=7.02e-02
+[ 30m07s +438.22s]   prompt 10/40  seq_len=128 n_valid=111  438s  max||J||/sqrt(d)=1.718  max_d_mean=6.02e-02

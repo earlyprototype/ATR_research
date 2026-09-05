@@ -132,6 +132,10 @@ def permutation_p_two_sided(a, b, n_perm=N_PERM, seed=PERM_SEED):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--out-suffix", default="",
+                    help="suffix for the output filename; used only by the "
+                         "non-registered harness check, which must not "
+                         "overwrite the registered artifact")
     ap.add_argument("--twin-lens", default=None,
                     help="path to the fitted twin lens; omit to score on the "
                          "base lens only (spec section 6.2 fallback)")
@@ -180,6 +184,20 @@ def main():
             "max": float(np.max(list(v.values())))} for k, v in rescale.items()}
 
     rots = {s: random_rotation(states["base"].shape[1], s) for s in ROT_SEEDS}
+
+    # ---- lens diagnostics, so instrument differences stay visible -----------
+    diag = {}
+    for l in PROBE_LAYERS:
+        row = {ln: {"frobenius_norm": float(np.linalg.norm(J[l]))}
+               for ln, J in lenses.items()}
+        if len(lenses) == 2:
+            a = lenses["twin"][l].ravel()
+            b = lenses["base"][l].ravel()
+            row["cosine_between_the_two_lenses"] = float(
+                a @ b / max(np.linalg.norm(a) * np.linalg.norm(b), 1e-30))
+        diag[str(l)] = row
+    rep["lens_diagnostics_per_layer"] = diag
+    print(f"lens diagnostics: {json.dumps(diag)}", flush=True)
 
     # ---- the decomposition ---------------------------------------------------
     # shares[lens][state_model][variant] = array [n_layers, n_prompts]
@@ -265,7 +283,8 @@ def main():
     rep["cross_checks"] = cross
     rep["wall_seconds"] = round(time.time() - t0, 1)
 
-    (OUT / "exp017_jspace.json").write_text(json.dumps(rep, indent=2))
+    outfile = OUT / f"exp017_jspace{args.out_suffix}.json"
+    outfile.write_text(json.dumps(rep, indent=2))
     print(f"\n=== H18b: {primary['h18b']} "
           f"({len(hits)}/6 band layers meet both conditions: {hits}) ===", flush=True)
     print(f"{'layer':<7}{'twin':<9}{'base':<9}{'|diff|':<9}{'ctrl spread':<13}{'perm p':<9}both")
@@ -274,7 +293,7 @@ def main():
         print(f"{l:<7}{r['median_twin']:<9.4f}{r['median_base']:<9.4f}"
               f"{r['abs_median_difference']:<9.4f}{r['control_spread']:<13.4f}"
               f"{r['perm_p']:<9}{r['both_conditions']}{'  <- band' if l in BAND else ''}")
-    print(f"\nSaved -> output/exp017_jspace.json ({rep['wall_seconds']:.0f}s)")
+    print(f"\nSaved -> output/{outfile.name} ({rep['wall_seconds']:.0f}s)")
 
 
 if __name__ == "__main__":
