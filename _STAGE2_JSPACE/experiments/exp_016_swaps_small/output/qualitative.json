@@ -1,0 +1,698 @@
+[
+ {
+  "prompt": "My favourite animal is",
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " the",
+   " a",
+   " my",
+   " an",
+   " probably"
+  ],
+  "lens": [
+   " dolphin",
+   " dolphins",
+   " Dolphin",
+   " in",
+   " marine"
+  ],
+  "control_a": [
+   " the",
+   " a",
+   " my",
+   " an",
+   " actually"
+  ],
+  "control_b": [
+   " the",
+   " a",
+   " her",
+   " my",
+   ","
+  ],
+  "source": " cat",
+  "target": " dolphin"
+ },
+ {
+  "prompt": "The animal I like best is",
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " the",
+   " a",
+   " not",
+   " an",
+   " my"
+  ],
+  "lens": [
+   " dolphin",
+   " dolphins",
+   " Dolphin",
+   " whales",
+   " whale"
+  ],
+  "control_a": [
+   " the",
+   " a",
+   " my",
+   " not",
+   " an"
+  ],
+  "control_b": [
+   " the",
+   " a",
+   " one",
+   " not",
+   " an"
+  ],
+  "source": " snake",
+  "target": " dolphin"
+ },
+ {
+  "prompt": "The animal I like best is",
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " the",
+   " a",
+   " not",
+   " an",
+   " my"
+  ],
+  "lens": [
+   " snake",
+   " snakes",
+   " Snake",
+   " venom",
+   " the"
+  ],
+  "control_a": [
+   " the",
+   " a",
+   " my",
+   " not",
+   " an"
+  ],
+  "control_b": [
+   " the",
+   " a",
+   " my",
+   " one",
+   " an"
+  ],
+  "source": " cat",
+  "target": " snake"
+ },
+ {
+  "prompt": "Q: Which animal do you like? A:",
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " I",
+   " The",
+   " A",
+   " My",
+   " It"
+  ],
+  "lens": [
+   " dolphin",
+   " Dolphin",
+   " dolphins",
+   " Dolphins",
+   " The"
+  ],
+  "control_a": [
+   " I",
+   " The",
+   " A",
+   " It",
+   " My"
+  ],
+  "control_b": [
+   " I",
+   " The",
+   " A",
+   " It",
+   " My"
+  ],
+  "source": " deer",
+  "target": " dolphin"
+ },
+ {
+  "prompt": "My favourite animal is",
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " the",
+   " a",
+   " my",
+   " an",
+   " probably"
+  ],
+  "lens": [
+   " dolphin",
+   " dolphins",
+   " Dolphin",
+   " whales",
+   " whale"
+  ],
+  "control_a": [
+   " the",
+   " a",
+   " my",
+   " an",
+   " actually"
+  ],
+  "control_b": [
+   " the",
+   " a",
+   " an",
+   " my",
+   " actually"
+  ],
+  "source": " dolphin",
+  "target": " snake"
+ },
+ {
+  "prompt": "Her favourite animal is",
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " a",
+   " the",
+   " an",
+   " her",
+   " also"
+  ],
+  "lens": [
+   " dolphin",
+   " dolphins",
+   " Dolphin",
+   " whales",
+   " whale"
+  ],
+  "control_a": [
+   " a",
+   " the",
+   " her",
+   " an",
+   " also"
+  ],
+  "control_b": [
+   " a",
+   " the",
+   " an",
+   " also",
+   " her"
+  ],
+  "source": " dolphin",
+  "target": " snake"
+ },
+ {
+  "prompt": "Australia is a country on the continent of",
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " the",
+   " Africa",
+   " Europe",
+   " Asia",
+   " Australia"
+  ],
+  "lens": [
+   " Africa",
+   " Latin",
+   " the",
+   " South",
+   " Europe"
+  ],
+  "control_a": [
+   " the",
+   " South",
+   " Asia",
+   " North",
+   " Korea"
+  ],
+  "control_b": [
+   " the",
+   " Africa",
+   " Europe",
+   " Asia",
+   " South"
+  ],
+  "source": " Australia",
+  "target": " Brazil"
+ },
+ {
+  "prompt": "Most people in Australia speak",
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " English",
+   " of",
+   " the",
+   " a",
+   " about"
+  ],
+  "lens": [
+   " English",
+   " Portuguese",
+   " Spanish",
+   " of",
+   " a"
+  ],
+  "control_a": [
+   " about",
+   " the",
+   " to",
+   " a",
+   " only"
+  ],
+  "control_b": [
+   " English",
+   " the",
+   " a",
+   " about",
+   " of"
+  ],
+  "source": " Australia",
+  "target": " Brazil"
+ },
+ {
+  "prompt": "The capital of Australia is the city of",
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " Sydney",
+   " Melbourne",
+   " Brisbane",
+   " Canberra",
+   " Perth"
+  ],
+  "lens": [
+   " Ottawa",
+   " Toronto",
+   " St",
+   " Winnipeg",
+   " Montreal"
+  ],
+  "control_a": [
+   " South",
+   " the",
+   " Cambodia",
+   " Central",
+   " Ce"
+  ],
+  "control_b": [
+   " Sydney",
+   " Melbourne",
+   " New",
+   " Canberra",
+   " Adelaide"
+  ],
+  "source": " Australia",
+  "target": " Canada"
+ },
+ {
+  "prompt": "Australia is a country on the continent of",
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " the",
+   " Africa",
+   " Europe",
+   " Asia",
+   " Australia"
+  ],
+  "lens": [
+   " the",
+   " Europe",
+   " Africa",
+   " North",
+   " Asia"
+  ],
+  "control_a": [
+   " the",
+   " South",
+   " Asia",
+   " North",
+   " Central"
+  ],
+  "control_b": [
+   " Africa",
+   " the",
+   " Europe",
+   " Asia",
+   " Australia"
+  ],
+  "source": " Australia",
+  "target": " Canada"
+ },
+ {
+  "prompt": "The capital of Australia is the city of",
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " Sydney",
+   " Melbourne",
+   " Brisbane",
+   " Canberra",
+   " Perth"
+  ],
+  "lens": [
+   " Sao",
+   " Rio",
+   " San",
+   " St",
+   " the"
+  ],
+  "control_a": [
+   " South",
+   " the",
+   " Cambodia",
+   " Central",
+   " New"
+  ],
+  "control_b": [
+   " Sydney",
+   " New",
+   " Melbourne",
+   " the",
+   " Chennai"
+  ],
+  "source": " Australia",
+  "target": " Brazil"
+ },
+ {
+  "prompt": "The capital of Brazil is the city of",
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "posmode": "all",
+  "clean": [
+   " Rio",
+   " Sao",
+   " C",
+   " T",
+   " Bras"
+  ],
+  "lens": [
+   " Sydney",
+   " the",
+   " Brisbane",
+   " Perth",
+   " K"
+  ],
+  "control_a": [
+   " Sao",
+   " Central",
+   " the",
+   " Ce",
+   " Brazil"
+  ],
+  "control_b": [
+   " Sao",
+   " Rio",
+   " C",
+   " T",
+   " S"
+  ],
+  "source": " Brazil",
+  "target": " Australia"
+ },
+ {
+  "prompt": "Bees make honey and cows make milk. The insect that lives in a hive makes",
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "posmode": "all_no_bos",
+  "clean": [
+   " honey",
+   " the",
+   " milk",
+   " a",
+   " bees"
+  ],
+  "lens": [
+   " milk",
+   " honey",
+   " the",
+   " a",
+   " its"
+  ],
+  "control_a": [
+   " honey",
+   " the",
+   " milk",
+   " bees",
+   " a"
+  ],
+  "control_b": [
+   " honey",
+   " bees",
+   " the",
+   " a",
+   " milk"
+  ],
+  "source": " bee",
+  "target": " cow"
+ },
+ {
+  "prompt": "Cows give milk and hens give eggs. The animal that moos gives",
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "posmode": "all_no_bos",
+  "clean": [
+   " milk",
+   " eggs",
+   " the",
+   " them",
+   " a"
+  ],
+  "lens": [
+   " eggs",
+   " the",
+   " hen",
+   " egg",
+   " them"
+  ],
+  "control_a": [
+   " milk",
+   " eggs",
+   " the",
+   " a",
+   " them"
+  ],
+  "control_b": [
+   " milk",
+   " eggs",
+   " the",
+   " a",
+   " egg"
+  ],
+  "source": " cow",
+  "target": " hen"
+ },
+ {
+  "prompt": "Roses are red and violets are blue. The flower with thorns is",
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "posmode": "all_no_bos",
+  "clean": [
+   " red",
+   " the",
+   " a",
+   " called",
+   " green"
+  ],
+  "lens": [
+   " blue",
+   " violet",
+   " green",
+   " yellow",
+   " purple"
+  ],
+  "control_a": [
+   " red",
+   " a",
+   " the",
+   " green",
+   " yellow"
+  ],
+  "control_b": [
+   " a",
+   " red",
+   " the",
+   " yellow",
+   " green"
+  ],
+  "source": " rose",
+  "target": " violet"
+ },
+ {
+  "prompt": "Trains run on rails and boats run on water. The vehicle that pulls carriages runs on",
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "posmode": "all_no_bos",
+  "clean": [
+   " rails",
+   " water",
+   " the",
+   " a",
+   " steam"
+  ],
+  "lens": [
+   " water",
+   " the",
+   " a",
+   " both",
+   " steam"
+  ],
+  "control_a": [
+   " rails",
+   " water",
+   " the",
+   " steam",
+   " a"
+  ],
+  "control_b": [
+   " water",
+   " rails",
+   " the",
+   " steam",
+   " a"
+  ],
+  "source": " train",
+  "target": " boat"
+ },
+ {
+  "prompt": "Bananas grow on trees and potatoes grow underground. The long yellow fruit grows on",
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "posmode": "all_no_bos",
+  "clean": [
+   " the",
+   " top",
+   " trees",
+   " a",
+   " roots"
+  ],
+  "lens": [
+   " the",
+   " trees",
+   " top",
+   " a",
+   " roots"
+  ],
+  "control_a": [
+   " the",
+   " trees",
+   " top",
+   " a",
+   " roots"
+  ],
+  "control_b": [
+   " the",
+   " top",
+   " trees",
+   " a",
+   " roots"
+  ],
+  "source": " banana",
+  "target": " potato"
+ },
+ {
+  "prompt": "Fish swim and birds fly. The animal with feathers can",
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "posmode": "all_no_bos",
+  "clean": [
+   " be",
+   " fly",
+   " also",
+   " swim",
+   "'t"
+  ],
+  "lens": [
+   " be",
+   " fly",
+   " also",
+   " swim",
+   "'t"
+  ],
+  "control_a": [
+   " be",
+   " fly",
+   " swim",
+   " also",
+   " make"
+  ],
+  "control_b": [
+   " be",
+   " fly",
+   " swim",
+   " also",
+   "'t"
+  ],
+  "source": " bird",
+  "target": " fish"
+ }
+]

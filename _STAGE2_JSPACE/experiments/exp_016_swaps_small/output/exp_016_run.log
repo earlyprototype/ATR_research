@@ -1,0 +1,131 @@
+EXP_016 run log. Branch claude/latent-context-small-llms-u2jdig-exp016.
+All times are wall clock. Machine: processor only, one torch thread per
+script, four cores shared with three other agents, 15 GB of memory shared.
+Versions: Python 3.11.15, torch 2.14.0+cpu, transformers 5.16.1,
+transformer_lens 3.8.1, numpy 2.4.6.
+Lens: jlens_gpt2_small_neuronpedia.pt, SHA-256
+d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762,
+reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82ba8e.
+
+2026-09-05  Environment check. transformer_lens loaded with
+  from_pretrained_no_processing agrees with the plain Hugging Face model:
+  largest disagreement 0.00006 in the residual stream at layer 5 on numbers
+  reaching 2917, and 0.00004 in the final word scores. Timing measured: one
+  forward pass over a batch of 32 copies of an 18-token prompt, reading out
+  the final position only, took 1.13 s, which is 35 ms per condition. Peak
+  memory 1.7 GB.
+
+2026-09-05  pilot_clean.py  exit 0, 154.5 s.
+  No intervention. 42 report frames read clean and through the lens at layer
+  8; 25 countries times 3 functions times 4 candidate frames read clean; 20
+  two-step completions read clean.
+  Output: output/pilot_clean.json
+
+2026-09-05  pilot_clean2.py  exit 0, 13.8 s.
+  No intervention. 16 further two-step completions read clean, plus the gate
+  arithmetic for the country battery.
+  Output: output/pilot_clean2.json
+
+2026-09-05  Specification committed at 47efd8d before any swap was run.
+
+2026-09-05  build_batteries.py  exit 0.
+  battery_h17.json 84 items (42 tuning, 42 held out)
+  battery_h17a.json 50 pairs (27 tuning, 23 held out), 24 with all three
+    functions scoreable
+  battery_h17b.json 16 items (8 tuning, 8 held out)
+
+2026-09-05  check_engine.py  exit 0.
+  (1) swapping a token with itself changed the log-probabilities by at most
+      0.0000343.
+  (2) the two coordinates at the final position were exchanged exactly:
+      1.594 and 0.362 became 0.362 and 1.594.
+  (3) the part of the change lying outside the plane of the two lens vectors
+      was 0.00000126 against a change of total size 9.528.
+  (4) the batched path agreed with the single-element path to 0.0000353.
+  Demonstration: on "My favourite sport is", the clean top five were
+  ' football', ' to', ' the', ' rugby', ' swimming'; after exchanging the
+  football and cricket lens coordinates at layer 8 at all positions at
+  strength 1 they were ' cricket', ' to', ' tennis', ' rugby', ' swimming'.
+
+2026-09-05  Batteries launched sequentially in one background process, in
+  the order h17b, h17, h17a, each with its own fresh Python process.
+
+2026-09-05  DEVIATION, recorded while h17b was still running and before h17
+  or h17a had started. Measured throughput fell from the 28.6 conditions per
+  second the specification's budget assumed (35 milliseconds per condition)
+  to 18.2 conditions per second, because the four shared cores were carrying
+  a load average of 4.9 from the other agents. Extrapolating the full
+  pre-registered grid at that rate gave about 2 hours of further computation
+  on top of the 1 hour 50 minutes already spent, which risks the five-hour
+  target. Two whole settings were therefore dropped from the two batteries
+  that had not yet started, never any items, as section 7 of the
+  specification requires:
+    (a) the position mode `all_no_bos` was dropped from H17 and from H17a,
+        leaving `all` and `last` for H17 and `all` alone for H17a. That mode
+        differs from `all` only in whether the single prepended
+        beginning-of-text token is patched.
+    (b) the number of control seeds was reduced from three to two for H17
+        and H17a. H17b keeps all three. Two seeds still give 168 control
+        trials per setting for H17 and 248 for H17a.
+  H17b was unaffected and ran the full pre-registered grid.
+  Revised counts: H17 35,280 conditions (was 74,088), H17a 18,600 (was
+  52,080), H17b 14,112 (unchanged).
+
+2026-09-05  ERRATUM found and corrected during the run, before any result
+  was read. The position of the swapped concept's first mention, used only
+  by the H17b position mode `from_mention`, was computed one token too high.
+  The cause: the offsets were taken from the plain Hugging Face tokenizer
+  encoding, which does not prepend the beginning-of-text token, and then one
+  was added to account for the prepended token, but the transformer_lens
+  tokenizer used to read those offsets does prepend it, so the correction was
+  applied twice. Fourteen of the sixteen items moved from position 2 to
+  position 1, one from 5 to 4 and one from 8 to 7. Effect: the `from_mention`
+  arm of the first H17b run began one token after the concept's first token
+  instead of at it. The other two H17b position modes, `all_no_bos` and
+  `answer_only`, were unaffected, and no other battery uses the mention
+  position. The first H17b run was stopped at roughly 9,000 of its 14,112
+  conditions, its partial records were discarded unread except for a
+  pipeline check, the position finder was rewritten to walk the model's own
+  token strings, `battery_h17b.json` was rebuilt (only `first_mention_pos`
+  changed; every other field is byte-identical), and H17b was queued to run
+  again in full after H17a.
+
+2026-09-05 12:03  All three batteries complete. Wall clock for the whole
+  experiment, from first environment check to last figure, 1 hour 26 minutes.
+  Peak memory stayed under 2 GB throughout, against the 3 GB ceiling.
+    run_swaps.py h17b (first, superseded)  STOPPED at ~9,000 of 14,112
+    run_swaps.py h17    exit 0  35,280 conditions, 23.1 min, seeds [0,1],
+      position modes ['all','last']
+    run_swaps.py h17a   exit 0  18,600 conditions, 14.0 min, seeds [0,1],
+      position modes ['all']
+    run_swaps.py h17b   exit 0  14,112 conditions, 13.0 min, seeds [0,1,2],
+      position modes ['all_no_bos','from_mention','answer_only']
+  Total 68,000 swap conditions actually scored.
+  Outputs: records_h17.csv, records_h17a.csv, records_h17b.csv (one row per
+  condition), provenance_h17*.json, summary_h17*.json, qual_jobs.json,
+  qualitative.json, fig_layers.png, fig_heldout.png.
+
+2026-09-05 12:03  analyse.py h17 h17a h17b  exit 0. Tuned settings chosen on
+  the tuning half, scored on the held-out half:
+    H17  layers 7-8-9, strength 2, all positions: held-out lens 27/42
+      (64 percent), control A 0/84 (0 percent), control B 0/84.
+    H17a layer 6, strength 2, all positions: held-out lens 52/57
+      (91 percent) per question, control A 18/114 (16 percent); at pair
+      level, at least two of three questions redirected 13/15 (87 percent)
+      against 0/30.
+    H17b layer 7, strength 2, all positions except the prepended
+      beginning-of-text token: held-out lens 1/8, control A 0/24; over all
+      16 items 4/16 against 0/48, one-sided Fisher exact probability 0.0029.
+
+2026-09-05 12:03  qualitative.py exit 0 (18 conditions re-run for the actual
+  words), make_figures.py exit 0 (two PNG figures). matplotlib 3.11.1 was
+  installed during the run for the figures only; it touches no measurement.
+
+[2026-09-05T17:31:59.067398Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 133.9 s
+
+[2026-09-05T17:43:38.499619Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 136.7 s
+
+[2026-09-05T17:50:00Z] review follow-up: check_engine.py re-run with its checks now asserting (exit 0, all four passed); analyse.py h17 h17a h17b re-run to add the source-rule, pair-level and position-mode selection routes to the summary files (chosen settings unchanged); make_tables.py output re-pasted into RESULTS_EXP016.md.
+[2026-09-05T18:05:00Z] review follow-up: analyse.py re-run to add the rank-one sensitivity readings the specification promised and to leave pairs with too few scoreable questions out of the at-least-three denominators; make_tables.py output re-pasted into RESULTS_EXP016.md.
+[2026-09-05T18:20:00Z] review follow-up: analyse.py re-run to add the exact within-item tests and the registered alternating-pair split reading for H17a to the summary files; make_tables.py output re-pasted into RESULTS_EXP016.md. No swap was re-run.
+[2026-09-05T18:55:00Z] review follow-up (Codex review of ea9073d, four findings): clean_ranks.py added and run (exit 0, 29 s, one clean forward pass per distinct battery prompt, no intervention), writing output/clean_target_ranks.json; it reproduces the committed clean ranks exactly for H17a's 124 questions and H17b's 16 items and to within one rank on one of H17's 84 items, and finds 24 of the 124 H17a questions whose target answer was already in the unmodified model's top five. analyse.py h17 h17a h17b re-run (exit 0) to add the baseline-hit counts, the two stricter H17a success readings and the cluster-level exact tests to the summary files; every key that existed before is byte identical, chosen settings and every previously reported number unchanged. make_tables.py output re-pasted into RESULTS_EXP016.md. make_figures.py re-run (exit 0): fig_heldout.png regenerated so that the H17 panel plots the tuning-selected source rule's held-out rate, 18 of 21, with the pooled 27 of 42 beside it; fig_layers.png unchanged. lib_exp016.py no longer forces Hugging Face offline mode by default (environment variable EXP016_OFFLINE=1 restores it); loading the model with and without it gives identical weights, SHA-256 0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1 over the ordered parameter tensors, and identical next-word scores. No swap was re-run.
