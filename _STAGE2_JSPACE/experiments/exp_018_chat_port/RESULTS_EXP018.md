@@ -177,7 +177,11 @@ below without touching the model.
 ## What was run, and on what
 
 **The model.** `Qwen/Qwen3-1.7B`, the public post-trained chat model released
-in 2025, downloaded from the Hugging Face hub with no authentication token. It
+in 2025, downloaded from the Hugging Face hub with no authentication token.
+**Established from this machine's model cache:** the exact files are hub
+revision `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, meaning one named version
+of a model's files on the hub, and it is the only version of this model on the
+machine, so every stage that read the weights read the same ones. It
 has 28 layers, a running internal state 2,048 numbers wide per word piece, 16
 attention heads sharing 8 sets of keys and values, a vocabulary of 151,936 word
 pieces, and about 1.72 billion numbers of its own that it learned during
@@ -285,6 +289,71 @@ the stage that produces the per-layer states for H19b would have injected the
 terminal tensor at its own size, about two thousand times the natural entry
 loudness, instead of at the loudness the loop itself uses. That is recorded in
 the commit history at `80c259d`.
+
+**Six faults found in a review of the code after the run, and what each one
+changes.** A review of the harness after the results were written found six
+faults in it. Two of them change what this record prints and are corrected in
+the sections below that report them; the other four are in code paths this run
+did not take, or took by hand, and are fixed for later runs. No hypothesis
+verdict moves, and nothing was re-run to make these corrections, because
+re-running any stage that touches the model needs the weights and hours of
+machine time.
+
+1. The table generator printed only one of the two conditions of the
+   approximation check named in deviation D6, because the line that prints sat
+   outside the loop over conditions and reported whichever condition the file
+   listed last. The appendix below now carries all four lines. The largest
+   disagreement between the restricted search and the unrestricted one is on
+   the terminal states, at 0.000675 at layer 11 and 0.003109 at layer 18 on a
+   share that runs from 0 to 1, against 0.000422 and 0.001302 on the ordinary
+   states. The figure of 0.0031 quoted in the H19b section before this
+   correction was the terminal number at layer 18 and is right, but that
+   section did not say which condition it belonged to and the table under it
+   showed only the ordinary condition. Both now say so.
+2. The field `final_cos_mean_lag2` in the two probe files is wrong: it reads
+   1.0 in both. That field is meant to hold the last measured agreement between
+   the state now and the state two repetitions back, on a scale where 1.0 means
+   the state has stopped moving altogether. The loop updated it only on
+   scheduled convergence checks, and the probe stage schedules none, so the
+   placeholder the loop starts from survived into the file. **Established from
+   the traces inside those same two files:** the correct value is the last
+   entry of the trace, which is 0.915891 for the bare arm and 0.908719 for the
+   chat arm in `probe_natural_norms_float32.json`, and 0.976165 and 0.924489 in
+   `probe_natural_norms_bfloat16.json`. The probe files are left exactly as
+   they were run and are not edited by hand; the loop code now records the last
+   measurement at every repetition, so later runs carry the right number.
+   Nothing in this record rests on that field, and the two registered arms are
+   unaffected: in all 30 prompt records their reported value already equals the
+   last entry of their own trace, because their 150th repetition falls on a
+   scheduled check.
+3. The probe stage wrote one filename whichever precision it ran in, so the
+   second of the two probe runs overwrote the first and the two committed files
+   were renamed by hand afterwards. The stage now writes the precision into the
+   filename, so it produces the two names that are committed.
+4. The loop stage counted a prompt as finished, when resuming, if its row was
+   in the results file, whether or not its terminal state had reached the state
+   file, and it wrote both files in place. A prompt interrupted between the two
+   writes would have been skipped for ever and would have stopped the states
+   stage later with a missing state. A prompt now counts as finished only when
+   both files hold it, and each file is written under a temporary name and then
+   renamed, which replaces it in one step. **This run was not affected, checked
+   here:** every row in each results file has its terminal state in the
+   matching state file, 25 of 25 in the main arm and 5 of 5 in the pilot arm.
+5. The states stage loaded the model in float32 unless told otherwise, while
+   this run's loop ran in bfloat16, so the documented regeneration command
+   would have rebuilt the states in the wrong precision. That stage now takes
+   the precision from the results file and refuses a flag that contradicts it.
+   **Established from the run logs:** the committed states were produced in
+   bfloat16, whose largest memory use was 3.88 gigabytes, against the 10.98
+   gigabytes the same load measured in float32.
+6. The J-space stage chose the model's weight files by sorting the cache
+   directory and taking the last name, which orders versions by their
+   identifiers and not by which one a run used. It now reads the version the
+   run recorded, or, when the run recorded none as is the case here, the cache
+   pointer an ordinary load follows, and it stops with a message naming the
+   directory rather than guessing between versions. **This run was not
+   affected:** this machine holds exactly one version of the weights, so the
+   old rule and the new one name the same files.
 
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
@@ -521,16 +590,17 @@ states 0.36 times; at layer 5, 2.32 and 0.10.
 **Two limits on this result, stated before the reader finds them.** First, the
 search is restricted after one full pass to the 4,096 best-correlating
 directions out of 151,936 (deviation D6). That restriction was measured against
-the unrestricted search at layers 11 and 18 on the first five prompts: the
-largest disagreement is 0.0007 at layer 11 and 0.0031 at layer 18, on a share
-that runs from 0 to 1. Those are small against the differences being claimed
-here, which are of order 0.03, but they are not zero and are recorded. Second,
-and more important: this experiment uses the lens, it does not validate it. The
-lens is a third-party artifact fitted by someone else's pipeline on Wikipedia
-text, and its own fit record puts its identity distance at 0.525. The direction
-of the result is robust to a bad lens in one specific sense, that a bad lens
-should not have produced ordinary states sitting three times above chance; but
-the sizes are not.
+the unrestricted search at layers 11 and 18 on the first five prompts, in both
+conditions. The largest disagreement is on the terminal states, at 0.000675 at
+layer 11 and 0.003109 at layer 18; on the ordinary states it is 0.000422 and
+0.001302. All four are on a share that runs from 0 to 1. Those are small
+against the differences being claimed here, which are of order 0.03, but they
+are not zero and are recorded. Second, and more important: this experiment uses
+the lens, it does not validate it. The lens is a third-party artifact fitted by
+someone else's pipeline on Wikipedia text, and its own fit record puts its
+identity distance at 0.525. The direction of the result is robust to a bad lens
+in one specific sense, that a bad lens should not have produced ordinary states
+sitting three times above chance; but the sizes are not.
 
 **How this sits against what the project already found.** The Stage 1 pilot on
 GPT-2 Small (finding F11) reported terminal states from real prompts holding
@@ -613,7 +683,11 @@ Settled: **0 of 5**. Positions-merged metric over all positions: median **0.767*
 
 Band layers where the terminal median is below the ordinary median: **15 of 15**. Of those, with a permutation p-value below 0.05: **15**. The pre-registered rule needs 8 or more. Verdict by that rule: **SUPPORTED**.
 
+Approximation check at layer 11, terminal states: the largest difference between the share computed over the whole 151,936-word-piece vocabulary and the share computed over the 4,096 best-correlating directions is 0.000675 on a scale of 0 to 1.
+
 Approximation check at layer 11, ordinary states: the largest difference between the share computed over the whole 151,936-word-piece vocabulary and the share computed over the 4,096 best-correlating directions is 0.000422 on a scale of 0 to 1.
+
+Approximation check at layer 18, terminal states: the largest difference between the share computed over the whole 151,936-word-piece vocabulary and the share computed over the 4,096 best-correlating directions is 0.003109 on a scale of 0 to 1.
 
 Approximation check at layer 18, ordinary states: the largest difference between the share computed over the whole 151,936-word-piece vocabulary and the share computed over the 4,096 best-correlating directions is 0.001302 on a scale of 0 to 1.
 
@@ -663,7 +737,10 @@ All under `experiments/exp_018_chat_port/`.
 
 The per-layer states that the J-space measurement consumes are intermediate and
 are not committed: they are about 13 megabytes and are reproducible from the
-committed terminal states with `run_exp018.py --stage states`.
+committed terminal states with `python3 run_exp018.py --stage states --arm bare`
+and the same command with `--arm chat`. Neither needs a precision flag, because
+that stage now reads the precision out of the results file, which is bfloat16
+for this run.
 
 The lens files themselves are not committed either, because
 `_STAGE2_JSPACE/artifacts/` is not versioned by repository convention. Their

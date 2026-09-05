@@ -19,22 +19,33 @@ Nothing here needs the model to run. It reads the unembedding matrix and the
 final normalisation gain out of the downloaded weight files, the fitted
 Jacobians out of the lens file, and the per-layer states written by
 `run_exp018.py --stage states`.
+
+The weight files are read from one exact revision of the model, meaning one
+named version of its files on the Hugging Face hub. The revision comes from
+`--revision` if given, otherwise from the metadata the states stage or the loop
+recorded, otherwise from the cache pointer an unpinned load follows. It is
+never chosen by sorting the cache directory, which orders revisions by their
+identifiers and not by which one a run used.
 """
 
 from __future__ import annotations
 
 import argparse
-import glob
 import json
+import sys
 import time
 from pathlib import Path
 
 import numpy as np
 import torch
 
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+
+from qwen_port import resolve_revision, snapshot_dir  # noqa: E402
+
 torch.set_num_threads(1)
 
-HERE = Path(__file__).resolve().parent
 OUT = HERE / "output"
 ART = (HERE / ".." / ".." / "artifacts").resolve()
 LENS_PT = ART / "qwen3-1.7b_jacobian_lens.pt"
@@ -50,25 +61,51 @@ CANDIDATE_POOL = 4096
 # weights
 # --------------------------------------------------------------------------
 
-def load_unembed() -> tuple[torch.Tensor, torch.Tensor]:
+def load_unembed(revision: str) -> tuple[torch.Tensor, torch.Tensor]:
     """The unembedding matrix `W_U` as [vocab, width] and the final RMSNorm gain.
 
     Qwen3 ties its embeddings, so the unembedding is the token embedding matrix
-    and the same tensor serves both roles. Read straight out of the cached
-    weight shards so this stage never loads the whole model.
+    and the same tensor serves both roles. Read straight out of the weight
+    files of the named revision, so this stage never loads the whole model and
+    never reads a different version of the weights from the one the loop ran.
     """
     from safetensors import safe_open
-    snap = sorted(glob.glob("/root/.cache/huggingface/hub/"
-                            "models--Qwen--Qwen3-1.7B/snapshots/*"))
-    if not snap:
-        raise FileNotFoundError("Qwen3-1.7B weights are not in the local cache")
-    index = json.loads((Path(snap[-1]) / "model.safetensors.index.json").read_text())
+    snap = snapshot_dir(revision)
+    index = json.loads((snap / "model.safetensors.index.json").read_text())
     wmap = index["weight_map"]
     want = {"model.embed_tokens.weight": None, "model.norm.weight": None}
     for key in want:
-        with safe_open(Path(snap[-1]) / wmap[key], framework="pt") as fh:
+        with safe_open(snap / wmap[key], framework="pt") as fh:
             want[key] = fh.get_tensor(key).float()
     return want["model.embed_tokens.weight"], want["model.norm.weight"]
+
+
+def revision_for(arm: str, meta: dict, explicit: str | None) -> tuple[str, str]:
+    """The revision of the weights to read, and the one-line reason for it.
+
+    A revision is the 40-character commit identifier naming one exact version
+    of the model's files on the Hugging Face hub. Order of authority: the
+    `--revision` option, then the revision the states stage recorded, then the
+    revision the loop recorded in its own results file, then the cache pointer
+    `refs/main`, which is the one an unpinned load follows. `resolve_revision`
+    stops with a message naming the directory it searched if that last step
+    cannot decide.
+    """
+    if explicit:
+        return explicit, "the --revision option"
+    for key, where in (("model_revision", "the states stage metadata"),
+                       ("loop_model_revision", "the loop metadata carried by "
+                                               "the states stage")):
+        if meta.get(key):
+            return meta[key], where
+    res_path = OUT / f"results_{arm}.json"
+    if res_path.exists():
+        rev = json.loads(res_path.read_text()).get("model_revision")
+        if rev:
+            return rev, f"the loop metadata in results_{arm}.json"
+    return (resolve_revision(),
+            "the local cache pointer refs/main, because neither the states "
+            "metadata nor the loop results record a revision")
 
 
 def load_lens() -> dict[int, torch.Tensor]:
@@ -178,6 +215,9 @@ def main() -> None:
                     help="layers additionally scored without the candidate pool")
     ap.add_argument("--rotation-seeds", default="2026,4242")
     ap.add_argument("--draws", type=int, default=10000)
+    ap.add_argument("--revision", default=None,
+                    help="the exact Hugging Face revision of the weights to "
+                         "read; defaults to the one the run recorded")
     args = ap.parse_args()
 
     t_start = time.time()
@@ -185,7 +225,9 @@ def main() -> None:
     meta = json.loads((Path(args.states_dir)
                        / f"layer_states_{args.arm}_meta.json").read_text())
     prompt_ids = [p["id"] for p in meta["prompts"]]
-    W_U, gamma = load_unembed()
+    revision, rev_source = revision_for(args.arm, meta, args.revision)
+    print(f"weights revision {revision}, from {rev_source}", flush=True)
+    W_U, gamma = load_unembed(revision)
     lens, lens_n_prompts = load_lens()
     d_model = W_U.shape[1]
     print(f"W_U {tuple(W_U.shape)}  lens layers {min(lens)}..{max(lens)} "
@@ -196,7 +238,9 @@ def main() -> None:
     exact_layers = {int(s) for s in args.exact_layers.split(",") if s}
 
     results = {
-        "arm": args.arm, "k_atoms": K_ATOMS, "candidate_pool": CANDIDATE_POOL,
+        "arm": args.arm, "model_revision": revision,
+        "model_revision_source": rev_source,
+        "k_atoms": K_ATOMS, "candidate_pool": CANDIDATE_POOL,
         "scored_layers": SCORED_LAYERS, "band_layers": BAND_LAYERS,
         "early_layers": EARLY_LAYERS, "rotation_seeds": rot_seeds,
         "lens_n_prompts": int(lens_n_prompts), "permutation_draws": args.draws,

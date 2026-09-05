@@ -27,9 +27,11 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import resource
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 
 import torch
 import torch.nn.functional as F
@@ -80,11 +82,82 @@ def versions() -> dict:
 
 
 # --------------------------------------------------------------------------
+# which copy of the weights
+# --------------------------------------------------------------------------
+
+def hub_cache_dir() -> Path:
+    """The Hugging Face cache directory this machine downloads model files into.
+
+    Follows the same environment variables the Hugging Face hub library
+    follows, so a run and a later analysis of that run look in one place.
+    """
+    for var in ("HF_HUB_CACHE", "HUGGINGFACE_HUB_CACHE"):
+        if os.environ.get(var):
+            return Path(os.environ[var])
+    if os.environ.get("HF_HOME"):
+        return Path(os.environ["HF_HOME"]) / "hub"
+    return Path.home() / ".cache" / "huggingface" / "hub"
+
+
+def model_cache_dir(model: str = MODEL_NAME) -> Path:
+    """The cache directory holding every downloaded version of one model."""
+    return hub_cache_dir() / ("models--" + model.replace("/", "--"))
+
+
+def resolve_revision(revision: str | None = None, model: str = MODEL_NAME) -> str:
+    """The revision of the weights a load of `model` on this machine resolves to.
+
+    A revision is the 40-character commit identifier that names one exact
+    version of a model's files on the Hugging Face hub. Returns `revision`
+    unchanged when one is given; otherwise the revision the cache's
+    `refs/main` pointer names, which is the one an unpinned load follows;
+    otherwise the only revision in the cache when there is exactly one.
+    Raises `FileNotFoundError`, naming the directory it searched, when it
+    cannot decide, because the alphabetically last revision in the cache is
+    not necessarily the one a run used.
+    """
+    if revision:
+        return revision
+    root = model_cache_dir(model)
+    ref = root / "refs" / "main"
+    if ref.exists():
+        return ref.read_text().strip()
+    snaps = sorted(p.name for p in (root / "snapshots").glob("*")
+                   if p.is_dir()) if (root / "snapshots").is_dir() else []
+    if len(snaps) == 1:
+        return snaps[0]
+    if not snaps:
+        raise FileNotFoundError(
+            f"no cached copy of {model} under {root}, so the revision of the "
+            f"weights cannot be resolved on this machine")
+    raise FileNotFoundError(
+        f"{len(snaps)} cached revisions of {model} under {root} and no "
+        f"refs/main pointer to choose between them; pass the revision "
+        f"explicitly, one of: {', '.join(snaps)}")
+
+
+def snapshot_dir(revision: str, model: str = MODEL_NAME) -> Path:
+    """The directory holding the files of one exact revision of the weights."""
+    path = model_cache_dir(model) / "snapshots" / revision
+    if not path.is_dir():
+        raise FileNotFoundError(
+            f"revision {revision} of {model} is not in the local cache; "
+            f"looked in {path}")
+    return path
+
+
+# --------------------------------------------------------------------------
 # model
 # --------------------------------------------------------------------------
 
 def load_model(dtype=torch.float32):
-    """Boot Qwen3-1.7B through the TransformerLens bridge, no compatibility mode."""
+    """Boot Qwen3-1.7B through the TransformerLens bridge, no compatibility mode.
+
+    The load is not pinned to a revision, so it follows the cache pointer
+    `refs/main` exactly as `resolve_revision()` does. Call `resolve_revision()`
+    after this returns, not before, and record what it says: that is the
+    revision of the weights this process is holding.
+    """
     from transformer_lens.model_bridge import TransformerBridge
     model = TransformerBridge.boot_transformers(
         MODEL_NAME, device="cpu", dtype=dtype)
@@ -256,7 +329,7 @@ def run_loop(model, tokens: torch.Tensor, cfg: LoopConfig, verbose=False) -> dic
     tensor_hist = [x.clone()]
     consecutive = 0
     lock_in = None
-    final_cos = 1.0
+    final_cos = 1.0        # replaced by a real measurement on the first iteration
     i = 0
 
     for i in range(1, cfg.max_iter + 1):
@@ -291,8 +364,13 @@ def run_loop(model, tokens: torch.Tensor, cfg: LoopConfig, verbose=False) -> dic
                 "norm_pos0": round(float(x[0].norm()), 4),
             })
 
+        # The reported lag-2 cosine is the most recent one, whether or not this
+        # iteration was a scheduled convergence check. Updating it only on
+        # checks left the initial 1.0 standing whenever the run ended between
+        # checks, which is what the probe stage does.
+        final_cos = cos_mean_lag
+
         if i >= cfg.check_start and i % cfg.check_every == 0:
-            final_cos = cos_mean_lag
             consecutive = consecutive + 1 if cos_mean_lag > cfg.threshold else 0
             if verbose:
                 print(f"    iter {i:>4}: cos={cos_mean_lag:.6f} streak={consecutive} "

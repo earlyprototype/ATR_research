@@ -99,15 +99,22 @@ def jspace_table() -> None:
           f"The pre-registered rule needs {v['majority_needed']} or more. "
           f"Verdict by that rule: "
           f"**{'SUPPORTED' if v['H19b_supported'] else 'NOT SUPPORTED'}**.")
+    label = {"settled": "terminal", "clean": "ordinary"}
     for layer, row in d["layers"].items():
-        if "exact_check" in row:
-            for cond, ex in row["exact_check"].items():
-                label = {"settled": "terminal", "clean": "ordinary"}[cond]
-            print(f"\nApproximation check at layer {layer}, {label} states: the "
-                      f"largest difference between the share computed over the "
-                      f"whole 151,936-word-piece vocabulary and the share computed "
-                      f"over the 4,096 best-correlating directions is "
-                      f"{ex['max_abs_diff']:.6f} on a scale of 0 to 1.")
+        if "exact_check" not in row:
+            continue
+        # Both conditions are printed, in a fixed order. Printing outside this
+        # loop reported whichever condition the file happened to list last and
+        # silently dropped the other, which is the larger of the two here.
+        for cond in ("settled", "clean"):
+            ex = row["exact_check"].get(cond)
+            if ex is None:
+                continue
+            print(f"\nApproximation check at layer {layer}, {label[cond]} "
+                  f"states: the largest difference between the share computed "
+                  f"over the whole 151,936-word-piece vocabulary and the share "
+                  f"computed over the 4,096 best-correlating directions is "
+                  f"{ex['max_abs_diff']:.6f} on a scale of 0 to 1.")
 
 
 if __name__ == "__main__":

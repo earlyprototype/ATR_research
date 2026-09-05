@@ -11,7 +11,8 @@ Stages, in the order they are meant to run:
            five of the same prompts wrapped as a user turn, thinking mode off).
   states   Per-layer states for the J-space test (H19b): inject each settled
            tensor at the layer-0 entry and read every scored layer, and run the
-           same prompts clean for the comparison arm.
+           same prompts clean for the comparison arm. The precision is the one
+           the loop recorded in its results file unless `--dtype` overrides it.
   lagscan  Supplementary observation, no hypothesis attached: rerun a few
            prompts keeping every mean position vector, then report the average
            cosine between repetitions k apart for k = 1 to 8. A state that has
@@ -38,8 +39,8 @@ sys.path.insert(0, str(HERE))
 
 from qwen_port import (  # noqa: E402
     LoopConfig, chat_wrap, free_gb, hook_names, load_model, make_injection_hook,
-    natural_profile, peak_gb, position_collapse, readout, rss_gb, run_loop,
-    tokenise, versions,
+    natural_profile, peak_gb, position_collapse, readout, resolve_revision,
+    rss_gb, run_loop, tokenise, versions,
 )
 
 OUT = HERE / "output"
@@ -53,6 +54,36 @@ SUBSET = (HERE / ".." / "exp_010c_windows" / "output"
 BAND_LAYERS = list(range(11, 26))
 EARLY_LAYERS = [2, 5]
 SCORED_LAYERS = sorted(EARLY_LAYERS + BAND_LAYERS)
+
+# The two precisions this port supports. `--dtype` defaults to nothing rather
+# than to a name, so a stage can tell "the operator asked for float32" from
+# "the operator asked for nothing", which the states stage needs.
+DTYPES = {"float32": torch.float32, "bfloat16": torch.bfloat16}
+DEFAULT_DTYPE = "float32"
+
+
+def dtype_name(args) -> str:
+    """The precision this invocation asked for, or the default if it asked for none."""
+    return args.dtype or DEFAULT_DTYPE
+
+
+def atomic_write(path: Path, write) -> None:
+    """Write a file through a temporary name in the same directory, then rename.
+
+    `write` is called with the temporary path. Renaming within one directory
+    replaces the old file in a single step, so a crash part way through a write
+    leaves the previous complete checkpoint in place instead of a half-written
+    file that a later resume would read as if it were whole. The temporary name
+    keeps the real suffix because `numpy.savez_compressed` appends `.npz` to
+    any name that lacks it.
+    """
+    tmp = path.with_name(f"{path.stem}.tmp{path.suffix}")
+    try:
+        write(tmp)
+        tmp.replace(path)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
 
 
 def load_prompts(n: int | None = None, arm: str = "bare",
@@ -73,10 +104,10 @@ def load_prompts(n: int | None = None, arm: str = "bare",
 def stage_probe(args) -> None:
     """Feasibility, memory, timing, and the natural-loudness recording pass."""
     t_start = time.time()
+    dtype = dtype_name(args)
     print(f"free={free_gb():.1f} GB before load", flush=True)
     t0 = time.time()
-    model = load_model(dtype=torch.float32 if args.dtype == "float32"
-                       else torch.bfloat16)
+    model = load_model(dtype=DTYPES[dtype])
     load_s = time.time() - t0
     print(f"loaded in {load_s:.1f}s  rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
           f"free={free_gb():.1f} GB", flush=True)
@@ -86,7 +117,8 @@ def stage_probe(args) -> None:
     records = load_prompts()
     out = {
         "model": "Qwen/Qwen3-1.7B",
-        "dtype": args.dtype,
+        "model_revision": resolve_revision(),
+        "dtype": dtype,
         "versions": versions(),
         "cfg": {k: getattr(model.cfg, k, None) for k in
                 ("n_layers", "d_model", "n_heads", "n_key_value_heads", "d_vocab",
@@ -177,16 +209,22 @@ def stage_probe(args) -> None:
     out["free_gb_at_end"] = round(free_gb(), 2)
     out["wall_seconds"] = round(time.time() - t_start, 1)
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "probe_natural_norms.json").write_text(json.dumps(out, indent=2))
-    print(f"\nwrote {OUT/'probe_natural_norms.json'}  peak={peak_gb():.2f} GB", flush=True)
+    # The precision is in the filename because both precisions are probed and
+    # both files are committed; one shared name let the second run overwrite
+    # the first and needed a rename by hand afterwards.
+    probe_path = OUT / f"probe_natural_norms_{dtype}.json"
+    probe_path.write_text(json.dumps(out, indent=2))
+    print(f"\nwrote {probe_path}  peak={peak_gb():.2f} GB", flush=True)
 
 
 def stage_loop(args) -> None:
     """The registered run for one arm."""
     t_start = time.time()
-    model = load_model(dtype=torch.float32 if args.dtype == "float32"
-                       else torch.bfloat16)
-    print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB", flush=True)
+    dtype = dtype_name(args)
+    model = load_model(dtype=DTYPES[dtype])
+    revision = resolve_revision()
+    print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
+          f"dtype={dtype} revision={revision}", flush=True)
     cfg = LoopConfig(max_iter=args.max_iter, check_start=args.check_start,
                      check_every=args.check_every, seed=args.seed)
     records = load_prompts(args.n_prompts, args.arm, args.n_chat)
@@ -195,10 +233,21 @@ def stage_loop(args) -> None:
     npz_path = OUT / f"terminal_states_{args.arm}.npz"
     results, tensors = [], {}
     if args.resume and res_path.exists():
-        results = json.loads(res_path.read_text())["records"]
-        done = {r["id"] for r in results}
+        prior = json.loads(res_path.read_text())["records"]
         if npz_path.exists():
-            tensors = {k: v for k, v in np.load(npz_path).items()}
+            with np.load(npz_path) as saved:
+                tensors = {k: v for k, v in saved.items()}
+        # A prompt counts as finished only when both checkpoints hold it: its
+        # row in the results file and its terminal state in the state file.
+        # A prompt held by only one of them is run again, because the states
+        # stage needs the terminal state and would fail on a missing one.
+        done = {r["id"] for r in prior} & set(tensors)
+        half = [r["id"] for r in prior if r["id"] not in done]
+        results = [r for r in prior if r["id"] in done]
+        tensors = {k: v for k, v in tensors.items() if k in done}
+        if half:
+            print(f"resume: rerunning {len(half)} prompt(s) present in one "
+                  f"checkpoint but not the other: {', '.join(half)}", flush=True)
         records = [r for r in records if r["id"] not in done]
         print(f"resume: {len(done)} done, {len(records)} to go", flush=True)
 
@@ -221,13 +270,19 @@ def stage_loop(args) -> None:
               f"top={r['readout']['top_token_strings'][0]!r} "
               f"({dt:.0f}s, {dt/r['n_iters']:.2f} s/pass, "
               f"rss={rss_gb():.1f} GB, free={free_gb():.1f} GB)", flush=True)
-        payload = {"arm": args.arm, "model": "Qwen/Qwen3-1.7B", "dtype": args.dtype,
+        payload = {"arm": args.arm, "model": "Qwen/Qwen3-1.7B",
+                   "model_revision": revision, "dtype": dtype,
                    "loop_config": vars(cfg), "versions": versions(),
                    "scored_layers": SCORED_LAYERS,
                    "wall_seconds": round(time.time() - t_start, 1),
                    "peak_gb": round(peak_gb(), 3), "records": results}
-        res_path.write_text(json.dumps(payload, indent=2))
-        np.savez_compressed(npz_path, **tensors)
+        # States first, then the results row, each written through a temporary
+        # file and renamed. A crash between the two leaves a state with no row,
+        # which the resume above reruns; the reverse order would leave a row
+        # with no state, which it would also rerun, so either order is safe and
+        # neither can be read as half a prompt.
+        atomic_write(npz_path, lambda p: np.savez_compressed(p, **tensors))
+        atomic_write(res_path, lambda p: p.write_text(json.dumps(payload, indent=2)))
     print(f"\narm {args.arm} done in {(time.time()-t_start)/60:.1f} min, "
           f"peak={peak_gb():.2f} GB", flush=True)
 
@@ -244,13 +299,44 @@ def _scored_positions(n_tokens: int) -> list[int]:
     return sorted({1, n_tokens // 2, n_tokens - 1})
 
 
+def states_dtype(args, res: dict) -> str:
+    """The precision the states stage loads the model in.
+
+    The loop records the precision it ran in, and states read at a different
+    precision are not the states the loop visited, so the recorded value wins
+    when no `--dtype` is given and a `--dtype` that contradicts it stops the
+    run unless `--allow-dtype-mismatch` says the contradiction is deliberate.
+    """
+    recorded = res.get("dtype")
+    if args.dtype is None:
+        if recorded in DTYPES:
+            return recorded
+        raise SystemExit(
+            f"results_{args.arm}.json records no precision this runner knows "
+            f"(found {recorded!r}), so the states stage cannot tell which "
+            f"precision the loop ran in; pass --dtype float32 or "
+            f"--dtype bfloat16 explicitly")
+    if (recorded in DTYPES and recorded != args.dtype
+            and not args.allow_dtype_mismatch):
+        raise SystemExit(
+            f"--dtype {args.dtype} contradicts the {recorded} recorded in "
+            f"results_{args.arm}.json; states read at a precision the loop "
+            f"never ran in are not comparable with it. Drop the flag to use "
+            f"{recorded}, or pass --allow-dtype-mismatch to override")
+    return args.dtype
+
+
 def stage_states(args) -> None:
     """Per-layer states for H19b: settled tensors re-injected, and clean passes."""
     t_start = time.time()
-    model = load_model(dtype=torch.float32 if args.dtype == "float32"
-                       else torch.bfloat16)
-    inject_name, _ = hook_names(model)
+    # The results file is read before the model is loaded, because it is what
+    # says which precision to load.
     res = json.loads((OUT / f"results_{args.arm}.json").read_text())
+    dtype = states_dtype(args, res)
+    print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})", flush=True)
+    model = load_model(dtype=DTYPES[dtype])
+    revision = resolve_revision()
+    inject_name, _ = hook_names(model)
     tensors = np.load(OUT / f"terminal_states_{args.arm}.npz")
     want = {f"blocks.{l}.hook_resid_post" for l in SCORED_LAYERS}
     settled, clean, meta = {}, {}, []
@@ -295,7 +381,11 @@ def stage_states(args) -> None:
                         **{f"settled|{k}": v for k, v in settled.items()},
                         **{f"clean|{k}": v for k, v in clean.items()})
     (outdir / f"layer_states_{args.arm}_meta.json").write_text(json.dumps(
-        {"arm": args.arm, "scored_layers": SCORED_LAYERS, "prompts": meta}, indent=2))
+        {"arm": args.arm, "scored_layers": SCORED_LAYERS, "dtype": dtype,
+         "model": "Qwen/Qwen3-1.7B", "model_revision": revision,
+         "loop_dtype": res.get("dtype"),
+         "loop_model_revision": res.get("model_revision"),
+         "prompts": meta}, indent=2))
     print(f"wrote layer states to {outdir}, {(time.time()-t_start)/60:.1f} min, "
           f"peak={peak_gb():.2f} GB", flush=True)
 
@@ -308,8 +398,7 @@ def stage_lagscan(args) -> None:
     `atr_engine2.lag_scan`, on the mean position vector of the last iterations.
     """
     import torch.nn.functional as F
-    model = load_model(dtype=torch.float32 if args.dtype == "float32"
-                       else torch.bfloat16)
+    model = load_model(dtype=DTYPES[dtype_name(args)])
     inject_name, extract_name = hook_names(model)
     records = load_prompts(args.n_prompts, args.arm, args.n_chat)
     out = {"arm": args.arm, "iterations": args.max_iter, "max_lag": 8,
@@ -355,7 +444,13 @@ def main() -> None:
     ap.add_argument("--stage", required=True,
                     choices=["probe", "loop", "states", "lagscan"])
     ap.add_argument("--arm", default="bare", choices=["bare", "chat"])
-    ap.add_argument("--dtype", default="float32", choices=["float32", "bfloat16"])
+    ap.add_argument("--dtype", default=None, choices=["float32", "bfloat16"],
+                    help="model precision; defaults to float32 for probe, loop "
+                         "and lagscan, and to the precision recorded in the "
+                         "results file for states")
+    ap.add_argument("--allow-dtype-mismatch", action="store_true",
+                    help="let --stage states run at a precision the loop did "
+                         "not record")
     ap.add_argument("--max-iter", type=int, default=200)
     ap.add_argument("--check-start", type=int, default=10)
     ap.add_argument("--check-every", type=int, default=2)
