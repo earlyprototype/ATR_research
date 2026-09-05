@@ -2643,5 +2643,153 @@
    "primary": 19,
    "extension": 4
   }
+ },
+ "registered_split": {
+  "split_counts": {
+   "tuning": 25,
+   "heldout": 25
+  },
+  "function_level": {
+   "chosen_cell": [
+    "10",
+    2.0,
+    "all"
+   ],
+   "tuning": {
+    "lens": [
+     0.871,
+     54,
+     62
+    ],
+    "randdir": [
+     0.1532,
+     19,
+     124
+    ],
+    "randnorm": [
+     0.1613,
+     20,
+     124
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.8548,
+     53,
+     62
+    ],
+    "randdir": [
+     0.1694,
+     21,
+     124
+    ],
+    "randnorm": [
+     0.1774,
+     22,
+     124
+    ]
+   },
+   "heldout_pairs_primary": {
+    "lens": [
+     14,
+     15
+    ],
+    "randdir": [
+     0,
+     30
+    ],
+    "randnorm": [
+     0,
+     30
+    ]
+   }
+  },
+  "pair_level": {
+   "chosen_cell": [
+    "9",
+    2.0,
+    "all"
+   ],
+   "tuning_pairs_primary": {
+    "lens": [
+     14,
+     15
+    ],
+    "randdir": [
+     0,
+     30
+    ],
+    "randnorm": [
+     0,
+     30
+    ]
+   },
+   "heldout_pairs_primary": {
+    "lens": [
+     13,
+     15
+    ],
+    "randdir": [
+     0,
+     30
+    ],
+    "randnorm": [
+     0,
+     30
+    ]
+   }
+  },
+  "committed_cells_heldout_pairs_primary": {
+   "6": {
+    "lens": [
+     14,
+     15
+    ],
+    "randdir": [
+     0,
+     30
+    ],
+    "randnorm": [
+     0,
+     30
+    ]
+   },
+   "9": {
+    "lens": [
+     13,
+     15
+    ],
+    "randdir": [
+     0,
+     30
+    ],
+    "randnorm": [
+     0,
+     30
+    ]
+   }
+  }
+ },
+ "exact_tests": {
+  "pairs_primary_heldout": [
+   13,
+   13,
+   6.272254743863065e-07
+  ],
+  "pairs_primary_both": [
+   26,
+   26,
+   3.9341179571912734e-13
+  ],
+  "pairs_primary_heldout_rank1": [
+   7,
+   7,
+   0.0004572473708276176
+  ],
+  "pairs_primary_heldout_layer9": [
+   13,
+   13,
+   6.272254743863065e-07
+  ]
  }
 }

@@ -181,3 +181,27 @@ for b in BATTERIES:
                 for half in ("tuning", "heldout", "overall"):
                     r = rs[ps][half]
                     print(f"| {ps} | {half} | {r['lens'][0]} of {r['lens'][1]} | {r['randdir'][0]} of {r['randdir'][1]} | {r['randnorm'][0]} of {r['randnorm'][1]} |")
+
+    et = s["exact_tests"]
+    def fmt(t):
+        return f"{t[0]} lens successes over {t[1]} informative items, probability {t[2]:.3g}"
+    print("\nExact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):\n")
+    for name, t in et.items():
+        print(f"- {name.replace('_', ' ')}: {fmt(t)}")
+    if b == "h17a":
+        rs = s["registered_split"]
+        fl, pl = rs["function_level"], rs["pair_level"]
+        print(f"\nUnder the specification's own split rule (alternate pairs in the committed order, "
+              f"{rs['split_counts']['tuning']} tuning and {rs['split_counts']['heldout']} held-out, against the "
+              f"country-wise 27 and 23 the battery was built with): function-level selection picks layers "
+              f"{fl['chosen_cell'][0]}, strength {fl['chosen_cell'][1]}, {fl['chosen_cell'][2]} "
+              f"(tuning {pct(fl['tuning']['lens'])}, held-out {pct(fl['heldout']['lens'])} per question; "
+              f"held-out primary pairs {fl['heldout_pairs_primary']['lens'][0]} of {fl['heldout_pairs_primary']['lens'][1]} "
+              f"against {fl['heldout_pairs_primary']['randdir'][0]} of {fl['heldout_pairs_primary']['randdir'][1]}); "
+              f"pair-level selection picks layers {pl['chosen_cell'][0]} (held-out primary pairs "
+              f"{pl['heldout_pairs_primary']['lens'][0]} of {pl['heldout_pairs_primary']['lens'][1]} against "
+              f"{pl['heldout_pairs_primary']['randdir'][0]} of {pl['heldout_pairs_primary']['randdir'][1]}). "
+              f"At the committed cells, held-out primary pairs under that split: layer 6 "
+              f"{rs['committed_cells_heldout_pairs_primary']['6']['lens'][0]} of {rs['committed_cells_heldout_pairs_primary']['6']['lens'][1]}, "
+              f"layer 9 {rs['committed_cells_heldout_pairs_primary']['9']['lens'][0]} of {rs['committed_cells_heldout_pairs_primary']['9']['lens'][1]}, "
+              f"control A 0 of 30 at both.")

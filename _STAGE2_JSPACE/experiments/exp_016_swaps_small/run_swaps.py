@@ -87,7 +87,7 @@ def main(battery):
     w = csv.writer(fh)
     w.writerow(["item_id", "func", "split", "layers", "alpha", "posmode",
                 "arm", "seed", "good_rank", "bad_rank", "argmax_tok",
-                "in_top5", "is_top1", "beats_bad", "patch_norm"])
+                "in_top5", "is_top1", "beats_bad", "patch_norm", "top5_ids"])
     n_done = 0
     for ui, u in enumerate(units):
         toks = model.to_tokens(u["prompt"])
@@ -121,7 +121,8 @@ def main(battery):
                 w.writerow([u["item_id"], u.get("func", ""), u["split"],
                             "-".join(map(str, ls)), a, m, arm, sd, gr, br,
                             int(am[bi]), int(g in top5[bi]), int(am[bi] == g),
-                            int(gr < br), round(float(plan.change_sq[bi].sqrt()), 4)])
+                            int(gr < br), round(float(plan.change_sq[bi].sqrt()), 4),
+                            " ".join(str(int(t)) for t in top5[bi])])
             n_done += len(chunk)
         if ui % 5 == 0 or ui == len(units) - 1:
             el = time.time() - t0

@@ -106,6 +106,12 @@ for X, Y, arm in pairs:
                    target_tok=single_token_id(model, " " + Y),
                    n_scoreable=sum(f["scoreable"] for f in funcs),
                    funcs=funcs,
+                   # The run assigned halves by source country, so a country's
+                   # three (or four) pairs sit in one half: 27 tuning and 23
+                   # held-out. The specification says alternate items, which for
+                   # this battery means alternate pairs (25 and 25); analyse.py
+                   # reports that reading beside this one (deviation 17). The
+                   # rule is kept here so the committed batteries rebuild exactly.
                    split="tuning" if (G3.index(X) if X in G3 else C.index(X)) % 2 == 0
                          else "heldout"))
 b2 = [it for it in b2 if it["n_scoreable"] >= 2]

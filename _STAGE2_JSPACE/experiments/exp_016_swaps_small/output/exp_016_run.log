@@ -127,3 +127,4 @@ reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82b
 
 [2026-09-05T17:50:00Z] review follow-up: check_engine.py re-run with its checks now asserting (exit 0, all four passed); analyse.py h17 h17a h17b re-run to add the source-rule, pair-level and position-mode selection routes to the summary files (chosen settings unchanged); make_tables.py output re-pasted into RESULTS_EXP016.md.
 [2026-09-05T18:05:00Z] review follow-up: analyse.py re-run to add the rank-one sensitivity readings the specification promised and to leave pairs with too few scoreable questions out of the at-least-three denominators; make_tables.py output re-pasted into RESULTS_EXP016.md.
+[2026-09-05T18:20:00Z] review follow-up: analyse.py re-run to add the exact within-item tests and the registered alternating-pair split reading for H17a to the summary files; make_tables.py output re-pasted into RESULTS_EXP016.md. No swap was re-run.

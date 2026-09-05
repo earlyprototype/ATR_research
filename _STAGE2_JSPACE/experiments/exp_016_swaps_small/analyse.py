@@ -203,6 +203,146 @@ def source_rule_selection(rows, items):
     return out
 
 
+def exact_within_item_test(items):
+    """Exact one-sided test of the lens arm against control A on the same
+    items. `items` is a list of (lens_success, [control_success per seed]).
+    Under the null that the lens direction is no different from a random
+    direction of the same lengths, the lens draw is exchangeable with the
+    control draws within each item; conditioning on each item's total number
+    of successes among its draws and relabelling which draw is the lens at
+    random, the number of lens successes is a sum of independent Bernoulli
+    variables with probability (successes / draws) per item. Returns
+    (observed lens successes, informative items, probability of at least the
+    observed count under the null)."""
+    probs, t = [], 0
+    for lens, ctrls in items:
+        s = lens + sum(ctrls)
+        k = 1 + len(ctrls)
+        if s == 0 or s == k:
+            continue
+        probs.append(s / k)
+        t += lens
+    dist = {0: 1.0}
+    for p in probs:
+        nd = defaultdict(float)
+        for c, v in dist.items():
+            nd[c] += v * (1 - p)
+            nd[c + 1] += v * p
+        dist = nd
+    return t, len(probs), sum(v for c, v in dist.items() if c >= t)
+
+
+def item_outcomes(rows, cell, key, pred=lambda r: True):
+    """Per-item (lens, [control A per seed]) outcomes at one setting."""
+    per = defaultdict(lambda: defaultdict(dict))
+    for r in rows:
+        if (r["layers"], r["alpha"], r["posmode"]) == tuple(cell) and pred(r):
+            per[r["item_id"]][r["arm"]][r["seed"]] = r[key]
+    return [(d["lens"][-1], [d["randdir"][s] for s in sorted(d["randdir"])])
+            for d in per.values() if "lens" in d and "randdir" in d]
+
+
+def pair_outcomes(rows, cell, split, pair_set, need=2, rank1=False):
+    """Per-pair (lens, [control A per seed]) outcomes for H17a at one setting,
+    a pair succeeding when at least `need` of its scoreable questions were
+    redirected by the same draw."""
+    items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
+    grp = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+    for r in rows:
+        if (r["layers"], r["alpha"], r["posmode"]) != tuple(cell):
+            continue
+        it = items[r["item_id"]]
+        if it["arm"] != pair_set or (split and it["split"] != split):
+            continue
+        if rank1 and next(f for f in it["funcs"] if f["func"] == r["func"])["clean_rank"] != 1:
+            continue
+        grp[r["item_id"]][(r["arm"], r["seed"])][r["func"]] += r["in_top5"]
+    out = []
+    for arms in grp.values():
+        if len(next(iter(arms.values()))) < need:
+            continue
+        lens = int(sum(1 for v in arms[("lens", -1)].values() if v) >= need)
+        ctrls = [int(sum(1 for v in d.values() if v) >= need)
+                 for (a, s), d in sorted(arms.items()) if a == "randdir"]
+        out.append((lens, ctrls))
+    return out
+
+
+def registered_split_reading(rows, key="in_top5"):
+    """H17a under the specification's own split rule, alternate pairs in the
+    committed order (25 and 25), instead of the country-wise assignment the
+    battery was built with (27 and 23). Reported as a sensitivity reading;
+    the run was tuned on the split it was built with."""
+    order = [it["item_id"] for it in json.load(open(D + "battery_h17a.json"))]
+    alt = {iid: ("tuning" if i % 2 == 0 else "heldout") for i, iid in enumerate(order)}
+    def rates(split):
+        acc = defaultdict(lambda: defaultdict(lambda: [0, 0]))
+        for r in rows:
+            if alt[r["item_id"]] != split:
+                continue
+            a = acc[(r["layers"], r["alpha"], r["posmode"])][r["arm"]]
+            a[0] += r[key]; a[1] += 1
+        return {c: {a: (n / d, n, d) for a, (n, d) in arms.items()} for c, arms in acc.items()}
+    tune, held = rates("tuning"), rates("heldout")
+    best = choose(tune)
+    items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
+    def pairs(split, cell):
+        grp = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        for r in rows:
+            if (r["layers"], r["alpha"], r["posmode"]) != tuple(cell) or alt[r["item_id"]] != split \
+                    or items[r["item_id"]]["arm"] != "primary":
+                continue
+            grp[r["item_id"]][(r["arm"], r["seed"])][r["func"]] += r["in_top5"]
+        acc = defaultdict(lambda: [0, 0])
+        for arms in grp.values():
+            for (a, s), d in arms.items():
+                if len(d) < 2:
+                    continue
+                acc[a][0] += int(sum(1 for v in d.values() if v) >= 2); acc[a][1] += 1
+        return {a: [n, d] for a, (n, d) in acc.items()}
+    tune_pl = {}
+    for c in tune:
+        pl = pairs("tuning", c)
+        if pl:
+            tune_pl[c] = {a: (n / d if d else 0.0, n, d) for a, (n, d) in pl.items()}
+    best_pl = choose(tune_pl)
+    return dict(split_counts=dict(tuning=sum(v == "tuning" for v in alt.values()),
+                                  heldout=sum(v == "heldout" for v in alt.values())),
+                function_level=dict(chosen_cell=list(best), tuning=arms_of(tune, best),
+                                    heldout=arms_of(held, best),
+                                    heldout_pairs_primary=pairs("heldout", best)),
+                pair_level=dict(chosen_cell=list(best_pl),
+                                tuning_pairs_primary=pairs("tuning", best_pl),
+                                heldout_pairs_primary=pairs("heldout", best_pl)),
+                committed_cells_heldout_pairs_primary={
+                    "6": pairs("heldout", ("6", 2.0, "all")), "9": pairs("heldout", ("9", 2.0, "all"))})
+
+
+def exact_tests(rows, battery, cell):
+    """The exact within-item tests the record reports, per battery."""
+    out = {}
+    if battery == "h17":
+        items = {it["item_id"]: it for it in json.load(open(D + "battery_h17.json"))}
+        held = lambda r: items[r["item_id"]]["split"] == "heldout"
+        out["pooled_heldout"] = exact_within_item_test(item_outcomes(rows, cell, "in_top5", held))
+        for rule in ("lens", "output"):
+            out[f"rule_{rule}_heldout"] = exact_within_item_test(item_outcomes(
+                rows, cell, "in_top5", lambda r, rule=rule: held(r) and items[r["item_id"]]["source_rule"] == rule))
+    elif battery == "h17a":
+        out["pairs_primary_heldout"] = exact_within_item_test(pair_outcomes(rows, cell, "heldout", "primary"))
+        out["pairs_primary_both"] = exact_within_item_test(pair_outcomes(rows, cell, None, "primary"))
+        out["pairs_primary_heldout_rank1"] = exact_within_item_test(pair_outcomes(rows, cell, "heldout", "primary", rank1=True))
+        out["pairs_primary_heldout_layer9"] = exact_within_item_test(pair_outcomes(rows, ("9", 2.0, "all"), "heldout", "primary"))
+    else:
+        items = {it["item_id"]: it for it in json.load(open(D + "battery_h17b.json"))}
+        out["items_all"] = exact_within_item_test(item_outcomes(rows, cell, "is_top1"))
+        out["items_heldout"] = exact_within_item_test(item_outcomes(
+            rows, cell, "is_top1", lambda r: items[r["item_id"]]["split"] == "heldout"))
+        out["items_rank1"] = exact_within_item_test(item_outcomes(
+            rows, cell, "is_top1", lambda r: items[r["item_id"]]["clean_answer_rank"] == 1))
+    return out
+
+
 def rank1_sensitivity(rows, battery, cell):
     """The specification's promised rank-1 sensitivity check: the same
     scoring at the tuned setting, restricted to the items (H17b) or the
@@ -279,6 +419,9 @@ if __name__ == "__main__":
             out["posmode"] = posmode_table(rows, SCORE[b], out["chosen_cell"])
         if b in ("h17a", "h17b"):
             out["rank1_sensitivity"] = rank1_sensitivity(rows, b, out["chosen_cell"])
+        if b == "h17a":
+            out["registered_split"] = registered_split_reading(rows)
+        out["exact_tests"] = exact_tests(rows, b, out["chosen_cell"])
         json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
         c = out["chosen_cell"]
         print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "

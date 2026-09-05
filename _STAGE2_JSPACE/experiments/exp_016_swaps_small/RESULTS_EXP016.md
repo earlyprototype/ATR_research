@@ -41,12 +41,13 @@ register:
   10 percent, and both readings clear it. Before any swap, the intended word
   was in the top five on 0 of 84 items by construction, because the
   battery's rule excludes it from the model's top ten. The lens arm and the
-  control are measured on the same items, so the right test is a paired
-  one: it counts the items on which the two arms disagree and asks how
-  often chance alone would put every disagreement on the lens's side. That
-  exact paired test gives a probability of 4 in 1,000,000 for the protocol
-  gap (18 items succeed under the lens and not under the control, none the
-  other way) and 7 in 1,000,000,000 for the pooled one (27 such items).
+  control are measured on the same items, and under the null hypothesis
+  that the lens direction is no better than a random direction of the same
+  lengths, the lens draw is exchangeable with the two control draws inside
+  each item. The exact test built on that (see "Statistical
+  distinguishability" below) gives a probability of 3 in 1,000,000,000 for
+  the protocol gap (18 items, each with one success among three draws, all
+  on the lens) and 1 in 10,000,000,000,000 for the pooled one (27 items).
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
   questions about that country on **87 percent of the held-out pairs, 13 of
@@ -62,32 +63,42 @@ register:
   three, while the register's words "items the clean model answers
   correctly" can be read as rank one only. On the rank-one questions alone,
   72 of the 124, over the 19 primary pairs that keep at least two of them,
-  the held-out result is 7 of 9 pairs against 0 of 18 for the control.
+  the held-out result is 7 of 9 pairs against 0 of 18 for the control. A
+  second caveat (deviation 17): the battery's halves were assigned by
+  source country, 27 and 23 pairs, where the specification says alternate
+  items, which for this battery means alternate pairs, 25 and 25. Under the
+  specification's rule the per-question selection picks layer 10 and the
+  held-out result is 14 of 15 pairs against 0 of 30, and the pair-level
+  selection picks layer 9 with 13 of 15 against 0 of 30, so the verdict
+  does not depend on the split.
 - **H17b, intermediate-step surgery: SUPPORTED on its registered wording,
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
   items, which is 25 percent**, against **0 of 48 control trials, which is 0
-  percent**. The exact paired test, which counts the items on which the
-  lens arm and the control disagree (an item counts as a control success
-  if any of its three control draws flipped it) and asks how often chance
-  alone would put every disagreement on the lens's side, gives a
-  probability of 0.0625 over all 16 items (4 disagreements, all favouring
-  the lens) and 0.5 on the held-out half alone (1 disagreement). The first
-  version of this record gave 0.0029 and 0.25 by counting the 48 control
-  rows as if they were 48 items, and a second version gave 0.051 by testing
-  the two arms as independent samples; both are withdrawn (see the
-  correction below). The registered
+  percent**. The exact within-item test (the lens draw exchangeable with
+  the three control draws inside each item, see "Statistical
+  distinguishability" below) gives a probability of 0.0039 over all 16
+  items, because each of the 4 flipped items has one success among four
+  draws and chance would put all four on the lens one time in 256, and
+  0.25 on the held-out half alone, where there is one such item. Three
+  earlier versions of this record gave 0.0029 (control draws counted as
+  items), 0.051 (the arms tested as independent samples) and 0.0625 (a
+  sign test against the union of the three control draws, which is not an
+  exchangeable pair); all three are withdrawn (see the corrections
+  below). The registered
   rule asked only that the flip happen more often than under the control,
-  and it does, but the effect is not distinguishable from chance at the
-  usual 5 percent level and the battery is too small for this verdict to
-  carry much weight on its own. One population caveat cuts the other way
+  and it does; over all 16 items the exact test puts the effect inside the
+  usual 5 percent level, but on the held-out half alone, the number the
+  specification judges on, it does not, and the battery is too small for
+  this verdict to carry much weight on its own. One population caveat cuts
+  the other way
   (deviation 14): the specification's gate admitted 9 items whose correct
   answer the unmodified model ranks second or third, and all four flips are
   among the 7 items it ranks first, which is the population the registered
   wording names if "answers correctly" is read strictly. On those 7 the
-  result is 4 of 7 against 0 of 7 for control A (exact paired probability
-  0.0625, the same four disagreements), and 1 of 3 against 0 of 3 on the
-  held-out half.
+  result is 4 of 7 against 0 of 7 for control A (exact within-item
+  probability 0.0039, the same four items), and 1 of 3 against 0 of 3 on
+  the held-out half.
 
 The most interesting single number is not any of those three. It is the
 contrast inside H17b. Exchanging the concept everywhere from its first
@@ -242,6 +253,12 @@ Each source rule at the pooled tuned setting (layers 7-8-9, strength 2.0, positi
 | output | heldout | 86 percent (18 of 21) | 0 percent (0 of 42) | 0 percent (0 of 42) |
 | output | overall | 90 percent (38 of 42) | 0 percent (0 of 84) | 0 percent (0 of 84) |
 
+Exact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):
+
+- pooled heldout: 27 lens successes over 27 informative items, probability 1.31e-13
+- rule lens heldout: 9 lens successes over 9 informative items, probability 5.08e-05
+- rule output heldout: 18 lens successes over 18 informative items, probability 2.58e-09
+
 ### H17A: tuned setting = layers 6, strength 2.0, positions all   (18600 records)
 
 | arm | tuning half | held-out half | both halves |
@@ -338,6 +355,15 @@ Rank-1 sensitivity check (specification section 5.2): only the 72 of 124 scoreab
 | extension | heldout | 0 of 0 | 0 of 0 | 0 of 0 |
 | extension | overall | 4 of 4 | 0 of 8 | 1 of 8 |
 
+Exact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):
+
+- pairs primary heldout: 13 lens successes over 13 informative items, probability 6.27e-07
+- pairs primary both: 26 lens successes over 26 informative items, probability 3.93e-13
+- pairs primary heldout rank1: 7 lens successes over 7 informative items, probability 0.000457
+- pairs primary heldout layer9: 13 lens successes over 13 informative items, probability 6.27e-07
+
+Under the specification's own split rule (alternate pairs in the committed order, 25 tuning and 25 held-out, against the country-wise 27 and 23 the battery was built with): function-level selection picks layers 10, strength 2.0, all (tuning 87 percent (54 of 62), held-out 85 percent (53 of 62) per question; held-out primary pairs 14 of 15 against 0 of 30); pair-level selection picks layers 9 (held-out primary pairs 13 of 15 against 0 of 30). At the committed cells, held-out primary pairs under that split: layer 6 14 of 15, layer 9 13 of 15, control A 0 of 30 at both.
+
 ### H17B: tuned setting = layers 7, strength 2.0, positions all_no_bos   (14112 records)
 
 | arm | tuning half | held-out half | both halves |
@@ -410,6 +436,12 @@ Rank-1 sensitivity check (specification section 5.3): the 7 of 16 items whose co
 | heldout | 1 of 3 | 0 of 3 | 0 of 3 |
 | overall | 4 of 7 | 0 of 7 | 1 of 7 |
 
+Exact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):
+
+- items all: 4 lens successes over 4 informative items, probability 0.00391
+- items heldout: 1 lens successes over 1 informative items, probability 0.25
+- items rank1: 4 lens successes over 4 informative items, probability 0.00391
+
 ### Numbers not in the tables above
 
 **All three country questions redirected together, counted only over the
@@ -423,22 +455,32 @@ those 18, which is 78 percent, against 0 of 36 control trials. On the
 held-out half alone the figures are 2 of 3 and 6 of 8 respectively.
 
 **Statistical distinguishability.** The lens arm and control A are measured
-on the same items, so the test is paired: an exact sign test over the items
-on which the two arms disagree (an item counts as a control success if any
-of its draws succeeded), one-sided in the lens's favour, on the held-out
-half. Every disagreement in this experiment favours the lens, so each
-probability is one half raised to the number of disagreeing items. H17
-gives 3.8 times 10 to the power minus 6 at the protocol setting (18
-disagreeing items) and 7.5 times 10 to the power minus 9 pooled over both
-source rules (27); H17a, scored per pair on the primary pairs, gives 1.2
-times 10 to the power minus 4 (13 pairs), and 0.0078 on the rank-one
-questions alone (7 pairs); H17b gives 0.5 (1 item), and 0.0625 over all 16
-items rather than the held-out half alone (4 items). The first version of
-this record gave 4.2 times 10 to the power minus 17, 1.6 times 10 to the
-power minus 22, 0.25 and 0.0029 by counting every control draw as a
-separate item, and a second version gave item-level Fisher figures that
-still treated the two arms as independent samples; both sets are withdrawn
-(deviation 13).
+on the same items, with one lens draw and two (H17, H17a) or three (H17b)
+control draws per item. Under the null hypothesis that the lens direction
+is no better than a random direction of the same lengths, the lens draw is
+exchangeable with the control draws inside each item. The exact test
+conditions on each item's total number of successes among its draws,
+relabels at random which draw is the lens, and asks how often the lens
+would collect at least the observed number of successes; the count of lens
+successes is then a sum of independent coin flips, one per item, with
+probability equal to that item's successes divided by its draws. Items
+where every draw or no draw succeeded carry no information. On these
+records every informative item at the settings that matter has exactly one
+success, on the lens, so each item contributes a factor of one third (two
+control draws) or one quarter (three). On the held-out half: H17 gives 2.6
+times 10 to the power minus 9 at the protocol setting (18 items) and 1.3
+times 10 to the power minus 13 pooled over both source rules (27); H17a,
+scored per pair on the primary pairs, gives 6.3 times 10 to the power
+minus 7 (13 pairs), and 4.6 times 10 to the power minus 4 on the rank-one
+questions alone (7 pairs); H17b gives 0.25 (1 item), and 0.0039 over all
+16 items rather than the held-out half alone (4 items). The summary files
+carry these under `exact_tests`. Three earlier versions of this paragraph
+are withdrawn: the first counted every control draw as a separate item
+(4.2 times 10 to the power minus 17, 1.6 times 10 to the power minus 22,
+0.25 and 0.0029), the second tested the two arms as independent samples at
+item level, and the third ran a sign test against the union of an item's
+control draws, which is not an exchangeable pair because a union of draws
+succeeds more often than one draw (deviation 13).
 
 **H17b under the looser score.** If success is counted as the alternative
 answer merely entering the top five rather than becoming the model's actual
@@ -483,8 +525,9 @@ confined to the country's mention, was not run for H17a.
 
 **Whether it reaches an intermediate reasoning step is unsettled, and the
 evidence leans yes.** H17b's flip rate of 4 in 16 items against 0 in 16
-for the control (three draws each) is small and, on the exact paired test,
-not distinguishable from chance at the usual level (probability 0.0625); the
+for the control (three draws each) is small; on the exact within-item test
+it is distinguishable from chance over all items (probability 0.0039) and
+not on the held-out half alone (0.25); the
 position contrast at the tuned layer and strength (4 of 16 when the
 exchange starts at the concept's first mention, 0 of 16 when it happens
 only at the answer position) is in the direction that separates reasoning
@@ -936,19 +979,23 @@ computation is inferred, not established.
     caveat, and `run_swaps.py` now shares one draw across a pair's
     questions.
 
-13. **The Fisher tests counted control rows as independent items.** The
-    first version of this record tested each lens rate against a control
-    denominator that multiplied the item count by the number of seeds (84
-    for H17, 48 for H17b), which treats repeated draws on the same prompt
-    as separate items; a second version replaced them with item-level
-    Fisher tests, which still treated the lens arm and the control as two
-    independent samples although they are measured on the same items. All
-    probabilities are now exact paired sign tests over the items on which
-    the arms disagree, one-sided in the lens's favour: H17 stays far below
-    any threshold (3.8 times 10 to the power minus 6 at the protocol
-    setting), H17a's pair-level result gives 1.2 times 10 to the power
-    minus 4 (13 disagreeing pairs), and H17b moves from 0.0029 to 0.0625
-    over all items and from 0.25 to 0.5 on the held-out half.
+13. **The significance tests took three attempts to reach an exchangeable
+    null.** The first version of this record tested each lens rate against
+    a control denominator that multiplied the item count by the number of
+    seeds, which treats repeated draws on the same prompt as separate
+    items; a second version used item-level Fisher tests, which still
+    treated the lens arm and the control as independent samples although
+    they are measured on the same items; a third used a paired sign test
+    against the union of an item's control draws, which is not an
+    exchangeable pair because a union of two or three draws succeeds more
+    often than a single draw. Every probability is now the exact
+    within-item test described under "Statistical distinguishability",
+    whose null is the one the registered comparison actually makes: that
+    the lens draw is one more random draw. H17 stays far below any
+    threshold (2.6 times 10 to the power minus 9 at the protocol setting),
+    H17a's pair-level result gives 6.3 times 10 to the power minus 7 (13
+    pairs), and H17b moves from 0.0029 to 0.0039 over all items and from
+    0.25 to 0.25 on the held-out half.
 
 14. **The gates admitted answers the model ranks second or third, and the
     promised rank-one sensitivity check was missing.** The register's
@@ -973,6 +1020,31 @@ computation is inferred, not established.
     ordered pairs by the same pairing rule, about 27,000 swap conditions,
     roughly 20 minutes of processor time at the H17a battery's measured
     rate; it is decision item 6.
+
+16. **The full top-five predictions were not recorded per trial.** Section
+    5.1 of the specification says the top five next words are recorded in
+    full for qualitative reading; the record files keep only the top word,
+    the two ranks and the membership flags, and `output/qualitative.json`
+    holds a chosen subset re-run afterwards. The lens arm's top fives can be
+    regenerated exactly, because that arm is deterministic (about a fifth
+    of the run); the control arms' cannot, because their draws are not
+    regenerable (deviation 7). `run_swaps.py` now writes the five token
+    identifiers on every row.
+
+17. **The H17a halves were assigned by source country, not by alternating
+    pairs.** Section 4 of the specification splits every battery by
+    alternating items, and for H17a an item is an ordered pair. The battery
+    builder assigned each country's three primary pairs (four in the
+    extension set) to one half, giving 27 tuning and 23 held-out pairs
+    rather than 25 and 25. The effect is that no source country appears in
+    both halves, which is a defensible choice, but it is not the registered
+    one. The reading under the registered rule is in the tables: the
+    per-question selection then picks layer 10 (54 of 62 questions on the
+    tuning half) and scores 14 of 15 held-out primary pairs against 0 of 30
+    for control A, and the pair-level selection picks layer 9 with 13 of
+    15 against 0 of 30. The run was tuned on the split it was built with,
+    and the record keeps that as its headline; the verdict is the same
+    under both.
 
 ## Errata found during the run
 
@@ -1004,9 +1076,11 @@ wrong, and what is true instead. The numbers are in the sections above.
 2. It said H17b's effect was distinguishable from control at a probability
    of 0.0029 over all items and 0.25 on the held-out half, "so the effect
    is real". Those probabilities counted the 48 control rows as 48 items;
-   a second version's 0.051 tested the arms as independent samples. The
-   exact paired probabilities are 0.0625 and 0.5, and the effect is not
-   distinguishable from chance at the usual level.
+   a second version's 0.051 tested the arms as independent samples; a
+   third version's 0.0625 sign-tested the lens draw against the union of
+   three control draws. The exact within-item probabilities are 0.0039
+   over all items and 0.25 on the held-out half: inside the usual level
+   over all items, outside it on the half the specification judges on.
 3. It said that swapping only at the answer position flipped 1 of 16 items,
    against 4 of 16 for swapping from the first mention. The 1 came from a
    different layer set chosen over all items. At the tuned layer and
@@ -1034,10 +1108,23 @@ wrong, and what is true instead. The numbers are in the sections above.
     the output" and called that established by H17a. H17a patched the
     answer position too, so the reading is inferred, not established
     (limit seven).
-11. Its tests treated the lens arm and the control as independent samples,
-    first with the control draws counted as items and then at item level.
-    The two arms are measured on the same items; every probability is now
-    an exact paired test, and H17b's is 0.0625 over all items.
+11. Its tests took three attempts to reach an exchangeable null: control
+    draws counted as items, then independent samples at item level, then
+    a sign test against the union of an item's control draws. Every
+    probability is now the exact within-item test, and H17b's is 0.0039
+    over all items and 0.25 on the held-out half.
+12. It assigned the H17a halves by source country (27 and 23 pairs) and
+    described the split as the specification's alternating-item rule. The
+    registered rule gives 25 and 25; under it the selection picks layer 10
+    (or layer 9 pair-level) and the held-out result is 14 of 15 (or 13 of
+    15) against 0 of 30. Recorded as deviation 17.
+13. It said the top five next words were recorded in full for every trial.
+    They were not; only the top word, the ranks and the membership flags
+    were, and the control arms' top fives cannot be regenerated (deviation
+    16).
+14. Its reproduction sequence omitted the step that writes the qualitative
+    job file; `make_qual_jobs.py` and the argument to `qualitative.py` are
+    now named.
 
 ## What remains
 
@@ -1082,9 +1169,9 @@ much they would add.
 
 2. **Whether H17b's verdict should stand as SUPPORTED.** It is supported on
    the registered wording, which asks only that the flip happen more often
-   than under the control, but the exact paired test across all 16 items
-   puts the effect at a probability of 0.0625, outside the usual 5 percent
-   level,
+   than under the control, and the exact within-item test across all 16
+   items puts the effect at a probability of 0.0039, inside the usual 5
+   percent level; but
    and on the held-out half alone, which this experiment's own
    specification names as the number a hypothesis is judged on, it is 1 of
    8 against 0 of 8 and not distinguishable from chance (probability 0.5).
@@ -1137,9 +1224,10 @@ committed battery files by the selection rules in section 5 of the
 specification; `check_engine.py` verifies the swap implementation;
 `run_swaps.py h17`, `run_swaps.py h17a` and `run_swaps.py h17b` produce the
 record files; `analyse.py h17 h17a h17b` applies the tuning-then-held-out
-selection and writes the summaries; `qualitative.py` re-runs a handful of
-conditions to capture the actual words; `make_figures.py` draws the two
-figures; `measure_disturbance.py` recomputes the disturbance sizes at the
+selection and writes the summaries; `make_qual_jobs.py` writes
+`output/qual_jobs.json` and `qualitative.py output/qual_jobs.json` re-runs
+those conditions to capture the actual words; `make_figures.py` draws the
+two figures; `measure_disturbance.py` recomputes the disturbance sizes at the
 chosen settings (deviation 8). The lens file is not committed: download the
 `gpt2-small` lens from the Hugging Face repository `neuronpedia/jacobian-lens`
 and place it at `_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt`
