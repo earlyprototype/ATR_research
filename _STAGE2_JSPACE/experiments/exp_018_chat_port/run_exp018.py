@@ -245,6 +245,13 @@ def stage_states(args) -> None:
         tokens = tokenise(model, rec["input_text"])
         pos = _scored_positions(int(tokens.shape[1]))
         x = torch.from_numpy(tensors[rec["id"]]).float()
+        # The saved tensor is the state as it came OUT of the last layer, before
+        # the loop's rescale. Inject what the loop itself would inject next:
+        # the same tensor pulled back to the prompt's natural layer-0 loudness
+        # over positions 1 and later. Injecting it unscaled would be a shout of
+        # about two thousand times natural strength and would measure a regime
+        # the loop never visits.
+        x = x * (rec["target_norm_natural_excl0"] / float(x[1:].norm()))
         # settled: inject the settled tensor at the layer-0 entry, read every layer
         model.add_hook(inject_name, make_injection_hook(x))
         try:
