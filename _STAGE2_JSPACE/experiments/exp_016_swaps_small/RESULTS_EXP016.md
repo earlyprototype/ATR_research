@@ -40,12 +40,13 @@ register:
   below). The registered rule asked for at least 50 percent against at most
   10 percent, and both readings clear it. Before any swap, the intended word
   was in the top five on 0 of 84 items by construction, because the
-  battery's rule excludes it from the model's top ten. A one-sided Fisher
-  exact test at item level, counting an item as a control success if either
-  control draw succeeded, gives a probability of 4 in 1,000,000,000 (18 of
-  21 against 0 of 21) that a control-like process would produce the
-  protocol gap, and 1 in 100,000,000,000 (27 of 42 against 0 of 42) for the
-  pooled one.
+  battery's rule excludes it from the model's top ten. The lens arm and the
+  control are measured on the same items, so the right test is a paired
+  one: it counts the items on which the two arms disagree and asks how
+  often chance alone would put every disagreement on the lens's side. That
+  exact paired test gives a probability of 4 in 1,000,000 for the protocol
+  gap (18 items succeed under the lens and not under the control, none the
+  other way) and 7 in 1,000,000,000 for the pooled one (27 such items).
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
   questions about that country on **87 percent of the held-out pairs, 13 of
@@ -66,13 +67,16 @@ register:
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
   items, which is 25 percent**, against **0 of 48 control trials, which is 0
-  percent**. A one-sided Fisher exact test at item level, which counts an
-  item as a control success if any of its three control draws succeeded,
-  gives a probability of 0.051 over all 16 items (4 of 16 against 0 of 16)
-  that a control-like process would do this well, and 0.5 on the held-out
-  half alone (1 of 8 against 0 of 8). The first version of this record gave
-  0.0029 and 0.25 by counting the 48 control rows as if they were 48 items;
-  those figures are withdrawn (see the correction below). The registered
+  percent**. The exact paired test, which counts the items on which the
+  lens arm and the control disagree (an item counts as a control success
+  if any of its three control draws flipped it) and asks how often chance
+  alone would put every disagreement on the lens's side, gives a
+  probability of 0.0625 over all 16 items (4 disagreements, all favouring
+  the lens) and 0.5 on the held-out half alone (1 disagreement). The first
+  version of this record gave 0.0029 and 0.25 by counting the 48 control
+  rows as if they were 48 items, and a second version gave 0.051 by testing
+  the two arms as independent samples; both are withdrawn (see the
+  correction below). The registered
   rule asked only that the flip happen more often than under the control,
   and it does, but the effect is not distinguishable from chance at the
   usual 5 percent level and the battery is too small for this verdict to
@@ -81,8 +85,9 @@ register:
   answer the unmodified model ranks second or third, and all four flips are
   among the 7 items it ranks first, which is the population the registered
   wording names if "answers correctly" is read strictly. On those 7 the
-  result is 4 of 7 against 0 of 7 for control A (item-level probability
-  0.035), and 1 of 3 against 0 of 3 on the held-out half.
+  result is 4 of 7 against 0 of 7 for control A (exact paired probability
+  0.0625, the same four disagreements), and 1 of 3 against 0 of 3 on the
+  held-out half.
 
 The most interesting single number is not any of those three. It is the
 contrast inside H17b. Exchanging the concept everywhere from its first
@@ -417,18 +422,23 @@ pairs have three scoreable questions, and all three moved together on 14 of
 those 18, which is 78 percent, against 0 of 36 control trials. On the
 held-out half alone the figures are 2 of 3 and 6 of 8 respectively.
 
-**Statistical distinguishability.** One-sided Fisher exact tests at item
-level, comparing the lens arm with control A on the held-out half and
-counting an item as a control success if any of its draws succeeded: H17
-gives a probability of 3.8 times 10 to the power minus 9 at the protocol
-setting (18 of 21 against 0 of 21) and 1.3 times 10 to the power minus 11
-pooled over both source rules (27 of 42 against 0 of 42); H17a, scored per
-pair on the primary pairs, gives 8.8 times 10 to the power minus 7 (13 of
-15 against 0 of 15); H17b gives 0.5 (1 of 8 against 0 of 8), and 0.051 over
-all 16 items rather than the held-out half alone. The first version of this
-record gave 4.2 times 10 to the power minus 17, 1.6 times 10 to the power
-minus 22, 0.25 and 0.0029 by counting every control draw as a separate
-item; those figures are withdrawn (deviation 13).
+**Statistical distinguishability.** The lens arm and control A are measured
+on the same items, so the test is paired: an exact sign test over the items
+on which the two arms disagree (an item counts as a control success if any
+of its draws succeeded), one-sided in the lens's favour, on the held-out
+half. Every disagreement in this experiment favours the lens, so each
+probability is one half raised to the number of disagreeing items. H17
+gives 3.8 times 10 to the power minus 6 at the protocol setting (18
+disagreeing items) and 7.5 times 10 to the power minus 9 pooled over both
+source rules (27); H17a, scored per pair on the primary pairs, gives 1.2
+times 10 to the power minus 4 (13 pairs), and 0.0078 on the rank-one
+questions alone (7 pairs); H17b gives 0.5 (1 item), and 0.0625 over all 16
+items rather than the held-out half alone (4 items). The first version of
+this record gave 4.2 times 10 to the power minus 17, 1.6 times 10 to the
+power minus 22, 0.25 and 0.0029 by counting every control draw as a
+separate item, and a second version gave item-level Fisher figures that
+still treated the two arms as independent samples; both sets are withdrawn
+(deviation 13).
 
 **H17b under the looser score.** If success is counted as the alternative
 answer merely entering the top five rather than becoming the model's actual
@@ -454,19 +464,27 @@ disturbance of the same size in a random direction did so 0 percent and 0
 percent of the time. The instrument is doing something specific to the
 direction, not merely shaking the model.
 
-**The effect passes through downstream computation, not only to the
-output.** That is established by H17a and is the most substantial result
-here. One exchange of a country's lens coordinates, applied at a single
-layer, redirected the capital question 85 percent of the time, the language
+**One exchange redirects three different answers, and whether that is
+downstream computation or output steering is not settled.** The redirection
+is established by H17a and is the most substantial result here. One
+exchange of a country's lens coordinates, applied at a single layer,
+redirected the capital question 85 percent of the time, the language
 question 100 percent of the time and the continent question 95 percent of
 the time in the extension set, and moved at least two of the three together
-on every one of the 20 pairs. A country name is not being copied to the
-output; three separate lookups are all being fed the substituted country.
+on every one of the 20 pairs. The country's name is not simply being copied
+to the output, because the three answers are different words. But H17a
+patched every position of the prompt, including the final position that
+produces the answer, so the result is also compatible with the country's
+direction steering each answer directly at that position rather than
+feeding three separate lookups (limit seven). The first version of this
+record called the downstream reading established; it is inferred at best,
+and the position mode that would separate the two readings, a swap
+confined to the country's mention, was not run for H17a.
 
 **Whether it reaches an intermediate reasoning step is unsettled, and the
 evidence leans yes.** H17b's flip rate of 4 in 16 items against 0 in 16
-for the control (three draws each) is small and, at item level, not
-distinguishable from chance at the usual level (probability 0.051); the
+for the control (three draws each) is small and, on the exact paired test,
+not distinguishable from chance at the usual level (probability 0.0625); the
 position contrast at the tuned layer and strength (4 of 16 when the
 exchange starts at the concept's first mention, 0 of 16 when it happens
 only at the answer position) is in the direction that separates reasoning
@@ -740,7 +758,7 @@ number reported as a verdict was chosen on the data it is reported for.
 
 ## What this does not show
 
-Six limits, stated before a reader finds them.
+Seven limits, stated before a reader finds them.
 
 First, a successful swap shows that the lens direction for a word is a
 handle the model responds to, not that the model "contains a concept" in any
@@ -781,6 +799,16 @@ size-matched in total at that setting, so the verdict stands as scored, but
 the effect is not a small nudge in lens coordinates. It is a large push
 whose size grows through the layer set, and the size-matched control B does
 not match it in total at multi-layer settings.
+
+Seventh, H17a ran only the position mode that patches every token,
+including the final one at which the answer is produced. A swap that
+redirects three answers under that mode has changed the working memory at
+the very position the model reads to answer, so the design cannot tell a
+substituted country feeding three downstream lookups from a
+country-associated direction steering each answer directly. The
+mention-only mode that would separate them was not in the H17a grid. The
+redirection itself stands; the reading that it passes through downstream
+computation is inferred, not established.
 ## Deviations from the specification, stated flat
 
 1. **Two settings were dropped from two batteries for time, before those
@@ -912,12 +940,15 @@ not match it in total at multi-layer settings.
     first version of this record tested each lens rate against a control
     denominator that multiplied the item count by the number of seeds (84
     for H17, 48 for H17b), which treats repeated draws on the same prompt
-    as separate items. All three probabilities are now computed at item
-    level, counting an item as a control success if any of its draws
-    succeeded: H17 stays far below any threshold, H17a's pair-level result
-    gives 9 in 10,000,000 (13 of 15 against 0 of 15), and H17b moves from
-    0.0029 to 0.051 over all items and from 0.25 to 0.5 on the held-out
-    half.
+    as separate items; a second version replaced them with item-level
+    Fisher tests, which still treated the lens arm and the control as two
+    independent samples although they are measured on the same items. All
+    probabilities are now exact paired sign tests over the items on which
+    the arms disagree, one-sided in the lens's favour: H17 stays far below
+    any threshold (3.8 times 10 to the power minus 6 at the protocol
+    setting), H17a's pair-level result gives 1.2 times 10 to the power
+    minus 4 (13 disagreeing pairs), and H17b moves from 0.0029 to 0.0625
+    over all items and from 0.25 to 0.5 on the held-out half.
 
 14. **The gates admitted answers the model ranks second or third, and the
     promised rank-one sensitivity check was missing.** The register's
@@ -931,6 +962,17 @@ not match it in total at multi-layer settings.
     of 38); for H17b, the 7 of 16 rank-one items hold all four flips, 4 of
     7 against 0 of 7. Whether the registered wording means rank one is
     decision item 5.
+
+15. **The rank-five sensitivity set for H17a was not built or run.** Section
+    5.2 of the specification promises the 20-country rank-five gate as a
+    second sensitivity check beside the rank-one one. `build_batteries.py`
+    forms the primary pairs from the rank-three gate only and uses the
+    rank-five gate solely to pick the five continent representatives of the
+    extension set, which is a different design and not a substitute. No
+    stopping-rule reduction was recorded for it. Running it would add 60
+    ordered pairs by the same pairing rule, about 27,000 swap conditions,
+    roughly 20 minutes of processor time at the H17a battery's measured
+    rate; it is decision item 6.
 
 ## Errata found during the run
 
@@ -961,8 +1003,9 @@ wrong, and what is true instead. The numbers are in the sections above.
    pooled figure is kept beside it. The verdict is unchanged.
 2. It said H17b's effect was distinguishable from control at a probability
    of 0.0029 over all items and 0.25 on the held-out half, "so the effect
-   is real". Those probabilities counted the 48 control rows as 48 items.
-   At item level they are 0.051 and 0.5, and the effect is not
+   is real". Those probabilities counted the 48 control rows as 48 items;
+   a second version's 0.051 tested the arms as independent samples. The
+   exact paired probabilities are 0.0625 and 0.5, and the effect is not
    distinguishable from chance at the usual level.
 3. It said that swapping only at the answer position flipped 1 of 16 items,
    against 4 of 16 for swapping from the first mention. The 1 came from a
@@ -987,6 +1030,14 @@ wrong, and what is true instead. The numbers are in the sections above.
    two scoreable questions as failures (4 of 30 and 14 of 20). The pairs
    that cannot meet the rule are now left out of the denominator (4 of 6
    and 14 of 18), as the bullets always said.
+10. It said the effect "passes through downstream computation, not only to
+    the output" and called that established by H17a. H17a patched the
+    answer position too, so the reading is inferred, not established
+    (limit seven).
+11. Its tests treated the lens arm and the control as independent samples,
+    first with the control draws counted as items and then at item level.
+    The two arms are measured on the same items; every probability is now
+    an exact paired test, and H17b's is 0.0625 over all items.
 
 ## What remains
 
@@ -1031,8 +1082,9 @@ much they would add.
 
 2. **Whether H17b's verdict should stand as SUPPORTED.** It is supported on
    the registered wording, which asks only that the flip happen more often
-   than under the control, but at item level the effect across all 16 items
-   sits at a probability of 0.051, just outside the usual 5 percent level,
+   than under the control, but the exact paired test across all 16 items
+   puts the effect at a probability of 0.0625, outside the usual 5 percent
+   level,
    and on the held-out half alone, which this experiment's own
    specification names as the number a hypothesis is judged on, it is 1 of
    8 against 0 of 8 and not distinguishable from chance (probability 0.5).
@@ -1071,6 +1123,11 @@ much they would add.
    TC rules that the register means rank one, the register rows should
    quote those numbers as the headline and the specification's gate as the
    sensitivity check, rather than the other way round.
+
+6. **Whether to run the promised rank-five sensitivity set for H17a**
+   (deviation 15): 60 ordered pairs from the 20 countries the unmodified
+   model answers within its top five, about 20 minutes of processor time,
+   no verdict weight, reported beside the rank-one set.
 ## Reproducing this
 
 Everything needed is in `experiments/exp_016_swaps_small/`. The order is:
