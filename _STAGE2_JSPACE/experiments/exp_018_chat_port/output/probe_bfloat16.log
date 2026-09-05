@@ -1,0 +1,57 @@
+free=9.5 GB before load
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  17%|█▋        | 54/311 [00:00<00:00, 529.63it/s]Loading weights:  34%|███▍      | 107/311 [00:00<00:00, 376.03it/s]Loading weights:  48%|████▊     | 148/311 [00:00<00:00, 382.29it/s]Loading weights:  60%|██████    | 188/311 [00:00<00:00, 353.48it/s]Loading weights:  73%|███████▎  | 227/311 [00:00<00:00, 346.26it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 442.05it/s]
+loaded in 14.5s  rss=1.22 GB peak=1.69 GB free=9.3 GB
+hooks: inject=blocks.0.hook_resid_pre extract=blocks.27.hook_resid_post
+round-trip checks: {
+  "readout_vs_model_logits_max_abs": 0.0,
+  "logit_scale_max_abs": 29.0,
+  "identity_injection_max_abs": 0.0,
+  "reversed_injection_max_abs": 24.75
+}
+  bare:A08_linguistics               T= 11 L0 all=5.16 pos0=1.41 excl0=4.96 ratio=0.284
+  bare:A14_kant                      T=  8 L0 all=4.03 pos0=1.19 excl0=3.85 ratio=0.309
+  bare:A15_sartre                    T=  9 L0 all=4.65 pos0=1.55 excl0=4.39 ratio=0.353
+  bare:A17_marx                      T= 10 L0 all=4.78 pos0=1.19 excl0=4.63 ratio=0.257
+  bare:A21_dickens                   T=  9 L0 all=4.07 pos0=1.27 excl0=3.87 ratio=0.329
+  bare:E01_politics                  T= 12 L0 all=5.37 pos0=1.53 excl0=5.15 ratio=0.296
+  bare:D01_water                     T= 17 L0 all=6.07 pos0=1.51 excl0=5.88 ratio=0.258
+  bare:A01_physics                   T=  9 L0 all=4.48 pos0=1.19 excl0=4.32 ratio=0.275
+  bare:B01_napoleon                  T= 10 L0 all=4.78 pos0=1.53 excl0=4.53 ratio=0.337
+  bare:C01_jack_jill                 T=  8 L0 all=3.95 pos0=1.44 excl0=3.68 ratio=0.391
+  bare:F01_anger                     T=  8 L0 all=3.81 pos0=1.24 excl0=3.61 ratio=0.342
+  bare:G01_punctuation               T= 11 L0 all=4.98 pos0=1.75 excl0=4.67 ratio=0.375
+  bare:E02_tech                      T=  8 L0 all=4.10 pos0=1.50 excl0=3.82 ratio=0.393
+  bare:D02_periodic                  T= 11 L0 all=5.22 pos0=1.51 excl0=5.00 ratio=0.302
+  bare:A02_medical                   T=  9 L0 all=4.55 pos0=1.59 excl0=4.26 ratio=0.373
+  bare:B02_wwi                       T= 12 L0 all=5.44 pos0=1.19 excl0=5.31 ratio=0.224
+  bare:C02_king_cole                 T=  8 L0 all=4.19 pos0=1.50 excl0=3.91 ratio=0.384
+  bare:F02_insult                    T=  8 L0 all=4.09 pos0=1.29 excl0=3.88 ratio=0.333
+  bare:G02_brackets                  T= 14 L0 all=5.44 pos0=1.63 excl0=5.19 ratio=0.314
+  bare:E03_orgs                      T=  9 L0 all=4.58 pos0=1.51 excl0=4.32 ratio=0.348
+  bare:D03_organic                   T= 17 L0 all=6.13 pos0=1.50 excl0=5.94 ratio=0.253
+  bare:A03_neuro                     T= 10 L0 all=4.74 pos0=1.19 excl0=4.59 ratio=0.259
+  bare:B03_moon                      T=  8 L0 all=4.15 pos0=1.34 excl0=3.93 ratio=0.340
+  bare:C03_mary_lamb                 T=  8 L0 all=4.18 pos0=1.40 excl0=3.93 ratio=0.357
+  bare:F03_frustration               T=  8 L0 all=4.24 pos0=1.25 excl0=4.05 ratio=0.308
+  chat:A08_linguistics               T= 23 L0 all=6.85 pos0=0.42 excl0=6.84 ratio=0.061
+  chat:A14_kant                      T= 20 L0 all=6.05 pos0=0.42 excl0=6.03 ratio=0.069
+  chat:A15_sartre                    T= 21 L0 all=6.48 pos0=0.42 excl0=6.47 ratio=0.065
+  chat:A17_marx                      T= 22 L0 all=6.58 pos0=0.42 excl0=6.56 ratio=0.064
+  chat:A21_dickens                   T= 21 L0 all=6.08 pos0=0.42 excl0=6.06 ratio=0.069
+timing bare: 11 tokens, 2.472 s/pass
+  after 12 iters: collapse_all=0.8406 collapse_excl0=0.8460 cos_lag2=1.000000 top='車'
+timing chat: 23 tokens, 3.712 s/pass
+  after 12 iters: collapse_all=0.6012 collapse_excl0=0.6161 cos_lag2=1.000000 top='の'
+
+wrote /home/user/wt/exp018/_STAGE2_JSPACE/experiments/exp_018_chat_port/output/probe_natural_norms.json  peak=3.89 GB
+
+2026-09-05, appended after the run, per rule R5: output/natural_loudness_profile.png
+was regenerated from this probe's committed JSON file, output/probe_natural_norms_bfloat16.json,
+with `python3 -c "import make_figures as m; m.fig_loudness()"`. The change adds the
+loop's extraction point, blocks.27.hook_resid_post, as a separate final point beside
+the 28 block entries the figure already plotted, because the entry to block 27 is not
+where the loop reads. No model was loaded and no measurement was repeated. Mean ratio
+of word position 0 to a typical other position over the 25 bare prompts, read from the
+same file: 0.94 at the entry to block 0, 5.18 at the entry to block 27, 0.84 at the
+exit of block 27.
