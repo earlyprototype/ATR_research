@@ -1,0 +1,39 @@
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 28017.56it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[12:06:26] loaded W_U (50257, 768) and the final LayerNorm
+/home/user/wt/exp011/_STAGE2_JSPACE/experiments/exp_011_small_overlap/readouts.py:58: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", device="cpu")
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 28679.00it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+[12:06:29] loaded GPT-2 Small through TransformerLens for the causal clamping readout
+[12:06:29] naming the selected atoms for the named states
+[12:06:35]   prolet1000  L 5: [' the', ' Marx', ',', ' Lenin']
+[12:06:35]   prolet1000  L 8: [' the', ' Marx', ' prolet', ' horizont']
+[12:06:35]   prolet1000  L10: [' the', ' prolet', ' horizont', ' princ', ' Marx', ' comrade']
+[12:06:35]   prolet1000  L11: [' the', ',', ' and', ' "', ' in']
+[12:06:35]   phaseA      L 5: [' the', '―', ' streng']
+[12:06:35]   phaseA      L 8: [' the', ' streng', ' arrang', ' princ']
+[12:06:35]   phaseA      L10: [' the', ' streng', ' seiz', ' arrang', ' neighb', ' cryst']
+[12:06:35]   phaseA      L11: [' the', ',', '\n', ' N']
+[12:06:35]   phaseB      L 5: [' the', '―', ' Fairy', ' Divine', ' �', ' Fuji']
+[12:06:35]   phaseB      L 8: [' the', ' Divine', ' Yu', ' Fuji', '……', ' 「']
+[12:06:35]   phaseB      L10: [',', ' Divine', ' seiz', ' Yu', ' the', '【']
+[12:06:35]   phaseB      L11: [' the', ',', '\n', ' and', ' in']
+[12:06:35]   pivotM      L 5: [' the', '―', ' Divine', ' Fairy']
+[12:06:35]   pivotM      L 8: [' the', ' streng', ' seiz', ' Divine', ' Yu', ' Fuji']
+[12:06:35]   pivotM      L10: [' seiz', ' the', ' Divine', ' streng', ',', ' arrang']
+[12:06:35]   pivotM      L11: [' the', ',', '\n', ' and', ' in']
+[12:06:35] clamping check
+[12:06:37]   prolet1000 L5: share 0.0231; causal top-1 at alpha [(' abstract', 0.0267), (' prolet', 0.0499), (' prolet', 0.0858), (' prolet', 0.1314)]
+[12:06:38]   phaseA L5: share 0.0105; causal top-1 at alpha [(' Divine', 0.251), (' Divine', 0.2523), (' Divine', 0.2252), ('【', 0.2546)]
+[12:06:40]   prolet1000 L6: share 0.0162; causal top-1 at alpha [(' bourgeois', 0.0397), (' prolet', 0.0579), (' prolet', 0.0858), (' prolet', 0.1261)]
+[12:06:41]   phaseA L6: share 0.0062; causal top-1 at alpha [(' Divine', 0.2528), (' Divine', 0.245), (' Divine', 0.2252), ('【', 0.2119)]
+[12:06:43]   prolet1000 L7: share 0.0213; causal top-1 at alpha [(' labour', 0.0357), (' prolet', 0.0576), (' prolet', 0.0858), (' Marx', 0.1437)]
+[12:06:45]   phaseA L7: share 0.0101; causal top-1 at alpha [(' Divine', 0.2372), (' Divine', 0.2403), (' Divine', 0.2252), ('【', 0.2518)]
+[12:06:47]   prolet1000 L8: share 0.0141; causal top-1 at alpha [(' comrade', 0.0371), (' comrade', 0.0454), (' prolet', 0.0858), (' Marx', 0.1897)]
+[12:06:48]   phaseA L8: share 0.0153; causal top-1 at alpha [(' Divine', 0.2535), (' Divine', 0.2562), (' Divine', 0.2252), ('【', 0.2503)]
+[12:06:50]   prolet1000 L9: share 0.0152; causal top-1 at alpha [(' comrade', 0.0352), (' comrade', 0.0453), (' prolet', 0.0858), (' prolet', 0.3012)]
+[12:06:51]   phaseA L9: share 0.0226; causal top-1 at alpha [(' Divine', 0.2117), (' Divine', 0.2605), (' Divine', 0.2252), ('【', 0.1674)]
+[12:06:54]   prolet1000 L10: share 0.0147; causal top-1 at alpha [(' the', 0.0494), (' comrade', 0.0393), (' prolet', 0.0858), (' prolet', 0.5686)]
+[12:06:55]   phaseA L10: share 0.0363; causal top-1 at alpha [(' Divine', 0.2007), (' Divine', 0.324), (' Divine', 0.2252), ('【', 0.0661)]
+[12:06:55] wrote top_atoms.json and clamping_check.json

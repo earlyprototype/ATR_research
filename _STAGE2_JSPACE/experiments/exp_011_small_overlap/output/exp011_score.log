@@ -1,0 +1,13 @@
+[12:13:02] building the per-layer share tables
+[12:13:02] H6: five basin representatives against eighteen null-model basins
+[12:13:02]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[12:13:02]   eighteen null basins: 18 representatives
+[12:13:05]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[12:13:05] H16: language terminals against the run-17 matched-scale noise terminals
+[12:13:14]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[12:13:14] H16a: the prolet attractor against the Divine cycle's two phases
+[12:13:14]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[12:13:14] H16b: terminals against the same prompts' ordinary residuals
+[12:13:20]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[12:13:20] drawing the figures
+[12:13:21] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png

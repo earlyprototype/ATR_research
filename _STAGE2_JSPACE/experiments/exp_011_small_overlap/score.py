@@ -349,7 +349,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
+fig, axes = plt.subplots(1, 3, figsize=(15.5, 4.4))
 ax = axes[0]
 series = [("lang", "language terminals (125)", "#1f77b4", "-"),
           ("noise17", "run-17 noise terminals (125)", "#d62728", "-"),
@@ -361,17 +361,16 @@ for fam, lab, c, ls in series:
     q75 = [table["lens"][fam][str(l)]["q75"] for l in LAYERS]
     ax.plot(LAYERS, med, ls, color=c, label=lab)
     ax.fill_between(LAYERS, q25, q75, color=c, alpha=0.12)
-for fam, lab, c in [("lang", "language terminals, rotated-lens control", "#1f77b4"),
-                    ("lang", "language terminals, Gaussian control", "#7f7f7f")]:
-    arms = ROT if "rotated" in lab else GAUSS
-    med = [table["control_rotation_pooled" if "rotated" in lab else
-                 "control_gaussian_pooled"][fam][str(l)]["median"] for l in LAYERS]
-    ax.plot(LAYERS, med, ":", color=c, label=lab)
+ax.plot(LAYERS, [table["control_rotation_pooled"]["lang"][str(l)]["median"] for l in LAYERS],
+        ":", color="#1f77b4", label="language, rotated-lens control")
+ax.plot(LAYERS, [table["control_gaussian_pooled"]["lang"][str(l)]["median"] for l in LAYERS],
+        ":", color="#7f7f7f", label="language, random-dictionary control")
 ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
-ax.text(7.5, ax.get_ylim()[1] * 0.97, "workspace band", ha="center", va="top", fontsize=8)
+ax.set_yscale("log")
 ax.set_xlabel("layer (output of block l)")
-ax.set_ylabel("J-space share (fraction of squared length)")
-ax.set_title("J-space share by layer, GPT-2 Small")
+ax.set_ylabel("J-space share (fraction of squared length, log scale)")
+ax.set_title("J-space share by layer, GPT-2 Small\n(gold band = workspace band, layers 5 to 10)",
+             fontsize=9)
 ax.legend(fontsize=7)
 ax.grid(alpha=0.25)
 
@@ -386,7 +385,24 @@ for key, lab, c in [("prolet1000", "prolet attractor", "#1f77b4"),
 ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
 ax.set_xlabel("layer (output of block l)")
 ax.set_ylabel("J-space share")
-ax.set_title("Named states: prolet against the Divine cycle")
+ax.set_title("Named states: prolet against the Divine cycle", fontsize=9)
+ax.legend(fontsize=7)
+ax.grid(alpha=0.25)
+
+ax = axes[2]
+for fam, lab, c in [("lang", "language terminals", "#1f77b4"),
+                    ("noise17", "run-17 noise terminals", "#d62728"),
+                    ("clean_last", "ordinary prompt residuals", "#2ca02c"),
+                    ("nullold", "original noise arm", "#9467bd")]:
+    d = [table["lens"][fam][str(l)]["median"]
+         - table["control_rotation_pooled"][fam][str(l)]["median"] for l in LAYERS]
+    ax.plot(LAYERS, d, "-o", ms=3, color=c, label=lab)
+ax.axhline(0.0, color="k", lw=1)
+ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
+ax.set_xlabel("layer (output of block l)")
+ax.set_ylabel("median share minus rotated-lens control")
+ax.set_title("Against the rotated-lens chance level\n(above 0 = more lens-expressible than chance)",
+             fontsize=9)
 ax.legend(fontsize=7)
 ax.grid(alpha=0.25)
 fig.tight_layout()

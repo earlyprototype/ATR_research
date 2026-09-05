@@ -1,0 +1,25 @@
+[10:59:58] loading GPT-2 Small through TransformerLens
+/home/user/wt/exp011/_STAGE2_JSPACE/experiments/exp_011_small_overlap/build_states.py:53: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", device="cpu")
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 1861.09it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+[11:00:11] model ready: n_layers=12 d_model=768
+[11:00:11] loading committed Stage 1 records (read-only)
+[11:00:11] checking position collapse in the committed tensors
+[11:00:11]   worst pairwise cosine between token positions: 0.99999964
+[11:00:13]   tiling identity: min cosine 0.99999976
+[11:00:13] building per-layer states: lang (125 language terminals, iteration 100)
+[11:00:55] building per-layer states: noise17 (run 17 matched-scale noise terminals)
+[11:01:36] building per-layer states: nullold (original noise arm, iteration 100)
+[11:02:19] building per-layer states: clean (the same 125 prompts, no injection)
+[11:03:03]   token-count agreement with the loop's recorded sequence length: 125/125
+[11:03:03] building per-layer states: Divine phases, pivot, prolet, pilot noise
+[11:03:04]   Divine cycle gate: cos(A,B)=0.68491167 (record 0.68491167), cos(A,f(f(A)))=1.00000000 (record 1.00000000)
+[11:03:07]   reconstruction gate: lang 91/125, noise17 90/125, nullold 98/125 (need 85 in each of the first two)
+[11:03:08] wrote output/states.npz (21.8 MB) and output/states_meta.json
+[11:03:08] stage 1 complete
+
+real	3m13.142s
+user	2m16.562s
+sys	0m42.917s

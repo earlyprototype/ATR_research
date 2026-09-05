@@ -1,0 +1,38 @@
+[11:07:37] self-test of the decomposition
+  synthetic 5-atom state: share=1.000000 n_atoms=5 recovered=[11, 402, 1500, 2222, 3999]
+  random state: share=0.263269 n_atoms=25
+  rotation identity: rotated-dictionary share=0.25162792 inverse-rotated-state share=0.25162792 (must agree)
+  batch vs single: [1.         0.26326901 1.        ] vs [1.         0.26326901 1.        ]
+  scale invariance: 0.26326901 vs 0.26326907
+  jspace self-test PASSED
+[11:07:38] state families: [('lang', (125, 12, 768)), ('noise17', (125, 12, 768)), ('nullold', (125, 12, 768)), ('clean_last', (125, 12, 768)), ('clean_mean', (125, 12, 768)), ('named', (10, 12, 768))]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 8161.84it/s]
+[11:07:44] lens source layers [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; W_U (50257, 768)
+[11:07:44] mean-component fraction of state norm, worst over families: 4.943e-08
+[11:08:15] L 0 lens: 30s, 637 states, mean share 0.0368
+[11:11:00]   rotated-dictionary identity: max difference 2.384e-07
+[11:11:29] L 0 done in 224s; elapsed 225s; peak RSS 1.57 GB
+[11:12:03] L 1 lens: 33s, 637 states, mean share 0.0476
+[11:16:04] L 1 done in 274s; elapsed 500s; peak RSS 1.57 GB
+[11:16:41] L 2 lens: 35s, 637 states, mean share 0.0254
+[11:21:08] L 2 done in 303s; elapsed 805s; peak RSS 1.57 GB
+[11:21:47] L 3 lens: 38s, 637 states, mean share 0.0172
+[11:26:13] L 3 done in 304s; elapsed 1109s; peak RSS 1.57 GB
+[11:26:53] L 4 lens: 39s, 637 states, mean share 0.0149
+[11:31:43] L 4 done in 328s; elapsed 1439s; peak RSS 1.58 GB
+[11:32:36] L 5 lens: 51s, 637 states, mean share 0.0169
+[11:38:04] L 5 done in 379s; elapsed 1820s; peak RSS 1.58 GB
+[11:38:47] L 6 lens: 43s, 637 states, mean share 0.0124
+[11:44:13] L 6 done in 369s; elapsed 2190s; peak RSS 1.58 GB
+[11:45:07] L 7 lens: 52s, 637 states, mean share 0.0170
+[11:49:50] L 7 done in 335s; elapsed 2526s; peak RSS 1.58 GB
+[11:50:26] L 8 lens: 34s, 637 states, mean share 0.0192
+[11:54:04] L 8 done in 253s; elapsed 2781s; peak RSS 1.58 GB
+[11:54:35] L 9 lens: 30s, 637 states, mean share 0.0223
+[11:57:55] L 9 done in 229s; elapsed 3011s; peak RSS 1.58 GB
+[11:58:22] L10 lens: 26s, 637 states, mean share 0.0230
+[12:01:50] L10 done in 234s; elapsed 3246s; peak RSS 1.58 GB
+[12:02:24] L11 lens: 33s, 637 states, mean share 0.0972
+[12:05:36] L11 done in 225s; elapsed 3472s; peak RSS 1.58 GB
+[12:05:36] wrote output/shares.json and output/atom_records.json in 3472s, peak RSS 1.58 GB

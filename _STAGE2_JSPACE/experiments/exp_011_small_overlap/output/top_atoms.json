@@ -1,0 +1,4660 @@
+{
+ "convtensor_Imperative": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 28.406278647665243,
+    "contributed_length": 308.4294080471172
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 26.952645689762218,
+    "contributed_length": 207.3589469509579
+   },
+   {
+    "token": " Party",
+    "token_id": 3615,
+    "coefficient": 20.277123439950916,
+    "contributed_length": 84.14561652205137
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 2.2462980141826816,
+    "contributed_length": 14.674959939918132
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 1.3718117985237663,
+    "contributed_length": 9.93808621527751
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 31.000835973742948,
+    "contributed_length": 350.1213026587197
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 28.772700931655315,
+    "contributed_length": 234.87408523866043
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 13.009462593736838,
+    "contributed_length": 126.7273734103312
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 6.6845393460718086,
+    "contributed_length": 45.8671127723285
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 3.1039863654154383,
+    "contributed_length": 22.833108550229905
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 26.255275348274782,
+    "contributed_length": 326.59853772981927
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 13.699119177565935,
+    "contributed_length": 114.44730285687717
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 8.263254118706858,
+    "contributed_length": 82.72460064161906
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 4.376005912317832,
+    "contributed_length": 31.209490408590007
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 2.7114125970169045,
+    "contributed_length": 20.579831475255986
+   },
+   {
+    "token": " comrades",
+    "token_id": 24863,
+    "coefficient": 1.397665652945725,
+    "contributed_length": 11.897340693864312
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 18.08811800692081,
+    "contributed_length": 248.88201980973818
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.542102168130409,
+    "contributed_length": 69.22502783404259
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.673030511856439,
+    "contributed_length": 64.14933507491895
+   }
+  ],
+  "4": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.813951389054916,
+    "contributed_length": 253.6726557182215
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.9794376320097555,
+    "contributed_length": 84.10556288219486
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.447445085744599,
+    "contributed_length": 69.68693949044206
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 14.828094125775998,
+    "contributed_length": 280.20320443989436
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 5.710381005405004,
+    "contributed_length": 70.84807940111712
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.4855299270647055,
+    "contributed_length": 60.75293344194825
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.757174486435177,
+    "contributed_length": 37.75730553303825
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.092990247250102,
+    "contributed_length": 20.273638205420507
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "6": [
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 9.288432535379526,
+    "contributed_length": 153.14656759637776
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.0631370231417465,
+    "contributed_length": 91.85413881774082
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.131213601687247,
+    "contributed_length": 67.9406582047157
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.4487590926904663,
+    "contributed_length": 47.18806688215833
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 1.5967691037802396,
+    "contributed_length": 19.729642413887568
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.3469177811825007,
+    "contributed_length": 3.6075543929975504
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.953020695897106,
+    "contributed_length": 147.76785726586579
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 8.185558214948157,
+    "contributed_length": 122.5532964751177
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.859378600620897,
+    "contributed_length": 81.10362800210581
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 3.2045590648420963,
+    "contributed_length": 36.68568812002628
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.591180194556294,
+    "contributed_length": 32.3528780510188
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.5412869060032611,
+    "contributed_length": 5.4586585616263985
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.19763814936411,
+    "contributed_length": 139.48565571854942
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 9.733045370563142,
+    "contributed_length": 98.36784595636468
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.722322066921146,
+    "contributed_length": 88.4972293796623
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 3.5626747015838873,
+    "contributed_length": 48.32047785354314
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.5551478820337232,
+    "contributed_length": 42.62093657529604
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 1.988874308570254,
+    "contributed_length": 19.712365386848145
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.248418203128779,
+    "contributed_length": 131.56691976796697
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 13.002103904613772,
+    "contributed_length": 114.87458047505783
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 10.571352502653266,
+    "contributed_length": 104.26401888794663
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 4.474617579097799,
+    "contributed_length": 55.62258741910187
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 2.3432549482860527,
+    "contributed_length": 30.453417978813956
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.576262195472105,
+    "contributed_length": 26.44038163710797
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 0.6927331241741893,
+    "contributed_length": 6.5351141575972065
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 0.3511636238390376,
+    "contributed_length": 3.610095917586067
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 13.407736252244137,
+    "contributed_length": 203.7077369422837
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 8.414439349281833,
+    "contributed_length": 91.2920559846125
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 8.860042054302854,
+    "contributed_length": 66.59644692020717
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.692523774206243,
+    "contributed_length": 45.550291694000165
+   },
+   {
+    "token": " movement",
+    "token_id": 3356,
+    "coefficient": 3.3435073992064908,
+    "contributed_length": 20.20144080192836
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 1.8298450068230445,
+    "contributed_length": 15.117546137283176
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 1.3571812191804278,
+    "contributed_length": 10.070436831155877
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 218.6385513049389,
+    "contributed_length": 583.7991443002212
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 74.2284590863447,
+    "contributed_length": 228.45451385289573
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 43.4049365292852,
+    "contributed_length": 113.00466466392359
+   },
+   {
+    "token": " \"",
+    "token_id": 366,
+    "coefficient": 25.20064286559464,
+    "contributed_length": 70.41944413540723
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 24.198265323187094,
+    "contributed_length": 59.639242958456784
+   }
+  ]
+ },
+ "convtensor_Lucier": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 27.045599766349227,
+    "contributed_length": 293.6554425054884
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 25.662243070717892,
+    "contributed_length": 197.43129341713703
+   },
+   {
+    "token": " Party",
+    "token_id": 3615,
+    "coefficient": 21.53029180048809,
+    "contributed_length": 89.34599046146178
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 1.6137014544647008,
+    "contributed_length": 11.69045505910268
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.9569896361449419,
+    "contributed_length": 6.251968565468238
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 29.686833213419053,
+    "contributed_length": 335.28104614010783
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 28.104811019959623,
+    "contributed_length": 229.4220412188003
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 12.992113356102887,
+    "contributed_length": 126.55837155493704
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 5.965767334204679,
+    "contributed_length": 40.935135381055176
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 3.2696050506321948,
+    "contributed_length": 24.051409461482276
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 25.468261052810913,
+    "contributed_length": 316.8085921032215
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 12.746680585627624,
+    "contributed_length": 106.49029287899118
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 7.800041996041833,
+    "contributed_length": 78.08731885053002
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 3.483201067322214,
+    "contributed_length": 24.84204374490971
+   },
+   {
+    "token": " comrades",
+    "token_id": 24863,
+    "coefficient": 2.8951918561371666,
+    "contributed_length": 24.644723732008927
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 2.9357809509885926,
+    "contributed_length": 22.282804648058256
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 17.352239347625392,
+    "contributed_length": 238.75675597685904
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.078418591397927,
+    "contributed_length": 64.96911777210673
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.4725545967162255,
+    "contributed_length": 62.47328326789061
+   }
+  ],
+  "4": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.213814903987785,
+    "contributed_length": 244.04582607805048
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.334820000615563,
+    "contributed_length": 77.31110803055132
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.020885314353172,
+    "contributed_length": 65.69555121758187
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.113996309860259,
+    "contributed_length": 285.60583457275254
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 5.30367850458246,
+    "contributed_length": 65.80216546934349
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.000587634963904,
+    "contributed_length": 55.3821366024621
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.746048885706147,
+    "contributed_length": 37.60494930457637
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.46425870396872004,
+    "contributed_length": 8.61143365337414
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "6": [
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 8.337509787024432,
+    "contributed_length": 137.46786676012883
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.650905363448864,
+    "contributed_length": 102.51728193957997
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.760465049268307,
+    "contributed_length": 63.832352359221005
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.6383230724994773,
+    "contributed_length": 49.7817991543355
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 1.1512920703787504,
+    "contributed_length": 14.225338409129932
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 10.020076421580086,
+    "contributed_length": 165.37940352753208
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 6.822390001729857,
+    "contributed_length": 102.144088722503
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.484961922657753,
+    "contributed_length": 77.2398936650288
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.9503517820457272,
+    "contributed_length": 36.83741162141616
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 2.7164903488285015,
+    "contributed_length": 31.098293307037025
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 11.033562272335507,
+    "contributed_length": 167.32813831935417
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 9.742777416034208,
+    "contributed_length": 98.46620369675223
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.252643844569618,
+    "contributed_length": 83.11475231928154
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.9712815651457825,
+    "contributed_length": 47.609760642051185
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 1.4632409443402261,
+    "contributed_length": 19.84590443072329
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 1.3859678789021832,
+    "contributed_length": 13.736768143480532
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 10.700609487768793,
+    "contributed_length": 152.22562377957158
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 12.545634239150424,
+    "contributed_length": 110.8416361374045
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 9.75567901920554,
+    "contributed_length": 96.21912629135166
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 4.093135801432657,
+    "contributed_length": 50.88050540831872
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.753080592033993,
+    "contributed_length": 28.255082754787136
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.6683282512857106,
+    "contributed_length": 8.685729906743793
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 0.8433784783636282,
+    "contributed_length": 8.670252255729277
+   },
+   {
+    "token": " Hegel",
+    "token_id": 38106,
+    "coefficient": 0.6148928859508725,
+    "contributed_length": 6.954682157258051
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 13.150245905186328,
+    "contributed_length": 199.7956092798045
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 7.62822878441269,
+    "contributed_length": 82.76210218444001
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 8.088851321299133,
+    "contributed_length": 60.79979692678013
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.761028130176738,
+    "contributed_length": 46.01654231962993
+   },
+   {
+    "token": " movement",
+    "token_id": 3356,
+    "coefficient": 3.5095808325392763,
+    "contributed_length": 21.2048549511064
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 2.2826059920416344,
+    "contributed_length": 18.858100696648503
+   },
+   {
+    "token": " horizont",
+    "token_id": 13736,
+    "coefficient": 1.232224799768665,
+    "contributed_length": 12.870668742277447
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 0.6240709072339655,
+    "contributed_length": 4.630676110635368
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 219.60756538558286,
+    "contributed_length": 586.3865635257805
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 71.53148195076619,
+    "contributed_length": 220.15396972245307
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 42.032325541010934,
+    "contributed_length": 109.43107472584599
+   },
+   {
+    "token": " \"",
+    "token_id": 366,
+    "coefficient": 24.626584703095133,
+    "contributed_length": 68.81532407703368
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 23.060138586623072,
+    "contributed_length": 56.834206479481715
+   }
+  ]
+ },
+ "convtensor_Nonsense": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 28.302214302779564,
+    "contributed_length": 307.2994992445596
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 26.831516729414446,
+    "contributed_length": 206.4270468342833
+   },
+   {
+    "token": " Party",
+    "token_id": 3615,
+    "coefficient": 20.40628014600132,
+    "contributed_length": 84.68158853458822
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 2.1360618456238596,
+    "contributed_length": 13.954792202905114
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 1.4039387049300076,
+    "contributed_length": 10.17082948664969
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 30.905637892801757,
+    "contributed_length": 349.04614210053444
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 28.704942349382303,
+    "contributed_length": 234.32096597932343
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 13.031264329305396,
+    "contributed_length": 126.93974780047087
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 6.622081868279987,
+    "contributed_length": 45.43855008026563
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 3.114335095738911,
+    "contributed_length": 22.909234426769086
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 26.204538726394073,
+    "contributed_length": 325.9674071743106
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 13.607161963712732,
+    "contributed_length": 113.67905966055788
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 8.23524419411458,
+    "contributed_length": 82.44418934207397
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 4.299732791860574,
+    "contributed_length": 30.665513716364018
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 2.7256944513875916,
+    "contributed_length": 20.688231855347993
+   },
+   {
+    "token": " comrades",
+    "token_id": 24863,
+    "coefficient": 1.5380565089076226,
+    "contributed_length": 13.092388908837359
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 18.036192512650768,
+    "contributed_length": 248.16755510486385
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.500920334302641,
+    "contributed_length": 68.84704122905725
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.662927710298428,
+    "contributed_length": 64.06487196724085
+   }
+  ],
+  "4": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.77402937306269,
+    "contributed_length": 253.03226397998824
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.923599804498654,
+    "contributed_length": 83.5170161537762
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.421582737730376,
+    "contributed_length": 69.44494134740134
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 14.882169612647903,
+    "contributed_length": 281.225056916324
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 5.670177489961986,
+    "contributed_length": 70.34927873411871
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.445407446316923,
+    "contributed_length": 60.30857192450044
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.7693299941998646,
+    "contributed_length": 37.923765516923396
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.0217716110991877,
+    "contributed_length": 18.95261922429072
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "6": [
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 9.200402355112749,
+    "contributed_length": 151.69513648554218
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.13379311100869,
+    "contributed_length": 93.13596351922234
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.109648661058244,
+    "contributed_length": 67.70169470488315
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.484911989714119,
+    "contributed_length": 47.68273330474253
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 1.5574736132380245,
+    "contributed_length": 19.244108234248962
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.28704467098207137,
+    "contributed_length": 2.9849414471008453
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.072055491358466,
+    "contributed_length": 149.7325033068904
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 8.05165764418288,
+    "contributed_length": 120.54855154309617
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.829725230336139,
+    "contributed_length": 80.79762468622104
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 3.162571004923516,
+    "contributed_length": 36.2050101734602
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.6314369877371644,
+    "contributed_length": 32.85551508229975
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.4855500229922731,
+    "contributed_length": 4.896574738293592
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.38222617266416,
+    "contributed_length": 142.28500279544855
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 9.733621339761587,
+    "contributed_length": 98.37366703776635
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.679968776107548,
+    "contributed_length": 88.01186385623122
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 3.3660513578948734,
+    "contributed_length": 45.65367980992981
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.5963075397937168,
+    "contributed_length": 43.11437966713335
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 1.9449257402512057,
+    "contributed_length": 19.27677715827038
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.391781884514284,
+    "contributed_length": 133.60639479517823
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 12.995700479773655,
+    "contributed_length": 114.81800572780857
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 10.512186099764094,
+    "contributed_length": 103.68046754512459
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 4.452750375110623,
+    "contributed_length": 55.350762968433784
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 2.192619721048932,
+    "contributed_length": 28.495731923038836
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.600373346305767,
+    "contributed_length": 26.687836275410056
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 0.7184462885092074,
+    "contributed_length": 6.777687319495189
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 0.40806993404156566,
+    "contributed_length": 4.195114479307024
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 13.394081910581805,
+    "contributed_length": 203.50028245577374
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 8.417231828362544,
+    "contributed_length": 91.32235285241201
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 8.77099285774545,
+    "contributed_length": 65.92710922909066
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.671866406350359,
+    "contributed_length": 45.409694639254944
+   },
+   {
+    "token": " movement",
+    "token_id": 3356,
+    "coefficient": 3.3662344798884587,
+    "contributed_length": 20.338757613342143
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 1.8956012639315292,
+    "contributed_length": 15.660801575282523
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 1.3323916150583204,
+    "contributed_length": 9.886495188836514
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 218.8380923309895,
+    "contributed_length": 584.3319500637331
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 73.99964234078912,
+    "contributed_length": 227.75027966818104
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 43.30549132941554,
+    "contributed_length": 112.74575928674084
+   },
+   {
+    "token": " \"",
+    "token_id": 366,
+    "coefficient": 25.161753344801028,
+    "contributed_length": 70.31077316016328
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 24.125374163803972,
+    "contributed_length": 59.45959480988441
+   }
+  ]
+ },
+ "convtensor_Semantic": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 28.71627754288041,
+    "contributed_length": 311.7953109495142
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 27.344173367215404,
+    "contributed_length": 210.3711472311584
+   },
+   {
+    "token": " Party",
+    "token_id": 3615,
+    "coefficient": 19.827313050332275,
+    "contributed_length": 82.2790020259384
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 2.588783324341783,
+    "contributed_length": 16.91240046422183
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 1.2713693209653067,
+    "contributed_length": 9.210431005775568
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 31.273946229394216,
+    "contributed_length": 353.2057910434545
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 28.99726369595394,
+    "contributed_length": 236.70721081031215
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 12.903770269868938,
+    "contributed_length": 125.69780662408581
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 6.877118541132857,
+    "contributed_length": 47.188527936510326
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 3.0906305152579256,
+    "contributed_length": 22.734862121113817
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 26.390427168876105,
+    "contributed_length": 328.2797384178485
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 14.002261574527425,
+    "contributed_length": 116.97986201371896
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 8.335548374682663,
+    "contributed_length": 83.4483486189132
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 4.611059486084517,
+    "contributed_length": 32.88588262628026
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 2.6866872898265757,
+    "contributed_length": 20.39216447993748
+   },
+   {
+    "token": " comrades",
+    "token_id": 24863,
+    "coefficient": 0.9291770508804335,
+    "contributed_length": 7.909428063818847
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 18.236120219306795,
+    "contributed_length": 250.91844446933186
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.669450087612363,
+    "contributed_length": 70.39388806348853
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.7021660175852595,
+    "contributed_length": 64.39291853476409
+   }
+  ],
+  "4": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.923864786287004,
+    "contributed_length": 255.4357839009838
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 8.151530804473301,
+    "contributed_length": 85.91947431376823
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.521331454301532,
+    "contributed_length": 70.37830610483324
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 14.610918727007,
+    "contributed_length": 276.0992891191248
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 5.842126229158204,
+    "contributed_length": 72.4826281403956
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.620365788066522,
+    "contributed_length": 62.24625755063915
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.695059395992739,
+    "contributed_length": 36.90668891099061
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.3466378073289347,
+    "contributed_length": 24.97849159058454
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "6": [
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 9.593084455167801,
+    "contributed_length": 158.16963210694053
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.7980916526132145,
+    "contributed_length": 87.04575339458263
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.208865622299011,
+    "contributed_length": 68.80112886093906
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.3228199583783447,
+    "contributed_length": 45.46488931791583
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 1.7229638236273208,
+    "contributed_length": 21.28890147721066
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.5192795106693013,
+    "contributed_length": 5.399922349103135
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.52847268026617,
+    "contributed_length": 140.76077521980193
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 8.643229208885836,
+    "contributed_length": 129.4054973312155
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.9679610429716785,
+    "contributed_length": 82.22412753005602
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 3.338211982424623,
+    "contributed_length": 38.215742380706835
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.454833752631449,
+    "contributed_length": 30.65048783610741
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.6994081463435725,
+    "contributed_length": 7.053247037323659
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.573130072737603,
+    "contributed_length": 130.01475491171558
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 9.744820023914476,
+    "contributed_length": 98.48684748599452
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 7.856423589083231,
+    "contributed_length": 90.03402272551034
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 4.208945642623678,
+    "contributed_length": 57.08583627372625
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 3.4137900215149624,
+    "contributed_length": 40.92626602782414
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 2.1125951291413005,
+    "contributed_length": 20.93860176113685
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.747592289841965,
+    "contributed_length": 124.44222867983761
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 13.041990200387723,
+    "contributed_length": 115.22697894282508
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 10.766966470900554,
+    "contributed_length": 106.19333668100693
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 4.556046420921868,
+    "contributed_length": 56.63480417119998
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 2.8478545174934604,
+    "contributed_length": 37.0112966271627
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 2.5181366877795015,
+    "contributed_length": 25.843834977787267
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 0.5439118444857362,
+    "contributed_length": 5.131162162370845
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.2981071797223101,
+    "contributed_length": 2.5390488459302905
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 13.423428610065518,
+    "contributed_length": 203.94615561631952
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 8.402134220925824,
+    "contributed_length": 91.15855208492957
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 9.166282632565702,
+    "contributed_length": 68.89830218117524
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 6.789991827574221,
+    "contributed_length": 46.21367346320193
+   },
+   {
+    "token": " movement",
+    "token_id": 3356,
+    "coefficient": 3.294423910449954,
+    "contributed_length": 19.904878816540617
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 1.6130892943844668,
+    "contributed_length": 13.326785460235971
+   },
+   {
+    "token": " congress",
+    "token_id": 8681,
+    "coefficient": 1.3627510234658913,
+    "contributed_length": 10.111765403513028
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 217.82026437814798,
+    "contributed_length": 581.6141901610662
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 74.94464100900113,
+    "contributed_length": 230.65872225200025
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 43.69376476039736,
+    "contributed_length": 113.75662838077598
+   },
+   {
+    "token": " \"",
+    "token_id": 366,
+    "coefficient": 25.329438915146767,
+    "contributed_length": 70.77934551826756
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 24.38493508871744,
+    "contributed_length": 60.09931079186445
+   }
+  ]
+ },
+ "convtensor_Syntactic": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 17.02816494365307,
+    "contributed_length": 184.88823892922204
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 12.872456040613612,
+    "contributed_length": 98.77938861496713
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 10545,
+    "coefficient": 7.008330853161446,
+    "contributed_length": 50.309768773940746
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.091946525666738,
+    "contributed_length": 29.059094637362342
+   },
+   {
+    "token": " Wind",
+    "token_id": 3086,
+    "coefficient": 5.6083941930795005,
+    "contributed_length": 28.794270347448403
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 10263,
+    "coefficient": 3.7193111511400505,
+    "contributed_length": 26.112563208302717
+   },
+   {
+    "token": "\u2026",
+    "token_id": 1399,
+    "coefficient": 4.621700257180956,
+    "contributed_length": 18.125868433532606
+   },
+   {
+    "token": " Takeru",
+    "token_id": 48497,
+    "coefficient": 1.5895652669024694,
+    "contributed_length": 17.902246578385444
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 18.94076217908985,
+    "contributed_length": 213.91566127793277
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 11.060189005527144,
+    "contributed_length": 109.8244420200023
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 6.870231925643427,
+    "contributed_length": 66.38741874128155
+   },
+   {
+    "token": " Viv",
+    "token_id": 25313,
+    "coefficient": 7.076335733737656,
+    "contributed_length": 46.50584396981369
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 3.7387450797157085,
+    "contributed_length": 29.51839959955178
+   },
+   {
+    "token": "\u300e",
+    "token_id": 40493,
+    "coefficient": 2.6445933031363533,
+    "contributed_length": 25.847940128652105
+   },
+   {
+    "token": " Suzuki",
+    "token_id": 35807,
+    "coefficient": 3.0085070262579494,
+    "contributed_length": 25.592895773143553
+   },
+   {
+    "token": " Suz",
+    "token_id": 22691,
+    "coefficient": 2.116964445297723,
+    "contributed_length": 18.309876185638366
+   }
+  ],
+  "2": [
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 14.7962661004487,
+    "contributed_length": 163.59808339759124
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.062840123898537,
+    "contributed_length": 87.85713446483929
+   },
+   {
+    "token": " Nico",
+    "token_id": 39360,
+    "coefficient": 6.032811565749926,
+    "contributed_length": 57.40777910329717
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 7.170891107403461,
+    "contributed_length": 53.787338906022086
+   },
+   {
+    "token": " Elements",
+    "token_id": 26632,
+    "coefficient": 5.125868106874763,
+    "contributed_length": 40.425080004164926
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 3.4853481419359613,
+    "contributed_length": 36.089625025489795
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 4.171286324500324,
+    "contributed_length": 34.41206992838555
+   },
+   {
+    "token": " Hong",
+    "token_id": 9764,
+    "coefficient": 3.096017715392914,
+    "contributed_length": 22.51116814591362
+   }
+  ],
+  "3": [
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 8.461014261518157,
+    "contributed_length": 103.58289649481775
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 7.374639658557647,
+    "contributed_length": 100.93406468852505
+   },
+   {
+    "token": " Nico",
+    "token_id": 39360,
+    "coefficient": 3.1892675213963804,
+    "contributed_length": 32.28833167140785
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.3348773012908093,
+    "contributed_length": 25.96133027156982
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 3.123293516904577,
+    "contributed_length": 25.38546628670835
+   },
+   {
+    "token": " Elements",
+    "token_id": 26632,
+    "coefficient": 2.54834755909272,
+    "contributed_length": 21.498255815845724
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 2.3933425650034597,
+    "contributed_length": 21.450110426330316
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 2.284401481360468,
+    "contributed_length": 16.54897762925043
+   }
+  ],
+  "4": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 10.93536164586253,
+    "contributed_length": 173.16648917700502
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 4.755027474569648,
+    "contributed_length": 47.3529724133991
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 3.984002945778247,
+    "contributed_length": 45.65189801290002
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 1.969940560575254,
+    "contributed_length": 31.599948761321652
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 3.5780440326834975,
+    "contributed_length": 28.952723627351997
+   },
+   {
+    "token": " Gou",
+    "token_id": 46531,
+    "coefficient": 1.7149686879721078,
+    "contributed_length": 17.945873509992047
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 0.3322540953823275,
+    "contributed_length": 2.9899674613460823
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 11.409737076855414,
+    "contributed_length": 215.6072697970043
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 6.661623444374158,
+    "contributed_length": 98.11054562938882
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 3.9644557645835574,
+    "contributed_length": 73.5358271080431
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 5.287712246517859,
+    "contributed_length": 51.29402506059315
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 1.9092362181870104,
+    "contributed_length": 22.865242048031376
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 13328,
+    "coefficient": 0.4327574265169136,
+    "contributed_length": 4.995562156013041
+   },
+   {
+    "token": "\u2026",
+    "token_id": 1399,
+    "coefficient": 0.3300068135365019,
+    "contributed_length": 2.602807984080299
+   },
+   {
+    "token": "!",
+    "token_id": 0,
+    "coefficient": 0.11885288190993953,
+    "contributed_length": 1.1148650955908066
+   }
+  ],
+  "6": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 11.044220511289437,
+    "contributed_length": 200.36142797261994
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 11.051435551691563,
+    "contributed_length": 111.49933224813863
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 4.762830720405259,
+    "contributed_length": 52.508276445126384
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.8830588500035619,
+    "contributed_length": 34.08515095330677
+   },
+   {
+    "token": " Gaia",
+    "token_id": 37471,
+    "coefficient": 0.6693684770523873,
+    "contributed_length": 8.89432517958945
+   },
+   {
+    "token": "!?",
+    "token_id": 22857,
+    "coefficient": 0.6353949388878459,
+    "contributed_length": 8.374828465040475
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 0.6135285754008689,
+    "contributed_length": 7.439370412941262
+   },
+   {
+    "token": "!",
+    "token_id": 0,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.96643806888394,
+    "contributed_length": 263.52294066385156
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 13.35055801207127,
+    "contributed_length": 127.15934910095939
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 5.700212071436722,
+    "contributed_length": 60.13107385149201
+   },
+   {
+    "token": " Nish",
+    "token_id": 48438,
+    "coefficient": 1.6147043210760057,
+    "contributed_length": 19.44919836516483
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.7362696434288604,
+    "contributed_length": 11.023349847049838
+   },
+   {
+    "token": "!",
+    "token_id": 0,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 15.070299843388495,
+    "contributed_length": 228.5467879246291
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 14.234520343792703,
+    "contributed_length": 134.6934509931805
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 4.55930813851457,
+    "contributed_length": 40.74144211873138
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 3.1187038839948906,
+    "contributed_length": 38.335827334139765
+   },
+   {
+    "token": " Nish",
+    "token_id": 48438,
+    "coefficient": 3.1799224120724237,
+    "contributed_length": 37.38610509286535
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 3.4420862458973684,
+    "contributed_length": 35.068883016106746
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 2.5168765017919963,
+    "contributed_length": 26.856123788992107
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 1.1166635176919513,
+    "contributed_length": 12.28847533546487
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 13.443662426353713,
+    "contributed_length": 191.24797527401373
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 18.250584630053016,
+    "contributed_length": 147.72604279732897
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 6.128810851787103,
+    "contributed_length": 61.106706527365745
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 5.48594853100284,
+    "contributed_length": 48.17149745074694
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 3.565342758568643,
+    "contributed_length": 33.58417918793092
+   },
+   {
+    "token": " Nish",
+    "token_id": 48438,
+    "coefficient": 3.206764529936457,
+    "contributed_length": 33.0292226550596
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 3.5592312412140528,
+    "contributed_length": 28.397030756056402
+   },
+   {
+    "token": " Gaia",
+    "token_id": 37471,
+    "coefficient": 1.6257650451027483,
+    "contributed_length": 16.054307334810566
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.88956291957485,
+    "contributed_length": 150.25507988775686
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 12.694220188769869,
+    "contributed_length": 136.50274469317628
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 19.00653297543042,
+    "contributed_length": 120.25821579126385
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 4.7924661310340815,
+    "contributed_length": 73.29890052499111
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 6.657614712713004,
+    "contributed_length": 42.397290691163015
+   },
+   {
+    "token": " Elements",
+    "token_id": 26632,
+    "coefficient": 4.696132886787348,
+    "contributed_length": 33.3758301039971
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 3.6228534442225904,
+    "contributed_length": 26.247558968700865
+   },
+   {
+    "token": " Qi",
+    "token_id": 21924,
+    "coefficient": 0.2875131124953205,
+    "contributed_length": 2.2581348667076346
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 202.09172941491127,
+    "contributed_length": 539.6165406256603
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 108.96220495270069,
+    "contributed_length": 335.35530532639336
+   },
+   {
+    "token": "\n",
+    "token_id": 198,
+    "coefficient": 50.858345704739584,
+    "contributed_length": 136.72044828747772
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 36.35702659961094,
+    "contributed_length": 94.65544538452166
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 23.834198366881612,
+    "contributed_length": 58.74196055534819
+   }
+  ]
+ },
+ "noise1000": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 11.168650551485266,
+    "contributed_length": 121.26686219642637
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 4.836949633647549,
+    "contributed_length": 45.45918760028033
+   },
+   {
+    "token": " NP",
+    "token_id": 28498,
+    "coefficient": 3.402832184619425,
+    "contributed_length": 23.439214376811496
+   },
+   {
+    "token": " ground",
+    "token_id": 2323,
+    "coefficient": 6.993823996538442,
+    "contributed_length": 20.521178662015693
+   },
+   {
+    "token": " FF",
+    "token_id": 18402,
+    "coefficient": 3.0564743923128597,
+    "contributed_length": 20.136809160211847
+   },
+   {
+    "token": " Nak",
+    "token_id": 22255,
+    "coefficient": 2.6279572170441337,
+    "contributed_length": 20.12300415552086
+   },
+   {
+    "token": " Smash",
+    "token_id": 18214,
+    "coefficient": 2.098534356205408,
+    "contributed_length": 16.305783020405812
+   },
+   {
+    "token": "Fair",
+    "token_id": 30099,
+    "coefficient": 2.0508439943168595,
+    "contributed_length": 15.392612204520399
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.256367514766822,
+    "contributed_length": 93.24684508339334
+   },
+   {
+    "token": " Smash",
+    "token_id": 18214,
+    "coefficient": 4.345996244453982,
+    "contributed_length": 34.87155342325022
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 2.868950507417737,
+    "contributed_length": 32.796811171710964
+   },
+   {
+    "token": " FF",
+    "token_id": 18402,
+    "coefficient": 4.596645420335029,
+    "contributed_length": 29.776929508441448
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 3.1695005822475095,
+    "contributed_length": 26.560064612083757
+   },
+   {
+    "token": " Nak",
+    "token_id": 22255,
+    "coefficient": 2.277927101713665,
+    "contributed_length": 17.26722927114014
+   },
+   {
+    "token": " Connie",
+    "token_id": 48506,
+    "coefficient": 1.759914865273703,
+    "contributed_length": 16.37974444481432
+   },
+   {
+    "token": " ground",
+    "token_id": 2323,
+    "coefficient": 4.035885894674817,
+    "contributed_length": 13.834372044954609
+   }
+  ],
+  "2": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 4.811155733198222,
+    "contributed_length": 60.0820840427392
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.2240280656417495,
+    "contributed_length": 52.544160031403464
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 5.765524021680192,
+    "contributed_length": 50.06260367697115
+   },
+   {
+    "token": " commer",
+    "token_id": 4412,
+    "coefficient": 4.732363551326889,
+    "contributed_length": 35.69550849616768
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.5759981968471544,
+    "contributed_length": 26.364387474963888
+   },
+   {
+    "token": " Dig",
+    "token_id": 7367,
+    "coefficient": 3.1463503044461496,
+    "contributed_length": 19.332036108581185
+   },
+   {
+    "token": " FF",
+    "token_id": 18402,
+    "coefficient": 1.7372701119996556,
+    "contributed_length": 11.860016912218917
+   },
+   {
+    "token": " Nak",
+    "token_id": 22255,
+    "coefficient": 0.8341765349925122,
+    "contributed_length": 6.6911383403808316
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.733907643067723,
+    "contributed_length": 65.135825371587
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 4.830965116270829,
+    "contributed_length": 44.83715541268619
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.120189582435462,
+    "contributed_length": 34.6931601993545
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 2.2737118927709643,
+    "contributed_length": 31.119484326492305
+   },
+   {
+    "token": " commer",
+    "token_id": 4412,
+    "coefficient": 3.423752754458074,
+    "contributed_length": 27.669538044325996
+   },
+   {
+    "token": " cryst",
+    "token_id": 17787,
+    "coefficient": 1.6207886700979102,
+    "contributed_length": 13.077994241381278
+   },
+   {
+    "token": " FF",
+    "token_id": 18402,
+    "coefficient": 0.39430008692302154,
+    "contributed_length": 2.847486366479518
+   }
+  ],
+  "4": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 3.075238150945678,
+    "contributed_length": 48.69781276817063
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 2.617752668692788,
+    "contributed_length": 41.99154627099475
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 3.7312168679538846,
+    "contributed_length": 37.738567640879666
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 3.010253492726774,
+    "contributed_length": 25.681753337290598
+   },
+   {
+    "token": " neighb",
+    "token_id": 9882,
+    "coefficient": 0.7495887159567924,
+    "contributed_length": 7.003701490906426
+   },
+   {
+    "token": " cryst",
+    "token_id": 17787,
+    "coefficient": 0.7004374074930583,
+    "contributed_length": 6.122418627507802
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 0.5852019479039996,
+    "contributed_length": 4.654489239238955
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.762521036569676,
+    "contributed_length": 108.89308136318726
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 2.552633011963442,
+    "contributed_length": 24.057656166308572
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 1.7439216739553336,
+    "contributed_length": 20.2103943233333
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 1.1391463744787136,
+    "contributed_length": 16.77703239834602
+   },
+   {
+    "token": " cryst",
+    "token_id": 17787,
+    "coefficient": 0.40504097757515195,
+    "contributed_length": 3.981806562767125
+   }
+  ],
+  "6": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.347103853348075,
+    "contributed_length": 78.86404791644355
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 4.372989322865666,
+    "contributed_length": 41.707670922711344
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.765823848164646,
+    "contributed_length": 95.16379603658969
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 5.704046099514283,
+    "contributed_length": 51.91752721235782
+   },
+   {
+    "token": " confir",
+    "token_id": 4322,
+    "coefficient": 1.9144461715795908,
+    "contributed_length": 18.25398469623365
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 0.034816480664906564,
+    "contributed_length": 0.31129438551875604
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 6.8059385860847454,
+    "contributed_length": 103.21462869528533
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 7.421985439635501,
+    "contributed_length": 67.6778608121336
+   },
+   {
+    "token": " confir",
+    "token_id": 4322,
+    "coefficient": 1.4922940588394793,
+    "contributed_length": 14.521120614015334
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 1.4885187748103088,
+    "contributed_length": 13.517820083290921
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 0.7256892638839179,
+    "contributed_length": 7.743407628198245
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 0.5053631063576823,
+    "contributed_length": 4.455960208045423
+   }
+  ],
+  "9": [
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 8.855063986927604,
+    "contributed_length": 81.44540731425161
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.548210195382308,
+    "contributed_length": 78.92819178362107
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 2.35306608555475,
+    "contributed_length": 23.461014250026032
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 2.325923218582841,
+    "contributed_length": 19.72815992118826
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 1.9499258481116382,
+    "contributed_length": 17.480497894088632
+   },
+   {
+    "token": " confir",
+    "token_id": 4322,
+    "coefficient": 0.641642966523353,
+    "contributed_length": 6.33597707937745
+   }
+  ],
+  "10": [
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 9.05041547861187,
+    "contributed_length": 97.32039739920752
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 7.383162568463207,
+    "contributed_length": 84.59394744648627
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.316727815756779,
+    "contributed_length": 65.5853335566948
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 3.3284796749921557,
+    "contributed_length": 30.647997076818122
+   },
+   {
+    "token": ".",
+    "token_id": 13,
+    "coefficient": 0.4723638643918272,
+    "contributed_length": 6.642552424186248
+   },
+   {
+    "token": " cryst",
+    "token_id": 17787,
+    "coefficient": 0.6305561378854385,
+    "contributed_length": 6.550685916148608
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 0.1840512025736132,
+    "contributed_length": 2.051290405563358
+   },
+   {
+    "token": " Eva",
+    "token_id": 32355,
+    "coefficient": 0.07686169808376737,
+    "contributed_length": 0.5462693460915545
+   }
+  ],
+  "11": [
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 5.264010491071776,
+    "contributed_length": 27.37256238074973
+   },
+   {
+    "token": " Dig",
+    "token_id": 7367,
+    "coefficient": 6.515017808028591,
+    "contributed_length": 23.509840983555165
+   },
+   {
+    "token": " Eva",
+    "token_id": 32355,
+    "coefficient": 6.069970903456372,
+    "contributed_length": 23.024246141007286
+   },
+   {
+    "token": " WP",
+    "token_id": 28993,
+    "coefficient": 5.068667889091102,
+    "contributed_length": 19.712214670958016
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 3.591800257130788,
+    "contributed_length": 17.338204380135803
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.6712831355947,
+    "contributed_length": 15.556171929777605
+   },
+   {
+    "token": " ground",
+    "token_id": 2323,
+    "coefficient": 2.926205534768184,
+    "contributed_length": 10.232039314688743
+   },
+   {
+    "token": " FF",
+    "token_id": 18402,
+    "coefficient": 2.2919940095723104,
+    "contributed_length": 8.438804274260454
+   }
+  ]
+ },
+ "phaseA": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 10.473359901744434,
+    "contributed_length": 113.71754233724495
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 10.046162376992951,
+    "contributed_length": 77.09125394525292
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 10545,
+    "coefficient": 4.915056901724193,
+    "contributed_length": 35.2830626032674
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.623895438509911,
+    "contributed_length": 24.660201990317724
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 14524,
+    "coefficient": 1.6351957711529281,
+    "contributed_length": 12.624376892900226
+   },
+   {
+    "token": " Wind",
+    "token_id": 3086,
+    "coefficient": 2.0454013010396506,
+    "contributed_length": 10.50137276438827
+   },
+   {
+    "token": " Gaia",
+    "token_id": 37471,
+    "coefficient": 1.0393580679522014,
+    "contributed_length": 9.277968895894876
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 0.7657074818460174,
+    "contributed_length": 7.533694218358033
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.548525995651692,
+    "contributed_length": 96.54646280972955
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 4.752143432835894,
+    "contributed_length": 37.519452600791425
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 3.306111922883872,
+    "contributed_length": 32.82872444629554
+   },
+   {
+    "token": " Suz",
+    "token_id": 22691,
+    "coefficient": 3.726492396780419,
+    "contributed_length": 32.23087404388427
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.835874246218779,
+    "contributed_length": 27.40320459614037
+   },
+   {
+    "token": " Viv",
+    "token_id": 25313,
+    "coefficient": 3.505603738208233,
+    "contributed_length": 23.038909769618318
+   },
+   {
+    "token": " Kou",
+    "token_id": 30559,
+    "coefficient": 1.6115725867816848,
+    "contributed_length": 13.991738007086544
+   },
+   {
+    "token": " elemental",
+    "token_id": 25601,
+    "coefficient": 0.6864511054749796,
+    "contributed_length": 4.802103465069896
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.549653289476582,
+    "contributed_length": 106.35212258870756
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 5.998263338828793,
+    "contributed_length": 44.99170580348898
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 3.984659197202561,
+    "contributed_length": 37.75349979324605
+   },
+   {
+    "token": " Elements",
+    "token_id": 26632,
+    "coefficient": 4.285798443367133,
+    "contributed_length": 33.79988352070075
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 2.727972736144073,
+    "contributed_length": 25.3814665173312
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 2.8197136342441134,
+    "contributed_length": 23.261932941334113
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.6567856896092577,
+    "contributed_length": 8.20199037185189
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 0.5020109910812423,
+    "contributed_length": 3.432175124756133
+   }
+  ],
+  "3": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 3.8541448563827387,
+    "contributed_length": 52.75030703387154
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 2.976373415923632,
+    "contributed_length": 40.95317308189025
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.446169537045787,
+    "contributed_length": 27.198780516813578
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 2.712616755324975,
+    "contributed_length": 22.047572800429247
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 2.021317265636116,
+    "contributed_length": 20.692871561275076
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 1.612728034700785,
+    "contributed_length": 16.02504372262329
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 2.131725696304007,
+    "contributed_length": 15.442942559651856
+   },
+   {
+    "token": " Fuj",
+    "token_id": 32671,
+    "coefficient": 0.06314293735403119,
+    "contributed_length": 0.609272716649522
+   }
+  ],
+  "4": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 2.5925845653007626,
+    "contributed_length": 41.58782303511427
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 2.614567521134693,
+    "contributed_length": 41.40288113127222
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 1.454444857472949,
+    "contributed_length": 16.666194579274226
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 1.8690687751459323,
+    "contributed_length": 15.945820964814843
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 0.6056638563453502,
+    "contributed_length": 4.817236019210684
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.539568651952568,
+    "contributed_length": 142.47355583609942
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.990385880674533,
+    "contributed_length": 44.04157527744528
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 0.11582267403097096,
+    "contributed_length": 1.0915874138743773
+   }
+  ],
+  "6": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.294940461533929,
+    "contributed_length": 96.05945759761715
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 2.6931543188155684,
+    "contributed_length": 25.686134993723396
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.467190471293745,
+    "contributed_length": 123.24451972336291
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 5.40890434778657,
+    "contributed_length": 49.231183227842806
+   },
+   {
+    "token": " confir",
+    "token_id": 4322,
+    "coefficient": 0.33378698194958956,
+    "contributed_length": 3.1826136199392843
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.008810096973024,
+    "contributed_length": 136.6220069993782
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 10.012149346524556,
+    "contributed_length": 91.29644020665994
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 2.3998254610253738,
+    "contributed_length": 21.793751857497245
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 1.0308861844850246,
+    "contributed_length": 9.08967781640519
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.482362707344242,
+    "contributed_length": 120.66910354274509
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 12.089635124313032,
+    "contributed_length": 111.19572466488694
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 4.8745252508431305,
+    "contributed_length": 43.69865062538869
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 2.1847715060678903,
+    "contributed_length": 21.783049677852745
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 1.3659419516572704,
+    "contributed_length": 11.585731227092465
+   },
+   {
+    "token": " confir",
+    "token_id": 4322,
+    "coefficient": 0.5929577261355361,
+    "contributed_length": 5.855229088212551
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.730664983171438,
+    "contributed_length": 117.45429945470681
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 9.354679958952525,
+    "contributed_length": 107.18297172630811
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 8.995379669073891,
+    "contributed_length": 96.72858955700616
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 5.331193060609154,
+    "contributed_length": 59.417298135064414
+   },
+   {
+    "token": " neighb",
+    "token_id": 9882,
+    "coefficient": 1.890161868098956,
+    "contributed_length": 21.279733236088006
+   },
+   {
+    "token": " cryst",
+    "token_id": 17787,
+    "coefficient": 1.2530046586786345,
+    "contributed_length": 13.017143878735805
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 44.729741739310114,
+    "contributed_length": 119.43540970393018
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 27.098279496577135,
+    "contributed_length": 83.40095355393531
+   },
+   {
+    "token": "\n",
+    "token_id": 198,
+    "coefficient": 7.117387393522519,
+    "contributed_length": 19.133386695811403
+   },
+   {
+    "token": " N",
+    "token_id": 399,
+    "coefficient": 2.6833722825614474,
+    "contributed_length": 7.625440305124649
+   }
+  ]
+ },
+ "phaseB": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 12.04235960943558,
+    "contributed_length": 130.75341166288274
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 8.94649995838818,
+    "contributed_length": 68.6527725047323
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.4024176645000814,
+    "contributed_length": 31.977000924109102
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 10545,
+    "coefficient": 3.7626317828846516,
+    "contributed_length": 27.01030230229722
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 14524,
+    "coefficient": 2.210334133423477,
+    "contributed_length": 17.064679136190307
+   },
+   {
+    "token": " Suz",
+    "token_id": 22691,
+    "coefficient": 1.5126684859622215,
+    "contributed_length": 13.400589054617164
+   },
+   {
+    "token": " Gou",
+    "token_id": 46531,
+    "coefficient": 1.0325881818075935,
+    "contributed_length": 8.738830525735198
+   },
+   {
+    "token": " Gaia",
+    "token_id": 37471,
+    "coefficient": 0.9587509424488174,
+    "contributed_length": 8.558418602047265
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 10.428482332216168,
+    "contributed_length": 117.77855997178547
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.8730722587705197,
+    "contributed_length": 37.42570449456245
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 3.129136398619183,
+    "contributed_length": 24.7053748374219
+   },
+   {
+    "token": " Suz",
+    "token_id": 22691,
+    "coefficient": 2.5987570423220685,
+    "contributed_length": 22.476957412849195
+   },
+   {
+    "token": " Viv",
+    "token_id": 25313,
+    "coefficient": 2.9257187781189273,
+    "contributed_length": 19.227892247402675
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 1.9170660200500942,
+    "contributed_length": 19.03590488935532
+   },
+   {
+    "token": " Nico",
+    "token_id": 39360,
+    "coefficient": 1.4299511679350965,
+    "contributed_length": 12.97602789917129
+   },
+   {
+    "token": " Shu",
+    "token_id": 32344,
+    "coefficient": 1.5756902543007756,
+    "contributed_length": 12.761844423793718
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.618374534448773,
+    "contributed_length": 107.20697015062295
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 2.0106269594172708,
+    "contributed_length": 25.108864616610923
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 2.9024284665028657,
+    "contributed_length": 23.94430964011991
+   },
+   {
+    "token": " Nico",
+    "token_id": 39360,
+    "coefficient": 2.2291585915960805,
+    "contributed_length": 21.2125047530234
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 1.965730032482993,
+    "contributed_length": 20.118518837080536
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 2.610302116622356,
+    "contributed_length": 19.579324590345358
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 1.9821445099001924,
+    "contributed_length": 18.780249110698676
+   },
+   {
+    "token": " Elements",
+    "token_id": 26632,
+    "coefficient": 2.0598757359573634,
+    "contributed_length": 16.245178316826525
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 3.9663765376889675,
+    "contributed_length": 54.57504222652036
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 3.443308237816219,
+    "contributed_length": 47.12733265753187
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.323346614591118,
+    "contributed_length": 25.833121407873563
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 1.674187535407543,
+    "contributed_length": 17.139193450056165
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 1.615212014324658,
+    "contributed_length": 14.476187644767542
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 1.6517273041933924,
+    "contributed_length": 11.965671721784938
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 1.3787958513068024,
+    "contributed_length": 10.601420125391893
+   },
+   {
+    "token": " Nico",
+    "token_id": 39360,
+    "coefficient": 0.902679402114212,
+    "contributed_length": 9.138779275452755
+   }
+  ],
+  "4": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 4.030323866669746,
+    "contributed_length": 63.82203504916121
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 2.5916769464439837,
+    "contributed_length": 41.5732638601102
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 3.2632496126584747,
+    "contributed_length": 37.39292880432829
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 2.7893714294900382,
+    "contributed_length": 27.777973746265204
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 1.4060297515694211,
+    "contributed_length": 11.377274968439377
+   },
+   {
+    "token": " Gou",
+    "token_id": 46531,
+    "coefficient": 0.8802917903961294,
+    "contributed_length": 9.211599741225307
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 0.3406226472425856,
+    "contributed_length": 4.280281071892495
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 0.32725052491845097,
+    "contributed_length": 2.9449401371220483
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 6.834368917214906,
+    "contributed_length": 129.14755292786555
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.191876972968167,
+    "contributed_length": 47.00908029622335
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 2.12946627423298,
+    "contributed_length": 25.502743625769295
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 1.7473761276929138,
+    "contributed_length": 16.95061128623006
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 13328,
+    "coefficient": 0.8677169859333258,
+    "contributed_length": 10.01654476954148
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 0.4051378727713799,
+    "contributed_length": 5.477562363200758
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.28495657124957163,
+    "contributed_length": 5.2855974189209824
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 0.12516566391774214,
+    "contributed_length": 1.2038823924808215
+   }
+  ],
+  "6": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.977140605422399,
+    "contributed_length": 108.43575838343533
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 4.359052976786226,
+    "contributed_length": 43.979037281860805
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 1.6145233524066596,
+    "contributed_length": 19.576980992367044
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 1.6842655434168625,
+    "contributed_length": 18.568344321338518
+   },
+   {
+    "token": " Gaia",
+    "token_id": 37471,
+    "coefficient": 0.2327271319833463,
+    "contributed_length": 3.0923935932691253
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 0.224233924691665,
+    "contributed_length": 3.032102533667373
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 0.18176385638572906,
+    "contributed_length": 2.665925074678366
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 0.21916283274226891,
+    "contributed_length": 2.1256348941393197
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.98395208054572,
+    "contributed_length": 131.77356911463917
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 5.090073954459561,
+    "contributed_length": 48.48115639358257
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 2.2658471045866833,
+    "contributed_length": 23.90223694743173
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 1.3162811820003373,
+    "contributed_length": 12.114942155048702
+   },
+   {
+    "token": " Nish",
+    "token_id": 48438,
+    "coefficient": 0.8684515134574964,
+    "contributed_length": 10.460544097947825
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 0.5079477532063212,
+    "contributed_length": 6.359338978892594
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 0.21167707155948867,
+    "contributed_length": 2.636989623529907
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 13328,
+    "coefficient": 0.05146121581964346,
+    "contributed_length": 0.5692895527730863
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.864834441035153,
+    "contributed_length": 119.27318419255973
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 6.095346590309545,
+    "contributed_length": 57.676918323863745
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 3.331635600941257,
+    "contributed_length": 29.77110449057649
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 1.3682098598007089,
+    "contributed_length": 16.81835111418147
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 1.2757624834453194,
+    "contributed_length": 12.997804846292542
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 0.8737815458182762,
+    "contributed_length": 10.419142626099038
+   },
+   {
+    "token": " Nish",
+    "token_id": 48438,
+    "coefficient": 0.8461566858700826,
+    "contributed_length": 9.948199573319991
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 13328,
+    "coefficient": 0.646248775398793,
+    "contributed_length": 6.892874267295419
+   }
+  ],
+  "9": [
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 8.857380296591094,
+    "contributed_length": 71.69445622096947
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.751309047067921,
+    "contributed_length": 67.59156889952509
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 4.001281702519532,
+    "contributed_length": 31.923893635900875
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 2.1526910635750762,
+    "contributed_length": 30.974188806935185
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 3.144619615115482,
+    "contributed_length": 27.612551396907342
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 1.5008300644219437,
+    "contributed_length": 14.137251094033921
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 10263,
+    "coefficient": 1.0621677840430972,
+    "contributed_length": 9.030084383381904
+   },
+   {
+    "token": " Shu",
+    "token_id": 32344,
+    "coefficient": 0.8551544905638738,
+    "contributed_length": 8.074262197051436
+   }
+  ],
+  "10": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 6.084537538267618,
+    "contributed_length": 93.06062882114101
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 11.380808780837494,
+    "contributed_length": 72.00870142988673
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 3.9445241130009774,
+    "contributed_length": 42.41602555542463
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 6.168837545086576,
+    "contributed_length": 39.28464020697536
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 1.2411254635759537,
+    "contributed_length": 18.856789445286342
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 0.8645762853725818,
+    "contributed_length": 7.683637935019892
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 0.9172774287820683,
+    "contributed_length": 6.204955226077579
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 0.5483908597646597,
+    "contributed_length": 3.973089624291493
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 121.70852749937681,
+    "contributed_length": 324.9808132376291
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 69.5817606155125,
+    "contributed_length": 214.1532707280704
+   },
+   {
+    "token": "\n",
+    "token_id": 198,
+    "coefficient": 30.599756686984648,
+    "contributed_length": 82.26009701574714
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 27.164307089434395,
+    "contributed_length": 70.72221869045383
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 20.75505632670013,
+    "contributed_length": 51.153081857418655
+   }
+  ]
+ },
+ "pivotM": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 12.188050283077754,
+    "contributed_length": 132.33529040126984
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 10.401552487936524,
+    "contributed_length": 79.81841166620777
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 10545,
+    "coefficient": 4.730109433245795,
+    "contributed_length": 33.955404909955654
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.206922932874973,
+    "contributed_length": 30.13967939857762
+   },
+   {
+    "token": " \ufffd",
+    "token_id": 14524,
+    "coefficient": 1.787906533170857,
+    "contributed_length": 13.803366130352227
+   },
+   {
+    "token": " Gaia",
+    "token_id": 37471,
+    "coefficient": 1.3079784124823985,
+    "contributed_length": 11.675844352104207
+   },
+   {
+    "token": " Wind",
+    "token_id": 3086,
+    "coefficient": 1.9246051317914619,
+    "contributed_length": 9.881188548635308
+   },
+   {
+    "token": " Suz",
+    "token_id": 22691,
+    "coefficient": 0.9666745314323656,
+    "contributed_length": 8.563679527606196
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 10.315772662195114,
+    "contributed_length": 116.50562473470252
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 3.748888365428663,
+    "contributed_length": 36.2257088878004
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 4.494451929940697,
+    "contributed_length": 35.4849087649095
+   },
+   {
+    "token": "\u3010",
+    "token_id": 31854,
+    "coefficient": 3.036415294641995,
+    "contributed_length": 30.150715806792324
+   },
+   {
+    "token": " Suz",
+    "token_id": 22691,
+    "coefficient": 3.285455234121571,
+    "contributed_length": 28.416291394900256
+   },
+   {
+    "token": " Viv",
+    "token_id": 25313,
+    "coefficient": 3.100279247015817,
+    "contributed_length": 20.37510773226328
+   },
+   {
+    "token": " Kou",
+    "token_id": 30559,
+    "coefficient": 1.1388419917742079,
+    "contributed_length": 9.88747197058888
+   },
+   {
+    "token": " elemental",
+    "token_id": 25601,
+    "coefficient": 1.241307438796061,
+    "contributed_length": 8.683629038567949
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 9.431488128708812,
+    "contributed_length": 117.32157406815591
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 4.480483936168017,
+    "contributed_length": 33.60716322813041
+   },
+   {
+    "token": " Elements",
+    "token_id": 26632,
+    "coefficient": 3.786748642781418,
+    "contributed_length": 29.86413494229259
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 3.095741922100036,
+    "contributed_length": 29.331264289302148
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 3.3574002408070376,
+    "contributed_length": 27.697713097666618
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 1.8564198985038178,
+    "contributed_length": 17.272408507492337
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.2736709425738026,
+    "contributed_length": 15.905701012019433
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 1.3807452008972652,
+    "contributed_length": 14.131415746022853
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 3.7630446977563747,
+    "contributed_length": 51.77731396121981
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 3.7181039703327357,
+    "contributed_length": 50.88836391141383
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 2.988713230157681,
+    "contributed_length": 33.23128423589478
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 2.418603041063356,
+    "contributed_length": 24.760013154433278
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 3.0596723392839276,
+    "contributed_length": 22.16530216286275
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 1.9360919918731452,
+    "contributed_length": 15.736144464696926
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 0.43857220837886735,
+    "contributed_length": 4.357919415782188
+   },
+   {
+    "token": " Fuj",
+    "token_id": 32671,
+    "coefficient": 0.09414052856070011,
+    "contributed_length": 0.9083716720590265
+   }
+  ],
+  "4": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 3.3037095383184036,
+    "contributed_length": 52.31576243549632
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 2.9992860898489337,
+    "contributed_length": 48.11174948958592
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 3.556731350095262,
+    "contributed_length": 40.75587770985319
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 0.9396083995747024,
+    "contributed_length": 8.455572347130982
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 0.5976000312076584,
+    "contributed_length": 7.509471618658447
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 0.5915725532247847,
+    "contributed_length": 4.786871397498877
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 0.45979799587723413,
+    "contributed_length": 4.578901369330448
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.532542520966096,
+    "contributed_length": 142.3407845978995
+   },
+   {
+    "token": "\u2015",
+    "token_id": 31857,
+    "coefficient": 4.524867659451833,
+    "contributed_length": 66.6409980504837
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 0.7210254806247378,
+    "contributed_length": 6.994385728316997
+   },
+   {
+    "token": " Fairy",
+    "token_id": 17746,
+    "coefficient": 0.06918429635122449,
+    "contributed_length": 0.8285594348800126
+   }
+  ],
+  "6": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 5.402556714352658,
+    "contributed_length": 98.01180417253225
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 2.7567068417212335,
+    "contributed_length": 27.812764289137593
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 1.4013448337303092,
+    "contributed_length": 15.449258276011076
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.567579361668321,
+    "contributed_length": 124.90141874413108
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 2.7315484599905213,
+    "contributed_length": 26.017034186590855
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 1.336547093732086,
+    "contributed_length": 14.099126662658456
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 0.6520154160035442,
+    "contributed_length": 5.934564257137285
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 0.5505507161270936,
+    "contributed_length": 5.067222847601774
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 0.00868309248161026,
+    "contributed_length": 0.10870946495397585
+   },
+   {
+    "token": " \u300c",
+    "token_id": 40283,
+    "coefficient": 0.005472588062796307,
+    "contributed_length": 0.06817534761383845
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.381030926394228,
+    "contributed_length": 127.10149881753756
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 3.9535459162439115,
+    "contributed_length": 36.05066762931767
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 2.7221202025112503,
+    "contributed_length": 29.04615982353834
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 2.844273843303702,
+    "contributed_length": 26.91380181920034
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 1.8045077510889402,
+    "contributed_length": 16.124869357425037
+   },
+   {
+    "token": " Fuji",
+    "token_id": 43694,
+    "coefficient": 0.15292459191297045,
+    "contributed_length": 1.879784349134772
+   },
+   {
+    "token": " K",
+    "token_id": 509,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.121189087608712,
+    "contributed_length": 115.53108971093383
+   },
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 4.904710906327121,
+    "contributed_length": 48.90193827194204
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 5.271923430396835,
+    "contributed_length": 48.48908508759342
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 4.968037601158768,
+    "contributed_length": 40.21287811673722
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 1.2911728314654352,
+    "contributed_length": 10.30151516483144
+   },
+   {
+    "token": "\u2026\u2026",
+    "token_id": 7398,
+    "coefficient": 0.8950342836079099,
+    "contributed_length": 7.8591954458726985
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 0.7052787679067087,
+    "contributed_length": 6.322611718326636
+   },
+   {
+    "token": " N",
+    "token_id": 399,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "10": [
+   {
+    "token": " seiz",
+    "token_id": 15038,
+    "coefficient": 10.617411891983979,
+    "contributed_length": 114.1705314105023
+   },
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.022730020927988,
+    "contributed_length": 106.69843236813607
+   },
+   {
+    "token": " Divine",
+    "token_id": 13009,
+    "coefficient": 6.970837540753686,
+    "contributed_length": 44.10591275670652
+   },
+   {
+    "token": " streng",
+    "token_id": 3472,
+    "coefficient": 3.7655755989450777,
+    "contributed_length": 43.14477723727483
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.8540637093844801,
+    "contributed_length": 13.062571370258208
+   },
+   {
+    "token": " arrang",
+    "token_id": 9020,
+    "coefficient": 0.7468277330795975,
+    "contributed_length": 8.323556391119407
+   },
+   {
+    "token": " Yu",
+    "token_id": 10605,
+    "coefficient": 1.0025455884369405,
+    "contributed_length": 6.3844512754603375
+   },
+   {
+    "token": " N",
+    "token_id": 399,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 84.73023874749994,
+    "contributed_length": 226.24299594884175
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 52.41451885898702,
+    "contributed_length": 161.31728412729709
+   },
+   {
+    "token": "\n",
+    "token_id": 198,
+    "coefficient": 22.369464564095036,
+    "contributed_length": 60.134933230219204
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 3.2384510893328704,
+    "contributed_length": 8.431300875965265
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 0.906580820099085,
+    "contributed_length": 2.234366516328667
+   }
+  ]
+ },
+ "prolet1000": {
+  "0": [
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 13.913032729320888,
+    "contributed_length": 151.0647875446828
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 11.000374705580874,
+    "contributed_length": 84.63087970178883
+   },
+   {
+    "token": "\u00ab",
+    "token_id": 24328,
+    "coefficient": 4.688721495380356,
+    "contributed_length": 33.388317819487916
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 4.341951256963572,
+    "contributed_length": 31.45525208390235
+   },
+   {
+    "token": " Party",
+    "token_id": 3615,
+    "coefficient": 6.4227942236850355,
+    "contributed_length": 26.653187832423427
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 0.5602911637571466,
+    "contributed_length": 3.6603559861214197
+   }
+  ],
+  "1": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.559632422903624,
+    "contributed_length": 96.6718980328514
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 10.366308905876028,
+    "contributed_length": 84.62109022550274
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 4.818687171539783,
+    "contributed_length": 55.08550002934053
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 4.850090522855661,
+    "contributed_length": 47.24555133120904
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 5.375746213292393,
+    "contributed_length": 36.88660430211959
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 4.703218790849168,
+    "contributed_length": 34.597157507992826
+   }
+  ],
+  "2": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 11.334341230747961,
+    "contributed_length": 140.99182823220045
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.914887729598159,
+    "contributed_length": 44.89445568118775
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 4.18843312733628,
+    "contributed_length": 34.99165664643881
+   },
+   {
+    "token": " proletarian",
+    "token_id": 47393,
+    "coefficient": 2.973509413024114,
+    "contributed_length": 29.768221473383598
+   },
+   {
+    "token": " \u00ab",
+    "token_id": 21110,
+    "coefficient": 2.9060249670501075,
+    "contributed_length": 20.72564803465607
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 0.7825270724807935,
+    "contributed_length": 8.709574167926487
+   },
+   {
+    "token": " general",
+    "token_id": 2276,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "3": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 6.378785201863479,
+    "contributed_length": 87.76838720119048
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 7.3714773037098205,
+    "contributed_length": 61.62824021384378
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.7025036644564295,
+    "contributed_length": 23.301560883898873
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 1.2197667491800392,
+    "contributed_length": 14.832470503847945
+   },
+   {
+    "token": " Anarch",
+    "token_id": 32229,
+    "coefficient": 0.08913686395444449,
+    "contributed_length": 0.8181408512814242
+   }
+  ],
+  "4": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 6.4396726688630075,
+    "contributed_length": 103.2992215340402
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.8593590847585135,
+    "contributed_length": 54.826963783045386
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 0.5094033089491936,
+    "contributed_length": 7.093197786047421
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.3857476946622541,
+    "contributed_length": 6.108492444606034
+   }
+  ],
+  "5": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 6.112790565045489,
+    "contributed_length": 115.51204692032945
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 4.584843154056983,
+    "contributed_length": 50.777714219716884
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.7724704659771567,
+    "contributed_length": 14.328386544157249
+   },
+   {
+    "token": " Lenin",
+    "token_id": 22899,
+    "coefficient": 0.7307139064668011,
+    "contributed_length": 10.006544148527395
+   }
+  ],
+  "6": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 4.142215248470104,
+    "contributed_length": 75.1470111725009
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 3.1410296955988093,
+    "contributed_length": 34.8060985676334
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 1.4612043248600024,
+    "contributed_length": 26.449183989328684
+   }
+  ],
+  "7": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 6.946829573626776,
+    "contributed_length": 114.6560647800578
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 3.7748000135519417,
+    "contributed_length": 38.95345823616062
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 0.31406847547367733,
+    "contributed_length": 5.190000007575299
+   }
+  ],
+  "8": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.2089602490604605,
+    "contributed_length": 109.32660440209594
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 4.808531436098081,
+    "contributed_length": 48.59782951521016
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 1.6949190857880958,
+    "contributed_length": 24.32330021181907
+   },
+   {
+    "token": " horizont",
+    "token_id": 13736,
+    "coefficient": 0.13867411717666375,
+    "contributed_length": 1.5688966899991883
+   }
+  ],
+  "9": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 7.061423307809766,
+    "contributed_length": 100.45498520730366
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 3.8827171063611905,
+    "contributed_length": 48.26485567863034
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 5.241690239199496,
+    "contributed_length": 46.31073337251062
+   },
+   {
+    "token": " horizont",
+    "token_id": 13736,
+    "coefficient": 1.346643189557385,
+    "contributed_length": 13.65125218012698
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 1.5282062884910013,
+    "contributed_length": 12.962034950700264
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 0.1341864750093049,
+    "contributed_length": 1.3794881153419298
+   }
+  ],
+  "10": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 8.31764874860966,
+    "contributed_length": 126.37251892365458
+   },
+   {
+    "token": " prolet",
+    "token_id": 22758,
+    "coefficient": 7.32154028920461,
+    "contributed_length": 79.43470007098104
+   },
+   {
+    "token": " horizont",
+    "token_id": 13736,
+    "coefficient": 4.001305488545864,
+    "contributed_length": 41.7938979067771
+   },
+   {
+    "token": " princ",
+    "token_id": 5144,
+    "coefficient": 2.510689926014073,
+    "contributed_length": 23.117947239217365
+   },
+   {
+    "token": " Marx",
+    "token_id": 10487,
+    "coefficient": 1.3711350990573574,
+    "contributed_length": 9.332145214732824
+   },
+   {
+    "token": " comrade",
+    "token_id": 47998,
+    "coefficient": 0.27504287804391175,
+    "contributed_length": 2.2723090660989973
+   },
+   {
+    "token": " movement",
+    "token_id": 3356,
+    "coefficient": 0.0,
+    "contributed_length": 0.0
+   }
+  ],
+  "11": [
+   {
+    "token": " the",
+    "token_id": 262,
+    "coefficient": 118.09342428931816,
+    "contributed_length": 315.32792197946446
+   },
+   {
+    "token": ",",
+    "token_id": 11,
+    "coefficient": 38.2799170680865,
+    "contributed_length": 117.81491831786745
+   },
+   {
+    "token": " and",
+    "token_id": 290,
+    "coefficient": 19.526752497178986,
+    "contributed_length": 50.83786072190998
+   },
+   {
+    "token": " \"",
+    "token_id": 366,
+    "coefficient": 9.068062628261579,
+    "contributed_length": 25.33935078850904
+   },
+   {
+    "token": " in",
+    "token_id": 287,
+    "coefficient": 5.522629093390457,
+    "contributed_length": 13.611116907398861
+   }
+  ]
+ }
+}
