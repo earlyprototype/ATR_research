@@ -1,4 +1,4 @@
-"""EXP_017 Part 1 — the registered full-stack loop on the twin and on base GPT-2 Small.
+"""EXP_017 Part 1: the registered full-stack loop on the twin and on base GPT-2 Small.
 
 Spec: ../../EXP_017_SPEC.md section 5. Reproduces EXP_010b arm SB (inject at
 blocks.0.hook_resid_pre, extract at blocks.11.hook_resid_post, renorm seed_j)
@@ -37,7 +37,7 @@ from atr_engine2 import run_atr_gated, get_top_tokens  # noqa: E402
 SUBSET = EXPERIMENTS / "exp_010c_windows" / "output" / "prompt_subset_small.json"
 OUT = HERE / "output"
 
-# Spec section 5.1 — every loop parameter, fixed.
+# Spec section 5.1: every loop parameter, fixed.
 LOOP = dict(layer_start=0, layer_end=11, max_iter=1000, threshold=0.999,
             patience=3, check_every=10, check_start=100, gate_lag=2,
             renorm="seed_j")

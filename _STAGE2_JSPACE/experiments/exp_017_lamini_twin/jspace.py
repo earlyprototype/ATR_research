@@ -1,4 +1,4 @@
-"""EXP_017 Part 2 — the J-space share, and its synthetic tests.
+"""EXP_017 Part 2: the J-space share, and its synthetic tests.
 
 Spec: ../../EXP_017_SPEC.md section 6.4.
 
@@ -142,8 +142,8 @@ def selftest():
     def check(name, cond, detail=""):
         nonlocal ok
         ok = ok and bool(cond)
-        print(f"  [{'PASS' if cond else 'FAIL'}] {name}{(' — ' + detail) if detail else ''}"
-              .replace(" — ", ": "))
+        print(f"  [{'PASS' if cond else 'FAIL'}] {name}{(': ' + detail) if detail else ''}"
+              .replace(": ", ": "))
 
     # 1. A positive combination of 3 atoms must be recovered exactly.
     idx = [7, 101, 500]

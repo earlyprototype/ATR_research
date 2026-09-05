@@ -1,4 +1,4 @@
-"""EXP_017 — render every results table mechanically from the committed JSON.
+"""EXP_017: render every results table mechanically from the committed JSON.
 
 RESULTS_EXP010B.md carries a dated erratum recording five numbers that were
 hand-copied into a results record and matched no committed artifact. This

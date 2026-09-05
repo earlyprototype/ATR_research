@@ -1,4 +1,4 @@
-"""EXP_017 Part 2 — fit a Jacobian lens to MBZUAI/LaMini-GPT-124M (the twin).
+"""EXP_017 Part 2: fit a Jacobian lens to MBZUAI/LaMini-GPT-124M (the twin).
 
 Follows _STAGE2_JSPACE/experiments/jlens_medium/fit_lens.py, the registered
 reference fit, changed only where the model changes (GPT-2 Small architecture,

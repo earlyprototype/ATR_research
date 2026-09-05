@@ -1,4 +1,4 @@
-"""EXP_017 — build a usable lens from a partial fit checkpoint.
+"""EXP_017: build a usable lens from a partial fit checkpoint.
 
 Spec section 6.2 sets a wall-clock budget for the twin's lens fit. The fit
 checkpoints its running sum of per-prompt Jacobians after every prompt, so if

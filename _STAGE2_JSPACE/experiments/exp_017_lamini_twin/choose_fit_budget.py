@@ -1,4 +1,4 @@
-"""EXP_017 — apply the spec's lens-fit budget rule to the timing probe.
+"""EXP_017: apply the spec's lens-fit budget rule to the timing probe.
 
 Spec section 6.2 fixes the rule before the probe's number is read: let t be the
 measured seconds per prompt from the five-prompt probe; choose 100 prompts if

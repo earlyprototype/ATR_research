@@ -1,4 +1,4 @@
-"""EXP_017 Part 1 analysis — H18 (the partition) and H18a (the readout tokens).
+"""EXP_017 Part 1 analysis: H18 (the partition) and H18a (the readout tokens).
 
 Spec: ../../EXP_017_SPEC.md sections 5.6 and 5.7.
 

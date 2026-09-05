@@ -1,4 +1,4 @@
-"""EXP_017 Part 2 — the J-space overlap probe (H18b).
+"""EXP_017 Part 2: the J-space overlap probe (H18b).
 
 Spec: ../../EXP_017_SPEC.md section 6.
 
@@ -170,7 +170,7 @@ def main():
         print(f"twin lens: {meta_twin}", flush=True)
     else:
         rep["lenses"]["twin"] = None
-        print("NO TWIN LENS — base lens only (spec section 6.2 fallback)", flush=True)
+        print("NO TWIN LENS: base lens only (spec section 6.2 fallback)", flush=True)
 
     # ---- per-layer states, one model at a time so only one is resident -------
     states, W_U, rescale = {}, {}, {}
