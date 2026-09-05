@@ -175,6 +175,69 @@ stage1_possim = [float(v["position_similarity"][-1]) for v in stage1.values()]
 gates["stage1_position_similarity_iter100"] = {
     "min": min(stage1_possim), "max": max(stage1_possim), "n": len(stage1_possim)}
 
+# The language terminals are rebuilt the same way, by repeating the stored
+# last-position vector, and they need the same scrutiny. Stage 1's own
+# position_similarity divides every position by its own length before averaging
+# the cosines (atr_engine2.py, "Position collapse metric"), so a value of 1 proves
+# the positions share one direction and says nothing about their lengths. Stage 1
+# stores no Frobenius norm for a snapshot, so the exact length test used for run 17
+# below cannot be formed here. What can be formed is this: when the positions are
+# parallel the stored position average has length equal to the AVERAGE of the
+# position lengths, so dividing the stored last vector's length by it asks whether
+# the last position is as long as the average position. That is necessary for exact
+# collapse without being sufficient, and the limitation is recorded in
+# RESULTS_EXP011.md rather than papered over.
+lang_pc = []
+for pid in sorted(stage1):
+    snap = stage1[pid]
+    mv_l, lv_l = snap["mean_vectors"][-1].double(), snap["last_vectors"][-1].double()
+    lang_pc.append({
+        "prompt": pid,
+        "position_similarity": float(snap["position_similarity"][-1]),
+        "last_over_mean_position_length": float(lv_l.norm() / mv_l.norm()),
+        "cos_mean_vec_last_vec": float(F.cosine_similarity(mv_l.unsqueeze(0),
+                                                           lv_l.unsqueeze(0))),
+        "all_positions_read_out_one_word": len(set(snap["all_position_tokens"][-1])) == 1,
+    })
+
+
+def _span(rows, key):
+    vals = [r[key] for r in rows]
+    return {"min": min(vals), "max": max(vals)}
+
+
+gates["lang_position_collapse_from_stage1_record"] = {
+    "n": len(lang_pc),
+    "source": ("the committed Stage 1 record's iteration-100 snapshot: "
+               "position_similarity, mean_vectors, last_vectors and "
+               "all_position_tokens. No terminal tensor and no Frobenius norm are "
+               "stored there."),
+    "position_similarity": _span(lang_pc, "position_similarity"),
+    "last_over_mean_position_length": _span(lang_pc, "last_over_mean_position_length"),
+    "cos_mean_vec_last_vec": _span(lang_pc, "cos_mean_vec_last_vec"),
+    "n_all_positions_read_out_one_word": sum(
+        1 for r in lang_pc if r["all_positions_read_out_one_word"]),
+    "limitation": ("position_similarity establishes a common direction only, because "
+                   "it normalises every position first. The length evidence here is "
+                   "that the last position is as long as the average position, which "
+                   "is necessary but not sufficient for every position to have the "
+                   "same length. The sufficient test needs the terminal tensor's "
+                   "Frobenius norm, which Stage 1 does not store."),
+}
+_lps = gates["lang_position_collapse_from_stage1_record"]
+log(f"  language position collapse, from the Stage 1 record: position similarity "
+    f"{_lps['position_similarity']['min']:.9f} to "
+    f"{_lps['position_similarity']['max']:.9f}, last over average position length "
+    f"{_lps['last_over_mean_position_length']['min']:.9f} to "
+    f"{_lps['last_over_mean_position_length']['max']:.9f}, "
+    f"{_lps['n_all_positions_read_out_one_word']}/125 prompts read out one word at "
+    f"every position")
+if (_lps["position_similarity"]["min"] < 0.9999
+        or abs(_lps["last_over_mean_position_length"]["min"] - 1.0) > 1e-3
+        or abs(_lps["last_over_mean_position_length"]["max"] - 1.0) > 1e-3):
+    raise SystemExit("GATE FAILED: the language terminals are not position-collapsed "
+                     "to the tolerance that makes repeating the last vector exact.")
+
 # Run 17 stores only the terminal's last-position vector and its position mean,
 # not the full terminal tensor, so this script rebuilds the tensor by repeating
 # the last vector. That rebuild is exact only if the run-17 terminal was
@@ -203,8 +266,7 @@ for tid in sorted(noise17):
                                                            lv17.unsqueeze(0))),
     })
 def _rng(key):
-    vals = [e[key] for e in n17_pc]
-    return {"min": min(vals), "max": max(vals)}
+    return _span(n17_pc, key)
 gates["noise17_position_collapse_from_run17_record"] = {
     "n": len(n17_pc),
     "source": ("run 17's own results.pt: the per-iteration metrics list at the "
@@ -262,9 +324,12 @@ meta["lang"] = {
     "reconstruction_cosine": lang_cos,
     "tensor_reconstruction": (
         "Rebuilt by repeating last_vectors[-1] across the paired sequence length "
-        "and rescaling to the paired iteration-0 Frobenius norm. Exact rather than "
-        "approximate because Stage 1 recorded position_similarity at iteration 100 "
-        "for all 125 prompts: see gates['stage1_position_similarity_iter100']."),
+        "and rescaling to the paired iteration-0 Frobenius norm. The evidence that "
+        "this is exact is in gates['lang_position_collapse_from_stage1_record']: the "
+        "positions share one direction, and the last position is as long as the "
+        "average position. Stage 1 stores no Frobenius norm for a snapshot, so the "
+        "stronger length test applied to run 17 cannot be formed for this arm; the "
+        "limitation is recorded in RESULTS_EXP011.md."),
 }
 
 # --------------------------------------------------- family: noise17 (125) ---

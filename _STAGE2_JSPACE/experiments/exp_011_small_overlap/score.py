@@ -23,6 +23,12 @@ BAND = [5, 6, 7, 8, 9, 10]          # spec section 6
 MAJORITY = 4                         # at least four of the six band layers
 ALPHA = 0.05
 N_PERM = 10000
+# Spec section 7.1: "All permutation tests use 10,000 permutations with seed
+# 11011." Every generator in this script is seeded with exactly that. The first
+# version of this file offset the secondary and reverse-direction tests to
+# 11012 through 11015, which the specification does not license; the offsets were
+# removed on 2026-09-05 and the change is recorded as a deviation in the results
+# record, with the before-and-after p-values.
 PERM_SEED = 11011
 ROT = ["rot2026", "rot2027", "rot2028"]
 GAUSS = ["gauss4242", "gauss4243", "gauss4244"]
@@ -35,6 +41,31 @@ def log(msg):
 shares = json.load(open(os.path.join(OUT, "shares.json")))
 meta = json.load(open(os.path.join(OUT, "states_meta.json")))
 LAYERS = sorted(int(x) for x in shares["arms"]["lens"]["lang"].keys())
+
+# The decomposition's search carries a safety bound on the number of rounds. A
+# decomposition that stops only because it reached that bound has not met any real
+# stopping condition, so its share is not the number this experiment means to
+# report. Refuse to score a file containing one, and say plainly when the field is
+# absent, which is the case for any file written before 2026-09-05.
+_flag_present, _flagged = False, []
+for _arm, _fams in shares["arms"].items():
+    for _fam, _layers in _fams.items():
+        for _l, _entry in _layers.items():
+            if "hit_max_iter" in _entry:
+                _flag_present = True
+                if any(_entry["hit_max_iter"]):
+                    _flagged.append((_arm, _fam, _l, int(sum(_entry["hit_max_iter"]))))
+if _flagged:
+    raise SystemExit(
+        "REFUSING TO SCORE: {} arm-family-layer groups contain decompositions that "
+        "stopped on the iteration safety bound rather than a real stopping "
+        "condition, for example {}. Re-run the decomposition before scoring."
+        .format(len(_flagged), _flagged[:5]))
+log("iteration-safety-bound check: " + (
+    "present and clear in every arm, family and layer" if _flag_present else
+    "the committed shares.json predates the flag and does not carry it, so this "
+    "check cannot be applied to it; the flag was added to decompose.py on "
+    "2026-09-05 and applies from the next decomposition run"))
 
 
 def arr(arm, fam, layer):
@@ -228,7 +259,7 @@ sup = [l for l in BAND
        and h16["per_layer"][str(l)]["lang_above_gaussian_control"]]
 ref = [l for l in BAND if h16["per_layer"][str(l)]["median_difference"] < 0]
 ref_p = []
-rng2 = np.random.default_rng(PERM_SEED + 1)
+rng2 = np.random.default_rng(PERM_SEED)
 for l in ref:
     _, p_rev = perm_two_sample(arr("lens", "noise17", l), arr("lens", "lang", l), rng2)
     h16["per_layer"][str(l)]["p_noise_greater"] = p_rev
@@ -240,7 +271,7 @@ h16["verdict"] = ("SUPPORTED" if len(sup) >= MAJORITY else
                   "REFUTED" if len(ref_p) >= MAJORITY else "NOT SUPPORTED")
 # robustness, not scoring
 h16["converged_only_secondary"] = {}
-rng3 = np.random.default_rng(PERM_SEED + 2)
+rng3 = np.random.default_rng(PERM_SEED)
 for l in BAND:
     obs, p = perm_two_sample(arr("lens", "lang", l), arr("lens", "noise17", l)[conv_mask], rng3)
     h16["converged_only_secondary"][str(l)] = {
@@ -253,7 +284,7 @@ for l in BAND:
 # primary test has) and once on the three seeds pooled. Same permutation count
 # (10,000) and the same seed convention the other secondaries use.
 h16["rotation_control_secondary"] = {}
-rng6 = np.random.default_rng(PERM_SEED + 5)
+rng6 = np.random.default_rng(PERM_SEED)
 for l in BAND:
     per_seed = {}
     for s_arm in ROT:
@@ -281,7 +312,7 @@ for l in BAND:
 # control shares, tested by a sign-flip permutation test, one-sided, language
 # higher.
 h16["lang_above_rotation_control_exploratory"] = {}
-rng7 = np.random.default_rng(PERM_SEED + 6)
+rng7 = np.random.default_rng(PERM_SEED)
 for l in LAYERS:
     ctrl_mean = np.mean(np.stack([arr(s_arm, "lang", l) for s_arm in ROT]), axis=0)
     d = arr("lens", "lang", l) - ctrl_mean
@@ -376,7 +407,7 @@ for l in LAYERS:
     }
 sup = [l for l in BAND if h16b["per_layer"][str(l)]["median_paired_difference"] < 0
        and h16b["per_layer"][str(l)]["p_terminal_lower"] < ALPHA]
-rng4 = np.random.default_rng(PERM_SEED + 3)
+rng4 = np.random.default_rng(PERM_SEED)
 ref = []
 for l in BAND:
     if h16b["per_layer"][str(l)]["median_paired_difference"] > 0:
@@ -390,7 +421,7 @@ h16b["band_layers_refuting"] = ref
 h16b["verdict"] = ("SUPPORTED" if len(sup) >= MAJORITY else
                    "REFUTED" if len(ref) >= MAJORITY else "NOT SUPPORTED")
 h16b["clean_mean_secondary"] = {}
-rng5 = np.random.default_rng(PERM_SEED + 4)
+rng5 = np.random.default_rng(PERM_SEED)
 for l in BAND:
     d = arr("lens", "lang", l) - arr("lens", "clean_mean", l)
     obs, p = perm_sign_flip(d, rng5)

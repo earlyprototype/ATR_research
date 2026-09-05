@@ -180,6 +180,10 @@ def _self_test():
     rr = decompose(D, hr, record_atoms=True)
     print(f"  random state: share={rr['share'][0]:.6f} n_atoms={rr['n_atoms'][0]}")
     assert not rr["hit_max_iter"].any(), "a state ran to the max_iter safety bound"
+    assert rr["share"][0] < 0.5, ("a generic random state was explained too well; "
+                                  "25 atoms out of this dictionary should capture a "
+                                  "minority of it, not most of it")
+    assert rr["share"][0] > 0.0, "a generic random state captured nothing at all"
 
     # Every reported atom must carry a strictly positive coefficient, and a state
     # that stops at the limit must be using the full allowance of k atoms rather

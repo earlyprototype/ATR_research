@@ -222,11 +222,11 @@ with its own rotated-lens control share, averaged over the three rotation seeds,
 and testing the 125 paired differences with a sign-flip permutation test of 10,000
 draws, one-sided in the direction "language higher", gives a median paired
 difference of +0.0072 at layer 5 with p of 0.0001 and 73 of every 100 pairs
-running that way, +0.0011 at layer 6 with p of 0.0039 and 68 percent, +0.0053 at
+running that way, +0.0011 at layer 6 with p of 0.0038 and 68 percent, +0.0053 at
 layer 7 with p of 0.0001 and 72 percent, and +0.0014 at layer 9 with p of 0.0001
 and 100 percent, where 0.0001 is the smallest value 10,000 permutations can
-report. At layer 8 it gives -0.0008 with p of 0.8270 and only 43 percent of pairs
-running that way, and at layer 10 -0.0015 with p of 0.9982 and 29 percent. So on
+report. At layer 8 it gives -0.0008 with p of 0.8328 and only 43 percent of pairs
+running that way, and at layer 10 -0.0015 with p of 0.9985 and 29 percent. So on
 the paired reading the language terminals are above their own rotated-lens chance
 level at four of the six band layers, not five: layer 8's margin on the medians,
 0.0137 against 0.0136, is a difference of one part in a hundred of the share and
@@ -243,11 +243,11 @@ The first version of this record omitted it; it was added on review and is in
 `output/verdicts.json` under `H16.rotation_control_secondary`. Pooling the three
 rotation seeds, the median difference between the two families at the band layers
 runs from -0.0019 to +0.0004 on shares of about 0.013 to 0.015, and the one-sided
-permutation p in the language-greater direction is 0.5087 at layer 5, 0.5028 at
-layer 6, 0.0410 at layer 7, 0.7567 at layer 8, 0.9896 at layer 9 and 0.9970 at
+permutation p in the language-greater direction is 0.5088 at layer 5, 0.4949 at
+layer 6, 0.0388 at layer 7, 0.7589 at layer 8, 0.9885 at layer 9 and 0.9947 at
 layer 10. Only layer 7 falls below 0.05, one band layer out of six against a rule
 that needs four. Read seed by seed the picture is unstable rather than
-informative: at layer 6 the three rotations give p of 0.9999, 0.0001 and 0.5769
+informative: at layer 6 the three rotations give p of 0.9999, 0.0001 and 0.5651
 for the same comparison, so a single rotation's p-value here is telling us about
 that rotation and not about the two families. Three seeds is too few to read a
 per-seed p-value from, and that is stated as a limit of this control rather than
@@ -818,15 +818,49 @@ Four gates were written into the specification before the run and all four
 passed. They are listed here because a reader should know the measurement was
 not simply asserted.
 
-**Position collapse is exact.** The loop's settled states have every token
-position holding the identical vector. Measured on the committed tensors: the
-smallest cosine between any two token positions is 1.000000 on a scale where 1
-means identical direction and 0 means unrelated, and the largest-to-smallest
-ratio of position lengths is 1.0000. The 125 language runs record the same thing
-independently, with a position-similarity between 0.9999996 and 1.0000005 where
-1.0 is exact. Consequence: a settled state is fully described by one
-768-number vector, so rebuilding the full tensor by repeating that vector is
-exact rather than approximate.
+**Position collapse is exact where a tensor was committed.** The loop's settled
+states have every token position holding the identical vector. Measured on the ten
+committed tensors this experiment can open, which are five converged language
+prompts from the pilot and five trials of the original noise arm: the smallest
+cosine between any two token positions is 0.9999996 on a scale where 1 means
+identical direction and 0 means unrelated, and the ratio of the longest position to
+the shortest is between 1.0000001 and 1.0000006, so no position differs in length
+from another by more than six parts in ten million. Consequence for those ten: the
+state is fully described by one 768-number vector, so rebuilding the full tensor by
+repeating that vector is exact rather than approximate.
+
+**Position collapse in the 125 language terminals, which have no committed tensor,
+and where the evidence stops.** The language arm is rebuilt the same way, by
+repeating the stored last-position vector, and its supporting evidence is weaker
+than the sentence above. Stage 1's `position_similarity`, which runs between
+0.9999996 and 1.0000005 across the 125 prompts where 1.0 is exact, divides every
+position by its own length before averaging the cosines, so it establishes that the
+positions share one direction and says nothing at all about their lengths. Two
+further quantities can be formed from the committed record and are, on review of
+2026-09-05. First, when the positions share one direction the stored position
+average has length equal to the average of the position lengths, so dividing the
+stored last vector's length by it asks whether the last position is as long as the
+average position: across the 125 prompts that ratio lies between 0.9999999 and
+1.0000001, and the stored average and the stored last vector agree in direction at
+cosine 1.000000000000. For contrast, the same ratio at iteration 0, before the loop
+has run, spans 0.766 to 1.851, so the test does discriminate. Second, every one of
+the 125 prompts reads out the same single word at every one of its token positions.
+
+**What that does not establish, stated plainly.** The last position being as long
+as the average position is necessary for every position to have the same length,
+and it is not sufficient. The test applied to the run-17 arm below is sufficient,
+and it needs the terminal tensor's Frobenius length, which Stage 1 does not store
+for a snapshot. So for the 125 language terminals this record establishes a shared
+direction and a last position of average length, and infers exact collapse from
+those together with the direct length measurement on the five committed converged
+language tensors above. That inference is marked as inferred, not established. It
+touches the language family, which is one side of H16, one side of H16b and the
+basin side of H6; it does not touch the run-17 noise arm, the original noise arm or
+the named single states, whose collapse is established directly. What would settle
+it is committing the 125 iteration-100 tensors, or simply the Frobenius length of
+each, which is one number per prompt and no new model computation: the tensors
+would have to be regenerated, which is the 125-prompt Stage 1 sweep rather than
+anything this experiment runs.
 
 **The tiling identity.** Reading the layer-by-layer states from the stored full
 tensor and from the repeated last-position vector gives the same answer: the
@@ -876,6 +910,30 @@ iteration-1000 state and checked against the recorded cycle anatomy: the cosine
 between the phases came out 0.68491167 against the recorded 0.68491167, and the
 cosine between phase A and phase A after two steps came out 1.00000000 against
 the recorded 1.00000000.
+
+**Provenance checks added on review, 2026-09-05.** Three, none of which changes a
+number and all of which close a way for a future run to go wrong quietly. First,
+the lens file's SHA-256 digest is now recomputed where the lens is actually loaded
+for decomposition, and not only where the states are built, and the run stops if it
+does not match the digest the specification pins; the committed lens file at
+`_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt` matches that digest,
+`d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762`, and its size of
+12,980,477 bytes, checked again for this note. Until this change the decomposition
+stage recorded no lens identity of its own, so a file swapped between the two
+stages would have been analysed while the shares inherited the earlier stage's
+attribution; from now on `output/shares.json` carries the digest it was actually
+computed against, and the committed file predates the change and does not. Second,
+the decomposition now records, for every single decomposition, whether the search
+stopped only because it reached its safety bound on rounds rather than a real
+stopping condition, and the scoring script refuses to run on a file in which any
+such flag is set. The committed shares predate that flag, so the check reports that
+it cannot be applied to them and says so in the scoring log rather than passing
+silently. Third, a run over a subset of the layers, or the lens-only quick run, now
+merges its results into the existing shares file rather than replacing it, and
+writes through a temporary file that is renamed, so neither a partial run nor an
+interrupted one can destroy work already done. The committed shares file is a
+complete run: it holds all twelve layers for all eight arms, which the
+decomposition log shows end to end.
 
 **The decomposition self-test.** Before every run, the decomposition is asked to
 recover a state deliberately built from five known dictionary atoms with positive
@@ -992,9 +1050,14 @@ flip-axis section.
 **What was done.** `jspace.py` now drops zero-weight directions from the chosen set
 and keeps going until 25 directions carry weight or no direction anywhere points at
 the remainder, and it now counts only weight-carrying directions. The module records
-why that loop must terminate. The self-test gained three checks: that no zero weight
-is ever reported, that a state stopping below the limit really has no usable
-direction left, and that no state reaches the safety bound on iterations. The
+why that loop must terminate. The self-test gained five checks: that no zero weight
+is ever reported, that no direction is selected twice and never more than 25 are
+kept, that a state stopping below the limit really has no usable direction left,
+that no state reaches the safety bound on iterations, and that a generic random
+state is still explained by a minority of itself rather than nearly all of it,
+which is the guard against a solver change that quietly makes everything look
+verbalizable. The safety-bound flag is now written into the shares file for every
+decomposition and the scoring script refuses a file in which any is set. The
 self-test's own numbers are unchanged from the committed run, byte for byte
 (`output/exp011_decompose.log`), because its synthetic states were never affected.
 **The committed outputs were produced by the earlier version and have not been
@@ -1194,6 +1257,27 @@ Recorded flat, whether or not they helped.
     arms would have cost about twelve minutes: roughly 23,000 state-layer
     decompositions at the measured rate of the committed run.
 
+13. **The permutation tests did not all use the registered seed, and now they do.**
+    Section 7.1 says every permutation test uses 10,000 permutations with seed
+    11011. The scoring script used 11011 for the tests that decide a verdict in the
+    hypothesised direction, but offset the random number generator to 11012, 11013,
+    11014 and 11015 for the reverse-direction tests and the secondary readings,
+    which the specification does not license. The offsets were removed on
+    2026-09-05 and every generator now starts from 11011. The scoring was re-run
+    from the committed shares. **Nothing that matters moved.** All four verdicts are
+    unchanged, and so is every supporting and refuting layer set: H16 is still
+    refuted at layers 5, 8 and 10 and supported nowhere, H16b is still supported at
+    layers 5 to 9 and refuted nowhere. Thirty-five p-values moved in the fourth
+    decimal place and **not one crossed the 0.05 threshold**, which is the check
+    that matters and which was run explicitly. Six numbers quoted in this record
+    changed with them and are corrected above: the pooled rotation-control p-values
+    at the six band layers, from 0.5087, 0.5028, 0.0410, 0.7567, 0.9896 and 0.9970
+    to 0.5088, 0.4949, 0.0388, 0.7589, 0.9885 and 0.9947; one per-seed p at layer 6
+    from 0.5769 to 0.5651; and three p-values in the exploratory paired test, at
+    layer 6 from 0.0039 to 0.0038, at layer 8 from 0.8270 to 0.8328 and at layer 10
+    from 0.9982 to 0.9985. The reverse-direction p-value for H16 at layer 9 moved
+    from 0.0858 to 0.0839 and is not quoted in this record.
+
 No reduction was taken under the specification's stopping rule, which triggers only
 on a projected cost above four hours: the run took 3,472 seconds of decomposition
 (0.96 hours) at a peak memory of 1.58 gigabytes against a 3-gigabyte ceiling, plus
@@ -1339,12 +1423,12 @@ and one cycle, each on a single trajectory, with no repeats.
    the significance now attached.** Paired state by state and tested with a
    sign-flip permutation test of 10,000 draws, the language terminals sit above
    their own rotated-lens control at four of the six band layers, with p of
-   0.0001 at layers 5, 7 and 9 and 0.0039 at layer 6, and not at layers 8 and 10,
-   where p is 0.8270 and 0.9982 in that direction. That test is exploratory, added
+   0.0001 at layers 5, 7 and 9 and 0.0038 at layer 6, and not at layers 8 and 10,
+   where p is 0.8328 and 0.9985 in that direction. That test is exploratory, added
    after the specification. The pre-registered robustness reading, the same
    language-against-noise permutation test carried out on the rotated-lens shares,
-   gives a one-sided p below 0.05 at one band layer out of six, layer 7 at 0.0410,
-   with the other five between 0.5028 and 0.9970. So adopting the rotated lens as
+   gives a one-sided p below 0.05 at one band layer out of six, layer 7 at 0.0388,
+   with the other five between 0.4949 and 0.9947. So adopting the rotated lens as
    the chance level would change H16's third condition but would not change H16's
    verdict, and it would give the settled states a modest but tested claim to
    being more lens-expressible than a rigidly rotated lens at four band layers.
