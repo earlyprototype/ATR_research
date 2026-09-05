@@ -281,6 +281,56 @@ def main():
                 "mean_atoms_selected": float(np.mean(n_sel[lens_name][m][li])),
             } for li, l in enumerate(PROBE_LAYERS)}
     rep["cross_checks"] = cross
+
+    # ---- the same-lens comparison, which separates model from instrument ----
+    # The registered H18b pairing measures the twin on one lens and base on
+    # another, so a difference could in principle come from the lenses. Holding
+    # the lens fixed and swapping only whose states are decomposed isolates the
+    # model effect; holding the states fixed and swapping only the lens
+    # isolates the instrument effect. Both are reported per layer.
+    same_lens = {}
+    for lens_name in lenses:
+        rows = {}
+        for li, l in enumerate(PROBE_LAYERS):
+            tw = shares[lens_name]["twin"]["real"][li]
+            bs = shares[lens_name]["base"]["real"][li]
+            p, obs = permutation_p_two_sided(tw, bs)
+            rows[str(l)] = {"median_twin_states": float(np.median(tw)),
+                            "median_base_states": float(np.median(bs)),
+                            "model_effect_abs_median_difference": obs,
+                            "perm_p": round(p, 5)}
+        same_lens[lens_name] = rows
+    rep["same_lens_model_effect"] = same_lens
+
+    if len(lenses) == 2:
+        lens_effect = {}
+        for m in ("twin", "base"):
+            rows = {}
+            for li, l in enumerate(PROBE_LAYERS):
+                a = shares["twin"][m]["real"][li]
+                b = shares["base"][m]["real"][li]
+                rows[str(l)] = {
+                    "median_on_twin_lens": float(np.median(a)),
+                    "median_on_base_lens": float(np.median(b)),
+                    "lens_effect_abs_median_difference":
+                        abs(float(np.median(a) - np.median(b)))}
+            lens_effect[m] = rows
+        rep["same_states_lens_effect"] = lens_effect
+        ratios = {}
+        for li, l in enumerate(PROBE_LAYERS):
+            model = max(same_lens[ln][str(l)]["model_effect_abs_median_difference"]
+                        for ln in lenses)
+            model_min = min(same_lens[ln][str(l)]["model_effect_abs_median_difference"]
+                            for ln in lenses)
+            lens = max(lens_effect[m][str(l)]["lens_effect_abs_median_difference"]
+                       for m in ("twin", "base"))
+            ratios[str(l)] = {"smallest_model_effect": model_min,
+                              "largest_model_effect": model,
+                              "largest_lens_effect": lens,
+                              "ratio_smallest_model_over_largest_lens":
+                                  model_min / max(lens, 1e-12)}
+        rep["model_effect_over_lens_effect"] = ratios
+
     rep["wall_seconds"] = round(time.time() - t0, 1)
 
     outfile = OUT / f"exp017_jspace{args.out_suffix}.json"

@@ -159,6 +159,37 @@ def main():
                 ctrl = ", ".join(f"{x:.3f}" for x in c["median_controls"])
                 cells.append(f"{c['median_real']:.4f} [{ctrl}]")
             lines.append(f"| {l} | " + " | ".join(cells) + " |")
+        if "same_lens_model_effect" in j:
+            lines += ["", "### Model effect against instrument effect", "",
+                      "The model effect holds the lens fixed and swaps whose "
+                      "settled states are decomposed. The instrument effect "
+                      "holds the states fixed and swaps the lens. Both are the "
+                      "absolute difference of medians over the 25 prompts.", "",
+                      "| layer | model effect on the base lens | model effect on "
+                      "the twin lens | instrument effect on twin states | "
+                      "instrument effect on base states | smallest model effect "
+                      "over largest instrument effect |",
+                      "|---|---|---|---|---|---|"]
+            for l in j["probe_layers"]:
+                mb = j["same_lens_model_effect"]["base"][str(l)]
+                cells = [f"{mb['model_effect_abs_median_difference']:.4f} "
+                         f"(p {mb['perm_p']})"]
+                if "twin" in j["same_lens_model_effect"]:
+                    mt = j["same_lens_model_effect"]["twin"][str(l)]
+                    cells.append(f"{mt['model_effect_abs_median_difference']:.4f} "
+                                 f"(p {mt['perm_p']})")
+                else:
+                    cells.append("not applicable")
+                if "same_states_lens_effect" in j:
+                    le = j["same_states_lens_effect"]
+                    cells.append(f"{le['twin'][str(l)]['lens_effect_abs_median_difference']:.4f}")
+                    cells.append(f"{le['base'][str(l)]['lens_effect_abs_median_difference']:.4f}")
+                    r = j["model_effect_over_lens_effect"][str(l)]
+                    cells.append(f"{r['ratio_smallest_model_over_largest_lens']:.1f} times")
+                else:
+                    cells += ["not applicable"] * 3
+                lines.append(f"| {l} | " + " | ".join(cells) + " |")
+            lines.append("")
         lines += ["", "### Lens diagnostics", "",
                   "| layer | " + " | ".join(
                       f"{k} Frobenius norm" for k in sorted(

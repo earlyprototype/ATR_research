@@ -7,3 +7,15 @@ twin: per-layer states read, rescale factor mean 0.269268
 Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights:  20%|██        | 30/148 [00:00<00:00, 281.96it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 961.91it/s]
 Loaded pretrained model gpt2 into HookedTransformer
 base: per-layer states read, rescale factor mean 0.281368
+lens diagnostics: {"0": {"base": {"frobenius_norm": 23.46354103088379}, "twin": {"frobenius_norm": 26.428678512573242}, "cosine_between_the_two_lenses": 0.8486043214797974}, "10": {"base": {"frobenius_norm": 47.43286895751953}, "twin": {"frobenius_norm": 49.11417770385742}, "cosine_between_the_two_lenses": 0.9822151064872742}}
+  lens=base layer=0: twin real median 0.3962 base real median 0.3106 (24s)
+  lens=base layer=10: twin real median 0.3115 base real median 0.2949 (25s)
+  lens=twin layer=0: twin real median 0.3856 base real median 0.2907 (23s)
+  lens=twin layer=10: twin real median 0.3069 base real median 0.2949 (22s)
+
+=== H18b: NOT SUPPORTED (1/6 band layers meet both conditions: [10]) ===
+layer  twin     base     |diff|   ctrl spread  perm p   both
+0      0.3856   0.3106   0.0749   0.0183       0.0001   True
+10     0.3069   0.2949   0.0121   0.0067       0.0001   True  <- band
+
+Saved -> output/exp017_jspace_harness.json (209s)
