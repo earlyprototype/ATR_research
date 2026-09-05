@@ -206,18 +206,37 @@ def main() -> None:
     for layer in SCORED_LAYERS:
         t0 = time.time()
         atoms = (W_U * gamma.unsqueeze(0)) @ lens[layer]        # [vocab, width]
-        atoms = atoms / atoms.norm(dim=1, keepdim=True).clamp_min(1e-8)
+        atoms /= atoms.norm(dim=1, keepdim=True).clamp_min(1e-8)  # in place: the
+        # matrix is 151,936 by 2,048 and a second copy would cost 1.2 gigabytes
         row = {"conditions": {}}
         for cond in ("settled", "clean"):
             per_prompt = {s: {} for s in ["real"] + [f"rot{s}" for s in rot_seeds]}
-            for pid in prompt_ids:
-                H = torch.from_numpy(states[f"{cond}|{pid}|{layer}"]).float()
-                per_prompt["real"][pid] = [
-                    jspace_share(atoms, h)[0] for h in H]
-                for s in rot_seeds:
-                    Hr = H @ rotations[s]     # rotating the state is exactly
-                    per_prompt[f"rot{s}"][pid] = [   # rotating the dictionary back
-                        jspace_share(atoms, h)[0] for h in Hr]
+            for dict_key in ["real"] + [f"rot{s}" for s in rot_seeds]:
+                # Gather every state this dictionary has to score into one
+                # matrix, so the 151,936 by 2,048 correlation happens as a
+                # single matrix product instead of once per state. The matrix
+                # is read from memory once instead of hundreds of times, which
+                # was measured to be about seven times faster.
+                flat, owner = [], []
+                for pid in prompt_ids:
+                    H = torch.from_numpy(states[f"{cond}|{pid}|{layer}"]).float()
+                    if dict_key != "real":
+                        # rotating the state is exactly rotating the dictionary
+                        # the other way, and costs a thousand times less
+                        H = H @ rotations[int(dict_key[3:])]
+                    for h in H:
+                        flat.append(h)
+                        owner.append(pid)
+                    per_prompt[dict_key][pid] = []
+                Hs = torch.stack(flat)                       # [n_states, width]
+                corrs = []
+                for start in range(0, Hs.shape[0], 128):
+                    corrs.append(atoms @ Hs[start:start + 128].T)
+                corrs = torch.cat(corrs, dim=1)              # [vocab, n_states]
+                for j, pid in enumerate(owner):
+                    per_prompt[dict_key][pid].append(
+                        jspace_share(atoms, Hs[j], corr0=corrs[:, j])[0])
+                del corrs, Hs, flat
             row["conditions"][cond] = per_prompt
         # exact (no candidate pool) check on selected layers
         if layer in exact_layers:

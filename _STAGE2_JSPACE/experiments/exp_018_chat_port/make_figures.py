@@ -42,14 +42,17 @@ def fig_collapse() -> None:
         ax.set_xscale("symlog", linthresh=10)
         ax.grid(alpha=0.25)
     axes[0].set_ylabel("mean cosine between word positions")
-    axes[0].set_ylim(-0.05, 1.05)
-    axes[0].text(1.2, 1.005, "1.00: GPT-2 Small by about repetition 10",
-                 color="crimson", fontsize=8, va="bottom")
-    axes[0].text(1.2, 0.965, "0.99: the H19 threshold",
-                 color="darkorange", fontsize=8, va="top")
-    fig.suptitle("EXP_018: do the word positions collapse onto one vector "
-                 "in Qwen3-1.7B?  Black dots mark where each prompt settled.",
-                 fontsize=10.5)
+    axes[0].set_ylim(-0.05, 1.12)
+    for ax in axes:
+        ax.annotate("0.99, the threshold H19 is scored on, and 1.00, where\n"
+                    "GPT-2 Small sits by about repetition 10, both lie here",
+                    xy=(0.08, 0.995), xycoords=("axes fraction", "data"),
+                    xytext=(0.10, 0.26), textcoords="axes fraction",
+                    fontsize=8, color="crimson", va="top",
+                    arrowprops=dict(arrowstyle="->", color="crimson", lw=1))
+    fig.suptitle("EXP_018: do the word positions collapse onto one shared vector "
+                 "in Qwen3-1.7B?  One line per prompt; a black dot would mark "
+                 "a prompt that settled.", fontsize=10.5)
     fig.tight_layout()
     fig.savefig(OUT / "collapse_over_iterations.png", dpi=140)
     plt.close(fig)
