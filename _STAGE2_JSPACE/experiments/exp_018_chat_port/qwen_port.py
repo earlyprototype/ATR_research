@@ -150,17 +150,20 @@ def snapshot_dir(revision: str, model: str = MODEL_NAME) -> Path:
 # model
 # --------------------------------------------------------------------------
 
-def load_model(dtype=torch.float32):
+def load_model(dtype=torch.float32, revision: str | None = None):
     """Boot Qwen3-1.7B through the TransformerLens bridge, no compatibility mode.
 
-    The load is not pinned to a revision, so it follows the cache pointer
-    `refs/main` exactly as `resolve_revision()` does. Call `resolve_revision()`
-    after this returns, not before, and record what it says: that is the
-    revision of the weights this process is holding.
+    `revision` pins the load to one exact version of the model's files on the
+    Hugging Face hub, which is what a stage must do when it has to match an
+    earlier stage's weights. Without it the load follows the cache pointer
+    `refs/main`, exactly as `resolve_revision()` does, and that pointer can
+    move between one stage and the next; in that case call `resolve_revision()`
+    after this returns, not before, and record what it says.
     """
     from transformer_lens.model_bridge import TransformerBridge
+    kwargs = {"revision": revision} if revision else {}
     model = TransformerBridge.boot_transformers(
-        MODEL_NAME, device="cpu", dtype=dtype)
+        MODEL_NAME, device="cpu", dtype=dtype, **kwargs)
     model.eval()
     for p in model.parameters():
         p.requires_grad_(False)
@@ -305,6 +308,17 @@ def run_loop(model, tokens: torch.Tensor, cfg: LoopConfig, verbose=False) -> dic
     (gate_lag=2) except for the position-0-excluded rescale and the
     per-iteration diagnostic trace.
     """
+    # The same guard `atr_engine2.run_atr_gated` enforces: before iteration
+    # `gate_lag` the buffer holds fewer states than the lag needs, so a check
+    # scheduled earlier would compare against a nearer state than it claims and
+    # could count that malformed comparison towards the patience streak.
+    if cfg.gate_lag < 1:
+        raise ValueError(f"gate_lag must be >= 1, got {cfg.gate_lag}")
+    if cfg.check_start < cfg.gate_lag:
+        raise ValueError(
+            f"check_start ({cfg.check_start}) must be >= gate_lag "
+            f"({cfg.gate_lag}) for the lagged comparison to be well-formed")
+
     torch.manual_seed(cfg.seed)
     inject_name, extract_name = hook_names(model)
     natural_pre_name = "blocks.0.hook_resid_pre"

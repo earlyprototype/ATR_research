@@ -18,6 +18,20 @@ def esc(s: str) -> str:
     return (repr(s).replace("|", "\\|"))
 
 
+def whole_tensor_ratio(r: dict) -> float:
+    """How loud the registered convention would have been, on its own terms.
+
+    The registered engine holds the fed-back state at the size it had where it
+    was read out (`seed_j`) and compares that with the natural layer-0 entry
+    size (`natural_i`), and it measures both over the whole tensor, every token
+    position included. That is the like-for-like number to set beside the
+    committed GPT-2 figures. This port's own convention leaves position 0 out
+    of both sizes, which the results files carry separately as
+    `seed_over_natural_excl0`.
+    """
+    return r["seed_norm_at_j_all"] / r["natural_norm_all"]
+
+
 def arm_table(arm: str) -> None:
     path = OUT / f"results_{arm}.json"
     if not path.exists():
@@ -30,8 +44,10 @@ def arm_table(arm: str) -> None:
     print("| Prompt | Word pieces | Settled? | Repetitions run | "
           "Positions merged (all) | Positions merged (position 0 left out) | "
           "Top word piece | Its probability | Spread (nats) | "
-          "Loudness the old convention would have used |")
-    print("|---|---|---|---|---|---|---|---|---|---|")
+          "Loudness the registered convention would have used, both sizes "
+          "over the whole tensor | The same with position 0 left out of both "
+          "sizes |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|")
     for r in recs:
         lock = "no" if r["lock_in_iter"] is None else f"yes, at {r['lock_in_iter']}"
         print(f"| `{r['id']}` | {r['n_tokens']} | {lock} | {r['n_iters']} | "
@@ -40,7 +56,9 @@ def arm_table(arm: str) -> None:
               f"{esc(r['readout']['top_token_strings'][0])} | "
               f"{r['readout']['top_token_probs'][0]:.3f} | "
               f"{r['readout']['entropy']:.2f} | "
+              f"{whole_tensor_ratio(r):.0f}x natural | "
               f"{r['seed_over_natural_excl0']:.0f}x natural |")
+    ratio_all = [whole_tensor_ratio(r) for r in recs]
     coll = [r["pos_collapse_all_terminal"] for r in recs]
     coll0 = [r["pos_collapse_excl0_terminal"] for r in recs]
     ent = [r["readout"]["entropy"] for r in recs]
@@ -63,9 +81,13 @@ def arm_table(arm: str) -> None:
           f"Spread: median {st.median(ent):.2f} nats out of a possible 11.93. "
           f"Distinct top word pieces: {len(uniq)} "
           f"({', '.join(f'{esc(k)} x{v}' for k, v in sorted(uniq.items(), key=lambda kv: -kv[1]))}). "
-          f"The registered loudness convention would have injected at "
-          f"{st.mean(ratio):.0f} times natural strength on average "
-          f"(range {min(ratio):.0f} to {max(ratio):.0f}).")
+          f"The registered loudness convention, which measures both the "
+          f"injected size and the natural size over the whole tensor, would "
+          f"have injected at {st.mean(ratio_all):.0f} times natural strength "
+          f"on average (range {min(ratio_all):.0f} to {max(ratio_all):.0f}). "
+          f"Measured this port's way, with position 0 left out of both sizes, "
+          f"the same figures are {st.mean(ratio):.0f} on average (range "
+          f"{min(ratio):.0f} to {max(ratio):.0f}).")
 
 
 def jspace_table() -> None:

@@ -68,16 +68,23 @@ wording.**
 
 **One number worth the operator's attention on its own.** Under this project's
 registered loudness convention, which holds the fed-back state at the size it
-had where it was read out, this model's loop would have been injecting at an
-average of **2,060 times** the natural size of the entry it is injected into,
-ranging from 1,371 to 2,764 across the 25 prompts. The comparable committed
-figures are 218 times for GPT-2 Medium's full stack and 73 times for GPT-2
-Small's. The committed control already established that Medium's founding
-collapse to the letter "D" disappears at natural loudness. Running this model at
-natural loudness from the first run, which the reading note recommended, was not
-a refinement; on this architecture the registered convention would have been an
-order of magnitude further from natural than the case the project already treats
-as the apparatus question.
+had where it was read out and measures that size and the natural one over the
+whole tensor, every word position included, this model's loop would have been
+injecting at an average of **2,039 times** the natural size of the entry it is
+injected into, ranging from 1,402 to 2,702 across the 25 prompts. **Correction,
+made after a review of the code:** this record first said 2,060 times, ranging
+from 1,371 to 2,764. That was the same ratio measured this port's own way, with
+the first word position left out of both sizes, which is not how the registered
+convention measures it. The whole-tensor figures are the like-for-like ones and
+are what this sentence now gives; the per-prompt tables below carry both.
+The comparable committed figures are 218 times for GPT-2 Medium's full stack
+and 73 times for GPT-2 Small's, measured by the registered engine, which takes
+both sizes over the whole tensor in the same way. The committed control already
+established that Medium's founding collapse to the letter "D" disappears at
+natural loudness. Running this model at natural loudness from the first run,
+which the reading note recommended, was not a refinement; on this architecture
+the registered convention would have been an order of magnitude further from
+natural than the case the project already treats as the apparatus question.
 
 ---
 
@@ -103,11 +110,17 @@ hypothesis, ran three prompts again while keeping every step, and asked how well
 the state agrees with itself k repetitions back, for k from 1 to 8. A state that has stopped
 moving scores about 1.0 at every k; a state that alternates between two values
 scores about 1.0 at every even k and lower at odd k; a state that wanders scores
-below 1.0 everywhere. All three prompts came out in between. Each of them agrees
-with itself better at even steps than at odd ones, averaging 0.83, 0.93 and 0.84
-at even steps against 0.68, 0.88 and 0.67 at odd steps, so there is a two-step
-alternation in the trajectory. But the best agreement any of them reaches at any
-step is 0.90, 0.95 and 0.92, nowhere near the 1.0 a real cycle would give. So the
+below 1.0 everywhere. **Established from the committed artifacts:** that rerun
+used the same precision and the same weights as the registered loop, because
+its agreement values one and two repetitions back reproduce the loop's own
+recorded values, for the same prompts over the same repetitions, to six decimal
+places; for the first prompt one step back it is 0.624926 against the loop's
+0.624926. The rerun is the same trajectory, not a second one. All three prompts
+came out in between. Each of them agrees with itself better at even steps than
+at odd ones, averaging 0.83, 0.93 and 0.84 at even steps against 0.68, 0.88 and
+0.67 at odd steps, so there is a two-step alternation in the trajectory. But the
+best agreement any of them reaches at any step is 0.90, 0.95 and 0.92, nowhere
+near the 1.0 a real cycle would give. So the
 loop is neither landing on a state nor closing into a repeating orbit: it is
 circling in a small region with a two-beat rhythm. On GPT-2 Small this project
 found a clean period-two cycle, whose lag-1 agreement sits at 0.685 forever while
@@ -355,6 +368,75 @@ machine time.
    affected:** this machine holds exactly one version of the weights, so the
    old rule and the new one name the same files.
 
+**Six further faults found in a second review of the code, and what each one
+changes.** A second review of the same code found six more faults. One of them
+changes a number this record put in front of the operator, and that number is
+retracted by name below; the other five are in code paths the registered run
+did not take, and are fixed for later runs. Nothing was re-run for these
+either.
+
+1. **The loudness figure this record led with was not measured the way the
+   registered convention measures it, and is retracted.** This record said that
+   the registered convention would have injected at 2,060 times the natural
+   entry loudness on the 25 bare prompts, ranging from 1,371 to 2,764, and set
+   that beside 218 times for GPT-2 Medium and 73 times for GPT-2 Small. As a
+   comparison that was wrong. The figure of 2,060 leaves the first word
+   position out of both sizes, which is this port's own convention, while the
+   registered engine measures both sizes over the whole tensor, which is how
+   the GPT-2 figures were measured. Recomputed from the committed results files
+   the like-for-like figure is **2,039 times on average, ranging from 1,402 to
+   2,702**; on the five chat prompts it is 1,899 on average, ranging from 1,780
+   to 2,010, where the position-0-excluded figure was 1,824, ranging from 1,690
+   to 1,944. Nothing else moves, because the two ways of measuring differ by
+   about 1 percent of each other and the comparison with 218 and 73 was never
+   close. Both numbers now appear in the per-prompt tables and in the summary
+   under each of them, and the table generator computes both.
+2. The states stage resolved the weights by the cache pointer instead of the
+   revision the loop recorded. If the pointer moved between the loop and that
+   stage, the saved terminal tensors would have been run through different
+   weights, and the metadata written afterwards would have recorded the new
+   revision and hidden the mismatch. The stage now pins its load to the
+   revision the loop recorded and names any disagreement with the pointer.
+   **Verified here:** a load pinned to revision
+   `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e` returns the model this experiment
+   used, 28 layers and a state 2,048 numbers wide, in 14.7 seconds at a largest
+   memory use of 1.69 gigabytes.
+3. The loop stage's resume matched saved work by prompt name alone, so
+   resuming after a change of precision, weights, repetition cap, check
+   schedule or seed would have put records made under two settings into one
+   file labelled with only the second. A resume now compares the precision, the
+   weights revision and every loop parameter against the saved file and stops
+   on any contradiction, naming the field that differs. What the saved file
+   does not record cannot be compared and is reported rather than assumed to
+   agree. The committed command in `_run_all.sh` still resumes cleanly, checked
+   here against the committed results file.
+4. The loop accepted a check schedule that begins before the comparison it
+   makes exists. With checks from repetition 1, the first check compares the
+   state with the one immediately before it while calling it a two-repetition
+   comparison, and that malformed value could count towards the three
+   consecutive passes the convergence gate needs. The loop now enforces the
+   rule the registered engine enforces, that checks may not start before the
+   lag. **The committed runs satisfy it:** both arms checked from repetition 10
+   with a lag of 2, and the probe scheduled no checks at all. The committed
+   trace shows what the rule prevents: at repetition 1 the one-repetition and
+   two-repetition agreements are the same number, 0.251262 for the first bare
+   prompt, because both compare with the state the loop started from.
+5. The lag scan now takes its precision from the results file, pins its weights
+   to the revision the loop recorded, and writes both into its own artifact,
+   which recorded neither before. It reruns the trajectory rather than reading
+   a saved one, so it has to match the loop it describes. **The committed lag
+   scan was not affected, established here:** its agreement values reproduce
+   the loop's own recorded values to six decimal places, so it ran the same
+   bfloat16 arithmetic on the same weights, and that is now stated beside the
+   lag-scan result above. The review asked whether it had been run in float32.
+   It had not.
+6. `_run_all.sh` printed each command as it ran but did not stop on failure, so
+   a failed arm still let the script write "ALL LOOPS DONE" and still exit with
+   a success status. It now stops at the first failure and exits with that
+   command's status, checked here with a stand-in command that fails: the old
+   form exits 0 and writes the completion line, the new form exits 1 and writes
+   nothing.
+
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
 state once, the search for the best 25 keeps only the 4,096 best-correlating
@@ -388,10 +470,13 @@ expect.** Two separate findings.
 
 First, the size of the shout. Under this project's registered convention the
 fed-back state is held at the size it had where it was read out, deep in the
-network. Measured here, on the 25 bare prompts, that size averages
-**2,060 times** the natural size of the layer-0 entry it is injected
-into (range 1,371 to 2,764 across prompts). The comparable committed figure for
-GPT-2 Medium's full stack is 218 times, and for GPT-2 Small 73 times. So the
+network, and both that size and the natural one are measured over the whole
+tensor. Measured here, on the 25 bare prompts, that size averages
+**2,039 times** the natural size of the layer-0 entry it is injected
+into (range 1,402 to 2,702 across prompts); this record first gave the figures
+measured with position 0 left out, 2,060 and 1,371 to 2,764, which are not
+like for like with the registered convention. The comparable committed figure
+for GPT-2 Medium's full stack is 218 times, and for GPT-2 Small 73 times. So the
 registered convention on this model would have been an order of magnitude more
 extreme than the one the operator report already identifies as the apparatus
 question. Running at natural loudness from the first run, which is what the
@@ -617,47 +702,47 @@ the readout cannot see.
 
 ### Arm `bare`: 25 prompts, cap 150 repetitions
 
-| Prompt | Word pieces | Settled? | Repetitions run | Positions merged (all) | Positions merged (position 0 left out) | Top word piece | Its probability | Spread (nats) | Loudness the old convention would have used |
-|---|---|---|---|---|---|---|---|---|---|
-| `A08_linguistics` | 11 | no | 150 | 0.713 | 0.812 | '\n' | 0.042 | 7.16 | 1847x natural |
-| `A14_kant` | 8 | no | 150 | 0.806 | 0.950 | '...' | 0.109 | 4.70 | 1761x natural |
-| `A15_sartre` | 9 | no | 150 | 0.624 | 0.638 | '\n' | 0.593 | 2.39 | 2239x natural |
-| `A17_marx` | 10 | no | 150 | 0.710 | 0.746 | '\n' | 0.198 | 5.56 | 1794x natural |
-| `A21_dickens` | 9 | no | 150 | 0.812 | 0.963 | '\n' | 0.069 | 6.68 | 2110x natural |
-| `E01_politics` | 12 | no | 150 | 0.590 | 0.669 | '\n' | 0.107 | 6.89 | 2102x natural |
-| `D01_water` | 17 | no | 150 | 0.679 | 0.690 | '我' | 0.043 | 7.43 | 2171x natural |
-| `A01_physics` | 9 | no | 150 | 0.607 | 0.585 | ' �' | 0.051 | 7.37 | 1916x natural |
-| `B01_napoleon` | 10 | no | 150 | 0.807 | 0.925 | '\n\n' | 0.155 | 4.16 | 1938x natural |
-| `C01_jack_jill` | 8 | no | 150 | 0.913 | 0.927 | '車' | 0.116 | 7.51 | 1855x natural |
-| `F01_anger` | 8 | no | 150 | 0.684 | 0.694 | 'は' | 0.087 | 6.72 | 2764x natural |
-| `G01_punctuation` | 11 | no | 150 | 0.874 | 0.951 | '\n' | 0.151 | 4.21 | 2537x natural |
-| `E02_tech` | 8 | no | 150 | 0.726 | 0.730 | '車' | 0.165 | 6.84 | 2278x natural |
-| `D02_periodic` | 11 | no | 150 | 0.834 | 0.847 | '車' | 0.352 | 6.32 | 2473x natural |
-| `A02_medical` | 9 | no | 150 | 0.864 | 0.966 | '\n\n' | 0.177 | 6.00 | 2057x natural |
-| `B02_wwi` | 12 | no | 150 | 0.776 | 0.797 | ' �' | 0.017 | 9.25 | 1441x natural |
-| `C02_king_cole` | 8 | no | 150 | 0.632 | 0.629 | '我' | 0.016 | 8.06 | 1371x natural |
-| `F02_insult` | 8 | no | 150 | 0.483 | 0.480 | 'の' | 0.037 | 7.71 | 2377x natural |
-| `G02_brackets` | 14 | no | 150 | 0.929 | 0.938 | '車' | 0.156 | 6.95 | 2282x natural |
-| `E03_orgs` | 9 | no | 150 | 0.503 | 0.504 | '由於' | 0.023 | 7.06 | 2060x natural |
-| `D03_organic` | 17 | no | 150 | 0.577 | 0.564 | 'の' | 0.147 | 6.93 | 2245x natural |
-| `A03_neuro` | 10 | no | 150 | 0.552 | 0.524 | 'の' | 0.159 | 6.18 | 1970x natural |
-| `B03_moon` | 8 | no | 150 | 0.846 | 0.857 | '車' | 0.184 | 6.20 | 1855x natural |
-| `C03_mary_lamb` | 8 | no | 150 | 0.731 | 0.703 | '車' | 0.026 | 9.32 | 1439x natural |
-| `F03_frustration` | 8 | no | 150 | 0.913 | 0.910 | '車' | 0.031 | 9.09 | 2626x natural |
+| Prompt | Word pieces | Settled? | Repetitions run | Positions merged (all) | Positions merged (position 0 left out) | Top word piece | Its probability | Spread (nats) | Loudness the registered convention would have used, both sizes over the whole tensor | The same with position 0 left out of both sizes |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `A08_linguistics` | 11 | no | 150 | 0.713 | 0.812 | '\n' | 0.042 | 7.16 | 1833x natural | 1847x natural |
+| `A14_kant` | 8 | no | 150 | 0.806 | 0.950 | '...' | 0.109 | 4.70 | 1792x natural | 1761x natural |
+| `A15_sartre` | 9 | no | 150 | 0.624 | 0.638 | '\n' | 0.593 | 2.39 | 2177x natural | 2239x natural |
+| `A17_marx` | 10 | no | 150 | 0.710 | 0.746 | '\n' | 0.198 | 5.56 | 1813x natural | 1794x natural |
+| `A21_dickens` | 9 | no | 150 | 0.812 | 0.963 | '\n' | 0.069 | 6.68 | 2087x natural | 2110x natural |
+| `E01_politics` | 12 | no | 150 | 0.590 | 0.669 | '\n' | 0.107 | 6.89 | 2065x natural | 2102x natural |
+| `D01_water` | 17 | no | 150 | 0.679 | 0.690 | '我' | 0.043 | 7.43 | 2144x natural | 2171x natural |
+| `A01_physics` | 9 | no | 150 | 0.607 | 0.585 | ' �' | 0.051 | 7.37 | 1928x natural | 1916x natural |
+| `B01_napoleon` | 10 | no | 150 | 0.807 | 0.925 | '\n\n' | 0.155 | 4.16 | 1906x natural | 1938x natural |
+| `C01_jack_jill` | 8 | no | 150 | 0.913 | 0.927 | '車' | 0.116 | 7.51 | 1865x natural | 1855x natural |
+| `F01_anger` | 8 | no | 150 | 0.684 | 0.694 | 'は' | 0.087 | 6.72 | 2702x natural | 2764x natural |
+| `G01_punctuation` | 11 | no | 150 | 0.874 | 0.951 | '\n' | 0.151 | 4.21 | 2439x natural | 2537x natural |
+| `E02_tech` | 8 | no | 150 | 0.726 | 0.730 | '車' | 0.165 | 6.84 | 2204x natural | 2278x natural |
+| `D02_periodic` | 11 | no | 150 | 0.834 | 0.847 | '車' | 0.352 | 6.32 | 2421x natural | 2473x natural |
+| `A02_medical` | 9 | no | 150 | 0.864 | 0.966 | '\n\n' | 0.177 | 6.00 | 1999x natural | 2057x natural |
+| `B02_wwi` | 12 | no | 150 | 0.776 | 0.797 | ' �' | 0.017 | 9.25 | 1479x natural | 1441x natural |
+| `C02_king_cole` | 8 | no | 150 | 0.632 | 0.629 | '我' | 0.016 | 8.06 | 1402x natural | 1371x natural |
+| `F02_insult` | 8 | no | 150 | 0.483 | 0.480 | 'の' | 0.037 | 7.71 | 2332x natural | 2377x natural |
+| `G02_brackets` | 14 | no | 150 | 0.929 | 0.938 | '車' | 0.156 | 6.95 | 2224x natural | 2282x natural |
+| `E03_orgs` | 9 | no | 150 | 0.503 | 0.504 | '由於' | 0.023 | 7.06 | 2018x natural | 2060x natural |
+| `D03_organic` | 17 | no | 150 | 0.577 | 0.564 | 'の' | 0.147 | 6.93 | 2217x natural | 2245x natural |
+| `A03_neuro` | 10 | no | 150 | 0.552 | 0.524 | 'の' | 0.159 | 6.18 | 1977x natural | 1970x natural |
+| `B03_moon` | 8 | no | 150 | 0.846 | 0.857 | '車' | 0.184 | 6.20 | 1854x natural | 1855x natural |
+| `C03_mary_lamb` | 8 | no | 150 | 0.731 | 0.703 | '車' | 0.026 | 9.32 | 1501x natural | 1439x natural |
+| `F03_frustration` | 8 | no | 150 | 0.913 | 0.910 | '車' | 0.031 | 9.09 | 2583x natural | 2626x natural |
 
-Settled: **0 of 25**. Positions-merged metric over all positions: median **0.726**, range 0.483 to 0.929; leaving position 0 out: median 0.746, range 0.480 to 0.966. Prompts at or above 0.99 on the all-positions metric: 0 of 25. Top-word-piece probability: median 0.109 (a flat distribution over 151,936 word pieces would give 0.0000066). Spread: median 6.89 nats out of a possible 11.93. Distinct top word pieces: 9 ('車' x7, '\n' x6, 'の' x3, '我' x2, ' �' x2, '\n\n' x2, '...' x1, 'は' x1, '由於' x1). The registered loudness convention would have injected at 2060 times natural strength on average (range 1371 to 2764).
+Settled: **0 of 25**. Positions-merged metric over all positions: median **0.726**, range 0.483 to 0.929; leaving position 0 out: median 0.746, range 0.480 to 0.966. Prompts at or above 0.99 on the all-positions metric: 0 of 25. Top-word-piece probability: median 0.109 (a flat distribution over 151,936 word pieces would give 0.0000066). Spread: median 6.89 nats out of a possible 11.93. Distinct top word pieces: 9 ('車' x7, '\n' x6, 'の' x3, '我' x2, ' �' x2, '\n\n' x2, '...' x1, 'は' x1, '由於' x1). The registered loudness convention, which measures both the injected size and the natural size over the whole tensor, would have injected at 2039 times natural strength on average (range 1402 to 2702). Measured this port's way, with position 0 left out of both sizes, the same figures are 2060 on average (range 1371 to 2764).
 
 ### Arm `chat`: 5 prompts, cap 150 repetitions
 
-| Prompt | Word pieces | Settled? | Repetitions run | Positions merged (all) | Positions merged (position 0 left out) | Top word piece | Its probability | Spread (nats) | Loudness the old convention would have used |
-|---|---|---|---|---|---|---|---|---|---|
-| `A08_linguistics` | 23 | no | 150 | 0.634 | 0.669 | '\n\n' | 0.109 | 6.39 | 1780x natural |
-| `A14_kant` | 20 | no | 150 | 0.885 | 0.894 | '凌晨' | 0.008 | 9.29 | 1690x natural |
-| `A15_sartre` | 21 | no | 150 | 0.833 | 0.868 | '\n' | 0.311 | 4.12 | 1868x natural |
-| `A17_marx` | 22 | no | 150 | 0.697 | 0.719 | '\n' | 0.445 | 1.89 | 1944x natural |
-| `A21_dickens` | 21 | no | 150 | 0.767 | 0.783 | '\n' | 0.129 | 4.60 | 1836x natural |
+| Prompt | Word pieces | Settled? | Repetitions run | Positions merged (all) | Positions merged (position 0 left out) | Top word piece | Its probability | Spread (nats) | Loudness the registered convention would have used, both sizes over the whole tensor | The same with position 0 left out of both sizes |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `A08_linguistics` | 23 | no | 150 | 0.634 | 0.669 | '\n\n' | 0.109 | 6.39 | 1847x natural | 1780x natural |
+| `A14_kant` | 20 | no | 150 | 0.885 | 0.894 | '凌晨' | 0.008 | 9.29 | 1780x natural | 1690x natural |
+| `A15_sartre` | 21 | no | 150 | 0.833 | 0.868 | '\n' | 0.311 | 4.12 | 1939x natural | 1868x natural |
+| `A17_marx` | 22 | no | 150 | 0.697 | 0.719 | '\n' | 0.445 | 1.89 | 2010x natural | 1944x natural |
+| `A21_dickens` | 21 | no | 150 | 0.767 | 0.783 | '\n' | 0.129 | 4.60 | 1917x natural | 1836x natural |
 
-Settled: **0 of 5**. Positions-merged metric over all positions: median **0.767**, range 0.634 to 0.885; leaving position 0 out: median 0.783, range 0.669 to 0.894. Prompts at or above 0.99 on the all-positions metric: 0 of 5. Top-word-piece probability: median 0.129 (a flat distribution over 151,936 word pieces would give 0.0000066). Spread: median 4.60 nats out of a possible 11.93. Distinct top word pieces: 3 ('\n' x3, '\n\n' x1, '凌晨' x1). The registered loudness convention would have injected at 1824 times natural strength on average (range 1690 to 1944).
+Settled: **0 of 5**. Positions-merged metric over all positions: median **0.767**, range 0.634 to 0.885; leaving position 0 out: median 0.783, range 0.669 to 0.894. Prompts at or above 0.99 on the all-positions metric: 0 of 5. Top-word-piece probability: median 0.129 (a flat distribution over 151,936 word pieces would give 0.0000066). Spread: median 4.60 nats out of a possible 11.93. Distinct top word pieces: 3 ('\n' x3, '\n\n' x1, '凌晨' x1). The registered loudness convention, which measures both the injected size and the natural size over the whole tensor, would have injected at 1899 times natural strength on average (range 1780 to 2010). Measured this port's way, with position 0 left out of both sizes, the same figures are 1824 on average (range 1690 to 1944).
 
 ### H19b: how much of each state the lens can express
 

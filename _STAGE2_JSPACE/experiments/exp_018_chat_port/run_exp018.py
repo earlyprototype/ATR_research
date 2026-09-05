@@ -15,7 +15,9 @@ Stages, in the order they are meant to run:
            the loop recorded in its results file unless `--dtype` overrides it.
   lagscan  Supplementary observation, no hypothesis attached: rerun a few
            prompts keeping every mean position vector, then report the average
-           cosine between repetitions k apart for k = 1 to 8. A state that has
+           cosine between repetitions k apart for k = 1 to 8. Because it reruns
+           the trajectory, it takes the precision and the weights revision from
+           the loop's results file, as the states stage does. A state that has
            stopped moving scores about 1.0 at every k; a state that alternates
            between p values scores about 1.0 only at multiples of p; a state
            that wanders scores below 1.0 everywhere and falls off with k.
@@ -217,6 +219,50 @@ def stage_probe(args) -> None:
     print(f"\nwrote {probe_path}  peak={peak_gb():.2f} GB", flush=True)
 
 
+def check_resume_compatible(prior: dict, arm: str, dtype: str, revision: str,
+                            cfg_vars: dict) -> None:
+    """Stop a resume that would mix two differently configured runs in one file.
+
+    The saved file carries the precision, the weights revision and every loop
+    parameter of the invocation that wrote it. Resuming with any of those
+    changed would leave one results file holding records made under two
+    settings and labelled with only the second, so any contradiction stops the
+    run. A field the saved file does not carry cannot be compared and is
+    reported rather than counted as agreement.
+    """
+    clashes, unknown = [], []
+    for name, now in (("dtype", dtype), ("model_revision", revision)):
+        before = prior.get(name)
+        if before is None:
+            unknown.append(name)
+        elif before != now:
+            clashes.append(f"{name}: the saved records were made with "
+                           f"{before!r}, this run would use {now!r}")
+    before_cfg = prior.get("loop_config")
+    if not before_cfg:
+        unknown.append("loop_config")
+    else:
+        for key, now in sorted(cfg_vars.items()):
+            if key not in before_cfg:
+                unknown.append(f"loop_config.{key}")
+            elif before_cfg[key] != now:
+                clashes.append(f"loop_config.{key}: the saved records were "
+                               f"made with {before_cfg[key]!r}, this run "
+                               f"would use {now!r}")
+    if clashes:
+        raise SystemExit(
+            f"refusing to resume results_{arm}.json: this invocation does not "
+            f"match the one that wrote it.\n  " + "\n  ".join(clashes) +
+            f"\nResuming would put records made under two settings in one "
+            f"file labelled with only this one. Rerun with the saved settings, "
+            f"or move results_{arm}.json and terminal_states_{arm}.npz aside "
+            f"and start the arm again.")
+    if unknown:
+        print(f"resume: the saved file records no "
+              f"{', '.join(sorted(unknown))}, so that cannot be checked "
+              f"against this invocation", flush=True)
+
+
 def stage_loop(args) -> None:
     """The registered run for one arm."""
     t_start = time.time()
@@ -233,10 +279,12 @@ def stage_loop(args) -> None:
     npz_path = OUT / f"terminal_states_{args.arm}.npz"
     results, tensors = [], {}
     if args.resume and res_path.exists():
-        prior = json.loads(res_path.read_text())["records"]
+        saved = json.loads(res_path.read_text())
+        check_resume_compatible(saved, args.arm, dtype, revision, vars(cfg))
+        prior = saved["records"]
         if npz_path.exists():
-            with np.load(npz_path) as saved:
-                tensors = {k: v for k, v in saved.items()}
+            with np.load(npz_path) as npz:
+                tensors = {k: v for k, v in npz.items()}
         # A prompt counts as finished only when both checkpoints hold it: its
         # row in the results file and its terminal state in the state file.
         # A prompt held by only one of them is run again, because the states
@@ -299,13 +347,14 @@ def _scored_positions(n_tokens: int) -> list[int]:
     return sorted({1, n_tokens // 2, n_tokens - 1})
 
 
-def states_dtype(args, res: dict) -> str:
-    """The precision the states stage loads the model in.
+def dtype_from_results(args, res: dict, stage: str) -> str:
+    """The precision a follow-on stage loads the model in.
 
-    The loop records the precision it ran in, and states read at a different
-    precision are not the states the loop visited, so the recorded value wins
-    when no `--dtype` is given and a `--dtype` that contradicts it stops the
-    run unless `--allow-dtype-mismatch` says the contradiction is deliberate.
+    The loop records the precision it ran in, and a state or a trajectory
+    produced at a different precision is not the one the loop visited, so the
+    recorded value wins when no `--dtype` is given and a `--dtype` that
+    contradicts it stops the run unless `--allow-dtype-mismatch` says the
+    contradiction is deliberate.
     """
     recorded = res.get("dtype")
     if args.dtype is None:
@@ -313,17 +362,52 @@ def states_dtype(args, res: dict) -> str:
             return recorded
         raise SystemExit(
             f"results_{args.arm}.json records no precision this runner knows "
-            f"(found {recorded!r}), so the states stage cannot tell which "
+            f"(found {recorded!r}), so the {stage} stage cannot tell which "
             f"precision the loop ran in; pass --dtype float32 or "
             f"--dtype bfloat16 explicitly")
     if (recorded in DTYPES and recorded != args.dtype
             and not args.allow_dtype_mismatch):
         raise SystemExit(
             f"--dtype {args.dtype} contradicts the {recorded} recorded in "
-            f"results_{args.arm}.json; states read at a precision the loop "
-            f"never ran in are not comparable with it. Drop the flag to use "
-            f"{recorded}, or pass --allow-dtype-mismatch to override")
+            f"results_{args.arm}.json; what the {stage} stage produces at a "
+            f"precision the loop never ran in is not comparable with it. Drop "
+            f"the flag to use {recorded}, or pass --allow-dtype-mismatch to "
+            f"override")
     return args.dtype
+
+
+def revision_from_results(res: dict, stage: str) -> tuple[str | None, str]:
+    """The revision to pin a follow-on stage to, and the revision to record.
+
+    Returns the revision the loop recorded, so the load can be pinned to the
+    exact version of the weights that produced the saved tensors, together
+    with the revision this stage will record. When the loop recorded none, as
+    the runs made before the runner recorded it did, nothing can be pinned and
+    the cache pointer an unpinned load follows is resolved and recorded
+    instead, with the fact printed rather than passed over. A pointer that has
+    moved since the loop ran is named here rather than silently followed.
+    """
+    recorded = res.get("model_revision")
+    try:
+        pointer = resolve_revision()
+    except FileNotFoundError as exc:
+        pointer = None
+        print(f"note: {exc}", flush=True)
+    if recorded:
+        if pointer and pointer != recorded:
+            print(f"note: the cache pointer names revision {pointer}, the loop "
+                  f"recorded {recorded}; the {stage} stage loads the loop's "
+                  f"revision so the weights match the saved tensors", flush=True)
+        return recorded, recorded
+    if pointer is None:
+        raise SystemExit(
+            f"the loop recorded no weights revision and none can be resolved "
+            f"from the local cache, so the {stage} stage cannot say which "
+            f"weights it is using")
+    print(f"note: the loop recorded no weights revision, so the {stage} stage "
+          f"cannot pin the load; it follows the cache pointer, {pointer}, "
+          f"which is what the loop itself followed", flush=True)
+    return None, pointer
 
 
 def stage_states(args) -> None:
@@ -332,10 +416,11 @@ def stage_states(args) -> None:
     # The results file is read before the model is loaded, because it is what
     # says which precision to load.
     res = json.loads((OUT / f"results_{args.arm}.json").read_text())
-    dtype = states_dtype(args, res)
-    print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})", flush=True)
-    model = load_model(dtype=DTYPES[dtype])
-    revision = resolve_revision()
+    dtype = dtype_from_results(args, res, "states")
+    pin, revision = revision_from_results(res, "states")
+    print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})  "
+          f"revision={revision}{' (pinned)' if pin else ''}", flush=True)
+    model = load_model(dtype=DTYPES[dtype], revision=pin)
     inject_name, _ = hook_names(model)
     tensors = np.load(OUT / f"terminal_states_{args.arm}.npz")
     want = {f"blocks.{l}.hook_resid_post" for l in SCORED_LAYERS}
@@ -398,11 +483,28 @@ def stage_lagscan(args) -> None:
     `atr_engine2.lag_scan`, on the mean position vector of the last iterations.
     """
     import torch.nn.functional as F
-    model = load_model(dtype=DTYPES[dtype_name(args)])
+    # This stage reruns the loop's own trajectory rather than reading a saved
+    # one, so it has to run the same weights at the same precision as the loop
+    # it is describing, and has to record which it used.
+    res_path = OUT / f"results_{args.arm}.json"
+    if res_path.exists():
+        res = json.loads(res_path.read_text())
+        dtype = dtype_from_results(args, res, "lagscan")
+        pin, revision = revision_from_results(res, "lagscan")
+    else:
+        dtype, pin = dtype_name(args), None
+        revision = resolve_revision()
+        print(f"note: no results_{args.arm}.json to check against, so this lag "
+              f"scan runs at {dtype} on revision {revision} without matching "
+              f"any recorded loop", flush=True)
+    print(f"dtype={dtype}  revision={revision}"
+          f"{' (pinned)' if pin else ''}", flush=True)
+    model = load_model(dtype=DTYPES[dtype], revision=pin)
     inject_name, extract_name = hook_names(model)
     records = load_prompts(args.n_prompts, args.arm, args.n_chat)
     out = {"arm": args.arm, "iterations": args.max_iter, "max_lag": 8,
-           "prompts": {}}
+           "dtype": dtype, "model": "Qwen/Qwen3-1.7B",
+           "model_revision": revision, "prompts": {}}
     for rec in records:
         text = rec["prompt"] if args.arm == "bare" else chat_wrap(model, rec["prompt"])
         tokens = tokenise(model, text)
@@ -445,12 +547,12 @@ def main() -> None:
                     choices=["probe", "loop", "states", "lagscan"])
     ap.add_argument("--arm", default="bare", choices=["bare", "chat"])
     ap.add_argument("--dtype", default=None, choices=["float32", "bfloat16"],
-                    help="model precision; defaults to float32 for probe, loop "
-                         "and lagscan, and to the precision recorded in the "
-                         "results file for states")
+                    help="model precision; defaults to float32 for probe and "
+                         "loop, and to the precision recorded in the results "
+                         "file for states and lagscan")
     ap.add_argument("--allow-dtype-mismatch", action="store_true",
-                    help="let --stage states run at a precision the loop did "
-                         "not record")
+                    help="let --stage states or --stage lagscan run at a "
+                         "precision the loop did not record")
     ap.add_argument("--max-iter", type=int, default=200)
     ap.add_argument("--check-start", type=int, default=10)
     ap.add_argument("--check-every", type=int, default=2)
