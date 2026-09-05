@@ -25,7 +25,7 @@ marked, with their git hashes. Nothing is deleted.
 
 ## 1. Hypothesis register (H0–H15)
 
-**Next free hypothesis ID: H16.** H1–H3 are unallocated gaps and stay
+**Next free hypothesis ID: H20** (H16 through H19b allocated 2026-09-05, erratum (f)). H1–H3 are unallocated gaps and stay
 unfilled — every Stage 2 spec says "continuing the numbering", so
 backfilling a low gap would break the reader's expectation that number
 order tracks time order. Do not backfill; continue at H16.
@@ -52,6 +52,18 @@ order tracks time order. Do not backfill; continue at H16.
 | H13 | EXP_010c-3 (in-fill) | At fixed injection i ∈ {8,10}, whole-word + via-tail-robust character is lost below an identifiable extraction depth | **SUPPORTED; edge at j=21, sharp** — scoped to i ∈ {8, 10}; see erratum (d) before generalising | same section |
 | H14 | EXP_010c-4 (census) | Aliasing materiality (amended criterion): ≥1 census cell with ≥1 measured neighbour differs in arm class from every measured neighbour | **SUPPORTED (15/50 eligible cells)** | `RESULTS_EXP010C.md` 2026-07-29 census section |
 | H15 | EXP_015 | The Small-like tensor partition of Medium's full-stack loop end states survives natural-strength injection: ARI vs Small above chance (perm p < 0.05 at gate threshold 0.999) on the natural_i A0 terminals | **REFUTED** (ARI -0.113, perm p 1.000 at the gate threshold; at/below chance at every sweep threshold) | `experiments/exp_010c_windows/RESULTS_EXP015.md` |
+| H16 | EXP_011 | Corrected null: on the Neuronpedia pre-fitted gpt2-small lens, the J-space share (sparse nonnegative decomposition onto at most 25 lens vectors) of GPT-2 Small's language-prompt terminal states exceeds that of the matched-ν noise terminal states (Stage 1 run 17) at the workspace-band layers, above the norm-matched random-dictionary chance level | UNTESTED (allocated 2026-09-05) | `EXP_011_SPEC.md` |
+| H16a | EXP_011 | The pilot's prediction re-tested on the full-vocabulary lens, phase-aware: the `prolet` attractor's J-space share exceeds the `Divine` cycle's share in both phases (the pilot found the reverse at pilot confidence, finding F16 in the lucier record) | UNTESTED (allocated 2026-09-05) | `EXP_011_SPEC.md` |
+| H16b | EXP_011 | ATR terminal states have a lower J-space share than ordinary non-iterated prompt residuals read at the same layer on the same lens (the loop leaves the verbalizable directions) | UNTESTED (allocated 2026-09-05) | `EXP_011_SPEC.md` |
+| H17 | EXP_016 | Report swap on base GPT-2 Small: exchanging the lens coordinates of the model's own top concept and a target concept (the paper's patching in lens coordinates, at one layer or a small layer set) puts the target in the next-token top-5 on at least 50 percent of trials, against at most 10 percent for norm-matched random-direction swaps | UNTESTED (allocated 2026-09-05) | `EXP_016_SPEC.md` |
+| H17a | EXP_016 | Flexible generalisation: one country swap redirects at least two of three downstream completion functions (capital, language, continent) at a rate above the random-direction control, on items the clean model answers correctly | UNTESTED (allocated 2026-09-05) | `EXP_016_SPEC.md` |
+| H17b | EXP_016 | Intermediate-step surgery: on two-hop completions the clean model answers correctly, swapping the intermediate concept changes the final answer to the predicted alternative more often than the random-direction control | UNTESTED (allocated 2026-09-05) | `EXP_016_SPEC.md` |
+| H18 | EXP_017 | The post-trained twin LaMini-GPT-124M, run under the registered full-stack convention on the 25-prompt Small subset, partitions the prompts like base GPT-2 Small's terminals (adjusted Rand index above chance under the EXP_010d permutation test) | UNTESTED (allocated 2026-09-05) | `EXP_017_SPEC.md` |
+| H18a | EXP_017 | The twin's terminal readout tokens coincide with base GPT-2 Small's basin tokens on at least half of the 25 prompts | UNTESTED (allocated 2026-09-05) | `EXP_017_SPEC.md` |
+| H18b | EXP_017 | Post-training changes the terminal states' J-space share: the twin's share on a lens fitted to the twin differs from base's share on the Neuronpedia lens by more than the random-dictionary control spread, two-sided | UNTESTED (allocated 2026-09-05) | `EXP_017_SPEC.md` |
+| H19 | EXP_018 | In a rotary-position chat model looped at natural loudness with position 0 excluded from the norm, the token positions do not collapse to one vector: the mean pairwise cosine between positions of the settled tensor stays below 0.99, where GPT-2 Small reaches 1.00 by about iteration 10 | UNTESTED (allocated 2026-09-05) | `EXP_018_SPEC.md` |
+| H19a | EXP_018 | At natural loudness the modern model's loop settles (lag-2 gate, cosine 0.999 sustained over three checks) on at least half of the run prompts within the iteration budget | UNTESTED (allocated 2026-09-05) | `EXP_018_SPEC.md` |
+| H19b | EXP_018 | The modern model's settled states have a lower J-space share on its pre-fitted lens than its ordinary prompt residuals at the same layer (the H16b test transplanted) | UNTESTED (allocated 2026-09-05) | `EXP_018_SPEC.md` |
 
 ### Retired bindings (kept visible; never reuse)
 
@@ -92,7 +104,7 @@ wrote at the time; read them against this table.
 | EXP_010c-ROBUST | Seed and prompt-subset robustness (issue #11) | COMPLETE | `EXP_010c_ROBUST_SPEC.md` | `RESULTS_EXP010C.md` |
 | EXP_010c-VARIANTS | Hook-point and energy-normalisation controls | COMPLETE | `EXP_010c_VARIANTS_SPEC.md` | `RESULTS_EXP010C.md` VARIANTS sections |
 | EXP_010d | Small-partition capstone (H11/H11a) | COMPLETE | `EXP_010d_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP010D.md` |
-| EXP_011 | J-space overlap, GPT-2 Small (H6) | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
+| EXP_011 | J-space overlap, GPT-2 Small (H6, with the corrected-null and phase-aware sub-hypotheses H16, H16a, H16b). Instrument: the Neuronpedia pre-fitted gpt2-small lens, permitted by TC on 2026-09-05 (erratum (f)) | **IN PROGRESS** (2026-09-05; branch `claude/latent-context-small-llms-u2jdig-exp011`) | `EXP_011_SPEC.md` (on that branch) | `experiments/exp_011_small_overlap/RESULTS_EXP011.md` (on that branch) |
 | EXP_011m | J-space overlap, Medium variant. **PRIMARY ARBITER for workspace-content claims about Medium terminal states** (promoted 2026-08-02; see erratum (e)) | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
 | EXP_012 | **The H7 cross-model band census ONLY.** Unqualified use of "EXP_012" for anything else is deprecated | **PLANNED — ID reserved** | `STAGE2_PLAN.md` | — |
 | EXP_012-PYTHIA | Pythia placebo window grid (absorbed EXP_010a as arms P-A0/P-A1) | COMPLETE | `EXP_012_PYTHIA_SPEC.md` | `RESULTS_EXP012_PYTHIA.md` |
@@ -101,6 +113,9 @@ wrote at the time; read them against this table.
 | EXP_013m | J-corrected readout, Medium variant. **DEMOTED from arbiter status** (2026-08-02; see erratum (e)): it can rule latent content in but can never rule it out | **PLANNED — ID reserved** | `RUNBOOK_JLENS_MEDIUM.md` | — |
 | EXP_014 | Held-out political-vocabulary rank test on the Small settled basin | **PROVISIONAL — lives on PR #53's branch** (`_STAGE1_REANALYSIS/POLARISATION_SPEC.md` @ `e505963`); not yet on main. **EXP_014 and hypothesis H14 are unrelated despite the number** — different namespaces, no collision | PR #53 branch | PR #53 branch |
 | EXP_015 | Natural-loudness ARI comparison vs Small (H15): the direct apparatus-mask test named in the 2026-07-27 session note; analysis-only, issue #59 | COMPLETE | `EXP_015_SPEC.md` | `experiments/exp_010c_windows/RESULTS_EXP015.md` |
+| EXP_016 | Completion-compatible swap battery on base GPT-2 Small (report swap, flexible generalisation, intermediate-step surgery) with the Neuronpedia lens (H17, H17a, H17b) | **IN PROGRESS** (2026-09-05; branch `claude/latent-context-small-llms-u2jdig-exp016`) | `EXP_016_SPEC.md` (on that branch) | `experiments/exp_016_swaps_small/RESULTS_EXP016.md` (on that branch) |
+| EXP_017 | Post-trained twin: LaMini-GPT-124M under the Stage 1 full-stack loop and the J-space overlap probe, base against post-trained (H18, H18a, H18b) | **IN PROGRESS** (2026-09-05; branch `claude/latent-context-small-llms-u2jdig-exp017`) | `EXP_017_SPEC.md` (on that branch) | `experiments/exp_017_lamini_twin/RESULTS_EXP017.md` (on that branch) |
+| EXP_018 | First modern chat-model port: Qwen3-1.7B under natural loudness with position 0 excluded from the norm, with its pre-fitted Neuronpedia lens (H19, H19a, H19b). Gemma-3-270M, the note's first choice, is licence-gated in this environment (HTTP 401 without a token); fallback if the 1.7B model cannot run here is Qwen2.5-0.5B-Instruct with an in-house lens | **IN PROGRESS** (2026-09-05; branch `claude/latent-context-small-llms-u2jdig-exp018`) | `EXP_018_SPEC.md` (on that branch) | `experiments/exp_018_chat_port/RESULTS_EXP018.md` (on that branch) |
 
 ---
 
@@ -229,6 +244,24 @@ RESULTS_EXP010C.md, RESULTS_EXP010D.md, and RUNBOOK_JLENS_MEDIUM.md.
 Issues #45 and #46 are re-chartered accordingly.
 
 ---
+
+### (f) 2026-09-05 allocations under TC's in-session direction (reading-note experiments)
+
+On 2026-09-05 TC directed, in session, that experiments 1 to 4 of the
+reading note `docs/LATENT_CONTEXT_NOTE_2026-09-04.md` (lucier repository,
+merged in its PR #142) be run, that experiment 5 (the Coconut line) be
+recorded as future work without an identifier (`FUTURE_WORK.md`), that the
+third-party pre-fitted lens published at `neuronpedia/jacobian-lens` may
+serve as the instrument ("you can use outside lens"), and that the open
+questions the note left to the operator are delegated to the session's
+judgement. Under that direction this erratum allocates EXP_016, EXP_017
+and EXP_018, moves EXP_011 from PLANNED to IN PROGRESS, and allocates H16
+through H19b. Each experiment lands on its own branch and PR, stacked on
+the PR that carries this allocation, per R1 and R5. H6 keeps its registered
+wording and is scored on it; the corrected-null comparison it can no longer
+express (the 18 null-model basins were superseded by the matched-ν re-run,
+lucier finding F4) is carried by H16. The lens file's SHA-256 digest is
+recorded in each results record so the instrument is reproducible.
 
 *Mirror maintenance: when this file changes an allocation, post the change
 to discussion #37 in the same working session. This file is the authority;
