@@ -159,6 +159,33 @@ def main():
                 ctrl = ", ".join(f"{x:.3f}" for x in c["median_controls"])
                 cells.append(f"{c['median_real']:.4f} [{ctrl}]")
             lines.append(f"| {l} | " + " | ".join(cells) + " |")
+        # ---- the control-adjusted table, section 3.5 of the record ---------
+        # Each cell is the median real share over the 25 prompts minus the mean
+        # over the three rotation seeds of that control's median share, so a
+        # positive number means the real dictionary explains more of the state
+        # than a randomly rotated copy of the same dictionary does.
+        adjusted = [("base-on-base", "base states, base lens"),
+                    ("twin-on-twin", "twin states, twin lens"),
+                    ("twin-on-base", "twin states, base lens"),
+                    ("base-on-twin", "base states, twin lens")]
+        adjusted = [(k, label) for k, label in adjusted if k in j["cross_checks"]]
+        lines += ["", "### Real minus its own rotation control", "",
+                  "Each cell is the median share over the 25 prompts minus the "
+                  "mean over the three seeds of the control's median share. A "
+                  "positive number means the real dictionary explains more of "
+                  "the state than a randomly rotated copy of the same "
+                  "dictionary does.", "",
+                  "| layer | " + " | ".join(label for _, label in adjusted) + " |",
+                  "|---" * (1 + len(adjusted)) + "|"]
+        for l in j["probe_layers"]:
+            cells = []
+            for key, _ in adjusted:
+                c = j["cross_checks"][key][str(l)]
+                ctrls = c["median_controls"]
+                gap = c["median_real"] - sum(ctrls) / len(ctrls)
+                cells.append(f"{gap:+.4f}")
+            lines.append(f"| {l} | " + " | ".join(cells) + " |")
+
         if "same_lens_model_effect" in j:
             lines += ["", "### Model effect against instrument effect", "",
                       "The model effect holds the lens fixed and swaps whose "

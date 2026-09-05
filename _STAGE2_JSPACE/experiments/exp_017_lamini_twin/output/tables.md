@@ -129,6 +129,24 @@ Median share over the 25 prompts, with the three rotation controls in brackets. 
 | 9 | 0.2964 [0.323, 0.309, 0.329] | 0.2905 [0.321, 0.309, 0.328] | 0.3323 [0.336, 0.292, 0.316] | 0.3221 [0.338, 0.297, 0.310] |
 | 10 | 0.2949 [0.339, 0.325, 0.332] | 0.2929 [0.335, 0.323, 0.337] | 0.3115 [0.344, 0.325, 0.329] | 0.3133 [0.344, 0.326, 0.338] |
 
+### Real minus its own rotation control
+
+Each cell is the median share over the 25 prompts minus the mean over the three seeds of the control's median share. A positive number means the real dictionary explains more of the state than a randomly rotated copy of the same dictionary does.
+
+| layer | base states, base lens | twin states, twin lens | twin states, base lens | base states, twin lens |
+|---|---|---|---|---|
+| 0 | +0.1051 | +0.1811 | +0.1990 | +0.0780 |
+| 1 | +0.0790 | +0.1620 | +0.1673 | +0.0580 |
+| 2 | +0.0054 | +0.0692 | +0.0744 | +0.0012 |
+| 3 | +0.0006 | +0.0522 | +0.0509 | -0.0017 |
+| 4 | -0.0179 | +0.0264 | +0.0369 | -0.0245 |
+| 5 | -0.0133 | +0.0284 | +0.0328 | -0.0163 |
+| 6 | -0.0323 | +0.0090 | +0.0228 | -0.0370 |
+| 7 | -0.0216 | +0.0242 | +0.0211 | -0.0252 |
+| 8 | -0.0197 | +0.0153 | +0.0152 | -0.0157 |
+| 9 | -0.0241 | +0.0069 | +0.0177 | -0.0288 |
+| 10 | -0.0373 | -0.0227 | -0.0214 | -0.0388 |
+
 ### Model effect against instrument effect
 
 The model effect holds the lens fixed and swaps whose settled states are decomposed. The instrument effect holds the states fixed and swaps the lens. Both are the absolute difference of medians over the 25 prompts.

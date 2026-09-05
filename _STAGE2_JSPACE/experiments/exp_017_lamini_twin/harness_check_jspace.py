@@ -16,7 +16,10 @@ import run_jspace
 run_jspace.PROBE_LAYERS = [0, 10]
 run_jspace.BAND = [10]
 run_jspace.N_PERM = 200
-sys.argv = ["harness", "--out-suffix", "_harness",
+# The five-prompt probe lens is deliberately shorter than the count the budget
+# rule chose, so this check opts in to scoring it and its output is stamped as
+# a sensitivity reading rather than the registered comparison.
+sys.argv = ["harness", "--out-suffix", "_harness", "--allow-short-twin-lens",
             "--twin-lens", str(HERE.parent.parent / "artifacts"
                                / "jlens_lamini_gpt2_124m_5_probe.pt")]
 run_jspace.main()

@@ -7,10 +7,22 @@ final block 11 as the target).
 
 Instrument: anthropics/jacobian-lens, pinned commit
 581d398613e5602a5af361e1c34d3a92ea82ba8e, installed editable.
+
 Fitting corpus: WikiText-103 via jlens.examples.load_wikitext_prompts, the same
-corpus and loader the reference fit used, frozen to
-_STAGE2_JSPACE/artifacts/wikitext_prompts_160.json (gitignored; the derivation
-is deterministic, so the file is reproducible from the loader).
+corpus and loader the reference fit used. The exact 160 prompts this experiment
+fitted on are committed beside this script as wikitext_prompts_160.json, and
+their SHA-256 is checked on every run, because the loader reads a remote
+dataset that could change under a later rerun. The copy the run wrote to
+_STAGE2_JSPACE/artifacts/ is used only when the committed one is absent, and
+--refresh-prompts regenerates it from the loader and reports whether the result
+still matches the recorded digest.
+
+Resuming from the timing probe. The registered fit continues the checkpoint the
+five-prompt timing probe wrote, because the probe fits the first 5 prompts of
+the same list in the same way. That reuse is now automatic: --resume-from names
+a checkpoint to seed this fit from, defaulting to the probe's, and it is copied
+into place only when this fit has no checkpoint of its own and the corpus digest
+matches, so the prompts already done are a prefix of this fit's list.
 
 Weights: pinned to the revision, that is the Hugging Face repository commit,
 recorded in exp017_models.py, unless --model-path names a local directory.
@@ -32,13 +44,15 @@ the caller's next step.
 Usage:
     python3 fit_twin_lens.py --refresh-prompts
     python3 fit_twin_lens.py --n 5  --dim-batch 16 --tag probe
-    python3 fit_twin_lens.py --n 100 --dim-batch 16 --tag twin
+    python3 fit_twin_lens.py --n 40 --dim-batch 16 --tag twin
     python3 fit_twin_lens.py --selftest      # the deadline arithmetic, no model
 """
 import argparse
+import hashlib
 import json
 import logging
 import os
+import shutil
 import sys
 import time
 
@@ -58,7 +72,13 @@ import lens_from_checkpoint  # noqa: E402
 
 STAGE2 = os.path.abspath(os.path.join(HERE, "..", ".."))
 ARTIFACTS = os.path.join(STAGE2, "artifacts")
+
+# The fitting corpus. The committed copy is authoritative; the artifacts copy is
+# what --refresh-prompts writes and is not version controlled.
+PROMPTS_COMMITTED = os.path.join(HERE, "wikitext_prompts_160.json")
 PROMPTS_JSON = os.path.join(ARTIFACTS, "wikitext_prompts_160.json")
+PROMPTS_SHA = "c325a40c06f5dcfe14a3cea02afe1d64d42914146822c63e111dc665fdeba8d7"
+
 TWIN = exp017_models.name("twin")
 TWIN_REVISION = exp017_models.revision("twin")
 
@@ -66,6 +86,16 @@ TWIN_REVISION = exp017_models.revision("twin")
 # 2 hours 30 minutes.
 CAP_SECONDS = 9000.0
 BUDGET_JSON = os.path.join(HERE, "output", "fit_budget_decision.json")
+
+# The checkpoint the five-prompt timing probe writes, and which the registered
+# fit continues from.
+PROBE_CKPT = os.path.join(ARTIFACTS, "jlens_lamini_gpt2_124m_5_probe.ckpt.pt")
+
+# What a checkpoint of this experiment's fit must have been built with: a
+# 12-layer model gives source layers 0 through 10 with block 11 as the target,
+# and 16 is the instrument's default number of leading positions to skip.
+EXPECTED_CKPT_SHAPE = {"source_layers": list(range(11)), "target_layer": 11,
+                       "skip_first": 16}
 
 # Exit code for a fit the deadline stopped short of the requested prompt count.
 EXIT_BUDGET_STOP = 3
@@ -76,14 +106,104 @@ def lens_path(n, tag=""):
     return os.path.join(ARTIFACTS, f"jlens_lamini_gpt2_124m_{n}{suffix}.pt")
 
 
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def refresh_prompts():
     """Deterministically regenerate the frozen fitting-corpus list: the first
-    160 WikiText-103 train records with at least 600 characters, stream order."""
+    160 WikiText-103 train records with at least 600 characters, stream order.
+
+    The result goes to the artifacts copy, never over the committed one, and the
+    digest is reported so that a change in the remote dataset is visible rather
+    than silent.
+    """
     from jlens.examples import load_wikitext_prompts
     prompts = load_wikitext_prompts(160, min_chars=600)
     os.makedirs(ARTIFACTS, exist_ok=True)
     json.dump(prompts, open(PROMPTS_JSON, "w"), indent=1)
+    got = sha256_file(PROMPTS_JSON)
     print(f"Wrote {len(prompts)} prompts -> {PROMPTS_JSON}")
+    print(f"sha256 {got}")
+    if got == PROMPTS_SHA:
+        print("This matches the corpus EXP_017 fitted on.")
+    else:
+        print(f"WARNING: this differs from the corpus EXP_017 fitted on, "
+              f"{PROMPTS_SHA}. The remote dataset has changed, so a fit on this "
+              f"file is a fit on a different corpus. The committed copy at "
+              f"{PROMPTS_COMMITTED} is the one the record's numbers come from.")
+
+
+def load_prompts(path=None, require_digest=True):
+    """The fitting corpus, and the path it came from.
+
+    Prefers an explicitly named file, then the committed copy beside this
+    script, then the copy in the unversioned artifacts directory. The SHA-256 is
+    checked against the corpus this experiment fitted on, because the loader
+    reads a remote dataset that a later rerun could find changed.
+    """
+    for candidate in (path, PROMPTS_COMMITTED, PROMPTS_JSON):
+        if candidate and os.path.exists(candidate):
+            chosen = candidate
+            break
+    else:
+        raise SystemExit(
+            f"no fitting corpus found. Expected {PROMPTS_COMMITTED} or "
+            f"{PROMPTS_JSON}; run --refresh-prompts to rebuild the second.")
+    got = sha256_file(chosen)
+    if got != PROMPTS_SHA:
+        message = (f"fitting corpus {chosen} has sha256 {got}, not the "
+                   f"{PROMPTS_SHA} EXP_017 fitted on. A fit on this file is a "
+                   f"fit on a different corpus and its lens is not comparable "
+                   f"with the committed one.")
+        if require_digest:
+            raise SystemExit(message + " Pass --allow-different-prompts to "
+                                       "proceed anyway and record it as a "
+                                       "deviation.")
+        print("WARNING: " + message, flush=True)
+    return json.load(open(chosen)), chosen, got
+
+
+def seed_checkpoint(target, source, n_prompts):
+    """Copy a compatible earlier checkpoint into place so this fit continues it.
+
+    Used so that the registered 40-prompt fit continues the five-prompt timing
+    probe rather than repeating its work, which is what the committed run did.
+    Copies only when this fit has no checkpoint of its own, the source exists,
+    the source was built with this experiment's layer choices, and the source
+    has consumed no more prompts than this fit's list holds. The prompts already
+    done are then a prefix of this fit's list, because both take the first N
+    entries of the same corpus file in order and the corpus digest is checked
+    before this runs. Returns a sentence describing what happened.
+    """
+    if not source:
+        return "not seeding: --resume-from was empty"
+    if os.path.abspath(source) == os.path.abspath(target):
+        return "not seeding: the source and this fit's checkpoint are the same file"
+    if os.path.exists(target):
+        done, fitted = lens_from_checkpoint.progress(target)
+        return (f"not seeding: this fit already has a checkpoint at {target} "
+                f"with {fitted} prompts fitted")
+    if not os.path.exists(source):
+        return f"not seeding: no checkpoint at {source}"
+    state = torch.load(source, map_location="cpu", weights_only=True)
+    for key, expected in EXPECTED_CKPT_SHAPE.items():
+        got = state.get(key)
+        if isinstance(expected, list) and got is not None:
+            got = list(got)
+        if got != expected:
+            return (f"not seeding: {source} was built with {key}={got!r}, "
+                    f"not {expected!r}")
+    if int(state["next_idx"]) > n_prompts:
+        return (f"not seeding: {source} has consumed {state['next_idx']} prompts, "
+                f"more than the {n_prompts} this fit asks for")
+    shutil.copyfile(source, target)
+    return (f"seeded {target} from {source}: {state['n_done']} prompts already "
+            f"fitted, so this fit continues at prompt {int(state['next_idx']) + 1}")
 
 
 def load_model(model_path=TWIN, revision=TWIN_REVISION):
@@ -216,6 +336,58 @@ def selftest():
     check("the committed 40-prompt fit would not have been stopped",
           idx == 40 and not fired, f"reached prompt {idx} at {elapsed:.0f}s")
 
+    # The same replay from nothing, using every one of the 40 prompts' recorded
+    # times, including the five the probe paid for. This is why the fit has to
+    # continue the probe's checkpoint rather than start over.
+    recorded = [245, 209, 208, 207, 236, 309, 296, 305, 453, 438, 370, 256, 253,
+                253, 215, 203, 203, 200, 199, 199, 202, 207, 197, 202, 209, 210,
+                209, 210, 209, 189, 208, 211, 211, 202, 200, 198, 197, 222, 205,
+                202]
+    elapsed, idx = 0.0, 0
+    for t in recorded:
+        if plan_next_chunk(idx, 40, elapsed, 221.0, CAP_SECONDS, 1) == 0:
+            break
+        elapsed += t
+        idx += 1
+    check("a fit started from nothing would stop short of 40 prompts",
+          idx == 38, f"reached prompt {idx} of 40 at {elapsed:.0f}s")
+
+    # The committed fitting corpus is present and is the one the run used.
+    try:
+        corpus, path, sha = load_prompts()
+        check("the committed fitting corpus is present and its digest matches",
+              len(corpus) == 160 and sha == PROMPTS_SHA,
+              f"{len(corpus)} prompts from {os.path.basename(path)}")
+    except SystemExit as exc:
+        check("the committed fitting corpus is present and its digest matches",
+              False, str(exc))
+
+    # Seeding one fit's checkpoint from an earlier compatible one.
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        good = os.path.join(tmp, "probe.ckpt.pt")
+        torch.save({"jacobian_sum": {l: torch.zeros(2, 2) for l in range(11)},
+                    "n_done": 5, "next_idx": 5, **EXPECTED_CKPT_SHAPE}, good)
+        target = os.path.join(tmp, "twin.ckpt.pt")
+        msg = seed_checkpoint(target, good, 40)
+        check("a compatible probe checkpoint seeds the fit",
+              os.path.exists(target) and msg.startswith("seeded"), msg)
+        msg = seed_checkpoint(target, good, 40)
+        check("an existing checkpoint is never overwritten by seeding",
+              msg.startswith("not seeding: this fit already has"), msg)
+        wrong = os.path.join(tmp, "wrong.ckpt.pt")
+        torch.save({"jacobian_sum": {0: torch.zeros(2, 2)}, "n_done": 5,
+                    "next_idx": 5, "source_layers": [0], "target_layer": 1,
+                    "skip_first": 16}, wrong)
+        msg = seed_checkpoint(os.path.join(tmp, "t2.ckpt.pt"), wrong, 40)
+        check("a checkpoint from different layers is refused",
+              msg.startswith("not seeding: ") and "source_layers" in msg, msg)
+        msg = seed_checkpoint(os.path.join(tmp, "t3.ckpt.pt"), good, 3)
+        check("a checkpoint holding more prompts than the fit asks for is refused",
+              "more than the 3" in msg, msg)
+        msg = seed_checkpoint(os.path.join(tmp, "t4.ckpt.pt"), "", 40)
+        check("an empty --resume-from seeds nothing", "not seeding" in msg, msg)
+
     print(f"\nselftest: {'ALL PASS' if ok else 'FAILURE'}")
     return 0 if ok else 1
 
@@ -230,6 +402,19 @@ def main():
                     help="Hugging Face repository commit to load; ignored when "
                          "--model-path names a local directory")
     ap.add_argument("--refresh-prompts", action="store_true")
+    ap.add_argument("--prompts", default=None,
+                    help="fitting corpus to use; defaults to the committed "
+                         "wikitext_prompts_160.json beside this script")
+    ap.add_argument("--allow-different-prompts", action="store_true",
+                    help="proceed even when the corpus digest is not the one "
+                         "EXP_017 fitted on; the resulting lens is not "
+                         "comparable with the committed one")
+    ap.add_argument("--resume-from", default=PROBE_CKPT,
+                    help="checkpoint to continue, copied into place when this "
+                         "fit has none of its own; defaults to the five-prompt "
+                         "timing probe's checkpoint, which is what the "
+                         "committed 40-prompt fit continued. Pass an empty "
+                         "string to start from nothing.")
     ap.add_argument("--selftest", action="store_true",
                     help="check the deadline arithmetic and exit")
     ap.add_argument("--deadline-seconds", type=float, default=CAP_SECONDS,
@@ -261,11 +446,19 @@ def main():
 
     jlens.configure_logging(level=logging.INFO)
     os.makedirs(ARTIFACTS, exist_ok=True)
-    prompts = json.load(open(PROMPTS_JSON))[: args.n]
+    corpus, corpus_path, corpus_sha = load_prompts(
+        args.prompts, require_digest=not args.allow_different_prompts)
+    prompts = corpus[: args.n]
     if not prompts:
         raise SystemExit(f"--n {args.n} selects no prompts; nothing to fit.")
+    print(f"corpus: {corpus_path} sha256 {corpus_sha} "
+          f"({len(corpus)} prompts, taking the first {len(prompts)})", flush=True)
     ckpt = os.path.join(ARTIFACTS, f"jlens_lamini_gpt2_124m_{args.n}_{args.tag}.ckpt.pt")
     out = lens_path(args.n, args.tag)
+
+    # Continue the timing probe's work rather than repeating it, which is what
+    # the committed run did by hand.
+    print(seed_checkpoint(ckpt, args.resume_from, len(prompts)), flush=True)
 
     # The pre-run budget check, spec section 6.2: refuse to start a fit whose
     # first remaining prompt is already predicted to cross the cap.
@@ -295,6 +488,13 @@ def main():
         dim_batch=args.dim_batch, max_seq_len=128, ckpt=ckpt,
         deadline=args.deadline_seconds, seconds_per_prompt=per_prompt,
         chunk=args.chunk)
+
+    # A fit the deadline stopped short is never written under the name the
+    # registered probe looks for. It goes to its own file whose name carries the
+    # prompt count it actually reached, so that no later step can mistake it for
+    # the lens the budget rule asked for.
+    stopped = consumed < len(prompts)
+    out = lens_path(fitted, f"{args.tag}_partial") if stopped else out
     lens.save(out)
 
     rate = wall / max(fitted_here, 1)
@@ -302,12 +502,15 @@ def main():
           f"({fitted_here} prompts computed here at {rate:.1f}s each; the lens "
           f"averages {fitted} prompts in all) -> {out}", flush=True)
     print(lens, flush=True)
-    if consumed < len(prompts):
+    if stopped:
         print(f"BUDGET STOP: {consumed} of {len(prompts)} prompts were reached "
-              f"inside the {args.deadline_seconds:.0f}s cap. The lens above is "
-              f"fitted on {fitted} prompts. Spec section 6.2 fallback applies: "
-              f"score H18b with the base lens on both sides and record the "
-              f"shortfall as a deviation.", flush=True)
+              f"inside the {args.deadline_seconds:.0f}s cap. The partial lens "
+              f"is fitted on {fitted} prompts and was written to {out}, not to "
+              f"{lens_path(args.n, args.tag)}, so it cannot be scored as the "
+              f"registered twin lens. Spec section 6.2 fallback applies: run "
+              f"run_jspace.py without --twin-lens, which scores H18b with the "
+              f"base lens on both sides, and record the shortfall as a "
+              f"deviation.", flush=True)
         return EXIT_BUDGET_STOP
     return 0
 

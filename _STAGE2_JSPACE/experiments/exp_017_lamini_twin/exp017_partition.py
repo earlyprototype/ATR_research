@@ -139,11 +139,23 @@ def main():
         tl, tn = cluster(means["twin"], threshold=thr)
         bl, bn = cluster(means["base"], threshold=thr)
         row = {"threshold": thr, "twin_basins": tn, "base_basins": bn}
-        if tn not in (1, 25) or bn not in (1, 25):
+        # The same degeneracy rule the primary comparison uses, and for the
+        # same reason: a grouping with one group, or with one group per prompt,
+        # has no substructure to compare, so the adjusted Rand index is not
+        # meaningful. Both sides must be non-degenerate, not just one of them.
+        degenerate = [m for m, n in (("twin", tn), ("base", bn)) if n in (1, 25)]
+        if not degenerate:
             a, pp = compare(bl, tl)
             row.update(ari=a, perm_p=pp)
         else:
-            row.update(ari=None, perm_p=None, note="both groupings trivial")
+            a, pp = compare(bl, tl)
+            row.update(ari=None, perm_p=None,
+                       degenerate_sides=degenerate,
+                       note=("the degenerate-partition guard fired on "
+                             + " and ".join(degenerate)
+                             + "; a grouping with one group or with one group "
+                               "per prompt has no substructure to compare"),
+                       ari_if_forced=a, perm_p_if_forced=pp)
         sweep.append(row)
     rep["h18_threshold_sweep"] = sweep
 

@@ -14,9 +14,21 @@ overridden with --base-lens. That directory is not version controlled, so the
 file has to be placed there (or named on the command line) before this runs;
 its SHA-256 is checked against the digest the spec records either way.
 
+A twin lens offered here is checked against the prompt count the spec's budget
+rule chose, recorded in output/fit_budget_decision.json. A lens fitted on fewer
+prompts than that is not the registered instrument: it is either a fit the
+wall-clock cap stopped short or a deliberately smaller one, so by default it is
+refused and the run takes the spec's section 6.2 route, scoring both sides on
+the base lens and reporting H18b as untestable as registered. The lens-quality
+sensitivity check, which is not registered and carries no verdict weight, opts
+in with --allow-short-twin-lens and is stamped as a sensitivity reading in its
+own output.
+
 Usage:
-    python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_30_twin.pt
+    python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
     python3 run_jspace.py --base-lens /some/other/path/jlens_gpt2_small_neuronpedia.pt
+    python3 run_jspace.py --out-suffix _lens5 --allow-short-twin-lens \
+        --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_5_probe.pt
 """
 import argparse
 import hashlib
@@ -43,6 +55,7 @@ ARTIFACTS = HERE.parent.parent / "artifacts"
 # probe runs from any clone that has the lens in its own artifacts directory.
 BASE_LENS_DEFAULT = ARTIFACTS / "jlens_gpt2_small_neuronpedia.pt"
 BASE_LENS_SHA = "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762"
+BUDGET_JSON = OUT / "fit_budget_decision.json"
 MODELS = exp017_models.MODELS
 PROBE_LAYERS = list(range(11))      # 0..10, the lens's fitted source layers
 BAND = list(range(5, 11))           # 5..10, the workspace band, verdict-bearing
@@ -112,6 +125,30 @@ def per_layer_states(which, prompt_ids):
     return states, W_U, rescales
 
 
+def budget_n_prompts(path=BUDGET_JSON):
+    """The prompt count the spec's budget rule chose for the twin's lens fit,
+    read from the decision that rule already wrote. Returns None when that file
+    is absent, in which case the caller has nothing to validate against."""
+    if not path.exists():
+        return None
+    return int(json.load(open(path))["chosen_n_prompts"])
+
+
+def twin_lens_decision(n_fitted, required, allow_short):
+    """Whether a twin lens may carry the registered H18b comparison.
+
+    Returns "accepted" when the lens was fitted on at least the prompt count
+    the budget rule chose, "sensitivity" when it is shorter and the caller has
+    opted in, and "refused" when it is shorter and has not. A refused lens sends
+    the run down the spec's section 6.2 route, both sides on the base lens.
+    """
+    if n_fitted is None:
+        return "refused"
+    if required is None or n_fitted >= required:
+        return "accepted"
+    return "sensitivity" if allow_short else "refused"
+
+
 def load_lens(path):
     """Load a fitted lens; returns {layer: J as numpy [d, d]} and its metadata."""
     ck = torch.load(path, map_location="cpu", weights_only=True)
@@ -140,8 +177,57 @@ def permutation_p_two_sided(a, b, n_perm=N_PERM, seed=PERM_SEED):
     return hits / (n_perm + 1), obs
 
 
+def selftest():
+    """The twin-lens budget gate, checked without loading a model or a lens
+    matrix. The committed lens files are read only for their prompt counts."""
+    ok = True
+
+    def check(name, cond, detail=""):
+        nonlocal ok
+        ok = ok and bool(cond)
+        print(f"  [{'PASS' if cond else 'FAIL'}] {name}"
+              f"{(': ' + detail) if detail else ''}")
+
+    got = twin_lens_decision(40, 40, False)
+    check("a lens meeting the budget is accepted as registered",
+          got == "accepted", got)
+    got = twin_lens_decision(41, 40, False)
+    check("a lens exceeding the budget is accepted as registered",
+          got == "accepted", got)
+    got = twin_lens_decision(5, 40, False)
+    check("a short lens is refused, sending the run to the section 6.2 route",
+          got == "refused", got)
+    got = twin_lens_decision(39, 40, False)
+    check("a lens one prompt short is refused too", got == "refused", got)
+    got = twin_lens_decision(5, 40, True)
+    check("a short lens with the opt-in becomes a sensitivity reading",
+          got == "sensitivity", got)
+    got = twin_lens_decision(None, 40, True)
+    check("no lens is never accepted", got == "refused", got)
+
+    required = budget_n_prompts()
+    check("the budget rule's chosen prompt count is readable",
+          required == 40, f"{required} prompts from {BUDGET_JSON.name}")
+    for name, expect in (("jlens_lamini_gpt2_124m_40_twin.pt", "accepted"),
+                         ("jlens_lamini_gpt2_124m_5_probe.pt", "refused")):
+        path = ARTIFACTS / name
+        if not path.exists():
+            check(f"{name} is present to check", False, "file absent")
+            continue
+        ck = torch.load(path, map_location="cpu", weights_only=True)
+        n = int(ck["n_prompts"])
+        got = twin_lens_decision(n, required, False)
+        check(f"the committed {name} is {expect} without the opt-in",
+              got == expect, f"fitted on {n} prompts, decision {got}")
+
+    print(f"\nselftest: {'ALL PASS' if ok else 'FAILURE'}")
+    return 0 if ok else 1
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--selftest", action="store_true",
+                    help="check the twin-lens budget gate and exit")
     ap.add_argument("--out-suffix", default="",
                     help="suffix for the output filename; used only by the "
                          "non-registered harness check, which must not "
@@ -154,7 +240,18 @@ def main():
                          "GPT-2 Small; defaults to this checkout's own "
                          "_STAGE2_JSPACE/artifacts/ copy, and its SHA-256 is "
                          "checked against the digest the spec records")
+    ap.add_argument("--twin-lens-min-prompts", type=int, default=None,
+                    help="the prompt count a twin lens must have been fitted "
+                         "on to count as the registered instrument; defaults "
+                         "to the count the budget rule chose in "
+                         "output/fit_budget_decision.json")
+    ap.add_argument("--allow-short-twin-lens", action="store_true",
+                    help="score a twin lens fitted on fewer prompts than the "
+                         "budget chose; the result is stamped as a sensitivity "
+                         "reading and is not the registered comparison")
     args = ap.parse_args()
+    if args.selftest:
+        raise SystemExit(selftest())
     base_lens = Path(args.base_lens)
     if not base_lens.exists():
         raise SystemExit(
@@ -183,14 +280,58 @@ def main():
     print(f"base lens: {meta_base}", flush=True)
 
     lenses = {"base": J_base}
+    # A twin lens counts as the registered instrument only if it was fitted on
+    # at least the prompt count the spec's budget rule chose. Anything shorter
+    # is either a fit the wall-clock cap stopped or a deliberately smaller one,
+    # and scoring it as registered would report SUPPORTED or NOT SUPPORTED where
+    # spec section 6.2 requires the base lens on both sides.
+    required = (args.twin_lens_min_prompts if args.twin_lens_min_prompts is not None
+                else budget_n_prompts())
+    short_reading = False
+    rep["twin_lens_budget"] = {
+        "required_n_prompts": required,
+        "source_of_requirement": ("--twin-lens-min-prompts"
+                                  if args.twin_lens_min_prompts is not None
+                                  else "output/fit_budget_decision.json"),
+        "allow_short_twin_lens": bool(args.allow_short_twin_lens)}
     if args.twin_lens:
         p = Path(args.twin_lens)
         J_twin, meta_twin = load_lens(p)
-        rep["lenses"]["twin"] = {"path": str(p), "sha256": sha256_file(p), **meta_twin}
-        lenses["twin"] = J_twin
-        print(f"twin lens: {meta_twin}", flush=True)
+        n_fitted = int(meta_twin["n_prompts"])
+        rep["lenses"]["twin"] = {"path": str(p), "sha256": sha256_file(p),
+                                 **meta_twin}
+        rep["twin_lens_budget"].update(twin_lens_n_prompts=n_fitted)
+        decision = twin_lens_decision(n_fitted, required, args.allow_short_twin_lens)
+        rep["twin_lens_budget"]["meets_budget"] = decision == "accepted"
+        rep["twin_lens_budget"]["decision"] = decision
+        if decision == "refused":
+            rep["twin_lens_budget"]["action"] = (
+                "refused for registered scoring; spec section 6.2 route taken")
+            rep["lenses"]["twin_refused"] = rep["lenses"].pop("twin")
+            rep["lenses"]["twin"] = None
+            print(f"TWIN LENS REFUSED: fitted on {n_fitted} prompts, short of "
+                  f"the {required} the budget rule chose. Scoring both sides on "
+                  f"the base lens (spec section 6.2 fallback). Pass "
+                  f"--allow-short-twin-lens to score it as a sensitivity "
+                  f"reading instead.", flush=True)
+        else:
+            if decision == "sensitivity":
+                short_reading = True
+                rep["twin_lens_budget"]["action"] = (
+                    "scored as a sensitivity reading, not the registered "
+                    "comparison")
+                print(f"SHORT TWIN LENS ACCEPTED: fitted on {n_fitted} prompts "
+                      f"against the {required} the budget rule chose. This run "
+                      f"is a sensitivity reading and carries no verdict weight.",
+                      flush=True)
+            else:
+                rep["twin_lens_budget"]["action"] = "accepted as registered"
+            lenses["twin"] = J_twin
+            print(f"twin lens: {meta_twin}", flush=True)
     else:
         rep["lenses"]["twin"] = None
+        rep["twin_lens_budget"].update(twin_lens_n_prompts=None, meets_budget=None,
+                                       action="no twin lens offered")
         print("NO TWIN LENS: base lens only (spec section 6.2 fallback)", flush=True)
 
     # ---- per-layer states, one model at a time so only one is resident -------
@@ -285,9 +426,22 @@ def main():
     primary["band_layers_meeting_both"] = hits
     primary["n_band_layers_meeting_both"] = len(hits)
     if not have_twin_lens:
-        primary["h18b"] = "UNTESTABLE as registered (no twin lens; base lens both sides)"
+        why = rep["twin_lens_budget"].get("action", "no twin lens offered")
+        primary["h18b"] = (f"UNTESTABLE as registered (base lens both sides: "
+                           f"{why})")
+        primary["registered_scoring"] = False
+    elif short_reading:
+        verdict = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
+        primary["h18b"] = (
+            f"{verdict} as a sensitivity reading only, NOT the registered "
+            f"comparison: the twin lens was fitted on "
+            f"{rep['twin_lens_budget']['twin_lens_n_prompts']} prompts against "
+            f"the {rep['twin_lens_budget']['required_n_prompts']} the budget "
+            f"rule chose")
+        primary["registered_scoring"] = False
     else:
         primary["h18b"] = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
+        primary["registered_scoring"] = True
     rep["h18b"] = primary
 
     # ---- cross-checks --------------------------------------------------------

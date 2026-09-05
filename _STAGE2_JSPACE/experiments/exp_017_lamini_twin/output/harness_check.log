@@ -41,3 +41,28 @@ re-runs the loop.
     d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762, which
     matches the digest the spec records; lens metadata 277 prompts, d_model 768,
     source layers 0 to 10.
+
+2026-09-05, second round of pull request review fixes. Cheap checks only; no
+lens was refitted, no loop and no J-space probe was re-run.
+  python3 make_tables.py
+    -> regenerated output/tables.md, adding one section, "Real minus its own
+       rotation control", and changing no existing line. Its eleven rows match
+       the table in RESULTS_EXP017.md section 3.5 verbatim, sign for sign.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 14 checks, now covering the
+       committed corpus digest
+       c325a40c06f5dcfe14a3cea02afe1d64d42914146822c63e111dc665fdeba8d7, the
+       checkpoint reuse rules, and two replays of the recorded per-prompt
+       timings: continuing the probe's five prompts reaches all 40, while a fit
+       started from nothing stops after 38 of 40 at 8950 seconds.
+  python3 run_jspace.py --selftest -> ALL PASS, 9 checks of the twin lens budget
+       gate. The committed jlens_lamini_gpt2_124m_40_twin.pt, fitted on 40
+       prompts, is accepted as the registered instrument against the 40 the
+       budget rule chose; the five-prompt probe lens is refused without
+       --allow-short-twin-lens.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  fitting corpus checked against the run logs through the instrument's own
+    encoder (jlens.from_hf, which prepends a beginning-of-sequence token):
+    all 40 of 40 prompts reproduce the seq_len and n_valid recorded in
+    fit_probe_db16.log and fit_twin.log, including prompt 30 at seq_len 117 and
+    n_valid 100. The committed wikitext_prompts_160.json is therefore the
+    corpus the committed lens was fitted on.
