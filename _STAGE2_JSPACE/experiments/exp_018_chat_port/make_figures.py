@@ -59,35 +59,75 @@ def fig_collapse() -> None:
 
 
 def fig_loudness() -> None:
-    """The natural loudness of each layer's entry, and where position 0 sits."""
+    """The natural loudness of each layer's entry, and where position 0 sits.
+
+    The curve runs over the 28 block entries, `blocks.<l>.hook_resid_pre`. The
+    loop's own two points are the first of those, the entry to block 0, and the
+    exit of block 27, `blocks.27.hook_resid_post`, which is not a block entry
+    and so is drawn as a separate final point rather than left off the end. The
+    last entry point, the entry to block 27, still carries a large first-word
+    activation and is not where the loop reads.
+    """
     d = json.loads((OUT / "probe_natural_norms_bfloat16.json").read_text())
     bare = [v for v in d["prompts"].values() if v["arm"] == "bare"]
     n_layers = d["cfg"]["n_layers"]
     layers = list(range(n_layers))
-    pos0 = np.array([[p["natural"][f"blocks.{l}.hook_resid_pre"]["pos0"]
-                      for l in layers] for p in bare])
-    ex0 = np.array([[p["natural"][f"blocks.{l}.hook_resid_pre"]["excl0"]
-                     for l in layers] for p in bare])
+    keys = [f"blocks.{l}.hook_resid_pre" for l in layers]
+    out_key = f"blocks.{n_layers - 1}.hook_resid_post"
+    has_out = all(out_key in p["natural"] for p in bare)
+    if has_out:
+        keys.append(out_key)
+    pos0 = np.array([[p["natural"][k]["pos0"] for k in keys] for p in bare])
+    ex0 = np.array([[p["natural"][k]["excl0"] for k in keys] for p in bare])
     T = np.array([p["n_tokens"] for p in bare])[:, None]
     per_pos = ex0 / np.sqrt(T - 1)          # typical size of one other position
+    x_out = n_layers + 1                    # set apart from the last block entry
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
-    axes[0].semilogy(layers, pos0.mean(0), "o-", ms=3, label="word position 0")
-    axes[0].semilogy(layers, per_pos.mean(0), "s-", ms=3,
-                     label="a typical other word position")
-    axes[0].set_xlabel("layer the state is entering")
+    axes[0].semilogy(layers, pos0.mean(0)[:n_layers], "o-", ms=3,
+                     color="tab:blue", label="word position 0")
+    axes[0].semilogy(layers, per_pos.mean(0)[:n_layers], "s-", ms=3,
+                     color="tab:orange", label="a typical other word position")
+    ratio = pos0 / per_pos
+    axes[1].semilogy(layers, ratio.mean(0)[:n_layers], "o-", ms=3, color="crimson")
+    axes[1].axhline(1.0, color="k", lw=1, ls=":")
+    if has_out:
+        axes[0].semilogy([x_out], [pos0.mean(0)[-1]], "*", ms=11,
+                         color="tab:blue", mec="k", mew=0.6, zorder=5)
+        axes[0].semilogy([x_out], [per_pos.mean(0)[-1]], "*", ms=11,
+                         color="tab:orange", mec="k", mew=0.6, zorder=5)
+        axes[0].plot([], [], "*", color="0.45", ms=11, mec="k", mew=0.6,
+                     label="the same two at the exit of block 27, the loop's "
+                           "extraction point")
+        axes[1].semilogy([x_out], [ratio.mean(0)[-1]], "*", ms=13,
+                         color="crimson", mec="k", mew=0.6, zorder=5)
+    for ax in axes:
+        # The loop's own two points: the entry to block 0 and the exit of
+        # block 27. Everything between them is a block entry the loop never
+        # touches.
+        ax.axvline(0, color="0.5", lw=1, ls="--")
+        if has_out:
+            ax.axvline(x_out, color="0.5", lw=1, ls="--")
+            ax.set_xticks(list(range(0, n_layers, 5)) + [x_out])
+            ax.set_xticklabels([str(v) for v in range(0, n_layers, 5)] + ["out"])
+            ax.set_xlim(-1.4, x_out + 1.4)
+        ax.set_xlabel("entry to this block, and 'out' for the exit of block 27")
     axes[0].set_ylabel("size of the state (log scale)")
     axes[0].set_title("Natural loudness, mean over the 25 bare prompts", fontsize=10)
     axes[0].legend(fontsize=8); axes[0].grid(alpha=0.25, which="both")
-    ratio = pos0 / per_pos
-    axes[1].semilogy(layers, ratio.mean(0), "o-", ms=3, color="crimson")
-    axes[1].axhline(1.0, color="k", lw=1, ls=":")
-    axes[1].set_xlabel("layer the state is entering")
     axes[1].set_ylabel("position 0 divided by a typical other position")
     axes[1].set_title("How much larger position 0 is", fontsize=10)
     axes[1].grid(alpha=0.25, which="both")
-    fig.suptitle("EXP_018: the first word piece carries a huge activation from "
-                 "layer 2 to layer 27, but not at the loop's two points",
-                 fontsize=10.5)
+    if has_out:
+        axes[1].annotate("the loop's two points, marked by the dashed lines:\n"
+                         f"{ratio.mean(0)[0]:.2f} at the entry to block 0 and "
+                         f"{ratio.mean(0)[-1]:.2f} at the exit of block 27,\n"
+                         f"against {ratio.mean(0)[n_layers - 1]:.1f} at the "
+                         "entry to block 27",
+                         xy=(0.97, 0.97), xycoords="axes fraction", fontsize=7.5,
+                         color="0.25", va="top", ha="right")
+    fig.suptitle("EXP_018: the first word piece carries a huge activation at "
+                 "every block entry from layer 3 on, but not at either of the "
+                 "loop's own two points", fontsize=10.5)
     fig.tight_layout()
     fig.savefig(OUT / "natural_loudness_profile.png", dpi=140)
     plt.close(fig)

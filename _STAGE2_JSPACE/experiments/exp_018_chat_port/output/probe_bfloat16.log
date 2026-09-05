@@ -45,3 +45,13 @@ timing chat: 23 tokens, 3.712 s/pass
   after 12 iters: collapse_all=0.6012 collapse_excl0=0.6161 cos_lag2=1.000000 top='の'
 
 wrote /home/user/wt/exp018/_STAGE2_JSPACE/experiments/exp_018_chat_port/output/probe_natural_norms.json  peak=3.89 GB
+
+2026-09-05, appended after the run, per rule R5: output/natural_loudness_profile.png
+was regenerated from this probe's committed JSON file, output/probe_natural_norms_bfloat16.json,
+with `python3 -c "import make_figures as m; m.fig_loudness()"`. The change adds the
+loop's extraction point, blocks.27.hook_resid_post, as a separate final point beside
+the 28 block entries the figure already plotted, because the entry to block 27 is not
+where the loop reads. No model was loaded and no measurement was repeated. Mean ratio
+of word position 0 to a typical other position over the 25 bare prompts, read from the
+same file: 0.94 at the entry to block 0, 5.18 at the entry to block 27, 0.84 at the
+exit of block 27.

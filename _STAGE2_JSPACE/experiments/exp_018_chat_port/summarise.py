@@ -8,10 +8,16 @@ the model.
 from __future__ import annotations
 
 import json
+import math
 import statistics as st
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent / "output"
+
+# The model's vocabulary: how many word pieces the readout chooses between,
+# recorded by the probe stage as `cfg.d_vocab`. It is the baseline every
+# readout number below is quoted against, so it is named once here.
+VOCAB = 151936
 
 
 def esc(s: str) -> str:
@@ -76,9 +82,16 @@ def arm_table(arm: str) -> None:
           f"{min(coll0):.3f} to {max(coll0):.3f}. "
           f"Prompts at or above 0.99 on the all-positions metric: "
           f"{sum(c >= 0.99 for c in coll)} of {len(recs)}. "
-          f"Top-word-piece probability: median {st.median(p1):.3f} "
-          f"(a flat distribution over 151,936 word pieces would give 0.0000066). "
-          f"Spread: median {st.median(ent):.2f} nats out of a possible 11.93. "
+          f"Top-word-piece probability: median {st.median(p1):.3f}, which is "
+          f"about {st.median(p1) * VOCAB:,.0f} times the {1 / VOCAB:.7f} a "
+          f"flat distribution over the model's {VOCAB:,} word pieces would "
+          f"give. "
+          f"Spread: median {st.median(ent):.2f} nats against the "
+          f"{math.log(VOCAB):.2f} nats of that flat distribution, which is "
+          f"the spread of a flat choice among about "
+          f"{math.exp(st.median(ent)):,.0f} word pieces, "
+          f"{100 * math.exp(st.median(ent)) / VOCAB:.2f} percent of the "
+          f"vocabulary. "
           f"Distinct top word pieces: {len(uniq)} "
           f"({', '.join(f'{esc(k)} x{v}' for k, v in sorted(uniq.items(), key=lambda kv: -kv[1]))}). "
           f"The registered loudness convention, which measures both the "
@@ -134,7 +147,7 @@ def jspace_table() -> None:
                 continue
             print(f"\nApproximation check at layer {layer}, {label[cond]} "
                   f"states: the largest difference between the share computed "
-                  f"over the whole 151,936-word-piece vocabulary and the share "
+                  f"over the whole {VOCAB:,}-word-piece vocabulary and the share "
                   f"computed over the 4,096 best-correlating directions is "
                   f"{ex['max_abs_diff']:.6f} on a scale of 0 to 1.")
 

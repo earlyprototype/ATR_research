@@ -13,6 +13,9 @@ Stages, in the order they are meant to run:
            tensor at the layer-0 entry and read every scored layer, and run the
            same prompts clean for the comparison arm. The precision is the one
            the loop recorded in its results file unless `--dtype` overrides it.
+           The load is always pinned to one version of the weights, taken from
+           `--revision` or from the revision the loop recorded; when neither
+           exists the stage stops rather than following the cache pointer.
   lagscan  Supplementary observation, no hypothesis attached: rerun a few
            prompts keeping every mean position vector, then report the average
            cosine between repetitions k apart for k = 1 to 8. Because it reruns
@@ -109,7 +112,7 @@ def stage_probe(args) -> None:
     dtype = dtype_name(args)
     print(f"free={free_gb():.1f} GB before load", flush=True)
     t0 = time.time()
-    model = load_model(dtype=DTYPES[dtype])
+    model = load_model(dtype=DTYPES[dtype], revision=args.revision)
     load_s = time.time() - t0
     print(f"loaded in {load_s:.1f}s  rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
           f"free={free_gb():.1f} GB", flush=True)
@@ -119,7 +122,7 @@ def stage_probe(args) -> None:
     records = load_prompts()
     out = {
         "model": "Qwen/Qwen3-1.7B",
-        "model_revision": resolve_revision(),
+        "model_revision": resolve_revision(args.revision),
         "dtype": dtype,
         "versions": versions(),
         "cfg": {k: getattr(model.cfg, k, None) for k in
@@ -267,8 +270,8 @@ def stage_loop(args) -> None:
     """The registered run for one arm."""
     t_start = time.time()
     dtype = dtype_name(args)
-    model = load_model(dtype=DTYPES[dtype])
-    revision = resolve_revision()
+    model = load_model(dtype=DTYPES[dtype], revision=args.revision)
+    revision = resolve_revision(args.revision)
     print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
           f"dtype={dtype} revision={revision}", flush=True)
     cfg = LoopConfig(max_iter=args.max_iter, check_start=args.check_start,
@@ -376,38 +379,53 @@ def dtype_from_results(args, res: dict, stage: str) -> str:
     return args.dtype
 
 
-def revision_from_results(res: dict, stage: str) -> tuple[str | None, str]:
+def revision_from_results(res: dict, stage: str,
+                          explicit: str | None = None) -> tuple[str, str]:
     """The revision to pin a follow-on stage to, and the revision to record.
 
-    Returns the revision the loop recorded, so the load can be pinned to the
-    exact version of the weights that produced the saved tensors, together
-    with the revision this stage will record. When the loop recorded none, as
-    the runs made before the runner recorded it did, nothing can be pinned and
-    the cache pointer an unpinned load follows is resolved and recorded
-    instead, with the fact printed rather than passed over. A pointer that has
-    moved since the loop ran is named here rather than silently followed.
+    A revision is the 40-character commit identifier naming one exact version
+    of the model's files on the Hugging Face hub. A stage that runs saved
+    tensors back through the model has to run them through the weights that
+    produced them, so it always pins its load: to `--revision` when one is
+    given, otherwise to the revision the loop recorded. When neither is
+    available, as in the runs made before the runner recorded the field, the
+    stage stops here instead of loading whatever the cache pointer `refs/main`
+    names today, because that pointer can name weights the loop never used and
+    the metadata written afterwards would then label mismatched states with a
+    revision they did not come from. A pointer that disagrees with the pin is
+    named rather than followed.
     """
     recorded = res.get("model_revision")
+    arm = res.get("arm", "?")
+    if explicit and recorded and explicit != recorded:
+        raise SystemExit(
+            f"--revision {explicit} contradicts the {recorded} recorded in "
+            f"results_{arm}.json; the saved tensors came out of {recorded}, "
+            f"so running them through {explicit} would put two versions of "
+            f"the weights in one measurement. Drop the flag to use the "
+            f"recorded revision.")
+    pin = explicit or recorded
+    if not pin:
+        raise SystemExit(
+            f"results_{arm}.json records no weights revision, so the {stage} "
+            f"stage cannot tell which version of the weights produced the "
+            f"saved tensors. Pass --revision <40-character identifier> naming "
+            f"the weights the loop ran; the results record states it for the "
+            f"committed runs, which were made before the runner wrote this "
+            f"field. Following the cache pointer instead would risk running "
+            f"the saved tensors through weights the loop never used and then "
+            f"recording the new revision as if it had.")
     try:
         pointer = resolve_revision()
     except FileNotFoundError as exc:
         pointer = None
         print(f"note: {exc}", flush=True)
-    if recorded:
-        if pointer and pointer != recorded:
-            print(f"note: the cache pointer names revision {pointer}, the loop "
-                  f"recorded {recorded}; the {stage} stage loads the loop's "
-                  f"revision so the weights match the saved tensors", flush=True)
-        return recorded, recorded
-    if pointer is None:
-        raise SystemExit(
-            f"the loop recorded no weights revision and none can be resolved "
-            f"from the local cache, so the {stage} stage cannot say which "
-            f"weights it is using")
-    print(f"note: the loop recorded no weights revision, so the {stage} stage "
-          f"cannot pin the load; it follows the cache pointer, {pointer}, "
-          f"which is what the loop itself followed", flush=True)
-    return None, pointer
+    if pointer and pointer != pin:
+        print(f"note: the cache pointer names revision {pointer}, the {stage} "
+              f"stage is pinned to {pin} "
+              f"({'the --revision option' if explicit else 'the loop record'}), "
+              f"so the weights match the saved tensors", flush=True)
+    return pin, pin
 
 
 def stage_states(args) -> None:
@@ -417,9 +435,9 @@ def stage_states(args) -> None:
     # says which precision to load.
     res = json.loads((OUT / f"results_{args.arm}.json").read_text())
     dtype = dtype_from_results(args, res, "states")
-    pin, revision = revision_from_results(res, "states")
+    pin, revision = revision_from_results(res, "states", args.revision)
     print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})  "
-          f"revision={revision}{' (pinned)' if pin else ''}", flush=True)
+          f"revision={revision} (pinned)", flush=True)
     model = load_model(dtype=DTYPES[dtype], revision=pin)
     inject_name, _ = hook_names(model)
     tensors = np.load(OUT / f"terminal_states_{args.arm}.npz")
@@ -490,10 +508,10 @@ def stage_lagscan(args) -> None:
     if res_path.exists():
         res = json.loads(res_path.read_text())
         dtype = dtype_from_results(args, res, "lagscan")
-        pin, revision = revision_from_results(res, "lagscan")
+        pin, revision = revision_from_results(res, "lagscan", args.revision)
     else:
-        dtype, pin = dtype_name(args), None
-        revision = resolve_revision()
+        dtype, pin = dtype_name(args), args.revision
+        revision = resolve_revision(args.revision)
         print(f"note: no results_{args.arm}.json to check against, so this lag "
               f"scan runs at {dtype} on revision {revision} without matching "
               f"any recorded loop", flush=True)
@@ -550,6 +568,12 @@ def main() -> None:
                     help="model precision; defaults to float32 for probe and "
                          "loop, and to the precision recorded in the results "
                          "file for states and lagscan")
+    ap.add_argument("--revision", default=None,
+                    help="pin the load to one exact version of the model's "
+                         "files on the Hugging Face hub, given as its "
+                         "40-character identifier; required by --stage states "
+                         "and --stage lagscan when the results file records "
+                         "none, as the committed runs do")
     ap.add_argument("--allow-dtype-mismatch", action="store_true",
                     help="let --stage states or --stage lagscan run at a "
                          "precision the loop did not record")

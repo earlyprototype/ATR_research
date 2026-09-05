@@ -31,14 +31,22 @@ specification pre-registered as the thing to score ("at lock-in or at the cap").
 The results files use `settled` as a field name for that state; read it as
 "terminal" throughout. Nothing in this record claims a prompt converged.
 
-**Result 1, the word positions do not merge.** On GPT-2 Small every word
-position of the state converges to one shared direction by about repetition 10,
-which the project records as a mean pairwise cosine of 1.0000 on a scale where
-0 means unrelated directions and 1 means identical ones. On Qwen3-1.7B that
-number ends at a median of **0.726** across the 25 prompts, ranging from 0.483
-to 0.929, and **not one of the 25 prompts** reaches even 0.99. It does not creep
-upward with repetition either: it oscillates around its own level for all 150
-repetitions. **H19 is SUPPORTED on its registered wording.**
+**Result 1, the word positions do not end up merged, and never merge for
+long.** On GPT-2 Small every word position of the state converges to one shared
+direction by about repetition 10, which the project records as a mean pairwise
+cosine of 1.0000 on a scale where 0 means unrelated directions and 1 means
+identical ones. On Qwen3-1.7B that number ends at a median of **0.726** across
+the 25 prompts, ranging from 0.483 to 0.929, and **not one of the 25 prompts
+ends at or above 0.99**, which is the level the hypothesis is scored against.
+Two prompts do cross it in passing and fall straight back: `F01_anger` is above
+0.99 at repetitions 24, 27, 28, 32 and 33, reaching 0.997077, and is back at
+0.729 by repetition 36 and 0.684 at the cap; `B03_moon` is above it at
+repetitions 74 and 75, reaching 0.996001, and is back at 0.652 by repetition 76
+and 0.846 at the cap. Merging therefore happens in flashes on 2 of the 25
+prompts and is never held. The measure does not creep upward with repetition
+either: it oscillates around its own level for all 150 repetitions. **H19 is
+SUPPORTED on its registered wording**, which scores the state the prompt ends
+on.
 
 **Result 2, the loop never stops moving.** The convergence test asks whether the
 average direction of the state now agrees with its direction two repetitions ago
@@ -92,17 +100,22 @@ natural than the case the project already treats as the apparatus question.
 
 **The founding picture is now conditional on the architecture, not just on the
 loudness.** The project's central observation has been that the loop drives a
-language model to a state in which every word position holds the same vector and
-the readout says one word. That has been shown before to be conditional on the
-loudness convention: at natural loudness on GPT-2 Medium's full stack, 0 of 25
-prompts settled and the letter "D" appeared nowhere. This experiment adds a
+language model to a state in which every word position holds the same vector
+and the readout says one word. That has been shown before to be conditional on
+the loudness convention: at natural loudness on GPT-2 Medium's full stack, 0 of
+25 prompts settled and the letter "D" appeared nowhere. This experiment adds a
 second condition. On a model that re-applies word order inside every layer, the
-positions do not merge at all, at any point in 150 repetitions, at natural
-loudness. Whether the position scheme is the cause is **inferred, not
-established**: this port changed the position scheme, the normalisation, the
-feed-forward shape, the training budget and the vocabulary at once. The single
-experiment that would separate them is named under "What remains" and costs one
-arm on a model the project has already run.
+positions never merge in a way that holds at natural loudness: 2 of the 25
+prompts touch the 0.99 mark on a handful of repetitions out of 150, drop back
+within one or two repetitions each time, and end the run at 0.684 and 0.846,
+both below it. **Correction, made after a review of this record:** this
+sentence first said the positions did not merge at all, at any point, which the
+committed traces contradict, and that wording is withdrawn. Whether the
+position scheme is the cause is **inferred, not established**: this port
+changed the position scheme, the normalisation, the feed-forward shape, the
+training budget and the vocabulary at once. The single experiment that would
+separate them is named under "What remains" and costs one arm on a model the
+project has already run.
 
 **Not settling is not the same as chaos, and the difference is measurable.** A
 supplementary observation, drawing no verdict and registered against no
@@ -132,14 +145,25 @@ the last position at the cap decodes, across the 25 prompts, to just **9
 distinct word pieces**, of which the commonest are the Chinese character for
 "car" (7 prompts) and a newline (6 prompts), with the Japanese particles "の"
 and "は", the Chinese character for "I", and two undecodable byte fragments
-making up the rest. The distribution behind those choices is flat: the top word
-piece carries a median probability of 0.109, and the spread of the whole
-distribution has a median of 6.89 nats against the 11.93 nats a perfectly flat
-distribution over 151,936 word pieces would give. So the loop is not finding a
-word the model prefers; it is landing in a region where the model has almost no
-preference at all, and the word piece reported is the tallest blade of grass in
-a flat field. **This is an observation, not a hypothesis test**: nothing was
-pre-registered about which word pieces would appear.
+making up the rest. The distribution behind those choices is diffuse, but it is
+not flat: the top word piece carries a median probability of 0.109, which is
+about 16,553 times the 0.0000066 a flat distribution over the model's 151,936
+word pieces would give it, and the spread of the whole distribution has a median
+of 6.89 nats against the 11.93 nats of that flat distribution, which is the
+spread of a flat choice among about 980 word pieces, 0.64 percent of the
+vocabulary. So the model does have a preference at the state the loop ends on,
+spread across roughly a thousand word pieces rather than concentrated on one.
+What it does not do is what the loop does on GPT-2, where the settled state
+decodes to one English word, and on GPT-2 Medium's full stack to a single
+letter; whether those GPT-2 terminals were also sharper in probability, and not
+only single-valued in what they decode to, is not measured here. **Correction,
+made after a review of this record:** this paragraph first called the
+distribution flat, said the model had almost no preference at all, and called
+the reported word piece the tallest blade of grass in a flat field. All three
+are withdrawn: a top word piece at about 16,500 times the flat level is a
+preference, and what the numbers support is that the preference is spread wide,
+not that it is absent. **This is an observation, not a hypothesis test**:
+nothing was pre-registered about which word pieces would appear.
 
 **The pilot arm says the chat wrapper changes the numbers but not the story.**
 Wrapping the same prompts as a user turn, with the model's thinking mode
@@ -437,6 +461,95 @@ either.
    form exits 0 and writes the completion line, the new form exits 1 and writes
    nothing.
 
+**Six findings from a third review, four of them in what this record says, one
+in the runner and one in a figure, and what each one changes.** A third review,
+this time of the record and the figures as well as the code, found six more
+faults. All six are real. Four of them change sentences this record put in front
+of the operator, and each of those sentences now carries its correction with the
+old wording or number withdrawn by name; no hypothesis verdict moves. Nothing
+that needs the model weights was re-run: the loudness figure was rebuilt from
+the committed probe file and the per-prompt tables from the committed results
+files, both without loading the model.
+
+1. **The documented way to regenerate the per-layer states loaded unpinned
+   weights, and the stage now refuses to.** That stage takes the terminal tensor
+   each prompt ended on, feeds it back into the model and reads every scored
+   layer, so it has to use the weights that produced those tensors. The second
+   review's item 2 above pinned its load to the revision the loop recorded,
+   meaning the 40-character identifier of one exact version of the model's files
+   on the Hugging Face hub. **Established from the committed artifacts:** neither
+   `output/results_bare.json` nor `output/results_chat.json` carries a
+   `model_revision` field at all, because both were written before the runner
+   recorded it, so that fix always fell through to its fallback, which followed
+   the machine's cache pointer `refs/main` and then wrote whatever version that
+   named into the metadata beside the regenerated states. On a machine whose
+   pointer had moved, the documented command would have run this run's terminal
+   tensors through different weights and labelled the result with the new
+   version. The stage now stops with a message naming the missing field, takes a
+   `--revision` option and pins its load to it, and the regeneration command in
+   "Artifacts" below passes this run's revision,
+   `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`. The loop, probe and lag-scan
+   stages take the same option, so a future run can pin from the start. **Nothing
+   was written into the committed results files**, because this run's revision is
+   established from this machine's model cache holding exactly one version of the
+   weights, and not from anything the run itself recorded; putting it in the
+   artifacts now would present an inference as a measurement. Those two files
+   predate the field, and the record says so where it gives the command.
+2. **Layer 18's two J-space medians were the across-band medians, and are
+   corrected.** The H19b section said that layer 18 was typical at ordinary
+   0.031 and terminal 0.0016, a factor of about 20. Those are the medians taken
+   across the whole band, which the sentence before it had just given.
+   **Established from `output/jspace_shares_bare.json` and the table below,
+   which agree:** layer 18's own medians are 0.03894 for the ordinary states and
+   0.00167 for the terminal ones, a factor of about 23, on a share that runs
+   from 0 to 1. The old numbers are withdrawn and the ratio is recomputed.
+3. **The lens was fitted on 466 pieces of text, not a thousand.** The H19b
+   section described the lens as averaged over a thousand ordinary pieces of
+   text. The fit was budgeted for 1,000 prompts and stopped itself at 466 when
+   its convergence criterion was met, which this record already states two pages
+   earlier and which the committed analysis carries as `lens_n_prompts` = 466.
+   The sentence now says 466 WikiText-103 prompts of 128 word pieces each, and
+   "a thousand" is withdrawn. Nothing else in this record or in
+   `REGISTER_VERDICTS.md` makes the same overstatement: the other mentions of
+   1,000 are the GPT-2 tiers' repetition cap, which is a different number.
+4. **The terminal distribution was called flat, and that description is
+   withdrawn.** The record said the readout distribution was flat and that the
+   model had "almost no preference at all". **Established from the committed
+   results files:** the median top-word-piece probability is 0.109, about 16,553
+   times the 0.0000066 a flat distribution over the model's 151,936 word pieces
+   would give, and the median spread is 6.89 nats against that flat
+   distribution's 11.93 nats, which is the spread of a flat choice among about
+   980 word pieces, 0.64 percent of the vocabulary. A distribution concentrated
+   on a thousandth of the vocabulary is diffuse next to a settled GPT-2 state
+   that decodes to one word, but it is not flat. The paragraph now says diffuse
+   and gives both baselines, the per-prompt tables carry the same two baselines,
+   and `summarise.py` computes them, so the tables regenerate as printed.
+5. **"The positions never merged at any point" was too strong, and is
+   withdrawn.** The record said the positions did not merge at all, at any point
+   in 150 repetitions. **Established from the committed traces in
+   `output/results_bare.json`:** two prompts cross the registered 0.99 merge
+   threshold in passing, `F01_anger` at repetitions 24, 27, 28, 32 and 33 with a
+   highest value of 0.997077, and `B03_moon` at repetitions 74 and 75 with a
+   highest value of 0.996001. Both fall back within a repetition or two, to
+   0.729 and 0.652 respectively, and end the run at 0.684 and 0.846. The
+   pre-registered verdict is unaffected, because H19 is scored on the state each
+   prompt ends on and 0 of 25 end at or above 0.99. The record now says that
+   merging is never sustained rather than that it never happens, and the figure
+   caption says which two lines touch the line and where.
+6. **The loudness figure stopped one hook short of the loop's extraction point,
+   and now carries it.** `make_figures.py` plotted the entry to each of the 28
+   blocks, `blocks.<l>.hook_resid_pre`, so its last point was the entry to block
+   27 and not the loop's extraction point, the exit of block 27,
+   `blocks.27.hook_resid_post`. The caption nonetheless said the loop reads and
+   writes at the two ends of the curve. **Established from the committed probe
+   file, which holds both:** the mean ratio of the first word position to a
+   typical other position is 5.18 at the plotted entry to block 27 and 0.84 at
+   the omitted exit, on the 25 bare prompts. The figure now draws the exit as a
+   separate final point, marks both of the loop's own points, and names all
+   three numbers; the caption and this record's description of the curve are
+   rewritten to match. The rebuild reads only the committed probe file and runs
+   no model.
+
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
 state once, the search for the best 25 keeps only the 4,096 best-correlating
@@ -487,19 +600,31 @@ Second, where the first word piece is huge. The note predicted, from the
 literature on massive activations, that position 0 would carry activations
 hundreds to thousands of times larger than the rest and would therefore
 dominate any whole-tensor rescale. Measured here across all 28 layers, that is
-true in the middle of the network and false at both ends. At the entry to
-layer 0, the injection point, position 0 is 0.9 times the size of a typical
-other position, which is entirely ordinary. One layer later it is 1.3 times.
-Then it explodes: 6.5 times at the entry to layer 2, **474 times** at the entry
-to layer 3, and it stays enormous for most of the stack, 334 times at layer 5,
-122 times at layer 11, 77 times at layer 15, 23 times at layer 20, and 5.2
-times at the entry to the last layer. At that last layer's output, the
-extraction point, it is back to 0.96 times a typical position: the final layer
-undoes it. The loop touches the state only at those two ends, so excluding
-position 0 from the rescale changed the loudness by about 5 percent rather than
-by the two orders of magnitude the note anticipated: the whole-tensor size at
-the injection point averages 1.051 times the size over positions 1 and later.
-The exclusion was therefore a correct safety measure that turned out not to be
+true in the middle of the network and false at both ends. At the entry to layer
+0, the injection point, position 0 is 0.9 times the size of a typical other
+position, which is entirely ordinary. One layer later it is 1.3 times. Then it
+explodes: 6.5 times at the entry to layer 2, **474 times** at the entry to
+layer 3, and it stays enormous for most of the stack, 334 times at layer 5, 122
+times at layer 11, 77 times at layer 15, 23 times at layer 20, and 5.2 times at
+the entry to the last layer. At that last layer's output, the extraction point,
+it is back to 0.84 times a typical position: the final layer undoes it.
+**Correction, made after a review of the figures:** this record first gave that
+last figure as 0.96 times. That is the value in the float32 feasibility probe,
+while every other number in this paragraph, and the figure below, comes from
+the bfloat16 probe, which is the precision the registered loop ran in. The
+like-for-like figure is therefore 0.84 and 0.96 is withdrawn. The two probes
+agree to within 0.9 percent of each other at every one of the 28 block entries
+and differ by 12 percent only here, at the exit of the last block. **Inferred,
+not established:** the exit of block 27 is where the last block removes most of
+the first position's activation, from about 14,800 units at its entry to about
+2,500 in bfloat16 and about 2,850 in float32, and a cancellation of that size
+is where a 16-bit number format's coarser rounding would show first.
+
+The loop touches the state only at those two ends, so excluding position 0 from
+the rescale changed the loudness by about 5 percent rather than by the two
+orders of magnitude the note anticipated: the whole-tensor size at the
+injection point averages 1.051 times the size over positions 1 and later. The
+exclusion was therefore a correct safety measure that turned out not to be
 load-bearing here. It would have been load-bearing for any window that read or
 wrote between layers 3 and 20, which is where this project's flagship GPT-2
 windows sit, so it should stay in the convention for future ports.
@@ -621,15 +746,17 @@ session and would either strengthen or retire every number in the H19b section.
 ## H19b in detail: how much of a state the model's own lens can express
 
 **What is being measured, in ordinary words.** A Jacobian lens gives, for each
-layer and each of the model's 151,936 word pieces, one direction in that layer's
-internal state: the direction along which a small push most raises the model's
-disposition to say that word piece, now or later, averaged over a thousand
-ordinary pieces of text. The "verbalizable workspace" paper calls the set of
-states reachable as a positively weighted mix of at most 25 of those directions
-the J-space, and reports that ordinary activity keeps only a small share of
-itself inside it, a median of 6 to 7 percent. The J-space share of a state is
-how much of its squared length the nearest such mix accounts for: 0 means none
-of it can be expressed that way and 1 means all of it can.
+layer and each of the model's 151,936 word pieces, one direction in that
+layer's internal state: the direction along which a small push most raises the
+model's disposition to say that word piece, now or later, averaged over
+ordinary text: the 466 WikiText-103 prompts of English Wikipedia, 128 word
+pieces each, that this lens was fitted on before its own convergence criterion
+stopped the fit. The "verbalizable workspace" paper calls the set of states
+reachable as a positively weighted mix of at most 25 of those directions the
+J-space, and reports that ordinary activity keeps only a small share of itself
+inside it, a median of 6 to 7 percent. The J-space share of a state is how much
+of its squared length the nearest such mix accounts for: 0 means none of it can
+be expressed that way and 1 means all of it can.
 
 **The measurement.** At each scored layer, three word positions of every one of
 the 25 prompts were scored twice: once on the state the loop ends on at the cap, and
@@ -651,10 +778,16 @@ draws. The pre-registered rule needed 8 of 15. **H19b is SUPPORTED.**
 The sizes are not marginal. Across the band, the ordinary states hold a median
 share of **0.031**, that is about 3 percent of themselves inside the J-space,
 which is the same order as the paper's own 6 to 7 percent for a different model
-family. The terminal states hold a median share of **0.0014**, about one seventh
-of one percent. The middle layer of the band, layer 18, is typical: ordinary
-states 0.031, terminal states 0.0016, a factor of about 20. Taken over the whole
-band the ratio has a median of **25.9**.
+family. The terminal states hold a median share of **0.0014**, about one
+seventh of one percent. At the middle layer of the band, layer 18, the two
+medians are **0.0389** for the ordinary states and **0.0017** for the terminal
+ones, a factor of about **23**. **Correction, made after a review of this
+record:** that sentence first gave layer 18 as ordinary 0.031, terminal 0.0016,
+a factor of about 20. Those were the across-band medians from the sentence
+before it and not layer 18's own values, and they are withdrawn; the committed
+J-space artifact and the table below both give 0.03894 and 0.00167 at that
+layer. Taken layer by layer over the whole band, the ratio of the ordinary
+median to the terminal median has a median of **25.9**.
 
 **What the controls add, and this is the part worth reading twice.** The
 randomly rotated lens is the level a set of directions with no relationship to
@@ -695,7 +828,7 @@ theirs. The shape here is the same and sharper: ordinary language above chance,
 loop terminals below it. **Inferred, not established:** the loop at natural
 loudness on this model drives the state into the part of the residual stream
 that the model's output path is least able to speak from, which is consistent
-with the near-flat readout reported above and with the project's own conclusion
+with the diffuse readout reported above and with the project's own conclusion
 from the GPT-2 mechanism series that the loop's dynamics live mostly in machinery
 the readout cannot see.
 ## Per-prompt terminal tables
@@ -730,7 +863,7 @@ the readout cannot see.
 | `C03_mary_lamb` | 8 | no | 150 | 0.731 | 0.703 | '車' | 0.026 | 9.32 | 1501x natural | 1439x natural |
 | `F03_frustration` | 8 | no | 150 | 0.913 | 0.910 | '車' | 0.031 | 9.09 | 2583x natural | 2626x natural |
 
-Settled: **0 of 25**. Positions-merged metric over all positions: median **0.726**, range 0.483 to 0.929; leaving position 0 out: median 0.746, range 0.480 to 0.966. Prompts at or above 0.99 on the all-positions metric: 0 of 25. Top-word-piece probability: median 0.109 (a flat distribution over 151,936 word pieces would give 0.0000066). Spread: median 6.89 nats out of a possible 11.93. Distinct top word pieces: 9 ('車' x7, '\n' x6, 'の' x3, '我' x2, ' �' x2, '\n\n' x2, '...' x1, 'は' x1, '由於' x1). The registered loudness convention, which measures both the injected size and the natural size over the whole tensor, would have injected at 2039 times natural strength on average (range 1402 to 2702). Measured this port's way, with position 0 left out of both sizes, the same figures are 2060 on average (range 1371 to 2764).
+Settled: **0 of 25**. Positions-merged metric over all positions: median **0.726**, range 0.483 to 0.929; leaving position 0 out: median 0.746, range 0.480 to 0.966. Prompts at or above 0.99 on the all-positions metric: 0 of 25. Top-word-piece probability: median 0.109, which is about 16,553 times the 0.0000066 a flat distribution over the model's 151,936 word pieces would give. Spread: median 6.89 nats against the 11.93 nats of that flat distribution, which is the spread of a flat choice among about 980 word pieces, 0.64 percent of the vocabulary. Distinct top word pieces: 9 ('車' x7, '\n' x6, 'の' x3, '我' x2, ' �' x2, '\n\n' x2, '...' x1, 'は' x1, '由於' x1). The registered loudness convention, which measures both the injected size and the natural size over the whole tensor, would have injected at 2039 times natural strength on average (range 1402 to 2702). Measured this port's way, with position 0 left out of both sizes, the same figures are 2060 on average (range 1371 to 2764).
 
 ### Arm `chat`: 5 prompts, cap 150 repetitions
 
@@ -742,7 +875,7 @@ Settled: **0 of 25**. Positions-merged metric over all positions: median **0.726
 | `A17_marx` | 22 | no | 150 | 0.697 | 0.719 | '\n' | 0.445 | 1.89 | 2010x natural | 1944x natural |
 | `A21_dickens` | 21 | no | 150 | 0.767 | 0.783 | '\n' | 0.129 | 4.60 | 1917x natural | 1836x natural |
 
-Settled: **0 of 5**. Positions-merged metric over all positions: median **0.767**, range 0.634 to 0.885; leaving position 0 out: median 0.783, range 0.669 to 0.894. Prompts at or above 0.99 on the all-positions metric: 0 of 5. Top-word-piece probability: median 0.129 (a flat distribution over 151,936 word pieces would give 0.0000066). Spread: median 4.60 nats out of a possible 11.93. Distinct top word pieces: 3 ('\n' x3, '\n\n' x1, '凌晨' x1). The registered loudness convention, which measures both the injected size and the natural size over the whole tensor, would have injected at 1899 times natural strength on average (range 1780 to 2010). Measured this port's way, with position 0 left out of both sizes, the same figures are 1824 on average (range 1690 to 1944).
+Settled: **0 of 5**. Positions-merged metric over all positions: median **0.767**, range 0.634 to 0.885; leaving position 0 out: median 0.783, range 0.669 to 0.894. Prompts at or above 0.99 on the all-positions metric: 0 of 5. Top-word-piece probability: median 0.129, which is about 19,662 times the 0.0000066 a flat distribution over the model's 151,936 word pieces would give. Spread: median 4.60 nats against the 11.93 nats of that flat distribution, which is the spread of a flat choice among about 99 word pieces, 0.07 percent of the vocabulary. Distinct top word pieces: 3 ('\n' x3, '\n\n' x1, '凌晨' x1). The registered loudness convention, which measures both the injected size and the natural size over the whole tensor, would have injected at 1899 times natural strength on average (range 1780 to 2010). Measured this port's way, with position 0 left out of both sizes, the same figures are 1824 on average (range 1690 to 1944).
 
 ### H19b: how much of each state the lens can express
 
@@ -780,18 +913,27 @@ Approximation check at layer 18, ordinary states: the largest difference between
 
 ![The mean cosine between word positions, repetition by repetition, for every prompt in both arms](output/collapse_over_iterations.png)
 
-*What to look at: every line stays well below the two reference lines at 0.99
-and 1.00, and none of them climbs toward either. The horizontal axis is
-compressed at the left so the first ten repetitions, where GPT-2 Small has
-already finished merging, are visible.*
+*What to look at: no line reaches the upper reference line at 1.00, and only 2
+of the 30 lines touch the lower one at 0.99, briefly, before dropping back:
+`F01_anger` at five repetitions between 24 and 33, and `B03_moon` at
+repetitions 74 and 75, both in the main arm. No line ends above 0.99 and none
+climbs steadily toward either reference line. The horizontal axis is compressed
+at the left so the first ten repetitions, where GPT-2 Small has already finished
+merging, are visible.*
 
 ![The natural size of the state at every layer, and how much larger the first word position is](output/natural_loudness_profile.png)
 
 *What to look at: the left panel shows that the first word position and a
-typical other word position start at the same size at the entry to layer 0, then
-separate by a factor of hundreds from layer 3 onward. The right panel is that
-ratio on its own. The loop reads and writes only at the two ends of this curve,
-where the ratio is about 1.*
+typical other word position start at the same size at the entry to block 0, then
+separate by a factor of hundreds from block 3 onward. The right panel is that
+ratio on its own. The loop's own two points are the ones marked by dashed lines:
+the entry to block 0 at the left, where position 0 is 0.94 times a typical other
+position, and the separate point at the right marked "out", which is the exit of
+block 27 where the loop reads, at 0.84 times. The last point of the curve itself
+is the entry to block 27, at 5.2 times, and the loop neither reads nor writes
+there. Before a review of the figures this figure plotted only the block entries
+and stopped at that 5.2, so its two ends were not the loop's two points; the
+caption said they were, and that claim is withdrawn.*
 
 ![The J-space share of settled and ordinary states at each scored layer, with the randomly rotated controls](output/jspace_share_by_layer.png)
 
@@ -822,10 +964,15 @@ All under `experiments/exp_018_chat_port/`.
 
 The per-layer states that the J-space measurement consumes are intermediate and
 are not committed: they are about 13 megabytes and are reproducible from the
-committed terminal states with `python3 run_exp018.py --stage states --arm bare`
-and the same command with `--arm chat`. Neither needs a precision flag, because
-that stage now reads the precision out of the results file, which is bfloat16
-for this run.
+committed terminal states with `python3 run_exp018.py --stage states --arm bare
+--revision 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e` and the same command with
+`--arm chat`. The revision, meaning one named version of the model's files on
+the Hugging Face hub, has to be passed by hand because the two committed results
+files were written before the runner recorded that field in them, so the stage
+cannot read it from them; without it the stage now stops rather than loading
+whatever the machine's cache pointer names today, which need not be the version
+this run used. Neither command needs a precision flag, because that stage reads
+the precision out of the results file, which is bfloat16 for this run.
 
 The lens files themselves are not committed either, because
 `_STAGE2_JSPACE/artifacts/` is not versioned by repository convention. Their
