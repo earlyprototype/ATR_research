@@ -742,9 +742,9 @@ Recorded flat, whether or not they helped.
    length across all 637 states and all twelve layers is 4.9 parts in one
    hundred million of the state's own length. The centred arm was run at every
    layer anyway rather than argued away, and its share medians agree with the
-   raw arm's to within 1.2 parts in ten million (the largest
-   difference in any family median at any layer). The raw-versus-centred question therefore does
-   not arise for these states.
+   raw arm's to within 1.2 parts in ten million, which is the largest difference
+   in any family median at any layer. The raw-versus-centred question therefore
+   does not arise for these states.
 
 3. **The selected atoms were recorded for more states than the descriptive
    section asked for.** Section 7.5 item 2 named the `prolet` and `Divine`
@@ -752,10 +752,13 @@ Recorded flat, whether or not they helped.
    ordinary residuals, at no extra compute, so the readout can be examined
    beyond the named states. This is an addition, not a substitution.
 
-4. **A cross-check against the previous pilot's published numbers was added
-   after the specification was written.** It is not a hypothesis test and
-   carries no verdict; it exists to show the decomposition code reproduces a
-   number already in the record. It is reported in the gates section above.
+4. **Two diagnostics were added after the specification was written.** The
+   first is a cross-check against the previous pilot's published numbers, which
+   exists to show the decomposition code reproduces a number already in the
+   record. The second is the dictionary-shape measurement reported near the top
+   of this record, which was prompted by seeing that the search kept stopping
+   after three or four directions instead of the 25 it was allowed. Neither is a
+   hypothesis test and neither carries a verdict.
 
 5. **Directory placement.** The brief named `experiments/exp_011_small_overlap/`.
    The repository's convention, and the register's own path for every other
@@ -770,8 +773,27 @@ Recorded flat, whether or not they helped.
    the directory's own ignore file. Every gate result and every provenance fact
    from that stage is committed in `output/states_meta.json`.
 
-No reduction was taken under the specification's stopping rule: the run
-completed every planned arm at every layer.
+7. **The materiality floor for H16a was replaced by a labelled substitute.**
+   Section 7.3 said a gap smaller than the spread of a state's control shares
+   across the six control runs would be marked as inside the control spread.
+   Because the two control types differ by a factor of about 25, that pooled
+   spread is 0.178 to 0.182 at every band layer and would mark every gap in the
+   table as immaterial, which is uninformative rather than conservative. The
+   substitute used, and labelled post hoc where it appears, is the spread across
+   the three seeds within one control type, which is 0.0009 to 0.0048 at the
+   band layers. No verdict depends on it: the H16a rule counted signs, not
+   sizes.
+
+8. **The left panel of the figure uses a logarithmic vertical scale.** The
+   specification asked for figures without specifying scales. A linear scale is
+   unreadable here because the random-dictionary control sits about 25 times
+   above every other series. The underlying numbers are unchanged and are in the
+   tables and the committed comma-separated file.
+
+No reduction was taken under the specification's stopping rule: the run completed
+every planned arm at every layer, in 3,472 seconds of decomposition (0.96 hours)
+at a peak memory of 1.58 gigabytes against a 3-gigabyte ceiling, plus about three
+minutes of state building and about one minute of scoring and readouts.
 
 ---
 
@@ -844,6 +866,17 @@ and one cycle, each on a single trajectory, with no repeats.
    125 prompts. Re-running the language arm at lock-in is a three-minute job on
    this machine if the lock-in tensors are ever committed; they are not committed
    today, only their labels are.
+
+5. **Finding F16 in the lucier record needs a dated pointer note, and this
+   session cannot write it.** F16 states that phase A of the `Divine` cycle is
+   the more lens-expressible phase and phase B the less. On the full-vocabulary
+   lens the assignment inverts, at eleven of twelve layers. The lucier repository
+   is read-only from this session, so the correction lives here and nowhere else
+   until someone with write access adds a pointer beside F16 in its
+   `docs/FINDINGS.md`. Until that happens, a reader of the lucier record will
+   take the superseded direction as current. Under the house convention of
+   visible supersession the F16 text stays as written and gains a note; it is not
+   edited away.
 
 ---
 
