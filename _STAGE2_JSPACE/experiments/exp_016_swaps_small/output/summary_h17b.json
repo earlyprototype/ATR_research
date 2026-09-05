@@ -7789,5 +7789,344 @@
     ]
    }
   }
- ]
+ ],
+ "posmode": {
+  "fixed_setting": {
+   "all_no_bos": {
+    "tuning": {
+     "lens": [
+      0.375,
+      3,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0417,
+      1,
+      24
+     ]
+    },
+    "heldout": {
+     "lens": [
+      0.125,
+      1,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "overall": {
+     "lens": [
+      0.25,
+      4,
+      16
+     ],
+     "randdir": [
+      0.0,
+      0,
+      48
+     ],
+     "randnorm": [
+      0.0208,
+      1,
+      48
+     ]
+    }
+   },
+   "from_mention": {
+    "tuning": {
+     "lens": [
+      0.375,
+      3,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0417,
+      1,
+      24
+     ]
+    },
+    "heldout": {
+     "lens": [
+      0.125,
+      1,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "overall": {
+     "lens": [
+      0.25,
+      4,
+      16
+     ],
+     "randdir": [
+      0.0,
+      0,
+      48
+     ],
+     "randnorm": [
+      0.0208,
+      1,
+      48
+     ]
+    }
+   },
+   "answer_only": {
+    "tuning": {
+     "lens": [
+      0.0,
+      0,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "heldout": {
+     "lens": [
+      0.0,
+      0,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "overall": {
+     "lens": [
+      0.0,
+      0,
+      16
+     ],
+     "randdir": [
+      0.0,
+      0,
+      48
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      48
+     ]
+    }
+   }
+  },
+  "tuned_per_mode": {
+   "all_no_bos": {
+    "cell": [
+     "7",
+     2.0,
+     "all_no_bos"
+    ],
+    "tuning": {
+     "lens": [
+      0.375,
+      3,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0417,
+      1,
+      24
+     ]
+    },
+    "heldout": {
+     "lens": [
+      0.125,
+      1,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "overall": {
+     "lens": [
+      0.25,
+      4,
+      16
+     ],
+     "randdir": [
+      0.0,
+      0,
+      48
+     ],
+     "randnorm": [
+      0.0208,
+      1,
+      48
+     ]
+    }
+   },
+   "from_mention": {
+    "cell": [
+     "7",
+     2.0,
+     "from_mention"
+    ],
+    "tuning": {
+     "lens": [
+      0.375,
+      3,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0417,
+      1,
+      24
+     ]
+    },
+    "heldout": {
+     "lens": [
+      0.125,
+      1,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "overall": {
+     "lens": [
+      0.25,
+      4,
+      16
+     ],
+     "randdir": [
+      0.0,
+      0,
+      48
+     ],
+     "randnorm": [
+      0.0208,
+      1,
+      48
+     ]
+    }
+   },
+   "answer_only": {
+    "cell": [
+     "8-9",
+     2.0,
+     "answer_only"
+    ],
+    "tuning": {
+     "lens": [
+      0.125,
+      1,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0417,
+      1,
+      24
+     ]
+    },
+    "heldout": {
+     "lens": [
+      0.0,
+      0,
+      8
+     ],
+     "randdir": [
+      0.0,
+      0,
+      24
+     ],
+     "randnorm": [
+      0.0,
+      0,
+      24
+     ]
+    },
+    "overall": {
+     "lens": [
+      0.0625,
+      1,
+      16
+     ],
+     "randdir": [
+      0.0,
+      0,
+      48
+     ],
+     "randnorm": [
+      0.0208,
+      1,
+      48
+     ]
+    }
+   }
+  }
+ }
 }

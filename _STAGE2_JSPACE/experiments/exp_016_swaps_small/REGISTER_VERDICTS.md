@@ -20,9 +20,9 @@ These replace the three UNTESTED rows allocated by erratum (f) on
 2026-09-05. Each keeps the registered statement word for word and changes
 only the verdict and the recorded-at columns.
 
-| H17 | EXP_016 | Report swap on base GPT-2 Small: exchanging the lens coordinates of the model's own top concept and a target concept (the paper's patching in lens coordinates, at one layer or a small layer set) puts the target in the next-token top-5 on at least 50 percent of trials, against at most 10 percent for norm-matched random-direction swaps | **SUPPORTED** (held-out half 64 percent, 27 of 42, against 0 percent, 0 of 84, at the tuned setting layers 7-8-9, strength 2, all positions; both registered thresholds cleared) | `experiments/exp_016_swaps_small/RESULTS_EXP016.md` |
+| H17 | EXP_016 | Report swap on base GPT-2 Small: exchanging the lens coordinates of the model's own top concept and a target concept (the paper's patching in lens coordinates, at one layer or a small layer set) puts the target in the next-token top-5 on at least 50 percent of trials, against at most 10 percent for norm-matched random-direction swaps | **SUPPORTED** (held-out half 86 percent, 18 of 21, against 0 percent, 0 of 42, at the tuned setting layers 7-8-9, strength 2, all positions, source rule output, with the rule part of the tuned selection as the specification's section 5.1 states; pooled over both source rules 64 percent, 27 of 42, against 0 of 84; both readings clear the registered thresholds) | `experiments/exp_016_swaps_small/RESULTS_EXP016.md` |
 | H17a | EXP_016 | Flexible generalisation: one country swap redirects at least two of three downstream completion functions (capital, language, continent) at a rate above the random-direction control, on items the clean model answers correctly | **SUPPORTED** (held-out half 87 percent, 13 of 15, against 0 percent, 0 of 30, for the control, at the tuned setting layer 6, strength 2, all positions; both halves 87 percent, 26 of 30, against 0 of 60; in the five-continent extension set, reported beside the headline number, 14 of 18 pairs redirect all three questions against 0 of 36) | same record |
-| H17b | EXP_016 | Intermediate-step surgery: on two-hop completions the clean model answers correctly, swapping the intermediate concept changes the final answer to the predicted alternative more often than the random-direction control | **SUPPORTED on the registered wording, weakly** (4 of 16 against 0 of 48, one-sided Fisher exact probability 0.0029 over all items; on the held-out half alone 1 of 8 against 0 of 24, probability 0.25, which is not distinguishable from chance). Owner ruling invited: see decision item 2 of the results record | same record |
+| H17b | EXP_016 | Intermediate-step surgery: on two-hop completions the clean model answers correctly, swapping the intermediate concept changes the final answer to the predicted alternative more often than the random-direction control | **SUPPORTED on the registered wording, weakly** (4 of 16 items against 0 of 16 for control A over three draws each; one-sided Fisher exact probability at item level 0.051 over all items and 0.5 on the held-out half alone, 1 of 8 against 0 of 8, so the effect is not distinguishable from chance at the usual level). Owner ruling invited: see decision item 2 of the results record | same record |
 
 ## 2. Experiment register row
 
@@ -43,8 +43,8 @@ point from EXP_016 that later experiments would otherwise have to rediscover.
 > residual stream. It was added on the expectation that the registered
 > control under-disturbs the model. The sizes, measured after the run at the
 > chosen settings, show that expectation to be wrong in general: control
-> A's change was 3.5 times the lens swap's at the H17a setting and 0.5 to
-> 0.7 times at the other two. They also show that swaps stacked at
+> A's change was about three times the lens swap's at the H17a setting and
+> 0.5 to 0.7 times at the other two. They also show that swaps stacked at
 > consecutive layers compound (at the H17 setting, layers 7-8-9 at strength
 > 2, the lens arm's change grows about sevenfold from layer 7 to layer 9),
 > so the size-matched control matches per layer and not in total at

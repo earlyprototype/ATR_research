@@ -75,7 +75,7 @@ def main():
             plan.add(V, V, alpha, pos, False)
             for s in seeds:
                 R = {l: random_pair(V[l][:, 0], V[l][:, 1],
-                                    control_seed(u["item_id"], u.get("func", ""), l, s))
+                                    control_seed(u["item_id"], l, s))
                      for l in layer_set}
                 plan.add(R, V, alpha, pos, False); rows.append(("randdir", s))
                 plan.add(R, V, alpha, pos, True); rows.append(("randnorm", s))

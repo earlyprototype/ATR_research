@@ -27,16 +27,25 @@ The three registered verdicts, each scored on the exact wording in the
 register:
 
 - **H17, the report swap: SUPPORTED.** On the held-out half of the items, at
-  the setting chosen on the other half, exchanging the model's own favourite
-  concept with a different concept from the same category put the intended
-  word into the model's top five next words on **64 percent of trials, 27 of
-  42**, against **0 percent, 0 of 84, for the norm-matched random-direction
-  control**. The registered rule asked for at least 50 percent against at
-  most 10 percent. Before any swap, the intended word was in the top five on
-  0 of 84 items by construction, because the battery's rule excludes it from
-  the model's top ten. A one-sided Fisher exact test on the held-out half
-  gives a probability of 4 in 100,000,000,000,000,000 that a control-like
-  process would produce a gap this large.
+  the setting chosen on the other half with the source rule treated as part
+  of that choice, as section 5.1 of the specification says it is (layers 7,
+  8 and 9 together, strength 2, all positions, source rule `output`),
+  exchanging the model's own favourite concept with a different concept from
+  the same category put the intended word into the model's top five next
+  words on **86 percent of trials, 18 of 21**, against **0 percent, 0 of 42,
+  for the norm-matched random-direction control**. Pooled over both source
+  rules as 84 items, which is how the first version of this record scored
+  it, the figure is 64 percent, 27 of 42, against 0 of 84, because the
+  items built by the `lens` rule succeed on only 9 of 21 (see the correction
+  below). The registered rule asked for at least 50 percent against at most
+  10 percent, and both readings clear it. Before any swap, the intended word
+  was in the top five on 0 of 84 items by construction, because the
+  battery's rule excludes it from the model's top ten. A one-sided Fisher
+  exact test at item level, counting an item as a control success if either
+  control draw succeeded, gives a probability of 4 in 1,000,000,000 (18 of
+  21 against 0 of 21) that a control-like process would produce the
+  protocol gap, and 1 in 100,000,000,000 (27 of 42 against 0 of 42) for the
+  pooled one.
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
   questions about that country on **87 percent of the held-out pairs, 13 of
@@ -51,19 +60,27 @@ register:
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
   items, which is 25 percent**, against **0 of 48 control trials, which is 0
-  percent**. Across all 16 items a one-sided Fisher exact test gives a
-  probability of 0.0029 that a control-like process would do this well, so
-  the effect is real. On the held-out half alone, however, it is 1 of 8
-  against 0 of 24, which the same test cannot distinguish from chance at a
-  probability of 0.25. The registered rule asked only that the flip happen
-  more often than under the control, and it does, but the battery is too
-  small for this verdict to carry much weight on its own.
+  percent**. A one-sided Fisher exact test at item level, which counts an
+  item as a control success if any of its three control draws succeeded,
+  gives a probability of 0.051 over all 16 items (4 of 16 against 0 of 16)
+  that a control-like process would do this well, and 0.5 on the held-out
+  half alone (1 of 8 against 0 of 8). The first version of this record gave
+  0.0029 and 0.25 by counting the 48 control rows as if they were 48 items;
+  those figures are withdrawn (see the correction below). The registered
+  rule asked only that the flip happen more often than under the control,
+  and it does, but the effect is not distinguishable from chance at the
+  usual 5 percent level and the battery is too small for this verdict to
+  carry much weight on its own.
 
 The most interesting single number is not any of those three. It is the
 contrast inside H17b. Exchanging the concept everywhere from its first
 mention onward flipped the answer on 4 of 16 items. Exchanging it only at
-the final position, where the answer is about to be produced, flipped the
-answer on 1 of 16. One thing those two labels hide: in 14 of the 16 items
+the final position, where the answer is about to be produced, at the same
+layer and strength, flipped the answer on 0 of 16. (The first version of
+this record put the second number at 1 of 16, which is that mode's rate at
+its own best setting, layers 8 and 9, chosen over all items; that compared
+different layers and used the held-out items in the choice, and it is
+withdrawn.) One thing those two labels hide: in 14 of the 16 items
 the swapped concept is the first word of the prompt, so "from its first
 mention onward" patches every position except the prepended start token,
 and the two position modes `from_mention` and `all_no_bos` are the same
@@ -72,9 +89,9 @@ identical rows for them). The contrast is therefore between changing the
 whole stated problem, including the clause that states the facts the model
 reads from, and changing only the position where the answer is produced. It
 is not yet a clean separation of a step in the model's working from the
-report of it. That difference, 4 against 1, points the way the reading note
-hoped, and it is far too small a difference, on far too few items, to be
-called established. Marked as suggestive.
+report of it. That difference, 4 against 0 at one setting, points the way
+the reading note hoped, and it is far too small a difference, on far too
+few items, to be called established. Marked as suggestive.
 
 ## What the swap looks like from outside
 
@@ -189,6 +206,25 @@ Target outranks the source word it replaced:
 - control A (random directions): 24 percent (41 of 168)
 - control B (size matched): 17 percent (28 of 168)
 
+Source rule as part of the tuned selection (section 5.1 of the specification): chosen setting layers 7-8-9, strength 2.0, positions all, rule output:
+
+| half | lens swap | control A | control B |
+|---|---|---|---|
+| tuning | 95 percent (20 of 21) | 0 percent (0 of 42) | 0 percent (0 of 42) |
+| heldout | 86 percent (18 of 21) | 0 percent (0 of 42) | 0 percent (0 of 42) |
+| overall | 90 percent (38 of 42) | 0 percent (0 of 84) | 0 percent (0 of 84) |
+
+Each source rule at the pooled tuned setting (layers 7-8-9, strength 2.0, positions all):
+
+| rule | half | lens swap | control A | control B |
+|---|---|---|---|---|
+| lens | tuning | 48 percent (10 of 21) | 2 percent (1 of 42) | 2 percent (1 of 42) |
+| lens | heldout | 43 percent (9 of 21) | 0 percent (0 of 42) | 0 percent (0 of 42) |
+| lens | overall | 45 percent (19 of 42) | 1 percent (1 of 84) | 1 percent (1 of 84) |
+| output | tuning | 95 percent (20 of 21) | 0 percent (0 of 42) | 0 percent (0 of 42) |
+| output | heldout | 86 percent (18 of 21) | 0 percent (0 of 42) | 0 percent (0 of 42) |
+| output | overall | 90 percent (38 of 42) | 0 percent (0 of 84) | 0 percent (0 of 84) |
+
 ### H17A: tuned setting = layers 6, strength 2.0, positions all   (18600 records)
 
 | arm | tuning half | held-out half | both halves |
@@ -261,6 +297,19 @@ Pairs where at least 3 scoreable questions redirected, extension set, tuned sett
 - control A (random directions): 0 percent (0 of 40)
 - control B (size matched): 0 percent (0 of 40)
 
+Selection by the registered pair-level outcome on the primary pairs (at least two of three functions redirected): chosen setting layers 9, strength 2.0, positions all, against layers 6 for the function-level selection the main analysis uses:
+
+| selection metric | setting | half | lens swap | control A | control B |
+|---|---|---|---|---|---|
+| pair-level, primary pairs | layers 9, strength 2.0, all | tuning | 93 percent (14 of 15) | 0 percent (0 of 30) | 0 percent (0 of 30) |
+| pair-level, primary pairs | layers 9, strength 2.0, all | heldout | 87 percent (13 of 15) | 0 percent (0 of 30) | 0 percent (0 of 30) |
+| pair-level, primary pairs | layers 9, strength 2.0, all | overall | 90 percent (27 of 30) | 0 percent (0 of 60) | 0 percent (0 of 60) |
+| function-level (main analysis) | layers 6, strength 2.0, all | tuning | 87 percent (13 of 15) | 0 percent (0 of 30) | 0 percent (0 of 30) |
+| function-level (main analysis) | layers 6, strength 2.0, all | heldout | 87 percent (13 of 15) | 0 percent (0 of 30) | 0 percent (0 of 30) |
+| function-level (main analysis) | layers 6, strength 2.0, all | overall | 87 percent (26 of 30) | 0 percent (0 of 60) | 0 percent (0 of 60) |
+
+Extension set, held-out half, at the pair-level chosen setting: lens 88 percent (7 of 8), control A 12 percent (2 of 16), control B 0 percent (0 of 16).
+
 ### H17B: tuned setting = layers 7, strength 2.0, positions all_no_bos   (14112 records)
 
 | arm | tuning half | held-out half | both halves |
@@ -297,13 +346,27 @@ Single layers at the tuned strength and positions:
 | 9 | 12 percent (2 of 16) | 0 percent (0 of 48) | 0 percent (0 of 48) |
 | 10 | 12 percent (2 of 16) | 0 percent (0 of 48) | 2 percent (1 of 48) |
 
-By position mode, best setting within each mode:
+By position mode at the tuned layer set and strength (layers 7, strength 2.0), so that only the patched positions differ:
 
-| positions | best layers | strength | lens | control A | control B |
-|---|---|---|---|---|---|
-| all_no_bos | 4 | 2.0 | 25 percent | 2 percent | 4 percent |
-| answer_only | 10 | 2.0 | 6 percent | 0 percent | 0 percent |
-| from_mention | 4 | 2.0 | 25 percent | 2 percent | 4 percent |
+| positions | half | lens | control A | control B |
+|---|---|---|---|---|
+| all_no_bos | tuning | 38 percent (3 of 8) | 0 percent (0 of 24) | 4 percent (1 of 24) |
+| all_no_bos | heldout | 12 percent (1 of 8) | 0 percent (0 of 24) | 0 percent (0 of 24) |
+| all_no_bos | overall | 25 percent (4 of 16) | 0 percent (0 of 48) | 2 percent (1 of 48) |
+| from_mention | tuning | 38 percent (3 of 8) | 0 percent (0 of 24) | 4 percent (1 of 24) |
+| from_mention | heldout | 12 percent (1 of 8) | 0 percent (0 of 24) | 0 percent (0 of 24) |
+| from_mention | overall | 25 percent (4 of 16) | 0 percent (0 of 48) | 2 percent (1 of 48) |
+| answer_only | tuning | 0 percent (0 of 8) | 0 percent (0 of 24) | 0 percent (0 of 24) |
+| answer_only | heldout | 0 percent (0 of 8) | 0 percent (0 of 24) | 0 percent (0 of 24) |
+| answer_only | overall | 0 percent (0 of 16) | 0 percent (0 of 48) | 0 percent (0 of 48) |
+
+By position mode, each mode's own best setting chosen on the tuning half and scored on the held-out half:
+
+| positions | tuned layers | strength | tuning, lens | held-out, lens | both halves, lens | both halves, control A |
+|---|---|---|---|---|---|---|
+| all_no_bos | 7 | 2.0 | 38 percent (3 of 8) | 12 percent (1 of 8) | 25 percent (4 of 16) | 0 percent (0 of 48) |
+| from_mention | 7 | 2.0 | 38 percent (3 of 8) | 12 percent (1 of 8) | 25 percent (4 of 16) | 0 percent (0 of 48) |
+| answer_only | 8-9 | 2.0 | 12 percent (1 of 8) | 0 percent (0 of 8) | 6 percent (1 of 16) | 0 percent (0 of 48) |
 
 Looser score at the tuned setting, alternative answer in the top five:
 
@@ -323,11 +386,18 @@ pairs have three scoreable questions, and all three moved together on 14 of
 those 18, which is 78 percent, against 0 of 36 control trials. On the
 held-out half alone the figures are 2 of 3 and 6 of 8 respectively.
 
-**Statistical distinguishability.** One-sided Fisher exact tests comparing
-the lens arm with control A on the held-out half: H17 gives a probability of
-4.2 times 10 to the power minus 17, H17a gives 1.6 times 10 to the power
-minus 22, and H17b gives 0.25. Over all items rather than the held-out half
-alone, H17b gives 0.0029.
+**Statistical distinguishability.** One-sided Fisher exact tests at item
+level, comparing the lens arm with control A on the held-out half and
+counting an item as a control success if any of its draws succeeded: H17
+gives a probability of 3.8 times 10 to the power minus 9 at the protocol
+setting (18 of 21 against 0 of 21) and 1.3 times 10 to the power minus 11
+pooled over both source rules (27 of 42 against 0 of 42); H17a, scored per
+pair on the primary pairs, gives 8.8 times 10 to the power minus 7 (13 of
+15 against 0 of 15); H17b gives 0.5 (1 of 8 against 0 of 8), and 0.051 over
+all 16 items rather than the held-out half alone. The first version of this
+record gave 4.2 times 10 to the power minus 17, 1.6 times 10 to the power
+minus 22, 0.25 and 0.0029 by counting every control draw as a separate
+item; those figures are withdrawn (deviation 13).
 
 **H17b under the looser score.** If success is counted as the alternative
 answer merely entering the top five rather than becoming the model's actual
@@ -363,11 +433,15 @@ on every one of the 20 pairs. A country name is not being copied to the
 output; three separate lookups are all being fed the substituted country.
 
 **Whether it reaches an intermediate reasoning step is unsettled, and the
-evidence leans yes.** H17b's flip rate of 4 in 16 against 0 in 48 is real
-but small, and the position contrast (4 of 16 when the exchange starts at
-the concept's first mention, 1 of 16 when it happens only at the answer
-position) is in the direction that separates reasoning from reporting. Both
-numbers are too small to settle it. Inferred, not established.
+evidence leans yes.** H17b's flip rate of 4 in 16 items against 0 in 16
+for the control (three draws each) is small and, at item level, not
+distinguishable from chance at the usual level (probability 0.051); the
+position contrast at the tuned layer and strength (4 of 16 when the
+exchange starts at the concept's first mention, 0 of 16 when it happens
+only at the answer position) is in the direction that separates reasoning
+from reporting, with the caveat that on 14 of the 16 items the first
+mention is the first word of the prompt. Both numbers are too small to
+settle it. Inferred, not established.
 
 **A finding nobody asked for: the lens and the model disagree about what the
 model is thinking.** On 38 of the 42 report frames, which is 90 percent, the
@@ -477,19 +551,20 @@ The specification promised that the size of each arm's change to the
 working memory would be recorded, and the run did not record it (deviation
 8). The sizes were measured afterwards at each battery's chosen setting, for
 every unit, by `measure_disturbance.py`, with fresh random draws for the
-controls (deviation 7), so they are typical sizes for each arm rather than
-the exact sizes behind the tables. The size of a change is the Euclidean
-norm of everything the arm added to the working memory, summed over the
-patched positions and layers; "of the stream" divides it by the norm of the
-untouched working memory over the same positions at the first patched
-layer. Medians over units; the full distributions, per layer, are in
-`output/disturbance_sizes.json`. Nothing here carries verdict weight.
+controls (deviation 7; one draw per pair, shared across its questions, as
+the corrected seeding scheme prescribes), so they are typical sizes for each
+arm rather than the exact sizes behind the tables. The size of a change is
+the Euclidean norm of everything the arm added to the working memory,
+summed over the patched positions and layers; "of the stream" divides it by
+the norm of the untouched working memory over the same positions at the
+first patched layer. Medians over units; the full distributions, per layer,
+are in `output/disturbance_sizes.json`. Nothing here carries verdict weight.
 
 | Battery, chosen setting | Units | Lens swap | Control A (random directions) | Control B (size matched) |
 |---|---|---|---|---|
-| H17: layers 7-8-9, strength 2, all positions | 84 | 1065 (0.34 of the stream) | 746 (0.24) | 393 (0.12) |
-| H17a: layer 6, strength 2, all positions | 124 | 97 (0.031) | 337 (0.109) | 97 (0.031) |
-| H17b: layer 7, strength 2, all positions but the first | 16 | 109 (0.26) | 51 (0.12) | 109 (0.26) |
+| H17: layers 7-8-9, strength 2, all positions | 84 | 1065 (0.34 of the stream) | 732 (0.23) | 404 (0.13) |
+| H17a: layer 6, strength 2, all positions | 124 | 97 (0.031) | 303 (0.098) | 97 (0.031) |
+| H17b: layer 7, strength 2, all positions but the first | 16 | 109 (0.26) | 50 (0.12) | 109 (0.26) |
 
 Three things follow, all established by this measurement for this model
 and this lens.
@@ -497,15 +572,15 @@ and this lens.
 First, the belief that the registered control under-disturbs the model,
 which motivated control B and is repeated in the specification and in the
 first version of this record, is wrong as a general statement. At the H17a
-setting control A's change is 3.5 times the lens swap's, and it still
+setting control A's change is 3.1 times the lens swap's, and it still
 redirected 0 of 30 held-out pairs; at the H17 setting it is
-0.70 times the lens swap's and at the H17b setting 0.47 times. Where
+0.69 times the lens swap's and at the H17b setting 0.46 times. Where
 the control is smaller it is smaller by half, not by an order of magnitude,
 and where it is larger the verdict is strengthened rather than weakened.
 
 Second, control B matches the lens swap exactly at the two single-layer
 settings (the same medians to three figures, as designed) but reaches only
-0.37 of the lens swap's total change at the three-layer H17 setting.
+0.38 of the lens swap's total change at the three-layer H17 setting.
 The reason is in the per-layer sizes. The lens arm's change grows from
 139 at layer 7 to 358 at layer 8 and 1017 at layer 9: each swap
 acts on a working memory the previous swap has already altered, and at
@@ -513,9 +588,9 @@ strength 2 the exchange overshoots, so the next layer finds a larger
 imbalance to exchange back. Control B is matched, layer by layer, to the
 change the lens swap would make on the control's own working memory, which
 the earlier random change has barely moved, so it stays near the layer-7
-size (139, 204, 260). At multi-layer settings, then, control B is
+size (139, 208, 252). At multi-layer settings, then, control B is
 size-fair per layer and not in total. The H17 verdict is scored against
-control A, as registered, and control A's total change is 0.70 of the
+control A, as registered, and control A's total change is 0.69 of the
 lens swap's at that setting, so the comparison the verdict rests on is
 close to size-fair.
 
@@ -720,9 +795,11 @@ not match it in total at multi-layer settings.
 6. **The pseudo-inverse ridge is 1e-6, not the 1e-8 the specification
    states.** `swap_engine.py` adds 1e-6 times the largest diagonal entry to
    the 2-by-2 Gram matrix before solving. For these well-conditioned
-   matrices the difference to any coefficient is far below the fourth
-   decimal place, so no number changes, but the constant was revised
-   without a note and is recorded here.
+   matrices the difference is negligible: over every source and target pair
+   in the three batteries at all eight swept layers, the pseudo-inverse
+   computed with the two ridges differs by at most 1.6 parts in 100,000
+   (measured on 2026-09-05), so no coefficient and no verdict changes, but
+   the constant was revised without a note and is recorded here.
 
 7. **The random-direction controls in the committed record files cannot be
    regenerated draw for draw.** The first run seeded each control draw from
@@ -731,8 +808,10 @@ not match it in total at multi-layer settings.
    recorded. The control rates in the tables are therefore measurements of
    one draw per seed index that a re-run would replace with a different
    draw. From this record's follow-up commit onward `run_swaps.py` derives
-   the seed from a fixed checksum of the same tuple and records the scheme
-   in the provenance file, so later runs reproduce themselves exactly.
+   the seed from a fixed checksum of the item, layer and seed index and
+   records the scheme in the provenance file, so later runs reproduce
+   themselves exactly (deviation 12 explains why the function name is no
+   longer part of the seed).
    Nothing in the verdicts turns on a particular draw: every control rate at
    the settings that matter is 0 or within one trial of 0, across two or
    three independent draws.
@@ -760,6 +839,55 @@ not match it in total at multi-layer settings.
    `analyse.py` now states that order as an explicit final key, so the
    choice is the same and is no longer accidental.
 
+10. **The H17 source rule was pooled instead of tuned.** Section 5.1 of the
+    specification says the two readings of "the model's own top concept"
+    are run as separate items "and the choice between them is part of the
+    tuned selection". The first analysis pooled the 84 items and chose only
+    the setting, and the first version of this record reported the pooled
+    held-out figure, 64 percent, 27 of 42, as the headline. Choosing the
+    rule on the tuning half as well, as the specification says, picks the
+    `output` rule at the same setting (20 of 21 on the tuning half) and
+    scores 86 percent, 18 of 21, on the held-out half. The record now leads
+    with the protocol figure and keeps the pooled one beside it; the table
+    "Source rule as part of the tuned selection" carries both. The verdict
+    is the same either way.
+
+11. **The H17a selection metric is ambiguous in the specification, and both
+    readings are reported.** Section 4 chooses the setting by "the highest
+    success rate" on the tuning half, and section 5.2 defines success for
+    H17a per question (the target country's answer in the top five), which
+    is what the analysis used and which picks layer 6. The registered rule
+    is stated per pair (at least two of three questions redirected) on the
+    primary pairs, and choosing by that metric picks layer 9 (14 of 15
+    pairs on the tuning half against 13 of 15). The two routes give the
+    same held-out result, 13 of 15 pairs against 0 of 30 for control A, so
+    the verdict does not depend on the reading; the table "Selection by the
+    registered pair-level outcome" carries both. The function-level route
+    also let the extension pairs vote in the choice of setting although
+    they are not part of the headline; the pair-level route does not.
+
+12. **The H17a controls used a different random draw for each of a pair's
+    three questions.** The lens arm applies one shared exchange to all
+    three questions about a country pair, but the first run seeded the
+    random directions with the question name as well, so control A's three
+    questions each saw their own directions. The pair-level control outcome
+    (at least two of three questions redirected by "one" random swap) is
+    therefore not like for like with the lens arm's, and it cannot be
+    regenerated (deviation 7). It is reported as measured, with this
+    caveat, and `run_swaps.py` now shares one draw across a pair's
+    questions.
+
+13. **The Fisher tests counted control rows as independent items.** The
+    first version of this record tested each lens rate against a control
+    denominator that multiplied the item count by the number of seeds (84
+    for H17, 48 for H17b), which treats repeated draws on the same prompt
+    as separate items. All three probabilities are now computed at item
+    level, counting an item as a control success if any of its draws
+    succeeded: H17 stays far below any threshold, H17a's pair-level result
+    gives 9 in 10,000,000 (13 of 15 against 0 of 15), and H17b moves from
+    0.0029 to 0.051 over all items and from 0.25 to 0.5 on the held-out
+    half.
+
 ## Errata found during the run
 
 One error was found and corrected while the batteries were running, before
@@ -776,6 +904,38 @@ was rewritten to walk the model's own token strings, the battery file was
 rebuilt with only that one field changed, and H17b was run again in full.
 The numbers reported here are from the corrected run.
 
+
+## Corrections after review (2026-09-05)
+
+Each line says what the first version of this record said, that it was
+wrong, and what is true instead. The numbers are in the sections above.
+
+1. It said H17's held-out result was 64 percent, 27 of 42, with the two
+   source rules pooled. That is the wrong headline under section 5.1 of the
+   specification, which makes the source rule part of the tuned selection.
+   The protocol result is 86 percent, 18 of 21, with the `output` rule; the
+   pooled figure is kept beside it. The verdict is unchanged.
+2. It said H17b's effect was distinguishable from control at a probability
+   of 0.0029 over all items and 0.25 on the held-out half, "so the effect
+   is real". Those probabilities counted the 48 control rows as 48 items.
+   At item level they are 0.051 and 0.5, and the effect is not
+   distinguishable from chance at the usual level.
+3. It said that swapping only at the answer position flipped 1 of 16 items,
+   against 4 of 16 for swapping from the first mention. The 1 came from a
+   different layer set chosen over all items. At the tuned layer and
+   strength the answer-only mode flips 0 of 16.
+4. It presented one selection route for H17a. Two readings of the
+   specification's selection metric exist and pick different layers; both
+   give 13 of 15 held-out pairs against 0 of 30, and both are now reported.
+5. It said "Rule R3 forbids this session from editing the register from a
+   branch". R3 says no such thing; the register was left alone because four
+   experiment branches share one allocation commit.
+6. It said control A ran with three random seeds and listed four limits.
+   Control A ran with two seeds in H17 and H17a and three in H17b, and the
+   limits are six.
+7. It said the registered control can under-disturb the model. Measured at
+   the chosen settings, it does not in general: see "Disturbance sizes,
+   measured after the fact".
 
 ## What remains
 
@@ -820,11 +980,12 @@ much they would add.
 
 2. **Whether H17b's verdict should stand as SUPPORTED.** It is supported on
    the registered wording, which asks only that the flip happen more often
-   than under the control, and the effect is distinguishable from control
-   across all 16 items at a probability of 0.0029. On the held-out half
-   alone, which this experiment's own specification names as the number a
-   hypothesis is judged on, it is 1 of 8 against 0 of 24 and not
-   distinguishable from chance. A reasonable operator could rule either
+   than under the control, but at item level the effect across all 16 items
+   sits at a probability of 0.051, just outside the usual 5 percent level,
+   and on the held-out half alone, which this experiment's own
+   specification names as the number a hypothesis is judged on, it is 1 of
+   8 against 0 of 8 and not distinguishable from chance (probability 0.5).
+   A reasonable operator could rule either
    SUPPORTED with the weakness recorded, which is what is written here, or
    NOT SUPPORTED pending a larger battery. This is the one verdict in this
    record where the wording and the evidence pull in different directions,
@@ -835,9 +996,9 @@ much they would add.
    directions, is not in the register's wording of H17. It was added on the
    expectation that the registered control under-disturbs the model. The
    measurement after the fact shows that expectation was wrong at the H17a
-   setting, where control A's change is three and a half times the lens
-   swap's, and only partly right at the other two settings, where it is half
-   to two thirds; it also shows that control B matches the lens swap per
+   setting, where control A's change is about three times the lens swap's,
+   and only partly right at the other two settings, where it is half to two
+   thirds; it also shows that control B matches the lens swap per
    layer but not in total at multi-layer settings, because the lens swaps
    compound. In outcome the two controls behaved almost identically, so
    nothing turns on it in this experiment. Later swap work should register

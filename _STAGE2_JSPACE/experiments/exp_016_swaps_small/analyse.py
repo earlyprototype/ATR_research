@@ -86,27 +86,6 @@ def arms_of(cells, cell):
     return {k: [round(v[0], 4), v[1], v[2]] for k, v in a.items()}
 
 
-if __name__ == "__main__":
-    for b in sys.argv[1:]:
-        out, rows = report(b)
-        json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
-        c = out["chosen_cell"]
-        print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "
-              f"strength {c[1]}, positions {c[2]}")
-        for half in ("tuning", "heldout", "overall"):
-            a = out[half]
-            print(f"  {half:8s} lens {a.get('lens',[0,0,0])[0]:.3f} "
-                  f"({a.get('lens',[0,0,0])[1]}/{a.get('lens',[0,0,0])[2]})  "
-                  f"control A {a.get('randdir',[0,0,0])[0]:.3f}  "
-                  f"control B {a.get('randnorm',[0,0,0])[0]:.3f}")
-        print("  best cells overall (lens rate, control A, control B):")
-        for g in out["top_cells_overall"][:6]:
-            print(f"    layers {g['layers']:8s} alpha {g['alpha']:.1f} "
-                  f"{g['posmode']:12s} lens {g['overall']['lens'][0]:.3f} "
-                  f"A {g['overall'].get('randdir',[0])[0]:.3f} "
-                  f"B {g['overall'].get('randnorm',[0])[0]:.3f}")
-
-
 # --------------------------------------------------------------------------
 # Battery-specific aggregations used by the results record.
 
@@ -158,18 +137,108 @@ def per_item(rows, cell, key, arm="lens"):
     return {k: (sum(v), len(v)) for k, v in sorted(out.items())}
 
 
-def posmode_table(rows, key):
-    """Best cell within each position mode, for the H17b contrast between
-    swapping at the intermediate mention and swapping only at the answer."""
-    acc = defaultdict(lambda: defaultdict(lambda: [0, 0]))
-    for r in rows:
-        acc[(r["layers"], r["alpha"], r["posmode"])][r["arm"]][0] += r[key]
-        acc[(r["layers"], r["alpha"], r["posmode"])][r["arm"]][1] += 1
-    best = {}
-    for cell, arms in acc.items():
-        m = cell[2]
-        rate = arms["lens"][0] / max(arms["lens"][1], 1)
-        if m not in best or rate > best[m][1]:
-            best[m] = (cell, rate,
-                       {a: round(n / max(d, 1), 4) for a, (n, d) in arms.items()})
-    return best
+def posmode_table(rows, key, tuned_cell):
+    """The H17b contrast between position modes, two ways that both respect
+    the tuning-then-held-out rule: (a) every mode at the battery's tuned
+    layer set and strength, so only the positions differ; (b) each mode's
+    own best cell chosen on the tuning half and scored on the held-out
+    half. The first version of this function picked each mode's best cell
+    over all rows, which compared different layers and used the held-out
+    items in the choice; that reading is no longer produced."""
+    modes = sorted({r["posmode"] for r in rows}, key=MODE_ORDER.index)
+    out = {"fixed_setting": {}, "tuned_per_mode": {}}
+    for m in modes:
+        cell = (tuned_cell[0], tuned_cell[1], m)
+        out["fixed_setting"][m] = {
+            half: arms_of(cell_rates(rows, "h17b", split, key), cell)
+            for half, split in (("tuning", "tuning"), ("heldout", "heldout"), ("overall", None))}
+        flt = lambda r, m=m: r["posmode"] == m
+        tune = cell_rates(rows, "h17b", "tuning", key, extra_filter=flt)
+        best = choose(tune)
+        out["tuned_per_mode"][m] = dict(
+            cell=list(best),
+            tuning=arms_of(tune, best),
+            heldout=arms_of(cell_rates(rows, "h17b", "heldout", key, extra_filter=flt), best),
+            overall=arms_of(cell_rates(rows, "h17b", None, key, extra_filter=flt), best))
+    return out
+
+
+def source_rule_selection(rows, items):
+    """H17 with the source rule (lens or output) treated as part of the tuned
+    selection, as section 5.1 of the specification says it is: the setting
+    and the rule are chosen together on the tuning half and scored on the
+    held-out half. Also reports each rule at the pooled tuned setting. The
+    first version of this analysis pooled the two rules as 84 items."""
+    rule_of = {it["item_id"]: it["source_rule"] for it in items}
+    rules = sorted(set(rule_of.values()))
+    joint = {}
+    for rule in rules:
+        flt = lambda r, rule=rule: rule_of[r["item_id"]] == rule
+        for cell, arms in cell_rates(rows, "h17", "tuning", "in_top5", extra_filter=flt).items():
+            joint[(cell, rule)] = arms
+    def k(item):
+        (cell, rule), arms = item
+        lens = arms.get("lens", (0, 0, 0))[0]
+        ctrl = arms.get("randdir", (0, 0, 0))[0]
+        ls, alpha, mode = cell
+        return (-lens, -(lens - ctrl), alpha, len(ls.split("-")), int(ls.split("-")[0]),
+                MODE_ORDER.index(mode), rules.index(rule))
+    (bc, br), _ = sorted(joint.items(), key=k)[0]
+    out = dict(chosen_cell=list(bc), chosen_rule=br, per_rule={})
+    for half, split in (("tuning", "tuning"), ("heldout", "heldout"), ("overall", None)):
+        out[half] = arms_of(cell_rates(rows, "h17", split, "in_top5",
+                                       extra_filter=lambda r: rule_of[r["item_id"]] == br), bc)
+    pooled = choose(cell_rates(rows, "h17", "tuning", "in_top5"))
+    out["pooled_cell"] = list(pooled)
+    for rule in rules:
+        flt = lambda r, rule=rule: rule_of[r["item_id"]] == rule
+        out["per_rule"][rule] = {
+            half: arms_of(cell_rates(rows, "h17", split, "in_top5", extra_filter=flt), pooled)
+            for half, split in (("tuning", "tuning"), ("heldout", "heldout"), ("overall", None))}
+    return out
+
+
+def pair_level_selection(rows, function_cell):
+    """H17a with the registered pair-level outcome (at least two of three
+    functions redirected, primary pairs only) used as the selection metric
+    on the tuning half, beside the function-level metric of section 5.2 that
+    the main analysis uses. Both routes are reported because the
+    specification names the function-level success for selection and the
+    pair-level rule for the verdict."""
+    tune = pair_level(rows, split="tuning", need=2, pair_set="primary")
+    best = choose(tune)
+    def at(cell):
+        return {half: arms_of(pair_level(rows, split=split, need=2, pair_set="primary"), cell)
+                for half, split in (("tuning", "tuning"), ("heldout", "heldout"), ("overall", None))}
+    return dict(chosen_cell=list(best), pair_level=at(best),
+                function_cell=list(function_cell), function_cell_pair_level=at(tuple(function_cell)),
+                extension_heldout_at_chosen=arms_of(
+                    pair_level(rows, split="heldout", need=2, pair_set="extension"), best))
+
+
+if __name__ == "__main__":
+    for b in sys.argv[1:]:
+        out, rows = report(b)
+        if b == "h17":
+            out["source_rule_selection"] = source_rule_selection(
+                rows, json.load(open(D + "battery_h17.json")))
+        if b == "h17a":
+            out["pair_level_selection"] = pair_level_selection(rows, out["chosen_cell"])
+        if b == "h17b":
+            out["posmode"] = posmode_table(rows, SCORE[b], out["chosen_cell"])
+        json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
+        c = out["chosen_cell"]
+        print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "
+              f"strength {c[1]}, positions {c[2]}")
+        for half in ("tuning", "heldout", "overall"):
+            a = out[half]
+            print(f"  {half:8s} lens {a.get('lens',[0,0,0])[0]:.3f} "
+                  f"({a.get('lens',[0,0,0])[1]}/{a.get('lens',[0,0,0])[2]})  "
+                  f"control A {a.get('randdir',[0,0,0])[0]:.3f}  "
+                  f"control B {a.get('randnorm',[0,0,0])[0]:.3f}")
+        print("  best cells overall (lens rate, control A, control B):")
+        for g in out["top_cells_overall"][:6]:
+            print(f"    layers {g['layers']:8s} alpha {g['alpha']:.1f} "
+                  f"{g['posmode']:12s} lens {g['overall']['lens'][0]:.3f} "
+                  f"A {g['overall'].get('randdir',[0])[0]:.3f} "
+                  f"B {g['overall'].get('randnorm',[0])[0]:.3f}")

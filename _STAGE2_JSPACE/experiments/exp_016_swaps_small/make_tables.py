@@ -65,14 +65,24 @@ for b in BATTERIES:
         for arm in ("lens", "randdir", "randnorm"):
             print(f"- {NAME[arm]}: {pct(r.get(arm,[0,0,0]))}")
     if b == "h17b":
-        print("\nBy position mode, best setting within each mode:\n")
-        print("| positions | best layers | strength | lens | control A | control B |")
-        print("|---|---|---|---|---|---|")
-        best = analyse.posmode_table(rows, key)
-        for m, (cell, rate, arms) in sorted(best.items()):
-            print(f"| {m} | {cell[0]} | {cell[1]} | {arms['lens']*100:.0f} percent | "
-                  f"{arms.get('randdir',0)*100:.0f} percent | "
-                  f"{arms.get('randnorm',0)*100:.0f} percent |")
+        pm = s["posmode"]
+        print(f"\nBy position mode at the tuned layer set and strength (layers {c[0]}, "
+              f"strength {c[1]}), so that only the patched positions differ:\n")
+        print("| positions | half | lens | control A | control B |")
+        print("|---|---|---|---|---|")
+        for m, halves in pm["fixed_setting"].items():
+            for half in ("tuning", "heldout", "overall"):
+                r = halves[half]
+                print(f"| {m} | {half} | {pct(r.get('lens',[0,0,0]))} | {pct(r.get('randdir',[0,0,0]))} | "
+                      f"{pct(r.get('randnorm',[0,0,0]))} |")
+        print("\nBy position mode, each mode's own best setting chosen on the tuning "
+              "half and scored on the held-out half:\n")
+        print("| positions | tuned layers | strength | tuning, lens | held-out, lens | both halves, lens | both halves, control A |")
+        print("|---|---|---|---|---|---|---|")
+        for m, d in pm["tuned_per_mode"].items():
+            print(f"| {m} | {d['cell'][0]} | {d['cell'][1]} | {pct(d['tuning']['lens'])} | "
+                  f"{pct(d['heldout']['lens'])} | {pct(d['overall']['lens'])} | "
+                  f"{pct(d['overall'].get('randdir',[0,0,0]))} |")
         print("\nLooser score at the tuned setting, alternative answer in the "
               "top five:\n")
         r = analyse.subset_rates(rows, b, c, "in_top5", lambda x: True)
@@ -109,3 +119,41 @@ for b in BATTERIES:
                 for arm in ("lens", "randdir", "randnorm"):
                     if arm in a:
                         print(f"- {NAME[arm]}: {pct(a[arm])}")
+
+    if b == "h17":
+        sr = s["source_rule_selection"]
+        print(f"\nSource rule as part of the tuned selection (section 5.1 of the "
+              f"specification): chosen setting layers {sr['chosen_cell'][0]}, strength "
+              f"{sr['chosen_cell'][1]}, positions {sr['chosen_cell'][2]}, rule {sr['chosen_rule']}:\n")
+        print("| half | lens swap | control A | control B |")
+        print("|---|---|---|---|")
+        for half in ("tuning", "heldout", "overall"):
+            r = sr[half]
+            print(f"| {half} | {pct(r.get('lens',[0,0,0]))} | {pct(r.get('randdir',[0,0,0]))} | {pct(r.get('randnorm',[0,0,0]))} |")
+        print(f"\nEach source rule at the pooled tuned setting (layers {sr['pooled_cell'][0]}, "
+              f"strength {sr['pooled_cell'][1]}, positions {sr['pooled_cell'][2]}):\n")
+        print("| rule | half | lens swap | control A | control B |")
+        print("|---|---|---|---|---|")
+        for rule, halves in sr["per_rule"].items():
+            for half in ("tuning", "heldout", "overall"):
+                r = halves[half]
+                print(f"| {rule} | {half} | {pct(r.get('lens',[0,0,0]))} | {pct(r.get('randdir',[0,0,0]))} | {pct(r.get('randnorm',[0,0,0]))} |")
+    if b == "h17a":
+        pl = s["pair_level_selection"]
+        print(f"\nSelection by the registered pair-level outcome on the primary pairs "
+              f"(at least two of three functions redirected): chosen setting layers "
+              f"{pl['chosen_cell'][0]}, strength {pl['chosen_cell'][1]}, positions {pl['chosen_cell'][2]}, "
+              f"against layers {pl['function_cell'][0]} for the function-level selection the main "
+              f"analysis uses:\n")
+        print("| selection metric | setting | half | lens swap | control A | control B |")
+        print("|---|---|---|---|---|---|")
+        for label, cell, d in (("pair-level, primary pairs", pl["chosen_cell"], pl["pair_level"]),
+                               ("function-level (main analysis)", pl["function_cell"], pl["function_cell_pair_level"])):
+            for half in ("tuning", "heldout", "overall"):
+                r = d[half]
+                print(f"| {label} | layers {cell[0]}, strength {cell[1]}, {cell[2]} | {half} | "
+                      f"{pct(r.get('lens',[0,0,0]))} | {pct(r.get('randdir',[0,0,0]))} | {pct(r.get('randnorm',[0,0,0]))} |")
+        r = pl["extension_heldout_at_chosen"]
+        print(f"\nExtension set, held-out half, at the pair-level chosen setting: lens "
+              f"{pct(r.get('lens',[0,0,0]))}, control A {pct(r.get('randdir',[0,0,0]))}, "
+              f"control B {pct(r.get('randnorm',[0,0,0]))}.")

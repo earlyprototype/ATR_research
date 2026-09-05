@@ -26,12 +26,15 @@ POSMODES = {"h17": ["all", "last"],
             "h17b": ["all_no_bos", "from_mention", "answer_only"]}
 
 
-def control_seed(item_id, func, layer, seed):
-    """A stable seed for the random-direction controls. The first run used
-    Python's hash() here, which is randomised per process, so the committed
-    control draws cannot be regenerated; every run from this version on
-    derives the seed from a fixed checksum of the same tuple."""
-    return zlib.crc32(f"{item_id}|{func}|{layer}|{seed}".encode("utf-8"))
+def control_seed(item_id, layer, seed):
+    """A stable seed for the random-direction controls, one draw per item,
+    layer and seed index. The three H17a functions of one country pair share
+    the draw, as they share the lens swap, so the pair-level control outcome
+    is like for like. The first run used Python's hash() of a tuple that
+    also carried the function name, which is randomised per process, so the
+    committed control draws cannot be regenerated and, for H17a, differed
+    between the three functions of a pair."""
+    return zlib.crc32(f"{item_id}|{layer}|{seed}".encode("utf-8"))
 
 
 def arms(seeds):
@@ -96,7 +99,7 @@ def main(battery):
             V_lens[l] = W
             for s in seeds:
                 V_rand[(l, s)] = random_pair(W[:, 0], W[:, 1],
-                                             control_seed(u["item_id"], u.get("func", ""), l, s))
+                                             control_seed(u["item_id"], l, s))
         conds = [(ls, a, m, arm, sd) for ls in sets for a in ALPHAS
                  for m in modes for arm, sd in arms(seeds)]
         for c0 in range(0, len(conds), CHUNK):
@@ -130,7 +133,7 @@ def main(battery):
     json.dump(dict(battery=battery, n_units=len(units), n_conditions=n_done,
                    layer_sets=[list(s) for s in sets], alphas=ALPHAS,
                    posmodes=modes, seeds=seeds, chunk=CHUNK,
-                   control_seed_scheme="crc32(item_id|func|layer|seed)",
+                   control_seed_scheme="crc32(item_id|layer|seed), shared across the functions of a pair",
                    patch_norm="Euclidean norm of the total residual change over patched positions and layers",
                    lens_sha256=lib_exp016.LENS_SHA256_MEASURED, jlens_commit=JLENS_COMMIT,
                    torch=torch.__version__,

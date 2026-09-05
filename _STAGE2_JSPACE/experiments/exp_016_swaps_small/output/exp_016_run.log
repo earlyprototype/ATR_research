@@ -122,3 +122,7 @@ reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82b
   installed during the run for the figures only; it touches no measurement.
 
 [2026-09-05T17:31:59.067398Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 133.9 s
+
+[2026-09-05T17:43:38.499619Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 136.7 s
+
+[2026-09-05T17:50:00Z] review follow-up: check_engine.py re-run with its checks now asserting (exit 0, all four passed); analyse.py h17 h17a h17b re-run to add the source-rule, pair-level and position-mode selection routes to the summary files (chosen settings unchanged); make_tables.py output re-pasted into RESULTS_EXP016.md.
