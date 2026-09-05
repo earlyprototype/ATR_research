@@ -187,7 +187,9 @@ for b in BATTERIES:
         return f"{t[0]} lens successes over {t[1]} informative items, probability {t[2]:.3g}"
     print("\nExact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):\n")
     for name, t in et.items():
-        print(f"- {name.replace('_', ' ')}: {fmt(t)}")
+        tag = "" if "heldout" in name else " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)"
+        print(f"- {name.replace('_', ' ')}: {fmt(t)}{tag}")
+    print("\nOnly the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.")
     if b == "h17a":
         rs = s["registered_split"]
         fl, pl = rs["function_level"], rs["pair_level"]

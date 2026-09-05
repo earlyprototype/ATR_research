@@ -77,28 +77,31 @@ register:
   items, which is 25 percent**, against **0 of 48 control trials, which is 0
   percent**. The exact within-item test (the lens draw exchangeable with
   the three control draws inside each item, see "Statistical
-  distinguishability" below) gives a probability of 0.0039 over all 16
-  items, because each of the 4 flipped items has one success among four
-  draws and chance would put all four on the lens one time in 256, and
-  0.25 on the held-out half alone, where there is one such item. Three
+  distinguishability" below) gives 0.25 on the held-out half (1 of 8
+  against 0 of 8), and that is the only valid test of the selected
+  setting: the tuning half's three flips were used to choose the layer,
+  strength and position mode from 126 candidate settings and cannot also
+  count as evidence for them. Over all 16 items the same test would give
+  0.0039, one in 256, but that figure reuses the selection outcomes and is
+  reported only to show what the selection consumed. Three
   earlier versions of this record gave 0.0029 (control draws counted as
   items), 0.051 (the arms tested as independent samples) and 0.0625 (a
   sign test against the union of the three control draws, which is not an
   exchangeable pair); all three are withdrawn (see the corrections
   below). The registered
   rule asked only that the flip happen more often than under the control,
-  and it does; over all 16 items the exact test puts the effect inside the
-  usual 5 percent level, but on the held-out half alone, the number the
-  specification judges on, it does not, and the battery is too small for
+  and it does, but on the held-out half, the only valid test of the
+  selected setting and the number the specification judges on, the effect
+  is not distinguishable from chance, and the battery is too small for
   this verdict to carry much weight on its own. One population caveat cuts
   the other way
   (deviation 14): the specification's gate admitted 9 items whose correct
   answer the unmodified model ranks second or third, and all four flips are
   among the 7 items it ranks first, which is the population the registered
   wording names if "answers correctly" is read strictly. On those 7 the
-  result is 4 of 7 against 0 of 7 for control A (exact within-item
-  probability 0.0039, the same four items), and 1 of 3 against 0 of 3 on
-  the held-out half.
+  result is 4 of 7 against 0 of 7 for control A, and 1 of 3 against 0 of
+  3 on the held-out half, which is again the only valid test (exact
+  within-item probability 0.25).
 
 The most interesting single number is not any of those three. It is the
 contrast inside H17b. Exchanging the concept everywhere from its first
@@ -259,6 +262,8 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 - rule lens heldout: 9 lens successes over 9 informative items, probability 5.08e-05
 - rule output heldout: 18 lens successes over 18 informative items, probability 2.58e-09
 
+Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
+
 ### H17A: tuned setting = layers 6, strength 2.0, positions all   (18600 records)
 
 | arm | tuning half | held-out half | both halves |
@@ -358,9 +363,11 @@ Rank-1 sensitivity check (specification section 5.2): only the 72 of 124 scoreab
 Exact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):
 
 - pairs primary heldout: 13 lens successes over 13 informative items, probability 6.27e-07
-- pairs primary both: 26 lens successes over 26 informative items, probability 3.93e-13
+- pairs primary both: 26 lens successes over 26 informative items, probability 3.93e-13 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)
 - pairs primary heldout rank1: 7 lens successes over 7 informative items, probability 0.000457
 - pairs primary heldout layer9: 13 lens successes over 13 informative items, probability 6.27e-07
+
+Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
 Under the specification's own split rule (alternate pairs in the committed order, 25 tuning and 25 held-out, against the country-wise 27 and 23 the battery was built with): function-level selection picks layers 10, strength 2.0, all (tuning 87 percent (54 of 62), held-out 85 percent (53 of 62) per question; held-out primary pairs 14 of 15 against 0 of 30); pair-level selection picks layers 9 (held-out primary pairs 13 of 15 against 0 of 30). At the committed cells, held-out primary pairs under that split: layer 6 14 of 15, layer 9 13 of 15, control A 0 of 30 at both.
 
@@ -438,9 +445,11 @@ Rank-1 sensitivity check (specification section 5.3): the 7 of 16 items whose co
 
 Exact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):
 
-- items all: 4 lens successes over 4 informative items, probability 0.00391
+- items all: 4 lens successes over 4 informative items, probability 0.00391 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)
 - items heldout: 1 lens successes over 1 informative items, probability 0.25
-- items rank1: 4 lens successes over 4 informative items, probability 0.00391
+- items rank1: 4 lens successes over 4 informative items, probability 0.00391 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)
+
+Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
 ### Numbers not in the tables above
 
@@ -472,9 +481,13 @@ times 10 to the power minus 9 at the protocol setting (18 items) and 1.3
 times 10 to the power minus 13 pooled over both source rules (27); H17a,
 scored per pair on the primary pairs, gives 6.3 times 10 to the power
 minus 7 (13 pairs), and 4.6 times 10 to the power minus 4 on the rank-one
-questions alone (7 pairs); H17b gives 0.25 (1 item), and 0.0039 over all
-16 items rather than the held-out half alone (4 items). The summary files
-carry these under `exact_tests`. Three earlier versions of this paragraph
+questions alone (7 pairs); H17b gives 0.25 (1 item). Only the held-out
+half tests a selected setting: the tuning half chose the setting from the
+grid, so a test that includes tuning items reuses the outcomes that made
+the choice and is not a valid test of it; the all-items figures in the
+tables (H17b 0.0039, 4 items) are labelled post-selection and carry no
+evidential weight. The summary files carry every test under
+`exact_tests`. Three earlier versions of this paragraph
 are withdrawn: the first counted every control draw as a separate item
 (4.2 times 10 to the power minus 17, 1.6 times 10 to the power minus 22,
 0.25 and 0.0029), the second tested the two arms as independent samples at
@@ -525,9 +538,9 @@ confined to the country's mention, was not run for H17a.
 
 **Whether it reaches an intermediate reasoning step is unsettled, and the
 evidence leans yes.** H17b's flip rate of 4 in 16 items against 0 in 16
-for the control (three draws each) is small; on the exact within-item test
-it is distinguishable from chance over all items (probability 0.0039) and
-not on the held-out half alone (0.25); the
+for the control (three draws each) is small and, on the held-out half,
+the only valid test of the selected setting, not distinguishable from
+chance (exact within-item probability 0.25); the
 position contrast at the tuned layer and strength (4 of 16 when the
 exchange starts at the concept's first mention, 0 of 16 when it happens
 only at the answer position) is in the direction that separates reasoning
@@ -994,8 +1007,10 @@ computation is inferred, not established.
     the lens draw is one more random draw. H17 stays far below any
     threshold (2.6 times 10 to the power minus 9 at the protocol setting),
     H17a's pair-level result gives 6.3 times 10 to the power minus 7 (13
-    pairs), and H17b moves from 0.0029 to 0.0039 over all items and from
-    0.25 to 0.25 on the held-out half.
+    pairs), and H17b's held-out probability is 0.25; its all-items figure,
+    which earlier versions of this record treated as a test, reuses the
+    tuning outcomes that selected the setting and is labelled
+    post-selection.
 
 14. **The gates admitted answers the model ranks second or third, and the
     promised rank-one sensitivity check was missing.** The register's
@@ -1078,9 +1093,11 @@ wrong, and what is true instead. The numbers are in the sections above.
    is real". Those probabilities counted the 48 control rows as 48 items;
    a second version's 0.051 tested the arms as independent samples; a
    third version's 0.0625 sign-tested the lens draw against the union of
-   three control draws. The exact within-item probabilities are 0.0039
-   over all items and 0.25 on the held-out half: inside the usual level
-   over all items, outside it on the half the specification judges on.
+   three control draws; a fourth said the exact within-item test put the
+   effect inside the usual level over all items. That last figure (0.0039)
+   reuses the tuning-half flips that selected the setting. The only valid
+   test is the held-out half, 0.25, and the effect is not distinguishable
+   from chance.
 3. It said that swapping only at the answer position flipped 1 of 16 items,
    against 4 of 16 for swapping from the first mention. The 1 came from a
    different layer set chosen over all items. At the tuned layer and
@@ -1110,9 +1127,10 @@ wrong, and what is true instead. The numbers are in the sections above.
     (limit seven).
 11. Its tests took three attempts to reach an exchangeable null: control
     draws counted as items, then independent samples at item level, then
-    a sign test against the union of an item's control draws. Every
-    probability is now the exact within-item test, and H17b's is 0.0039
-    over all items and 0.25 on the held-out half.
+    a sign test against the union of an item's control draws, then an
+    exact test that reused the tuning-half outcomes. Every probability is
+    now the exact within-item test on the held-out half, and H17b's is
+    0.25.
 12. It assigned the H17a halves by source country (27 and 23 pairs) and
     described the split as the specification's alternating-item rule. The
     registered rule gives 25 and 25; under it the selection picks layer 10
@@ -1169,9 +1187,9 @@ much they would add.
 
 2. **Whether H17b's verdict should stand as SUPPORTED.** It is supported on
    the registered wording, which asks only that the flip happen more often
-   than under the control, and the exact within-item test across all 16
-   items puts the effect at a probability of 0.0039, inside the usual 5
-   percent level; but
+   than under the control, but the only valid test of the selected setting
+   is the held-out half, which gives a probability of 0.25 (1 of 8 against
+   0 of 8), and
    and on the held-out half alone, which this experiment's own
    specification names as the number a hypothesis is judged on, it is 1 of
    8 against 0 of 8 and not distinguishable from chance (probability 0.5).
