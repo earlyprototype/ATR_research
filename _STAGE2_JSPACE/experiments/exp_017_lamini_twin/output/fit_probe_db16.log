@@ -1,0 +1,19 @@
+torch threads=1 prompts=5 dim_batch=16 model=MBZUAI/LaMini-GPT-124M
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 7538.80it/s]
+[transformers] [1mGPT2LMHeadModel LOAD REPORT[0m from: MBZUAI/LaMini-GPT-124M
+Key                                     | Status     |  | 
+----------------------------------------+------------+--+-
+transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[     7s +  7.49s] fit: n_layers=12 d_model=768, fitting 11 source layers (target=L11) on 5 prompts
+[  4m12s +245.17s]   prompt 1/5  seq_len=128 n_valid=111  245s  max||J||/sqrt(d)=1.737  max_d_mean=nan
+[  7m41s +208.65s]   prompt 2/5  seq_len=128 n_valid=111  209s  max||J||/sqrt(d)=1.883  max_d_mean=3.67e-01
+[ 11m09s +208.49s]   prompt 3/5  seq_len=128 n_valid=111  208s  max||J||/sqrt(d)=2.087  max_d_mean=2.71e-01
+[ 14m37s +207.51s]   prompt 4/5  seq_len=128 n_valid=111  207s  max||J||/sqrt(d)=1.739  max_d_mean=1.75e-01
+[ 18m33s +236.21s]   prompt 5/5  seq_len=128 n_valid=111  236s  max||J||/sqrt(d)=1.754  max_d_mean=1.52e-01
+[ 18m33s +  0.16s] fit: done, 5 prompts
+DONE n=5 dim_batch=16 wall=1106s (221.2s/prompt) -> /home/user/wt/exp017/_STAGE2_JSPACE/artifacts/jlens_lamini_gpt2_124m_5_probe.pt
+JacobianLens(d_model=768, n_prompts=5, source_layers=[0..10] (11 layers))

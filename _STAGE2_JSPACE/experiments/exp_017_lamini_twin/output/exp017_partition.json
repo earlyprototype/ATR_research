@@ -1,0 +1,1051 @@
+{
+  "experiment": "EXP_017",
+  "spec": "../../EXP_017_SPEC.md",
+  "cluster_threshold": 0.999,
+  "n_perm": 10000,
+  "perm_seed": 42,
+  "prompt_ids": [
+    "A08_linguistics",
+    "A14_kant",
+    "A15_sartre",
+    "A17_marx",
+    "A21_dickens",
+    "E01_politics",
+    "D01_water",
+    "A01_physics",
+    "B01_napoleon",
+    "C01_jack_jill",
+    "F01_anger",
+    "G01_punctuation",
+    "E02_tech",
+    "D02_periodic",
+    "A02_medical",
+    "B02_wwi",
+    "C02_king_cole",
+    "F02_insult",
+    "G02_brackets",
+    "E03_orgs",
+    "D03_organic",
+    "A03_neuro",
+    "B03_moon",
+    "C03_mary_lamb",
+    "F03_frustration"
+  ],
+  "per_prompt": [
+    {
+      "prompt_id": "A08_linguistics",
+      "category": "Complex",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.5141,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        "\u2026\u2026",
+        "\u2015",
+        "\u3010",
+        " divine"
+      ],
+      "base_loudness_ratio": 71.34,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1083,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " universal",
+        " freedom"
+      ],
+      "twin_loudness_ratio": 59.58
+    },
+    {
+      "prompt_id": "A14_kant",
+      "category": "Complex",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4493,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        "\u3010",
+        " Fairy",
+        " Falling",
+        " Elements"
+      ],
+      "base_loudness_ratio": 72.75,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1174,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " equality"
+      ],
+      "twin_loudness_ratio": 65.33
+    },
+    {
+      "prompt_id": "A15_sartre",
+      "category": "Complex",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4178,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        " Fairy",
+        "\u3010",
+        " Elements",
+        " Falling"
+      ],
+      "base_loudness_ratio": 77.02,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.119,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " Anarch",
+        " freedom"
+      ],
+      "twin_loudness_ratio": 67.16
+    },
+    {
+      "prompt_id": "A17_marx",
+      "category": "Complex",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.5239,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        "\u3010",
+        " Fairy",
+        " Falling",
+        "\u2015"
+      ],
+      "base_loudness_ratio": 72.4,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1156,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " liberty",
+        " absolute",
+        " freedom",
+        " equality"
+      ],
+      "twin_loudness_ratio": 63.94
+    },
+    {
+      "prompt_id": "A21_dickens",
+      "category": "Complex",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4297,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        " Fairy",
+        "\u3010",
+        " Falling",
+        " Elements"
+      ],
+      "base_loudness_ratio": 77.04,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.118,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " Anarch",
+        " freedom"
+      ],
+      "twin_loudness_ratio": 70.91
+    },
+    {
+      "prompt_id": "E01_politics",
+      "category": "Acronyms",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0992,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " Anarch",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 65.59,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1023,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " universal",
+        " instant"
+      ],
+      "twin_loudness_ratio": 58.67
+    },
+    {
+      "prompt_id": "D01_water",
+      "category": "Chemical",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.1104,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " Anarch",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 67.87,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.0909,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " av",
+        " instant"
+      ],
+      "twin_loudness_ratio": 59.98
+    },
+    {
+      "prompt_id": "A01_physics",
+      "category": "Complex",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0816,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " Anarch",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 66.87,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.104,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " universal",
+        " instant"
+      ],
+      "twin_loudness_ratio": 57.28
+    },
+    {
+      "prompt_id": "B01_napoleon",
+      "category": "Narrative",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0844,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " Anarch",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 65.41,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1089,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " universal",
+        " freedom"
+      ],
+      "twin_loudness_ratio": 58.32
+    },
+    {
+      "prompt_id": "C01_jack_jill",
+      "category": "Simple",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0615,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " Anarch",
+        " bourgeois",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 70.56,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1139,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " universal"
+      ],
+      "twin_loudness_ratio": 63.1
+    },
+    {
+      "prompt_id": "F01_anger",
+      "category": "Vulgarity",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4142,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        " Fairy",
+        "\u3010",
+        " Elements",
+        " Falling"
+      ],
+      "base_loudness_ratio": 79.3,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1166,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " equality"
+      ],
+      "twin_loudness_ratio": 66.79
+    },
+    {
+      "prompt_id": "G01_punctuation",
+      "category": "Wild",
+      "base_terminal": " till",
+      "base_terminal_id": 10597,
+      "base_prob": 0.2426,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " till",
+        " solidarity",
+        " BJP",
+        " agitation",
+        " Congress"
+      ],
+      "base_loudness_ratio": 87.91,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1219,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " Anarch",
+        " equality"
+      ],
+      "twin_loudness_ratio": 73.8
+    },
+    {
+      "prompt_id": "E02_tech",
+      "category": "Acronyms",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4675,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        "\u3010",
+        " Fairy",
+        " Falling",
+        " Elements"
+      ],
+      "base_loudness_ratio": 71.18,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1135,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " universal"
+      ],
+      "twin_loudness_ratio": 60.17
+    },
+    {
+      "prompt_id": "D02_periodic",
+      "category": "Chemical",
+      "base_terminal": " till",
+      "base_terminal_id": 10597,
+      "base_prob": 0.2289,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " till",
+        " solidarity",
+        " agitation",
+        " BJP",
+        " Congress"
+      ],
+      "base_loudness_ratio": 87.83,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1379,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " Anarch",
+        " anarchist",
+        " liberty",
+        " absolute"
+      ],
+      "twin_loudness_ratio": 77.18
+    },
+    {
+      "prompt_id": "A02_medical",
+      "category": "Complex",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0878,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " Anarch",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 66.4,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1021,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " universal",
+        " instant"
+      ],
+      "twin_loudness_ratio": 57.4
+    },
+    {
+      "prompt_id": "B02_wwi",
+      "category": "Narrative",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.1468,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " abstract",
+        " Anarch",
+        " Marx"
+      ],
+      "base_loudness_ratio": 56.23,
+      "twin_terminal": " instant",
+      "twin_terminal_id": 9113,
+      "twin_prob": 0.0626,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " instant",
+        " anarchism",
+        " av",
+        " Rousse",
+        " universal"
+      ],
+      "twin_loudness_ratio": 50.55
+    },
+    {
+      "prompt_id": "C02_king_cole",
+      "category": "Simple",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0722,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " Anarch",
+        " bourgeois",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 67.81,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1123,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " universal"
+      ],
+      "twin_loudness_ratio": 61.11
+    },
+    {
+      "prompt_id": "F02_insult",
+      "category": "Vulgarity",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4097,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        " Fairy",
+        "\u3010",
+        " Elements",
+        " Falling"
+      ],
+      "base_loudness_ratio": 76.71,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1179,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " Anarch",
+        " freedom"
+      ],
+      "twin_loudness_ratio": 68.65
+    },
+    {
+      "prompt_id": "G02_brackets",
+      "category": "Wild",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0645,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " Anarch",
+        " bourgeois",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 74.51,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1161,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " equality"
+      ],
+      "twin_loudness_ratio": 69.31
+    },
+    {
+      "prompt_id": "E03_orgs",
+      "category": "Acronyms",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4245,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        " Fairy",
+        "\u3010",
+        " Elements",
+        " Falling"
+      ],
+      "base_loudness_ratio": 74.18,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1173,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " Anarch"
+      ],
+      "twin_loudness_ratio": 64.0
+    },
+    {
+      "prompt_id": "D03_organic",
+      "category": "Chemical",
+      "base_terminal": " till",
+      "base_terminal_id": 10597,
+      "base_prob": 0.2668,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " till",
+        " solidarity",
+        " BJP",
+        " agitation",
+        " Congress"
+      ],
+      "base_loudness_ratio": 88.42,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1169,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " equality"
+      ],
+      "twin_loudness_ratio": 71.96
+    },
+    {
+      "prompt_id": "A03_neuro",
+      "category": "Complex",
+      "base_terminal": " Anarch",
+      "base_terminal_id": 32229,
+      "base_prob": 0.0593,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Anarch",
+        " prolet",
+        " bourgeois",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 71.57,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1128,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " universal"
+      ],
+      "twin_loudness_ratio": 62.33
+    },
+    {
+      "prompt_id": "B03_moon",
+      "category": "Narrative",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4718,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        "\u3010",
+        " Fairy",
+        " Falling",
+        " Elements"
+      ],
+      "base_loudness_ratio": 73.36,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1162,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " equality"
+      ],
+      "twin_loudness_ratio": 65.45
+    },
+    {
+      "prompt_id": "C03_mary_lamb",
+      "category": "Simple",
+      "base_terminal": " prolet",
+      "base_terminal_id": 22758,
+      "base_prob": 0.0948,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " prolet",
+        " bourgeois",
+        " Anarch",
+        " Marx",
+        " comrade"
+      ],
+      "base_loudness_ratio": 65.06,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1134,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " freedom",
+        " universal"
+      ],
+      "twin_loudness_ratio": 62.5
+    },
+    {
+      "prompt_id": "F03_frustration",
+      "category": "Vulgarity",
+      "base_terminal": " Divine",
+      "base_terminal_id": 13009,
+      "base_prob": 0.4082,
+      "base_lock_in_iter": 120,
+      "base_converged": true,
+      "base_top5": [
+        " Divine",
+        " Fairy",
+        "\u3010",
+        " Elements",
+        " Falling"
+      ],
+      "base_loudness_ratio": 77.56,
+      "twin_terminal": " anarchism",
+      "twin_terminal_id": 41661,
+      "twin_prob": 0.1224,
+      "twin_lock_in_iter": 120,
+      "twin_converged": true,
+      "twin_top5": [
+        " anarchism",
+        " absolute",
+        " liberty",
+        " Anarch",
+        " equality"
+      ],
+      "twin_loudness_ratio": 70.75
+    }
+  ],
+  "twin_summary": {
+    "converged": 25,
+    "lock_in_iters": [
+      120
+    ],
+    "terminal_tokens": {
+      " anarchism": 24,
+      " instant": 1
+    },
+    "loudness_ratio_mean": 64.25,
+    "loudness_ratio_range": [
+      50.55,
+      77.18
+    ],
+    "mean_terminal_prob": 0.1119,
+    "extra_vocab_token_used": false,
+    "lag_scan_mean": {
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0,
+      "4": 1.0,
+      "5": 1.0,
+      "6": 1.0,
+      "7": 1.0,
+      "8": 1.0
+    }
+  },
+  "base_summary": {
+    "converged": 25,
+    "lock_in_iters": [
+      120
+    ],
+    "terminal_tokens": {
+      " Divine": 11,
+      " prolet": 10,
+      " till": 3,
+      " Anarch": 1
+    },
+    "loudness_ratio_mean": 73.0,
+    "loudness_ratio_range": [
+      56.23,
+      88.42
+    ],
+    "mean_terminal_prob": 0.2653,
+    "extra_vocab_token_used": false,
+    "lag_scan_mean": {
+      "1": 0.8574,
+      "2": 1.0,
+      "3": 0.8574,
+      "4": 1.0,
+      "5": 0.8574,
+      "6": 1.0,
+      "7": 0.8574,
+      "8": 1.0
+    }
+  },
+  "h18_primary": {
+    "twin_basins": 5,
+    "base_basins": 7,
+    "twin_labels": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      3,
+      0,
+      4,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "base_labels": [
+      0,
+      1,
+      2,
+      1,
+      1,
+      3,
+      3,
+      3,
+      3,
+      4,
+      2,
+      5,
+      1,
+      5,
+      3,
+      6,
+      4,
+      1,
+      4,
+      2,
+      5,
+      4,
+      1,
+      3,
+      1
+    ],
+    "trivial_partition": {
+      "twin": false,
+      "base": false
+    },
+    "ari": 0.1694,
+    "perm_p": 0.0097,
+    "h18": "SUPPORTED"
+  },
+  "h18_threshold_sweep": [
+    {
+      "threshold": 0.99,
+      "twin_basins": 2,
+      "base_basins": 4,
+      "ari": 0.0659,
+      "perm_p": 0.15538
+    },
+    {
+      "threshold": 0.995,
+      "twin_basins": 3,
+      "base_basins": 5,
+      "ari": 0.1329,
+      "perm_p": 0.0232
+    },
+    {
+      "threshold": 0.999,
+      "twin_basins": 5,
+      "base_basins": 7,
+      "ari": 0.1694,
+      "perm_p": 0.0097
+    },
+    {
+      "threshold": 0.9995,
+      "twin_basins": 6,
+      "base_basins": 8,
+      "ari": 0.1727,
+      "perm_p": 0.0046
+    }
+  ],
+  "h18_secondary_committed_lag1": {
+    "what": "base GPT-2 Small arm SB as committed by EXP_010b, lag-1 gate",
+    "base_lag1_basins": 7,
+    "labels": [
+      0,
+      1,
+      2,
+      0,
+      1,
+      3,
+      3,
+      3,
+      3,
+      4,
+      2,
+      5,
+      1,
+      5,
+      3,
+      6,
+      4,
+      2,
+      4,
+      2,
+      5,
+      4,
+      0,
+      3,
+      2
+    ],
+    "ari_vs_twin": 0.1878,
+    "perm_p": 0.0029,
+    "ari_lag1_vs_this_runs_lag2_base": 0.6809,
+    "perm_p_lag1_vs_this_runs_lag2_base": 0.0001
+  },
+  "h18_secondary_exp010d": {
+    "what": "EXP_010d's committed Small reference partition, restricted to the prompts the two 25-prompt lists share",
+    "n_shared_prompts": 20,
+    "shared_prompt_ids": [
+      "E01_politics",
+      "D01_water",
+      "A01_physics",
+      "B01_napoleon",
+      "C01_jack_jill",
+      "F01_anger",
+      "G01_punctuation",
+      "E02_tech",
+      "D02_periodic",
+      "A02_medical",
+      "B02_wwi",
+      "C02_king_cole",
+      "F02_insult",
+      "G02_brackets",
+      "E03_orgs",
+      "D03_organic",
+      "A03_neuro",
+      "B03_moon",
+      "C03_mary_lamb",
+      "F03_frustration"
+    ],
+    "exp010d_basins": 7,
+    "twin_basins": 5,
+    "base_basins": 6,
+    "ari_exp010d_vs_twin": 0.2538,
+    "perm_p": 0.0049,
+    "ari_exp010d_vs_this_runs_base": 0.9805,
+    "perm_p_base": 0.0001
+  },
+  "h18a": {
+    "threshold": "at least 13 of 25, being at least half of 25",
+    "reading_a_verdict_bearing": {
+      "token_set": [
+        " prolet",
+        " Divine",
+        " till",
+        " Anarch",
+        " solidarity"
+      ],
+      "set_source": "Stage 1's five established basin tokens",
+      "hits": 0,
+      "of": 25,
+      "prompts": [],
+      "h18a": "REFUTED"
+    },
+    "reading_b_secondary": {
+      "token_set": [
+        " Anarch",
+        " Divine",
+        " prolet",
+        " till"
+      ],
+      "set_source": "the tokens base GPT-2 Small produced in this run's own matched lag-2 arm",
+      "hits": 0,
+      "of": 25,
+      "prompts": [],
+      "reading": "would be REFUTED"
+    },
+    "twin_repeated_terminal": {
+      "token": " anarchism",
+      "count": 24,
+      "all_counts": {
+        " anarchism": 24,
+        " instant": 1
+      }
+    },
+    "base_terminal_counts": {
+      " Divine": 11,
+      " prolet": 10,
+      " till": 3,
+      " Anarch": 1
+    },
+    "twin_top1_equals_base_top1_same_prompt": 0,
+    "twin_top5_contains_a_stage1_basin_token": 7
+  }
+}

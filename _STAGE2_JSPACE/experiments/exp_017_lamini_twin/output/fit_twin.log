@@ -1,0 +1,51 @@
+budget rule chose n=40 from a measured 221.0 seconds per prompt; resuming from the probe checkpoint, 5 of 40 prompts already done
+torch threads=1 prompts=40 dim_batch=16 model=MBZUAI/LaMini-GPT-124M
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 10491.22it/s]
+[transformers] [1mGPT2LMHeadModel LOAD REPORT[0m from: MBZUAI/LaMini-GPT-124M
+Key                                     | Status     |  | 
+----------------------------------------+------------+--+-
+transformer.h.{0...11}.attn.masked_bias | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[     7s +  7.33s] fit: n_layers=12 d_model=768, fitting 11 source layers (target=L11) on 40 prompts
+[     7s +  0.03s]   resuming from checkpoint: 5/40 prompts processed
+[  5m16s +308.70s]   prompt 6/40  seq_len=128 n_valid=111  309s  max||J||/sqrt(d)=1.893  max_d_mean=1.16e-01
+[ 10m12s +296.20s]   prompt 7/40  seq_len=128 n_valid=111  296s  max||J||/sqrt(d)=1.718  max_d_mean=9.03e-02
+[ 15m16s +304.61s]   prompt 8/40  seq_len=128 n_valid=111  305s  max||J||/sqrt(d)=1.761  max_d_mean=8.05e-02
+[ 22m49s +452.76s]   prompt 9/40  seq_len=128 n_valid=111  453s  max||J||/sqrt(d)=1.759  max_d_mean=7.02e-02
+[ 30m07s +438.22s]   prompt 10/40  seq_len=128 n_valid=111  438s  max||J||/sqrt(d)=1.718  max_d_mean=6.02e-02
+[ 36m18s +370.31s]   prompt 11/40  seq_len=128 n_valid=111  370s  max||J||/sqrt(d)=1.765  max_d_mean=5.30e-02
+[ 40m34s +256.06s]   prompt 12/40  seq_len=128 n_valid=111  256s  max||J||/sqrt(d)=1.783  max_d_mean=4.74e-02
+[ 44m47s +253.05s]   prompt 13/40  seq_len=128 n_valid=111  253s  max||J||/sqrt(d)=1.753  max_d_mean=5.16e-02
+[ 49m00s +253.30s]   prompt 14/40  seq_len=128 n_valid=111  253s  max||J||/sqrt(d)=1.751  max_d_mean=3.68e-02
+[ 52m35s +214.73s]   prompt 15/40  seq_len=128 n_valid=111  215s  max||J||/sqrt(d)=1.781  max_d_mean=4.98e-02
+[ 55m58s +203.26s]   prompt 16/40  seq_len=128 n_valid=111  203s  max||J||/sqrt(d)=1.786  max_d_mean=4.72e-02
+[ 59m21s +203.27s]   prompt 17/40  seq_len=128 n_valid=111  203s  max||J||/sqrt(d)=1.748  max_d_mean=3.97e-02
+[  1h02m +200.16s]   prompt 18/40  seq_len=128 n_valid=111  200s  max||J||/sqrt(d)=1.811  max_d_mean=4.13e-02
+[  1h06m +199.10s]   prompt 19/40  seq_len=128 n_valid=111  199s  max||J||/sqrt(d)=1.949  max_d_mean=4.51e-02
+[  1h09m +199.51s]   prompt 20/40  seq_len=128 n_valid=111  199s  max||J||/sqrt(d)=1.962  max_d_mean=4.46e-02
+[  1h12m +202.35s]   prompt 21/40  seq_len=128 n_valid=111  202s  max||J||/sqrt(d)=1.794  max_d_mean=3.52e-02
+[  1h16m +206.64s]   prompt 22/40  seq_len=128 n_valid=111  207s  max||J||/sqrt(d)=1.976  max_d_mean=3.65e-02
+[  1h19m +197.31s]   prompt 23/40  seq_len=128 n_valid=111  197s  max||J||/sqrt(d)=1.746  max_d_mean=2.64e-02
+[  1h22m +201.93s]   prompt 24/40  seq_len=128 n_valid=111  202s  max||J||/sqrt(d)=1.825  max_d_mean=2.88e-02
+[  1h26m +208.92s]   prompt 25/40  seq_len=128 n_valid=111  209s  max||J||/sqrt(d)=1.800  max_d_mean=2.62e-02
+[  1h29m +210.38s]   prompt 26/40  seq_len=128 n_valid=111  210s  max||J||/sqrt(d)=1.719  max_d_mean=2.32e-02
+[  1h33m +209.11s]   prompt 27/40  seq_len=128 n_valid=111  209s  max||J||/sqrt(d)=1.764  max_d_mean=2.38e-02
+[  1h36m +209.70s]   prompt 28/40  seq_len=128 n_valid=111  210s  max||J||/sqrt(d)=1.803  max_d_mean=2.22e-02
+[  1h40m +208.71s]   prompt 29/40  seq_len=128 n_valid=111  209s  max||J||/sqrt(d)=1.715  max_d_mean=1.86e-02
+[  1h43m +189.36s]   prompt 30/40  seq_len=117 n_valid=100  189s  max||J||/sqrt(d)=1.721  max_d_mean=1.90e-02
+[  1h46m +207.88s]   prompt 31/40  seq_len=128 n_valid=111  208s  max||J||/sqrt(d)=1.847  max_d_mean=2.02e-02
+[  1h50m +210.97s]   prompt 32/40  seq_len=128 n_valid=111  211s  max||J||/sqrt(d)=1.765  max_d_mean=1.79e-02
+[  1h53m +210.57s]   prompt 33/40  seq_len=128 n_valid=111  211s  max||J||/sqrt(d)=1.696  max_d_mean=1.86e-02
+[  1h57m +201.99s]   prompt 34/40  seq_len=128 n_valid=111  202s  max||J||/sqrt(d)=1.880  max_d_mean=1.92e-02
+[  2h00m +199.80s]   prompt 35/40  seq_len=128 n_valid=111  200s  max||J||/sqrt(d)=1.729  max_d_mean=1.86e-02
+[  2h03m +198.31s]   prompt 36/40  seq_len=128 n_valid=111  198s  max||J||/sqrt(d)=1.841  max_d_mean=2.06e-02
+[  2h07m +196.71s]   prompt 37/40  seq_len=128 n_valid=111  197s  max||J||/sqrt(d)=1.921  max_d_mean=2.12e-02
+[  2h10m +222.03s]   prompt 38/40  seq_len=128 n_valid=111  222s  max||J||/sqrt(d)=1.918  max_d_mean=2.50e-02
+[  2h14m +204.98s]   prompt 39/40  seq_len=128 n_valid=111  205s  max||J||/sqrt(d)=1.715  max_d_mean=2.06e-02
+[  2h17m +202.48s]   prompt 40/40  seq_len=128 n_valid=111  202s  max||J||/sqrt(d)=1.800  max_d_mean=1.79e-02
+[  2h17m +  0.08s] fit: done, 40 prompts
+DONE n=40 dim_batch=16 wall=8253s (206.3s/prompt) -> /home/user/wt/exp017/_STAGE2_JSPACE/artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+JacobianLens(d_model=768, n_prompts=40, source_layers=[0..10] (11 layers))

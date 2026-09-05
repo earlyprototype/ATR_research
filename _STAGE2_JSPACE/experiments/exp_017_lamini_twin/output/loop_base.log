@@ -1,0 +1,56 @@
+EXP_017 loop | model=base (gpt2) threads=1 seed=42
+params: {'layer_start': 0, 'layer_end': 11, 'max_iter': 1000, 'threshold': 0.999, 'patience': 3, 'check_every': 10, 'check_start': 100, 'gate_lag': 2, 'renorm': 'seed_j'}
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 3428.33it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/home/user/wt/exp017/_STAGE2_JSPACE/experiments/exp_017_lamini_twin/run_loop.py:54: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok,
+Loaded pretrained model gpt2 into HookedTransformer
+loaded: n_layers=12 d_model=768 d_vocab=50257
+natural entry sizes recorded -> natural_resid_norms_base.json
+/home/user/wt/exp017/_STAGE2_JSPACE/experiments/atr_engine2.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  margin = float(top_logits[0] - top_logits[1]) if top_logits.numel() > 1 else 0.0
+  [ 1/25] A08_linguistics  lock=  120 conv=True  top1=' Divine'      p=0.514 loud=71.3x 61s
+  [ 2/25] A14_kant         lock=  120 conv=True  top1=' Divine'      p=0.449 loud=72.8x 58s
+  [ 3/25] A15_sartre       lock=  120 conv=True  top1=' Divine'      p=0.418 loud=77.0x 62s
+  [ 4/25] A17_marx         lock=  120 conv=True  top1=' Divine'      p=0.524 loud=72.4x 57s
+  [ 5/25] A21_dickens      lock=  120 conv=True  top1=' Divine'      p=0.430 loud=77.0x 63s
+  [ 6/25] E01_politics     lock=  120 conv=True  top1=' prolet'      p=0.099 loud=65.6x 64s
+  [ 7/25] D01_water        lock=  120 conv=True  top1=' prolet'      p=0.110 loud=67.9x 54s
+  [ 8/25] A01_physics      lock=  120 conv=True  top1=' prolet'      p=0.082 loud=66.9x 59s
+  [ 9/25] B01_napoleon     lock=  120 conv=True  top1=' prolet'      p=0.084 loud=65.4x 62s
+  [10/25] C01_jack_jill    lock=  120 conv=True  top1=' prolet'      p=0.061 loud=70.6x 56s
+  [11/25] F01_anger        lock=  120 conv=True  top1=' Divine'      p=0.414 loud=79.3x 55s
+  [12/25] G01_punctuation  lock=  120 conv=True  top1=' till'        p=0.243 loud=87.9x 72s
+  [13/25] E02_tech         lock=  120 conv=True  top1=' Divine'      p=0.467 loud=71.2x 79s
+  [14/25] D02_periodic     lock=  120 conv=True  top1=' till'        p=0.229 loud=87.8x 74s
+  [15/25] A02_medical      lock=  120 conv=True  top1=' prolet'      p=0.088 loud=66.4x 77s
+  [16/25] B02_wwi          lock=  120 conv=True  top1=' prolet'      p=0.147 loud=56.2x 88s
+  [17/25] C02_king_cole    lock=  120 conv=True  top1=' prolet'      p=0.072 loud=67.8x 72s
+  [18/25] F02_insult       lock=  120 conv=True  top1=' Divine'      p=0.410 loud=76.7x 70s
+  [19/25] G02_brackets     lock=  120 conv=True  top1=' prolet'      p=0.065 loud=74.5x 66s
+  [20/25] E03_orgs         lock=  120 conv=True  top1=' Divine'      p=0.425 loud=74.2x 66s
+  [21/25] D03_organic      lock=  120 conv=True  top1=' till'        p=0.267 loud=88.4x 75s
+  [22/25] A03_neuro        lock=  120 conv=True  top1=' Anarch'      p=0.059 loud=71.6x 76s
+  [23/25] B03_moon         lock=  120 conv=True  top1=' Divine'      p=0.472 loud=73.4x 68s
+  [24/25] C03_mary_lamb    lock=  120 conv=True  top1=' prolet'      p=0.095 loud=65.1x 80s
+  [25/25] F03_frustration  lock=  120 conv=True  top1=' Divine'      p=0.408 loud=77.6x 76s
+
+=== base: converged 25/25, wall 1689s ===
+terminal tokens: [(' Divine', 11), (' prolet', 10), (' till', 3), (' Anarch', 1)]
+entry loudness ratio: mean 73.0x, range 56.2-88.4x
+terminals -> terminals_base.npz sha256 497f567deb25cbc306b8cfae635eaa292d581ab8def752970c44226de6016762
+=== EXP_017 Part 1 ===
+base  converged 25/25, locks [120], loudness 73.0x [56.23, 88.42]
+      terminals: {' Divine': 11, ' prolet': 10, ' till': 3, ' Anarch': 1}
+twin  converged 25/25, locks [120], loudness 64.25x [50.55, 77.18]
+      terminals: {' anarchism': 24, ' instant': 1}
+
+H18: twin 5 basins, base 7 basins -> SUPPORTED
+     ari = 0.1694
+     perm_p = 0.0097
+H18a reading A: 0/25 -> REFUTED
+H18a reading B: 0/25 (would be REFUTED)
+
+Sweep: [{"threshold": 0.99, "twin_basins": 2, "base_basins": 4, "ari": 0.0659, "perm_p": 0.15538}, {"threshold": 0.995, "twin_basins": 3, "base_basins": 5, "ari": 0.1329, "perm_p": 0.0232}, {"threshold": 0.999, "twin_basins": 5, "base_basins": 7, "ari": 0.1694, "perm_p": 0.0097}, {"threshold": 0.9995, "twin_basins": 6, "base_basins": 8, "ari": 0.1727, "perm_p": 0.0046}]
+Saved -> output/exp017_partition.json

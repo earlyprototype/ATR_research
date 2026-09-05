@@ -1,0 +1,49 @@
+{
+  "twin": {
+    "max_abs_raw": 26.624902725219727,
+    "per_position_offset_std_max": 4.986142357665813e-06,
+    "max_abs_after_centering": 2.5272369384765625e-05,
+    "max_abs_logprob": 3.4332275390625e-05,
+    "max_abs_prob": 1.7285346984863281e-06,
+    "top5_hf": [
+      " it",
+      " the",
+      " there",
+      " quantum",
+      " they"
+    ],
+    "top5_ht": [
+      " it",
+      " the",
+      " there",
+      " quantum",
+      " they"
+    ],
+    "d_vocab": 50258
+  },
+  "wte_shared_rows_rel_frobenius": 0.030686479061841965,
+  "extra_row_norm": 2.062398910522461,
+  "mean_row_norm": 3.958536148071289,
+  "base": {
+    "max_abs_raw": 111.3336410522461,
+    "per_position_offset_std_max": 8.96071651368402e-06,
+    "max_abs_after_centering": 6.103515625e-05,
+    "max_abs_logprob": 4.00543212890625e-05,
+    "max_abs_prob": 3.427267074584961e-06,
+    "top5_hf": [
+      " the",
+      " it",
+      " we",
+      " there",
+      " a"
+    ],
+    "top5_ht": [
+      " the",
+      " it",
+      " we",
+      " there",
+      " a"
+    ],
+    "d_vocab": 50257
+  }
+}

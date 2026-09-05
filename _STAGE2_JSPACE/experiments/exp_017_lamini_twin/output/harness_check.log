@@ -1,0 +1,68 @@
+base lens: {'n_prompts': 277, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+twin lens: {'n_prompts': 5, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 6380.64it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+twin: per-layer states read, rescale factor mean 0.269268
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights:  20%|██        | 30/148 [00:00<00:00, 281.96it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 961.91it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+base: per-layer states read, rescale factor mean 0.281368
+lens diagnostics: {"0": {"base": {"frobenius_norm": 23.46354103088379}, "twin": {"frobenius_norm": 26.428678512573242}, "cosine_between_the_two_lenses": 0.8486043214797974}, "10": {"base": {"frobenius_norm": 47.43286895751953}, "twin": {"frobenius_norm": 49.11417770385742}, "cosine_between_the_two_lenses": 0.9822151064872742}}
+  lens=base layer=0: twin real median 0.3962 base real median 0.3106 (24s)
+  lens=base layer=10: twin real median 0.3115 base real median 0.2949 (25s)
+  lens=twin layer=0: twin real median 0.3856 base real median 0.2907 (23s)
+  lens=twin layer=10: twin real median 0.3069 base real median 0.2949 (22s)
+
+=== H18b: NOT SUPPORTED (1/6 band layers meet both conditions: [10]) ===
+layer  twin     base     |diff|   ctrl spread  perm p   both
+0      0.3856   0.3106   0.0749   0.0183       0.0001   True
+10     0.3069   0.2949   0.0121   0.0067       0.0001   True  <- band
+
+Saved -> output/exp017_jspace_harness.json (209s)
+
+2026-09-05, after the run, fixing findings from the pull request review. These
+are cheap checks; none of them carries verdict weight and none refits a lens or
+re-runs the loop.
+  python3 verify_model.py --conversion-check-only
+    -> regenerated output/tl_conversion_check.json, which came out byte for
+       byte identical to the version committed at 93bf517, so the calculation
+       now committed in verify_model.py reproduces every number the results
+       record's section 2.3 quotes. Both models were loaded at the pinned
+       revisions, the twin at fc740804ff49f50fe3ef871b31eb2d5a5584132c and base
+       GPT-2 Small at 607a30d783dfa663caf39e06633721c8d4cfcd7e.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, now including the spec's
+       requirement that a state built from 40 atoms gets a share below 1: the
+       measured share is 0.986468 on a scale from 0 to 1.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 7 checks of the wall-clock
+       deadline arithmetic, including a replay of this run's own timings that
+       confirms the committed fit would not have been stopped by the cap.
+  base lens digest re-checked at the checkout-relative path
+    ../../artifacts/jlens_gpt2_small_neuronpedia.pt ->
+    d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762, which
+    matches the digest the spec records; lens metadata 277 prompts, d_model 768,
+    source layers 0 to 10.
+
+2026-09-05, second round of pull request review fixes. Cheap checks only; no
+lens was refitted, no loop and no J-space probe was re-run.
+  python3 make_tables.py
+    -> regenerated output/tables.md, adding one section, "Real minus its own
+       rotation control", and changing no existing line. Its eleven rows match
+       the table in RESULTS_EXP017.md section 3.5 verbatim, sign for sign.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 14 checks, now covering the
+       committed corpus digest
+       c325a40c06f5dcfe14a3cea02afe1d64d42914146822c63e111dc665fdeba8d7, the
+       checkpoint reuse rules, and two replays of the recorded per-prompt
+       timings: continuing the probe's five prompts reaches all 40, while a fit
+       started from nothing stops after 38 of 40 at 8950 seconds.
+  python3 run_jspace.py --selftest -> ALL PASS, 9 checks of the twin lens budget
+       gate. The committed jlens_lamini_gpt2_124m_40_twin.pt, fitted on 40
+       prompts, is accepted as the registered instrument against the 40 the
+       budget rule chose; the five-prompt probe lens is refused without
+       --allow-short-twin-lens.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  fitting corpus checked against the run logs through the instrument's own
+    encoder (jlens.from_hf, which prepends a beginning-of-sequence token):
+    all 40 of 40 prompts reproduce the seq_len and n_valid recorded in
+    fit_probe_db16.log and fit_twin.log, including prompt 30 at seq_len 117 and
+    n_valid 100. The committed wikitext_prompts_160.json is therefore the
+    corpus the committed lens was fitted on.
