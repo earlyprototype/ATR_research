@@ -19,7 +19,3 @@ Use the project's founding analogy (the room, the echo, the tone the room settle
 When reporting work, answer four questions in this order: what happened, what it means, what remains, and what needs the operator's decision. Then stop.
 
 Before sending, find the sentence a smart outsider would stumble on. If they would ask "what does that word mean?" or "compared to what?", the reply is not finished.
-
-## Reading notes (added 2026-09-05)
-
-When the answer to a research question is more than a chat reply can carry, write it as a reading note: a dated markdown file, `docs/<TOPIC>_NOTE_<YYYY-MM-DD>.md`, that opens with the answer, says in a provenance block where every fact came from and whether anything was run, marks every claim inside its sentence as established, inferred or speculation, and closes by answering what happened, what it means, what remains and what needs the operator's decision. The rules above apply to every sentence of it. The format, a template, a checker and a page builder are in the `papertime` skill, invoked as `/papertime`, at `.claude/skills/papertime/`, and rule R9 in `CLAUDE.md` makes the note the required form. The first note in this format is `docs/LATENT_CONTEXT_NOTE_2026-09-04.md` in the lucier repository. The markdown file governs; the page built from it is a view for sharing, not a record.

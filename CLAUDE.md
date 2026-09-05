@@ -5,7 +5,9 @@ ratifying the rulebook proposed in `PROJECT_REVIEW_2026-07-31.md` §5.3.
 The review's wording governs where this file and the review disagree.
 Rules marked ⛔ are enforced by CI (`.github/workflows/pr-rules.yml`);
 everything else is convention, and the review records why conventions
-alone failed twice (`REGISTER.md` errata (a) and (b)).
+alone failed twice (`REGISTER.md` errata (a) and (b)). R9 was added
+2026-09-05 under TC's in-session direction of that date; it is not in
+the review.
 
 **Writing for the operator:** every operator-facing document, report, PR
 description, and issue body follows `docs/voice.md`. Read it before writing
@@ -55,6 +57,26 @@ what it means, what remains, and what needs the operator's decision.
 - **R8, authority rule.** Never self-execute a resolution that an open
   issue reserves for a human. File, cite, wait. If the ruling artifact
   does not exist, the action does not happen.
+- **R9, reading-note rule.** An operator-facing answer to a research
+  question lands as a dated reading note, `docs/<TOPIC>_NOTE_<YYYY-MM-DD>.md`,
+  in the format the `papertime` skill describes
+  (`.claude/skills/papertime/SKILL.md`, invoked as `/papertime`): the
+  answer first, a provenance
+  block saying where every fact came from and whether anything was run,
+  every claim marked inside its sentence as established or inferred or
+  speculation, every number with its scale and a baseline, and a closing
+  section that says what remains and what needs the operator's decision.
+  Before committing a note, run the skill's checker with the register:
+  `python3 .claude/skills/papertime/scripts/check_note.py docs/<NOTE>.md --register _STAGE2_JSPACE/REGISTER.md`.
+  A note lands in its own PR with a `No-Close:` line unless it closes an
+  issue. The markdown file governs; the page the skill's builder makes from
+  it is a view for sharing, not a record. The skill directory is a vendored
+  copy of the `papertime` plugin, version 1.0.0, from the
+  `earlyprototype/early-prototype` marketplace; the plugin is the authority,
+  so refresh the copy from it rather than editing it here. (Adopted
+  2026-09-05 under TC's in-session direction; the format is that of the
+  2026-09-04 note `docs/LATENT_CONTEXT_NOTE_2026-09-04.md` in the lucier
+  repository, which TC asked to become a rule for the projects and a skill.)
 
 ## Obligations for the operator (TC)
 
@@ -82,6 +104,8 @@ reviewer would stall the pipeline or breed rubber stamps.
 
 - Identifier register (authoritative): `_STAGE2_JSPACE/REGISTER.md`.
 - Operator voice rules: `docs/voice.md`.
+- Reading-note format, template, checker and page builder: the
+  `papertime` skill at `.claude/skills/papertime/` (R9).
 - Peer board usage: `.claude/skills/peer-board/SKILL.md`.
 - Current state of the science: `OPERATOR_REPORT_2026-07-31.md` and
   `PROJECT_REVIEW_2026-07-31.md`, plus dated results records under
