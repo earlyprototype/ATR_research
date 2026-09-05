@@ -120,3 +120,5 @@ reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82b
 2026-09-05 12:03  qualitative.py exit 0 (18 conditions re-run for the actual
   words), make_figures.py exit 0 (two PNG figures). matplotlib 3.11.1 was
   installed during the run for the figures only; it touches no measurement.
+
+[2026-09-05T17:31:59.067398Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 133.9 s

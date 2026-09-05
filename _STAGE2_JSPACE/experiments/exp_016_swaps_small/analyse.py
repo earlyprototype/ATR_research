@@ -8,6 +8,10 @@ from collections import defaultdict
 
 D = os.path.dirname(os.path.abspath(__file__)) + "/"
 SCORE = {"h17": "in_top5", "h17a": "in_top5", "h17b": "is_top1"}
+# Final tie-break for choose(): the order the position modes were run in.
+# Before this key existed, exact ties fell to CSV insertion order, which is
+# this same order; the key makes that rule explicit and stable.
+MODE_ORDER = ["all", "last", "all_no_bos", "from_mention", "answer_only"]
 
 
 def load(battery):
@@ -43,14 +47,15 @@ def cell_rates(rows, battery, split=None, key=None, extra_filter=None):
 def choose(cells):
     """Pre-registered selection: highest lens success on the tuning half;
     ties by larger gap over control A, then smaller strength, then fewer
-    layers, then lowest first layer."""
+    layers, then lowest first layer; remaining ties by MODE_ORDER."""
     def k(item):
         cell, arms = item
         lens = arms.get("lens", (0, 0, 0))[0]
         ctrl = arms.get("randdir", (0, 0, 0))[0]
         ls, alpha, mode = cell
         n_l = len(ls.split("-"))
-        return (-lens, -(lens - ctrl), alpha, n_l, int(ls.split("-")[0]))
+        return (-lens, -(lens - ctrl), alpha, n_l, int(ls.split("-")[0]),
+                MODE_ORDER.index(mode))
     return sorted(cells.items(), key=k)[0][0]
 
 
@@ -153,7 +158,7 @@ def per_item(rows, cell, key, arm="lens"):
     return {k: (sum(v), len(v)) for k, v in sorted(out.items())}
 
 
-def posmode_table(rows, key, sets, alphas, modes):
+def posmode_table(rows, key):
     """Best cell within each position mode, for the H17b contrast between
     swapping at the intermediate mention and swapping only at the answer."""
     acc = defaultdict(lambda: defaultdict(lambda: [0, 0]))

@@ -68,7 +68,7 @@ for b in BATTERIES:
         print("\nBy position mode, best setting within each mode:\n")
         print("| positions | best layers | strength | lens | control A | control B |")
         print("|---|---|---|---|---|---|")
-        best = analyse.posmode_table(rows, key, None, None, None)
+        best = analyse.posmode_table(rows, key)
         for m, (cell, rate, arms) in sorted(best.items()):
             print(f"| {m} | {cell[0]} | {cell[1]} | {arms['lens']*100:.0f} percent | "
                   f"{arms.get('randdir',0)*100:.0f} percent | "

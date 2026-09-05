@@ -39,12 +39,14 @@ register:
   process would produce a gap this large.
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
-  questions about that country on **87 percent of pairs, 26 of 30**, against
-  **0 percent, 0 of 60, for the control**. On the held-out half alone the
-  figure is 87 percent, 13 of 15, against 0 of 30. Among the pairs where all
-  three questions could show redirection, all three moved together on 4 of 6
-  in the primary set and on **14 of 18, which is 78 percent, in the
-  five-continent extension set**, against 0 of 36 for the control.
+  questions about that country on **87 percent of the held-out pairs, 13 of
+  15**, against **0 percent, 0 of 30, for the control**; the held-out half is
+  the number the specification judges on. Over both halves the figure is the
+  same 87 percent, 26 of 30, against 0 of 60. Among the pairs where all three
+  questions could show redirection, all three moved together on 4 of 6 in
+  the primary set and on **14 of 18, which is 78 percent, in the
+  five-continent extension set**, against 0 of 36 for the control; the
+  extension set is reported beside the headline number, not inside it.
 - **H17b, intermediate-step surgery: SUPPORTED on its registered wording,
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
@@ -61,10 +63,18 @@ The most interesting single number is not any of those three. It is the
 contrast inside H17b. Exchanging the concept everywhere from its first
 mention onward flipped the answer on 4 of 16 items. Exchanging it only at
 the final position, where the answer is about to be produced, flipped the
-answer on 1 of 16. That difference, 4 against 1, is the difference between
-changing a step in the model's working and changing only its report. It
-points the way the reading note hoped, and it is far too small a difference,
-on far too few items, to be called established. Marked as suggestive.
+answer on 1 of 16. One thing those two labels hide: in 14 of the 16 items
+the swapped concept is the first word of the prompt, so "from its first
+mention onward" patches every position except the prepended start token,
+and the two position modes `from_mention` and `all_no_bos` are the same
+operation on those 14 items (the table by position mode below shows
+identical rows for them). The contrast is therefore between changing the
+whole stated problem, including the clause that states the facts the model
+reads from, and changing only the position where the answer is produced. It
+is not yet a clean separation of a step in the model's working from the
+report of it. That difference, 4 against 1, points the way the reading note
+hoped, and it is far too small a difference, on far too few items, to be
+called established. Marked as suggestive.
 
 ## What the swap looks like from outside
 
@@ -388,7 +398,11 @@ carrying a large-model tuning intuition down to a small model.
 
 The lens is a pre-fitted file published by Neuronpedia,
 `jlens_gpt2_small_neuronpedia.pt`, whose SHA-256 digest is
-`d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762`. Its own
+`d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762`. During
+the run that digest was a constant copied into the provenance files rather
+than computed from the file loaded; it was recomputed from the file on
+2026-09-05 and matches, and from this record's follow-up commit onward
+`lib_exp016.py` computes it at load and refuses any other file. Its own
 fit record says it was fitted on WikiText-103, a standard corpus of
 Wikipedia text, using 277 prompts of at most 128 tokens each, in bfloat16
 arithmetic, on 2026-06-11. The reference code is `anthropics/jacobian-lens`
@@ -440,7 +454,8 @@ as the lens arm.
 
 Control A is the one the register names: two random directions, drawn from a
 standard Gaussian and rescaled so their lengths match the two lens
-directions, put through the identical swap. Three random seeds.
+directions, put through the identical swap. Two random seeds in H17 and
+H17a and three in H17b (deviation 1).
 
 Control B was added by this session and is reported everywhere beside
 control A: the same random directions, but the resulting change to the
@@ -450,8 +465,66 @@ Control A fixes the lengths of the directions; control B fixes the size of
 the actual disturbance. Control B is the stricter test of the objection
 "would any disturbance this large have done the same thing", because two
 random directions in 768 dimensions sit almost at right angles to each other
-and to the working memory, so the amounts they read off are small and the
-change they write can be much smaller than the lens swap's.
+and to the working memory, so the amounts they read off are small. How
+much smaller control A's change actually is was not captured during the
+run: the size column in the record files is empty (deviation 8). It was
+measured after the fact at each battery's chosen setting, and the section
+"Disturbance sizes, measured after the fact" reports what was found.
+
+### Disturbance sizes, measured after the fact (2026-09-05)
+
+The specification promised that the size of each arm's change to the
+working memory would be recorded, and the run did not record it (deviation
+8). The sizes were measured afterwards at each battery's chosen setting, for
+every unit, by `measure_disturbance.py`, with fresh random draws for the
+controls (deviation 7), so they are typical sizes for each arm rather than
+the exact sizes behind the tables. The size of a change is the Euclidean
+norm of everything the arm added to the working memory, summed over the
+patched positions and layers; "of the stream" divides it by the norm of the
+untouched working memory over the same positions at the first patched
+layer. Medians over units; the full distributions, per layer, are in
+`output/disturbance_sizes.json`. Nothing here carries verdict weight.
+
+| Battery, chosen setting | Units | Lens swap | Control A (random directions) | Control B (size matched) |
+|---|---|---|---|---|
+| H17: layers 7-8-9, strength 2, all positions | 84 | 1065 (0.34 of the stream) | 746 (0.24) | 393 (0.12) |
+| H17a: layer 6, strength 2, all positions | 124 | 97 (0.031) | 337 (0.109) | 97 (0.031) |
+| H17b: layer 7, strength 2, all positions but the first | 16 | 109 (0.26) | 51 (0.12) | 109 (0.26) |
+
+Three things follow, all established by this measurement for this model
+and this lens.
+
+First, the belief that the registered control under-disturbs the model,
+which motivated control B and is repeated in the specification and in the
+first version of this record, is wrong as a general statement. At the H17a
+setting control A's change is 3.5 times the lens swap's, and it still
+redirected 0 of 30 held-out pairs; at the H17 setting it is
+0.70 times the lens swap's and at the H17b setting 0.47 times. Where
+the control is smaller it is smaller by half, not by an order of magnitude,
+and where it is larger the verdict is strengthened rather than weakened.
+
+Second, control B matches the lens swap exactly at the two single-layer
+settings (the same medians to three figures, as designed) but reaches only
+0.37 of the lens swap's total change at the three-layer H17 setting.
+The reason is in the per-layer sizes. The lens arm's change grows from
+139 at layer 7 to 358 at layer 8 and 1017 at layer 9: each swap
+acts on a working memory the previous swap has already altered, and at
+strength 2 the exchange overshoots, so the next layer finds a larger
+imbalance to exchange back. Control B is matched, layer by layer, to the
+change the lens swap would make on the control's own working memory, which
+the earlier random change has barely moved, so it stays near the layer-7
+size (139, 204, 260). At multi-layer settings, then, control B is
+size-fair per layer and not in total. The H17 verdict is scored against
+control A, as registered, and control A's total change is 0.70 of the
+lens swap's at that setting, so the comparison the verdict rests on is
+close to size-fair.
+
+Third, the H17 headline setting is a large intervention: a change of about
+a third of the working memory's own size at the patched positions (median
+0.34, at most 1.47 of the stream), against three percent at the H17a
+setting and a quarter at the H17b setting. The report swap needed the
+compounded three-layer push to clear its registered threshold; the country
+swap did not.
 
 ### The tuning and held-out split
 
@@ -561,7 +634,7 @@ number reported as a verdict was chosen on the data it is reported for.
 
 ## What this does not show
 
-Four limits, stated before a reader finds them.
+Six limits, stated before a reader finds them.
 
 First, a successful swap shows that the lens direction for a word is a
 handle the model responds to, not that the model "contains a concept" in any
@@ -593,6 +666,15 @@ Fifth, and specific to H17b: with 16 items, a difference of four successes
 against one is what separates the two position modes. That is a thin thread
 to hang the report-versus-reasoning distinction on, and it is named as
 suggestive everywhere it appears above.
+
+Sixth, the H17 setting stacks three swaps at consecutive layers, and the
+measurement after the fact shows that they compound: the change at layer 9
+is about seven times the change at layer 7, and the total is about a third
+of the working memory's own size. The registered control A is close to
+size-matched in total at that setting, so the verdict stands as scored, but
+the effect is not a small nudge in lens coordinates. It is a large push
+whose size grows through the layer set, and the size-matched control B does
+not match it in total at multi-layer settings.
 ## Deviations from the specification, stated flat
 
 1. **Two settings were dropped from two batteries for time, before those
@@ -634,6 +716,49 @@ suggestive everywhere it appears above.
 
 5. **matplotlib was installed during the run**, at version 3.11.1, purely to
    draw the two figures. It touches no measurement.
+
+6. **The pseudo-inverse ridge is 1e-6, not the 1e-8 the specification
+   states.** `swap_engine.py` adds 1e-6 times the largest diagonal entry to
+   the 2-by-2 Gram matrix before solving. For these well-conditioned
+   matrices the difference to any coefficient is far below the fourth
+   decimal place, so no number changes, but the constant was revised
+   without a note and is recorded here.
+
+7. **The random-direction controls in the committed record files cannot be
+   regenerated draw for draw.** The first run seeded each control draw from
+   Python's built-in `hash()` of the item, function, layer and seed index,
+   which is randomised per process, and the process's hash seed was not
+   recorded. The control rates in the tables are therefore measurements of
+   one draw per seed index that a re-run would replace with a different
+   draw. From this record's follow-up commit onward `run_swaps.py` derives
+   the seed from a fixed checksum of the same tuple and records the scheme
+   in the provenance file, so later runs reproduce themselves exactly.
+   Nothing in the verdicts turns on a particular draw: every control rate at
+   the settings that matter is 0 or within one trial of 0, across two or
+   three independent draws.
+
+8. **The disturbance-size column the specification promised was empty in
+   the committed record files.** Section 3 of the specification says the
+   sizes of both arms' changes are recorded so that the reader can check
+   whether control A was matched in effect; `run_swaps.py` wrote an empty
+   `patch_norm` field on every row. The sizes were measured after the fact
+   at each battery's chosen setting only, with fresh control draws, by
+   `measure_disturbance.py` (output `output/disturbance_sizes.json`), and
+   are reported in the section "Disturbance sizes, measured after the
+   fact". They carry no verdict weight. `run_swaps.py` now records the size
+   on every row.
+
+9. **Ties in the tuning-half selection are broken by the order the position
+   modes were run in.** The pre-registered rule breaks ties by the gap over
+   control A, then smaller strength, then fewer layers, then the lower
+   layer; it names no rule for a tie that survives all four. One such tie
+   occurred: on the H17b tuning half, `from_mention` and `all_no_bos` at
+   layer 7, strength 2, are identical (3 of 8 lens successes, against 0 of
+   24 and 1 of 24 for the controls), which is expected since the two modes
+   patch the same positions on 14 of the 16 items. The run resolved it by
+   the order in which the records were written, `all_no_bos` first;
+   `analyse.py` now states that order as an explicit final key, so the
+   choice is the same and is no longer accidental.
 
 ## Errata found during the run
 
@@ -687,9 +812,11 @@ much they would add.
 
 1. **Whether the register rows this experiment proposes are accepted.** They
    are in `experiments/exp_016_swaps_small/REGISTER_VERDICTS.md`, in the
-   register's own format. Rule R3 forbids this session from editing the
-   register from a branch, so nothing is authoritative until those rows land
-   there.
+   register's own format. The register is not edited from this branch
+   because four experiment branches share one allocation commit and would
+   otherwise carry conflicting edits to the same table; the rows land in one
+   sweep after the experiment PRs merge, and nothing is authoritative until
+   they do.
 
 2. **Whether H17b's verdict should stand as SUPPORTED.** It is supported on
    the registered wording, which asks only that the flip happen more often
@@ -705,11 +832,18 @@ much they would add.
 
 3. **Whether the added control B should become standard.** Control B, which
    matches the size of the disturbance rather than the lengths of the
-   directions, is not in the register's wording of H17. It was added here
-   because the registered control can under-disturb the model. In the event
-   the two controls behaved almost identically, so nothing turns on it in
-   this experiment, but later swap work should register whichever TC prefers
-   from the start rather than adding one in flight.
+   directions, is not in the register's wording of H17. It was added on the
+   expectation that the registered control under-disturbs the model. The
+   measurement after the fact shows that expectation was wrong at the H17a
+   setting, where control A's change is three and a half times the lens
+   swap's, and only partly right at the other two settings, where it is half
+   to two thirds; it also shows that control B matches the lens swap per
+   layer but not in total at multi-layer settings, because the lens swaps
+   compound. In outcome the two controls behaved almost identically, so
+   nothing turns on it in this experiment. Later swap work should register
+   whichever control TC prefers from the start, and if a size-fair control
+   at multi-layer settings is wanted it should match the total change, not
+   the per-layer change.
 
 4. **Whether the tune-then-hold-out convention becomes this project's house
    rule for instrument experiments.** This is the first time the project has
@@ -726,6 +860,16 @@ specification; `check_engine.py` verifies the swap implementation;
 record files; `analyse.py h17 h17a h17b` applies the tuning-then-held-out
 selection and writes the summaries; `qualitative.py` re-runs a handful of
 conditions to capture the actual words; `make_figures.py` draws the two
-figures. Each script sets a single compute thread and needs no graphics
-card. The record files are one row per condition, so any reader can
+figures; `measure_disturbance.py` recomputes the disturbance sizes at the
+chosen settings (deviation 8). The lens file is not committed: download the
+`gpt2-small` lens from the Hugging Face repository `neuronpedia/jacobian-lens`
+and place it at `_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt`
+in the checkout, or point the environment variable `EXP016_LENS_PATH` at it;
+`lib_exp016.py` computes the file's SHA-256 at load, refuses any file whose
+digest differs from the recorded one, and writes the computed digest into
+the provenance files. `run_swaps.py` now derives its control seeds from a
+fixed checksum (deviation 7) and records the disturbance size on every row,
+so a re-run reproduces itself exactly, though its control rates will not
+match the committed ones draw for draw. Each script sets a single compute
+thread and needs no graphics card. The record files are one row per condition, so any reader can
 recompute every rate in this document from them without rerunning the model.

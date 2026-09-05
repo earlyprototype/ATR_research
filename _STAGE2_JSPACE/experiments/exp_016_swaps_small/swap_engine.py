@@ -72,6 +72,11 @@ class SwapPlan:
         self.mask = torch.stack([r["mask"] for r in self.rows])          # [B,T]
         self.rescale = torch.tensor([r["rescale"] for r in self.rows])
         self.Vu, self.Vl, self.Pu, self.Pl, self.act = {}, {}, {}, {}, {}
+        # Squared size of the total change each row makes to the residual
+        # stream, summed over patched positions and layers; filled by the
+        # hooks during run_plan and read back as patch_norm.
+        self.change_sq = torch.zeros(B)
+        self.change_sq_layer = {l: torch.zeros(B) for l in self.layers}
         zero = torch.zeros(768, 2)
         for l in self.layers:
             Vu = torch.stack([r["Vu"].get(l, zero) for r in self.rows])
@@ -112,6 +117,9 @@ class SwapPlan:
                                  torch.ones_like(nu))
                 patch = patch * sc
             delta = patch * (alpha * act)[:, None, None] * mask[:, :, None]
+            sq = (delta * delta).sum(dim=(1, 2))
+            self.change_sq += sq
+            self.change_sq_layer[l] += sq
             return resid + delta.to(resid.dtype)
         return hook
 
@@ -119,7 +127,13 @@ class SwapPlan:
 @torch.no_grad()
 def run_plan(model, toks, plan):
     """Run one batched forward pass under the plan and return the
-    next-token log-probabilities at the last position, shape [B, vocab]."""
+    next-token log-probabilities at the last position, shape [B, vocab].
+    Afterwards plan.change_sq[b].sqrt() is the size (Euclidean norm over all
+    patched positions and layers) of the change row b made to the residual
+    stream, the disturbance size the specification asks to be recorded."""
+    plan.change_sq.zero_()
+    for v in plan.change_sq_layer.values():
+        v.zero_()
     tk = toks.repeat(plan.B, 1)
     resid = model.run_with_hooks(tk, return_type=None,
                                  stop_at_layer=model.cfg.n_layers,

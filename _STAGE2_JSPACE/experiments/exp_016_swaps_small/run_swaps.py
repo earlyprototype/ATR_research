@@ -6,10 +6,11 @@ Writes one row per (item, layer set, strength, position mode, arm) to
 output/records_<battery>.csv and a small provenance JSON beside it.
 """
 from __future__ import annotations
-import csv, json, sys, time, torch
-import os
+import csv, json, os, sys, time, zlib
+import torch
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib_exp016 import (load_model, load_lens, lens_vectors, LENS_SHA256,
+import lib_exp016
+from lib_exp016 import (load_model, load_lens, lens_vectors, positions, rank_of,
                         JLENS_COMMIT)
 from swap_engine import SwapPlan, random_pair, run_plan
 
@@ -25,16 +26,12 @@ POSMODES = {"h17": ["all", "last"],
             "h17b": ["all_no_bos", "from_mention", "answer_only"]}
 
 
-def positions(mode, T, mention):
-    if mode == "all":
-        return list(range(T))
-    if mode == "all_no_bos":
-        return list(range(1, T))
-    if mode in ("last", "answer_only"):
-        return [T - 1]
-    if mode == "from_mention":
-        return list(range(mention, T))
-    raise ValueError(mode)
+def control_seed(item_id, func, layer, seed):
+    """A stable seed for the random-direction controls. The first run used
+    Python's hash() here, which is randomised per process, so the committed
+    control draws cannot be regenerated; every run from this version on
+    derives the seed from a fixed checksum of the same tuple."""
+    return zlib.crc32(f"{item_id}|{func}|{layer}|{seed}".encode("utf-8"))
 
 
 def arms(seeds):
@@ -42,6 +39,25 @@ def arms(seeds):
     out += [("randdir", s) for s in seeds]
     out += [("randnorm", s) for s in seeds]
     return out
+
+
+def units_for(battery, items):
+    """Expand each battery item into one or more scored prompts (units)."""
+    units = []
+    for it in items:
+        if battery == "h17a":
+            for f in it["funcs"]:
+                if f["scoreable"]:
+                    units.append(dict(it, prompt=f["prompt"], func=f["func"],
+                                      good_tok=f["target_answer_tok"],
+                                      bad_tok=f["clean_answer_tok"]))
+        elif battery == "h17b":
+            units.append(dict(it, func="", good_tok=it["target_answer_tok"],
+                              bad_tok=it["clean_answer_tok"]))
+        else:
+            units.append(dict(it, prompt=it["frame"], func="",
+                              good_tok=it["target_tok"], bad_tok=it["source_tok"]))
+    return units
 
 
 def main(battery):
@@ -61,21 +77,8 @@ def main(battery):
         cheap = model.unembed(model.ln_final(r[:, -1:, :]))[0, 0].float()
     assert (full - cheap).abs().max().item() < 1e-3, "read-out path mismatch"
 
-    # expand each battery item into one or more scored prompts
-    units = []
-    for it in items:
-        if battery == "h17a":
-            for f in it["funcs"]:
-                if f["scoreable"]:
-                    units.append(dict(it, prompt=f["prompt"], func=f["func"],
-                                      good_tok=f["target_answer_tok"],
-                                      bad_tok=f["clean_answer_tok"]))
-        elif battery == "h17b":
-            units.append(dict(it, func="", good_tok=it["target_answer_tok"],
-                              bad_tok=it["clean_answer_tok"]))
-        else:
-            units.append(dict(it, prompt=it["frame"], func="",
-                              good_tok=it["target_tok"], bad_tok=it["source_tok"]))
+    units = units_for(battery, items)
+
 
     fh = open(D + f"output/records_{battery}.csv", "w", newline="")
     w = csv.writer(fh)
@@ -93,7 +96,7 @@ def main(battery):
             V_lens[l] = W
             for s in seeds:
                 V_rand[(l, s)] = random_pair(W[:, 0], W[:, 1],
-                                             hash((u["item_id"], u.get("func", ""), l, s)))
+                                             control_seed(u["item_id"], u.get("func", ""), l, s))
         conds = [(ls, a, m, arm, sd) for ls in sets for a in ALPHAS
                  for m in modes for arm, sd in arms(seeds)]
         for c0 in range(0, len(conds), CHUNK):
@@ -110,12 +113,12 @@ def main(battery):
             am = lp.argmax(dim=-1)
             for bi, (ls, a, m, arm, sd) in enumerate(chunk):
                 g, b = u["good_tok"], u["bad_tok"]
-                gr = int((lp[bi] > lp[bi, g]).sum()) + 1
-                br = int((lp[bi] > lp[bi, b]).sum()) + 1
+                gr = rank_of(lp[bi], g)
+                br = rank_of(lp[bi], b)
                 w.writerow([u["item_id"], u.get("func", ""), u["split"],
                             "-".join(map(str, ls)), a, m, arm, sd, gr, br,
                             int(am[bi]), int(g in top5[bi]), int(am[bi] == g),
-                            int(gr < br), ""])
+                            int(gr < br), round(float(plan.change_sq[bi].sqrt()), 4)])
             n_done += len(chunk)
         if ui % 5 == 0 or ui == len(units) - 1:
             el = time.time() - t0
@@ -127,7 +130,9 @@ def main(battery):
     json.dump(dict(battery=battery, n_units=len(units), n_conditions=n_done,
                    layer_sets=[list(s) for s in sets], alphas=ALPHAS,
                    posmodes=modes, seeds=seeds, chunk=CHUNK,
-                   lens_sha256=LENS_SHA256, jlens_commit=JLENS_COMMIT,
+                   control_seed_scheme="crc32(item_id|func|layer|seed)",
+                   patch_norm="Euclidean norm of the total residual change over patched positions and layers",
+                   lens_sha256=lib_exp016.LENS_SHA256_MEASURED, jlens_commit=JLENS_COMMIT,
                    torch=torch.__version__,
                    wall_seconds=round(time.time() - t0, 1)),
               open(D + f"output/provenance_{battery}.json", "w"), indent=1)

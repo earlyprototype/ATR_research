@@ -4,7 +4,7 @@ No swaps are performed here. Every selection rule is the one written into
 `_STAGE2_JSPACE/EXP_016_SPEC.md`; this script is that specification executed,
 so the committed battery files are reproducible from the pilot outputs.
 """
-import json, sys
+import json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_exp016 import load_model, single_token_id, first_token_id
 
@@ -145,12 +145,10 @@ for i, r in enumerate(sorted(allrows, key=lambda z: z["name"])):
                    source_tok=r["src_tok"], target_tok=r["tgt_tok"],
                    first_mention_pos=mention, clean_answer_rank=r["answer_rank"],
                    clean_alt_rank=r["alt_rank"], clean_argmax=r["argmax"],
-                   clean_top5=r["top5"],
-                   split="tuning" if i % 2 == 0 else "heldout"))
+                   clean_top5=r["top5"]))
 for i, it in enumerate(b3):
     it["split"] = "tuning" if i % 2 == 0 else "heldout"
 
-import os
 ONLY = os.environ.get("BUILD_ONLY")
 for name, data in (("battery_h17.json", b1), ("battery_h17a.json", b2),
                    ("battery_h17b.json", b3)):

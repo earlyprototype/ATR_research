@@ -12,6 +12,7 @@ is the transformer_lens hook point `blocks.l.hook_resid_post`.
 
 from __future__ import annotations
 
+import hashlib
 import os
 import torch
 
@@ -26,6 +27,9 @@ LENS_PATH = os.environ.get("EXP016_LENS_PATH") or os.path.join(
     "artifacts", "jlens_gpt2_small_neuronpedia.pt")
 LENS_SHA256 = "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762"
 JLENS_COMMIT = "581d398613e5602a5af361e1c34d3a92ea82ba8e"
+# Set by load_lens() to the digest computed from the file actually loaded,
+# so provenance records a measured value rather than the constant above.
+LENS_SHA256_MEASURED = None
 
 
 def load_model():
@@ -40,8 +44,36 @@ def load_model():
 
 
 def load_lens():
+    """Load the lens and check its digest against LENS_SHA256, so that a
+    different file at LENS_PATH (or at EXP016_LENS_PATH) cannot silently
+    stand in for the registered instrument."""
+    global LENS_SHA256_MEASURED
     from jlens.lens import JacobianLens
+    if not os.path.exists(LENS_PATH):
+        raise FileNotFoundError(
+            f"lens not found at {LENS_PATH}; download gpt2-small from the Hugging "
+            f"Face repository neuronpedia/jacobian-lens and point EXP016_LENS_PATH at it")
+    with open(LENS_PATH, "rb") as fh:
+        digest = hashlib.sha256(fh.read()).hexdigest()
+    if digest != LENS_SHA256:
+        raise RuntimeError(f"lens at {LENS_PATH} has SHA-256 {digest}, "
+                           f"expected {LENS_SHA256}")
+    LENS_SHA256_MEASURED = digest
     return JacobianLens.load(LENS_PATH)
+
+
+def positions(mode, n_tokens, mention):
+    """Token positions a position mode patches. `mention` is the position of
+    the swapped concept's first mention (used by from_mention)."""
+    if mode == "all":
+        return list(range(n_tokens))
+    if mode == "all_no_bos":
+        return list(range(1, n_tokens))
+    if mode in ("last", "answer_only"):
+        return [n_tokens - 1]
+    if mode == "from_mention":
+        return list(range(mention, n_tokens))
+    raise ValueError(mode)
 
 
 def lens_vectors(lens, model, layer, token_ids):

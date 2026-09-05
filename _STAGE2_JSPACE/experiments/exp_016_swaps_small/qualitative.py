@@ -5,7 +5,7 @@ from __future__ import annotations
 import json, sys, torch
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib_exp016 import load_model, load_lens, lens_vectors
+from lib_exp016 import load_model, load_lens, lens_vectors, positions
 from swap_engine import SwapPlan, random_pair, run_plan
 
 D = os.path.dirname(os.path.abspath(__file__)) + "/"
@@ -19,9 +19,7 @@ def top5(v):
 
 def one(prompt, s_tok, t_tok, layer_set, alpha, mode, mention=1, seed=11):
     toks = model.to_tokens(prompt); T = toks.shape[1]
-    pos = {"all": list(range(T)), "all_no_bos": list(range(1, T)),
-           "last": [T-1], "answer_only": [T-1],
-           "from_mention": list(range(mention, T))}[mode]
+    pos = positions(mode, T, mention)
     V = {l: lens_vectors(lens, model, l, [s_tok, t_tok]) for l in layer_set}
     R = {l: random_pair(V[l][:, 0], V[l][:, 1], seed * 100 + l) for l in layer_set}
     p = SwapPlan(T, LAYERS)
