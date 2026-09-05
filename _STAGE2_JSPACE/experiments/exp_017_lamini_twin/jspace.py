@@ -132,7 +132,9 @@ def rotate_states(H, Rot):
 # --------------------------------------------------------------------------
 
 def selftest():
-    """Four properties, each fixed in the spec before the probe was run."""
+    """The four properties spec section 6.4 fixed before the probe was run,
+    plus the rotation identity section 6.5 requires the committed test to
+    assert numerically."""
     rng = np.random.default_rng(0)
     d, n_atoms = 64, 800
     A = rng.standard_normal((n_atoms, d)).astype(np.float32)
@@ -169,12 +171,19 @@ def selftest():
           shares2[0] < 1e-8, f"share={shares2[0]:.3e}")
 
     # 3. A state built from 40 atoms cannot be fully explained by 25.
+    #    Two separate properties, because the first alone proves nothing: the
+    #    selection loop cannot run past 25 rounds, so the count check is
+    #    guaranteed by construction. The share is the property the spec names,
+    #    and it is not guaranteed: 25 well-chosen atoms of a 64-dimensional
+    #    dictionary could in principle reach the state exactly.
     idx40 = rng.choice(n_atoms, size=40, replace=False)
     coef40 = rng.random(40).astype(np.float32) + 0.1
     h3 = (U[idx40].T @ coef40).reshape(d, 1)
     shares3, nsel3, _ = pursue_batch(U, h3, keep=keep)
     check("at most 25 atoms are ever selected", nsel3[0] <= K_ATOMS,
           f"n_selected={nsel3[0]}")
+    check("a state built from 40 atoms gets a share below 1",
+          shares3[0] < 1.0 - 1e-6, f"share={shares3[0]:.6f}")
 
     # 4. Shares stay inside [0, 1] on random states, and the fitted point is
     #    orthogonal to the residual, which is the defining property of a

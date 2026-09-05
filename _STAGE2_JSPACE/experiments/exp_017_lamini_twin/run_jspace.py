@@ -8,8 +8,15 @@ vectors, on the twin's own fitted lens and on the pre-fitted Neuronpedia lens
 for base GPT-2 Small, with three random-rotation controls per side and the two
 cross-checks that separate lens mismatch from model mismatch.
 
+The base lens is resolved relative to this checkout, at
+`_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt`, and can be
+overridden with --base-lens. That directory is not version controlled, so the
+file has to be placed there (or named on the command line) before this runs;
+its SHA-256 is checked against the digest the spec records either way.
+
 Usage:
     python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_30_twin.pt
+    python3 run_jspace.py --base-lens /some/other/path/jlens_gpt2_small_neuronpedia.pt
 """
 import argparse
 import hashlib
@@ -26,15 +33,17 @@ torch.set_num_threads(1)
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
+import exp017_models  # noqa: E402
 from jspace import (K_ATOMS, pursue_batch, random_rotation, rotate_states,  # noqa: E402
                     unit_atoms)
 
 OUT = HERE / "output"
 ARTIFACTS = HERE.parent.parent / "artifacts"
-BASE_LENS = Path("/home/user/ATR_research/_STAGE2_JSPACE/artifacts/"
-                 "jlens_gpt2_small_neuronpedia.pt")
+# Resolved from this checkout, never from one machine's absolute path, so the
+# probe runs from any clone that has the lens in its own artifacts directory.
+BASE_LENS_DEFAULT = ARTIFACTS / "jlens_gpt2_small_neuronpedia.pt"
 BASE_LENS_SHA = "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762"
-MODELS = {"twin": "MBZUAI/LaMini-GPT-124M", "base": "gpt2"}
+MODELS = exp017_models.MODELS
 PROBE_LAYERS = list(range(11))      # 0..10, the lens's fitted source layers
 BAND = list(range(5, 11))           # 5..10, the workspace band, verdict-bearing
 ROT_SEEDS = (2026, 2027, 2028)
@@ -63,8 +72,9 @@ def per_layer_states(which, prompt_ids):
     """
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from transformer_lens import HookedTransformer
-    hf = AutoModelForCausalLM.from_pretrained(MODELS[which])
-    tok = AutoTokenizer.from_pretrained(MODELS[which])
+    rev = exp017_models.revision(which)
+    hf = AutoModelForCausalLM.from_pretrained(MODELS[which], revision=rev)
+    tok = AutoTokenizer.from_pretrained(MODELS[which], revision=rev)
     model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok,
                                               device="cpu")
     model.eval()
@@ -139,7 +149,18 @@ def main():
     ap.add_argument("--twin-lens", default=None,
                     help="path to the fitted twin lens; omit to score on the "
                          "base lens only (spec section 6.2 fallback)")
+    ap.add_argument("--base-lens", default=str(BASE_LENS_DEFAULT),
+                    help="path to the pre-fitted Neuronpedia lens for base "
+                         "GPT-2 Small; defaults to this checkout's own "
+                         "_STAGE2_JSPACE/artifacts/ copy, and its SHA-256 is "
+                         "checked against the digest the spec records")
     args = ap.parse_args()
+    base_lens = Path(args.base_lens)
+    if not base_lens.exists():
+        raise SystemExit(
+            f"base lens not found at {base_lens}. That directory is not "
+            f"version controlled; put jlens_gpt2_small_neuronpedia.pt there, "
+            f"or pass --base-lens with its path.")
 
     subset = json.load(open(HERE.parent / "exp_010c_windows" / "output"
                             / "prompt_subset_small.json"))
@@ -152,12 +173,12 @@ def main():
            "perm_seed": PERM_SEED, "prompt_ids": prompt_ids, "lenses": {}}
 
     # ---- lenses --------------------------------------------------------------
-    got = sha256_file(BASE_LENS)
-    rep["lenses"]["base"] = {"path": str(BASE_LENS), "sha256": got,
+    got = sha256_file(base_lens)
+    rep["lenses"]["base"] = {"path": str(base_lens), "sha256": got,
                              "sha256_expected": BASE_LENS_SHA,
                              "digest_verified": got == BASE_LENS_SHA}
     assert got == BASE_LENS_SHA, f"base lens digest mismatch: {got}"
-    J_base, meta_base = load_lens(BASE_LENS)
+    J_base, meta_base = load_lens(base_lens)
     rep["lenses"]["base"].update(meta_base)
     print(f"base lens: {meta_base}", flush=True)
 

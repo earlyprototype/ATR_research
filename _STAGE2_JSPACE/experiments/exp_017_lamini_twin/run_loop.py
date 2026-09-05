@@ -31,7 +31,9 @@ torch.set_num_threads(1)
 HERE = Path(__file__).resolve().parent
 EXPERIMENTS = HERE.parent
 sys.path.insert(0, str(EXPERIMENTS))
+sys.path.insert(0, str(HERE))
 
+import exp017_models  # noqa: E402
 from atr_engine2 import run_atr_gated, get_top_tokens  # noqa: E402
 
 SUBSET = EXPERIMENTS / "exp_010c_windows" / "output" / "prompt_subset_small.json"
@@ -41,16 +43,21 @@ OUT = HERE / "output"
 LOOP = dict(layer_start=0, layer_end=11, max_iter=1000, threshold=0.999,
             patience=3, check_every=10, check_start=100, gate_lag=2,
             renorm="seed_j")
-MODELS = {"twin": "MBZUAI/LaMini-GPT-124M", "base": "gpt2"}
+MODELS = exp017_models.MODELS
 
 
 def load_model(which):
-    """Load into TransformerLens by the lucier pilot's offline-weights route."""
+    """Load into TransformerLens by the lucier pilot's offline-weights route.
+
+    The weights and the tokenizer are pinned to the revision, that is the
+    repository commit, recorded for this model in exp017_models.py, so that a
+    later change on Hugging Face cannot alter what this loads.
+    """
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from transformer_lens import HookedTransformer
-    name = MODELS[which]
-    hf = AutoModelForCausalLM.from_pretrained(name)
-    tok = AutoTokenizer.from_pretrained(name)
+    name, rev = MODELS[which], exp017_models.revision(which)
+    hf = AutoModelForCausalLM.from_pretrained(name, revision=rev)
+    tok = AutoTokenizer.from_pretrained(name, revision=rev)
     model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok,
                                               device="cpu")
     model.eval()
@@ -68,7 +75,8 @@ def main():
     assert len(subset) == 25, f"expected 25 prompts, got {len(subset)}"
     torch.manual_seed(args.seed)
 
-    print(f"EXP_017 loop | model={args.model} ({MODELS[args.model]}) "
+    print(f"EXP_017 loop | model={args.model} ({MODELS[args.model]} at "
+          f"revision {exp017_models.revision(args.model)}) "
           f"threads={torch.get_num_threads()} seed={args.seed}", flush=True)
     print(f"params: {LOOP}", flush=True)
     model = load_model(args.model)

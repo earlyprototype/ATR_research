@@ -19,3 +19,25 @@ layer  twin     base     |diff|   ctrl spread  perm p   both
 10     0.3069   0.2949   0.0121   0.0067       0.0001   True  <- band
 
 Saved -> output/exp017_jspace_harness.json (209s)
+
+2026-09-05, after the run, fixing findings from the pull request review. These
+are cheap checks; none of them carries verdict weight and none refits a lens or
+re-runs the loop.
+  python3 verify_model.py --conversion-check-only
+    -> regenerated output/tl_conversion_check.json, which came out byte for
+       byte identical to the version committed at 93bf517, so the calculation
+       now committed in verify_model.py reproduces every number the results
+       record's section 2.3 quotes. Both models were loaded at the pinned
+       revisions, the twin at fc740804ff49f50fe3ef871b31eb2d5a5584132c and base
+       GPT-2 Small at 607a30d783dfa663caf39e06633721c8d4cfcd7e.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, now including the spec's
+       requirement that a state built from 40 atoms gets a share below 1: the
+       measured share is 0.986468 on a scale from 0 to 1.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 7 checks of the wall-clock
+       deadline arithmetic, including a replay of this run's own timings that
+       confirms the committed fit would not have been stopped by the cap.
+  base lens digest re-checked at the checkout-relative path
+    ../../artifacts/jlens_gpt2_small_neuronpedia.pt ->
+    d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762, which
+    matches the digest the spec records; lens metadata 277 prompts, d_model 768,
+    source layers 0 to 10.

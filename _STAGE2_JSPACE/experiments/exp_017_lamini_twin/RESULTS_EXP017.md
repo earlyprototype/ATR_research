@@ -6,11 +6,15 @@ before any run that carries verdict weight.
 base commit `34cc368`. **Run date:** 2026-09-05.
 **Status:** run complete; verdicts recorded below.
 
-Every table in this record is generated from the committed JSON artifacts by
-`make_tables.py` and reproduced in `output/tables.md`. No number here was
-copied by hand. That guard exists because `RESULTS_EXP010B.md` carries a dated
-erratum recording five numbers that were hand-copied into a results record and
-matched no committed artifact.
+Every table of results in this record is generated from the committed JSON
+artifacts by `make_tables.py` and reproduced in `output/tables.md`, so no
+result here was copied by hand. That guard exists because `RESULTS_EXP010B.md`
+carries a dated erratum recording five numbers that were hand-copied into a
+results record and matched no committed artifact. Two descriptive tables sit
+outside the guard and are named here rather than left to be discovered: the
+file digests in section 1.1, read from `output/model_verification.json`, and
+the lens summary in section 3.2, whose fit timings are read from the committed
+run logs. Both cite their source where they appear. Neither carries a verdict.
 
 ---
 
@@ -225,7 +229,17 @@ agreeing to 2.53e-05 for the twin and 6.10e-05 for base on the score scale, to
 predicted tokens are identical for both models. A probability difference of
 about two parts in a million is floating-point noise, so the converted model
 makes the same predictions as the original. Record:
-`output/tl_conversion_check.json`.
+`output/tl_conversion_check.json`, which `verify_model.py` writes, either on a
+full run or on `python3 verify_model.py --conversion-check-only`.
+
+**Regenerated and checked on 2026-09-05, after the run.** The first version of
+this experiment's code committed that artifact without committing the code that
+produced it, which a review of the pull request caught. The calculation now
+lives in `verify_model.py`, one measurement feeding both this artifact and the
+provenance record so that the two cannot disagree, and re-running it rewrote
+the file byte for byte identically to the committed one. That is a reproduction
+check on every number in this section, not merely a promise that the code
+exists.
 
 ### 2.4 The per-prompt terminal table
 
@@ -466,7 +480,7 @@ the position the loop's own readout uses.
 | SHA-256 | `d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762`, re-verified in this run | `8ccf4b7a12b1c4f3bd56df5cbe2ec8228260ca676618c7fa09f7f2b83595c280` |
 | fitting prompts | 277 WikiText-103 prompts | 40 WikiText-103 prompts |
 | precision and hardware | bfloat16 on a graphics processor | 32-bit on one processor thread |
-| fit time | not recorded by its publisher | 8,253 seconds, that is 2 hours 18 minutes, at 206.3 seconds per prompt |
+| fit time | not recorded by its publisher | 8,253 seconds, that is 2 hours 18 minutes, for the 35 prompts that invocation computed, so 235.8 seconds each |
 
 **How the prompt count was chosen.** The spec fixed a rule before the
 measurement: measure the cost per prompt on a five-prompt probe, then take 100
@@ -475,6 +489,26 @@ multiple of ten that fits. The probe measured 221.0 seconds per prompt, so the
 rule chose 40. Forty is below fifty, which the spec named in advance as a
 deviation, and it is recorded as one. The fit then ran to completion at 40
 prompts without needing the deadline fallback.
+
+**How the fit stayed inside the cap, stated exactly.** The 40-prompt lens was
+assembled by two invocations of the instrument, because the fit resumed from
+the checkpoint the five-prompt timing probe had already written. Both
+invocations logged every prompt they computed, in `output/fit_probe_db16.log`
+and `output/fit_twin.log`, which is where these figures come from. The probe
+computed prompts 1 to 5 in 1,105 seconds. The fit invocation computed prompts 6
+to 40, that is 35 prompts, in 8,253 seconds, which is 92 percent of the 9,000
+second cap and inside it. Adding the two invocations together, the lens cost
+9,358 seconds of one processor thread in total, which is 4 percent above the
+cap; the cap governs the fit run, and the probe was a separate step the spec
+records in its own section 9.1, so nothing here breaks the rule, but a reader
+comparing totals should see both figures. **Correction, marked as a retraction
+of an earlier sentence in this record:** the first version of this section
+reported the fit at "206.3 seconds per prompt", which was the invocation's
+8,253 seconds divided by the lens's 40 prompts. That was wrong as a cost rate,
+because 5 of those 40 prompts were computed by the probe and cost this
+invocation nothing. The measured cost is 235.8 seconds per prompt actually
+computed, and section 6.3's projection of a 100-prompt fit is corrected with
+it.
 
 **How well converged the twin's lens is.** The instrument reports, after each
 prompt, how much the running average still moved, as a fraction of its own
@@ -698,6 +732,37 @@ rest arose during the run.
    experiment's largest weakness and the reader is entitled to know whether the
    H18b reading moves when the lens quality moves. It is reported in section 3
    and marked throughout as carrying no verdict weight.
+10. **The lens fit's wall-clock cap was not enforced by the code that ran it,
+    and the committed fit stayed inside the cap without being made to.** The
+    spec's section 6.2 sets a 9,000 second cap and a fallback for a fit that
+    overruns it, but the instrument's fitting call has no deadline of its own
+    and `fit_twin_lens.py` did not add one, so on this run the cap was a number
+    in the spec rather than a rule the machine could apply. What actually
+    happened, from the committed run log `output/fit_twin.log`: the fit resumed
+    from the five-prompt timing probe's checkpoint and computed prompts 6 to 40
+    in 8,253 seconds, which is 92 percent of the cap, so the fallback was never
+    needed. The gap between the spec and the code was found by a review of the
+    pull request, not during the run. `fit_twin_lens.py` now refuses before
+    loading the model if the timing probe's measured cost per prompt predicts
+    that not even one more prompt fits in the remaining budget, and during the
+    fit it works one prompt at a time from the instrument's own per-prompt
+    checkpoint and stops before starting a prompt that would cross the cap,
+    exiting with a distinct code and naming the section 6.2 fallback. Its
+    `--selftest` replays this run's timings against that rule and confirms the
+    committed fit would have been allowed to finish. Nothing about the
+    committed lens changes, and the lens was not refitted.
+11. **The scripts did not pin the models' revisions, and now do.** A revision is
+    the 40-character commit identifier of a Hugging Face repository's state, and
+    without one a loader takes whatever the repository holds on the day it runs.
+    The provenance record shows which revisions this run actually loaded, the
+    twin at `fc740804ff49f50fe3ef871b31eb2d5a5584132c` and base GPT-2 Small at
+    `607a30d783dfa663caf39e06633721c8d4cfcd7e`, so the run itself is identified;
+    what was missing was any guarantee that a later re-run would load the same
+    weights. Both revisions now live in one file, `exp017_models.py`, and the
+    loop, the lens fit, the J-space probe and the verification script all pass
+    them to both the model load and the tokenizer load. Loading at those pinned
+    revisions was checked and reproduces this run's model shapes and, in the
+    conversion check, every committed number.
 
 ## 5. H18b verdict: **SUPPORTED, at exactly the pre-registered threshold**
 
@@ -831,11 +896,11 @@ departures from a verified baseline.
    reserved for the operator under rule R8.
 
 3. **Should a longer twin lens fit be commissioned?** A 100-prompt fit costs
-   about 5 hours 45 minutes of one processor thread at this run's measured
-   206.3 seconds per prompt, which does not fit in a session that also runs the
-   loop. It is worth doing only if H18b's threshold-edge verdict is going to be
-   leaned on; the cross-checks in section 3.4 already carry the substantive
-   claim without it. **Recommendation, offered not taken:** not now.
+   about 6 hours 33 minutes of one processor thread at this run's measured
+   235.8 seconds per prompt computed, which does not fit in a session that also
+   runs the loop. It is worth doing only if H18b's threshold-edge verdict is
+   going to be leaned on; the cross-checks in section 3.4 already carry the
+   substantive claim without it. **Recommendation, offered not taken:** not now.
 
 4. **Is the rotation-control finding in section 3.5 worth its own experiment?**
    That base's settled states fall below a randomly rotated dictionary at the
@@ -874,11 +939,71 @@ All paths relative to this directory.
   `output/harness_check.log`.
 - Scripts: `verify_model.py`, `run_loop.py`, `exp017_partition.py`,
   `fit_twin_lens.py`, `choose_fit_budget.py`, `lens_from_checkpoint.py`,
-  `jspace.py`, `run_jspace.py`, `harness_check_jspace.py`, `make_tables.py`.
+  `jspace.py`, `run_jspace.py`, `harness_check_jspace.py`, `make_tables.py`,
+  and `exp017_models.py`, which holds the two repository names and the two
+  pinned revisions that every other script loads its weights at.
 - `REGISTER_VERDICTS.md`: proposed register rows for the orchestrator's sweep.
   This session does not edit `REGISTER.md`.
 - The two lens files live in `../../artifacts/`, which is not version
   controlled, and are identified above by their SHA-256 digests.
+
+## 8. Reproducing this run
+
+Every path below is relative to this directory, and every script sets one
+processor thread on its first lines.
+
+**What has to be placed by hand.** Two large files are not version controlled,
+because `_STAGE2_JSPACE/artifacts/` is in the repository's ignore list. The
+first is the pre-fitted Neuronpedia lens for base GPT-2 Small,
+`jlens_gpt2_small_neuronpedia.pt`, SHA-256
+`d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762`. The J-space
+probe resolves it relative to the checkout, at
+`../../artifacts/jlens_gpt2_small_neuronpedia.pt`, so put it there or name
+another path with `--base-lens`; either way the probe checks its SHA-256
+against that digest before it reads it, and stops if the file is missing or the
+digest disagrees. **Correction to the code as first committed:** that path was
+an absolute path on the machine that ran the experiment, which meant the probe
+could not run from any other checkout even with the lens correctly placed. A
+review of the pull request found it, and it now resolves from the checkout. The
+second unversioned file is the frozen fitting corpus
+`../../artifacts/wikitext_prompts_160.json`, which `fit_twin_lens.py
+--refresh-prompts` regenerates deterministically.
+
+**The models.** Both are downloaded from huggingface.co at the revisions pinned
+in `exp017_models.py`, the twin at `fc740804ff49f50fe3ef871b31eb2d5a5584132c`
+and base GPT-2 Small at `607a30d783dfa663caf39e06633721c8d4cfcd7e`. A revision
+is the commit identifier of a repository's state at one moment, so pinning it
+means a later change on Hugging Face cannot silently change what is loaded.
+
+**The order the steps ran in.** Where a step's cost was recorded, the figure
+below is the recorded one and its source is named. The steps with no figure had
+no timing written down, so none is given here.
+
+1. `python3 verify_model.py`, the provenance step. It writes
+   `output/model_verification.json` and `output/tl_conversion_check.json`. The
+   flag `--conversion-check-only` rewrites the second alone, which is how the
+   conversion numbers in section 2.3 were re-derived and checked.
+2. `python3 run_loop.py --model twin` and `python3 run_loop.py --model base`,
+   the loop, 1,096 seconds for the twin and 1,689 seconds for base, that is 18
+   and 28 minutes (`output/loop_twin.log` and `output/loop_base.log`).
+3. `python3 exp017_partition.py`, the H18 and H18a computation.
+4. `python3 fit_twin_lens.py --n 5 --dim-batch 16 --tag probe`, the timing
+   probe, 1,105 seconds for 5 prompts, that is 18 minutes
+   (`output/fit_probe_db16.log`); then `python3 choose_fit_budget.py`, which
+   applies the spec's budget rule to it; then `python3 fit_twin_lens.py --n 40
+   --dim-batch 16 --tag twin`, the lens fit, 8,253 seconds for the 35 prompts
+   it computed, that is 2 hours 18 minutes (`output/fit_twin.log`). The fit
+   stops itself before the spec's 9,000 second cap and exits with code 3 if it
+   has to, which is the signal to score H18b on the base lens for both sides.
+5. `python3 jspace.py --selftest`, the eight synthetic checks of the J-space
+   share, and `python3 fit_twin_lens.py --selftest`, the deadline arithmetic.
+   Both are expected to print ALL PASS.
+6. `python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt`,
+   the J-space probe, 160 seconds, that is under 3 minutes (the `wall_seconds`
+   field of `output/exp017_jspace.json`). Omitting `--twin-lens` runs the
+   spec's section 6.2 fallback, scoring both sides on the base lens.
+7. `python3 make_tables.py`, which regenerates `output/tables.md` from the JSON
+   so that no number in this record is hand-copied.
 
 **EXP_017 COMPLETE. H18: SUPPORTED. H18a: REFUTED. H18b: SUPPORTED at exactly
 the pre-registered threshold, with the cross-check carrying the substantive
