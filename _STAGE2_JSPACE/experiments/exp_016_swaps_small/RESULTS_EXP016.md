@@ -55,7 +55,13 @@ register:
   questions could show redirection, all three moved together on 4 of 6 in
   the primary set and on **14 of 18, which is 78 percent, in the
   five-continent extension set**, against 0 of 36 for the control; the
-  extension set is reported beside the headline number, not inside it.
+  extension set is reported beside the headline number, not inside it. One
+  population caveat (deviation 14): the specification's gate admits a
+  question when the unmodified model ranks the correct answer in its top
+  three, while the register's words "items the clean model answers
+  correctly" can be read as rank one only. On the rank-one questions alone,
+  72 of the 124, over the 19 primary pairs that keep at least two of them,
+  the held-out result is 7 of 9 pairs against 0 of 18 for the control.
 - **H17b, intermediate-step surgery: SUPPORTED on its registered wording,
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
@@ -70,7 +76,13 @@ register:
   rule asked only that the flip happen more often than under the control,
   and it does, but the effect is not distinguishable from chance at the
   usual 5 percent level and the battery is too small for this verdict to
-  carry much weight on its own.
+  carry much weight on its own. One population caveat cuts the other way
+  (deviation 14): the specification's gate admitted 9 items whose correct
+  answer the unmodified model ranks second or third, and all four flips are
+  among the 7 items it ranks first, which is the population the registered
+  wording names if "answers correctly" is read strictly. On those 7 the
+  result is 4 of 7 against 0 of 7 for control A (item-level probability
+  0.035), and 1 of 3 against 0 of 3 on the held-out half.
 
 The most interesting single number is not any of those three. It is the
 contrast inside H17b. Exchanging the concept everywhere from its first
@@ -283,9 +295,9 @@ Pairs where at least 2 scoreable questions redirected, primary set, tuned settin
 - control B (size matched): 0 percent (0 of 60)
 
 Pairs where at least 3 scoreable questions redirected, primary set, tuned setting:
-- lens swap: 13 percent (4 of 30)
-- control A (random directions): 0 percent (0 of 60)
-- control B (size matched): 0 percent (0 of 60)
+- lens swap: 67 percent (4 of 6)
+- control A (random directions): 0 percent (0 of 12)
+- control B (size matched): 0 percent (0 of 12)
 
 Pairs where at least 2 scoreable questions redirected, extension set, tuned setting:
 - lens swap: 100 percent (20 of 20)
@@ -293,9 +305,9 @@ Pairs where at least 2 scoreable questions redirected, extension set, tuned sett
 - control B (size matched): 5 percent (2 of 40)
 
 Pairs where at least 3 scoreable questions redirected, extension set, tuned setting:
-- lens swap: 70 percent (14 of 20)
-- control A (random directions): 0 percent (0 of 40)
-- control B (size matched): 0 percent (0 of 40)
+- lens swap: 78 percent (14 of 18)
+- control A (random directions): 0 percent (0 of 36)
+- control B (size matched): 0 percent (0 of 36)
 
 Selection by the registered pair-level outcome on the primary pairs (at least two of three functions redirected): chosen setting layers 9, strength 2.0, positions all, against layers 6 for the function-level selection the main analysis uses:
 
@@ -309,6 +321,17 @@ Selection by the registered pair-level outcome on the primary pairs (at least tw
 | function-level (main analysis) | layers 6, strength 2.0, all | overall | 87 percent (26 of 30) | 0 percent (0 of 60) | 0 percent (0 of 60) |
 
 Extension set, held-out half, at the pair-level chosen setting: lens 88 percent (7 of 8), control A 12 percent (2 of 16), control B 0 percent (0 of 16).
+
+Rank-1 sensitivity check (specification section 5.2): only the 72 of 124 scoreable questions whose correct answer the unmodified model ranks first, scored per pair (at least two such questions redirected) over the pairs that keep at least two of them (19 primary, 4 extension), at the tuned setting:
+
+| pair set | half | lens swap | control A | control B |
+|---|---|---|---|---|
+| primary | tuning | 8 of 10 | 0 of 20 | 0 of 20 |
+| primary | heldout | 7 of 9 | 0 of 18 | 0 of 18 |
+| primary | overall | 15 of 19 | 0 of 38 | 0 of 38 |
+| extension | tuning | 4 of 4 | 0 of 8 | 1 of 8 |
+| extension | heldout | 0 of 0 | 0 of 0 | 0 of 0 |
+| extension | overall | 4 of 4 | 0 of 8 | 1 of 8 |
 
 ### H17B: tuned setting = layers 7, strength 2.0, positions all_no_bos   (14112 records)
 
@@ -373,6 +396,14 @@ Looser score at the tuned setting, alternative answer in the top five:
 - lens swap: 56 percent (9 of 16)
 - control A (random directions): 46 percent (22 of 48)
 - control B (size matched): 42 percent (20 of 48)
+
+Rank-1 sensitivity check (specification section 5.3): the 7 of 16 items whose correct answer the unmodified model ranks first, at the tuned setting, an item counting as a control success if any of its draws flipped it:
+
+| half | lens swap | control A | control B |
+|---|---|---|---|
+| tuning | 3 of 4 | 0 of 4 | 1 of 4 |
+| heldout | 1 of 3 | 0 of 3 | 0 of 3 |
+| overall | 4 of 7 | 0 of 7 | 1 of 7 |
 
 ### Numbers not in the tables above
 
@@ -661,7 +692,7 @@ model's top three next words for all three questions. That left 10 of 25
 countries: France, Germany, Greece, Ireland, Italy, Japan, Poland, Portugal,
 Spain and Sweden. The other 15 are recorded as not testable at this scale,
 not as failed swaps. Requiring rank 1 rather than rank 3 would have left
-only 4 countries, which is too few to measure anything.
+only 4 countries, which is too few to measure anything. The specification promised that rank-one set as a sensitivity check, and the first version of this record omitted it; the tables now carry it for both batteries, and the bullets above quote it.
 
 Nine of those ten countries are European, so their continent answer is the
 same word and a swap between two of them cannot show the continent question
@@ -888,6 +919,19 @@ not match it in total at multi-layer settings.
     0.0029 to 0.051 over all items and from 0.25 to 0.5 on the held-out
     half.
 
+14. **The gates admitted answers the model ranks second or third, and the
+    promised rank-one sensitivity check was missing.** The register's
+    wording for H17a and H17b names items "the clean model answers
+    correctly"; the specification's pre-registered gates accept a correct
+    answer anywhere in the unmodified model's top three, and say so, with
+    the rank-one set promised as a sensitivity check. The first version of
+    this record did not report that check. It is now in the tables: for
+    H17a, the 72 of 124 scoreable questions at rank one give 7 of 9
+    held-out pairs against 0 of 18 (15 of 19 over both halves, against 0
+    of 38); for H17b, the 7 of 16 rank-one items hold all four flips, 4 of
+    7 against 0 of 7. Whether the registered wording means rank one is
+    decision item 5.
+
 ## Errata found during the run
 
 One error was found and corrected while the batteries were running, before
@@ -936,6 +980,13 @@ wrong, and what is true instead. The numbers are in the sections above.
 7. It said the registered control can under-disturb the model. Measured at
    the chosen settings, it does not in general: see "Disturbance sizes,
    measured after the fact".
+8. It reported no rank-one sensitivity check, although the specification
+   promised one for H17a and H17b. Both are now in the tables and quoted
+   in the verdict bullets; for H17b every flip lies in the rank-one set.
+9. Its "at least three questions redirected" tables counted pairs with only
+   two scoreable questions as failures (4 of 30 and 14 of 20). The pairs
+   that cannot meet the rule are now left out of the denominator (4 of 6
+   and 14 of 18), as the bullets always said.
 
 ## What remains
 
@@ -1010,6 +1061,16 @@ much they would add.
    rule for instrument experiments.** This is the first time the project has
    used it. It should either become the convention or be replaced by
    something TC prefers.
+
+5. **Whether "answers correctly" in the H17a and H17b register rows means
+   rank one.** The specification's gates admit a correct answer anywhere in
+   the top three, and the verdicts above are scored on those gates. Read at
+   rank one, H17a rests on 19 primary pairs (held-out 7 of 9 against 0 of
+   18) and H17b on 7 items (4 of 7 against 0 of 7); both stay SUPPORTED on
+   their wording, and H17b is stronger there than on the full battery. If
+   TC rules that the register means rank one, the register rows should
+   quote those numbers as the headline and the specification's gate as the
+   sensitivity check, rather than the other way round.
 ## Reproducing this
 
 Everything needed is in `experiments/exp_016_swaps_small/`. The order is:

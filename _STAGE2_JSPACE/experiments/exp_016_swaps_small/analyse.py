@@ -108,6 +108,11 @@ def pair_level(rows, battery="h17a", split=None, need=2, arm_filter=None,
         grp[g][0] += r[key]; grp[g][1] += 1
     acc = defaultdict(lambda: defaultdict(lambda: [0, 0]))
     for (iid, ls, a, m, arm, sd), (hit, tot) in grp.items():
+        if tot < need:
+            # A pair with fewer scoreable questions than the rule needs
+            # cannot meet it and is left out of the denominator, never
+            # counted as a failure (specification section 5.2).
+            continue
         cell = (ls, a, m)
         acc[cell][arm][0] += int(hit >= need)
         acc[cell][arm][1] += 1
@@ -198,6 +203,52 @@ def source_rule_selection(rows, items):
     return out
 
 
+def rank1_sensitivity(rows, battery, cell):
+    """The specification's promised rank-1 sensitivity check: the same
+    scoring at the tuned setting, restricted to the items (H17b) or the
+    questions (H17a) whose correct answer the unmodified model ranks first,
+    which is the population the register's words "answers correctly" name
+    if they are read strictly. Returns counts per arm, and for H17a the
+    pair-level outcome over pairs that keep at least two such questions."""
+    out = {}
+    if battery == "h17b":
+        items = {it["item_id"]: it for it in json.load(open(D + "battery_h17b.json"))}
+        keep = {i for i, it in items.items() if it["clean_answer_rank"] == 1}
+        per = defaultdict(lambda: defaultdict(list))
+        for r in rows:
+            if (r["layers"], r["alpha"], r["posmode"]) == tuple(cell) and r["item_id"] in keep:
+                per[r["item_id"]][r["arm"]].append(r["is_top1"])
+        for half, pred in (("tuning", lambda i: items[i]["split"] == "tuning"),
+                           ("heldout", lambda i: items[i]["split"] == "heldout"),
+                           ("overall", lambda i: True)):
+            ids = [i for i in per if pred(i)]
+            out[half] = {a: [sum(any(per[i][a]) for i in ids), len(ids)] for a in ("lens", "randdir", "randnorm")}
+        out["n_items"] = len(keep)
+        return out
+    items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
+    rank1 = {(it["item_id"], f["func"]) for it in items.values() for f in it["funcs"]
+             if f["scoreable"] and f["clean_rank"] == 1}
+    grp = defaultdict(lambda: [0, 0])
+    for r in rows:
+        if (r["layers"], r["alpha"], r["posmode"]) != tuple(cell) or (r["item_id"], r["func"]) not in rank1:
+            continue
+        g = (r["item_id"], r["arm"], r["seed"]); grp[g][0] += r["in_top5"]; grp[g][1] += 1
+    for pair_set in ("primary", "extension"):
+        out[pair_set] = {}
+        for half, split in (("tuning", "tuning"), ("heldout", "heldout"), ("overall", None)):
+            acc = defaultdict(lambda: [0, 0])
+            for (iid, arm, sd), (hit, tot) in grp.items():
+                it = items[iid]
+                if it["arm"] != pair_set or (split and it["split"] != split) or tot < 2:
+                    continue
+                acc[arm][0] += int(hit >= 2); acc[arm][1] += 1
+            out[pair_set][half] = {a: list(acc.get(a, [0, 0])) for a in ("lens", "randdir", "randnorm")}
+    out["n_rank1_questions"] = len(rank1)
+    out["n_pairs_with_two_rank1_questions"] = {ps: sum(1 for it in items.values() if it["arm"] == ps and
+        sum(1 for f in it["funcs"] if f["scoreable"] and f["clean_rank"] == 1) >= 2) for ps in ("primary", "extension")}
+    return out
+
+
 def pair_level_selection(rows, function_cell):
     """H17a with the registered pair-level outcome (at least two of three
     functions redirected, primary pairs only) used as the selection metric
@@ -226,6 +277,8 @@ if __name__ == "__main__":
             out["pair_level_selection"] = pair_level_selection(rows, out["chosen_cell"])
         if b == "h17b":
             out["posmode"] = posmode_table(rows, SCORE[b], out["chosen_cell"])
+        if b in ("h17a", "h17b"):
+            out["rank1_sensitivity"] = rank1_sensitivity(rows, b, out["chosen_cell"])
         json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
         c = out["chosen_cell"]
         print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "

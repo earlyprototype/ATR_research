@@ -157,3 +157,27 @@ for b in BATTERIES:
         print(f"\nExtension set, held-out half, at the pair-level chosen setting: lens "
               f"{pct(r.get('lens',[0,0,0]))}, control A {pct(r.get('randdir',[0,0,0]))}, "
               f"control B {pct(r.get('randnorm',[0,0,0]))}.")
+
+    if b in ("h17a", "h17b"):
+        rs = s["rank1_sensitivity"]
+        if b == "h17b":
+            print(f"\nRank-1 sensitivity check (specification section 5.3): the {rs['n_items']} of 16 "
+                  f"items whose correct answer the unmodified model ranks first, at the tuned setting, "
+                  f"an item counting as a control success if any of its draws flipped it:\n")
+            print("| half | lens swap | control A | control B |")
+            print("|---|---|---|---|")
+            for half in ("tuning", "heldout", "overall"):
+                r = rs[half]
+                print(f"| {half} | {r['lens'][0]} of {r['lens'][1]} | {r['randdir'][0]} of {r['randdir'][1]} | {r['randnorm'][0]} of {r['randnorm'][1]} |")
+        else:
+            print(f"\nRank-1 sensitivity check (specification section 5.2): only the {rs['n_rank1_questions']} of 124 "
+                  f"scoreable questions whose correct answer the unmodified model ranks first, scored per pair "
+                  f"(at least two such questions redirected) over the pairs that keep at least two of them "
+                  f"({rs['n_pairs_with_two_rank1_questions']['primary']} primary, "
+                  f"{rs['n_pairs_with_two_rank1_questions']['extension']} extension), at the tuned setting:\n")
+            print("| pair set | half | lens swap | control A | control B |")
+            print("|---|---|---|---|---|")
+            for ps in ("primary", "extension"):
+                for half in ("tuning", "heldout", "overall"):
+                    r = rs[ps][half]
+                    print(f"| {ps} | {half} | {r['lens'][0]} of {r['lens'][1]} | {r['randdir'][0]} of {r['randdir'][1]} | {r['randnorm'][0]} of {r['randnorm'][1]} |")

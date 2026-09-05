@@ -2548,5 +2548,100 @@
     16
    ]
   }
+ },
+ "rank1_sensitivity": {
+  "primary": {
+   "tuning": {
+    "lens": [
+     8,
+     10
+    ],
+    "randdir": [
+     0,
+     20
+    ],
+    "randnorm": [
+     0,
+     20
+    ]
+   },
+   "heldout": {
+    "lens": [
+     7,
+     9
+    ],
+    "randdir": [
+     0,
+     18
+    ],
+    "randnorm": [
+     0,
+     18
+    ]
+   },
+   "overall": {
+    "lens": [
+     15,
+     19
+    ],
+    "randdir": [
+     0,
+     38
+    ],
+    "randnorm": [
+     0,
+     38
+    ]
+   }
+  },
+  "extension": {
+   "tuning": {
+    "lens": [
+     4,
+     4
+    ],
+    "randdir": [
+     0,
+     8
+    ],
+    "randnorm": [
+     1,
+     8
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0,
+     0
+    ],
+    "randdir": [
+     0,
+     0
+    ],
+    "randnorm": [
+     0,
+     0
+    ]
+   },
+   "overall": {
+    "lens": [
+     4,
+     4
+    ],
+    "randdir": [
+     0,
+     8
+    ],
+    "randnorm": [
+     1,
+     8
+    ]
+   }
+  },
+  "n_rank1_questions": 72,
+  "n_pairs_with_two_rank1_questions": {
+   "primary": 19,
+   "extension": 4
+  }
  }
 }
