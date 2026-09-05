@@ -95,7 +95,11 @@ stops after three or four directions rather than the 25 it is allowed: there is
 nothing left that any direction points toward. When it stops for that reason the
 answer is not an approximation. It is the exact nearest point of the positive
 cone over all 50,257 directions, so the 25-direction limit is not what is
-holding these numbers down.
+holding these numbers down. That holds for every decomposition of the 125
+language terminals, of the 125 run-17 noise terminals and of the named single
+states, at every layer, and for 1,409 of the 1,500 ordinary-residual
+decompositions. The 91 that did reach the limit are covered by the solver
+limitation below, and their shares are lower bounds.
 
 Second, the norm-matched random dictionary is not a like-for-like chance level.
 Its cone is nearly the whole space, so it captures more of almost any state for a
@@ -579,11 +583,20 @@ are well above chance. So the correct statement is that the flip axis is below t
 lens's own chance level through the early band in both signs and rises above it in
 one sign in the last two band layers, not that it is at or below chance throughout.
 
-Two cautions on that reading. The control is three rotation seeds of a single
+Three cautions on that reading. The control is three rotation seeds of a single
 direction, and its own run-to-run spread is large relative to the differences being
 read: at layer 5 the three seeds give 0.0106, 0.0087 and 0.0270 for the positive
 sign, so the seed-to-seed variation is of the same size as the gap being reported.
-Marked as inferred rather than established for that reason. And the comparison with
+Marked as inferred rather than established for that reason. The negative sign's
+shares at layers 5, 6 and 7, and at layer 0, come from decompositions that used all
+25 directions they were allowed, so under the solver limitation recorded below they
+are looser lower bounds than the rest of the table and could rise if the search were
+re-run; their controls at those layers did not reach the limit, so the "below
+chance" reading in the negative sign at layers 5 and 6 is the part of this paragraph
+most exposed to that. The positive sign never reached the limit at a band layer, so
+the statement that it rises above chance at layers 9 and 10 is a claim about a lower
+bound already exceeding its control and is safe. At layer 11 the controls themselves
+all reached the limit, so that row's margins are the least reliable in the table. And the comparison with
 finding F16 is looser than the earlier version implied. F16's statement that the
 flip axis is almost entirely outside the lens rests on its least-squares span probe
 against a generic-direction baseline of about 0.25, and its non-negative sparse
@@ -669,7 +682,11 @@ directions with a positive correlation first, which as explained above means the
 answer is the exact nearest point of the whole positive cone rather than a
 25-direction approximation. Ordinary residuals use about twice as many
 directions as settled states do, which is the same fact as their higher shares
-seen from another side.
+seen from another side. One caution on this table: the counts are of directions
+the search *selected*, and the solver limitation below explains that a selected
+direction can end with a weight of exactly zero and contribute nothing, which
+makes these medians a slight overcount of the directions actually carrying the
+reconstruction.
 
 ### The named states
 
@@ -717,7 +734,11 @@ at 25 directions or when nothing is left that any direction points toward. When
 the search stops for the second reason, which happens often here, the answer is
 not merely a good 25-direction approximation: it is the exact closest point of
 the whole positive cone over all 50,257 directions, so the 25-direction limit is
-not what is holding the number down.
+not what is holding the number down. When it stops for the first reason instead,
+having spent its 25 directions, the number is a lower bound on the true share
+rather than the exact answer. That happened for none of the settled states and for
+91 of the 1,500 ordinary-residual readings, almost all of them at layers 0, 1 and
+2, which carry no verdict; the solver limitation below gives the counts.
 
 ## The two controls, and why both are needed
 
@@ -763,7 +784,12 @@ Five families of states, all read at every one of the twelve layers, where
    random Gaussian tensors, each pair-matched to one prompt's exact sequence
    length and starting length, iterated under the convergence gate. Its average
    injection length is 1427.5 against the original noise arm's 401.3, which is
-   the mis-scaling that lucier finding F4 records.
+   the mis-scaling that lucier finding F4 records. Run 17 stores each trial's
+   last-position vector and its position average but not the terminal tensor, so
+   the tensor used here was rebuilt by repeating the last-position vector across
+   the recorded sequence length. That is exact rather than approximate, and the
+   evidence comes from run 17's own record: see the position-collapse check under
+   the gates below.
 3. **The 125 original-noise terminals.** The first noise arm, at iteration 100,
    whose 18 distinct read-out labels are the "18 null-model basins" that H6
    names. Known to be mis-scaled; used only because H6's registered wording
@@ -807,6 +833,32 @@ tensor and from the repeated last-position vector gives the same answer: the
 smallest cosine between the two readings across all twelve layers is 0.9999998,
 and the largest absolute difference in any of the 768 numbers is 0.0007 against
 state lengths above 1500.
+
+**Position collapse in the run-17 noise arm, established from run 17's own record
+rather than from this experiment's own forward pass.** Run 17 stores each trial's
+last-position vector and its position average but not the terminal tensor itself,
+so the tensor injected here was rebuilt by repeating the last-position vector
+across the recorded sequence length. That rebuild is exact only if run 17's
+terminal really did hold the same vector at every position, and the reconstruction
+gate below cannot show it, because that gate only asks what a forward pass does to
+the already rebuilt tensor. Three quantities from run 17's own file settle it, over
+all 125 trials, whose sequence lengths run from 2 to 25 tokens so every trial has
+at least one pair of positions to compare. First, the loop engine recorded, in
+double precision at each trial's terminal iteration, the average cosine between
+every pair of token positions of the terminal tensor: it lies between
+0.99999999999995 and 0.99999999999999, on a scale where 1 means every position
+holds the same direction. Second, the root-mean-square of the token-position
+lengths divided by their mean, which can be formed from the stored tensor length,
+the sequence length and the stored position average, and which is exactly 1 only
+when every position has the same length, lies between 0.999999464 and 1.000000349,
+so the departure from 1 is at the level of the single-precision rounding in the
+stored numbers. Third, the stored position average and the stored last position
+agree in direction at cosine 1.000000000000 and in length to within 1.1 parts in
+ten million. The run-17 terminal was therefore position-collapsed to
+floating-point precision, and repeating the last vector is an exact rebuild rather
+than a fabrication. This check was added on 2026-09-05 in review; the state builder
+now computes and records it, and also states in its metadata that the run-17
+tensor was reconstructed from the last vector.
 
 **The reconstruction gate.** A settled state that is a true resting point must
 come back unchanged after one loop step. It does: 91 of the 125 language states
@@ -860,6 +912,105 @@ token fewer for **125 of 125**. For example the physics prompt was run at length
 include the prepended start-of-text marker, and any lens reading built on the
 assumption that they do not is reading a different sequence length from the one
 the loop used. This is established, not inferred.
+
+### A defect in the decomposition search, found in review on 2026-09-05
+
+**What it is.** The search adds one dictionary direction at a time and, after each
+addition, re-fits all the chosen weights under the rule that none may go negative.
+That re-fit can set a previously chosen direction's weight to exactly zero. In the
+version of `jspace.py` that produced every number in this record, such a direction
+stayed on the chosen list: it contributed nothing to the reconstruction, it could
+never be chosen again, and it still used up one of the 25 slots the registered
+J-space allows. A state could therefore stop at 25 chosen directions while fewer
+than 25 were actually carrying any weight.
+
+**When it costs anything, and when it does not.** It costs nothing for a state that
+stops because no direction points at what is left over, and that is established
+rather than assumed. After a non-negative re-fit, the optimality conditions of that
+re-fit put every zero-weighted direction at a non-positive correlation with what is
+left over, so a zero-weighted direction would not have been chosen at that moment
+anyway. When the search stops on the correlation test, no direction anywhere has a
+positive correlation with the remainder, and the answer is the exact nearest point
+of the whole positive cone. The defect bites only on states that run out of their
+25 slots, because those are stopped before the registered allowance is used up.
+
+**How many decompositions that is.** Counted from the committed
+`output/shares.json` and `output/atom_records.json`:
+
+| family, real lens | decompositions | at the 25-direction limit | layers where that happens |
+|---|---|---|---|
+| 125 language terminals | 1,500 | 0 | none |
+| 125 run-17 noise terminals | 1,500 | 0 | none |
+| named single states (`prolet`, the two `Divine` traces, the pivot, the pilot noise state, the five converged prompt tensors) | 120 | 0 | none |
+| 125 original-noise terminals | 1,500 | 7 | layer 1 (1 state) and layer 11 (6) |
+| 125 ordinary residuals, last position | 1,500 | 91 | layers 0 (32), 1 (40), 2 (15), 4 (3) and 5 (1) |
+| 125 ordinary residuals, position-averaged | 1,500 | 60 | layers 0 (8) and 1 (52) |
+| the flip axis, both signs | 24 | 4 | layers 0, 5, 6 and 7, the negative sign each time |
+
+Of the 91 ordinary-residual decompositions that reached the limit, 84 hold at least
+one zero weight, which is the number an independent review counted and this record
+reproduces; the count of zero weights among them runs from one to five. For the
+controls the picture is coarser, because the selected directions were recorded only
+for the real lens. Every one of the 22,500 decompositions against the three
+norm-matched random dictionaries reached the limit, so all of those are affected.
+Against the three rotated lenses, 401 of the 4,500 language decompositions reached
+it, but **none at any band layer**, and the same is true of the run-17 noise arm;
+the ordinary residuals reach it at 4 of 375 rotated-lens decompositions at layer 5
+and nowhere else in the band.
+
+**Which way the bias runs.** Every share in this record is the share of an actual
+combination of at most 25 lens directions with non-negative weights, so it is a
+point of the J-space and its share is at or below the true J-space share, which is
+defined by the nearest such point. **A share here can only be an underestimate,
+never an overestimate.** That is established by the construction of the measure and
+does not depend on the defect; the defect widens the gap for the affected states.
+
+**Whether any verdict could turn on it.** No, and the reason is the table above
+rather than an argument about sizes. H16 compares the language terminals with the
+run-17 noise terminals, and neither family has a single decomposition at the limit
+at any layer. H16a compares the `prolet` attractor with the `Divine` traces, and
+none of the named states has one either. H6 scores at layers 5 to 10, and the
+original-noise arm reaches the limit only at layers 1 and 11, neither of which
+carries a verdict. H16b compares the language terminals with the ordinary
+residuals, and inside the band exactly one of the 750 ordinary-residual
+decompositions is affected, the single layer-5 state. That one state can only move
+upward, which makes its paired difference more negative and so supports H16b rather
+than threatening it, and one pair in 125 cannot move a median of 125 paired
+differences appreciably in any case. The first decision item's rotated-lens
+comparison is likewise untouched inside the band. So all four verdicts stand
+without a re-run, and that is established from the counts, not inferred.
+
+**What is affected, and it is descriptive.** The ordinary residuals' shares at
+layers 0, 1 and 2 (medians 0.0257, 0.0422 and 0.0358) rest on 32, 40 and 15 of 125
+readings that stopped early, so those three medians are the loosest lower bounds in
+the record. The norm-matched random dictionary's level of 0.369 to 0.375 is a lower
+bound throughout, which if anything widens the gap the record already reports
+between it and the real families rather than narrowing it. And the flip axis's
+negative-sign shares at layers 5, 6 and 7 are lower bounds, which is flagged in the
+flip-axis section.
+
+**What was done.** `jspace.py` now drops zero-weight directions from the chosen set
+and keeps going until 25 directions carry weight or no direction anywhere points at
+the remainder, and it now counts only weight-carrying directions. The module records
+why that loop must terminate. The self-test gained three checks: that no zero weight
+is ever reported, that a state stopping below the limit really has no usable
+direction left, and that no state reaches the safety bound on iterations. The
+self-test's own numbers are unchanged from the committed run, byte for byte
+(`output/exp011_decompose.log`), because its synthetic states were never affected.
+**The committed outputs were produced by the earlier version and have not been
+touched**, so from this commit the code and the artifacts under `output/` no longer
+correspond; that is stated here rather than hidden, and re-running the stage is the
+only thing that would restore the correspondence.
+
+**What a re-run would cost, from this run's own logs.** The whole decomposition
+stage took 3,472 seconds, which is 58 minutes, for about 61,000 state-layer
+decompositions at a peak memory of 1.58 gigabytes (`output/shares.json`, fields
+`wall_seconds` and `peak_rss_gb`). Re-doing only the ordinary residuals against the
+real lens is 1,500 of those decompositions plus twelve dictionary builds at the
+measured 1.3 seconds each, so under two minutes. Re-doing every arm is about the
+same 58 minutes plus whatever the extra rounds cost on the 25,453 decompositions
+that reached the limit, so on the order of an hour and a quarter. This is decision
+item 5.
 
 ---
 
@@ -1008,10 +1159,49 @@ Recorded flat, whether or not they helped.
     (a)" was omitted from the first version of this record and has now been run,
     with its p-values reported under H16.
 
-No reduction was taken under the specification's stopping rule: the run completed
-every planned arm at every layer, in 3,472 seconds of decomposition (0.96 hours)
-at a peak memory of 1.58 gigabytes against a 3-gigabyte ceiling, plus about three
-minutes of state building and about one minute of scoring and readouts.
+11. **The decomposition search did not always use the full allowance of 25
+    directions.** Section 4 fixes the atom limit at 25, and section 9 item 2 makes
+    any change to that limit a deviation. The implementation kept a direction on
+    the chosen list even when the non-negative re-fit gave it a weight of exactly
+    zero, so a state could stop having chosen 25 directions while fewer than 25
+    carried weight, which is an effective limit below 25 for those states. It
+    affects no decomposition of the language terminals, the run-17 noise terminals
+    or the named single states at any layer, and inside the band it affects one of
+    the 750 ordinary-residual decompositions. The section "A defect in the
+    decomposition search" above gives the full counts, the direction of the bias,
+    which is that a share can only be underestimated, and the reasoning that no
+    verdict depends on it. `jspace.py` is fixed for future runs and the committed
+    outputs are unchanged, so the code and the artifacts no longer correspond.
+
+12. **Three of the eleven planned dictionary arms were not run.** Section 8's plan
+    counts eleven arms: the lens and six controls on the raw residuals, and the
+    lens and three rotation controls on the mean-centred residuals. Eight ran. The
+    three rotation controls on the centred residuals were not, and this was not a
+    reduction taken under section 8's stopping rule, which triggers only on a
+    projected cost above four hours, against a measured 0.96 hours. It is
+    immaterial for a measured reason rather than an argued one. As deviation 2
+    records, the loader centres every residual already, so the centred states are
+    the primary arm's states: the largest average-component length across all 637
+    states and twelve layers is 4.9 parts in one hundred million of a state's own
+    length, and comparing the two committed arms state by state, the largest
+    difference between a centred share and its primary-arm share is 2.4 parts in
+    ten million on the 0-to-1 scale over all 7,644 state-layer pairs, with the
+    largest difference in any family median at 1.2 parts in ten million. A rotation
+    control is the same decomposition applied to the rotated state, so the primary
+    arm's three rotation controls are the centred arm's three rotation controls to
+    that same precision, and running them would have produced three more copies of
+    numbers already in `output/shares.json`. Had the identity not held, the missing
+    arms would have cost about twelve minutes: roughly 23,000 state-layer
+    decompositions at the measured rate of the committed run.
+
+No reduction was taken under the specification's stopping rule, which triggers only
+on a projected cost above four hours: the run took 3,472 seconds of decomposition
+(0.96 hours) at a peak memory of 1.58 gigabytes against a 3-gigabyte ceiling, plus
+about three minutes of state building and about one minute of scoring and readouts.
+**Correction, dated 2026-09-05:** an earlier version of this sentence also said the
+run "completed every planned arm at every layer". That was wrong. Eight of the
+eleven arms section 8 plans were run, and the three missing ones are recorded as
+deviation 12 below.
 
 ---
 
@@ -1030,6 +1220,16 @@ share is therefore ambiguous between "the state holds nothing verbalizable" and
 out, and the H16b verdict in particular says the settled state holds less of what
 this lens can express, which is not the same claim as "the settled state holds
 less".
+
+**Every share here is a lower bound on the quantity it names, and for some states
+a loose one.** The share reported is the share of an actual combination of at most
+25 lens directions with non-negative weights, so it is at or below the true
+J-space share, which is defined by the nearest such combination. The search that
+found it is greedy, and until it was corrected on 2026-09-05 it could also stop a
+state before it had used its full allowance of 25 directions. The section "A
+defect in the decomposition search" gives the counts and shows that no verdict
+turns on it; what a reader should carry away is that a low share here is never
+evidence that the true share is lower still.
 
 The share is a geometric quantity about a cone of at most 25 directions. It is
 not a measure of meaning, and a state can be rich in structure the lens has no
@@ -1199,3 +1399,24 @@ and one cycle, each on a single trajectory, with no repeats.
    the one-hour re-run here so that the arm the specification made primary has
    numbers. The choice matters beyond this experiment, because EXP_011m and H19b
    in EXP_018 will inherit whichever convention is settled.
+
+5. **Whether to re-run the decomposition with the corrected search, and this one
+   changes no verdict.** The search that produced every number here could stop a
+   state at 25 chosen directions while fewer than 25 carried any weight, so those
+   states were stopped before using the allowance the registered J-space gives
+   them. The full accounting is in "A defect in the decomposition search" above.
+   The short of it: no decomposition of the language terminals, the run-17 noise
+   terminals or the named single states reached the limit at any layer, so H16,
+   H16a and H6 are untouched, and inside the band exactly one of the 750
+   ordinary-residual decompositions is affected, in a direction that supports H16b
+   rather than threatening it. What is affected is descriptive: the ordinary
+   residuals' shares at layers 0, 1 and 2, the norm-matched random dictionary's
+   level, and the flip axis's negative-sign shares at layers 5, 6 and 7 are all
+   lower bounds that would rise. `jspace.py` is already corrected, so a re-run
+   needs no further work. **The cost, from this run's logs:** under two minutes to
+   redo the ordinary residuals against the real lens, or about an hour and a
+   quarter to redo every arm. **Proposal for ruling:** do not re-run for the
+   verdicts, because none turns on it. If decision item 4 is answered by
+   authorising a rebuild of the states, fold this into the same run, since the
+   corrected search costs nothing extra to use and the two questions then close
+   together.

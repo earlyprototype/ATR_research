@@ -175,6 +175,57 @@ stage1_possim = [float(v["position_similarity"][-1]) for v in stage1.values()]
 gates["stage1_position_similarity_iter100"] = {
     "min": min(stage1_possim), "max": max(stage1_possim), "n": len(stage1_possim)}
 
+# Run 17 stores only the terminal's last-position vector and its position mean,
+# not the full terminal tensor, so this script rebuilds the tensor by repeating
+# the last vector. That rebuild is exact only if the run-17 terminal was
+# position-collapsed, and the reconstruction gate further down cannot establish
+# it, because that gate only checks what a forward pass does to the already tiled
+# tensor. The evidence therefore has to come from run 17's own record, and is
+# taken from it here so the claim is not circular. Three quantities per trial,
+# all read or derived from that record and none of them requiring the tensor:
+# the mean off-diagonal cosine between token positions, which the engine computes
+# in float64 at the terminal iteration; the root-mean-square of the token-position
+# lengths divided by their mean, which the power-mean inequality makes exactly 1
+# only when every position has the same length; and the cosine between the stored
+# position mean and the stored last position.
+n17_pc = []
+for tid in sorted(noise17):
+    e17 = noise17[tid]["result"]
+    T17 = int(noise17[tid]["seq_len"])
+    mv17, lv17 = e17["terminal_mean_vec"].double(), e17["terminal_last_vec"].double()
+    n17_pc.append({
+        "trial": tid,
+        "iteration": int(e17["metrics"][-1]["iteration"]),
+        "mean_offdiagonal_position_cosine": float(e17["metrics"][-1]["position_similarity_f64"]),
+        "rms_over_mean_position_length": (float(e17["metrics"][-1]["tensor_norm"])
+                                          / (T17 ** 0.5 * float(mv17.norm()))),
+        "cos_mean_vec_last_vec": float(F.cosine_similarity(mv17.unsqueeze(0),
+                                                           lv17.unsqueeze(0))),
+    })
+def _rng(key):
+    vals = [e[key] for e in n17_pc]
+    return {"min": min(vals), "max": max(vals)}
+gates["noise17_position_collapse_from_run17_record"] = {
+    "n": len(n17_pc),
+    "source": ("run 17's own results.pt: the per-iteration metrics list at the "
+               "terminal iteration, and the stored terminal_mean_vec and "
+               "terminal_last_vec. No tensor is stored there and none is needed."),
+    "mean_offdiagonal_position_cosine": _rng("mean_offdiagonal_position_cosine"),
+    "rms_over_mean_position_length": _rng("rms_over_mean_position_length"),
+    "cos_mean_vec_last_vec": _rng("cos_mean_vec_last_vec"),
+    "note": ("A mean off-diagonal position cosine of 1 means every token position "
+             "holds the same direction; a root-mean-square over mean of 1 means "
+             "every position holds the same length. Both together make repeating "
+             "the last vector an exact rebuild of the terminal tensor rather than "
+             "an approximation."),
+}
+log(f"  run-17 position collapse, from run 17's own record: mean off-diagonal "
+    f"position cosine {_rng('mean_offdiagonal_position_cosine')['min']:.12f} to "
+    f"{_rng('mean_offdiagonal_position_cosine')['max']:.12f}, position-length "
+    f"root-mean-square over mean "
+    f"{_rng('rms_over_mean_position_length')['min']:.9f} to "
+    f"{_rng('rms_over_mean_position_length')['max']:.9f}")
+
 # tiling identity: reading the stored full tensor and reading the tiled last
 # vector must give the identical per-layer states.
 tile_checks = []
@@ -209,6 +260,11 @@ meta["lang"] = {
     "initial_frobenius": [pairing[p][1] for p in lang_ids],
     "terminal_norm": [float(stage1[p]["last_vectors"][-1].norm()) for p in lang_ids],
     "reconstruction_cosine": lang_cos,
+    "tensor_reconstruction": (
+        "Rebuilt by repeating last_vectors[-1] across the paired sequence length "
+        "and rescaling to the paired iteration-0 Frobenius norm. Exact rather than "
+        "approximate because Stage 1 recorded position_similarity at iteration 100 "
+        "for all 125 prompts: see gates['stage1_position_similarity_iter100']."),
 }
 
 # --------------------------------------------------- family: noise17 (125) ---
@@ -230,6 +286,14 @@ meta["noise17"] = {
     "seq_len": [int(noise17[t]["seq_len"]) for t in n17_ids],
     "initial_frobenius": [float(noise17[t]["target_frobenius"]) for t in n17_ids],
     "reconstruction_cosine": n17_cos,
+    "tensor_reconstruction": (
+        "Run 17 stores terminal_last_vec and terminal_mean_vec, not the terminal "
+        "tensor, so the tensor injected here was rebuilt by repeating "
+        "terminal_last_vec across the recorded seq_len positions and rescaling the "
+        "whole tensor to target_frobenius. The rebuild is exact rather than "
+        "approximate because run 17's own record shows the terminal was "
+        "position-collapsed: see "
+        "gates['noise17_position_collapse_from_run17_record']."),
 }
 
 # --------------------------------------------------- family: nullold (125) ---

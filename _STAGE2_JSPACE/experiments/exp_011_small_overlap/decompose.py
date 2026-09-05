@@ -135,6 +135,17 @@ def main():
                 del Drot
             # Centred arm: the pre-registered secondary. Run on the lens at every
             # layer so the pre-registration is discharged with numbers, not an argument.
+            # Spec section 8's plan also counted three rotation controls on the
+            # centred residuals, which are not run here, so 8 of the 11 planned
+            # arms exist. This is not a reduction under section 8's stopping rule,
+            # which triggers only above a projected four hours. It is immaterial
+            # for a measured reason: the loader centres every residual already, so
+            # Hc equals H to within the mean-component fraction reported above
+            # (4.9e-8 of a state's own length at worst), the lens_centred shares
+            # agree with the lens shares to 2.4e-7 on a 0-to-1 scale at worst over
+            # all 7,644 state-layer pairs, and therefore the raw arm's rotation
+            # controls are the centred arm's rotation controls to the same
+            # precision. Recorded as a deviation in RESULTS_EXP011.md.
             Hc = H - H.mean(dim=1, keepdim=True)
             arms["lens_centred"] = decompose(D, Hc.contiguous(), Dn=Dn)
 
