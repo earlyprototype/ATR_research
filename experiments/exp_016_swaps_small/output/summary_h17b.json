@@ -1,0 +1,7793 @@
+{
+ "battery": "h17b",
+ "score_key": "is_top1",
+ "chosen_cell": [
+  "7",
+  2.0,
+  "all_no_bos"
+ ],
+ "n_records": 14112,
+ "tuning": {
+  "lens": [
+   0.375,
+   3,
+   8
+  ],
+  "randdir": [
+   0.0,
+   0,
+   24
+  ],
+  "randnorm": [
+   0.0417,
+   1,
+   24
+  ]
+ },
+ "heldout": {
+  "lens": [
+   0.125,
+   1,
+   8
+  ],
+  "randdir": [
+   0.0,
+   0,
+   24
+  ],
+  "randnorm": [
+   0.0,
+   0,
+   24
+  ]
+ },
+ "overall": {
+  "lens": [
+   0.25,
+   4,
+   16
+  ],
+  "randdir": [
+   0.0,
+   0,
+   48
+  ],
+  "randnorm": [
+   0.0208,
+   1,
+   48
+  ]
+ },
+ "grid": [
+  {
+   "layers": "10",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "10",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0833,
+     2,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0417,
+     2,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5-6",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0833,
+     2,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0417,
+     2,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0833,
+     2,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0417,
+     2,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0833,
+     2,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0417,
+     2,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6-7-8",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7-8-9",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "8-9",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 0.5,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 0.5,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 0.5,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 1.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0625,
+     1,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 2.0,
+   "posmode": "answer_only",
+   "tuning": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.0,
+     0,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.0,
+     0,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "9",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.125,
+     2,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     48
+    ]
+   }
+  }
+ ],
+ "top_cells_overall": [
+  {
+   "layers": "4",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "4",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0417,
+     1,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0208,
+     1,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "7",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.375,
+     3,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.25,
+     4,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "3",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0417,
+     1,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0208,
+     1,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 2.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "5",
+   "alpha": 2.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.125,
+     3,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0625,
+     3,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 1.0,
+   "posmode": "all_no_bos",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  },
+  {
+   "layers": "6",
+   "alpha": 1.0,
+   "posmode": "from_mention",
+   "tuning": {
+    "lens": [
+     0.25,
+     2,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0833,
+     2,
+     24
+    ]
+   },
+   "heldout": {
+    "lens": [
+     0.125,
+     1,
+     8
+    ],
+    "randdir": [
+     0.0,
+     0,
+     24
+    ],
+    "randnorm": [
+     0.0,
+     0,
+     24
+    ]
+   },
+   "overall": {
+    "lens": [
+     0.1875,
+     3,
+     16
+    ],
+    "randdir": [
+     0.0,
+     0,
+     48
+    ],
+    "randnorm": [
+     0.0417,
+     2,
+     48
+    ]
+   }
+  }
+ ]
+}

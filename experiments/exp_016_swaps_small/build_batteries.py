@@ -123,12 +123,18 @@ for i, r in enumerate(sorted(allrows, key=lambda z: z["name"])):
     ch = low.find(word)
     if ch < 0:
         continue
-    enc = tokzr(r["prompt"], return_offsets_mapping=True)
-    mention = None
-    for ti, (a, b) in enumerate(enc["offset_mapping"]):
-        if a <= ch < b:
-            mention = ti + 1          # +1 for the prepended beginning-of-text token
+    # Walk the model's own token strings, which begin with the prepended
+    # beginning-of-text token at position 0, and find the position whose
+    # characters cover the first mention of the swapped concept.
+    strtoks = model.to_str_tokens(r["prompt"])
+    mention, cursor = None, 0
+    for ti, st in enumerate(strtoks):
+        if ti == 0:                   # the prepended beginning-of-text token
+            continue
+        if cursor <= ch < cursor + len(st):
+            mention = ti
             break
+        cursor += len(st)
     if mention is None:
         continue
     b3.append(dict(item_id=r["name"], prompt=r["prompt"],
@@ -144,8 +150,12 @@ for i, r in enumerate(sorted(allrows, key=lambda z: z["name"])):
 for i, it in enumerate(b3):
     it["split"] = "tuning" if i % 2 == 0 else "heldout"
 
+import os
+ONLY = os.environ.get("BUILD_ONLY")
 for name, data in (("battery_h17.json", b1), ("battery_h17a.json", b2),
                    ("battery_h17b.json", b3)):
+    if ONLY and ONLY not in name:
+        continue
     json.dump(data, open(D + name, "w"), indent=1)
     print(name, len(data), "items;",
           "tuning", sum(1 for x in data if x["split"] == "tuning"),

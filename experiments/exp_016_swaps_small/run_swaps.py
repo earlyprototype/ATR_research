@@ -17,10 +17,10 @@ LAYERS = list(range(3, 11))
 SETS_FULL = [(l,) for l in LAYERS] + [(5,6),(6,7),(7,8),(8,9),(6,7,8),(7,8,9)]
 SETS_B2 = [(l,) for l in LAYERS] + [(6,7,8),(7,8,9)]
 ALPHAS = [0.5, 1.0, 2.0]
-SEEDS = [0, 1, 2]
+SEEDS_BY_BATTERY = {"h17b": [0, 1, 2], "h17": [0, 1], "h17a": [0, 1]}
 CHUNK = 32
-POSMODES = {"h17": ["all", "all_no_bos", "last"],
-            "h17a": ["all", "all_no_bos"],
+POSMODES = {"h17": ["all", "last"],
+            "h17a": ["all"],
             "h17b": ["all_no_bos", "from_mention", "answer_only"]}
 
 
@@ -36,10 +36,10 @@ def positions(mode, T, mention):
     raise ValueError(mode)
 
 
-def arms():
+def arms(seeds):
     out = [("lens", -1)]
-    out += [("randdir", s) for s in SEEDS]
-    out += [("randnorm", s) for s in SEEDS]
+    out += [("randdir", s) for s in seeds]
+    out += [("randnorm", s) for s in seeds]
     return out
 
 
@@ -50,6 +50,7 @@ def main(battery):
     items = json.load(open(D + f"battery_{battery}.json"))
     sets = SETS_B2 if battery == "h17a" else SETS_FULL
     modes = POSMODES[battery]
+    seeds = SEEDS_BY_BATTERY[battery]
 
     # sanity check: the cheap read-out path equals the model's own word scores
     tk = model.to_tokens("The capital of France is the city of")
@@ -89,11 +90,11 @@ def main(battery):
         for l in LAYERS:
             W = lens_vectors(lens, model, l, [u["source_tok"], u["target_tok"]])
             V_lens[l] = W
-            for s in SEEDS:
+            for s in seeds:
                 V_rand[(l, s)] = random_pair(W[:, 0], W[:, 1],
                                              hash((u["item_id"], u.get("func", ""), l, s)))
         conds = [(ls, a, m, arm, sd) for ls in sets for a in ALPHAS
-                 for m in modes for arm, sd in arms()]
+                 for m in modes for arm, sd in arms(seeds)]
         for c0 in range(0, len(conds), CHUNK):
             chunk = conds[c0:c0 + CHUNK]
             plan = SwapPlan(T, LAYERS)
@@ -124,7 +125,7 @@ def main(battery):
     fh.close()
     json.dump(dict(battery=battery, n_units=len(units), n_conditions=n_done,
                    layer_sets=[list(s) for s in sets], alphas=ALPHAS,
-                   posmodes=modes, seeds=SEEDS, chunk=CHUNK,
+                   posmodes=modes, seeds=seeds, chunk=CHUNK,
                    lens_sha256=LENS_SHA256, jlens_commit=JLENS_COMMIT,
                    torch=torch.__version__,
                    wall_seconds=round(time.time() - t0, 1)),

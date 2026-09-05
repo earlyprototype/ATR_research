@@ -46,3 +46,77 @@ reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82b
   ' football', ' to', ' the', ' rugby', ' swimming'; after exchanging the
   football and cricket lens coordinates at layer 8 at all positions at
   strength 1 they were ' cricket', ' to', ' tennis', ' rugby', ' swimming'.
+
+2026-09-05  Batteries launched sequentially in one background process, in
+  the order h17b, h17, h17a, each with its own fresh Python process.
+
+2026-09-05  DEVIATION, recorded while h17b was still running and before h17
+  or h17a had started. Measured throughput fell from the 28.6 conditions per
+  second the specification's budget assumed (35 milliseconds per condition)
+  to 18.2 conditions per second, because the four shared cores were carrying
+  a load average of 4.9 from the other agents. Extrapolating the full
+  pre-registered grid at that rate gave about 2 hours of further computation
+  on top of the 1 hour 50 minutes already spent, which risks the five-hour
+  target. Two whole settings were therefore dropped from the two batteries
+  that had not yet started, never any items, as section 7 of the
+  specification requires:
+    (a) the position mode `all_no_bos` was dropped from H17 and from H17a,
+        leaving `all` and `last` for H17 and `all` alone for H17a. That mode
+        differs from `all` only in whether the single prepended
+        beginning-of-text token is patched.
+    (b) the number of control seeds was reduced from three to two for H17
+        and H17a. H17b keeps all three. Two seeds still give 168 control
+        trials per setting for H17 and 248 for H17a.
+  H17b was unaffected and ran the full pre-registered grid.
+  Revised counts: H17 35,280 conditions (was 74,088), H17a 18,600 (was
+  52,080), H17b 14,112 (unchanged).
+
+2026-09-05  ERRATUM found and corrected during the run, before any result
+  was read. The position of the swapped concept's first mention, used only
+  by the H17b position mode `from_mention`, was computed one token too high.
+  The cause: the offsets were taken from the plain Hugging Face tokenizer
+  encoding, which does not prepend the beginning-of-text token, and then one
+  was added to account for the prepended token, but the transformer_lens
+  tokenizer used to read those offsets does prepend it, so the correction was
+  applied twice. Fourteen of the sixteen items moved from position 2 to
+  position 1, one from 5 to 4 and one from 8 to 7. Effect: the `from_mention`
+  arm of the first H17b run began one token after the concept's first token
+  instead of at it. The other two H17b position modes, `all_no_bos` and
+  `answer_only`, were unaffected, and no other battery uses the mention
+  position. The first H17b run was stopped at roughly 9,000 of its 14,112
+  conditions, its partial records were discarded unread except for a
+  pipeline check, the position finder was rewritten to walk the model's own
+  token strings, `battery_h17b.json` was rebuilt (only `first_mention_pos`
+  changed; every other field is byte-identical), and H17b was queued to run
+  again in full after H17a.
+
+2026-09-05 12:03  All three batteries complete. Wall clock for the whole
+  experiment, from first environment check to last figure, 1 hour 26 minutes.
+  Peak memory stayed under 2 GB throughout, against the 3 GB ceiling.
+    run_swaps.py h17b (first, superseded)  STOPPED at ~9,000 of 14,112
+    run_swaps.py h17    exit 0  35,280 conditions, 23.1 min, seeds [0,1],
+      position modes ['all','last']
+    run_swaps.py h17a   exit 0  18,600 conditions, 14.0 min, seeds [0,1],
+      position modes ['all']
+    run_swaps.py h17b   exit 0  14,112 conditions, 13.0 min, seeds [0,1,2],
+      position modes ['all_no_bos','from_mention','answer_only']
+  Total 68,000 swap conditions actually scored.
+  Outputs: records_h17.csv, records_h17a.csv, records_h17b.csv (one row per
+  condition), provenance_h17*.json, summary_h17*.json, qual_jobs.json,
+  qualitative.json, fig_layers.png, fig_heldout.png.
+
+2026-09-05 12:03  analyse.py h17 h17a h17b  exit 0. Tuned settings chosen on
+  the tuning half, scored on the held-out half:
+    H17  layers 7-8-9, strength 2, all positions: held-out lens 27/42
+      (64 percent), control A 0/84 (0 percent), control B 0/84.
+    H17a layer 6, strength 2, all positions: held-out lens 52/57
+      (91 percent) per question, control A 18/114 (16 percent); at pair
+      level, at least two of three questions redirected 13/15 (87 percent)
+      against 0/30.
+    H17b layer 7, strength 2, all positions except the prepended
+      beginning-of-text token: held-out lens 1/8, control A 0/24; over all
+      16 items 4/16 against 0/48, one-sided Fisher exact probability 0.0029.
+
+2026-09-05 12:03  qualitative.py exit 0 (18 conditions re-run for the actual
+  words), make_figures.py exit 0 (two PNG figures). matplotlib 3.11.1 was
+  installed during the run for the figures only; it touches no measurement.
