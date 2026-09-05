@@ -1,0 +1,140 @@
+[12:13:02] building the per-layer share tables
+[12:13:02] H6: five basin representatives against eighteen null-model basins
+[12:13:02]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[12:13:02]   eighteen null basins: 18 representatives
+[12:13:05]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[12:13:05] H16: language terminals against the run-17 matched-scale noise terminals
+[12:13:14]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[12:13:14] H16a: the prolet attractor against the Divine cycle's two phases
+[12:13:14]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[12:13:14] H16b: terminals against the same prompts' ordinary residuals
+[12:13:20]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[12:13:20] drawing the figures
+[12:13:21] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+
+=== 2026-09-05, re-scored on review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json. No state was rebuilt and no decomposition was run: this
+stage reads the committed share tables only. Three things were added to the
+scoring and nothing was removed. First, the spread of the prolet attractor's
+control shares is now computed within each control type as well as pooled over
+all six control runs, because the pooled figure is dominated by the factor of
+about 25 between the two types and marks every gap immaterial
+(prolet_control_spread_sd_rotation, prolet_control_spread_sd_gaussian). Second,
+the robustness reading the specification pre-registered in section 7.2 as "the
+same test under control (a)" is now run: the language-against-noise label
+permutation test carried out on the rotated-lens shares, once per rotation seed
+and once pooled (H16.rotation_control_secondary). Third, an exploratory paired
+sign-flip test of each language terminal against its own rotated-lens control
+share was added and is labelled exploratory
+(H16.lang_above_rotation_control_exploratory). Every value that existed in the
+previous verdicts.json is unchanged: a key-by-key comparison of the old and new
+files found 93 keys added and 0 values changed or removed, and
+per_layer_tables.json and per_layer_shares.csv are byte-identical to their
+previous versions. All four verdicts reproduce: H6 NOT SUPPORTED, H16 NOT
+SUPPORTED, H16a NOT SUPPORTED, H16b SUPPORTED. Running the script twice in
+succession gave byte-identical verdicts.json, per_layer_tables.json and
+per_layer_shares.csv, so the added permutation tests are reproducible under the
+seed convention the script already used.
+[17:45:03] building the per-layer share tables
+[17:45:03] H6: five basin representatives against eighteen null-model basins
+[17:45:04]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[17:45:04]   eighteen null basins: 18 representatives
+[17:45:06]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[17:45:06] H16: language terminals against the run-17 matched-scale noise terminals
+[17:45:29]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[17:45:29] H16a: the prolet attractor against the Divine cycle's two phases
+[17:45:29]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[17:45:29] H16b: terminals against the same prompts' ordinary residuals
+[17:45:36]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[17:45:36] drawing the figures
+[17:45:37] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+
+=== 2026-09-05, re-scored again on further review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json. No state was rebuilt and no decomposition was run. Two
+changes to the script. First, every permutation test now starts its random number
+generator from the registered seed 11011, which specification section 7.1
+requires; the previous version offset the reverse-direction tests and the
+secondary readings to 11012, 11013, 11014 and 11015. Second, the script now
+inspects the shares file for the per-decomposition iteration-safety-bound flag
+that decompose.py began writing on 2026-09-05 and refuses to score a file in
+which any flag is set; the committed shares file predates the flag, so the check
+reports that it cannot be applied rather than passing silently, which is the line
+at the top of the run below. Effect of the seed correction: all four verdicts
+unchanged (H6 NOT SUPPORTED, H16 NOT SUPPORTED, H16a NOT SUPPORTED, H16b
+SUPPORTED), every supporting and refuting layer set unchanged (H16 refuted at
+layers 5, 8 and 10; H16b supported at layers 5 to 9), 35 p-values moved in the
+fourth decimal place and none crossed the 0.05 threshold, which was checked
+explicitly by comparing the old and new verdict files entry by entry. Six numbers
+quoted in RESULTS_EXP011.md moved with them and were corrected there. Running the
+script twice in succession gave a byte-identical verdicts.json.
+[18:23:26] iteration-safety-bound check: the committed shares.json predates the flag and does not carry it, so this check cannot be applied to it; the flag was added to decompose.py on 2026-09-05 and applies from the next decomposition run
+[18:23:26] building the per-layer share tables
+[18:23:26] H6: five basin representatives against eighteen null-model basins
+[18:23:26]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[18:23:26]   eighteen null basins: 18 representatives
+[18:23:29]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[18:23:29] H16: language terminals against the run-17 matched-scale noise terminals
+[18:23:52]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[18:23:52] H16a: the prolet attractor against the Divine cycle's two phases
+[18:23:52]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[18:23:52] H16b: terminals against the same prompts' ordinary residuals
+[18:23:59]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[18:23:59] drawing the figures
+[18:24:00] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+
+=== 2026-09-05, re-scored on a fourth review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json. No state was rebuilt and no decomposition was run: this
+stage reads the committed share tables only. Three changes to the scoring script,
+all of them additions. First, the script now refuses to produce final verdicts,
+tables or a figure unless the shares file covers layers 0 to 11 for every arm the
+scoring reads and does not mark itself partial_run: true. Until now the script
+took its layer list from whichever layers the file happened to hold, so a
+decomposition run over the six band layers alone would have supplied every layer a
+verdict needs and the outputs would have looked final. The option --allow-partial
+permits a diagnostic scoring instead, which writes every file under a .partial.
+name, stamps both JSON files, labels the figure and the comma-separated table, and
+rewrites each verdict string to say it is not a verdict. The committed shares file
+passes as complete: all twelve layers for every family in all seven arms the
+scoring reads, which is the lens and the six controls. Second, the
+iteration-safety-bound check now counts the decompositions that carry the flag and
+the decompositions that do not, and refuses a file holding both, because a partial
+decomposition merged into the committed pre-flag file would otherwise be reported
+as clear everywhere while the untouched entries were scored with their termination
+status unknown. The committed file holds 672 arm-family-layer groups and none of
+them carries the field, so the check reports that it cannot be applied, which is
+the second line of the run below. Third, the comparison specification section 7.1
+asks to be reported beside H6 and expressly keeps out of its rule, the same
+five-against-eighteen Mann-Whitney test carried out on the norm-matched
+random-dictionary control shares, is now run at every layer, pooled over the three
+control seeds and once per seed; the first version of the script recorded the two
+control medians and never ran the test. Effect on the record: every value that
+existed in the previous verdicts.json is unchanged, a key-by-key comparison of the
+old and new files found 207 leaf values added, 0 changed and 0 removed, and
+per_layer_tables.json, per_layer_shares.csv and exp011_share_curves.png are
+byte-identical to their committed versions. All four verdicts reproduce: H6 NOT
+SUPPORTED, H16 NOT SUPPORTED, H16a NOT SUPPORTED, H16b SUPPORTED. The added
+control comparison separates nothing at any band layer, with one-sided p between
+0.1298 and 0.8792 in the basins-greater direction and between 0.1237 and 0.8733 in
+the reverse direction, against a 0.05 threshold. Running the script twice in
+succession gave a byte-identical verdicts.json. The readout stage was not re-run:
+its gate change is a refusal path, and its committed outputs predate the metadata
+block it now writes.
+[18:53:32] completeness check: layers 0 to 11 present for every family in all 7 scoring arms, and the file is from before the partial_run flag existed, which decompose.py began writing on 2026-09-05
+[18:53:32] iteration-safety-bound check: the committed shares.json predates the flag and does not carry it, so this check cannot be applied to it; the flag was added to decompose.py on 2026-09-05 and applies from the next decomposition run (672 groups, none carrying the field)
+[18:53:32] building the per-layer share tables
+[18:53:32] H6: five basin representatives against eighteen null-model basins
+[18:53:33]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[18:53:33]   eighteen null basins: 18 representatives
+[18:53:35]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[18:53:35]   H6 under control (b), reported not scoring: band layers with the basins above the nulls at p below 0.05: []; below them: []
+[18:53:35] H16: language terminals against the run-17 matched-scale noise terminals
+[18:53:59]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[18:53:59] H16a: the prolet attractor against the Divine cycle's two phases
+[18:53:59]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[18:53:59] H16b: terminals against the same prompts' ordinary residuals
+[18:54:05]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[18:54:05] drawing the figures
+[18:54:06] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
