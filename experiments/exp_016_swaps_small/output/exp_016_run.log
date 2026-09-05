@@ -1,0 +1,48 @@
+EXP_016 run log. Branch claude/latent-context-small-llms-u2jdig-exp016.
+All times are wall clock. Machine: processor only, one torch thread per
+script, four cores shared with three other agents, 15 GB of memory shared.
+Versions: Python 3.11.15, torch 2.14.0+cpu, transformers 5.16.1,
+transformer_lens 3.8.1, numpy 2.4.6.
+Lens: jlens_gpt2_small_neuronpedia.pt, SHA-256
+d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762,
+reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82ba8e.
+
+2026-09-05  Environment check. transformer_lens loaded with
+  from_pretrained_no_processing agrees with the plain Hugging Face model:
+  largest disagreement 0.00006 in the residual stream at layer 5 on numbers
+  reaching 2917, and 0.00004 in the final word scores. Timing measured: one
+  forward pass over a batch of 32 copies of an 18-token prompt, reading out
+  the final position only, took 1.13 s, which is 35 ms per condition. Peak
+  memory 1.7 GB.
+
+2026-09-05  pilot_clean.py  exit 0, 154.5 s.
+  No intervention. 42 report frames read clean and through the lens at layer
+  8; 25 countries times 3 functions times 4 candidate frames read clean; 20
+  two-step completions read clean.
+  Output: output/pilot_clean.json
+
+2026-09-05  pilot_clean2.py  exit 0, 13.8 s.
+  No intervention. 16 further two-step completions read clean, plus the gate
+  arithmetic for the country battery.
+  Output: output/pilot_clean2.json
+
+2026-09-05  Specification committed at 47efd8d before any swap was run.
+
+2026-09-05  build_batteries.py  exit 0.
+  battery_h17.json 84 items (42 tuning, 42 held out)
+  battery_h17a.json 50 pairs (27 tuning, 23 held out), 24 with all three
+    functions scoreable
+  battery_h17b.json 16 items (8 tuning, 8 held out)
+
+2026-09-05  check_engine.py  exit 0.
+  (1) swapping a token with itself changed the log-probabilities by at most
+      0.0000343.
+  (2) the two coordinates at the final position were exchanged exactly:
+      1.594 and 0.362 became 0.362 and 1.594.
+  (3) the part of the change lying outside the plane of the two lens vectors
+      was 0.00000126 against a change of total size 9.528.
+  (4) the batched path agreed with the single-element path to 0.0000353.
+  Demonstration: on "My favourite sport is", the clean top five were
+  ' football', ' to', ' the', ' rugby', ' swimming'; after exchanging the
+  football and cricket lens coordinates at layer 8 at all positions at
+  strength 1 they were ' cricket', ' to', ' tennis', ' rugby', ' swimming'.

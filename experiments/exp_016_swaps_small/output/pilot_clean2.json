@@ -1,0 +1,341 @@
+{
+ "extra_twohop": [
+  {
+   "name": "duck-sound",
+   "prompt": "Ducks say quack and cows say moo. The bird that swims on the pond says",
+   "answer": " quack",
+   "alt": " moo",
+   "swap_from": " duck",
+   "swap_to": " cow",
+   "n_tokens": 21,
+   "src_tok": 22045,
+   "tgt_tok": 9875,
+   "answer_rank": 5,
+   "alt_rank": 4,
+   "argmax": " \"",
+   "top5": [
+    " \"",
+    " it",
+    ",",
+    " m",
+    " qu"
+   ]
+  },
+  {
+   "name": "farmer-place",
+   "prompt": "Nurses work in hospitals and farmers work in fields. The person who milks cows works in",
+   "answer": " fields",
+   "alt": " hospitals",
+   "swap_from": " farmer",
+   "swap_to": " nurse",
+   "n_tokens": 20,
+   "src_tok": 18739,
+   "tgt_tok": 15849,
+   "answer_rank": 1,
+   "alt_rank": 5,
+   "argmax": " fields",
+   "top5": [
+    " fields",
+    " the",
+    " a",
+    " an",
+    " hospitals"
+   ]
+  },
+  {
+   "name": "sugar-taste",
+   "prompt": "Sugar is sweet and salt is salty. The white powder you put in your tea is",
+   "answer": " sweet",
+   "alt": " salty",
+   "swap_from": " sugar",
+   "swap_to": " salt",
+   "n_tokens": 19,
+   "src_tok": 7543,
+   "tgt_tok": 8268,
+   "answer_rank": 9,
+   "alt_rank": 7,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " a",
+    " called",
+    " sugar",
+    " what"
+   ]
+  },
+  {
+   "name": "rain-wet",
+   "prompt": "Rain is wet and sand is dry. The thing that falls from the clouds is",
+   "answer": " wet",
+   "alt": " dry",
+   "swap_from": " rain",
+   "swap_to": " sand",
+   "n_tokens": 17,
+   "src_tok": 6290,
+   "tgt_tok": 6450,
+   "answer_rank": 7,
+   "alt_rank": 38,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " a",
+    " not",
+    " water",
+    " rain"
+   ]
+  },
+  {
+   "name": "guitar-part",
+   "prompt": "Guitars have strings and drums have skins. The instrument that you strum has",
+   "answer": " strings",
+   "alt": " skins",
+   "swap_from": " guitar",
+   "swap_to": " drum",
+   "n_tokens": 18,
+   "src_tok": 10047,
+   "tgt_tok": 13026,
+   "answer_rank": 2,
+   "alt_rank": 48,
+   "argmax": " a",
+   "top5": [
+    " a",
+    " strings",
+    " the",
+    " its",
+    " an"
+   ]
+  },
+  {
+   "name": "tiger-pattern",
+   "prompt": "Tigers have stripes and leopards have spots. The big cat from India has",
+   "answer": " stripes",
+   "alt": " spots",
+   "swap_from": " tiger",
+   "swap_to": " leopard",
+   "n_tokens": 18,
+   "src_tok": 26241,
+   "tgt_tok": null,
+   "answer_rank": 2,
+   "alt_rank": 14,
+   "argmax": " a",
+   "top5": [
+    " a",
+    " stripes",
+    " been",
+    " the",
+    " two"
+   ]
+  },
+  {
+   "name": "wood-float",
+   "prompt": "Wood floats and stone sinks. In water, a log of wood will",
+   "answer": " float",
+   "alt": " sink",
+   "swap_from": " wood",
+   "swap_to": " stone",
+   "n_tokens": 15,
+   "src_tok": 4898,
+   "tgt_tok": 7815,
+   "answer_rank": 2,
+   "alt_rank": 14,
+   "argmax": " rise",
+   "top5": [
+    " rise",
+    " float",
+    " be",
+    " fall",
+    " form"
+   ]
+  },
+  {
+   "name": "milk-colour",
+   "prompt": "Milk is white and coffee is black. The drink that comes from cows is",
+   "answer": " white",
+   "alt": " black",
+   "swap_from": " milk",
+   "swap_to": " coffee",
+   "n_tokens": 17,
+   "src_tok": 7545,
+   "tgt_tok": 6891,
+   "answer_rank": 3,
+   "alt_rank": 8,
+   "argmax": " milk",
+   "top5": [
+    " milk",
+    " called",
+    " white",
+    " a",
+    " the"
+   ]
+  },
+  {
+   "name": "knife-use",
+   "prompt": "Knives cut and spoons scoop. The tool with a sharp blade is used to",
+   "answer": " cut",
+   "alt": " scoop",
+   "swap_from": " knife",
+   "swap_to": " spoon",
+   "n_tokens": 18,
+   "src_tok": 9845,
+   "tgt_tok": 24556,
+   "answer_rank": 1,
+   "alt_rank": 4,
+   "argmax": " cut",
+   "top5": [
+    " cut",
+    " grind",
+    " make",
+    " scoop",
+    " scrape"
+   ]
+  },
+  {
+   "name": "summer-temp",
+   "prompt": "Summer is warm and winter is freezing. The season with the longest days is",
+   "answer": " warm",
+   "alt": " freezing",
+   "swap_from": " summer",
+   "swap_to": " winter",
+   "n_tokens": 16,
+   "src_tok": 3931,
+   "tgt_tok": 7374,
+   "answer_rank": 55,
+   "alt_rank": 159,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " July",
+    " June",
+    " August",
+    " February"
+   ]
+  },
+  {
+   "name": "banana-grow",
+   "prompt": "Bananas grow on trees and potatoes grow underground. The long yellow fruit grows on",
+   "answer": " trees",
+   "alt": " underground",
+   "swap_from": " banana",
+   "swap_to": " potato",
+   "n_tokens": 17,
+   "src_tok": 25996,
+   "tgt_tok": 21219,
+   "answer_rank": 3,
+   "alt_rank": 462,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " top",
+    " trees",
+    " a",
+    " roots"
+   ]
+  },
+  {
+   "name": "camel-home",
+   "prompt": "Whales live in the ocean and camels live in the desert. The animal with a hump lives in the",
+   "answer": " desert",
+   "alt": " ocean",
+   "swap_from": " camel",
+   "swap_to": " whale",
+   "n_tokens": 23,
+   "src_tok": 41021,
+   "tgt_tok": 22206,
+   "answer_rank": 5,
+   "alt_rank": 1,
+   "argmax": " ocean",
+   "top5": [
+    " ocean",
+    " water",
+    " sea",
+    " deep",
+    " desert"
+   ]
+  },
+  {
+   "name": "clock-show",
+   "prompt": "Clocks tell the time and maps show the way. The thing with hands and numbers tells the",
+   "answer": " time",
+   "alt": " way",
+   "swap_from": " clock",
+   "swap_to": " map",
+   "n_tokens": 20,
+   "src_tok": 8801,
+   "tgt_tok": 3975,
+   "answer_rank": 1,
+   "alt_rank": 2,
+   "argmax": " time",
+   "top5": [
+    " time",
+    " way",
+    " story",
+    " whole",
+    " times"
+   ]
+  },
+  {
+   "name": "chicken-give",
+   "prompt": "Chickens lay eggs and sheep give wool. The bird on the farm lays",
+   "answer": " eggs",
+   "alt": " wool",
+   "swap_from": " chicken",
+   "swap_to": " sheep",
+   "n_tokens": 17,
+   "src_tok": 9015,
+   "tgt_tok": 15900,
+   "answer_rank": 1,
+   "alt_rank": 18,
+   "argmax": " eggs",
+   "top5": [
+    " eggs",
+    " the",
+    " a",
+    " its",
+    " his"
+   ]
+  },
+  {
+   "name": "pencil-made",
+   "prompt": "Pencils are made of wood and coins are made of metal. The thing that you write with is made of",
+   "answer": " wood",
+   "alt": " metal",
+   "swap_from": " pencil",
+   "swap_to": " coin",
+   "n_tokens": 24,
+   "src_tok": 21613,
+   "tgt_tok": 10752,
+   "answer_rank": 2,
+   "alt_rank": 1,
+   "argmax": " metal",
+   "top5": [
+    " metal",
+    " wood",
+    " a",
+    " the",
+    " paper"
+   ]
+  },
+  {
+   "name": "rose-colour",
+   "prompt": "Roses are red and violets are blue. The flower with thorns is",
+   "answer": " red",
+   "alt": " blue",
+   "swap_from": " rose",
+   "swap_to": " violet",
+   "n_tokens": 18,
+   "src_tok": 8278,
+   "tgt_tok": 45725,
+   "answer_rank": 1,
+   "alt_rank": 8,
+   "argmax": " red",
+   "top5": [
+    " red",
+    " the",
+    " a",
+    " called",
+    " green"
+   ]
+  }
+ ],
+ "wall_seconds": 13.8
+}

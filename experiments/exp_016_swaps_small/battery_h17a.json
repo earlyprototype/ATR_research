@@ -1,0 +1,2102 @@
+[
+ {
+  "item_id": "France->Germany",
+  "source": "France",
+  "target": "Germany",
+  "arm": "primary",
+  "source_tok": 4881,
+  "target_tok": 4486,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Berlin",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 11307,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " German",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 2679,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "France->Ireland",
+  "source": "France",
+  "target": "Ireland",
+  "arm": "primary",
+  "source_tok": 4881,
+  "target_tok": 7517,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Dublin",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 18220,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " English",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "France->Japan",
+  "source": "France",
+  "target": "Japan",
+  "arm": "primary",
+  "source_tok": 4881,
+  "target_tok": 2869,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Tokyo",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 11790,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " Japanese",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 4960,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Asia",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Germany->Greece",
+  "source": "Germany",
+  "target": "Greece",
+  "arm": "primary",
+  "source_tok": 4486,
+  "target_tok": 10315,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Germany is the city of",
+    "clean_answer": " Berlin",
+    "target_answer": " Athens",
+    "clean_answer_tok": 11307,
+    "target_answer_tok": 21891,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Germany speak",
+    "clean_answer": " German",
+    "target_answer": " Greek",
+    "clean_answer_tok": 2679,
+    "target_answer_tok": 8312,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Germany is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Germany->Italy",
+  "source": "Germany",
+  "target": "Italy",
+  "arm": "primary",
+  "source_tok": 4486,
+  "target_tok": 8031,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Germany is the city of",
+    "clean_answer": " Berlin",
+    "target_answer": " Rome",
+    "clean_answer_tok": 11307,
+    "target_answer_tok": 10598,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Germany speak",
+    "clean_answer": " German",
+    "target_answer": " Italian",
+    "clean_answer_tok": 2679,
+    "target_answer_tok": 8200,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Germany is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Germany->Poland",
+  "source": "Germany",
+  "target": "Poland",
+  "arm": "primary",
+  "source_tok": 4486,
+  "target_tok": 12873,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Germany is the city of",
+    "clean_answer": " Berlin",
+    "target_answer": " Warsaw",
+    "clean_answer_tok": 11307,
+    "target_answer_tok": 32955,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Germany speak",
+    "clean_answer": " German",
+    "target_answer": " Polish",
+    "clean_answer_tok": 2679,
+    "target_answer_tok": 15945,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Germany is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Greece->Ireland",
+  "source": "Greece",
+  "target": "Ireland",
+  "arm": "primary",
+  "source_tok": 10315,
+  "target_tok": 7517,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Greece is the city of",
+    "clean_answer": " Athens",
+    "target_answer": " Dublin",
+    "clean_answer_tok": 21891,
+    "target_answer_tok": 18220,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Greece speak",
+    "clean_answer": " Greek",
+    "target_answer": " English",
+    "clean_answer_tok": 8312,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Greece is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 2
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Greece->Japan",
+  "source": "Greece",
+  "target": "Japan",
+  "arm": "primary",
+  "source_tok": 10315,
+  "target_tok": 2869,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Greece is the city of",
+    "clean_answer": " Athens",
+    "target_answer": " Tokyo",
+    "clean_answer_tok": 21891,
+    "target_answer_tok": 11790,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Greece speak",
+    "clean_answer": " Greek",
+    "target_answer": " Japanese",
+    "clean_answer_tok": 8312,
+    "target_answer_tok": 4960,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Greece is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Asia",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 2
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Greece->Portugal",
+  "source": "Greece",
+  "target": "Portugal",
+  "arm": "primary",
+  "source_tok": 10315,
+  "target_tok": 19101,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Greece is the city of",
+    "clean_answer": " Athens",
+    "target_answer": " Lisbon",
+    "clean_answer_tok": 21891,
+    "target_answer_tok": 41898,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Greece speak",
+    "clean_answer": " Greek",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 8312,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Greece is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 2
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Ireland->Italy",
+  "source": "Ireland",
+  "target": "Italy",
+  "arm": "primary",
+  "source_tok": 7517,
+  "target_tok": 8031,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Ireland is the city of",
+    "clean_answer": " Dublin",
+    "target_answer": " Rome",
+    "clean_answer_tok": 18220,
+    "target_answer_tok": 10598,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Ireland speak",
+    "clean_answer": " English",
+    "target_answer": " Italian",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 8200,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "continent",
+    "prompt": "Ireland is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Ireland->Poland",
+  "source": "Ireland",
+  "target": "Poland",
+  "arm": "primary",
+  "source_tok": 7517,
+  "target_tok": 12873,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Ireland is the city of",
+    "clean_answer": " Dublin",
+    "target_answer": " Warsaw",
+    "clean_answer_tok": 18220,
+    "target_answer_tok": 32955,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Ireland speak",
+    "clean_answer": " English",
+    "target_answer": " Polish",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 15945,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "continent",
+    "prompt": "Ireland is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Ireland->Spain",
+  "source": "Ireland",
+  "target": "Spain",
+  "arm": "primary",
+  "source_tok": 7517,
+  "target_tok": 8602,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Ireland is the city of",
+    "clean_answer": " Dublin",
+    "target_answer": " Madrid",
+    "clean_answer_tok": 18220,
+    "target_answer_tok": 14708,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Ireland speak",
+    "clean_answer": " English",
+    "target_answer": " Spanish",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 7897,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "continent",
+    "prompt": "Ireland is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Italy->Japan",
+  "source": "Italy",
+  "target": "Japan",
+  "arm": "primary",
+  "source_tok": 8031,
+  "target_tok": 2869,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Italy is the city of",
+    "clean_answer": " Rome",
+    "target_answer": " Tokyo",
+    "clean_answer_tok": 10598,
+    "target_answer_tok": 11790,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Italy speak",
+    "clean_answer": " Italian",
+    "target_answer": " Japanese",
+    "clean_answer_tok": 8200,
+    "target_answer_tok": 4960,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Italy is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Asia",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Italy->Portugal",
+  "source": "Italy",
+  "target": "Portugal",
+  "arm": "primary",
+  "source_tok": 8031,
+  "target_tok": 19101,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Italy is the city of",
+    "clean_answer": " Rome",
+    "target_answer": " Lisbon",
+    "clean_answer_tok": 10598,
+    "target_answer_tok": 41898,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Italy speak",
+    "clean_answer": " Italian",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 8200,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Italy is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Italy->Sweden",
+  "source": "Italy",
+  "target": "Sweden",
+  "arm": "primary",
+  "source_tok": 8031,
+  "target_tok": 10710,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Italy is the city of",
+    "clean_answer": " Rome",
+    "target_answer": " Stockholm",
+    "clean_answer_tok": 10598,
+    "target_answer_tok": 29679,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Italy speak",
+    "clean_answer": " Italian",
+    "target_answer": " Swedish",
+    "clean_answer_tok": 8200,
+    "target_answer_tok": 14023,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Italy is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Japan->Poland",
+  "source": "Japan",
+  "target": "Poland",
+  "arm": "primary",
+  "source_tok": 2869,
+  "target_tok": 12873,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Japan is the city of",
+    "clean_answer": " Tokyo",
+    "target_answer": " Warsaw",
+    "clean_answer_tok": 11790,
+    "target_answer_tok": 32955,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Japan speak",
+    "clean_answer": " Japanese",
+    "target_answer": " Polish",
+    "clean_answer_tok": 4960,
+    "target_answer_tok": 15945,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "continent",
+    "prompt": "Japan is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " Europe",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 2
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Japan->Spain",
+  "source": "Japan",
+  "target": "Spain",
+  "arm": "primary",
+  "source_tok": 2869,
+  "target_tok": 8602,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Japan is the city of",
+    "clean_answer": " Tokyo",
+    "target_answer": " Madrid",
+    "clean_answer_tok": 11790,
+    "target_answer_tok": 14708,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Japan speak",
+    "clean_answer": " Japanese",
+    "target_answer": " Spanish",
+    "clean_answer_tok": 4960,
+    "target_answer_tok": 7897,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "continent",
+    "prompt": "Japan is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " Europe",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 2
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Japan->France",
+  "source": "Japan",
+  "target": "France",
+  "arm": "primary",
+  "source_tok": 2869,
+  "target_tok": 4881,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Japan is the city of",
+    "clean_answer": " Tokyo",
+    "target_answer": " Paris",
+    "clean_answer_tok": 11790,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Japan speak",
+    "clean_answer": " Japanese",
+    "target_answer": " French",
+    "clean_answer_tok": 4960,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "continent",
+    "prompt": "Japan is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " Europe",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 2
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Poland->Portugal",
+  "source": "Poland",
+  "target": "Portugal",
+  "arm": "primary",
+  "source_tok": 12873,
+  "target_tok": 19101,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Poland is the city of",
+    "clean_answer": " Warsaw",
+    "target_answer": " Lisbon",
+    "clean_answer_tok": 32955,
+    "target_answer_tok": 41898,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Poland speak",
+    "clean_answer": " Polish",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 15945,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Poland is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Poland->Sweden",
+  "source": "Poland",
+  "target": "Sweden",
+  "arm": "primary",
+  "source_tok": 12873,
+  "target_tok": 10710,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Poland is the city of",
+    "clean_answer": " Warsaw",
+    "target_answer": " Stockholm",
+    "clean_answer_tok": 32955,
+    "target_answer_tok": 29679,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Poland speak",
+    "clean_answer": " Polish",
+    "target_answer": " Swedish",
+    "clean_answer_tok": 15945,
+    "target_answer_tok": 14023,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Poland is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Poland->Germany",
+  "source": "Poland",
+  "target": "Germany",
+  "arm": "primary",
+  "source_tok": 12873,
+  "target_tok": 4486,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Poland is the city of",
+    "clean_answer": " Warsaw",
+    "target_answer": " Berlin",
+    "clean_answer_tok": 32955,
+    "target_answer_tok": 11307,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Poland speak",
+    "clean_answer": " Polish",
+    "target_answer": " German",
+    "clean_answer_tok": 15945,
+    "target_answer_tok": 2679,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Poland is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Portugal->Spain",
+  "source": "Portugal",
+  "target": "Spain",
+  "arm": "primary",
+  "source_tok": 19101,
+  "target_tok": 8602,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Portugal is the city of",
+    "clean_answer": " Lisbon",
+    "target_answer": " Madrid",
+    "clean_answer_tok": 41898,
+    "target_answer_tok": 14708,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Portugal speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " Spanish",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 7897,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Portugal is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 2
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Portugal->France",
+  "source": "Portugal",
+  "target": "France",
+  "arm": "primary",
+  "source_tok": 19101,
+  "target_tok": 4881,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Portugal is the city of",
+    "clean_answer": " Lisbon",
+    "target_answer": " Paris",
+    "clean_answer_tok": 41898,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Portugal speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " French",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Portugal is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 2
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Portugal->Greece",
+  "source": "Portugal",
+  "target": "Greece",
+  "arm": "primary",
+  "source_tok": 19101,
+  "target_tok": 10315,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Portugal is the city of",
+    "clean_answer": " Lisbon",
+    "target_answer": " Athens",
+    "clean_answer_tok": 41898,
+    "target_answer_tok": 21891,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Portugal speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " Greek",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 8312,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Portugal is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 2
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Spain->Sweden",
+  "source": "Spain",
+  "target": "Sweden",
+  "arm": "primary",
+  "source_tok": 8602,
+  "target_tok": 10710,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Spain is the city of",
+    "clean_answer": " Madrid",
+    "target_answer": " Stockholm",
+    "clean_answer_tok": 14708,
+    "target_answer_tok": 29679,
+    "scoreable": true,
+    "clean_rank": 3
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Spain speak",
+    "clean_answer": " Spanish",
+    "target_answer": " Swedish",
+    "clean_answer_tok": 7897,
+    "target_answer_tok": 14023,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Spain is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Spain->Germany",
+  "source": "Spain",
+  "target": "Germany",
+  "arm": "primary",
+  "source_tok": 8602,
+  "target_tok": 4486,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Spain is the city of",
+    "clean_answer": " Madrid",
+    "target_answer": " Berlin",
+    "clean_answer_tok": 14708,
+    "target_answer_tok": 11307,
+    "scoreable": true,
+    "clean_rank": 3
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Spain speak",
+    "clean_answer": " Spanish",
+    "target_answer": " German",
+    "clean_answer_tok": 7897,
+    "target_answer_tok": 2679,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Spain is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Spain->Ireland",
+  "source": "Spain",
+  "target": "Ireland",
+  "arm": "primary",
+  "source_tok": 8602,
+  "target_tok": 7517,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Spain is the city of",
+    "clean_answer": " Madrid",
+    "target_answer": " Dublin",
+    "clean_answer_tok": 14708,
+    "target_answer_tok": 18220,
+    "scoreable": true,
+    "clean_rank": 3
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Spain speak",
+    "clean_answer": " Spanish",
+    "target_answer": " English",
+    "clean_answer_tok": 7897,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Spain is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Sweden->France",
+  "source": "Sweden",
+  "target": "France",
+  "arm": "primary",
+  "source_tok": 10710,
+  "target_tok": 4881,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Sweden is the city of",
+    "clean_answer": " Stockholm",
+    "target_answer": " Paris",
+    "clean_answer_tok": 29679,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Sweden speak",
+    "clean_answer": " Swedish",
+    "target_answer": " French",
+    "clean_answer_tok": 14023,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Sweden is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Sweden->Greece",
+  "source": "Sweden",
+  "target": "Greece",
+  "arm": "primary",
+  "source_tok": 10710,
+  "target_tok": 10315,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Sweden is the city of",
+    "clean_answer": " Stockholm",
+    "target_answer": " Athens",
+    "clean_answer_tok": 29679,
+    "target_answer_tok": 21891,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Sweden speak",
+    "clean_answer": " Swedish",
+    "target_answer": " Greek",
+    "clean_answer_tok": 14023,
+    "target_answer_tok": 8312,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Sweden is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Sweden->Italy",
+  "source": "Sweden",
+  "target": "Italy",
+  "arm": "primary",
+  "source_tok": 10710,
+  "target_tok": 8031,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Sweden is the city of",
+    "clean_answer": " Stockholm",
+    "target_answer": " Rome",
+    "clean_answer_tok": 29679,
+    "target_answer_tok": 10598,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Sweden speak",
+    "clean_answer": " Swedish",
+    "target_answer": " Italian",
+    "clean_answer_tok": 14023,
+    "target_answer_tok": 8200,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Sweden is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2031,
+    "scoreable": false,
+    "clean_rank": 1
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Australia->Brazil",
+  "source": "Australia",
+  "target": "Brazil",
+  "arm": "extension",
+  "source_tok": 4505,
+  "target_tok": 7595,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Australia is the city of",
+    "clean_answer": " Canberra",
+    "target_answer": " Brasilia",
+    "clean_answer_tok": 33452,
+    "target_answer_tok": 39452,
+    "scoreable": true,
+    "clean_rank": 4
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Australia speak",
+    "clean_answer": " English",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Australia is a country on the continent of",
+    "clean_answer": " Australia",
+    "target_answer": " South",
+    "clean_answer_tok": 4505,
+    "target_answer_tok": 2520,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Australia->Canada",
+  "source": "Australia",
+  "target": "Canada",
+  "arm": "extension",
+  "source_tok": 4505,
+  "target_tok": 3340,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Australia is the city of",
+    "clean_answer": " Canberra",
+    "target_answer": " Ottawa",
+    "clean_answer_tok": 33452,
+    "target_answer_tok": 14074,
+    "scoreable": true,
+    "clean_rank": 4
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Australia speak",
+    "clean_answer": " English",
+    "target_answer": " English",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 3594,
+    "scoreable": false,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Australia is a country on the continent of",
+    "clean_answer": " Australia",
+    "target_answer": " North",
+    "clean_answer_tok": 4505,
+    "target_answer_tok": 2258,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Australia->China",
+  "source": "Australia",
+  "target": "China",
+  "arm": "extension",
+  "source_tok": 4505,
+  "target_tok": 2807,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Australia is the city of",
+    "clean_answer": " Canberra",
+    "target_answer": " Beijing",
+    "clean_answer_tok": 33452,
+    "target_answer_tok": 11618,
+    "scoreable": true,
+    "clean_rank": 4
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Australia speak",
+    "clean_answer": " English",
+    "target_answer": " Chinese",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 3999,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Australia is a country on the continent of",
+    "clean_answer": " Australia",
+    "target_answer": " Asia",
+    "clean_answer_tok": 4505,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Australia->France",
+  "source": "Australia",
+  "target": "France",
+  "arm": "extension",
+  "source_tok": 4505,
+  "target_tok": 4881,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Australia is the city of",
+    "clean_answer": " Canberra",
+    "target_answer": " Paris",
+    "clean_answer_tok": 33452,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 4
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Australia speak",
+    "clean_answer": " English",
+    "target_answer": " French",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Australia is a country on the continent of",
+    "clean_answer": " Australia",
+    "target_answer": " Europe",
+    "clean_answer_tok": 4505,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Brazil->Australia",
+  "source": "Brazil",
+  "target": "Australia",
+  "arm": "extension",
+  "source_tok": 7595,
+  "target_tok": 4505,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Brazil is the city of",
+    "clean_answer": " Brasilia",
+    "target_answer": " Canberra",
+    "clean_answer_tok": 39452,
+    "target_answer_tok": 33452,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Brazil speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " English",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Brazil is a country on the continent of",
+    "clean_answer": " South",
+    "target_answer": " Australia",
+    "clean_answer_tok": 2520,
+    "target_answer_tok": 4505,
+    "scoreable": true,
+    "clean_rank": 4
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Brazil->Canada",
+  "source": "Brazil",
+  "target": "Canada",
+  "arm": "extension",
+  "source_tok": 7595,
+  "target_tok": 3340,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Brazil is the city of",
+    "clean_answer": " Brasilia",
+    "target_answer": " Ottawa",
+    "clean_answer_tok": 39452,
+    "target_answer_tok": 14074,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Brazil speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " English",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Brazil is a country on the continent of",
+    "clean_answer": " South",
+    "target_answer": " North",
+    "clean_answer_tok": 2520,
+    "target_answer_tok": 2258,
+    "scoreable": true,
+    "clean_rank": 4
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Brazil->China",
+  "source": "Brazil",
+  "target": "China",
+  "arm": "extension",
+  "source_tok": 7595,
+  "target_tok": 2807,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Brazil is the city of",
+    "clean_answer": " Brasilia",
+    "target_answer": " Beijing",
+    "clean_answer_tok": 39452,
+    "target_answer_tok": 11618,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Brazil speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " Chinese",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 3999,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Brazil is a country on the continent of",
+    "clean_answer": " South",
+    "target_answer": " Asia",
+    "clean_answer_tok": 2520,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 4
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Brazil->France",
+  "source": "Brazil",
+  "target": "France",
+  "arm": "extension",
+  "source_tok": 7595,
+  "target_tok": 4881,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Brazil is the city of",
+    "clean_answer": " Brasilia",
+    "target_answer": " Paris",
+    "clean_answer_tok": 39452,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Brazil speak",
+    "clean_answer": " Portuguese",
+    "target_answer": " French",
+    "clean_answer_tok": 21813,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Brazil is a country on the continent of",
+    "clean_answer": " South",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2520,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 4
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "Canada->Australia",
+  "source": "Canada",
+  "target": "Australia",
+  "arm": "extension",
+  "source_tok": 3340,
+  "target_tok": 4505,
+  "n_scoreable": 2,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Canada is the city of",
+    "clean_answer": " Ottawa",
+    "target_answer": " Canberra",
+    "clean_answer_tok": 14074,
+    "target_answer_tok": 33452,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Canada speak",
+    "clean_answer": " English",
+    "target_answer": " English",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 3594,
+    "scoreable": false,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Canada is a country on the continent of",
+    "clean_answer": " North",
+    "target_answer": " Australia",
+    "clean_answer_tok": 2258,
+    "target_answer_tok": 4505,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Canada->Brazil",
+  "source": "Canada",
+  "target": "Brazil",
+  "arm": "extension",
+  "source_tok": 3340,
+  "target_tok": 7595,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Canada is the city of",
+    "clean_answer": " Ottawa",
+    "target_answer": " Brasilia",
+    "clean_answer_tok": 14074,
+    "target_answer_tok": 39452,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Canada speak",
+    "clean_answer": " English",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Canada is a country on the continent of",
+    "clean_answer": " North",
+    "target_answer": " South",
+    "clean_answer_tok": 2258,
+    "target_answer_tok": 2520,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Canada->China",
+  "source": "Canada",
+  "target": "China",
+  "arm": "extension",
+  "source_tok": 3340,
+  "target_tok": 2807,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Canada is the city of",
+    "clean_answer": " Ottawa",
+    "target_answer": " Beijing",
+    "clean_answer_tok": 14074,
+    "target_answer_tok": 11618,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Canada speak",
+    "clean_answer": " English",
+    "target_answer": " Chinese",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 3999,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Canada is a country on the continent of",
+    "clean_answer": " North",
+    "target_answer": " Asia",
+    "clean_answer_tok": 2258,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "Canada->France",
+  "source": "Canada",
+  "target": "France",
+  "arm": "extension",
+  "source_tok": 3340,
+  "target_tok": 4881,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of Canada is the city of",
+    "clean_answer": " Ottawa",
+    "target_answer": " Paris",
+    "clean_answer_tok": 14074,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in Canada speak",
+    "clean_answer": " English",
+    "target_answer": " French",
+    "clean_answer_tok": 3594,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "Canada is a country on the continent of",
+    "clean_answer": " North",
+    "target_answer": " Europe",
+    "clean_answer_tok": 2258,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 5
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "China->Australia",
+  "source": "China",
+  "target": "Australia",
+  "arm": "extension",
+  "source_tok": 2807,
+  "target_tok": 4505,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of China is the city of",
+    "clean_answer": " Beijing",
+    "target_answer": " Canberra",
+    "clean_answer_tok": 11618,
+    "target_answer_tok": 33452,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in China speak",
+    "clean_answer": " Chinese",
+    "target_answer": " English",
+    "clean_answer_tok": 3999,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "continent",
+    "prompt": "China is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " Australia",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 4505,
+    "scoreable": true,
+    "clean_rank": 3
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "China->Brazil",
+  "source": "China",
+  "target": "Brazil",
+  "arm": "extension",
+  "source_tok": 2807,
+  "target_tok": 7595,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of China is the city of",
+    "clean_answer": " Beijing",
+    "target_answer": " Brasilia",
+    "clean_answer_tok": 11618,
+    "target_answer_tok": 39452,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in China speak",
+    "clean_answer": " Chinese",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 3999,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "continent",
+    "prompt": "China is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " South",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 2520,
+    "scoreable": true,
+    "clean_rank": 3
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "China->Canada",
+  "source": "China",
+  "target": "Canada",
+  "arm": "extension",
+  "source_tok": 2807,
+  "target_tok": 3340,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of China is the city of",
+    "clean_answer": " Beijing",
+    "target_answer": " Ottawa",
+    "clean_answer_tok": 11618,
+    "target_answer_tok": 14074,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in China speak",
+    "clean_answer": " Chinese",
+    "target_answer": " English",
+    "clean_answer_tok": 3999,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "continent",
+    "prompt": "China is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " North",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 2258,
+    "scoreable": true,
+    "clean_rank": 3
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "China->France",
+  "source": "China",
+  "target": "France",
+  "arm": "extension",
+  "source_tok": 2807,
+  "target_tok": 4881,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of China is the city of",
+    "clean_answer": " Beijing",
+    "target_answer": " Paris",
+    "clean_answer_tok": 11618,
+    "target_answer_tok": 6342,
+    "scoreable": true,
+    "clean_rank": 2
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in China speak",
+    "clean_answer": " Chinese",
+    "target_answer": " French",
+    "clean_answer_tok": 3999,
+    "target_answer_tok": 4141,
+    "scoreable": true,
+    "clean_rank": 5
+   },
+   {
+    "func": "continent",
+    "prompt": "China is a country on the continent of",
+    "clean_answer": " Asia",
+    "target_answer": " Europe",
+    "clean_answer_tok": 7229,
+    "target_answer_tok": 2031,
+    "scoreable": true,
+    "clean_rank": 3
+   }
+  ],
+  "split": "heldout"
+ },
+ {
+  "item_id": "France->Australia",
+  "source": "France",
+  "target": "Australia",
+  "arm": "extension",
+  "source_tok": 4881,
+  "target_tok": 4505,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Canberra",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 33452,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " English",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Australia",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 4505,
+    "scoreable": true,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "France->Brazil",
+  "source": "France",
+  "target": "Brazil",
+  "arm": "extension",
+  "source_tok": 4881,
+  "target_tok": 7595,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Brasilia",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 39452,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " Portuguese",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 21813,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " South",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2520,
+    "scoreable": true,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "France->Canada",
+  "source": "France",
+  "target": "Canada",
+  "arm": "extension",
+  "source_tok": 4881,
+  "target_tok": 3340,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Ottawa",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 14074,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " English",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 3594,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " North",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 2258,
+    "scoreable": true,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ },
+ {
+  "item_id": "France->China",
+  "source": "France",
+  "target": "China",
+  "arm": "extension",
+  "source_tok": 4881,
+  "target_tok": 2807,
+  "n_scoreable": 3,
+  "funcs": [
+   {
+    "func": "capital",
+    "prompt": "The capital of France is the city of",
+    "clean_answer": " Paris",
+    "target_answer": " Beijing",
+    "clean_answer_tok": 6342,
+    "target_answer_tok": 11618,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "language",
+    "prompt": "Most people in France speak",
+    "clean_answer": " French",
+    "target_answer": " Chinese",
+    "clean_answer_tok": 4141,
+    "target_answer_tok": 3999,
+    "scoreable": true,
+    "clean_rank": 1
+   },
+   {
+    "func": "continent",
+    "prompt": "France is a country on the continent of",
+    "clean_answer": " Europe",
+    "target_answer": " Asia",
+    "clean_answer_tok": 2031,
+    "target_answer_tok": 7229,
+    "scoreable": true,
+    "clean_rank": 1
+   }
+  ],
+  "split": "tuning"
+ }
+]
