@@ -17,8 +17,17 @@ import os
 import torch
 
 torch.set_num_threads(1)
-os.environ.setdefault("HF_HUB_OFFLINE", "1")
-os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
+# Offline mode is not forced. Until 2026-09-05 these scripts set Hugging
+# Face's two offline switches on import, which pins the model load to the
+# local cache: on the machine that produced the committed records the cache
+# already held base GPT-2 Small, but on a fresh checkout with an empty cache
+# the load failed instead of fetching the weights. Set the environment
+# variable EXP016_OFFLINE to 1 to pin a run to the cache again. The weights
+# are the same file either way, so this changes nothing that was measured.
+if os.environ.get("EXP016_OFFLINE", "0").strip().lower() not in ("", "0", "false", "no"):
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
+    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 # The lens lives in the gitignored artifacts folder of the Stage 2 tree that
 # contains this script; EXP016_LENS_PATH overrides it for another checkout.

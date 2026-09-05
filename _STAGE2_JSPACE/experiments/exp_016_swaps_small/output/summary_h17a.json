@@ -2770,6 +2770,1134 @@
    }
   }
  },
+ "baseline_hits": {
+  "primary": {
+   "tuning": {
+    "units": 33,
+    "units_with_target_already_in_clean_top5": 6,
+    "lens_successes": 30,
+    "baseline_hits_among_lens_successes": 5,
+    "by_pair": {
+     "France->Ireland": 1,
+     "France->Japan": 1,
+     "Greece->Ireland": 1,
+     "Greece->Japan": 1,
+     "Spain->Ireland": 1
+    }
+   },
+   "heldout": {
+    "units": 33,
+    "units_with_target_already_in_clean_top5": 4,
+    "lens_successes": 30,
+    "baseline_hits_among_lens_successes": 4,
+    "by_pair": {
+     "Japan->France": 1,
+     "Japan->Poland": 1,
+     "Japan->Spain": 1,
+     "Portugal->Spain": 1
+    }
+   },
+   "overall": {
+    "units": 66,
+    "units_with_target_already_in_clean_top5": 10,
+    "lens_successes": 60,
+    "baseline_hits_among_lens_successes": 9,
+    "by_pair": {
+     "France->Ireland": 1,
+     "France->Japan": 1,
+     "Greece->Ireland": 1,
+     "Greece->Japan": 1,
+     "Japan->France": 1,
+     "Japan->Poland": 1,
+     "Japan->Spain": 1,
+     "Portugal->Spain": 1,
+     "Spain->Ireland": 1
+    }
+   },
+   "by_question": {
+    "capital": [
+     0,
+     30
+    ],
+    "continent": [
+     6,
+     6
+    ],
+    "language": [
+     4,
+     30
+    ]
+   }
+  },
+  "extension": {
+   "tuning": {
+    "units": 34,
+    "units_with_target_already_in_clean_top5": 7,
+    "lens_successes": 32,
+    "baseline_hits_among_lens_successes": 7,
+    "by_pair": {
+     "Australia->China": 1,
+     "Australia->France": 1,
+     "Canada->China": 1,
+     "Canada->France": 1,
+     "France->Australia": 1,
+     "France->Canada": 1,
+     "France->China": 1
+    }
+   },
+   "heldout": {
+    "units": 24,
+    "units_with_target_already_in_clean_top5": 7,
+    "lens_successes": 22,
+    "baseline_hits_among_lens_successes": 7,
+    "by_pair": {
+     "Brazil->Australia": 1,
+     "Brazil->Canada": 1,
+     "Brazil->France": 1,
+     "China->Australia": 1,
+     "China->Canada": 2,
+     "China->France": 1
+    }
+   },
+   "overall": {
+    "units": 58,
+    "units_with_target_already_in_clean_top5": 14,
+    "lens_successes": 54,
+    "baseline_hits_among_lens_successes": 14,
+    "by_pair": {
+     "Australia->China": 1,
+     "Australia->France": 1,
+     "Brazil->Australia": 1,
+     "Brazil->Canada": 1,
+     "Brazil->France": 1,
+     "Canada->China": 1,
+     "Canada->France": 1,
+     "China->Australia": 1,
+     "China->Canada": 2,
+     "China->France": 1,
+     "France->Australia": 1,
+     "France->Canada": 1,
+     "France->China": 1
+    }
+   },
+   "by_question": {
+    "capital": [
+     0,
+     20
+    ],
+    "continent": [
+     8,
+     20
+    ],
+    "language": [
+     6,
+     18
+    ]
+   }
+  }
+ },
+ "strict_readings": {
+  "6|2.0|all": {
+   "registered_in_top5": {
+    "primary": {
+     "tuning": {
+      "lens": [
+       0.8667,
+       13,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8667,
+       13,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8667,
+       26,
+       30
+      ],
+      "randdir": [
+       0.0,
+       0,
+       60
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       60
+      ]
+     }
+    },
+    "extension": {
+     "tuning": {
+      "lens": [
+       1.0,
+       12,
+       12
+      ],
+      "randdir": [
+       0.0,
+       0,
+       24
+      ],
+      "randnorm": [
+       0.0417,
+       1,
+       24
+      ]
+     },
+     "heldout": {
+      "lens": [
+       1.0,
+       8,
+       8
+      ],
+      "randdir": [
+       0.0,
+       0,
+       16
+      ],
+      "randnorm": [
+       0.0625,
+       1,
+       16
+      ]
+     },
+     "overall": {
+      "lens": [
+       1.0,
+       20,
+       20
+      ],
+      "randdir": [
+       0.0,
+       0,
+       40
+      ],
+      "randnorm": [
+       0.05,
+       2,
+       40
+      ]
+     }
+    },
+    "per_question": {
+     "tuning": {
+      "lens": [
+       0.9254,
+       62,
+       67
+      ],
+      "randdir": [
+       0.1194,
+       16,
+       134
+      ],
+      "randnorm": [
+       0.1791,
+       24,
+       134
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.9123,
+       52,
+       57
+      ],
+      "randdir": [
+       0.1579,
+       18,
+       114
+      ],
+      "randnorm": [
+       0.1842,
+       21,
+       114
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.9194,
+       114,
+       124
+      ],
+      "randdir": [
+       0.1371,
+       34,
+       248
+      ],
+      "randnorm": [
+       0.1815,
+       45,
+       248
+      ]
+     }
+    },
+    "exact_within_item_heldout_primary": [
+     13,
+     13,
+     6.272254743863065e-07
+    ]
+   },
+   "strict_new_to_top5": {
+    "primary": {
+     "tuning": {
+      "lens": [
+       0.6667,
+       10,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8,
+       12,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.7333,
+       22,
+       30
+      ],
+      "randdir": [
+       0.0,
+       0,
+       60
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       60
+      ]
+     }
+    },
+    "extension": {
+     "tuning": {
+      "lens": [
+       0.9167,
+       11,
+       12
+      ],
+      "randdir": [
+       0.0,
+       0,
+       24
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       24
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.625,
+       5,
+       8
+      ],
+      "randdir": [
+       0.0,
+       0,
+       16
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       16
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8,
+       16,
+       20
+      ],
+      "randdir": [
+       0.0,
+       0,
+       40
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       40
+      ]
+     }
+    },
+    "per_question": {
+     "tuning": {
+      "lens": [
+       0.7463,
+       50,
+       67
+      ],
+      "randdir": [
+       0.0149,
+       2,
+       134
+      ],
+      "randnorm": [
+       0.0149,
+       2,
+       134
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.7193,
+       41,
+       57
+      ],
+      "randdir": [
+       0.0088,
+       1,
+       114
+      ],
+      "randnorm": [
+       0.0088,
+       1,
+       114
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.7339,
+       91,
+       124
+      ],
+      "randdir": [
+       0.0121,
+       3,
+       248
+      ],
+      "randnorm": [
+       0.0121,
+       3,
+       248
+      ]
+     }
+    },
+    "exact_within_item_heldout_primary": [
+     12,
+     12,
+     1.8816764231589197e-06
+    ]
+   },
+   "strict_outranks_source_answer": {
+    "primary": {
+     "tuning": {
+      "lens": [
+       0.9333,
+       14,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8,
+       12,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8667,
+       26,
+       30
+      ],
+      "randdir": [
+       0.0,
+       0,
+       60
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       60
+      ]
+     }
+    },
+    "extension": {
+     "tuning": {
+      "lens": [
+       1.0,
+       12,
+       12
+      ],
+      "randdir": [
+       0.0,
+       0,
+       24
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       24
+      ]
+     },
+     "heldout": {
+      "lens": [
+       1.0,
+       8,
+       8
+      ],
+      "randdir": [
+       0.0,
+       0,
+       16
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       16
+      ]
+     },
+     "overall": {
+      "lens": [
+       1.0,
+       20,
+       20
+      ],
+      "randdir": [
+       0.0,
+       0,
+       40
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       40
+      ]
+     }
+    },
+    "per_question": {
+     "tuning": {
+      "lens": [
+       0.8657,
+       58,
+       67
+      ],
+      "randdir": [
+       0.0448,
+       6,
+       134
+      ],
+      "randnorm": [
+       0.0746,
+       10,
+       134
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.9123,
+       52,
+       57
+      ],
+      "randdir": [
+       0.0965,
+       11,
+       114
+      ],
+      "randnorm": [
+       0.1316,
+       15,
+       114
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8871,
+       110,
+       124
+      ],
+      "randdir": [
+       0.0685,
+       17,
+       248
+      ],
+      "randnorm": [
+       0.1008,
+       25,
+       248
+      ]
+     }
+    },
+    "exact_within_item_heldout_primary": [
+     12,
+     12,
+     1.8816764231589197e-06
+    ]
+   }
+  },
+  "9|2.0|all": {
+   "registered_in_top5": {
+    "primary": {
+     "tuning": {
+      "lens": [
+       0.9333,
+       14,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8667,
+       13,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.9,
+       27,
+       30
+      ],
+      "randdir": [
+       0.0,
+       0,
+       60
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       60
+      ]
+     }
+    },
+    "extension": {
+     "tuning": {
+      "lens": [
+       0.9167,
+       11,
+       12
+      ],
+      "randdir": [
+       0.0417,
+       1,
+       24
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       24
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.875,
+       7,
+       8
+      ],
+      "randdir": [
+       0.125,
+       2,
+       16
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       16
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.9,
+       18,
+       20
+      ],
+      "randdir": [
+       0.075,
+       3,
+       40
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       40
+      ]
+     }
+    },
+    "per_question": {
+     "tuning": {
+      "lens": [
+       0.9254,
+       62,
+       67
+      ],
+      "randdir": [
+       0.1493,
+       20,
+       134
+      ],
+      "randnorm": [
+       0.1493,
+       20,
+       134
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8596,
+       49,
+       57
+      ],
+      "randdir": [
+       0.193,
+       22,
+       114
+      ],
+      "randnorm": [
+       0.1491,
+       17,
+       114
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8952,
+       111,
+       124
+      ],
+      "randdir": [
+       0.1694,
+       42,
+       248
+      ],
+      "randnorm": [
+       0.1492,
+       37,
+       248
+      ]
+     }
+    },
+    "exact_within_item_heldout_primary": [
+     13,
+     13,
+     6.272254743863065e-07
+    ]
+   },
+   "strict_new_to_top5": {
+    "primary": {
+     "tuning": {
+      "lens": [
+       0.8,
+       12,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8,
+       12,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8,
+       24,
+       30
+      ],
+      "randdir": [
+       0.0,
+       0,
+       60
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       60
+      ]
+     }
+    },
+    "extension": {
+     "tuning": {
+      "lens": [
+       0.8333,
+       10,
+       12
+      ],
+      "randdir": [
+       0.0,
+       0,
+       24
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       24
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.625,
+       5,
+       8
+      ],
+      "randdir": [
+       0.0,
+       0,
+       16
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       16
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.75,
+       15,
+       20
+      ],
+      "randdir": [
+       0.0,
+       0,
+       40
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       40
+      ]
+     }
+    },
+    "per_question": {
+     "tuning": {
+      "lens": [
+       0.7463,
+       50,
+       67
+      ],
+      "randdir": [
+       0.0075,
+       1,
+       134
+      ],
+      "randnorm": [
+       0.0075,
+       1,
+       134
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.6842,
+       39,
+       57
+      ],
+      "randdir": [
+       0.0175,
+       2,
+       114
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       114
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.7177,
+       89,
+       124
+      ],
+      "randdir": [
+       0.0121,
+       3,
+       248
+      ],
+      "randnorm": [
+       0.004,
+       1,
+       248
+      ]
+     }
+    },
+    "exact_within_item_heldout_primary": [
+     12,
+     12,
+     1.8816764231589197e-06
+    ]
+   },
+   "strict_outranks_source_answer": {
+    "primary": {
+     "tuning": {
+      "lens": [
+       1.0,
+       15,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.8667,
+       13,
+       15
+      ],
+      "randdir": [
+       0.0,
+       0,
+       30
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       30
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.9333,
+       28,
+       30
+      ],
+      "randdir": [
+       0.0,
+       0,
+       60
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       60
+      ]
+     }
+    },
+    "extension": {
+     "tuning": {
+      "lens": [
+       1.0,
+       12,
+       12
+      ],
+      "randdir": [
+       0.0,
+       0,
+       24
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       24
+      ]
+     },
+     "heldout": {
+      "lens": [
+       1.0,
+       8,
+       8
+      ],
+      "randdir": [
+       0.0,
+       0,
+       16
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       16
+      ]
+     },
+     "overall": {
+      "lens": [
+       1.0,
+       20,
+       20
+      ],
+      "randdir": [
+       0.0,
+       0,
+       40
+      ],
+      "randnorm": [
+       0.0,
+       0,
+       40
+      ]
+     }
+    },
+    "per_question": {
+     "tuning": {
+      "lens": [
+       0.8806,
+       59,
+       67
+      ],
+      "randdir": [
+       0.0448,
+       6,
+       134
+      ],
+      "randnorm": [
+       0.0672,
+       9,
+       134
+      ]
+     },
+     "heldout": {
+      "lens": [
+       0.9123,
+       52,
+       57
+      ],
+      "randdir": [
+       0.1053,
+       12,
+       114
+      ],
+      "randnorm": [
+       0.1053,
+       12,
+       114
+      ]
+     },
+     "overall": {
+      "lens": [
+       0.8952,
+       111,
+       124
+      ],
+      "randdir": [
+       0.0726,
+       18,
+       248
+      ],
+      "randnorm": [
+       0.0847,
+       21,
+       248
+      ]
+     }
+    },
+    "exact_within_item_heldout_primary": [
+     13,
+     13,
+     6.272254743863065e-07
+    ]
+   }
+  }
+ },
  "exact_tests": {
   "pairs_primary_heldout": [
    13,
@@ -2791,5 +3919,244 @@
    13,
    6.272254743863065e-07
   ]
+ },
+ "cluster_tests": {
+  "pairs_primary_heldout": {
+   "cluster": "source country",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 5,
+   "per_cluster": {
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Ireland": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Japan": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    5,
+    5,
+    0.004115226337448559,
+    0.004115226337448559
+   ]
+  },
+  "pairs_primary_both": {
+   "cluster": "source country",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 30,
+   "n_clusters": 10,
+   "per_cluster": {
+    "France": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Greece": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Ireland": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Italy": [
+     2,
+     [
+      0,
+      0
+     ]
+    ],
+    "Japan": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Poland": [
+     2,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Spain": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    26,
+    10,
+    10,
+    1.693508780843029e-05,
+    1.693508780843029e-05
+   ]
+  },
+  "pairs_primary_heldout_rank1": {
+   "cluster": "source country",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 9,
+   "n_clusters": 3,
+   "per_cluster": {
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    7,
+    3,
+    3,
+    0.037037037037037035,
+    0.037037037037037035
+   ]
+  },
+  "pairs_primary_heldout_layer9": {
+   "cluster": "source country",
+   "cell": [
+    "9",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 5,
+   "per_cluster": {
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Ireland": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Japan": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    5,
+    5,
+    0.004115226337448559,
+    0.004115226337448559
+   ]
+  }
  }
 }

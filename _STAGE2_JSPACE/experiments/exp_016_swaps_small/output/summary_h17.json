@@ -5626,5 +5626,109 @@
    18,
    2.581174791713195e-09
   ]
+ },
+ "cluster_tests": {
+  "pooled_heldout_by_source": {
+   "cluster": "source concept",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 42,
+   "n_clusters": 20,
+   "test": [
+    27,
+    20,
+    12,
+    1.881676423158921e-06,
+    2.8679719907924424e-10
+   ]
+  },
+  "pooled_heldout_by_source_and_target": {
+   "cluster": "source and target concepts",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 42,
+   "n_clusters": 31,
+   "test": [
+    27,
+    31,
+    19,
+    8.603915972377327e-10,
+    1.6189785832062875e-15
+   ]
+  },
+  "rule_lens_heldout_by_source": {
+   "cluster": "source concept",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 9,
+   "test": [
+    9,
+    9,
+    4,
+    0.012345679012345678,
+    5.0805263425290864e-05
+   ]
+  },
+  "rule_lens_heldout_by_source_and_target": {
+   "cluster": "source and target concepts",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 16,
+   "test": [
+    9,
+    16,
+    7,
+    0.0004572473708276177,
+    2.323057312541878e-08
+   ]
+  },
+  "rule_output_heldout_by_source": {
+   "cluster": "source concept",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 12,
+   "test": [
+    18,
+    12,
+    9,
+    5.0805263425290864e-05,
+    1.881676423158921e-06
+   ]
+  },
+  "rule_output_heldout_by_source_and_target": {
+   "cluster": "source and target concepts",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 17,
+   "test": [
+    18,
+    17,
+    14,
+    2.0907515812876902e-07,
+    7.743524375139593e-09
+   ]
+  }
  }
 }

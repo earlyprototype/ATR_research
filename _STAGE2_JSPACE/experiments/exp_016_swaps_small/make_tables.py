@@ -182,6 +182,63 @@ for b in BATTERIES:
                     r = rs[ps][half]
                     print(f"| {ps} | {half} | {r['lens'][0]} of {r['lens'][1]} | {r['randdir'][0]} of {r['randdir'][1]} | {r['randnorm'][0]} of {r['randnorm'][1]} |")
 
+    if b == "h17a":
+        bh = s["baseline_hits"]
+        print("\nWhere the target answer already stood before any swap, at the tuned "
+              "setting, lens arm only. A baseline hit is a question whose target "
+              "answer was already among the unmodified model's five most likely next "
+              "words, so that the pre-registered criterion of section 5.2 is met "
+              "without the swap doing anything:\n")
+        print("| pair set | half | questions scored | of those, target already in the clean top five | lens successes | of those, baseline hits |")
+        print("|---|---|---|---|---|---|")
+        for ps in ("primary", "extension"):
+            for half in ("tuning", "heldout", "overall"):
+                r = bh[ps][half]
+                print(f"| {ps} | {half} | {r['units']} | "
+                      f"{r['units_with_target_already_in_clean_top5']} | "
+                      f"{r['lens_successes']} | {r['baseline_hits_among_lens_successes']} |")
+        print("\nThe same count by question, over both halves: "
+              + "; ".join(f"{ps} set, " + ", ".join(
+                  f"{f} {v[0]} of {v[1]}" for f, v in bh[ps]["by_question"].items())
+                  for ps in ("primary", "extension"))
+              + ". The capital question carries none of them. In the primary set "
+                "every continent question is one, because all six primary pairs "
+                "whose two continent answers differ pair a European country with "
+                "Japan, and on the continent frame the unmodified model already "
+                "ranks \" Asia\" fourth or fifth for those European countries and "
+                "\" Europe\" third for Japan. The primary continent row of the "
+                "table above, lens 5 of 6, therefore shows nothing under the "
+                "stricter reading.")
+        for ps in ("primary", "extension"):
+            names = sorted(set(bh[ps]["overall"]["by_pair"]))
+            print(f"\nPairs in the {ps} set carrying a baseline hit among their lens "
+                  f"successes at the tuned setting: "
+                  + (", ".join(f"{n} ({bh[ps]['overall']['by_pair'][n]})" for n in names)
+                     if names else "none") + ".")
+        sr = s["strict_readings"]
+        print("\nThe pair-level result under the pre-registered criterion and under two "
+              "stricter ones, primary pairs, a pair counting as a success when at least "
+              "two of its scoreable questions were redirected by the same swap:\n")
+        print("| criterion | setting | tuning, lens | held-out, lens | both halves, lens | held-out, control A |")
+        print("|---|---|---|---|---|---|")
+        crit = {"registered_in_top5": "target answer in the top five after the swap (pre-registered)",
+                "strict_new_to_top5": "target answer in the top five after the swap and not before it",
+                "strict_outranks_source_answer": "target answer outranks the source country's own answer after the swap"}
+        for name, label in crit.items():
+            for cellkey, block in sr.items():
+                cl = cellkey.split("|")
+                d = block[name]["primary"]
+                print(f"| {label} | layers {cl[0]}, strength {cl[1]}, {cl[2]} | "
+                      f"{pct(d['tuning']['lens'])} | {pct(d['heldout']['lens'])} | "
+                      f"{pct(d['overall']['lens'])} | {pct(d['heldout'].get('randdir',[0,0,0]))} |")
+        ck = "|".join(str(x) for x in c)
+        print("\nPer question rather than per pair, held-out half, at the tuned setting, "
+              "under the same three criteria:\n")
+        for name, label in crit.items():
+            d = sr[ck][name]["per_question"]["heldout"]
+            print(f"- {label}: lens {pct(d['lens'])}, control A "
+                  f"{pct(d.get('randdir',[0,0,0]))}, control B {pct(d.get('randnorm',[0,0,0]))}.")
+
     et = s["exact_tests"]
     def fmt(t):
         return f"{t[0]} lens successes over {t[1]} informative items, probability {t[2]:.3g}"
@@ -190,6 +247,24 @@ for b in BATTERIES:
         tag = "" if "heldout" in name else " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)"
         print(f"- {name.replace('_', ' ')}: {fmt(t)}{tag}")
     print("\nOnly the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.")
+
+    ct = s["cluster_tests"]
+    print("\nCluster-level exact tests against control A, which treat the scored units "
+          "that share one source lens direction as a single draw rather than as "
+          "independent ones. Resolution is the smallest probability the test can "
+          "return with that many clusters and draws, so a value equal to its "
+          "resolution means the lens beat every control draw in every cluster:\n")
+    for name, d in ct.items():
+        obs, n_cl, n_inf, p, floor = d["test"]
+        s_obs = "success" if obs == 1 else "successes"
+        s_unit = "unit" if d["n_units"] == 1 else "units"
+        s_cl = "cluster" if n_cl == 1 else "clusters"
+        print(f"- {name.replace('_', ' ')}: cluster is the {d['cluster']}; "
+              f"{obs} lens {s_obs} over {d['n_units']} scored {s_unit} in "
+              f"{n_cl} {s_cl} ({n_inf} of them informative), probability "
+              f"{p:.3g}, resolution {floor:.3g}"
+              + ("" if "heldout" in name else
+                 " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)") + ".")
     if b == "h17a":
         rs = s["registered_split"]
         fl, pl = rs["function_level"], rs["pair_level"]

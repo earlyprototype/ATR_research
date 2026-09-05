@@ -40,14 +40,25 @@ register:
   below). The registered rule asked for at least 50 percent against at most
   10 percent, and both readings clear it. Before any swap, the intended word
   was in the top five on 0 of 84 items by construction, because the
-  battery's rule excludes it from the model's top ten. The lens arm and the
+  battery's rule excludes it from the model's top ten. That was checked
+  again on 2026-09-05 by a fresh clean forward pass over the 84 frames with
+  no intervention: it reproduces the battery file's recorded clean ranks on
+  83 of the 84 items and differs by one rank on the eighty-fourth, at rank
+  12,546 of the model's 50,257 words, and it puts the intended word no
+  higher than rank 11 on any item. The lens arm and the
   control are measured on the same items, and under the null hypothesis
   that the lens direction is no better than a random direction of the same
   lengths, the lens draw is exchangeable with the two control draws inside
-  each item. The exact test built on that (see "Statistical
-  distinguishability" below) gives a probability of 3 in 1,000,000,000 for
-  the protocol gap (18 items, each with one success among three draws, all
-  on the lens) and 1 in 10,000,000,000,000 for the pooled one (27 items).
+  each item. Several frames share one source concept, so the items are not
+  independent of one another; grouping the 21 held-out items of the
+  `output` rule into the 12 groups that share a source concept and treating
+  the lens as one draw per group, the exact test (see "Statistical
+  distinguishability" below) gives a probability of 5 in 100,000, and
+  grouping into the 17 groups that share both source and target concept
+  gives 2 in 10,000,000. The earlier figures of 3 in 1,000,000,000 for the
+  protocol gap and 1 in 10,000,000,000,000 for the pooled one are withdrawn
+  as headlines: they counted every item as an independent draw (correction
+  16).
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
   questions about that country on **87 percent of the held-out pairs, 13 of
@@ -70,7 +81,34 @@ register:
   specification's rule the per-question selection picks layer 10 and the
   held-out result is 14 of 15 pairs against 0 of 30, and the pair-level
   selection picks layer 9 with 13 of 15 against 0 of 30, so the verdict
-  does not depend on the split.
+  does not depend on the split. A third caveat, found in review on
+  2026-09-05 (correction 15): the pre-registered success criterion of
+  section 5.2 counts a question as redirected when the target country's
+  answer is among the model's five most likely next words after the swap,
+  and it does not require that the answer was absent from that top five
+  beforehand, which is the exclusion section 5.1 builds into H17. A clean
+  forward pass over the battery prompts with no intervention, run on
+  2026-09-05, finds 24 of the 124 scored questions, which is 19 percent,
+  whose target answer was already in the top five: the Australia to China
+  continent question is one of them, because the unmodified model already
+  ranks " Asia" fourth on "Australia is a country on the continent of". Of
+  the 30 lens successes on the held-out primary pairs at the tuned setting,
+  4 are such baseline hits, one each in the pairs Japan to Poland, Japan to
+  Spain, Japan to France and Portugal to Spain, and no pair collects two of
+  them. Requiring the target answer to be in the top five after the swap
+  and not before it, the held-out pair result is 12 of 15 rather than 13 of
+  15, still against 0 of 30 for the control; requiring instead that the
+  target answer outrank the source country's own answer after the swap
+  gives 12 of 15, again against 0 of 30. The verdict on the registered
+  wording is the same under all three readings, so the registered reading
+  stays as the register row and the stricter numbers sit beside it
+  (decision item 7). A fourth caveat (correction 16): the 15 held-out pairs
+  are three pairs for each of five source countries, and the three pairs of
+  one country share that country's lens direction, so they are not 15
+  independent draws. Treating the source country as the unit, the exact
+  test gives 0.0041, which is 1 in 243 and is the smallest probability that
+  five groups of three draws each can produce; the item-level 6.3 times 10
+  to the power minus 7 is withdrawn as the headline for H17a.
 - **H17b, intermediate-step surgery: SUPPORTED on its registered wording,
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
@@ -179,7 +217,13 @@ the two lens directions, put through the identical exchange. "Control B" is
 the stricter control added here, the same random directions with the
 resulting disturbance rescaled to the size of the disturbance the real
 exchange would have made. Both figures, `output/fig_layers.png` and
-`output/fig_heldout.png`, plot these tables.
+`output/fig_heldout.png`, plot these tables. In the second figure the H17
+panel plots the protocol number, the held-out rate of the source rule
+chosen on the tuning half, which is 86 percent, 18 of 21, and puts the
+pooled rate over both source rules, 64 percent, 27 of 42, beside it as a
+hatched bar. Until 2026-09-05 that panel plotted only the pooled rate and
+labelled it "the reported number", which was wrong under section 5.1 of
+the specification (correction 17).
 
 
 ### H17: tuned setting = layers 7-8-9, strength 2.0, positions all   (35280 records)
@@ -263,6 +307,15 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 - rule output heldout: 18 lens successes over 18 informative items, probability 2.58e-09
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
+
+Cluster-level exact tests against control A, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. Resolution is the smallest probability the test can return with that many clusters and draws, so a value equal to its resolution means the lens beat every control draw in every cluster:
+
+- pooled heldout by source: cluster is the source concept; 27 lens successes over 42 scored units in 20 clusters (12 of them informative), probability 1.88e-06, resolution 2.87e-10.
+- pooled heldout by source and target: cluster is the source and target concepts; 27 lens successes over 42 scored units in 31 clusters (19 of them informative), probability 8.6e-10, resolution 1.62e-15.
+- rule lens heldout by source: cluster is the source concept; 9 lens successes over 21 scored units in 9 clusters (4 of them informative), probability 0.0123, resolution 5.08e-05.
+- rule lens heldout by source and target: cluster is the source and target concepts; 9 lens successes over 21 scored units in 16 clusters (7 of them informative), probability 0.000457, resolution 2.32e-08.
+- rule output heldout by source: cluster is the source concept; 18 lens successes over 21 scored units in 12 clusters (9 of them informative), probability 5.08e-05, resolution 1.88e-06.
+- rule output heldout by source and target: cluster is the source and target concepts; 18 lens successes over 21 scored units in 17 clusters (14 of them informative), probability 2.09e-07, resolution 7.74e-09.
 
 ### H17A: tuned setting = layers 6, strength 2.0, positions all   (18600 records)
 
@@ -360,6 +413,40 @@ Rank-1 sensitivity check (specification section 5.2): only the 72 of 124 scoreab
 | extension | heldout | 0 of 0 | 0 of 0 | 0 of 0 |
 | extension | overall | 4 of 4 | 0 of 8 | 1 of 8 |
 
+Where the target answer already stood before any swap, at the tuned setting, lens arm only. A baseline hit is a question whose target answer was already among the unmodified model's five most likely next words, so that the pre-registered criterion of section 5.2 is met without the swap doing anything:
+
+| pair set | half | questions scored | of those, target already in the clean top five | lens successes | of those, baseline hits |
+|---|---|---|---|---|---|
+| primary | tuning | 33 | 6 | 30 | 5 |
+| primary | heldout | 33 | 4 | 30 | 4 |
+| primary | overall | 66 | 10 | 60 | 9 |
+| extension | tuning | 34 | 7 | 32 | 7 |
+| extension | heldout | 24 | 7 | 22 | 7 |
+| extension | overall | 58 | 14 | 54 | 14 |
+
+The same count by question, over both halves: primary set, capital 0 of 30, continent 6 of 6, language 4 of 30; extension set, capital 0 of 20, continent 8 of 20, language 6 of 18. The capital question carries none of them. In the primary set every continent question is one, because all six primary pairs whose two continent answers differ pair a European country with Japan, and on the continent frame the unmodified model already ranks " Asia" fourth or fifth for those European countries and " Europe" third for Japan. The primary continent row of the table above, lens 5 of 6, therefore shows nothing under the stricter reading.
+
+Pairs in the primary set carrying a baseline hit among their lens successes at the tuned setting: France->Ireland (1), France->Japan (1), Greece->Ireland (1), Greece->Japan (1), Japan->France (1), Japan->Poland (1), Japan->Spain (1), Portugal->Spain (1), Spain->Ireland (1).
+
+Pairs in the extension set carrying a baseline hit among their lens successes at the tuned setting: Australia->China (1), Australia->France (1), Brazil->Australia (1), Brazil->Canada (1), Brazil->France (1), Canada->China (1), Canada->France (1), China->Australia (1), China->Canada (2), China->France (1), France->Australia (1), France->Canada (1), France->China (1).
+
+The pair-level result under the pre-registered criterion and under two stricter ones, primary pairs, a pair counting as a success when at least two of its scoreable questions were redirected by the same swap:
+
+| criterion | setting | tuning, lens | held-out, lens | both halves, lens | held-out, control A |
+|---|---|---|---|---|---|
+| target answer in the top five after the swap (pre-registered) | layers 6, strength 2.0, all | 87 percent (13 of 15) | 87 percent (13 of 15) | 87 percent (26 of 30) | 0 percent (0 of 30) |
+| target answer in the top five after the swap (pre-registered) | layers 9, strength 2.0, all | 93 percent (14 of 15) | 87 percent (13 of 15) | 90 percent (27 of 30) | 0 percent (0 of 30) |
+| target answer in the top five after the swap and not before it | layers 6, strength 2.0, all | 67 percent (10 of 15) | 80 percent (12 of 15) | 73 percent (22 of 30) | 0 percent (0 of 30) |
+| target answer in the top five after the swap and not before it | layers 9, strength 2.0, all | 80 percent (12 of 15) | 80 percent (12 of 15) | 80 percent (24 of 30) | 0 percent (0 of 30) |
+| target answer outranks the source country's own answer after the swap | layers 6, strength 2.0, all | 93 percent (14 of 15) | 80 percent (12 of 15) | 87 percent (26 of 30) | 0 percent (0 of 30) |
+| target answer outranks the source country's own answer after the swap | layers 9, strength 2.0, all | 100 percent (15 of 15) | 87 percent (13 of 15) | 93 percent (28 of 30) | 0 percent (0 of 30) |
+
+Per question rather than per pair, held-out half, at the tuned setting, under the same three criteria:
+
+- target answer in the top five after the swap (pre-registered): lens 91 percent (52 of 57), control A 16 percent (18 of 114), control B 18 percent (21 of 114).
+- target answer in the top five after the swap and not before it: lens 72 percent (41 of 57), control A 1 percent (1 of 114), control B 1 percent (1 of 114).
+- target answer outranks the source country's own answer after the swap: lens 91 percent (52 of 57), control A 10 percent (11 of 114), control B 13 percent (15 of 114).
+
 Exact within-item tests against control A (the lens draw exchangeable with the control draws inside each item):
 
 - pairs primary heldout: 13 lens successes over 13 informative items, probability 6.27e-07
@@ -368,6 +455,13 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 - pairs primary heldout layer9: 13 lens successes over 13 informative items, probability 6.27e-07
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
+
+Cluster-level exact tests against control A, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. Resolution is the smallest probability the test can return with that many clusters and draws, so a value equal to its resolution means the lens beat every control draw in every cluster:
+
+- pairs primary heldout: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
+- pairs primary both: cluster is the source country; 26 lens successes over 30 scored units in 10 clusters (10 of them informative), probability 1.69e-05, resolution 1.69e-05 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
+- pairs primary heldout rank1: cluster is the source country; 7 lens successes over 9 scored units in 3 clusters (3 of them informative), probability 0.037, resolution 0.037.
+- pairs primary heldout layer9: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
 
 Under the specification's own split rule (alternate pairs in the committed order, 25 tuning and 25 held-out, against the country-wise 27 and 23 the battery was built with): function-level selection picks layers 10, strength 2.0, all (tuning 87 percent (54 of 62), held-out 85 percent (53 of 62) per question; held-out primary pairs 14 of 15 against 0 of 30); pair-level selection picks layers 9 (held-out primary pairs 13 of 15 against 0 of 30). At the committed cells, held-out primary pairs under that split: layer 6 14 of 15, layer 9 13 of 15, control A 0 of 30 at both.
 
@@ -451,6 +545,11 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
+Cluster-level exact tests against control A, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. Resolution is the smallest probability the test can return with that many clusters and draws, so a value equal to its resolution means the lens beat every control draw in every cluster:
+
+- items all: cluster is the source concept; 4 lens successes over 16 scored units in 16 clusters (4 of them informative), probability 0.00391, resolution 2.33e-10 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
+- items heldout: cluster is the source concept; 1 lens success over 8 scored units in 8 clusters (1 of them informative), probability 0.25, resolution 1.53e-05.
+
 ### Numbers not in the tables above
 
 **All three country questions redirected together, counted only over the
@@ -481,7 +580,11 @@ times 10 to the power minus 9 at the protocol setting (18 items) and 1.3
 times 10 to the power minus 13 pooled over both source rules (27); H17a,
 scored per pair on the primary pairs, gives 6.3 times 10 to the power
 minus 7 (13 pairs), and 4.6 times 10 to the power minus 4 on the rank-one
-questions alone (7 pairs); H17b gives 0.25 (1 item). Only the held-out
+questions alone (7 pairs); H17b gives 0.25 (1 item). Those four figures
+are the item-level reading only, and the first three are withdrawn as
+headlines by correction 16, because the items are not independent of one
+another; the paragraph below gives the grouped values that replace them.
+Only the held-out
 half tests a selected setting: the tuning half chose the setting from the
 grid, so a test that includes tuning items reuses the outcomes that made
 the choice and is not a valid test of it; the all-items figures in the
@@ -494,6 +597,53 @@ are withdrawn: the first counted every control draw as a separate item
 item level, and the third ran a sign test against the union of an item's
 control draws, which is not an exchangeable pair because a union of draws
 succeeds more often than one draw (deviation 13).
+
+**Statistical distinguishability when the items share a direction.** The
+test just described treats every item as an independent draw, and for two
+of the three batteries that is wrong, which review found on 2026-09-05
+(correction 16). In H17a the 15 held-out primary pairs are three pairs for
+each of five source countries, and the three pairs of one country are
+swapped out of the same source lens direction, so the lens makes five
+draws there and not fifteen. In H17 several frames share a source concept,
+and some share both the source and the target concept, in which case the
+items receive the identical swap and differ only in the wording of the
+frame. The cluster-level test therefore groups the scored units that share
+a source direction and treats the lens as one draw for the whole group,
+exchangeable with each control seed's draw for that group; the groups are
+independent of one another, so the null distribution of the total number
+of lens successes is the product over groups, and the probability is
+computed exactly from it. Because each group can contribute at best a
+factor of one third (two control draws) or one quarter (three), the test
+has a floor, called its resolution here: the smallest probability it can
+return is one over the number of draws raised to the number of groups.
+
+On the held-out half, with the source concept or source country as the
+group: H17a's pair-level result gives 0.0041 over 5 groups, which is 1 in
+243 and equal to its resolution, meaning the lens beat every control draw
+in every group and the test cannot go lower with this many groups; on the
+rank-one questions alone it gives 0.037 over 3 groups, again at its
+resolution. H17 at the protocol setting gives 5.1 times 10 to the power
+minus 5 over 12 groups by source concept and 2.1 times 10 to the power
+minus 7 over 17 groups by source and target concept together, against
+resolutions of 1.9 times 10 to the power minus 6 and 7.7 times 10 to the
+power minus 9; pooled over both source rules the same two groupings give
+1.9 times 10 to the power minus 6 and 8.6 times 10 to the power minus 10.
+H17b is unaffected, because each of its 16 items has its own source
+concept, so every group holds one item and the cluster-level test returns
+exactly the item-level values, 0.25 on the held-out half and 0.0039 over
+all items, the second of which stays labelled post-selection because the
+tuning half chose the setting. The withdrawn item-level headlines are named in correction 16.
+The summary files carry every cluster-level test under `cluster_tests`.
+
+One limit of this test, stated because a reader would otherwise find it:
+within a group the lens draws for the three pairs share a source
+direction, while each control seed's three draws are independent random
+directions, so the lens draw and the control draws are exchangeable at the
+level of the group only under the null's own assumption that the lens
+direction is nothing but another random direction. That is the null being
+tested, so the test is valid under it, but the two arms are not matched in
+their internal dependence, and the effect of that mismatch on the test's
+power is not measured here. Inferred, not established.
 
 **H17b under the looser score.** If success is counted as the alternative
 answer merely entering the top five rather than becoming the model's actual
@@ -526,7 +676,18 @@ exchange of a country's lens coordinates, applied at a single layer,
 redirected the capital question 85 percent of the time, the language
 question 100 percent of the time and the continent question 95 percent of
 the time in the extension set, and moved at least two of the three together
-on every one of the 20 pairs. The country's name is not simply being copied
+on every one of the 20 pairs. Those three rates are not equally
+informative, and the difference was found only in review (correction 15).
+The capital question contains no case where the target answer was already
+among the model's five most likely next words before any swap: 0 of its 20
+extension questions and 0 of its 30 primary questions. The language
+question contains 6 such cases of 18 in the extension set and 4 of 30 in
+the primary set, and the continent question contains 8 of 20 in the
+extension set and all 6 of 6 in the primary set, where every scoreable
+continent pair joins a European country to Japan. The capital question,
+scored against a control that succeeds on 0 of 40 extension trials and 0 of
+60 primary trials, is therefore the clean evidence here, and it is the
+strongest of the three. The country's name is not simply being copied
 to the output, because the three answers are different words. But H17a
 patched every position of the prompt, including the final position that
 produces the answer, so the result is also compatible with the country's
@@ -814,7 +975,8 @@ number reported as a verdict was chosen on the data it is reported for.
 
 ## What this does not show
 
-Seven limits, stated before a reader finds them.
+Nine limits, stated before a reader finds them. The eighth and ninth were
+added on 2026-09-05 after review.
 
 First, a successful swap shows that the lens direction for a word is a
 handle the model responds to, not that the model "contains a concept" in any
@@ -865,6 +1027,34 @@ country-associated direction steering each answer directly. The
 mention-only mode that would separate them was not in the H17a grid. The
 redirection itself stands; the reading that it passes through downstream
 computation is inferred, not established.
+
+Eighth, H17a's pre-registered success criterion can be met without the swap
+doing anything. Section 5.2 counts a question as redirected when the target
+country's answer is among the model's five most likely next words after the
+swap, and unlike section 5.1's rule for H17 it does not require the answer
+to have been absent from that top five before the intervention. Measured on
+2026-09-05 by a clean forward pass with no intervention, 24 of the 124
+scored questions, which is 19 percent, already had their target answer in
+the top five, and 4 of the 30 lens successes on the held-out primary pairs
+at the tuned setting are questions of that kind. The stricter readings are
+in the tables and change the held-out pair result from 13 of 15 to 12 of
+15, against 0 of 30 for the control either way, so the verdict does not
+turn on it, but the registered criterion is weaker than it looks and any
+later battery should build the exclusion into the criterion as H17 does.
+
+Ninth, the scored units within a battery are not independent of one
+another. H17a's three pairs per source country share that country's lens
+direction and H17's frames often share a source concept, so a test that
+counts every unit as a separate draw overstates the evidence. The
+cluster-level test reported above is the honest version, and it costs a
+great deal of apparent significance: H17a's held-out pair result moves from
+6.3 times 10 to the power minus 7 to 0.0041, and H17's protocol result from
+2.6 times 10 to the power minus 9 to 5.1 times 10 to the power minus 5. The
+gaps themselves, 13 of 15 pairs against 0 of 30 control trials and 18 of 21
+items against 0 of 42, are unchanged; what changes is how much a
+significance test is entitled to say about them from five or twelve
+independent draws.
+
 ## Deviations from the specification, stated flat
 
 1. **Two settings were dropped from two batteries for time, before those
@@ -1010,7 +1200,11 @@ computation is inferred, not established.
     pairs), and H17b's held-out probability is 0.25; its all-items figure,
     which earlier versions of this record treated as a test, reuses the
     tuning outcomes that selected the setting and is labelled
-    post-selection.
+    post-selection. A fourth attempt was needed, and it is recorded as
+    deviation 19 and correction 16: the two figures quoted in this
+    paragraph for H17 and H17a count every item as an independent draw,
+    which they are not, and the grouped values that replace them as
+    headlines are 5.1 times 10 to the power minus 5 and 0.0041.
 
 14. **The gates admitted answers the model ranks second or third, and the
     promised rank-one sensitivity check was missing.** The register's
@@ -1060,6 +1254,32 @@ computation is inferred, not established.
     15 against 0 of 30. The run was tuned on the split it was built with,
     and the record keeps that as its headline; the verdict is the same
     under both.
+
+18. **Two stricter readings of H17a's success criterion were added beside
+    the registered one, not substituted for it, and one measurement was
+    added to support them.** Section 5.2 of the specification scores a
+    question as redirected when the target country's answer is in the model's
+    five most likely next words after the swap, and records the top-one form
+    and the outranking form alongside. It does not say where the target
+    answer stood before the swap, and that was not recorded during the run.
+    A new script, `clean_ranks.py`, measures it for all three batteries with
+    a clean forward pass and no intervention, writing
+    `output/clean_target_ranks.json`; the analysis then reports the
+    registered criterion, the criterion restricted to answers that were not
+    already in the clean top five, and the outranking criterion side by side.
+    The registered criterion remains the one the verdict is scored on. The
+    same pass reproduces the clean ranks already committed in the battery
+    files, exactly for H17a's 124 questions and H17b's 16 items and to within
+    one rank on one of H17's 84 items, at rank 12,546 of the model's 50,257
+    words, where two words are all but tied.
+
+19. **The exact test is now also reported with the units grouped by shared
+    source direction.** The specification names no significance test at all;
+    it registers rate thresholds against control A. The within-item exact
+    test was added by this record, and the cluster-level version is added
+    beside it because H17a's three pairs per source country and H17's frames
+    sharing a source concept are not independent draws. Both are reported;
+    the registered thresholds are unaffected, since they compare rates.
 
 ## Errata found during the run
 
@@ -1143,6 +1363,66 @@ wrong, and what is true instead. The numbers are in the sections above.
 14. Its reproduction sequence omitted the step that writes the qualitative
     job file; `make_qual_jobs.py` and the argument to `qualitative.py` are
     now named.
+
+The four corrections below come from a review of commit `ea9073d` on
+2026-09-05. Each says what the record said, that it was incomplete or
+wrong, and what is true instead.
+
+15. The H17a headline sentence said, without qualification, that the swap
+    "redirected at least two of the three separate questions about that
+    country on 87 percent of the held-out pairs, 13 of 15, against 0
+    percent, 0 of 30, for the control". The count is right and the verdict
+    stands, but the sentence hid that the pre-registered criterion counts a
+    question as redirected whenever the target answer is in the model's top
+    five after the swap, including when it was already there before any
+    swap. A clean forward pass with no intervention finds 24 of the 124
+    scored questions in that position, 19 percent, and 4 of the 30 lens
+    successes on the held-out primary pairs at the tuned setting are of that
+    kind. Under the stricter reading that requires the target answer to be
+    new to the top five the held-out result is 12 of 15, and under the
+    reading that requires the target answer to outrank the source country's
+    own answer it is also 12 of 15, both against 0 of 30 for the control.
+    The register row keeps the registered reading, with the stricter numbers
+    beside it, and whether it should is decision item 7.
+
+16. It reported the exact within-item probabilities as though every scored
+    unit were an independent draw. They are not: H17a's three pairs per
+    source country share that country's lens direction, and H17's frames
+    often share a source concept or share both source and target concept, in
+    which case they receive the identical swap. Three headline numbers are
+    withdrawn as headlines and kept only as the item-level reading: H17a's
+    6.3 times 10 to the power minus 7 on the held-out primary pairs, which
+    becomes 0.0041 with the source country as the unit; H17's 2.6 times 10
+    to the power minus 9 at the protocol setting, which becomes 5.1 times 10
+    to the power minus 5 grouped by source concept and 2.1 times 10 to the
+    power minus 7 grouped by source and target concept; and H17's pooled 1.3
+    times 10 to the power minus 13, which becomes 1.9 times 10 to the power
+    minus 6 and 8.6 times 10 to the power minus 10 under the same two
+    groupings. The plain-language forms of the first two, "3 in
+    1,000,000,000" and "1 in 10,000,000,000,000", are withdrawn with them.
+    H17a's rank-one reading moves from 4.6 times 10 to the power minus 4 to
+    0.037. H17b is unchanged at 0.25 on the held-out half, because each of
+    its 16 items has its own source concept. No rate and no verdict changes.
+
+17. The held-out figure, `output/fig_heldout.png`, plotted H17's pooled
+    rate over both source rules, 64 percent, 27 of 42, under an axis label
+    reading "held-out half (the reported number)", although the record's
+    protocol result since correction 1 is the tuning-selected source rule's
+    86 percent, 18 of 21. The figure now plots the selected rule's rate as
+    the labelled bar, keeps the pooled rate beside it as a hatched bar, and
+    names the selected rule in the panel title.
+
+18. The reproduction section said its sequence was everything a reader
+    needs, while `lib_exp016.py` set Hugging Face's two offline switches on
+    import, so a fresh checkout with an empty model cache would fail to load
+    base GPT-2 Small rather than fetch it. Offline mode is now off unless
+    the environment variable `EXP016_OFFLINE` is set to 1, and the
+    reproduction section names the model acquisition step. Nothing measured
+    changes: loading the model with and without the switch on this machine
+    gives byte-identical weights, SHA-256 digest
+    `0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1` over
+    the ordered parameter tensors, and identical next-word scores on a test
+    prompt.
 
 ## What remains
 
@@ -1233,16 +1513,63 @@ much they would add.
    (deviation 15): 60 ordered pairs from the 20 countries the unmodified
    model answers within its top five, about 20 minutes of processor time,
    no verdict weight, reported beside the rank-one set.
+
+7. **Which reading of H17a's success criterion the register row should
+   quote** (correction 15). The pre-registered criterion counts a question
+   as redirected when the target country's answer is among the model's five
+   most likely next words after the swap, and 24 of the 124 scored
+   questions, 19 percent, already met it before any swap. The row as
+   proposed keeps the registered criterion and gives 13 of 15 held-out
+   pairs against 0 of 30 for the control. The stricter criterion, requiring
+   the target answer to be new to the top five, gives 12 of 15 against 0 of
+   30, and the criterion requiring the target answer to outrank the source
+   country's own answer gives the same 12 of 15. All three support the
+   hypothesis, so this is a question of which number the register should
+   carry, not of the verdict. Nothing in the register is changed from this
+   branch either way (rule R8).
+
+8. **Whether the cluster-level exact test becomes the project's standard
+   for batteries whose items share a direction** (correction 16). This
+   record now reports both the item-level test, which treats every scored
+   unit as an independent draw, and the cluster-level test, which treats the
+   units sharing one source lens direction as a single draw. The two differ
+   by four orders of magnitude for H17a, 6.3 times 10 to the power minus 7
+   against 0.0041. The cluster-level test is the conservative one and this
+   record leads with it. Whether later experiments must design their
+   batteries so that clusters are large enough for the test to resolve, five
+   groups of three draws can never return less than 0.0041, is a question
+   for the operator rather than for a session.
+
 ## Reproducing this
 
-Everything needed is in `experiments/exp_016_swaps_small/`. The order is:
+Everything needed is in `experiments/exp_016_swaps_small/`, except the model
+weights and the lens file, which are downloaded. Two acquisitions come
+first. The model is base GPT-2 Small, the Hugging Face repository `gpt2`,
+about 500 megabytes, which transformer_lens fetches into the local Hugging
+Face cache the first time `lib_exp016.load_model()` runs, so the first run
+needs network access; `python3 -c "import transformers;
+transformers.AutoModelForCausalLM.from_pretrained('gpt2')"` fetches it
+ahead of time. Setting the environment variable `EXP016_OFFLINE` to 1 pins
+every script to the local cache instead, which is what a machine with the
+cache already populated should do and what this run did in effect;
+until 2026-09-05 the scripts forced that offline mode themselves, so a
+fresh checkout failed rather than downloading (correction 18). The lens is
+the second acquisition, described below.
+
+The order is:
 `pilot_clean.py` and `pilot_clean2.py` measure the unmodified model and
 write the two pilot files; `build_batteries.py` turns those into the three
 committed battery files by the selection rules in section 5 of the
 specification; `check_engine.py` verifies the swap implementation;
 `run_swaps.py h17`, `run_swaps.py h17a` and `run_swaps.py h17b` produce the
-record files; `analyse.py h17 h17a h17b` applies the tuning-then-held-out
-selection and writes the summaries; `make_qual_jobs.py` writes
+record files; `clean_ranks.py` measures, with no intervention, where each
+battery's target answer stood before any swap and writes
+`output/clean_target_ranks.json`, which the analysis needs for the stricter
+readings of H17a (deviation 18); `analyse.py h17 h17a h17b` applies the
+tuning-then-held-out selection and writes the summaries; `make_tables.py`
+prints the markdown tables of the section "The numbers" straight from those
+summaries, so no number in this record is typed by hand;
+`make_qual_jobs.py` writes
 `output/qual_jobs.json` and `qualitative.py output/qual_jobs.json` re-runs
 those conditions to capture the actual words; `make_figures.py` draws the
 two figures; `measure_disturbance.py` recomputes the disturbance sizes at the

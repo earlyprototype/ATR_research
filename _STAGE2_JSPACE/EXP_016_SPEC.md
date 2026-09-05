@@ -389,3 +389,36 @@ the null. NOT SUPPORTED means the run finished and the registered threshold
 was missed without the evidence being strong enough to call the claim
 refuted. UNTESTABLE means the model could not do the clean task often enough
 for the swap question to arise.
+
+---
+
+## Addendum, 2026-09-05
+
+This addendum is appended after the run. It changes nothing that was
+pre-registered above; it records two things a reader of this specification
+alone would otherwise not know, both found by review of the results record
+and both answered there in full.
+
+1. **The success criterion for H17a in section 5.2 admits answers the model
+   already gave.** It counts a question as redirected when the target
+   country's answer is among the unmodified model's five most likely next
+   words after the swap, and it does not require that answer to have been
+   absent from that top five beforehand. Section 5.1 builds exactly that
+   exclusion into H17, where the target is chosen from outside the model's
+   top ten, but section 5.2 does not. Measured afterwards with a clean
+   forward pass and no intervention, 24 of the 124 scored questions, which
+   is 19 percent, already had their target answer in the top five. The
+   results record reports the registered criterion as the verdict and two
+   stricter criteria beside it, and the verdict is the same under all
+   three. A later battery of this shape should write the exclusion into the
+   criterion.
+
+2. **The significance tests in the results record are not part of this
+   specification, and the units they test are not independent.** This
+   specification registers rate thresholds against control A and names no
+   test. The results record adds an exact test, and reports it both with
+   every scored unit counted as an independent draw and with the units that
+   share one source lens direction grouped into a single draw, which is the
+   conservative reading: H17a's three pairs per source country share that
+   country's direction, and H17's frames often share a source concept. The
+   grouped reading is the one the record leads with.

@@ -42,26 +42,48 @@ fig.savefig(D + "output/fig_layers.png", dpi=130)
 print("wrote fig_layers.png")
 
 fig2, axes2 = plt.subplots(1, 3, figsize=(13, 3.6))
+halves = ["tuning", "heldout"]
 for ax, b in zip(axes2, ["h17", "h17a", "h17b"]):
     s = json.load(open(D + f"output/summary_{b}.json"))
-    halves = ["tuning", "heldout"]
-    w = 0.26
-    for i, arm in enumerate(("lens", "randdir", "randnorm")):
-        vals = [s[h].get(arm, [0])[0] for h in halves]
-        ax.bar([j + (i - 1) * w for j in range(2)], vals, w,
-               color=COL[arm], label=LAB[arm])
+    c = s["chosen_cell"]
+    # For H17 the protocol number is the source rule's, not the pooled one:
+    # section 5.1 of the specification makes the choice between the two
+    # readings of "the model's own top concept" part of the tuned selection,
+    # so the bar that carries the verdict is the selected rule's held-out
+    # rate. The pooled rate, which an earlier version of this figure plotted
+    # as "the reported number", is kept beside it and labelled as pooled.
+    if b == "h17":
+        sr = s["source_rule_selection"]
+        c = sr["chosen_cell"]
+        series = [("lens swap, selected source rule "
+                   f"({sr['chosen_rule']})", COL["lens"], "",
+                   [sr[h].get("lens", [0])[0] for h in halves]),
+                  ("lens swap, both source rules pooled", COL["lens"], "//",
+                   [s[h].get("lens", [0])[0] for h in halves])]
+        series += [(LAB[a], COL[a], "", [sr[h].get(a, [0])[0] for h in halves])
+                   for a in ("randdir", "randnorm")]
+        title = (f"H17: layers {c[0]}, strength {c[1]}, {c[2]}, "
+                 f"source rule {sr['chosen_rule']}")
+    else:
+        series = [(LAB[a], COL[a], "", [s[h].get(a, [0])[0] for h in halves])
+                  for a in ("lens", "randdir", "randnorm")]
+        title = f"{b.upper()}: layers {c[0]}, strength {c[1]}, {c[2]}"
+    w = 0.8 / len(series)
+    off = (len(series) - 1) / 2
+    for i, (label, colour, hatch, vals) in enumerate(series):
+        ax.bar([j + (i - off) * w for j in range(2)], vals, w, color=colour,
+               hatch=hatch, edgecolor="white", label=label)
         for j, v in enumerate(vals):
-            ax.text(j + (i - 1) * w, v + .015, f"{v:.2f}", ha="center",
+            ax.text(j + (i - off) * w, v + .015, f"{v:.2f}", ha="center",
                     fontsize=7)
     ax.set_xticks(range(2))
     ax.set_xticklabels(["tuning half\n(setting chosen here)",
                         "held-out half\n(the reported number)"], fontsize=8)
-    c = s["chosen_cell"]
-    ax.set_title(f"{b.upper()}: layers {c[0]}, strength {c[1]}, {c[2]}",
-                 fontsize=9)
-    ax.set_ylim(0, 1.05); ax.grid(axis="y", alpha=.3)
+    ax.set_title(title, fontsize=9)
+    # Headroom above 1.0 so the per-panel legend never sits over a bar.
+    ax.set_ylim(0, 1.32); ax.grid(axis="y", alpha=.3)
+    ax.legend(fontsize=6.5, loc="upper right", framealpha=0.95)
 axes2[0].set_ylabel("success rate (0 to 1)", fontsize=9)
-axes2[0].legend(fontsize=7)
 fig2.suptitle("EXP_016: the tuned setting, chosen on one half and scored on "
               "the other", fontsize=10)
 fig2.tight_layout()

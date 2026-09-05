@@ -14,6 +14,20 @@ SCORE = {"h17": "in_top5", "h17a": "in_top5", "h17b": "is_top1"}
 MODE_ORDER = ["all", "last", "all_no_bos", "from_mention", "answer_only"]
 
 
+def clean_target_ranks(battery):
+    """Where each scored unit's target answer stood before any intervention:
+    its rank in the unmodified model's next-word prediction, 1 meaning the
+    model's most likely next word. Measured by `clean_ranks.py` and keyed by
+    (item identifier, function name)."""
+    path = D + "output/clean_target_ranks.json"
+    if not os.path.exists(path):
+        raise FileNotFoundError(
+            f"{path} not found; run `python3 clean_ranks.py` first, which "
+            f"measures the unmodified model with no intervention")
+    return {(r["item_id"], r["func"]): r["clean_target_rank"]
+            for r in json.load(open(path))["units"][battery]}
+
+
 def load(battery):
     rows = []
     with open(D + f"output/records_{battery}.csv") as fh:
@@ -23,6 +37,15 @@ def load(battery):
                 r[k] = int(r[k])
             r["alpha"] = float(r["alpha"])
             rows.append(r)
+    ranks = clean_target_ranks(battery)
+    for r in rows:
+        r["clean_target_rank"] = ranks[(r["item_id"], r["func"])]
+        # Stricter than the pre-registered criterion: the target answer is in
+        # the model's five most likely next words after the swap and was not
+        # already there before any intervention. For H17 and H17b the two
+        # criteria agree on every row, because those batteries are built so
+        # that the target cannot be a success before the swap.
+        r["in_top5_new"] = int(r["in_top5"] and r["clean_target_rank"] > 5)
     return rows
 
 
@@ -232,20 +255,209 @@ def exact_within_item_test(items):
     return t, len(probs), sum(v for c, v in dist.items() if c >= t)
 
 
-def item_outcomes(rows, cell, key, pred=lambda r: True):
-    """Per-item (lens, [control A per seed]) outcomes at one setting."""
+def item_outcomes_by_id(rows, cell, key, pred=lambda r: True):
+    """Per-item (lens, [control A per seed]) outcomes at one setting, keyed by
+    the item's identifier so that items can be grouped into clusters."""
     per = defaultdict(lambda: defaultdict(dict))
     for r in rows:
         if (r["layers"], r["alpha"], r["posmode"]) == tuple(cell) and pred(r):
             per[r["item_id"]][r["arm"]][r["seed"]] = r[key]
-    return [(d["lens"][-1], [d["randdir"][s] for s in sorted(d["randdir"])])
-            for d in per.values() if "lens" in d and "randdir" in d]
+    return {i: (d["lens"][-1], [d["randdir"][s] for s in sorted(d["randdir"])])
+            for i, d in per.items() if "lens" in d and "randdir" in d}
 
 
-def pair_outcomes(rows, cell, split, pair_set, need=2, rank1=False):
+def item_outcomes(rows, cell, key, pred=lambda r: True):
+    """The same outcomes as `item_outcomes_by_id`, as a plain list."""
+    return list(item_outcomes_by_id(rows, cell, key, pred).values())
+
+
+def cluster_exact_test(clusters):
+    """Exact one-sided test of the lens arm against control A when the scored
+    units are not independent of one another. A cluster is a group of units
+    that share one source lens direction, so the lens arm makes a single draw
+    for the whole cluster while each control seed makes its own. `clusters` is
+    a list of (successes the lens draw collected in the cluster, [successes
+    each control seed's draw collected in the cluster]).
+
+    Under the null that the lens direction is no different from a random
+    direction of the same lengths, the lens draw is exchangeable with the
+    control draws as a whole draw within each cluster, and the clusters are
+    independent of one another, so the total number of lens successes is the
+    sum of one uniformly chosen draw per cluster and its distribution is the
+    product over clusters. Returns (observed lens successes, clusters,
+    clusters whose draws are not all equal, probability of at least the
+    observed total under the null, resolution). Resolution is the smallest
+    probability this many clusters and draws can produce, one divided by the
+    number of draws per cluster raised to the number of clusters, which is
+    the floor the test cannot go below however large the effect."""
+    obs = sum(l for l, _ in clusters)
+    dist, informative, floor = {0: 1.0}, 0, 1.0
+    for lens, ctrls in clusters:
+        draws = [lens] + list(ctrls)
+        if len(set(draws)) > 1:
+            informative += 1
+        floor /= len(draws)
+        nd = defaultdict(float)
+        for tot, v in dist.items():
+            for d in draws:
+                nd[tot + d] += v / len(draws)
+        dist = nd
+    return (obs, len(clusters), informative,
+            sum(v for tot, v in dist.items() if tot >= obs), floor)
+
+
+def clusters_of(outcomes, key_of):
+    """Group per-unit (lens, [control per seed]) outcomes into clusters by
+    `key_of(unit identifier)`, summing successes within each cluster."""
+    acc = {}
+    for iid, (lens, ctrls) in sorted(outcomes.items()):
+        k = key_of(iid)
+        if k not in acc:
+            acc[k] = [0, [0] * len(ctrls)]
+        acc[k][0] += lens
+        for i, c in enumerate(ctrls):
+            acc[k][1][i] += c
+    return {k: (v[0], v[1]) for k, v in acc.items()}
+
+
+def cluster_tests(rows, battery, cell, rule_cell=None):
+    """The cluster-level exact tests the record reports, per battery. The
+    cluster is the group of scored units that share one source lens
+    direction: for H17a the source country, for H17 the source concept (and,
+    reported beside it, the source and target concepts together, which is the
+    finer grouping in which every unit of a cluster receives the identical
+    swap). For H17b every item has its own source concept, so each cluster
+    holds one item and the test reduces to the item-level one."""
+    out = {}
+    if battery == "h17a":
+        items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
+        src = lambda iid: items[iid]["source"]
+        for name, c, split, rank1 in (
+                ("pairs_primary_heldout", cell, "heldout", False),
+                ("pairs_primary_both", cell, None, False),
+                ("pairs_primary_heldout_rank1", cell, "heldout", True),
+                ("pairs_primary_heldout_layer9", ("9", 2.0, "all"), "heldout", False)):
+            o = pair_outcomes_by_id(rows, c, split, "primary", rank1=rank1)
+            cl = clusters_of(o, src)
+            out[name] = dict(cluster="source country", cell=list(c),
+                             n_units=len(o), n_clusters=len(cl),
+                             per_cluster={k: [v[0], v[1]] for k, v in cl.items()},
+                             test=list(cluster_exact_test(list(cl.values()))))
+    elif battery == "h17":
+        items = {it["item_id"]: it for it in json.load(open(D + "battery_h17.json"))}
+        held = lambda r: items[r["item_id"]]["split"] == "heldout"
+        preds = {"pooled_heldout": (cell, held)}
+        for rule in ("lens", "output"):
+            preds[f"rule_{rule}_heldout"] = (
+                rule_cell or cell,
+                lambda r, rule=rule: held(r) and items[r["item_id"]]["source_rule"] == rule)
+        groupings = (("by_source", "source concept", lambda i: items[i]["source"]),
+                     ("by_source_and_target", "source and target concepts",
+                      lambda i: (items[i]["source"], items[i]["target"])))
+        for name, (c, pred) in preds.items():
+            o = item_outcomes_by_id(rows, c, "in_top5", pred)
+            for suffix, label, key_of in groupings:
+                cl = clusters_of(o, key_of)
+                out[f"{name}_{suffix}"] = dict(
+                    cluster=label, cell=list(c), n_units=len(o), n_clusters=len(cl),
+                    test=list(cluster_exact_test(list(cl.values()))))
+    else:
+        items = {it["item_id"]: it for it in json.load(open(D + "battery_h17b.json"))}
+        for name, pred in (("items_all", lambda r: True),
+                           ("items_heldout",
+                            lambda r: items[r["item_id"]]["split"] == "heldout")):
+            o = item_outcomes_by_id(rows, cell, "is_top1", pred)
+            cl = clusters_of(o, lambda i: items[i]["source"])
+            out[name] = dict(cluster="source concept", cell=list(cell),
+                             n_units=len(o), n_clusters=len(cl),
+                             test=list(cluster_exact_test(list(cl.values()))))
+    return out
+
+
+def baseline_hit_counts(rows, cell):
+    """For H17a: how much of the lens arm's success at one setting is carried
+    by units whose target answer was already among the unmodified model's five
+    most likely next words, so that the pre-registered criterion of section
+    5.2 is met without any swap. Counted per half and named per country pair."""
+    items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
+    out = {}
+    for pair_set in ("primary", "extension"):
+        out[pair_set] = {}
+        for half in ("tuning", "heldout", "overall"):
+            units = baseline_units = succ = hits = 0
+            by_pair = defaultdict(int)
+            for r in rows:
+                if (r["layers"], r["alpha"], r["posmode"]) != tuple(cell) or r["arm"] != "lens":
+                    continue
+                it = items[r["item_id"]]
+                if it["arm"] != pair_set or (half != "overall" and it["split"] != half):
+                    continue
+                units += 1
+                baseline = r["clean_target_rank"] <= 5
+                baseline_units += int(baseline)
+                if r["in_top5"]:
+                    succ += 1
+                    if baseline:
+                        hits += 1
+                        by_pair[r["item_id"]] += 1
+            out[pair_set][half] = dict(
+                units=units, units_with_target_already_in_clean_top5=baseline_units,
+                lens_successes=succ, baseline_hits_among_lens_successes=hits,
+                by_pair=dict(sorted(by_pair.items())))
+        by_func = defaultdict(lambda: [0, 0])
+        for r in rows:
+            if (r["layers"], r["alpha"], r["posmode"]) != tuple(cell) or r["arm"] != "lens":
+                continue
+            if items[r["item_id"]]["arm"] != pair_set:
+                continue
+            by_func[r["func"]][0] += int(r["clean_target_rank"] <= 5)
+            by_func[r["func"]][1] += 1
+        out[pair_set]["by_question"] = {f: v for f, v in sorted(by_func.items())}
+    return out
+
+
+def strict_readings(rows, cells):
+    """For H17a: the pair-level headline (at least two of a pair's scoreable
+    questions redirected by one swap) under the pre-registered criterion and
+    under two stricter ones, at each named setting. The criteria are: the
+    target answer in the model's five most likely next words after the swap,
+    which is what section 5.2 registers; the same but only when the target
+    answer was not already in that top five before any intervention; and the
+    target answer outranking the source country's own answer after the swap,
+    which section 5.2 records alongside."""
+    names = (("registered_in_top5", "in_top5"),
+             ("strict_new_to_top5", "in_top5_new"),
+             ("strict_outranks_source_answer", "beats_bad"))
+    out = {}
+    for cell in cells:
+        cell = tuple(cell)
+        block = {}
+        for name, key in names:
+            entry = {}
+            for pair_set in ("primary", "extension"):
+                entry[pair_set] = {
+                    half: arms_of(pair_level(rows, split=split, need=2,
+                                             pair_set=pair_set, key=key), cell)
+                    for half, split in (("tuning", "tuning"),
+                                        ("heldout", "heldout"), ("overall", None))}
+            entry["per_question"] = {
+                half: arms_of(cell_rates(rows, "h17a", split, key), cell)
+                for half, split in (("tuning", "tuning"),
+                                    ("heldout", "heldout"), ("overall", None))}
+            entry["exact_within_item_heldout_primary"] = list(
+                exact_within_item_test(pair_outcomes(rows, cell, "heldout",
+                                                     "primary", key=key)))
+            block[name] = entry
+        out["|".join(str(x) for x in cell)] = block
+    return out
+
+
+def pair_outcomes_by_id(rows, cell, split, pair_set, need=2, rank1=False,
+                        key="in_top5"):
     """Per-pair (lens, [control A per seed]) outcomes for H17a at one setting,
     a pair succeeding when at least `need` of its scoreable questions were
-    redirected by the same draw."""
+    redirected by the same draw. Keyed by the pair's identifier, so that the
+    pairs can be grouped by source country for the cluster-level test."""
     items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
     grp = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     for r in rows:
@@ -256,16 +468,23 @@ def pair_outcomes(rows, cell, split, pair_set, need=2, rank1=False):
             continue
         if rank1 and next(f for f in it["funcs"] if f["func"] == r["func"])["clean_rank"] != 1:
             continue
-        grp[r["item_id"]][(r["arm"], r["seed"])][r["func"]] += r["in_top5"]
-    out = []
-    for arms in grp.values():
+        grp[r["item_id"]][(r["arm"], r["seed"])][r["func"]] += r[key]
+    out = {}
+    for iid, arms in grp.items():
         if len(next(iter(arms.values()))) < need:
             continue
         lens = int(sum(1 for v in arms[("lens", -1)].values() if v) >= need)
         ctrls = [int(sum(1 for v in d.values() if v) >= need)
                  for (a, s), d in sorted(arms.items()) if a == "randdir"]
-        out.append((lens, ctrls))
+        out[iid] = (lens, ctrls)
     return out
+
+
+def pair_outcomes(rows, cell, split, pair_set, need=2, rank1=False,
+                  key="in_top5"):
+    """The same outcomes as `pair_outcomes_by_id`, as a plain list."""
+    return list(pair_outcomes_by_id(rows, cell, split, pair_set, need,
+                                    rank1, key).values())
 
 
 def registered_split_reading(rows, key="in_top5"):
@@ -421,7 +640,13 @@ if __name__ == "__main__":
             out["rank1_sensitivity"] = rank1_sensitivity(rows, b, out["chosen_cell"])
         if b == "h17a":
             out["registered_split"] = registered_split_reading(rows)
+            out["baseline_hits"] = baseline_hit_counts(rows, out["chosen_cell"])
+            out["strict_readings"] = strict_readings(
+                rows, [out["chosen_cell"], ["9", 2.0, "all"]])
         out["exact_tests"] = exact_tests(rows, b, out["chosen_cell"])
+        rule_cell = (out["source_rule_selection"]["chosen_cell"]
+                     if b == "h17" else None)
+        out["cluster_tests"] = cluster_tests(rows, b, out["chosen_cell"], rule_cell)
         json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
         c = out["chosen_cell"]
         print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "
