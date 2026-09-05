@@ -272,6 +272,20 @@ most of their range. So the injection point is exactly the layer-0 entry, the
 extraction point is exactly the last layer's output, and a hook that overwrites
 the state really does change what the model says.
 
+**One incident, recorded because it is the kind of thing this project's rules
+exist to catch.** The pilot arm was launched with a runner whose prompt-count
+default applied only to the probe stage, so it began working through all 25
+prompts instead of the 5 the specification fixes. The bug was noticed after the
+first pilot prompt, the runner was corrected, and the running process was
+stopped after its fifth prompt, which its per-prompt checkpointing makes clean.
+The committed pilot arm is therefore exactly the 5 prompts the specification
+names, in the specified order, run with the specified parameters. Nothing about
+the main arm was affected. A second bug was caught before it could run at all:
+the stage that produces the per-layer states for H19b would have injected the
+terminal tensor at its own size, about two thousand times the natural entry
+loudness, instead of at the loudness the loop itself uses. That is recorded in
+the commit history at `80c259d`.
+
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
 state once, the search for the best 25 keeps only the 4,096 best-correlating
