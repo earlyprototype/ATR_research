@@ -50,6 +50,16 @@ def sha256(path):
 log("loading GPT-2 Small through TransformerLens")
 from transformer_lens import HookedTransformer  # noqa: E402
 
+# from_pretrained applies TransformerLens's default weight processing, which
+# includes center_writing_weights=True: every matrix that writes into the residual
+# stream has its output mean over the 768 coordinates removed, so every state this
+# script records is mean-centred by construction. That is the same frame the
+# earlier pilot scripts used (10_jlens_phase.py loads the model the same way), and
+# it is why the spec's "raw" and "mean-centred" arms come out numerically
+# identical. It is NOT the frame the dictionary lives in: decompose.py builds the
+# dictionary from the Hugging Face unembedding, which is not centred. The
+# consequence is recorded as a limitation in RESULTS_EXP011.md rather than
+# repaired here, because repairing it means rebuilding every state.
 model = HookedTransformer.from_pretrained("gpt2", device="cpu")
 model.eval()
 for p in model.parameters():
@@ -126,6 +136,7 @@ meta = {
         "state_prolet": os.path.join(LUCIER, "experiments/gpt2_small/output_divine_motion/state_prolet.pt"),
         "state_noise": os.path.join(LUCIER, "experiments/gpt2_small/output_divine_motion/state_noise.pt"),
         "converged_tensors": os.path.join(LUCIER, "experiments/gpt2_small/output_confidence/converged_tensors.pt"),
+        "bell_anatomy": os.path.join(LUCIER, "experiments/gpt2_small/output_divine_motion/bell_anatomy.json"),
         "prompt_library": os.path.join(LUCIER, "prompt_library.py"),
     },
 }
@@ -320,6 +331,18 @@ sn = torch.load(os.path.join(LUCIER, "experiments/gpt2_small/output_divine_motio
 prolet_H = per_layer_from_tensor(norm_to(sp["current_tensor"], float(sp["initial_norm"])))
 noise1000_H = per_layer_from_tensor(norm_to(sn["current_tensor"], float(sn["initial_norm"])))
 
+# Naming, stated because it is not what the names suggest. Each entry is the
+# per-layer trace of ONE forward pass, named after the vector injected at that
+# pass's input. So "phaseA" is the pass whose input is vector A, and what it holds
+# at layer 11 is that pass's output, which for this period-2 cycle is vector B;
+# "phaseB" holds vector A at layer 11. At layers 0 to 10 neither entry is a phase
+# vector at all: they are intermediate residuals of one loop step. Spec section
+# 2.2 can be read either way for a period-2 cycle, because its framing sentence
+# ("the loop step that produced it") and its numbered steps (splice the state
+# itself) name opposite passes once a state is not a fixed point. Nothing in the
+# H16a verdict rule depends on the choice: the rule is symmetric in the two
+# phases. Finding F16 measured a different quantity again, the single vectors A
+# and B scored against every layer's dictionary with no forward pass.
 named = {
     "phaseA": stackA[:, -1, :],
     "phaseB": stackB[:, -1, :],
@@ -344,7 +367,12 @@ meta["named"] = {
 }
 
 # d_sym is a direction, not a state: probed against every layer's dictionary
-# directly, exactly as the phase-aware pilot (finding F16) did.
+# directly, exactly as the phase-aware pilot (finding F16) did. DEVIATION from
+# spec section 2.1, which named output_jlens_phase/phase_states.pt as the source:
+# the axis is rebuilt here from this script's own on-shell An and Bn instead, and
+# phase_states.pt is never opened. The two are not the same axis, because the
+# committed one mixes frames (the lucier record's caveat 15). Recorded in the
+# results record's deviations list.
 d_sym = (An[-1] - Bn[-1])
 d_sym = d_sym / d_sym.norm()
 arrays["directions"] = torch.stack([d_sym, -d_sym]).numpy().astype(np.float32)

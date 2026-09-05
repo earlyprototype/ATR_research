@@ -38,7 +38,7 @@ for l in ALL:
 print("\n### TABLE C: H16, language terminals against run-17 noise terminals\n")
 print("| layer | language, median | noise, median | difference | permutation p | "
       "language above random-dictionary control | language above rotated-lens control |")
-print("|---|---|---|---|---|---|")
+print("|---|---|---|---|---|---|---|")
 for l in ALL:
     e = v["H16"]["per_layer"][str(l)]
     print(f"| {band_mark(l)} | {e['lang_median']:.4f} | {e['noise_median']:.4f} | "
@@ -46,15 +46,24 @@ for l in ALL:
           f"{'yes' if e['lang_above_gaussian_control'] else 'no'} | "
           f"{'yes' if e['lang_above_rotation_control'] else 'no'} |")
 
+# The three Divine columns are named for the vector injected at the trace's input,
+# not for what the trace holds at the layer being read: the trace injected from
+# phase A carries phase B at layer 11, and the trace injected from phase B carries
+# phase A there. Layers 0 to 10 hold intermediate residuals of one loop step.
 print("\n### TABLE D: H16a, the prolet attractor against the Divine cycle\n")
-print("| layer | prolet | Divine phase A | Divine phase B | Divine pivot M | "
-      "prolet minus phase A | prolet minus phase B | control spread (one standard deviation) |")
-print("|---|---|---|---|---|---|---|---|")
+print("| layer | prolet | trace injected from phase A | trace injected from phase B | "
+      "trace injected from pivot M | prolet minus the phase-A trace | "
+      "prolet minus the phase-B trace | seed spread within the rotated-lens control "
+      "(one standard deviation) | pooled spread over all six control runs "
+      "(one standard deviation) |")
+print("|---|---|---|---|---|---|---|---|---|")
 for l in ALL:
     e = v["H16a"]["per_layer"][str(l)]
     print(f"| {band_mark(l)} | {e['prolet']:.4f} | {e['phaseA']:.4f} | {e['phaseB']:.4f} | "
           f"{e['pivotM']:.4f} | {e['gap_prolet_minus_phaseA']:+.4f} | "
-          f"{e['gap_prolet_minus_phaseB']:+.4f} | {e['prolet_control_spread_sd']:.4f} |")
+          f"{e['gap_prolet_minus_phaseB']:+.4f} | "
+          f"{e['prolet_control_spread_sd_rotation']:.5f} | "
+          f"{e['prolet_control_spread_sd']:.4f} |")
 
 print("\n### TABLE E: H16b, terminals against the same prompts' ordinary residuals\n")
 print("| layer | terminal, median | ordinary residual, median | median paired difference | "
@@ -68,7 +77,10 @@ for l in ALL:
 
 print("\n### TABLE F: named states, J-space share by layer\n")
 keys = ["prolet1000", "phaseA", "phaseB", "pivotM", "noise1000"]
-print("| layer | " + " | ".join(keys) + " |")
+headers = ["prolet1000", "trace from phase A (phase B at layer 11)",
+           "trace from phase B (phase A at layer 11)", "trace from pivot M",
+           "noise1000"]
+print("| layer | " + " | ".join(headers) + " |")
 print("|---" * (len(keys) + 1) + "|")
 for l in ALL:
     print(f"| {band_mark(l)} | " + " | ".join(

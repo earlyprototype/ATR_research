@@ -60,7 +60,7 @@ percent slice of the state decides what the model says.
 |---|---|---|---|
 | H6 | GPT-2 Small's five basin tensors project significantly more onto the J-space than the 18 null-model basins | **NOT SUPPORTED** | The five basins beat the eighteen with a one-sided p below 0.05 at three of the six band layers (layers 5, 6 and 7, p = 0.023, 0.015, 0.015), and lose at layer 10 (p = 0.033 the other way). The pre-registered rule needed four of six. |
 | H16 | Language terminals hold a higher share than the matched-strength noise terminals at the band layers, above the random-dictionary chance level | **NOT SUPPORTED** | Language exceeds noise at two of six band layers, by +0.0002 both times, against shares of 0.015 to 0.022, and no band layer reaches p below 0.05 in that direction. Three band layers run significantly the other way. |
-| H16a | The `prolet` attractor's share exceeds the `Divine` cycle's share in both phases | **NOT SUPPORTED** | `prolet` beats phase A at three of six band layers and phase B at one of six. The pre-registered rule needed four of six against each phase. The phases straddle `prolet`, but not in the direction finding F16 reported. |
+| H16a | The `prolet` attractor's share exceeds the `Divine` cycle's share in both phases | **NOT SUPPORTED** | `prolet` beats the trace injected from phase A at three of six band layers and the trace injected from phase B at one of six. The pre-registered rule needed four of six against each phase, and the rule is symmetric in the two phases, so the verdict does not turn on which trace carries which name. Finding F16 is not overturned: see the correction below. |
 | H16b | ATR terminal states have a lower share than ordinary non-iterated prompt residuals at the same layer | **SUPPORTED** | The settled state is lower at five of the six band layers, with permutation p of 0.0032, 0.0001, 0.0001, 0.0001 and 0.0001, and median paired differences of -0.0041, -0.0072, -0.0063, -0.0189 and -0.0170 against terminal shares of 0.0137 to 0.0217. |
 
 ---
@@ -171,7 +171,7 @@ matched strength. H16 is that question, and it is answered next.
 **NOT SUPPORTED on the registered wording.**
 
 | layer | language, median | noise, median | difference | permutation p | language above random-dictionary control | language above rotated-lens control |
-|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|
 | 0 | 0.0313 | 0.0320 | -0.0007 | 0.8680 | no | yes |
 | 1 | 0.0448 | 0.0459 | -0.0011 | 0.8544 | no | yes |
 | 2 | 0.0260 | 0.0284 | -0.0023 | 0.9999 | no | yes |
@@ -204,75 +204,201 @@ at any layer, and neither does anything else measured here: that control sits at
 factor of about 25 and it is entirely explained by the shape finding above. A
 random dictionary's positive cone is nearly the whole space; the lens's is
 narrow. **Against the rotated-lens control, which preserves the lens's shape
-exactly, the picture is the opposite: the language terminals sit above chance at
-five of the six band layers** (0.0217 against 0.0135 at layer 5, 0.0152 against
-0.0135 at layer 6, 0.0204 against 0.0139 at layer 7, 0.0137 against 0.0136 at
-layer 8, 0.0153 against 0.0132 at layer 9, and 0.0145 against 0.0149 at layer 10,
-the one exception). The settled states are therefore modestly more
-lens-expressible than a rigidly rotated lens would make them, which the
-registered chance level was unable to show. Changing which control counts is a
-ruling for the operator, not a change this record makes on its own; it is
-decision item 1 below.
+exactly, the language terminals sit above chance at five of the six band layers on
+the comparison of medians the registered rule uses** (0.0217 against 0.0135 at
+layer 5, 0.0152 against 0.0135 at layer 6, 0.0204 against 0.0139 at layer 7,
+0.0137 against 0.0136 at layer 8, 0.0153 against 0.0132 at layer 9, and 0.0145
+against 0.0149 at layer 10, the one exception). Changing which control counts is a
+ruling for the operator, not a change this record makes on its own; it is decision
+item 1 below.
+
+**That five-of-six count is a comparison of medians, and it does not entirely
+survive being tested state by state.** Pairing each of the 125 language terminals
+with its own rotated-lens control share, averaged over the three rotation seeds,
+and testing the 125 paired differences with a sign-flip permutation test of 10,000
+draws, one-sided in the direction "language higher", gives a median paired
+difference of +0.0072 at layer 5 with p of 0.0001 and 73 of every 100 pairs
+running that way, +0.0011 at layer 6 with p of 0.0039 and 68 percent, +0.0053 at
+layer 7 with p of 0.0001 and 72 percent, and +0.0014 at layer 9 with p of 0.0001
+and 100 percent, where 0.0001 is the smallest value 10,000 permutations can
+report. At layer 8 it gives -0.0008 with p of 0.8270 and only 43 percent of pairs
+running that way, and at layer 10 -0.0015 with p of 0.9982 and 29 percent. So on
+the paired reading the language terminals are above their own rotated-lens chance
+level at four of the six band layers, not five: layer 8's margin on the medians,
+0.0137 against 0.0136, is a difference of one part in a hundred of the share and
+the paired test puts its sign the other way. This test was added after the
+specification was written, so under section 9 item 5 it is exploratory and carries
+no verdict; it is recorded in `output/verdicts.json` under
+`H16.lang_above_rotation_control_exploratory`.
+
+**The robustness reading the specification pre-registered under control (a) is now
+run, and it does not rescue H16 either.** Section 7.2 asked for "the same test
+under control (a)", meaning the same language-against-noise label-permutation test
+carried out on the shares those same 250 states score against the rotated lens.
+The first version of this record omitted it; it was added on review and is in
+`output/verdicts.json` under `H16.rotation_control_secondary`. Pooling the three
+rotation seeds, the median difference between the two families at the band layers
+runs from -0.0019 to +0.0004 on shares of about 0.013 to 0.015, and the one-sided
+permutation p in the language-greater direction is 0.5087 at layer 5, 0.5028 at
+layer 6, 0.0410 at layer 7, 0.7567 at layer 8, 0.9896 at layer 9 and 0.9970 at
+layer 10. Only layer 7 falls below 0.05, one band layer out of six against a rule
+that needs four. Read seed by seed the picture is unstable rather than
+informative: at layer 6 the three rotations give p of 0.9999, 0.0001 and 0.5769
+for the same comparison, so a single rotation's p-value here is telling us about
+that rotation and not about the two families. Three seeds is too few to read a
+per-seed p-value from, and that is stated as a limit of this control rather than
+discovered later.
 
 ### H16a: the `prolet` attractor against the `Divine` cycle's two phases
 
-**NOT SUPPORTED on the registered wording, and finding F16's phase assignment
-does not survive the move to the full vocabulary.**
+**NOT SUPPORTED on the registered wording. Finding F16 is not overturned: at the
+one layer where this experiment and F16 measure the same thing, F16's direction
+reproduces.**
 
-| layer | prolet | Divine phase A | Divine phase B | Divine pivot M | prolet minus phase A | prolet minus phase B | control spread (one standard deviation) |
-|---|---|---|---|---|---|---|---|
-| 0 | 0.0352 | 0.0250 | 0.0272 | 0.0274 | +0.0102 | +0.0079 | 0.1777 |
-| 1 | 0.0485 | 0.0264 | 0.0269 | 0.0272 | +0.0221 | +0.0216 | 0.1781 |
-| 2 | 0.0283 | 0.0115 | 0.0270 | 0.0195 | +0.0168 | +0.0013 | 0.1779 |
-| 3 | 0.0175 | 0.0051 | 0.0154 | 0.0100 | +0.0124 | +0.0021 | 0.1795 |
-| 4 | 0.0170 | 0.0042 | 0.0150 | 0.0081 | +0.0128 | +0.0020 | 0.1778 |
-| **5** | 0.0231 | 0.0105 | 0.0214 | 0.0161 | +0.0126 | +0.0017 | 0.1775 |
-| **6** | 0.0162 | 0.0062 | 0.0197 | 0.0101 | +0.0100 | -0.0034 | 0.1797 |
-| **7** | 0.0213 | 0.0101 | 0.0283 | 0.0159 | +0.0113 | -0.0070 | 0.1810 |
-| **8** | 0.0141 | 0.0153 | 0.0288 | 0.0169 | -0.0012 | -0.0147 | 0.1799 |
-| **9** | 0.0152 | 0.0226 | 0.0322 | 0.0215 | -0.0074 | -0.0170 | 0.1818 |
-| **10** | 0.0147 | 0.0363 | 0.0265 | 0.0243 | -0.0216 | -0.0118 | 0.1786 |
-| 11 | 0.0912 | 0.0164 | 0.1516 | 0.0602 | +0.0748 | -0.0603 | 0.1587 |
+**Correction, dated 2026-09-05.** An earlier version of this section, committed
+the same day at `0c94f69`, said that on the full-vocabulary lens the `Divine`
+cycle's phase assignment inverts, that phase B is the more lens-expressible phase
+and phase A the less, and it called that "a retraction of a directional claim"
+against lucier finding F16. That reading was wrong. It is named here rather than
+edited away, and what is true instead is set out below. Two separate mistakes
+produced it, and both have now been checked against the code and against the
+committed states.
 
-The `prolet` attractor is above phase A at layers 5, 6 and 7 and below it at
-layers 8, 9 and 10; it is above phase B at layer 5 only. Three of six against
-phase A and one of six against phase B, where the rule needed four of six against
-each. So the phases straddle `prolet`, which is the shape finding F16 describes,
-but they straddle it the other way round. F16, working with the pilot's 193-word
-dictionary, reported phase A above `prolet` at every layer and phase B below
-`prolet` at every layer. On the full 50,257-word lens the assignment inverts:
-phase B is the more lens-expressible phase at eleven of twelve layers, and phase
-A is the less lens-expressible one through the early band. **This is a retraction
-of a directional claim, stated plainly: F16 says phase A is the more verbalizable
-phase and phase B the less; measured on the full-vocabulary lens, phase B is the
-more verbalizable phase and phase A the less.** What survives from F16 is its
-structural point, that the cycle is not one object with respect to the lens but
-swings between a more expressible and a less expressible phase.
+**The first mistake is a label.** The state builder `build_states.py` names each
+per-layer trace after the vector it injects at that trace's input, not after what
+the trace holds at the layer being read. The entry called `phaseA` is therefore
+the forward pass whose input is phase A, and what that pass holds at layer 11 is
+its own output, which for a period-2 cycle, meaning a state the loop returns to
+only after two steps rather than one, is phase B. Measured directly on the
+committed state file against the phase vectors the pilot stored
+(`output_jlens_phase/phase_states.pt`): the cosine between the layer-11 entry of
+the trace called `phaseA` and the stored phase B vector is 1.000000, and between
+the layer-11 entry of the trace called `phaseB` and the stored phase A vector is
+also 1.000000, on a scale where 1 means the same direction and 0 means unrelated.
+So in the layer-11 row of the table below, the column headed "trace injected from
+phase A" holds phase B, at 0.0164, and the column headed "trace injected from
+phase B" holds phase A, at 0.1516. The earlier version of this section headed
+those two columns "Divine phase A" and "Divine phase B", and that is what made
+the two numbers read as an inversion of F16. This is established by measurement,
+not inferred.
+
+**The second mistake is that outside layer 11 the two experiments are not
+measuring the same quantity at all.** F16 scored the single 768-number vectors A
+and B against every layer's dictionary with no forward pass anywhere: that is
+`10_jlens_phase.py` stage 2, whose function `probe_state` loops one fixed vector
+over the twelve dictionaries. This experiment, following its own specification's
+section 2.2, splices a state into the model's input and reads the residual stream
+on the way through, so at layers 0 to 10 what it scores is an intermediate
+residual of one loop step and not a phase vector at all. Measured: the layer-0
+entry of the trace called `phaseA` sits at cosine 0.913 to phase A and 0.600 to
+phase B, so it is neither of them. Any comparison drawn at the band layers is
+therefore confounded with the change in how the state was constructed, and cannot
+bear on F16 in either direction.
+
+**A third point, marked as inferred rather than established, is that the
+specification itself is ambiguous here.** Section 2.2's framing sentence says each
+state is turned into per-layer states by "running exactly the loop step that
+produced it", which names the pass whose *output* is that state, while its
+numbered steps say to rebuild and splice the state itself, which names the pass
+whose *input* is that state. Those are the same pass for a fixed point, a state
+the loop returns unchanged, and that is the case the reconstruction gate checks.
+They are opposite passes for a period-2 cycle. So for the `Divine` phases the two
+labels may simply be inverted with respect to the reading of the specification an
+attentive reader would take. Nothing in the verdict depends on the choice, for the
+reason set out under the verdict below.
+
+| layer | prolet | trace injected from phase A | trace injected from phase B | trace injected from pivot M | prolet minus the phase-A trace | prolet minus the phase-B trace | seed spread within the rotated-lens control (one standard deviation) | pooled spread over all six control runs (one standard deviation) |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 0.0352 | 0.0250 | 0.0272 | 0.0274 | +0.0102 | +0.0079 | 0.00324 | 0.1777 |
+| 1 | 0.0485 | 0.0264 | 0.0269 | 0.0272 | +0.0221 | +0.0216 | 0.00435 | 0.1781 |
+| 2 | 0.0283 | 0.0115 | 0.0270 | 0.0195 | +0.0168 | +0.0013 | 0.00529 | 0.1779 |
+| 3 | 0.0175 | 0.0051 | 0.0154 | 0.0100 | +0.0124 | +0.0021 | 0.00613 | 0.1795 |
+| 4 | 0.0170 | 0.0042 | 0.0150 | 0.0081 | +0.0128 | +0.0020 | 0.00681 | 0.1778 |
+| **5** | 0.0231 | 0.0105 | 0.0214 | 0.0161 | +0.0126 | +0.0017 | 0.00482 | 0.1775 |
+| **6** | 0.0162 | 0.0062 | 0.0197 | 0.0101 | +0.0100 | -0.0034 | 0.00447 | 0.1797 |
+| **7** | 0.0213 | 0.0101 | 0.0283 | 0.0159 | +0.0113 | -0.0070 | 0.00191 | 0.1810 |
+| **8** | 0.0141 | 0.0153 | 0.0288 | 0.0169 | -0.0012 | -0.0147 | 0.00198 | 0.1799 |
+| **9** | 0.0152 | 0.0226 | 0.0322 | 0.0215 | -0.0074 | -0.0170 | 0.00087 | 0.1818 |
+| **10** | 0.0147 | 0.0363 | 0.0265 | 0.0243 | -0.0216 | -0.0118 | 0.00281 | 0.1786 |
+| 11 | 0.0912 | 0.0164 | 0.1516 | 0.0602 | +0.0748 | -0.0603 | 0.00688 | 0.1587 |
+
+The three `Divine` columns are named for the vector injected at each trace's
+input. At layer 11 that means the column headed "trace injected from phase A"
+holds phase B and the column headed "trace injected from phase B" holds phase A;
+at layers 0 to 10 both hold intermediate residuals of one loop step.
+
+**The verdict, and why it does not depend on which trace carries which name.** The
+`prolet` attractor is above the trace injected from phase A at layers 5, 6 and 7
+and below it at layers 8, 9 and 10, which is three of the six band layers; it is
+above the trace injected from phase B at layer 5 only, which is one of six. The
+pre-registered rule records SUPPORTED only if `prolet` is above *both* at four of
+the six band layers, and REFUTED only if *both* are above `prolet` at four of six.
+Neither holds, so the verdict is NOT SUPPORTED. Both conditions are conjunctions
+over the two phases, so exchanging the two labels exchanges the two counts and
+leaves each condition exactly as it was: with the labels swapped the counts read
+one of six and three of six, and the verdict is still NOT SUPPORTED. That is
+established by the structure of the rule and needs no further measurement.
+
+**What the layer-11 comparison shows, which is the only like-for-like reading of
+F16 available here.** At layer 11 the lens matrix is the identity, so the reading
+is the ordinary logit lens, and the object scored is a single settled vector
+rather than an intermediate residual. That holds for all three states here, and it
+is checked rather than assumed: the layer-11 entry of the `prolet` trace has
+cosine 1.000000 with the stored `prolet` attractor, because `prolet` is a fixed
+point and one loop step returns it unchanged, and the two phase traces carry the
+two stored phase vectors at cosine 1.000000 as set out above. Labelled correctly,
+the three numbers are
+phase A at 0.1516, `prolet` at 0.0912 and phase B at 0.0164, on the 0-to-1 share
+scale, where each state's own rotated-lens chance level at that layer is 0.0475
+for phase A, 0.0473 for `prolet` and 0.0553 for phase B. So phase A sits at about
+three times its chance level, `prolet` at about twice, and phase B below its own
+chance level. F16, working with the pilot's restricted 193-word dictionary and its
+own sparse probe, reported at the same layer phase A 0.098, `prolet` 0.091 and
+phase B 0.070. The two orderings are the same one: phase A above `prolet` above
+phase B. **F16's layer-11 direction therefore reproduces on the full 50,257-word
+lens.** The magnitudes are not comparable between the two instruments, because a
+193-word dictionary and a 50,257-word dictionary span different sets of
+directions, but the ordering is the claim F16 made and it holds.
+
+**What this experiment cannot say about F16.** At the band layers it does not
+measure what F16 measured, so it neither confirms nor refutes F16 there, and the
+band-layer rows above should not be read as evidence about the phases as objects.
+Scoring the phase vectors themselves against layers 0 to 10, which is what would
+make the comparison like-for-like across the band, is a small additional run that
+this branch has not done. It is listed under what remains.
 
 The pivot, the midpoint of the two phases, does not come out as the most
-lens-expressible object here: it sits between the phases at every band layer, for
-example 0.0169 at layer 8 against phase A's 0.0153 and phase B's 0.0288. F16
-reported the pivot as the most lens-expressible state it probed. That comparison
-is not like-for-like and should not be read as a contradiction: F16's pivot mixed
-two different scalings, while this one rescales both phases to the loop's own
-starting length before averaging. The deviation is recorded below.
+lens-expressible object here: its trace sits between the two phase traces at every
+band layer, for example 0.0169 at layer 8 against 0.0153 and 0.0288. F16 reported
+the pivot as the most lens-expressible state it probed. That comparison is not
+like-for-like and should not be read as a contradiction, for three reasons. F16's
+pivot mixed two different scalings, taking phase A at its raw length and phase B
+rescaled to the loop's starting length, while this run rescales both phases before
+averaging, which is the deviation recorded below. The pivot trace's layer-11 entry
+is the pivot after one loop step rather than the pivot itself, at cosine 0.945 to
+the pilot's stored pivot. And at the band layers it is an intermediate residual,
+the same confound as for the phases.
 
 **The materiality floor written into the specification turned out to be
 uninformative, and is replaced by a labelled substitute.** The specification said
 a gap smaller than the spread of the state's own control shares across the six
 control runs should be marked as inside the control spread. Because the two
-control types differ by a factor of 25, that pooled spread is 0.178 to 0.182 at
-every band layer, which swamps every gap in the table and would mark everything
-as immaterial. The informative yardstick is the spread within one control type:
-across the three rotated-lens seeds the `prolet` state's share varies with a
+control types differ by a factor of about 25, that pooled spread is 0.178 to 0.182
+at every band layer, which swamps every gap in the table and would mark every one
+of them as immaterial. The informative yardstick is the spread within one control
+type: across the three rotated-lens seeds the `prolet` state's share varies with a
 standard deviation of 0.0009 to 0.0048 at the band layers. Measured against that,
-the gaps against phase A at layers 5, 6 and 7 (+0.0126, +0.0100, +0.0113) and
-against phase B at layers 8, 9 and 10 (-0.0147, -0.0170, -0.0118) are two to
-twelve times the seed spread and are material; the gaps against phase B at layers
-5, 6 and 7 (+0.0017, -0.0034, -0.0070) are within about one to four times it and
-the smallest of them should not be leaned on. This substitution is post hoc, it is
-labelled as such, and it changes no verdict: the verdict rule counted signs, not
-sizes.
+the gaps against the phase-A trace at layers 5, 6 and 7 (+0.0126, +0.0100,
++0.0113) are 2.6, 2.2 and 5.9 times the seed spread, and the gaps against the
+phase-B trace at layers 8, 9 and 10 (-0.0147, -0.0170, -0.0118) are 7.4, 19.5 and
+4.2 times it, so all six are material on this yardstick. The gaps against the
+phase-B trace at layers 5, 6 and 7 (+0.0017, -0.0034, -0.0070) are 0.4, 0.8 and
+3.7 times the seed spread, so the first two are smaller than the run-to-run
+variation of the control itself and should not be leaned on at all. Both spreads
+are now computed and recorded per layer in `output/verdicts.json`, as
+`prolet_control_spread_sd_rotation` and `prolet_control_spread_sd`, so every ratio
+above has a committed provenance. This substitution is post hoc, it is labelled as
+such, and it changes no verdict: the verdict rule counted signs, not sizes.
 
 ### H16b: settled states against the same prompts' ordinary residuals
 
@@ -305,9 +431,10 @@ the gap is the largest of all: 0.0899 against 0.1556, with 93 percent of pairs.
 The plain reading is that the loop moves the state out of the directions the
 model uses to say words. It does not follow that the loop moves the state
 nowhere: the settled states still sit above the rotated-lens chance level at five
-of six band layers, as noted under H16. Both can be true, and together they say
-the settled state is somewhat lens-expressible but distinctly less so than an
-ordinary residual.
+of six band layers on the comparison of medians, and at four of six when each
+state is paired with its own control and tested, as set out under H16. Both can be
+true, and together they say the settled state is somewhat lens-expressible but
+distinctly less so than an ordinary residual.
 
 **One secondary reading runs the other way and is reported because it does.**
 The specification pre-registered a second comparison against the ordinary residual
@@ -347,7 +474,15 @@ own; the clamping check below is the causal part.
 
 The same table for the `Divine` cycle's two phases is the more surprising one.
 The cycle reads out the word ` Divine` in **both** phases, which is finding F9's
-phase-invariant argmax. The lens does not agree that both phases are made of it:
+phase-invariant argmax. The lens does not agree that both halves of the cycle are
+made of it. **Read the two columns with the labelling correction above in hand:**
+each column is named for the vector injected at that trace's input, so the layer-11
+row of the column headed "phase A" holds phase B and the layer-11 row of the column
+headed "phase B" holds phase A, and at layers 5, 8 and 10 both columns hold
+intermediate residuals of one loop step rather than either phase vector. The
+observation below is therefore about the two halves of one loop cycle as this
+experiment constructed them, not about the two phase vectors as finding F16 probed
+them.
 
 | layer | phase A's directions | phase B's directions |
 |---|---|---|
@@ -356,13 +491,15 @@ phase-invariant argmax. The lens does not agree that both phases are made of it:
 | 10 | ` the`, ` streng`, ` seiz`, ` arrang`, ` neighb` | `,`, ` Divine`, ` seiz`, ` Yu`, ` the` |
 | 11 | ` the`, `,`, `\n`, ` N` | ` the`, `,`, `\n`, ` and`, ` in` |
 
-Phase B is built partly out of the ` Divine` direction at layers 5, 8 and 10.
-Phase A is not, at any band layer: its directions are `streng`, `arrang`, `seiz`,
-`neighb`, the beginnings of `strength`, `arrange`, `seize` and `neighbour`. The
-two halves of one cycle, which say the same word out loud, are made of different
-material inside. This is an observation, not an explanation, and it is new: the
-phase-blind pilot could not have seen it and the restricted 193-word pilot
-dictionary did not contain most of these words.
+One half of the cycle is built partly out of the ` Divine` direction at layers 5,
+8 and 10, and the other is not at any band layer: its directions are `streng`,
+`arrang`, `seiz`, `neighb`, the beginnings of `strength`, `arrange`, `seize` and
+`neighbour`. The two halves of one cycle, which say the same word out loud, are
+made of different material inside. This is an observation, not an explanation, and
+it is new: the phase-blind pilot could not have seen it and the restricted 193-word
+pilot dictionary did not contain most of these words. Because of the labelling and
+the construction, which half is which is not settled by this table, and this record
+does not claim it.
 
 ### The clamping check: a two percent slice decides the output
 
@@ -404,15 +541,57 @@ each, no repeats.
 
 ### The flip axis
 
-The `Divine` cycle's symmetric flip axis, the single direction the loop negates
-each pass, holds a J-space share between 0.0011 and 0.0307 in one sign and
-between 0.0053 and 0.0152 in the other across the band layers, against a
-rotated-lens chance level of about 0.013 to 0.015 for states at those layers. So
-the axis is at or below chance inside the band, which agrees in direction with
-finding F16's statement that the flip axis is almost entirely outside the lens.
-A caution the pilot also gave: a share is sign-dependent for a direction, because
-the combination must use positive weights, so both signs are reported and neither
-alone is the answer.
+The `Divine` cycle's symmetric flip axis is the single direction the loop negates
+each pass. The axis measured here is exactly the pilot's own symmetric on-shell
+axis: the cosine between them is 1.000000 on a scale where 1 means the same
+direction, which is checked by rebuilding the pilot's axis from its stored phase
+vectors. A share is sign-dependent for a direction, because the combination is
+allowed positive weights only, so both signs are reported and neither alone is the
+answer.
+
+**Correction, dated 2026-09-05.** An earlier version of this paragraph compared
+the axis with "a rotated-lens chance level of about 0.013 to 0.015 for states at
+those layers" and concluded that "the axis is at or below chance inside the band".
+Both halves were wrong. The chance level quoted belonged to the 125 language
+terminals, which are different objects; the axis has its own rotated-lens control
+shares, and they are committed in `output/shares.json` under `arms.rot*.directions`
+but were never reported. Against its own control the axis is not uniformly at or
+below chance. The numbers are these, each share on the 0-to-1 scale and each
+control the median over the three rotation seeds:
+
+| layer | axis, positive sign | its own rotated-lens control | axis, negative sign | its own rotated-lens control |
+|---|---|---|---|---|
+| **5** | 0.0029 | 0.0106 | 0.0115 | 0.0176 |
+| **6** | 0.0011 | 0.0099 | 0.0115 | 0.0144 |
+| **7** | 0.0032 | 0.0121 | 0.0105 | 0.0102 |
+| **8** | 0.0084 | 0.0093 | 0.0064 | 0.0173 |
+| **9** | 0.0153 | 0.0082 | 0.0053 | 0.0136 |
+| **10** | 0.0307 | 0.0085 | 0.0152 | 0.0182 |
+| 11 | 0.1129 | 0.0338 | 0.1553 | 0.0615 |
+
+What the numbers show is a split by sign and by depth. In the negative sign the
+axis is below its own chance level at five of the six band layers and level with
+it at layer 7 (0.0105 against 0.0102), so the earlier summary holds for that sign.
+In the positive sign it is below chance at layers 5, 6, 7 and 8 but **above** it at
+layers 9 and 10, at 0.0153 against 0.0082, about 1.9 times chance, and 0.0307
+against 0.0085, about 3.6 times chance. At layer 11, outside the band, both signs
+are well above chance. So the correct statement is that the flip axis is below the
+lens's own chance level through the early band in both signs and rises above it in
+one sign in the last two band layers, not that it is at or below chance throughout.
+
+Two cautions on that reading. The control is three rotation seeds of a single
+direction, and its own run-to-run spread is large relative to the differences being
+read: at layer 5 the three seeds give 0.0106, 0.0087 and 0.0270 for the positive
+sign, so the seed-to-seed variation is of the same size as the gap being reported.
+Marked as inferred rather than established for that reason. And the comparison with
+finding F16 is looser than the earlier version implied. F16's statement that the
+flip axis is almost entirely outside the lens rests on its least-squares span probe
+against a generic-direction baseline of about 0.25, and its non-negative sparse
+numbers for the same axis on the pilot's 193-word dictionary run 0.005 to 0.012 in
+the positive sign and 0.002 to 0.010 in the negative, with no chance level stated
+for that probe. Those are a different dictionary and a different baseline, so this
+record neither confirms nor contradicts F16's flip-axis claim; it reports what the
+full-vocabulary lens gives for the same direction.
 
 ### Where the band actually is on this instrument
 
@@ -494,7 +673,7 @@ seen from another side.
 
 ### The named states
 
-| layer | prolet1000 | phaseA | phaseB | pivotM | noise1000 |
+| layer | prolet1000 | trace from phase A (phase B at layer 11) | trace from phase B (phase A at layer 11) | trace from pivot M | noise1000 |
 |---|---|---|---|---|---|
 | 0 | 0.0352 | 0.0250 | 0.0272 | 0.0274 | 0.0657 |
 | 1 | 0.0485 | 0.0264 | 0.0269 | 0.0272 | 0.0615 |
@@ -733,18 +912,27 @@ Recorded flat, whether or not they helped.
    between phases, 0.68491167 against 0.68491167, and the recorded cosine
    between phase A and phase A two steps later, 1.00000000 against 1.00000000.
 
-2. **The mean-centred secondary arm turned out to be the same arm.** Section 4
-   pre-registered a second pass on mean-centred residuals, on the reasoning that
-   the model's final LayerNorm discards the average of a state's 768 numbers
-   before any word score is formed. Measurement showed the states are already
-   exactly mean-centred as they come out of TransformerLens, which centres
-   everything written into the residual stream: the largest average-component
-   length across all 637 states and all twelve layers is 4.9 parts in one
-   hundred million of the state's own length. The centred arm was run at every
-   layer anyway rather than argued away, and its share medians agree with the
-   raw arm's to within 1.2 parts in ten million, which is the largest difference
-   in any family median at any layer. The raw-versus-centred question therefore
-   does not arise for these states.
+2. **The pre-registered raw arm was never run: both arms are the centred arm.**
+   Section 4 made the primary arm the residual "as it is", raw, and pre-registered
+   a mean-centred secondary arm, on the reasoning that the model's final LayerNorm
+   discards the average of a state's 768 numbers before any word score is formed.
+   The state builder loads the model with
+   `HookedTransformer.from_pretrained("gpt2")`, whose default weight processing
+   includes `center_writing_weights=True`, meaning every matrix that writes into
+   the residual stream has its output average over the 768 coordinates removed.
+   Every state this experiment measured is therefore mean-centred by construction,
+   before any arm was chosen. The centring measurement in the record confirms it
+   rather than being a surprise: the largest average-component length across all
+   637 states and all twelve layers is 4.9 parts in one hundred million of the
+   state's own length, which is the signature of the centring and not evidence
+   that the question does not arise. The centred arm was run at every layer anyway
+   and its share medians agree with the nominally raw arm's to within 1.2 parts in
+   ten million, which is exactly what two names for the same arm should give.
+   **Correction, dated 2026-09-05:** an earlier version of this entry concluded
+   that "the raw-versus-centred question therefore does not arise for these
+   states". That was wrong. The question does arise, it was not answered, and the
+   consequence is recorded as a limitation below and put to the operator as
+   decision item 4.
 
 3. **The selected atoms were recorded for more states than the descriptive
    section asked for.** Section 7.5 item 2 named the `prolet` and `Divine`
@@ -790,6 +978,36 @@ Recorded flat, whether or not they helped.
    above every other series. The underlying numbers are unchanged and are in the
    tables and the committed comma-separated file.
 
+9. **The flip axis was rebuilt from this script's own phases rather than from the
+   file section 2.1 names.** Section 2.1 gave the `dsym` source as
+   `output_jlens_phase/phase_states.pt`, reconstructed per the stage-3 recipe of
+   `10_jlens_phase.py`. The state builder never opens that file: it derives the
+   axis from its own on-shell phases, as the difference of phase A and phase B
+   after both have been rescaled to the loop's starting length. Under section 9
+   item 1 a change of data source is a deviation, so it is recorded here. It is
+   benign, and that is measured rather than assumed: the axis built here has
+   cosine 1.000000 with the pilot's own symmetric on-shell axis rebuilt from the
+   phase vectors that file stores, on a scale where 1 means the same direction.
+   Two further metadata points belong with it. The gate file
+   `bell_anatomy.json`, which the builder reads to check the reconstructed cycle,
+   was missing from the `sources` list the run records in
+   `output/states_meta.json`; the code has been corrected to list it, so the
+   committed `states_meta.json` predates that fix and does not name it, and the
+   file will name it the next time `build_states.py` runs. No measurement changes
+   either way.
+
+10. **One test was added to the scoring after the specification was written.**
+    Section 9 item 5 requires any such test to be reported as exploratory and to
+    carry no verdict. The test is the paired sign-flip permutation test of each
+    language terminal against its own rotated-lens control share, reported under
+    H16 above and stored as `H16.lang_above_rotation_control_exploratory`. It
+    exists because the record's first decision item leans on a comparison that had
+    no significance attached to it. It carries no verdict and changes none. The
+    other addition to the scoring is not a deviation but the discharge of a
+    pre-registration: section 7.2's robustness item "the same test under control
+    (a)" was omitted from the first version of this record and has now been run,
+    with its p-values reported under H16.
+
 No reduction was taken under the specification's stopping rule: the run completed
 every planned arm at every layer, in 3,472 seconds of decomposition (0.96 hours)
 at a peak memory of 1.58 gigabytes against a 3-gigabyte ceiling, plus about three
@@ -827,6 +1045,23 @@ would tilt every direction slightly. This is a recorded limitation, not a repair
 It applies identically to every family and every control, so it cannot manufacture
 a difference between them, and that last clause is inferred from the construction
 rather than measured.
+
+**Every state was produced by a weight-processed model, and sits in a frame the
+lens's dictionary does not share.** The states were built with
+`HookedTransformer.from_pretrained("gpt2")`, whose default processing removes the
+average over the 768 coordinates from everything written into the residual stream,
+while the dictionary is built from the Hugging Face unembedding matrix, which is
+not centred. So the states and the directions they are decomposed against differ
+by the per-position average, and the primary arm the specification called "as it
+is", the raw residual, has no numbers in this record: both arms it reports are the
+centred arm. How much that moves the shares is unmeasured, and this record does
+not guess at it. What can be said is that every comparison between arms and
+between families here is internally consistent, because every state in every arm
+went through the same processing, and that the earlier pilot work this record
+compares itself with used the same loader with the same defaults
+(`10_jlens_phase.py` loads the model the same way), so the comparison with the
+pilot is not disturbed by this either. Whether to rebuild the states without the
+processing is decision item 4.
 
 The 125 language states are one seed of one sweep, read at iteration 100 of the
 original sweep rather than at the later convergence-gated lock-in. The `Divine`
@@ -867,16 +1102,23 @@ and one cycle, each on a single trajectory, with no repeats.
    this machine if the lock-in tensors are ever committed; they are not committed
    today, only their labels are.
 
-5. **Finding F16 in the lucier record needs a dated pointer note, and this
-   session cannot write it.** F16 states that phase A of the `Divine` cycle is
-   the more lens-expressible phase and phase B the less. On the full-vocabulary
-   lens the assignment inverts, at eleven of twelve layers. The lucier repository
-   is read-only from this session, so the correction lives here and nowhere else
-   until someone with write access adds a pointer beside F16 in its
-   `docs/FINDINGS.md`. Until that happens, a reader of the lucier record will
-   take the superseded direction as current. Under the house convention of
-   visible supersession the F16 text stays as written and gains a note; it is not
-   edited away.
+5. **Finding F16 needs no correction, and the phase vectors have not been probed
+   across the band.** An earlier version of this record said F16's phase
+   assignment inverts on the full-vocabulary lens and asked for a dated pointer
+   note beside F16 in the lucier repository's `docs/FINDINGS.md`. That request is
+   withdrawn: the inversion was an artefact of this experiment's own trace
+   labelling and of a change of measurement, both set out in the correction under
+   H16a, and at layer 11, the only like-for-like comparison available, F16's
+   ordering reproduces. Nothing in the lucier record needs editing on this
+   account. What is genuinely open is the band. F16 scored the two phase vectors
+   themselves against every layer's dictionary; this experiment scored
+   intermediate residuals of a loop step at layers 0 to 10 and so has no
+   band-layer comparison with F16 at all. Scoring the two phase vectors and the
+   `prolet` attractor directly against each of the eleven fitted layers would
+   close that gap. It is 3 states times 12 layers of decomposition, which at the
+   measured 36 milliseconds per state-layer is a job of seconds once the
+   dictionaries are built, plus about 5 minutes of dictionary construction. It has
+   not been done here because this branch may not run new decompositions.
 
 ---
 
@@ -893,12 +1135,25 @@ and one cycle, each on a single trajectory, with no repeats.
    Any state at all scores higher against the random dictionary for that reason
    alone. The rotated-lens control keeps the clustering exactly and moves only
    where it points, so it is the control that isolates the lens's content from
-   the lens's shape. **Proposal for ruling:** the rotated-lens control becomes
-   the registered chance level for every J-space share claim from here, and the
-   norm-matched random dictionary is retained as a reported secondary. This
-   would change the third condition in H16's scoring rule and would apply to the
-   planned Medium variant EXP_011m and to H19b in EXP_018, so it is not a local
-   change and should be ruled on rather than adopted quietly.
+   the lens's shape. **What the rotated-lens control does and does not buy, with
+   the significance now attached.** Paired state by state and tested with a
+   sign-flip permutation test of 10,000 draws, the language terminals sit above
+   their own rotated-lens control at four of the six band layers, with p of
+   0.0001 at layers 5, 7 and 9 and 0.0039 at layer 6, and not at layers 8 and 10,
+   where p is 0.8270 and 0.9982 in that direction. That test is exploratory, added
+   after the specification. The pre-registered robustness reading, the same
+   language-against-noise permutation test carried out on the rotated-lens shares,
+   gives a one-sided p below 0.05 at one band layer out of six, layer 7 at 0.0410,
+   with the other five between 0.5028 and 0.9970. So adopting the rotated lens as
+   the chance level would change H16's third condition but would not change H16's
+   verdict, and it would give the settled states a modest but tested claim to
+   being more lens-expressible than a rigidly rotated lens at four band layers.
+   **Proposal for ruling:** the rotated-lens control becomes the registered chance
+   level for every J-space share claim from here, and the norm-matched random
+   dictionary is retained as a reported secondary. This would change the third
+   condition in H16's scoring rule and would apply to the planned Medium variant
+   EXP_011m and to H19b in EXP_018, so it is not a local change and should be
+   ruled on rather than adopted quietly.
 
 2. **Whether H6 stays live now that it has been scored.** H6's registered
    wording compares GPT-2 Small's five basins with the 18 basins of the original
@@ -920,3 +1175,27 @@ and one cycle, each on a single trajectory, with no repeats.
    half-hour run. **Proposal:** run it once as a sensitivity check inside
    EXP_011m rather than reopening EXP_011, and record whichever convention the
    Medium variant adopts as the registered one.
+
+4. **Whether to rebuild the states without TransformerLens's weight processing,
+   so that the specification's primary "as it is" arm actually has numbers.**
+   Section 4 of the specification made the raw residual the primary arm and the
+   mean-centred residual the secondary. As deviation 2 above now records, the
+   loader used applies `center_writing_weights=True` by default, so every state
+   measured here is mean-centred and the raw arm was never run. The dictionary,
+   built from the Hugging Face unembedding, is not centred, so the states and the
+   directions they are scored against differ by the per-position average, and the
+   size of that effect on the shares is unmeasured. Rebuilding with
+   `HookedTransformer.from_pretrained_no_processing` would answer it.
+   **The cost, taken from this run's own committed logs.** Rebuilding the 637
+   states took 3 minutes 13 seconds of wall clock
+   (`output/exp011_build_states.log`); the decomposition that follows it took
+   3,472 seconds, which is 58 minutes, at a peak memory of 1.58 gigabytes
+   (`output/shares.json`, fields `wall_seconds` and `peak_rss_gb`); scoring and
+   readouts add about a minute. So a full re-run of the raw arm is about one hour
+   and ten minutes on this machine, well inside the specification's 2.5-hour
+   budget. **Proposal for ruling:** either accept the centred frame as the
+   registered convention for J-space work, in which case the specification's
+   section 4 wording should be amended for EXP_011m before it runs, or authorise
+   the one-hour re-run here so that the arm the specification made primary has
+   numbers. The choice matters beyond this experiment, because EXP_011m and H19b
+   in EXP_018 will inherit whichever convention is settled.

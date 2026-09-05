@@ -11,3 +11,41 @@
 [12:13:20]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
 [12:13:20] drawing the figures
 [12:13:21] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+
+=== 2026-09-05, re-scored on review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json. No state was rebuilt and no decomposition was run: this
+stage reads the committed share tables only. Three things were added to the
+scoring and nothing was removed. First, the spread of the prolet attractor's
+control shares is now computed within each control type as well as pooled over
+all six control runs, because the pooled figure is dominated by the factor of
+about 25 between the two types and marks every gap immaterial
+(prolet_control_spread_sd_rotation, prolet_control_spread_sd_gaussian). Second,
+the robustness reading the specification pre-registered in section 7.2 as "the
+same test under control (a)" is now run: the language-against-noise label
+permutation test carried out on the rotated-lens shares, once per rotation seed
+and once pooled (H16.rotation_control_secondary). Third, an exploratory paired
+sign-flip test of each language terminal against its own rotated-lens control
+share was added and is labelled exploratory
+(H16.lang_above_rotation_control_exploratory). Every value that existed in the
+previous verdicts.json is unchanged: a key-by-key comparison of the old and new
+files found 93 keys added and 0 values changed or removed, and
+per_layer_tables.json and per_layer_shares.csv are byte-identical to their
+previous versions. All four verdicts reproduce: H6 NOT SUPPORTED, H16 NOT
+SUPPORTED, H16a NOT SUPPORTED, H16b SUPPORTED. Running the script twice in
+succession gave byte-identical verdicts.json, per_layer_tables.json and
+per_layer_shares.csv, so the added permutation tests are reproducible under the
+seed convention the script already used.
+[17:45:03] building the per-layer share tables
+[17:45:03] H6: five basin representatives against eighteen null-model basins
+[17:45:04]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[17:45:04]   eighteen null basins: 18 representatives
+[17:45:06]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[17:45:06] H16: language terminals against the run-17 matched-scale noise terminals
+[17:45:29]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[17:45:29] H16a: the prolet attractor against the Divine cycle's two phases
+[17:45:29]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[17:45:29] H16b: terminals against the same prompts' ordinary residuals
+[17:45:36]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[17:45:36] drawing the figures
+[17:45:37] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png

@@ -73,6 +73,17 @@ def perm_sign_flip(d, rng, n_perm=N_PERM):
     return obs, (1 + le) / (1 + n_perm)
 
 
+def perm_sign_flip_higher(d, rng, n_perm=N_PERM):
+    """One-sided sign-flip test on paired differences, median difference above 0."""
+    obs = float(np.median(d))
+    ge = 0
+    for _ in range(n_perm):
+        s = rng.choice([-1.0, 1.0], size=len(d))
+        if float(np.median(d * s)) >= obs:
+            ge += 1
+    return obs, (1 + ge) / (1 + n_perm)
+
+
 # ------------------------------------------------------------- descriptive ---
 log("building the per-layer share tables")
 FAMS = ["lang", "noise17", "nullold", "clean_last", "clean_mean", "named", "directions"]
@@ -234,31 +245,103 @@ for l in BAND:
     obs, p = perm_two_sample(arr("lens", "lang", l), arr("lens", "noise17", l)[conv_mask], rng3)
     h16["converged_only_secondary"][str(l)] = {
         "n_noise": int(conv_mask.sum()), "median_difference": obs, "p_language_greater": p}
-h16["rotation_control_secondary"] = {
-    str(l): {"lang_median": float(np.median(arr("lens", "lang", l))),
-             "lang_rotation_control_median": float(np.median(pooled(ROT, "lang", l))),
-             "noise_median": float(np.median(arr("lens", "noise17", l))),
-             "noise_rotation_control_median": float(np.median(pooled(ROT, "noise17", l)))}
-    for l in BAND}
+# Spec section 7.2 pre-registers, as robustness reported but not scoring, "the
+# same test under control (a)". The primary test is the label-permutation test on
+# the difference of medians between the 125 language and the 125 run-17 noise
+# states; here it is run again on the shares those same states score against the
+# rotated lens, once per rotation seed (the same 125-against-125 shape the
+# primary test has) and once on the three seeds pooled. Same permutation count
+# (10,000) and the same seed convention the other secondaries use.
+h16["rotation_control_secondary"] = {}
+rng6 = np.random.default_rng(PERM_SEED + 5)
+for l in BAND:
+    per_seed = {}
+    for s_arm in ROT:
+        obs_s, p_s = perm_two_sample(arr(s_arm, "lang", l), arr(s_arm, "noise17", l), rng6)
+        per_seed[s_arm] = {
+            "lang_median": float(np.median(arr(s_arm, "lang", l))),
+            "noise_median": float(np.median(arr(s_arm, "noise17", l))),
+            "median_difference": obs_s, "p_language_greater": p_s}
+    obs_p, p_p = perm_two_sample(pooled(ROT, "lang", l), pooled(ROT, "noise17", l), rng6)
+    h16["rotation_control_secondary"][str(l)] = {
+        "lang_median": float(np.median(arr("lens", "lang", l))),
+        "lang_rotation_control_median": float(np.median(pooled(ROT, "lang", l))),
+        "noise_median": float(np.median(arr("lens", "noise17", l))),
+        "noise_rotation_control_median": float(np.median(pooled(ROT, "noise17", l))),
+        "per_rotation_seed": per_seed,
+        "pooled_median_difference": obs_p,
+        "pooled_p_language_greater": p_p,
+    }
+
+# EXPLORATORY, added after the specification was written and therefore carrying
+# no verdict (spec section 9 item 5). The results record's first decision item
+# leans on the language terminals sitting above their own rotated-lens control;
+# this gives that comparison a p-value. Paired by state: for each of the 125
+# language terminals, its lens share minus the mean of its own three rotated-lens
+# control shares, tested by a sign-flip permutation test, one-sided, language
+# higher.
+h16["lang_above_rotation_control_exploratory"] = {}
+rng7 = np.random.default_rng(PERM_SEED + 6)
+for l in LAYERS:
+    ctrl_mean = np.mean(np.stack([arr(s_arm, "lang", l) for s_arm in ROT]), axis=0)
+    d = arr("lens", "lang", l) - ctrl_mean
+    obs, p_hi = perm_sign_flip_higher(d, rng7)
+    h16["lang_above_rotation_control_exploratory"][str(l)] = {
+        "median_paired_difference": obs, "p_language_higher": p_hi,
+        "n_pairs": int(len(d)),
+        "fraction_pairs_language_higher": float((d > 0).mean()),
+        "exploratory_not_preregistered": True,
+    }
 verdicts["H16"] = h16
 log(f"  H16 verdict: {h16['verdict']} (supporting {sup}, refuting {ref_p})")
 
 # ----------------------------------------------------------------- H16a ------
 log("H16a: the prolet attractor against the Divine cycle's two phases")
-h16a = {"per_layer": {}}
+# What the labels mean, because it is not what the names suggest. build_states.py
+# names each per-layer trace after the vector it injects, so "phaseA" is the
+# forward pass whose INPUT is vector A. Its layer-11 entry is therefore that
+# pass's output, which for this period-2 cycle is vector B (verified: cosine
+# 1.000000 to the stored B), and "phaseB" holds vector A at layer 11. At layers 0
+# to 10 neither trace holds a phase vector at all: those entries are intermediate
+# residuals of one loop step, not either phase re-probed. Finding F16 in the
+# lucier record measured a different quantity, the single vectors A and B scored
+# against every layer's dictionary with no forward pass, so only layer 11 is a
+# like-for-like comparison with it. The verdict rule below is symmetric in the
+# two phases, so it is unaffected by which trace carries which name.
+h16a = {"per_layer": {}, "label_note": (
+    "phaseA is the forward pass injected FROM vector A: its layer-11 entry is "
+    "vector B. phaseB is the pass injected FROM vector B: its layer-11 entry is "
+    "vector A. Layers 0 to 10 are intermediate residuals of that pass, not the "
+    "phase vectors re-probed. The SUPPORTED and REFUTED conditions are symmetric "
+    "in phaseA and phaseB, so the verdict does not depend on the naming.")}
 for l in LAYERS:
     nm = arr("lens", "named", l)
     pro = float(nm[NIDX["prolet1000"]])
     pa, pb, pm = (float(nm[NIDX["phaseA"]]), float(nm[NIDX["phaseB"]]),
                   float(nm[NIDX["pivotM"]]))
-    ctrl = [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in ROT + GAUSS]
+    ctrl_rot = [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in ROT]
+    ctrl_gauss = [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in GAUSS]
+    ctrl = ctrl_rot + ctrl_gauss
+    # The pre-registered floor (spec section 7.3) pools all six control runs. The
+    # two control types differ by a factor of about 25, so that pooled standard
+    # deviation is dominated by the gap between the types rather than by run-to-run
+    # variation, and it marks every gap as immaterial. The per-type spreads are
+    # recorded beside it so the results record's yardstick has a provenance.
     spread = float(np.std(ctrl))
+    spread_rot = float(np.std(ctrl_rot))
+    spread_gauss = float(np.std(ctrl_gauss))
     h16a["per_layer"][str(l)] = {
         "prolet": pro, "phaseA": pa, "phaseB": pb, "pivotM": pm,
         "gap_prolet_minus_phaseA": pro - pa, "gap_prolet_minus_phaseB": pro - pb,
         "prolet_control_spread_sd": spread,
+        "prolet_control_spread_sd_rotation": spread_rot,
+        "prolet_control_spread_sd_gaussian": spread_gauss,
         "gapA_inside_control_spread": abs(pro - pa) < spread,
         "gapB_inside_control_spread": abs(pro - pb) < spread,
+        "gapA_inside_rotation_spread": abs(pro - pa) < spread_rot,
+        "gapB_inside_rotation_spread": abs(pro - pb) < spread_rot,
+        "gapA_over_rotation_spread": abs(pro - pa) / spread_rot,
+        "gapB_over_rotation_spread": abs(pro - pb) / spread_rot,
         "prolet_control_gaussian_median": float(np.median(
             [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in GAUSS])),
         "pilot_prolet_states": {k: float(nm[NIDX[f"convtensor_{k}"]])
@@ -326,6 +409,12 @@ verdicts["descriptive"] = {
     "dictionary_note": ("Every share is a fraction of the state's squared length "
                         "captured by at most 25 lens vectors with non-negative "
                         "coefficients; 0 means none of it, 1 means all of it."),
+    "named_state_label_note": ("Every named state is a per-layer trace named after "
+                               "the vector injected at its input. For the Divine "
+                               "period-2 cycle that matters: phaseA's layer-11 entry "
+                               "is vector B and phaseB's layer-11 entry is vector A, "
+                               "and layers 0 to 10 are intermediate residuals of one "
+                               "loop step rather than either phase re-probed."),
 }
 with open(os.path.join(OUT, "per_layer_tables.json"), "w") as fh:
     json.dump(table, fh, indent=1)

@@ -5,9 +5,9 @@ layer's 193-atom dictionary with a projected-gradient sparse solver. Running the
 EXP_011 non-negative orthogonal matching pursuit on the identical dictionary and
 the identical states should land in the same range and preserve the same ordering.
 """
-import torch, json, sys, numpy as np
+import os, torch, json, sys, numpy as np
 torch.set_num_threads(1)
-sys.path.insert(0,"/home/user/wt/exp011/_STAGE2_JSPACE/experiments/exp_011_small_overlap")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from jspace import decompose
 P="/home/user/lucier-gpt2-activ-tensor-reson-experiments/experiments/gpt2_small/"
 jl=torch.load(P+"output_jlens_pilot/jlens_vectors.pt", weights_only=False, map_location="cpu")

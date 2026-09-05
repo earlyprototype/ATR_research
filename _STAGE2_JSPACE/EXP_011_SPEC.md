@@ -398,3 +398,38 @@ share is a geometric quantity about a cone of at most 25 directions; it is not
 a measure of meaning. The 125 language states are one seed of one sweep. The
 `Divine` comparison is a comparison of single vectors and carries no
 significance test at all.
+
+---
+
+## Addendum, 2026-09-05
+
+Appended after the run, on review of the results record. The body above is
+unchanged: it is the pre-registered text and stays as written. This addendum
+records two places where that text turned out to be ambiguous or to require an
+implementation choice it did not name, so that the Medium variant EXP_011m does
+not inherit either problem silently. Neither entry changes any verdict in
+`experiments/exp_011_small_overlap/RESULTS_EXP011.md`.
+
+1. **Section 2.2 does not determine which forward pass belongs to a state that
+   is not a fixed point.** Its framing sentence says each terminal state becomes
+   twelve per-layer states by "running exactly the loop step that produced it",
+   which names the pass whose output is that state. Its numbered steps say to
+   rebuild the state itself, rescale it and splice it in, which names the pass
+   whose input is that state. Those are the same pass for a fixed point, a state
+   the loop returns unchanged, and section 2.2's own reconstruction gate checks
+   exactly that case. They are opposite passes for a period-2 cycle such as the
+   `Divine` phases, so the two phase labels can be read either way round. A future
+   specification should say which pass it means, and should say plainly that at
+   layers 0 to 10 the recorded quantity is an intermediate residual of a loop
+   step rather than the state itself re-probed at that layer. See the correction
+   dated 2026-09-05 under H16a in the results record.
+
+2. **Section 4's primary "as it is" arm needs the loader named as well as the
+   arithmetic.** The section makes the raw residual the primary arm and the
+   mean-centred residual a secondary. Loading GPT-2 through
+   `HookedTransformer.from_pretrained` applies TransformerLens's default weight
+   processing, which centres everything written into the residual stream, so both
+   arms come out centred and the primary arm is not run. A specification that
+   wants the raw arm has to name `from_pretrained_no_processing`, or say which
+   frame the dictionary and the states are both to sit in. Recorded as deviation
+   2 and decision item 4 in the results record.
