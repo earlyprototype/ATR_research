@@ -138,3 +138,54 @@ block it now writes.
 [18:54:05]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
 [18:54:05] drawing the figures
 [18:54:06] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+
+=== 2026-09-06, re-scored and the figure redrawn, fifth review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json. No state was rebuilt and no decomposition was run: this
+stage reads the committed share tables only. Two things changed and nothing was
+removed. First, the diagnostic scoring path now works. The option --allow-partial
+promised a scoring of an incomplete share file under stamped names, and on a file
+holding only the lens arm, which is what decompose.py --quick writes, the script
+named the missing control arms in its log and then stopped with a KeyError at its
+line 245 before writing any of the four outputs; a file holding two of the twelve
+layers failed the same way at line 356. The script now refuses only what it cannot
+diagnose at all, which is a file with no lens arm or a lens arm missing a state
+family, and otherwise computes what the input supports and records every reading
+it could not compute by name, in this log, in the stamped verdict file under
+input_completeness.not_computed, and at the top of the tables. Verified on two
+partial shapes built in the scratchpad from the committed shares: the lens-only
+copy and a two-layer copy both produce all four stamped diagnostic outputs and
+name what is missing. Second, the figure was redrawn to carry what specification
+section 7.5 item 1 asks for, the per-layer share curves of every family and every
+control at all twelve layers. It has six panels: one per dictionary arm across the
+top, each with all seven families, and the two single-state panels and the
+against-chance panel across the bottom. Effect on the record: every value that
+existed in the previous verdicts.json is unchanged, a leaf-by-leaf comparison of
+the old and new files found 16 leaf values added, 0 changed and 0 removed, and the
+16 sit in five new keys under input_completeness (arms_present,
+rotation_control_arms_present, gaussian_control_arms_present, band_layers_present
+and not_computed, the last of them empty because this input was complete);
+per_layer_tables.json and per_layer_shares.csv are byte-identical to their
+committed versions. All four verdicts reproduce: H6 NOT SUPPORTED, H16 NOT
+SUPPORTED, H16a NOT SUPPORTED, H16b SUPPORTED, with the same supporting and
+refuting layer sets. Only exp011_share_curves.png changed, by design. Running the
+script twice in succession gave byte-identical verdicts.json,
+per_layer_tables.json, per_layer_shares.csv and exp011_share_curves.png. The
+readout stage was not re-run: nothing in it changed.
+[03:27:29] completeness check: layers 0 to 11 present for every family in all 7 scoring arms, and the file is from before the partial_run flag existed, which decompose.py began writing on 2026-09-05
+[03:27:29] iteration-safety-bound check: the committed shares.json predates the flag and does not carry it, so this check cannot be applied to it; the flag was added to decompose.py on 2026-09-05 and applies from the next decomposition run (672 groups, none carrying the field)
+[03:27:29] building the per-layer share tables
+[03:27:30] H6: five basin representatives against eighteen null-model basins
+[03:27:30]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[03:27:30]   eighteen null basins: 18 representatives
+[03:27:34]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[03:27:34]   H6 under control (b), reported not scoring: band layers with the basins above the nulls at p below 0.05: []; below them: []
+[03:27:34] H16: language terminals against the run-17 matched-scale noise terminals
+[03:28:08]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[03:28:08] H16a: the prolet attractor against the Divine cycle's two phases
+[03:28:08]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[03:28:08] H16b: terminals against the same prompts' ordinary residuals
+[03:28:18]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[03:28:18] drawing the figures
+[03:28:20] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+[03:28:20] not computed from this input: nothing; every arm and every layer the scoring reads was present

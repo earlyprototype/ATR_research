@@ -670,17 +670,46 @@ imported from the paper, not a structure this measurement independently confirms
 
 ![J-space share by layer](output/exp011_share_curves.png)
 
-Three panels, all with the workspace band shaded in gold. **Left:** the median
-share by layer for each family, on a logarithmic vertical scale because the
-random-dictionary control sits about 25 times higher than everything else and
-would otherwise flatten the picture; shaded regions are the middle half of each
-family. **Middle:** the named single states, on a linear scale, showing the
-`prolet` attractor crossing from above both `Divine` phases in the early band to
-below both in the late band. **Right:** each family's median share minus its own
-rotated-lens control, so that above zero means more lens-expressible than a
-rigidly rotated lens would make it. Ordinary residuals are the family furthest
-above chance through the band; the two settled families sit just above zero; the
-original noise arm crosses from above to below and back.
+Six panels, all with the workspace band shaded in gold, redrawn on 2026-09-06.
+**Top row, one panel per dictionary:** the lens itself, then the rigidly rotated
+lens pooled over its three seeds, then the norm-matched random dictionary pooled
+over its three seeds. Each of those three panels draws all seven families of
+states on a logarithmic vertical scale. That scale is needed in the first of them,
+where the family medians span a factor of about 120, from 0.0013 to 0.16 on the
+0-to-1 share scale, so a linear scale would flatten the small ones, and it is kept
+in the other two so that the three panels can be read against each other. The seven
+families are the 125 language terminals, the 125 run-17 noise terminals, the 125
+ordinary prompt residuals read at the last token position, the 125 original-noise
+terminals, the same 125 ordinary residuals averaged over token positions instead
+of read at the last one, the ten named single states taken together, and the two
+signs of the flip axis taken together. The shaded ribbon around a family of 125
+states is its middle half, meaning the range from the 25th to the 75th percentile;
+the two small families, ten states and two states, carry no ribbon. **Bottom
+left:** the named single states of the H16a comparison on a linear scale, which
+are the `prolet` attractor, the two `Divine` phase traces, the pivot trace and the
+pilot's noise state, showing the `prolet` attractor crossing from above both
+`Divine` phase traces in the early band to below both in the late band. **Bottom
+middle:** the five pilot-era converged prompt tensors and both signs of the flip
+axis, so that every single state the decomposition scored appears somewhere in the
+figure. **Bottom right:** each family's median share minus its own rotated-lens
+control, so that above zero means more lens-expressible than a rigidly rotated
+lens would make it. Ordinary residuals are the family furthest above chance
+through the band; the two settled families sit just above zero; the original noise
+arm crosses from above to below and back.
+
+**What changed in the figure on 2026-09-06, and what did not.** Specification
+section 7.5 item 1 asks for the per-layer share curves of every family and every
+control, at all twelve layers, as a table and as a figure. The table always held
+all of it. The figure did not: until that date it had three panels, drew four of
+the seven families against the lens, and drew control curves for the language
+family alone, so the position-averaged ordinary residuals, the named single
+states, the flip axis and every other family's two chance levels were missing from
+the picture while sitting in the committed tables. All of them are now drawn.
+No number moved. The figure is drawn from the same `output/shares.json` as before,
+which was not regenerated and against which no decomposition was re-run, and the
+regenerated `output/verdicts.json`, `output/per_layer_tables.json` and
+`output/per_layer_shares.csv` reproduce their committed values exactly, as this
+run's entry in `output/exp011_score.log` records. Recorded as deviation 16.
 
 ---
 
@@ -840,7 +869,14 @@ Five families of states, all read at every one of the twelve layers, where
 3. **The 125 original-noise terminals.** The first noise arm, at iteration 100,
    whose 18 distinct read-out labels are the "18 null-model basins" that H6
    names. Known to be mis-scaled; used only because H6's registered wording
-   names it.
+   names it. Unlike run 17, this arm's committed record stores the whole terminal
+   tensor of every trial, which is one 768-number vector for each token position
+   rather than the last position alone. This experiment nevertheless rebuilt all
+   125 of them by repeating the stored last-position vector, the same way it had
+   to treat the other arms. That rebuild is exact, which is established by
+   measuring all 125 stored tensors under the gate described below, and a future
+   run could drop the rebuild and inject the stored tensors themselves. This
+   paragraph was added on 2026-09-06; see decision item 4.
 4. **The 125 ordinary prompt residuals.** The same 125 prompts run once through
    the model with no injection and no iteration, read at the last token
    position. The token count matched the loop's own recorded sequence length for
@@ -874,7 +910,48 @@ identical direction and 0 means unrelated, and the ratio of the longest position
 the shortest is between 1.0000001 and 1.0000006, so no position differs in length
 from another by more than six parts in ten million. Consequence for those ten: the
 state is fully described by one 768-number vector, so rebuilding the full tensor by
-repeating that vector is exact rather than approximate.
+repeating that vector is exact rather than approximate. **Correction, dated
+2026-09-06:** the phrase "the ten committed tensors this experiment can open" was
+wrong. The original noise arm's record stores a full terminal tensor for every one
+of its 125 trials, so 130 committed tensors were open to this experiment and ten
+of them were measured. The ten numbers just given are unchanged and still describe
+those ten states. What was wrong was the implication that there was nothing else
+to look at, and all 125 are measured in the next paragraph.
+
+**Position collapse in all 125 original-noise terminal tensors, measured on
+2026-09-06, and now a hard stop rather than a log line.** Every one of the 125
+trials of the original noise arm is rebuilt for this experiment by repeating its
+stored last-position vector across the recorded number of token positions, and
+until 2026-09-06 only the first five of those trials had been measured, with the
+result written to the log and never enforced. Seventeen of the eighteen
+representatives H6 is scored on came from trials nobody had looked at; the
+exception is trial R002, the representative of the ` exchanged` basin, which was
+among the five. All 125 stored terminal tensors have now been measured, directly
+from the committed record and with no model involved. The smallest cosine between
+any two token positions of any of the 125 is 0.9999992, on a scale where 1 means
+the two positions hold the same direction and 0 means they are unrelated, and it
+belongs to trial R046, which has 18 token positions; in double precision that same
+trial gives 1.000000000000, so the departure from 1 is the single-precision
+rounding of the stored numbers rather than a real spread. The largest ratio of the
+longest token position's length to the shortest's, over all 125, is 1.0000017,
+where 1 means every position has exactly the same length, and it belongs to trial
+R065, which has 15 positions. The gate refuses a cosine below 0.9999 or a ratio
+above 1.001, which are in size the two tolerances the language arm's own gate
+already uses, a cosine floor of one part in ten thousand below 1 and a length
+departure of one part in a thousand. All 125 pass with room: the worst cosine
+departure from 1 is 120 times smaller than the cosine tolerance allows, and the
+worst length departure is 600 times smaller than the length tolerance allows. The
+eighteen null-basin representatives H6 actually scores all pass, with the worst
+cosine among them 0.9999995, trial R052, and the worst length ratio 1.0000011,
+trial R055. So
+rebuilding those 125 states by repeating one vector is exact rather than
+approximate, and that is now established for the whole arm rather than inferred
+from a sample of five. The gate lives in `build_states.py` and runs on its own,
+without loading the model, as `python3 build_states.py --check-nullold-collapse`,
+which took 3 seconds; the committed `output/states.npz` and
+`output/states_meta.json` predate it and were not rebuilt, so the gate's numbers
+are here and in `output/exp011_build_states.log` rather than in that metadata
+file. Recorded as deviation 15.
 
 **Position collapse in the 125 language terminals, which have no committed tensor,
 and where the evidence stops.** The language arm is rebuilt the same way, by
@@ -903,7 +980,12 @@ those together with the direct length measurement on the five committed converge
 language tensors above. That inference is marked as inferred, not established. It
 touches the language family, which is one side of H16, one side of H16b and the
 basin side of H6; it does not touch the run-17 noise arm, the original noise arm or
-the named single states, whose collapse is established directly. What would settle
+the named single states, whose collapse is established directly. **Correction,
+dated 2026-09-06:** when that sentence was first written, the original noise arm's
+collapse was established directly for five of its 125 trials and for no others, so
+naming the whole arm claimed more than had been measured. The sentence is true as
+written now, because all 125 of that arm's stored terminal tensors have since been
+measured and all 125 pass, as the paragraph two above reports. What would settle
 it is committing the 125 iteration-100 tensors, or simply the Frobenius length of
 each, which is one number per prompt and no new model computation: the tensors
 would have to be regenerated, which is the 125-prompt Stage 1 sweep rather than
@@ -1030,6 +1112,63 @@ arms the scoring reads, which is the lens and the six controls, checked at the
 top of this run's scoring log. Both facts about the input are now written into
 `output/verdicts.json` beside the verdicts, under `input_completeness` and
 `iteration_safety_bound_flag_coverage`.
+
+**Three defects in the supporting tools, found on the fifth review and repaired,
+2026-09-06.** None of the three touches a verdict or a number in this record, and
+each was a way for a later run to fail or to mislead. First, the diagnostic
+scoring path did not work at all. The option `score.py --allow-partial` promises a
+scoring of an incomplete share file whose four outputs are renamed and stamped
+partial. Run on a file from `python3 decompose.py --quick`, which holds the lens
+arm and neither control, it named the missing arms in its own log and then stopped
+with a KeyError, a Python error for a lookup of something that is not there, on
+the first control lookup, before writing any of the four files. This was
+reproduced rather than argued: on a copy of the committed shares file reduced to
+the lens arm, the committed script fails at its line 245, and on a copy reduced to
+two of the twelve layers it fails the same way at its line 356. The script now
+computes what its input can support and records everything else as not computed,
+by name, in its log, in the stamped verdict file under
+`input_completeness.not_computed`, and at the top of the tables. A file with no
+lens arm at all, or one whose lens arm is missing a state family, is refused
+outright, because there is nothing in it to diagnose. **Correction, dated
+2026-09-06:** the paragraph above, dated 2026-09-05, says the option "permits a
+diagnostic scoring, which writes every file under a `.partial.` name, stamps both
+JSON files, labels the figure and the comma-separated table, and rewrites each
+verdict string to say plainly that it is not a verdict". That described the
+intention and not the behaviour: for a lens-only file, which is the commonest
+partial case, nothing was written at all. The sentence is true as written now, and
+it was verified by running the fixed script on both partial shapes.
+
+Second, `make_tables.py`, the helper that prints this record's tables from the
+scoring output, always opened the unstamped final files. After a diagnostic
+scoring it therefore either failed, when no final file existed, or printed the
+previous final tables while the partial warning it carries stayed silent, because
+that warning is read out of the file it opened. It now takes `--partial`, which
+reads the stamped diagnostic files, prints the warning, prints every reading the
+partial input could not support, and prints only the layers the decomposition
+actually covered. The default path is unchanged and was checked rather than
+assumed: its output is identical, character for character, to the committed
+helper's output on the same JSON files.
+
+Third, the dictionary-shape diagnostic `dictionary_geometry.py` opened the lens
+with no gate at all and overwrote `output/dictionary_geometry.json` with nothing
+in it to say which lens file had produced it, although the anisotropy numbers at
+the top of this record, meaning the measurement that the 50,257 lens directions
+are packed around one common direction, rest on that file. It now passes through
+the same pinned-lens gate as the decomposition and the readout, which is
+`lens_gate.py`: the file must match the digest and byte count specification
+section 3 pins, and it must match the digest `output/shares.json` records for the
+decomposition whose shares these numbers are read beside. The committed shares
+file predates that digest field, so the second check reports that it cannot be
+applied rather than passing silently, exactly as it does for the readout stage.
+The diagnostic was re-run on 2026-09-06 and every number it produces is unchanged:
+all 252 values in its twelve per-layer blocks are identical to the committed ones,
+and the only difference in the file is a new metadata block naming the lens file,
+its digest `d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762`, its
+size of 12,980,477 bytes, and the fact that the shares file records no
+decomposition digest to compare against. The re-run took 38 seconds of wall clock
+including loading the model's unembedding matrix, against the 25 seconds of
+measurement in the committed log, and the dated line is appended to
+`output/exp011_dictionary_geometry.log`.
 
 **The decomposition self-test.** Before every run, the decomposition is asked to
 recover a state deliberately built from five known dictionary atoms with positive
@@ -1286,7 +1425,13 @@ Recorded flat, whether or not they helped.
    specification asked for figures without specifying scales. A linear scale is
    unreadable here because the random-dictionary control sits about 25 times
    above every other series. The underlying numbers are unchanged and are in the
-   tables and the committed comma-separated file.
+   tables and the committed comma-separated file. **Update, 2026-09-06:** the
+   figure now has six panels and the logarithmic scale applies to the three
+   panels of its top row, one for each dictionary, where the reason is no longer
+   the gap between the two controls, which now have panels of their own, but the
+   factor of about 120 between the largest and smallest family median inside a
+   single panel. The three panels of the bottom row are on linear scales. See
+   deviation 16.
 
 9. **The flip axis was rebuilt from this script's own phases rather than from the
    file section 2.1 names.** Section 2.1 gave the `dsym` source as
@@ -1395,6 +1540,50 @@ Recorded flat, whether or not they helped.
     the reverse direction, none of them near the 0.05 threshold. No number
     already in this record is superseded by it; two columns and one paragraph
     are added.
+
+15. **The original noise arm's position collapse was measured on five of its 125
+    trials rather than on all of them, and the measurement was not enforced.**
+    Specification section 2.2 states position collapse as verified "in
+    `converged_tensors.pt` and in the original noise arm's stored tensors", and
+    makes the rebuild of every state depend on it. The state builder measured the
+    five committed converged language tensors and the first five original-noise
+    trials, wrote the numbers into its log and its metadata, and then rebuilt all
+    125 original-noise trials by repeating each one's last-position vector without
+    checking the other 120. Seventeen of the eighteen null-basin representatives
+    H6 is scored on came from those unchecked trials. Section 9's list of what
+    counts as a deviation does not name this case exactly, and the closest entry
+    is item 6, which covers a gate and what was done about it; it is recorded here
+    because section 2.2 states the verification as done over the arm's stored
+    tensors and it was done over five of them. It is repaired rather than merely
+    reported: `build_states.py` now measures all 125 stored terminal tensors and
+    stops the run if any fails, refusing a smallest pairwise position cosine below
+    0.9999 or a longest-over-shortest position length ratio above 1.001, and the
+    gate can be run alone in 3 seconds with no model. It was run on
+    2026-09-06 against the committed record and all 125 pass, worst cosine between
+    two token positions 0.9999992 against a floor of 0.9999, worst
+    longest-over-shortest position length ratio 1.0000017 against a ceiling of
+    1.001, and all eighteen H6 representatives pass. Nothing in this record's
+    numbers changes: the rebuild those 125 states were given was exact, which is
+    now established for the whole arm instead of inferred from five trials. The
+    committed `output/states.npz` and `output/states_meta.json` were not
+    regenerated, so they predate the gate, and the gate's numbers are in the
+    checks section above and appended to `output/exp011_build_states.log`.
+
+16. **The descriptive figure did not show every family and every control.**
+    Section 7.5 item 1 asks for the per-layer share curves of all twelve layers
+    "for every family and every control, as a table and as a figure". The table
+    always did. The figure showed four of the seven families against the lens and
+    the two chance levels of the language family alone, leaving out the
+    position-averaged ordinary residuals, the named single states, the flip axis
+    and six of the seven families' chance levels, all of which were in the
+    committed tables. The figure was redrawn on 2026-09-06 with six panels
+    carrying all of it, described in "The figure" above, and regenerated from the
+    committed `output/shares.json` with no decomposition re-run. Every value in
+    `output/verdicts.json` that existed before is unchanged,
+    `per_layer_tables.json` is identical and `per_layer_shares.csv` is
+    byte-identical. This is the
+    discharge of a pre-registered descriptive reading that was only partly
+    delivered, in the same class as deviation 14, rather than a new test.
 
 No reduction was taken under the specification's stopping rule, which triggers only
 on a projected cost above four hours: the run took 3,472 seconds of decomposition
@@ -1588,6 +1777,16 @@ and one cycle, each on a single trajectory, with no repeats.
    directions they are scored against differ by the per-position average, and the
    size of that effect on the shares is unmeasured. Rebuilding with
    `HookedTransformer.from_pretrained_no_processing` would answer it.
+   **A second thing a rebuild should change, added 2026-09-06.** The original
+   noise arm's committed record stores each trial's whole terminal tensor, one
+   768-number vector per token position, and this run rebuilt those 125 states by
+   repeating the stored last-position vector rather than injecting the stored
+   tensor. That rebuild is exact, which is measured over all 125 trials in the
+   checks section above, so no number here is wrong on account of it. It is
+   nevertheless a reconstruction where the record allows a direct reading, and if
+   a rebuild is authorised the null arm should be built from its own stored
+   tensors, which removes one reconstruction step from the H6 comparison at no
+   cost in compute.
    **The cost, taken from this run's own committed logs.** Rebuilding the 637
    states took 3 minutes 13 seconds of wall clock
    (`output/exp011_build_states.log`); the decomposition that follows it took

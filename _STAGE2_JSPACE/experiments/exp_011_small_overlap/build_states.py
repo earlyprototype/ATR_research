@@ -10,6 +10,7 @@ lens and no decomposition happen here.
 
 Run: python3 build_states.py
 """
+import argparse
 import hashlib
 import json
 import os
@@ -44,6 +45,145 @@ def sha256(path):
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+# ------------------------------- the original noise arm's collapse gate ------
+# The original noise arm, called `nullold` here, is the only family whose
+# committed record stores each trial's full terminal tensor, one 768-number
+# vector per token position. Every one of its 125 trials is rebuilt below by
+# repeating the trial's last-position vector across the recorded number of
+# positions, and that rebuild is exact only if the terminal really did hold the
+# same direction and the same length at every position. So all 125 stored tensors
+# are measured, and a failure stops the run rather than being logged and passed
+# over. Until this gate was added on 2026-09-06 only the first five trials were
+# measured, the numbers were logged and never enforced, and seventeen of the
+# eighteen representatives hypothesis H6 is scored on came from trials nobody had
+# looked at; the fifth review round of pull request 84 found that and this gate is
+# the repair. The two tolerances are
+# the ones the language arm already uses, and the check needs no model and no
+# forward pass, so it can be run on its own with --check-nullold-collapse.
+NULLOLD_MIN_POSITION_COSINE = 0.9999   # smallest cosine between two positions
+NULLOLD_MAX_LENGTH_RATIO = 1.001       # longest position length over shortest
+
+
+def nullold_collapse_rows(record):
+    """Per trial: the smallest cosine between any two token positions of the
+    stored terminal tensor, on a scale where 1 means the same direction, and the
+    longest position's length divided by the shortest's, where 1 means every
+    position is the same length. Measured in the single precision the record
+    stores, so the numbers sit on the same footing as the five trials measured
+    before this gate existed."""
+    rows = []
+    for tid in sorted(record):
+        snap = record[tid][-1]
+        t = snap["tensor"]
+        n = t.norm(dim=1)
+        tn = t / n.unsqueeze(1)
+        rows.append({"trial": tid, "iteration": int(snap["iteration"]),
+                     "positions": int(t.shape[0]),
+                     "min_pairwise_cosine": float((tn @ tn.T).min()),
+                     "norm_ratio_max_over_min": float(n.max() / n.min())})
+    return rows
+
+
+def nullold_collapse_gate(record, representatives=None):
+    """Measure every stored original-noise terminal tensor and refuse to go on if
+    any trial fails. `representatives` is the H6 null-basin representative map,
+    read from a previous scoring when one is on disk, so the gate can say whether
+    the eighteen trials H6 actually scores are among the ones that pass."""
+    rows = nullold_collapse_rows(record)
+    worst_cos = min(rows, key=lambda r: r["min_pairwise_cosine"])
+    worst_ratio = max(rows, key=lambda r: r["norm_ratio_max_over_min"])
+    failed = [r["trial"] for r in rows
+              if r["min_pairwise_cosine"] < NULLOLD_MIN_POSITION_COSINE
+              or r["norm_ratio_max_over_min"] > NULLOLD_MAX_LENGTH_RATIO]
+    gate = {
+        "n_trials": len(rows),
+        "source": ("the committed original-noise record's iteration-100 snapshot "
+                   "for every trial, field `tensor`, which is the full terminal "
+                   "tensor of shape [positions, 768]. No model and no forward pass "
+                   "are used."),
+        "thresholds": {"min_pairwise_cosine_at_least": NULLOLD_MIN_POSITION_COSINE,
+                       "norm_ratio_max_over_min_at_most": NULLOLD_MAX_LENGTH_RATIO},
+        "worst_min_pairwise_cosine": {"value": worst_cos["min_pairwise_cosine"],
+                                      "trial": worst_cos["trial"],
+                                      "positions": worst_cos["positions"]},
+        "worst_norm_ratio_max_over_min": {"value": worst_ratio["norm_ratio_max_over_min"],
+                                          "trial": worst_ratio["trial"],
+                                          "positions": worst_ratio["positions"]},
+        "positions_min": min(r["positions"] for r in rows),
+        "positions_max": max(r["positions"] for r in rows),
+        "n_pass": len(rows) - len(failed),
+        "failed_trials": failed,
+        "per_trial": rows,
+    }
+    if representatives:
+        by_trial = {r["trial"]: r for r in rows}
+        reps = {label: by_trial[t] for label, t in sorted(representatives.items())
+                if t in by_trial}
+        gate["h6_null_representatives"] = {
+            "n": len(reps),
+            "all_pass": all(
+                r["min_pairwise_cosine"] >= NULLOLD_MIN_POSITION_COSINE
+                and r["norm_ratio_max_over_min"] <= NULLOLD_MAX_LENGTH_RATIO
+                for r in reps.values()),
+            "worst_min_pairwise_cosine": min(
+                (r["min_pairwise_cosine"] for r in reps.values()), default=None),
+            "worst_norm_ratio_max_over_min": max(
+                (r["norm_ratio_max_over_min"] for r in reps.values()), default=None),
+            "per_representative": {label: {k: r[k] for k in (
+                "trial", "positions", "min_pairwise_cosine",
+                "norm_ratio_max_over_min")} for label, r in reps.items()},
+        }
+    log(f"  original-noise position collapse, all {gate['n_trials']} stored terminal "
+        f"tensors: smallest cosine between two token positions "
+        f"{gate['worst_min_pairwise_cosine']['value']:.10f} (trial "
+        f"{gate['worst_min_pairwise_cosine']['trial']}), largest "
+        f"longest-over-shortest position length ratio "
+        f"{gate['worst_norm_ratio_max_over_min']['value']:.10f} (trial "
+        f"{gate['worst_norm_ratio_max_over_min']['trial']}), {gate['n_pass']}/"
+        f"{gate['n_trials']} inside the tolerances")
+    if "h6_null_representatives" in gate:
+        h6g = gate["h6_null_representatives"]
+        log(f"  the {h6g['n']} H6 null-basin representatives: "
+            f"{'all pass' if h6g['all_pass'] else 'NOT all pass'}, worst cosine "
+            f"{h6g['worst_min_pairwise_cosine']:.10f}, worst length ratio "
+            f"{h6g['worst_norm_ratio_max_over_min']:.10f}")
+    if failed:
+        raise SystemExit(
+            "GATE FAILED: {} of the {} original-noise terminal tensors are not "
+            "position-collapsed to the tolerance that makes repeating the last "
+            "vector an exact rebuild (cosine at least {}, length ratio at most {}): "
+            "{}. Rebuilding those trials by tiling would fabricate a state."
+            .format(len(failed), len(rows), NULLOLD_MIN_POSITION_COSINE,
+                    NULLOLD_MAX_LENGTH_RATIO, failed[:10]))
+    return gate
+
+
+ap = argparse.ArgumentParser(description="EXP_011 stage 1: build the per-layer states.")
+ap.add_argument("--check-nullold-collapse", action="store_true",
+                help="run the original-noise position-collapse gate over all 125 "
+                     "stored terminal tensors and stop. Reads the committed record "
+                     "only: no model is loaded, nothing under output/ is written, "
+                     "and no state is rebuilt.")
+ARGS = ap.parse_args()
+
+if ARGS.check_nullold_collapse:
+    log("standalone gate only: original-noise position collapse, no model loaded")
+    _rec = torch.load(os.path.join(FROZEN,
+                                  "output_random_baseline/random_baseline_results.pt"),
+                      weights_only=False, map_location="cpu")
+    _reps = None
+    _vpath = os.path.join(OUT, "verdicts.json")
+    if os.path.exists(_vpath):
+        with open(_vpath) as _fh:
+            _reps = json.load(_fh).get("H6", {}).get("null_representatives")
+        log(f"  H6 null-basin representatives read from output/verdicts.json: "
+            f"{len(_reps or [])}")
+    _gate = nullold_collapse_gate(_rec, _reps)
+    print(json.dumps({k: v for k, v in _gate.items() if k != "per_trial"}, indent=1))
+    log("standalone gate complete; nothing was written")
+    raise SystemExit(0)
 
 
 # ----------------------------------------------------------------- model ----
@@ -161,16 +301,19 @@ for k, t in conv.items():
     pc.append({"state": k, "positions": int(t.shape[0]),
                "min_pairwise_cosine": float((tn @ tn.T).min()),
                "norm_ratio_max_over_min": float(n.max() / n.min())})
-for k in list(nullold_raw)[:5]:
-    t = nullold_raw[k][-1]["tensor"]
-    n = t.norm(dim=1)
-    tn = t / n.unsqueeze(1)
-    pc.append({"state": f"nullold/{k}", "positions": int(t.shape[0]),
-               "min_pairwise_cosine": float((tn @ tn.T).min()),
-               "norm_ratio_max_over_min": float(n.max() / n.min())})
 gates["position_collapse"] = pc
 worst_cos = min(e["min_pairwise_cosine"] for e in pc)
-log(f"  worst pairwise cosine between token positions: {worst_cos:.8f}")
+log(f"  worst pairwise cosine between token positions, five committed converged "
+    f"language tensors: {worst_cos:.8f}")
+# Every original-noise trial, not a sample of five, and a hard stop on failure.
+# The representatives H6 scores are named by a previous scoring when one is on
+# disk, so the gate reports whether those eighteen trials pass by name.
+_h6_reps = None
+_vpath = os.path.join(OUT, "verdicts.json")
+if os.path.exists(_vpath):
+    with open(_vpath) as _fh:
+        _h6_reps = json.load(_fh).get("H6", {}).get("null_representatives")
+gates["nullold_position_collapse"] = nullold_collapse_gate(nullold_raw, _h6_reps)
 stage1_possim = [float(v["position_similarity"][-1]) for v in stage1.values()]
 gates["stage1_position_similarity_iter100"] = {
     "min": min(stage1_possim), "max": max(stage1_possim), "n": len(stage1_possim)}

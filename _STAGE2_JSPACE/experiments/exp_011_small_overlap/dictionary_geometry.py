@@ -7,6 +7,15 @@ common direction, what fraction lie on its positive side, and where each state
 family sits relative to that common direction. Also records the same numbers for
 one norm-matched random dictionary, which is the point of comparison.
 
+The lens goes through the same pinned-lens gate as every other stage that opens
+it (`lens_gate.py`): the file must match the digest and byte count specification
+section 3 pins, and it must match the digest `output/shares.json` records for the
+decomposition, because the anisotropy numbers this writes are read beside that
+decomposition's shares. The lens identity is written into the output file's own
+metadata block, so a later reader can tell which instrument produced these
+numbers instead of inferring it. Added on 2026-09-06 in the fifth review round
+of pull request 84.
+
 Run: python3 dictionary_geometry.py
 """
 import json
@@ -23,11 +32,23 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "output")
 sys.path.insert(0, HERE)
 from jspace import unit_rows, gaussian_dictionary_like  # noqa: E402
+from lens_gate import LENS_PT, verify_lens, check_against_decomposition  # noqa: E402
 
-LENS_PT = "/home/user/ATR_research/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt"
+
+def log(msg):
+    print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
+
 
 from jlens.lens import JacobianLens  # noqa: E402
 from transformers import AutoModelForCausalLM  # noqa: E402
+
+# Two gates before anything is measured: the file is the one the specification
+# pins, and it is the one the committed decomposition ran against. The second
+# returns None, with a line saying so, for a shares file written before the digest
+# field existed on 2026-09-05, which is the case for the committed one.
+LENS_ID = verify_lens(log=log, stage="dictionary geometry")
+SHARES = os.path.join(OUT, "shares.json")
+DECOMP_SHA = check_against_decomposition(SHARES, LENS_ID, log=log)
 
 lens = JacobianLens.load(LENS_PT)
 hf = AutoModelForCausalLM.from_pretrained("gpt2", dtype=torch.float32)
@@ -36,7 +57,21 @@ del hf
 npz = np.load(os.path.join(OUT, "states.npz"))
 FAMS = ["lang", "noise17", "nullold", "clean_last", "clean_mean"]
 
-out = {"note": ("concentration is the length of the average of the 50257 unit lens "
+out = {"metadata": {
+           "stage": "dictionary_geometry",
+           "generated": time.strftime("%Y-%m-%dT%H:%M:%S"),
+           "lens_file": LENS_ID["lens_file"],
+           "lens_sha256": LENS_ID["lens_sha256"],
+           "lens_bytes": LENS_ID["lens_bytes"],
+           "lens_digest_matches_spec": LENS_ID["lens_digest_matches_spec"],
+           "decomposition_lens_sha256_in_shares_json": DECOMP_SHA,
+           "decomposition_digest_note": (
+               "The digest output/shares.json records for the decomposition that "
+               "produced the shares these numbers are read beside. None means that "
+               "file predates the digest field, which decompose.py began writing on "
+               "2026-09-05, so the two stages are tied by the pinned digest alone."),
+           "states_file": os.path.join(OUT, "states.npz")},
+       "note": ("concentration is the length of the average of the 50257 unit lens "
                 "directions: 0 would mean perfectly even spread over the sphere, 1 "
                 "would mean every direction identical. fraction_positive is how many "
                 "of them lie on the positive side of that average direction. "
@@ -76,4 +111,4 @@ for l in range(12):
     del D, Dn, G, Gn
 with open(os.path.join(OUT, "dictionary_geometry.json"), "w") as fh:
     json.dump(out, fh, indent=1)
-print("wrote output/dictionary_geometry.json")
+log(f"wrote output/dictionary_geometry.json against lens {LENS_ID['lens_sha256']}")

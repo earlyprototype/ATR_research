@@ -433,3 +433,25 @@ not inherit either problem silently. Neither entry changes any verdict in
    wants the raw arm has to name `from_pretrained_no_processing`, or say which
    frame the dictionary and the states are both to sit in. Recorded as deviation
    2 and decision item 4 in the results record.
+
+---
+
+## Addendum, 2026-09-06
+
+Appended after the fifth review of pull request 84. The body above and the
+addendum of 2026-09-05 are both unchanged: they are the pre-registered text and
+the first review's note on it. One further entry, recorded so that the Medium
+variant EXP_011m does not inherit the same gap. It changes no verdict in
+`experiments/exp_011_small_overlap/RESULTS_EXP011.md`.
+
+1. **Section 2.2 states a verification without saying how much of an arm it
+   covers.** Its numbered step 1 says position collapse "is verified to hold to
+   floating-point precision (every pair of positions has cosine 1.000000 and
+   identical norm) in `converged_tensors.pt` and in the original noise arm's
+   stored tensors". Read as written, that names the whole of that arm, which is
+   125 committed terminal tensors. The implementation measured five of them,
+   wrote the numbers into its log, and did not stop on them; the results record's
+   deviation 15 records that, and all 125 have since been measured and all 125
+   pass. A future specification should say how many of an arm's stored tensors a
+   verification covers, and should make it a hard stop rather than a log line,
+   which is what `build_states.py` now does for this arm.

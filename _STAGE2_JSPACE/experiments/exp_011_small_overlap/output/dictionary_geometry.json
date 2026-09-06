@@ -1,4 +1,15 @@
 {
+ "metadata": {
+  "stage": "dictionary_geometry",
+  "generated": "2026-09-06T03:13:02",
+  "lens_file": "/home/user/ATR_research/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt",
+  "lens_sha256": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
+  "lens_bytes": 12980477,
+  "lens_digest_matches_spec": true,
+  "decomposition_lens_sha256_in_shares_json": null,
+  "decomposition_digest_note": "The digest output/shares.json records for the decomposition that produced the shares these numbers are read beside. None means that file predates the digest field, which decompose.py began writing on 2026-09-05, so the two stages are tied by the pinned digest alone.",
+  "states_file": "/home/user/wt/exp011/_STAGE2_JSPACE/experiments/exp_011_small_overlap/output/states.npz"
+ },
  "note": "concentration is the length of the average of the 50257 unit lens directions: 0 would mean perfectly even spread over the sphere, 1 would mean every direction identical. fraction_positive is how many of them lie on the positive side of that average direction. state_cosine_median is the median cosine between a family's states and that average direction; a negative value means the family points away from the cone the non-negative decomposition can reach.",
  "per_layer": {
   "0": {

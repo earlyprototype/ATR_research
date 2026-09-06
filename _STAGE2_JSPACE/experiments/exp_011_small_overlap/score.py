@@ -7,7 +7,11 @@ the per-layer tables (JSON and CSV) and the figures.
 The shares file must cover layers 0 to 11 for every arm the scoring reads and must
 not mark itself partial: no final verdict, table or figure is produced from a
 partial decomposition. Pass --allow-partial for a diagnostic scoring, whose four
-outputs are renamed and stamped partial and carry no verdict.
+outputs are renamed and stamped partial and carry no verdict. A diagnostic
+scoring computes what the file it was given can support and records everything
+else as not computed, by name: a file from `decompose.py --quick` holds the lens
+arm alone and so has no control shares, and a file from `decompose.py --layers`
+holds some layers and not others.
 
 Run: python3 score.py [--allow-partial]
 """
@@ -53,6 +57,26 @@ ARGS = ap.parse_args()
 
 shares = json.load(open(os.path.join(OUT, "shares.json")))
 meta = json.load(open(os.path.join(OUT, "states_meta.json")))
+
+# The lens arm and the seven state families are the floor: without them there is
+# nothing to diagnose, let alone to score, so a file lacking any of them is
+# refused even under --allow-partial. The controls and the layers are the things a
+# partial file may be missing and still be worth reading, and they are handled
+# below rather than here.
+SCORED_FAMILIES = ["lang", "noise17", "nullold", "clean_last", "clean_mean",
+                   "named", "directions"]
+if "lens" not in shares["arms"]:
+    raise SystemExit(
+        "REFUSING TO SCORE: output/shares.json holds no lens arm, only {}. Every "
+        "hypothesis is scored on the lens arm, so there is nothing here to score or "
+        "to diagnose.".format(sorted(shares["arms"])))
+_fam_gaps = [f for f in SCORED_FAMILIES if f not in shares["arms"]["lens"]]
+if _fam_gaps:
+    raise SystemExit(
+        "REFUSING TO SCORE: the lens arm of output/shares.json is missing the state "
+        "families {}. The scoring and the descriptive tables read all of {}, so a "
+        "file without them cannot be diagnosed either.".format(_fam_gaps,
+                                                               SCORED_FAMILIES))
 LAYERS = sorted(int(x) for x in shares["arms"]["lens"]["lang"].keys())
 
 # ------------------------------------------------------- completeness gate ---
@@ -120,6 +144,46 @@ else:
 def outpath(name):
     """Where an output goes: its own name, or a stamped one for a partial run."""
     return os.path.join(OUT, name if not INCOMPLETE else name.replace(".", ".partial.", 1))
+
+
+# ------------------------------------------- what this file can support ------
+# A diagnostic scoring has to survive the arms and the layers its input does not
+# hold. A shares file from `decompose.py --quick` carries the lens arm alone, so
+# every control median, every control comparison and the control clause of H16's
+# scoring rule has nothing to read; a file from `decompose.py --layers 5,6`
+# carries two of the twelve layers, so the loops that walk the six band layers
+# have nothing to read at the other four. Until 2026-09-06 this script noticed the
+# gap in the completeness block above, said so in its log, and then raised a
+# KeyError on the first control lookup, which meant --allow-partial never produced
+# the diagnostic outputs its own refusal message promises. Nothing missing is
+# guessed at or silently skipped now: it is recorded here by name, written into
+# the verdict file under input_completeness.not_computed, and named in the log.
+HAVE_ROT = all(a in shares["arms"] for a in ROT)
+HAVE_GAUSS = all(a in shares["arms"] for a in GAUSS)
+BAND_PRESENT = [l for l in BAND if l in LAYERS]
+NOT_COMPUTED = []
+
+
+def not_computed(what, why):
+    """Record, by name, one thing this input could not support."""
+    NOT_COMPUTED.append({"what": what, "why": why})
+    log(f"  NOT COMPUTED: {what}, because {why}")
+
+
+COMPLETENESS["arms_present"] = sorted(shares["arms"])
+COMPLETENESS["rotation_control_arms_present"] = HAVE_ROT
+COMPLETENESS["gaussian_control_arms_present"] = HAVE_GAUSS
+COMPLETENESS["band_layers_present"] = BAND_PRESENT
+COMPLETENESS["not_computed"] = NOT_COMPUTED       # filled in as the run proceeds
+if not HAVE_ROT:
+    not_computed("every rotated-lens control reading",
+                 f"the shares file holds none of the arms {ROT}")
+if not HAVE_GAUSS:
+    not_computed("every norm-matched random-dictionary control reading",
+                 f"the shares file holds none of the arms {GAUSS}")
+if BAND_PRESENT != BAND:
+    not_computed(f"every reading at band layers {[l for l in BAND if l not in LAYERS]}",
+                 "the shares file does not cover them")
 
 
 # ------------------------------------------------ iteration-safety-bound gate ---
@@ -240,6 +304,10 @@ for arm in shares["arms"]:
             } for l in LAYERS}
 # control summaries: the two controls pooled over their three seeds
 for label, arms in (("control_rotation_pooled", ROT), ("control_gaussian_pooled", GAUSS)):
+    if not all(a in shares["arms"] for a in arms):
+        not_computed(f"the pooled control table {label}",
+                     f"the shares file does not hold all of {arms}")
+        continue
     table[label] = {}
     for fam in FAMS:
         if fam not in shares["arms"][arms[0]]:
@@ -311,17 +379,24 @@ for l in LAYERS:
     y = arr("lens", "nullold", l)[oi]
     u_greater = mannwhitneyu(x, y, alternative="greater")
     u_less = mannwhitneyu(x, y, alternative="less")
-    h6["per_layer"][str(l)] = {
+    entry = {
         "basin_median": float(np.median(x)), "null_median": float(np.median(y)),
         "basin_shares": [float(v) for v in x], "null_shares": [float(v) for v in y],
         "p_greater": float(u_greater.pvalue), "p_less": float(u_less.pvalue),
-        "basin_control_gaussian_median": float(np.median(
-            np.concatenate([arr(a, "lang", l)[li] for a in GAUSS]))),
-        "basin_control_rotation_median": float(np.median(
-            np.concatenate([arr(a, "lang", l)[li] for a in ROT]))),
-        "null_control_gaussian_median": float(np.median(
-            np.concatenate([arr(a, "nullold", l)[oi] for a in GAUSS]))),
     }
+    # The control medians beside the rule's own numbers. A diagnostic scoring of a
+    # file holding only the lens arm has nowhere to take them from, and leaves them
+    # out rather than raising.
+    if HAVE_GAUSS:
+        entry["basin_control_gaussian_median"] = float(np.median(
+            np.concatenate([arr(a, "lang", l)[li] for a in GAUSS])))
+    if HAVE_ROT:
+        entry["basin_control_rotation_median"] = float(np.median(
+            np.concatenate([arr(a, "lang", l)[li] for a in ROT])))
+    if HAVE_GAUSS:
+        entry["null_control_gaussian_median"] = float(np.median(
+            np.concatenate([arr(a, "nullold", l)[oi] for a in GAUSS])))
+    h6["per_layer"][str(l)] = entry
     # Specification section 7.1, reported alongside and explicitly not part of the
     # rule: "the same comparison against control (b)". Control (b) is the
     # norm-matched random dictionary at seeds 4242, 4243 and 4244. The same test
@@ -334,6 +409,8 @@ for l in LAYERS:
     # cannot move the H6 verdict, because section 7.1's rule sentence scores the
     # lens comparison alone; control (b) enters a scoring rule only in section 7.2,
     # as the third condition of H16.
+    if not HAVE_GAUSS:
+        continue
     xb = np.concatenate([arr(a, "lang", l)[li] for a in GAUSS])
     yb = np.concatenate([arr(a, "nullold", l)[oi] for a in GAUSS])
     per_seed_b = {}
@@ -353,9 +430,9 @@ for l in LAYERS:
         "control_gaussian_n_null": int(len(yb)),
         "control_gaussian_per_seed": per_seed_b,
     })
-hits_g = [l for l in BAND if h6["per_layer"][str(l)]["basin_median"] > h6["per_layer"][str(l)]["null_median"]
+hits_g = [l for l in BAND_PRESENT if h6["per_layer"][str(l)]["basin_median"] > h6["per_layer"][str(l)]["null_median"]
           and h6["per_layer"][str(l)]["p_greater"] < ALPHA]
-hits_l = [l for l in BAND if h6["per_layer"][str(l)]["null_median"] > h6["per_layer"][str(l)]["basin_median"]
+hits_l = [l for l in BAND_PRESENT if h6["per_layer"][str(l)]["null_median"] > h6["per_layer"][str(l)]["basin_median"]
           and h6["per_layer"][str(l)]["p_less"] < ALPHA]
 h6["band_layers_supporting"] = hits_g
 h6["band_layers_refuting"] = hits_l
@@ -372,14 +449,22 @@ h6["control_gaussian_comparison"] = {
              "comparison and keeps it out of the scoring rule."),
     "scoring": False,
     "band_layers_control_p_greater_below_alpha": [
-        l for l in BAND if h6["per_layer"][str(l)]["control_gaussian_p_greater"] < ALPHA],
+        l for l in BAND_PRESENT if HAVE_GAUSS
+        and h6["per_layer"][str(l)]["control_gaussian_p_greater"] < ALPHA],
     "band_layers_control_p_less_below_alpha": [
-        l for l in BAND if h6["per_layer"][str(l)]["control_gaussian_p_less"] < ALPHA],
+        l for l in BAND_PRESENT if HAVE_GAUSS
+        and h6["per_layer"][str(l)]["control_gaussian_p_less"] < ALPHA],
 }
+if not HAVE_GAUSS:
+    h6["control_gaussian_comparison"]["computed"] = False
+    not_computed("the H6 comparison against control (b), the norm-matched random "
+                 "dictionary, which specification section 7.1 asks for beside the "
+                 "rule and keeps out of it",
+                 f"the shares file holds none of the arms {GAUSS}")
 # reported alongside, not scoring: all 125 against all 125
 h6["all_states_secondary"] = {}
 rng = np.random.default_rng(PERM_SEED)
-for l in BAND:
+for l in BAND_PRESENT:
     obs, p = perm_two_sample(arr("lens", "lang", l), arr("lens", "nullold", l), rng)
     h6["all_states_secondary"][str(l)] = {
         "median_difference": obs, "p_language_greater_permutation": p,
@@ -404,21 +489,32 @@ conv_mask = np.array(meta["noise17"]["converged"], dtype=bool)
 for l in LAYERS:
     x, y = arr("lens", "lang", l), arr("lens", "noise17", l)
     obs, p = perm_two_sample(x, y, rng)
-    ctrl_g = float(np.median(pooled(GAUSS, "lang", l)))
-    ctrl_r = float(np.median(pooled(ROT, "lang", l)))
+    # The two control medians and the two "above chance" flags exist only when the
+    # shares file holds the control arms. Where it does not, the flags are None,
+    # which is neither True nor False, so the third condition of the H16 rule below
+    # cannot be met by accident.
+    ctrl_g = float(np.median(pooled(GAUSS, "lang", l))) if HAVE_GAUSS else None
+    ctrl_r = float(np.median(pooled(ROT, "lang", l))) if HAVE_ROT else None
     h16["per_layer"][str(l)] = {
         "lang_median": float(np.median(x)), "noise_median": float(np.median(y)),
         "median_difference": obs, "p_language_greater": p,
         "lang_control_gaussian_median": ctrl_g, "lang_control_rotation_median": ctrl_r,
-        "noise_control_gaussian_median": float(np.median(pooled(GAUSS, "noise17", l))),
-        "lang_above_gaussian_control": float(np.median(x)) > ctrl_g,
-        "lang_above_rotation_control": float(np.median(x)) > ctrl_r,
+        "noise_control_gaussian_median": (float(np.median(pooled(GAUSS, "noise17", l)))
+                                          if HAVE_GAUSS else None),
+        "lang_above_gaussian_control": (float(np.median(x)) > ctrl_g
+                                        if HAVE_GAUSS else None),
+        "lang_above_rotation_control": (float(np.median(x)) > ctrl_r
+                                        if HAVE_ROT else None),
     }
-sup = [l for l in BAND
+if not HAVE_GAUSS:
+    not_computed("the third condition of H16's scoring rule, that the language "
+                 "median sits above the language states' own control (b) median",
+                 f"the shares file holds none of the arms {GAUSS}")
+sup = [l for l in BAND_PRESENT
        if h16["per_layer"][str(l)]["median_difference"] > 0
        and h16["per_layer"][str(l)]["p_language_greater"] < ALPHA
-       and h16["per_layer"][str(l)]["lang_above_gaussian_control"]]
-ref = [l for l in BAND if h16["per_layer"][str(l)]["median_difference"] < 0]
+       and h16["per_layer"][str(l)]["lang_above_gaussian_control"] is True]
+ref = [l for l in BAND_PRESENT if h16["per_layer"][str(l)]["median_difference"] < 0]
 ref_p = []
 rng2 = np.random.default_rng(PERM_SEED)
 for l in ref:
@@ -433,7 +529,7 @@ h16["verdict"] = ("SUPPORTED" if len(sup) >= MAJORITY else
 # robustness, not scoring
 h16["converged_only_secondary"] = {}
 rng3 = np.random.default_rng(PERM_SEED)
-for l in BAND:
+for l in BAND_PRESENT:
     obs, p = perm_two_sample(arr("lens", "lang", l), arr("lens", "noise17", l)[conv_mask], rng3)
     h16["converged_only_secondary"][str(l)] = {
         "n_noise": int(conv_mask.sum()), "median_difference": obs, "p_language_greater": p}
@@ -446,7 +542,13 @@ for l in BAND:
 # (10,000) and the same seed convention the other secondaries use.
 h16["rotation_control_secondary"] = {}
 rng6 = np.random.default_rng(PERM_SEED)
-for l in BAND:
+if not HAVE_ROT:
+    not_computed("the H16 robustness reading specification section 7.2 asks for "
+                 "under control (a), the rotated lens, and the exploratory paired "
+                 "test of each language terminal against its own rotated-lens "
+                 "control share",
+                 f"the shares file holds none of the arms {ROT}")
+for l in (BAND_PRESENT if HAVE_ROT else []):
     per_seed = {}
     for s_arm in ROT:
         obs_s, p_s = perm_two_sample(arr(s_arm, "lang", l), arr(s_arm, "noise17", l), rng6)
@@ -474,7 +576,7 @@ for l in BAND:
 # higher.
 h16["lang_above_rotation_control_exploratory"] = {}
 rng7 = np.random.default_rng(PERM_SEED)
-for l in LAYERS:
+for l in (LAYERS if HAVE_ROT else []):
     ctrl_mean = np.mean(np.stack([arr(s_arm, "lang", l) for s_arm in ROT]), axis=0)
     d = arr("lens", "lang", l) - ctrl_mean
     obs, p_hi = perm_sign_flip_higher(d, rng7)
@@ -511,39 +613,53 @@ for l in LAYERS:
     pro = float(nm[NIDX["prolet1000"]])
     pa, pb, pm = (float(nm[NIDX["phaseA"]]), float(nm[NIDX["phaseB"]]),
                   float(nm[NIDX["pivotM"]]))
-    ctrl_rot = [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in ROT]
-    ctrl_gauss = [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in GAUSS]
+    ctrl_rot = ([float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in ROT]
+                if HAVE_ROT else [])
+    ctrl_gauss = ([float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in GAUSS]
+                  if HAVE_GAUSS else [])
     ctrl = ctrl_rot + ctrl_gauss
     # The pre-registered floor (spec section 7.3) pools all six control runs. The
     # two control types differ by a factor of about 25, so that pooled standard
     # deviation is dominated by the gap between the types rather than by run-to-run
     # variation, and it marks every gap as immaterial. The per-type spreads are
     # recorded beside it so the results record's yardstick has a provenance.
-    spread = float(np.std(ctrl))
-    spread_rot = float(np.std(ctrl_rot))
-    spread_gauss = float(np.std(ctrl_gauss))
-    h16a["per_layer"][str(l)] = {
+    # The yardsticks are spreads of control shares, so a file without the control
+    # arms has none of them; the gaps themselves need no control and are kept.
+    spread = float(np.std(ctrl)) if ctrl else None
+    spread_rot = float(np.std(ctrl_rot)) if ctrl_rot else None
+    spread_gauss = float(np.std(ctrl_gauss)) if ctrl_gauss else None
+    entry = {
         "prolet": pro, "phaseA": pa, "phaseB": pb, "pivotM": pm,
         "gap_prolet_minus_phaseA": pro - pa, "gap_prolet_minus_phaseB": pro - pb,
         "prolet_control_spread_sd": spread,
         "prolet_control_spread_sd_rotation": spread_rot,
         "prolet_control_spread_sd_gaussian": spread_gauss,
-        "gapA_inside_control_spread": abs(pro - pa) < spread,
-        "gapB_inside_control_spread": abs(pro - pb) < spread,
-        "gapA_inside_rotation_spread": abs(pro - pa) < spread_rot,
-        "gapB_inside_rotation_spread": abs(pro - pb) < spread_rot,
-        "gapA_over_rotation_spread": abs(pro - pa) / spread_rot,
-        "gapB_over_rotation_spread": abs(pro - pb) / spread_rot,
-        "prolet_control_gaussian_median": float(np.median(
-            [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in GAUSS])),
-        "pilot_prolet_states": {k: float(nm[NIDX[f"convtensor_{k}"]])
-                                for k in ("Lucier", "Semantic", "Nonsense", "Imperative")},
-        "pilot_divine_state": float(nm[NIDX["convtensor_Syntactic"]]),
     }
-supA = [l for l in BAND if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseA"] > 0]
-supB = [l for l in BAND if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseB"] > 0]
-refA = [l for l in BAND if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseA"] < 0]
-refB = [l for l in BAND if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseB"] < 0]
+    if spread is not None:
+        entry["gapA_inside_control_spread"] = abs(pro - pa) < spread
+        entry["gapB_inside_control_spread"] = abs(pro - pb) < spread
+    if spread_rot is not None:
+        entry["gapA_inside_rotation_spread"] = abs(pro - pa) < spread_rot
+        entry["gapB_inside_rotation_spread"] = abs(pro - pb) < spread_rot
+        entry["gapA_over_rotation_spread"] = abs(pro - pa) / spread_rot
+        entry["gapB_over_rotation_spread"] = abs(pro - pb) / spread_rot
+    if HAVE_GAUSS:
+        entry["prolet_control_gaussian_median"] = float(np.median(
+            [float(arr(a, "named", l)[NIDX["prolet1000"]]) for a in GAUSS]))
+    entry["pilot_prolet_states"] = {k: float(nm[NIDX[f"convtensor_{k}"]])
+                                    for k in ("Lucier", "Semantic", "Nonsense",
+                                              "Imperative")}
+    entry["pilot_divine_state"] = float(nm[NIDX["convtensor_Syntactic"]])
+    h16a["per_layer"][str(l)] = entry
+if not (HAVE_ROT and HAVE_GAUSS):
+    not_computed("the H16a control-spread yardsticks, which say whether a gap "
+                 "between two single states is smaller than the spread of that "
+                 "state's own control shares",
+                 "the shares file does not hold both control arms")
+supA = [l for l in BAND_PRESENT if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseA"] > 0]
+supB = [l for l in BAND_PRESENT if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseB"] > 0]
+refA = [l for l in BAND_PRESENT if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseA"] < 0]
+refB = [l for l in BAND_PRESENT if h16a["per_layer"][str(l)]["gap_prolet_minus_phaseB"] < 0]
 h16a["band_layers_prolet_above_phaseA"] = supA
 h16a["band_layers_prolet_above_phaseB"] = supB
 h16a["verdict"] = ("SUPPORTED" if len(supA) >= MAJORITY and len(supB) >= MAJORITY else
@@ -566,11 +682,11 @@ for l in LAYERS:
         "n_pairs": int(len(d)),
         "fraction_pairs_terminal_lower": float((d < 0).mean()),
     }
-sup = [l for l in BAND if h16b["per_layer"][str(l)]["median_paired_difference"] < 0
+sup = [l for l in BAND_PRESENT if h16b["per_layer"][str(l)]["median_paired_difference"] < 0
        and h16b["per_layer"][str(l)]["p_terminal_lower"] < ALPHA]
 rng4 = np.random.default_rng(PERM_SEED)
 ref = []
-for l in BAND:
+for l in BAND_PRESENT:
     if h16b["per_layer"][str(l)]["median_paired_difference"] > 0:
         d = arr("lens", "clean_last", l) - arr("lens", "lang", l)
         _, p_hi = perm_sign_flip(d, rng4)
@@ -583,7 +699,7 @@ h16b["verdict"] = ("SUPPORTED" if len(sup) >= MAJORITY else
                    "REFUTED" if len(ref) >= MAJORITY else "NOT SUPPORTED")
 h16b["clean_mean_secondary"] = {}
 rng5 = np.random.default_rng(PERM_SEED)
-for l in BAND:
+for l in BAND_PRESENT:
     d = arr("lens", "lang", l) - arr("lens", "clean_mean", l)
     obs, p = perm_sign_flip(d, rng5)
     h16b["clean_mean_secondary"][str(l)] = {
@@ -649,32 +765,63 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(1, 3, figsize=(15.5, 4.4))
-ax = axes[0]
-series = [("lang", "language terminals (125)", "#1f77b4", "-"),
-          ("noise17", "run-17 noise terminals (125)", "#d62728", "-"),
-          ("clean_last", "ordinary prompt residuals (125)", "#2ca02c", "-"),
-          ("nullold", "original noise arm (125)", "#9467bd", "--")]
-for fam, lab, c, ls in series:
-    med = [table["lens"][fam][str(l)]["median"] for l in LAYERS]
-    q25 = [table["lens"][fam][str(l)]["q25"] for l in LAYERS]
-    q75 = [table["lens"][fam][str(l)]["q75"] for l in LAYERS]
-    ax.plot(LAYERS, med, ls, color=c, label=lab)
-    ax.fill_between(LAYERS, q25, q75, color=c, alpha=0.12)
-ax.plot(LAYERS, [table["control_rotation_pooled"]["lang"][str(l)]["median"] for l in LAYERS],
-        ":", color="#1f77b4", label="language, rotated-lens control")
-ax.plot(LAYERS, [table["control_gaussian_pooled"]["lang"][str(l)]["median"] for l in LAYERS],
-        ":", color="#7f7f7f", label="language, random-dictionary control")
-ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
-ax.set_yscale("log")
-ax.set_xlabel("layer (output of block l)")
-ax.set_ylabel("J-space share (fraction of squared length, log scale)")
-ax.set_title("J-space share by layer, GPT-2 Small\n(gold band = workspace band, layers 5 to 10)",
-             fontsize=9)
-ax.legend(fontsize=7)
-ax.grid(alpha=0.25)
+# Specification section 7.5 item 1 asks for the per-layer share curves of every
+# family and every control, at all twelve layers, as a table and as a figure. The
+# table always held all of it; until 2026-09-06 the figure did not. It drew four
+# of the seven families against the lens and the controls of the language family
+# alone, so the position-averaged ordinary residuals (`clean_mean`), the ten named
+# single states (`named`) and the two signs of the flip axis (`directions`) were
+# missing from it, and so was every other family's chance level. Six panels now
+# carry all of it: the top row is one panel per dictionary arm, the lens and each
+# of the two pooled controls, with every family drawn in each; the bottom row
+# keeps the two single-state readings and the against-chance comparison, with the
+# single states no longer confined to five of the ten.
+FAMILY_SERIES = [
+    ("lang", "language terminals (125)", "#1f77b4", "-"),
+    ("noise17", "run-17 noise terminals (125)", "#d62728", "-"),
+    ("clean_last", "ordinary prompt residuals (125)", "#2ca02c", "-"),
+    ("nullold", "original noise arm (125)", "#9467bd", "--"),
+    ("clean_mean", "ordinary residuals, position-averaged (125)", "#17becf", "--"),
+    ("named", "named single states (10)", "#8c564b", ":"),
+    ("directions", "flip axis, both signs (2)", "#e377c2", ":"),
+]
+POPULATIONS = {"lang", "noise17", "clean_last", "nullold", "clean_mean"}
+ARM_PANELS = [
+    ("lens", "J-space share by layer, the lens itself",
+     "J-space share (fraction of squared length, log scale)"),
+    ("control_rotation_pooled",
+     "Control (a): the rigidly rotated lens, three seeds pooled", "J-space share (log scale)"),
+    ("control_gaussian_pooled",
+     "Control (b): the norm-matched random dictionary, three seeds pooled",
+     "J-space share (log scale)"),
+]
 
-ax = axes[1]
+fig, axes = plt.subplots(2, 3, figsize=(16.5, 9.0))
+for ax, (arm, title, ylab) in zip(axes[0], ARM_PANELS):
+    if arm not in table:
+        ax.set_axis_off()
+        ax.set_title(title + "\n(not computed: this arm is absent from the shares file)",
+                     fontsize=9)
+        continue
+    for fam, lab, c, ls in FAMILY_SERIES:
+        if fam not in table[arm]:
+            continue
+        med = [table[arm][fam][str(l)]["median"] for l in LAYERS]
+        ax.plot(LAYERS, med, ls, color=c, label=lab)
+        if fam in POPULATIONS:
+            q25 = [table[arm][fam][str(l)]["q25"] for l in LAYERS]
+            q75 = [table[arm][fam][str(l)]["q75"] for l in LAYERS]
+            ax.fill_between(LAYERS, q25, q75, color=c, alpha=0.10)
+    ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
+    ax.set_yscale("log")
+    ax.set_xlabel("layer (output of block l)")
+    ax.set_ylabel(ylab)
+    ax.set_title(title + "\n(gold band = workspace band, layers 5 to 10; shaded = middle half)",
+                 fontsize=9)
+    ax.legend(fontsize=6)
+    ax.grid(alpha=0.25)
+
+ax = axes[1][0]
 for key, lab, c in [("prolet1000", "prolet attractor", "#1f77b4"),
                     ("phaseA", "Divine phase A", "#d62728"),
                     ("phaseB", "Divine phase B", "#ff7f0e"),
@@ -689,22 +836,47 @@ ax.set_title("Named states: prolet against the Divine cycle", fontsize=9)
 ax.legend(fontsize=7)
 ax.grid(alpha=0.25)
 
-ax = axes[2]
-for fam, lab, c in [("lang", "language terminals", "#1f77b4"),
-                    ("noise17", "run-17 noise terminals", "#d62728"),
-                    ("clean_last", "ordinary prompt residuals", "#2ca02c"),
-                    ("nullold", "original noise arm", "#9467bd")]:
-    d = [table["lens"][fam][str(l)]["median"]
-         - table["control_rotation_pooled"][fam][str(l)]["median"] for l in LAYERS]
-    ax.plot(LAYERS, d, "-o", ms=3, color=c, label=lab)
-ax.axhline(0.0, color="k", lw=1)
+# The rest of the named family, and both signs of the flip axis, so that every
+# single state the decomposition scored appears somewhere in this figure.
+ax = axes[1][1]
+for key, c in [("convtensor_Lucier", "#1f77b4"), ("convtensor_Semantic", "#2ca02c"),
+               ("convtensor_Nonsense", "#ff7f0e"), ("convtensor_Imperative", "#9467bd"),
+               ("convtensor_Syntactic", "#d62728")]:
+    ax.plot(LAYERS, [float(arr("lens", "named", l)[NIDX[key]]) for l in LAYERS],
+            "-o", ms=3, color=c,
+            label="pilot converged tensor, " + key.replace("convtensor_", ""))
+for i, key in enumerate(meta["directions"]["keys"]):
+    ax.plot(LAYERS, [float(arr("lens", "directions", l)[i]) for l in LAYERS],
+            "--s", ms=3, color=("#e377c2" if i == 0 else "#7f7f7f"),
+            label="flip axis, " + ("positive" if key.endswith("plus") else "negative")
+                  + " sign")
 ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
 ax.set_xlabel("layer (output of block l)")
-ax.set_ylabel("median share minus rotated-lens control")
-ax.set_title("Against the rotated-lens chance level\n(above 0 = more lens-expressible than chance)",
-             fontsize=9)
-ax.legend(fontsize=7)
+ax.set_ylabel("J-space share")
+ax.set_title("The five pilot converged tensors and the flip axis", fontsize=9)
+ax.legend(fontsize=6)
 ax.grid(alpha=0.25)
+
+ax = axes[1][2]
+if "control_rotation_pooled" in table:
+    for fam, lab, c, _ls in FAMILY_SERIES:
+        if fam not in table["control_rotation_pooled"]:
+            continue
+        d = [table["lens"][fam][str(l)]["median"]
+             - table["control_rotation_pooled"][fam][str(l)]["median"] for l in LAYERS]
+        ax.plot(LAYERS, d, "-o", ms=3, color=c, label=lab)
+    ax.axhline(0.0, color="k", lw=1)
+    ax.axvspan(4.6, 10.4, color="gold", alpha=0.12)
+    ax.set_xlabel("layer (output of block l)")
+    ax.set_ylabel("median share minus rotated-lens control")
+    ax.set_title("Against the rotated-lens chance level\n(above 0 = more lens-expressible than chance)",
+                 fontsize=9)
+    ax.legend(fontsize=6)
+    ax.grid(alpha=0.25)
+else:
+    ax.set_axis_off()
+    ax.set_title("Against the rotated-lens chance level\n(not computed: the rotated-lens "
+                 "arms are absent from the shares file)", fontsize=9)
 if INCOMPLETE:
     fig.suptitle("PARTIAL DIAGNOSTIC SCORING, not a verdict figure: the shares "
                  "file did not cover layers 0 to 11 for every scoring arm",
@@ -714,3 +886,6 @@ fig.savefig(outpath("exp011_share_curves.png"), dpi=150)
 log("wrote " + ", ".join(os.path.basename(outpath(n)) for n in (
     "per_layer_tables.json", "verdicts.json", "per_layer_shares.csv",
     "exp011_share_curves.png")))
+log("not computed from this input: "
+    + ("nothing; every arm and every layer the scoring reads was present"
+       if not NOT_COMPUTED else "; ".join(e["what"] for e in NOT_COMPUTED)))
