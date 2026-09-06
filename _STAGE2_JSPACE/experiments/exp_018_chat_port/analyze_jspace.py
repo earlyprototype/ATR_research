@@ -7,7 +7,9 @@ layer's internal state can reach as a non-negative combination of at most 25
 lens directions. A lens direction for vocabulary token v at layer l is row v of
 the matrix `W_U J_l`: the direction in the layer-l state along which a small
 push most raises the model's disposition to say token v, later or now,
-averaged over a thousand ordinary web-text contexts.
+averaged over the 466 WikiText-103 prompts of 128 word pieces each on which
+the published fit converged (it was budgeted for 1,000 prompts and stopped at
+466 on its own criterion; the committed analysis records `lens_n_prompts`).
 
 The J-space share of a state is the squared length of the closest point in
 that set divided by the squared length of the state itself. It runs from 0
