@@ -1,0 +1,77 @@
+{
+ "battery": "h17b",
+ "n_units": 16,
+ "n_conditions": 14112,
+ "layer_sets": [
+  [
+   3
+  ],
+  [
+   4
+  ],
+  [
+   5
+  ],
+  [
+   6
+  ],
+  [
+   7
+  ],
+  [
+   8
+  ],
+  [
+   9
+  ],
+  [
+   10
+  ],
+  [
+   5,
+   6
+  ],
+  [
+   6,
+   7
+  ],
+  [
+   7,
+   8
+  ],
+  [
+   8,
+   9
+  ],
+  [
+   6,
+   7,
+   8
+  ],
+  [
+   7,
+   8,
+   9
+  ]
+ ],
+ "alphas": [
+  0.5,
+  1.0,
+  2.0
+ ],
+ "posmodes": [
+  "all_no_bos",
+  "from_mention",
+  "answer_only"
+ ],
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "chunk": 32,
+ "lens_sha256": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
+ "jlens_commit": "581d398613e5602a5af361e1c34d3a92ea82ba8e",
+ "torch": "2.14.0+cpu",
+ "wall_seconds": 780.4
+}

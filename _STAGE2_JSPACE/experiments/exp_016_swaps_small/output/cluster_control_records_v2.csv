@@ -1,0 +1,1417 @@
+battery,item_id,func,split,layers,alpha,posmode,arm,seed,good_rank,bad_rank,argmax_tok,in_top5,is_top1,beats_bad,patch_norm,top5_ids,sel_source,sel_target
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,lens,-1,47657,1,18836,0,0,0,2636.4238,18836 262 34761 284 33564, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,24,18,4346,0,0,0,353.8292,4346 284 262 9669 50196, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,177,211,284,0,0,1,846.8121,284 262 4346 257 21576, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,81,9,284,0,0,0,419.4122,284 4346 262 257 14899, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,83,180,262,0,0,1,719.8679,262 9669 284 2491 257, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,21,7,4346,0,0,0,462.4888,4346 284 262 257 20790, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,54,57,262,0,0,1,648.986,262 284 4346 257 22948, cricket, skiing
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,332,274,262,0,0,0,759.377,262 4346 284 257 11, cycling, cricket
+h17,sport-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,880,280,262,0,0,0,609.7582,262 2491 4346 284 257, tennis, surfing
+h17,sport-00-output,,tuning,7-8-9,2.0,all,lens,-1,1,36079,18836,1,1,1,909.4593,18836 34761 19553 33564 23761, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,17,5,284,0,0,0,601.8573,284 262 2491 14899 4346, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,101,4,284,0,0,0,751.0082,284 262 2712 4346 257, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,23,1,4346,0,0,0,517.3283,4346 284 9669 14899 262, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,212,4,284,0,0,0,886.2573,284 262 257 4346 5701, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,27,1,4346,0,0,0,683.6016,4346 262 2491 284 14899, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,478,23,262,0,0,0,1094.4144,262 284 407 4964 11, football, cricket
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,121,1,4346,0,0,0,445.863,4346 262 284 14899 2712, football, cycling
+h17,sport-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,1219,129,262,0,0,0,1166.2076,262 257 287 5059 25, football, surfing
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,lens,-1,29019,2,262,0,0,0,2562.0945,262 9669 257 284 407, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,17,194,262,0,0,1,842.4794,262 284 340 2712 257, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,215,165,262,0,0,0,1062.3519,262 257 287 326 284, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,20,3,262,0,0,0,424.6564,262 4346 9669 284 11783, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,17,44,262,0,0,1,927.6609,262 284 4346 326 12217, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,87,102,262,0,0,1,1600.5865,262 4346 9957 1444 25, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,7,2,262,0,0,0,607.2584,262 9669 284 4346 2712, basketball, rugby
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,26,10,262,0,0,0,449.2163,262 4346 284 22948 12217, golf, cycling
+h17,sport-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,19,69,262,0,0,1,310.8383,262 284 4346 2491 16381, surfing, boxing
+h17,sport-01-output,,heldout,7-8-9,2.0,all,lens,-1,1,1042,22948,1,1,1,1598.9656,22948 287 262 6332 257, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,17,2,262,0,0,0,391.378,262 4346 9669 284 2491, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,35,3,262,0,0,0,785.4803,262 11783 4346 284 407, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,14,2,262,0,0,0,884.6792,262 4346 11783 4964 25, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,98,4,262,0,0,0,1035.3254,262 407 284 4346 326, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,3,1,4346,1,0,0,963.2034,4346 262 22948 41348 2491, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,49,7,262,0,0,0,815.6836,262 25 465 257 11, football, rugby
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,17,2,262,0,0,0,739.7487,262 4346 22948 326 257, football, golf
+h17,sport-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,834,103,262,0,0,0,1168.5184,262 257 287 284 326, football, surfing
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,lens,-1,50056,2,34761,0,0,0,1342.1403,34761 18836 314 6208 2011, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,1978,5041,314,0,0,1,343.845,314 17362 19709 9957 383, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,1207,3012,314,0,0,1,377.6693,314 25911 9957 17362 2011, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,442,1750,314,0,0,1,581.0827,314 9957 12771 17362 383, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,7254,7261,314,0,0,1,851.6053,314 383 25911 17362 2011, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,3737,5434,314,0,0,1,747.5627,314 19709 383 17362 9957, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,2355,5009,314,0,0,1,803.7098,314 383 17277 17362 632, cricket, soccer
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,9486,4446,314,0,0,0,1027.3915,314 383 9957 775 357, golf, basketball
+h17,sport-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,11879,11028,17362,0,0,0,819.6096,17362 314 19709 383 7092, tennis, cycling
+h17,sport-02-output,,tuning,7-8-9,2.0,all,lens,-1,1,47349,18836,1,1,1,1033.1444,18836 34761 20872 554 317, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,2386,606,314,0,0,0,1044.7333,314 383 9957 17362 17011, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,2399,1134,314,0,0,0,300.2114,314 17362 9957 383 15872, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,2786,501,314,0,0,0,524.4026,314 25911 9957 17362 383, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,8933,2173,314,0,0,0,887.7681,314 9957 17362 317 383, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,1823,276,314,0,0,0,682.5628,314 17362 383 9957 19709, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,13859,6709,314,0,0,0,1097.3152,314 383 921 317 366, football, cricket
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,2793,868,314,0,0,0,738.834,314 383 357 15872 9957, football, golf
+h17,sport-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,10949,3389,314,0,0,0,817.5599,314 317 9957 383 25911, football, tennis
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,lens,-1,1,49990,18836,1,1,1,3210.1865,18836 262 34761 284 257, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,4,3,4346,1,0,0,600.4189,4346 262 22948 18836 14899, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,11,4,4346,0,0,0,643.511,4346 262 284 22948 257, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,25,14,262,0,0,0,864.0945,262 284 4346 14899 257, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,191,7,4346,0,0,0,623.3732,4346 262 257 12217 9669, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,17,3,4346,0,0,0,783.7216,4346 262 22948 14899 257, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,27,3,4346,0,0,0,566.0029,4346 2491 22948 20790 262, rugby, cricket
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,77,76,4346,0,0,0,633.318,4346 262 12478 14899 607, cycling, wrestling
+h17,sport-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,685,135,4346,0,0,0,612.2239,4346 262 2491 257 14284, tennis, surfing
+h17,sport-03-output,,heldout,7-8-9,2.0,all,lens,-1,1,30092,18836,1,1,1,918.6713,18836 34761 287 19553 262, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,17,1,4346,0,0,0,382.4273,4346 14899 20790 13126 284, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,49,1,4346,0,0,0,469.9269,4346 50196 262 14899 2491, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,15,1,4346,0,0,0,517.1378,4346 14899 50196 20790 284, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,66,4,262,0,0,0,885.1426,262 284 257 4346 12478, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,20,1,4346,0,0,0,682.6465,4346 14899 50196 262 2491, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,183,11,262,0,0,0,1093.1493,262 284 14899 407 4964, football, cricket
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,81,1,4346,0,0,0,443.4845,4346 262 284 14899 12478, football, cycling
+h17,sport-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,596,78,257,0,0,0,1165.0188,257 262 607 287 5059, football, surfing
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,lens,-1,1,49957,16381,1,1,1,2812.2744,16381 34845 46825 10419 262, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,98,24,13126,0,0,0,816.6317,13126 20790 284 4346 2712, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,124,1,22948,0,0,0,960.5308,22948 262 4346 2491 16259, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,73,39,262,0,0,0,629.4266,262 4346 2712 2491 16259, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,37,22,4346,0,0,0,721.091,4346 20790 262 18836 16259, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,20,5,4346,0,0,0,1122.9025,4346 262 257 41348 22948, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,38,8,4346,0,0,0,943.8901,4346 262 10988 12478 257, rugby, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,48,69,4346,0,0,1,633.6634,4346 262 12478 19780 14899, cycling, wrestling
+h17,sport-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,703,126,4346,0,0,0,612.6727,4346 262 2491 257 11783, tennis, surfing
+h17,sport-04-output,,tuning,7-8-9,2.0,all,lens,-1,1,48693,16381,1,1,1,1219.4227,16381 10419 46825 34845 41758, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,21,1,4346,0,0,0,389.7977,4346 22948 20790 13126 14899, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,42,1,4346,0,0,0,395.1921,4346 262 13126 14899 22948, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,33,1,4346,0,0,0,692.0812,4346 13126 14899 262 2491, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,19,1,4346,0,0,0,235.5115,4346 12217 262 22948 284, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,22,1,4346,0,0,0,177.8166,4346 22948 21576 13126 262, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,22,1,4346,0,0,0,926.0452,4346 22948 262 14899 2491, football, wrestling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,62,1,4346,0,0,0,443.4659,4346 262 12478 18836 20790, football, cycling
+h17,sport-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,574,40,262,0,0,0,1166.1843,262 257 5059 287 25, football, surfing
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,lens,-1,1,14022,18836,1,1,1,236.9238,18836 1444 34761 262 257, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,44,7,262,0,0,0,1072.233,262 257 3115 616 4152, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,260,23,262,0,0,0,715.5895,262 257 23186 616 36254, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,583,2,262,0,0,0,1257.8512,262 9669 257 36254 4673, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,270,22,262,0,0,0,1100.8088,262 257 530 4346 616, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,1038,21,262,0,0,0,1153.7965,262 257 4346 2491 1444, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,254,45,262,0,0,0,936.6313,262 257 407 1444 25, basketball, cricket
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,32,8,262,0,0,0,450.9235,262 22948 12217 4346 257, golf, cycling
+h17,sport-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,99,716,262,0,0,1,609.7062,262 257 11783 4346 2491, surfing, tennis
+h17,sport-05-output,,heldout,7-8-9,2.0,all,lens,-1,1,41256,18836,1,1,1,1074.7124,18836 34761 19553 287 1067, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,9,7,262,0,0,0,405.2517,262 22948 12217 9669 257, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,65,4,262,0,0,0,159.586,262 257 9669 4346 616, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,53,3,262,0,0,0,522.0151,262 9669 4346 50196 20790, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,444,3,262,0,0,0,887.1187,262 257 4346 1444 287, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,18,2,262,0,0,0,683.4833,262 4346 50196 11783 9283, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,1249,31,262,0,0,0,1097.3553,262 407 257 1444 366, football, cricket
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,11,3,262,0,0,0,740.7943,262 22948 4346 257 27101, football, golf
+h17,sport-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,1380,99,262,0,0,0,1168.233,262 257 287 11 25, football, surfing
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,lens,-1,1,29538,18836,1,1,1,336.3858,18836 34761 1444 262 257, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,805,63,262,0,0,0,923.959,262 523 1479 257 655, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,759,165,257,0,0,0,970.8516,257 262 523 517 284, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,2503,21,3221,0,0,0,1258.8872,3221 262 407 845 257, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,364,82,262,0,0,0,1100.6877,262 530 257 616 284, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,886,58,262,0,0,0,1154.4023,262 257 407 4346 1479, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,863,237,262,0,0,0,938.5732,262 407 644 257 845, basketball, cricket
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,93,18,262,0,0,0,453.5307,262 284 257 407 616, golf, cycling
+h17,sport-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,1520,35,257,0,0,0,501.7853,257 262 616 407 845, soccer, surfing
+h17,sport-06-output,,tuning,7-8-9,2.0,all,lens,-1,1,40589,18836,1,1,1,1055.3508,18836 34761 19553 287 262, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,120,14,262,0,0,0,740.8155,262 616 257 530 284, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,58,2,262,0,0,0,446.6966,262 4346 284 257 616, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,111,5,262,0,0,0,524.7212,262 407 9669 284 4346, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,1358,21,257,0,0,0,891.246,257 262 530 284 2495, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,64,3,262,0,0,0,684.7716,262 1257 4346 1464 407, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,2873,152,262,0,0,0,1099.8934,262 407 257 1444 284, football, cricket
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,66,8,477,0,0,0,744.8031,477 262 616 257 3221, football, golf
+h17,sport-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,594,135,262,0,0,0,848.9062,262 257 616 407 1690, football, soccer
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,lens,-1,44219,1,18836,0,0,0,2662.7463,18836 262 34761 33564 284, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,30,15,4346,0,0,0,837.7501,4346 14899 22948 262 9669, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,18,41,4346,0,0,1,406.5388,4346 14899 50196 9669 262, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,55,5,4346,0,0,0,432.2491,4346 262 284 13126 18836, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,69,146,9669,0,0,1,721.2347,9669 262 2008 4346 2491, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,20,7,4346,0,0,0,465.2881,4346 262 11783 284 20790, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,41,65,262,0,0,1,653.025,262 9669 50196 284 4346, cricket, skiing
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,5,16,4346,1,0,1,453.0436,4346 22948 12217 284 13126, cycling, golf
+h17,sport-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,755,100,4346,0,0,0,612.1241,4346 262 11783 2491 9669, tennis, surfing
+h17,sport-07-output,,heldout,7-8-9,2.0,all,lens,-1,1,33384,18836,1,1,1,936.3152,18836 34761 19553 287 33564, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,14,1,4346,0,0,0,621.7077,4346 14899 9283 2491 20790, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,17,1,4346,0,0,0,281.1506,4346 14899 12217 262 9669, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,21,1,4346,0,0,0,524.7244,4346 9669 14899 50196 20790, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,223,4,262,0,0,0,889.5965,262 284 257 4346 12217, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,26,1,4346,0,0,0,689.6166,4346 262 14899 2491 50196, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,366,16,262,0,0,0,1101.0197,262 284 14899 366 407, football, cricket
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,101,1,4346,0,0,0,456.5721,4346 262 19780 284 14899, football, cycling
+h17,sport-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,1063,91,262,0,0,0,1174.712,262 257 5059 287 326, football, surfing
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,lens,-1,1,49261,18836,1,1,1,3218.6741,18836 262 34761 284 19553, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,98,32,262,0,0,0,667.0842,262 257 284 2491 4346, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,34,11,262,0,0,0,975.837,262 284 2712 9669 4346, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,19,12,262,0,0,0,864.3085,262 4346 284 14899 16259, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,224,8,262,0,0,0,625.8029,262 4346 9669 12217 257, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,15,3,4346,0,0,0,785.2117,4346 262 22948 12217 12478, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,23,2,4346,0,0,0,572.6361,4346 22948 2491 36254 20790, rugby, cricket
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,8,10,4346,0,0,1,261.5113,4346 41348 12217 14899 262, cycling, tennis
+h17,sport-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,654,132,4346,0,0,0,610.9058,4346 2491 262 11783 12217, tennis, surfing
+h17,sport-08-output,,tuning,7-8-9,2.0,all,lens,-1,1,31400,18836,1,1,1,976.8692,18836 34761 287 262 11, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,89,1,4346,0,0,0,793.0879,4346 262 2491 284 257, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,16,1,4346,0,0,0,145.7368,4346 14899 284 262 11783, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,17,1,4346,0,0,0,521.2776,4346 9669 14899 50196 20790, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,93,2,262,0,0,0,887.7292,262 4346 284 12217 257, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,19,1,4346,0,0,0,685.5046,4346 262 9283 14899 2491, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,151,7,262,0,0,0,1094.5518,262 14899 284 4964 11, football, cricket
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,57,1,4346,0,0,0,448.5503,4346 262 12478 14899 20790, football, cycling
+h17,sport-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,140,1,4346,0,0,0,816.7924,4346 262 284 257 22948, football, tennis
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,lens,-1,50136,1,18836,0,0,0,3222.1433,18836 262 407 991 257, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,21,69,284,0,0,1,328.7688,284 262 407 4346 257, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,738,1266,262,0,0,1,1159.134,262 257 407 783 625, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,41,7,262,0,0,0,392.1251,262 4346 407 284 783, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,25,16,4346,0,0,0,515.2046,4346 284 11783 9669 262, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,6,37,4346,0,0,1,784.4449,4346 262 257 284 12217, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,33,47,4346,0,0,1,570.6172,4346 262 407 257 284, cricket, rugby
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,9,25,4346,0,0,1,447.8296,4346 12217 284 262 257, cycling, golf
+h17,sport-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,300,1001,262,0,0,1,614.4833,262 257 4346 407 11783, surfing, tennis
+h17,sport-09-output,,heldout,7-8-9,2.0,all,lens,-1,1,37932,18836,1,1,1,1093.3442,18836 34761 19553 23761 287, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,27,14,262,0,0,0,723.4837,262 257 284 9283 9669, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,23,1,4346,0,0,0,460.984,4346 262 284 407 257, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,42,1,4346,0,0,0,517.3428,4346 9669 284 262 407, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,220,3,257,0,0,0,886.0685,257 262 4346 284 530, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,38,1,4346,0,0,0,683.2958,4346 262 407 257 284, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,1201,54,407,0,0,0,1098.1178,407 262 284 257 534, football, cricket
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,186,2,530,0,0,0,450.9527,530 4346 262 407 257, football, cycling
+h17,sport-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,1634,246,257,0,0,0,1172.2941,257 287 262 329 530, football, surfing
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,lens,-1,1,7998,18836,1,1,1,267.2707,18836 34761 262 326 6208, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,28,15,14899,0,0,0,1049.6619,14899 262 2159 4346 11783, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,29,5,4346,0,0,0,470.6327,4346 262 9283 11783 9669, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,123,1,9669,0,0,0,1259.3834,9669 262 11783 20790 257, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,66,7,262,0,0,0,1100.871,262 4346 9283 22948 257, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,247,8,4346,0,0,0,1156.9939,4346 9283 262 5701 13126, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,107,10,262,0,0,0,942.0623,262 12217 25 257 4346, basketball, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,97,53,4346,0,0,0,761.0461,4346 9283 262 9669 11783, cycling, cricket
+h17,sport-10-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,11,7,4346,0,0,0,562.4131,4346 22948 12217 9669 262, soccer, tennis
+h17,sport-10-output,,tuning,7-8-9,2.0,all,lens,-1,1,35380,18836,1,1,1,997.5721,18836 34761 287 19553 262, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,39,1,4346,0,0,0,589.8206,4346 262 9669 9283 5701, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,26,1,4346,0,0,0,650.9977,4346 262 12217 22948 9283, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,28,1,4346,0,0,0,520.1475,4346 9669 9283 12217 262, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,108,1,4346,0,0,0,893.4419,4346 9283 5701 262 12217, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,20,1,4346,0,0,0,683.8111,4346 9283 262 11783 9669, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,601,5,262,0,0,0,1099.8179,262 257 14899 534 4346, football, cricket
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,125,1,4346,0,0,0,449.8448,4346 262 9669 9283 5701, football, cycling
+h17,sport-10-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,80,1,4346,0,0,0,819.059,4346 262 12217 257 9669, football, tennis
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,lens,-1,1,29514,16381,1,1,1,493.6445,16381 34845 10419 46825 36762, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,2,3,262,1,0,1,1273.7733,262 16381 9669 11783 14899, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,24,29,262,0,0,1,1011.6445,262 616 257 11783 9283, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,67,1,9669,0,0,0,771.6505,9669 262 4346 50196 4395, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,13,3,262,0,0,0,302.6914,262 4346 9669 22948 50196, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,16,5,262,0,0,0,1026.8776,262 4346 2491 9283 9669, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,60,2,262,0,0,0,1009.5722,262 9669 257 5701 2491, basketball, wrestling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,38,19,22948,0,0,0,453.2517,22948 50196 4346 11783 262, golf, cycling
+h17,sport-11-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,615,75,262,0,0,0,612.6279,262 4346 11783 9669 2491, tennis, surfing
+h17,sport-11-output,,heldout,7-8-9,2.0,all,lens,-1,1,48383,16381,1,1,1,1296.9691,16381 10419 46825 34845 41758, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,18,2,262,0,0,0,758.1453,262 4346 257 50196 616, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,11,1,4346,0,0,0,569.9754,4346 11783 262 9669 2491, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,14,3,262,0,0,0,698.5201,262 9669 4346 50196 11783, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,9,2,9669,0,0,0,241.1764,9669 4346 262 11783 12217, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,7,2,9669,0,0,0,180.029,9669 4346 262 50196 11783, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,11,6,262,0,0,0,928.3975,262 9669 38581 14899 18553, football, wrestling
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,26,3,262,0,0,0,745.5902,262 22948 4346 14899 50196, football, golf
+h17,sport-11-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,398,33,262,0,0,0,1171.5356,262 257 287 38581 11, football, surfing
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,lens,-1,1,35684,49364,1,1,1,611.8795,49364 262 257 523 428, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,55,145,262,0,0,1,867.3092,262 257 407 523 616, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,11,5,262,0,0,0,783.8841,262 257 616 45540 41236, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,115,33,262,0,0,0,996.4954,262 257 407 2192 616, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,60,5,262,0,0,0,431.1543,262 257 45540 6029 41236, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,134,18,257,0,0,0,361.8115,257 262 281 1682 1444, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,43,21,262,0,0,0,967.3841,262 428 257 29036 17180, strawberry, mango
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,117,218,262,0,0,1,860.8201,262 257 616 284 479, grape, banana
+h17,fruit-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,1272,87,257,0,0,0,842.4208,257 262 1444 407 1464, cherry, apple
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,lens,-1,1,35684,49364,1,1,1,611.8795,49364 262 257 523 428, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,30,19,262,0,0,0,320.342,262 257 407 616 6029, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,16,12,262,0,0,0,559.9508,262 257 45540 1444 407, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,115,33,262,0,0,0,996.4954,262 257 407 2192 616, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,60,5,262,0,0,0,431.1543,262 257 45540 6029 41236, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,134,18,257,0,0,0,361.8115,257 262 281 1682 1444, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,43,21,262,0,0,0,967.3841,262 428 257 29036 17180, strawberry, mango
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,967,1366,262,0,0,1,1386.9102,262 257 465 1737 2192, strawberry, grape
+h17,fruit-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,299,53,262,0,0,0,792.8876,262 257 1444 616 407, strawberry, cherry
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,lens,-1,1,42819,47565,1,1,1,546.0976,47565 262 257 33230 613, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,71,34,262,0,0,0,606.7297,262 257 616 6029 45540, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,398,66,262,0,0,0,768.92,262 257 284 326 616, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,189,12,262,0,0,0,808.1981,262 257 25 4713 6029, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,51,11,262,0,0,0,718.6489,262 257 407 6029 45540, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,421,64,262,0,0,0,792.256,262 257 6029 287 407, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,12,52,262,0,0,1,797.8899,262 257 407 6029 428, strawberry, peach
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,66,87,262,0,0,1,861.2665,262 257 284 616 511, grape, banana
+h17,fruit-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,116,37,262,0,0,0,793.9014,262 257 407 6029 29036, strawberry, cherry
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,lens,-1,11,13,262,0,0,1,681.4056,262 257 6029 29036 41236, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,100,223,262,0,0,1,963.4553,262 257 1682 1444 655, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,40,6,262,0,0,0,671.7303,262 257 8234 6029 35484, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,50,4,262,0,0,0,82.4515,262 257 6029 45540 407, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,33,9,262,0,0,0,265.5941,262 257 6029 29036 49364, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,304,91,262,0,0,0,1020.2516,262 257 407 530 616, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,33,13,262,0,0,0,345.7424,262 257 6029 407 616, pineapple, peach
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,192,169,262,0,0,0,1371.6232,262 257 407 2192 530, pineapple, grape
+h17,fruit-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,27,41,262,0,0,1,561.4911,262 257 326 407 35842, pineapple, cherry
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,lens,-1,2,47270,314,1,0,1,1152.2997,314 45540 23076 383 317, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,6702,8113,314,0,0,1,782.8646,314 317 22826 632 383, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,11587,7021,314,0,0,0,699.3435,314 383 317 366 775, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,5594,1259,314,0,0,0,800.3381,314 383 317 632 1002, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,4717,2029,314,0,0,0,911.0657,314 22826 383 42611 317, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,9013,8715,314,0,0,0,606.1544,314 317 22826 383 2011, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,2795,4028,314,0,0,1,514.0834,314 383 317 22826 40058, strawberry, pineapple
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,11012,3441,314,0,0,0,1472.1891,314 22826 317 383 632, banana, plum
+h17,fruit-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,2961,1248,314,0,0,0,445.8887,314 383 22826 317 632, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,lens,-1,14967,2330,314,0,0,0,2028.6871,314 383 317 3363 4196, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,2722,1643,314,0,0,0,1306.1627,314 383 317 632 1119, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,4013,1678,314,0,0,0,581.2925,314 383 317 2011 1002, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,2420,446,314,0,0,0,669.4641,314 22826 317 383 632, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,3973,704,314,0,0,0,548.0156,314 22826 383 317 632, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,3463,1161,314,0,0,0,344.3641,314 383 22826 317 632, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,2961,1248,314,0,0,0,445.8887,314 383 22826 317 632, apple, strawberry
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,3319,1259,314,0,0,0,1069.7625,314 22826 317 383 2011, apple, banana
+h17,fruit-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,2961,1248,314,0,0,0,445.8887,314 383 22826 317 632, apple, strawberry
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,lens,-1,1,48585,49364,1,1,1,637.0117,49364 262 257 465 523, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,46,5,262,0,0,0,674.0164,262 257 47565 613 41236, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,25,4,262,0,0,0,659.4644,262 257 6029 41236 45540, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,88,16,262,0,0,0,996.3257,262 257 607 635 705, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,30,4,262,0,0,0,431.2087,262 257 45540 41236 705, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,105,5,257,0,0,0,360.3944,257 262 281 1444 41236, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,37,9,262,0,0,0,967.8464,262 257 17180 29036 479, strawberry, mango
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,105,136,262,0,0,1,860.9914,262 257 607 705 284, grape, banana
+h17,fruit-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,984,60,257,0,0,0,842.1495,257 262 1444 1043 1690, cherry, apple
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,lens,-1,1,48585,49364,1,1,1,637.0117,49364 262 257 465 523, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,95,27,262,0,0,0,870.2684,262 257 607 783 635, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,17,18,262,0,0,1,537.2924,262 257 6029 1444 635, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,88,16,262,0,0,0,996.3257,262 257 607 635 705, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,30,4,262,0,0,0,431.2087,262 257 45540 41236 705, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,105,5,257,0,0,0,360.3944,257 262 281 1444 41236, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,37,9,262,0,0,0,967.8464,262 257 17180 29036 479, strawberry, mango
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,988,1149,257,0,0,1,1387.4861,257 262 465 281 1737, strawberry, grape
+h17,fruit-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,152,33,262,0,0,0,793.3051,262 257 465 1444 607, strawberry, cherry
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,lens,-1,1,36204,49364,1,1,1,623.6133,49364 262 257 465 635, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,97,409,257,0,0,1,1350.4919,257 262 607 783 300, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,34,7,262,0,0,0,344.004,262 257 465 705 635, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,77,29,262,0,0,0,996.4431,262 257 705 465 635, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,23,5,262,0,0,0,432.3396,262 257 45540 465 41236, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,80,10,257,0,0,0,360.1823,257 262 281 465 1444, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,26,11,262,0,0,0,967.3828,262 257 17180 45540 479, strawberry, mango
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,103,149,257,0,0,1,860.678,257 262 465 479 284, grape, banana
+h17,fruit-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,843,52,257,0,0,0,842.2231,257 262 1444 465 366, cherry, apple
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,lens,-1,3,39,262,1,0,1,622.3847,262 257 49364 6029 465, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,68,93,262,0,0,1,772.4294,262 257 465 12498 12379, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,150,230,262,0,0,1,1498.9728,262 257 279 465 350, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,61,3,262,0,0,0,668.9613,262 257 45540 1444 465, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,114,10,262,0,0,0,605.0837,262 257 465 8234 407, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,13,5,262,0,0,0,497.9095,262 257 465 705 45540, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,7,3,262,0,0,0,592.1411,262 257 45540 279 465, pineapple, mango
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,199,209,262,0,0,1,1370.2556,262 257 407 635 465, pineapple, grape
+h17,fruit-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,41,28,257,0,0,0,560.9286,257 262 281 465 326, pineapple, cherry
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,lens,-1,1,27018,49364,1,1,1,618.3572,49364 262 257 523 407, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,427,285,257,0,0,0,1045.0425,257 262 407 616 523, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,175,33,257,0,0,0,620.1147,257 262 523 407 616, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,117,102,257,0,0,0,997.2217,257 262 407 616 1223, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,85,39,262,0,0,0,434.0919,262 257 6029 407 616, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,285,100,257,0,0,0,365.8824,257 262 407 523 6029, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,62,106,262,0,0,1,969.7665,262 257 523 6029 407, strawberry, mango
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,131,164,262,0,0,1,1607.7903,262 257 6029 616 407, grape, plum
+h17,fruit-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,480,164,257,0,0,0,797.0605,257 262 523 407 845, strawberry, cherry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,lens,-1,27018,1,49364,0,0,0,618.3572,49364 262 257 523 407, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,62,26,262,0,0,0,694.269,262 257 6029 616 845, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,60,95,257,0,0,1,670.9783,257 262 523 1444 616, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,426,67,262,0,0,0,962.8403,262 257 407 530 6029, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,148,64,262,0,0,0,951.0121,262 257 523 2192 465, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,100,285,257,0,0,1,365.8824,257 262 407 523 6029, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,106,62,262,0,0,0,969.7665,262 257 523 6029 407, mango, strawberry
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,1089,1651,262,0,0,1,1111.4613,262 257 523 922 407, mango, grape
+h17,fruit-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,106,62,262,0,0,0,969.7665,262 257 523 6029 407, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,lens,-1,18504,1,49364,0,0,0,630.1812,49364 3091 1402 1588 1263, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,3346,2741,1256,0,0,0,275.5438,1256 649 1178 1402 1588, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,1646,2261,1310,0,0,1,377.274,1310 1402 3236 1588 3091, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,11051,2712,1402,0,0,0,969.3345,1402 1178 1643 1310 1808, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,3853,956,1402,0,0,0,947.1083,1402 649 1256 1178 845, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,1148,3108,3091,0,0,1,367.5868,3091 1402 1178 1310 1588, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,1098,718,3091,0,0,0,970.3602,3091 1310 649 1402 1256, mango, strawberry
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,808,5667,3155,0,0,1,864.3153,3155 1256 1178 1263 649, grape, banana
+h17,fruit-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,1639,600,1402,0,0,0,692.7705,1402 3091 1310 3348 649, strawberry, plum
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,lens,-1,1,50143,49364,1,1,1,1913.8848,49364 1862 4713 29981 3275, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,1601,216,1402,0,0,0,624.1722,1402 1588 1310 3236 1263, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,3260,580,1256,0,0,0,962.7305,1256 1310 366 1402 1588, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,1212,342,3091,0,0,0,260.9763,3091 1402 649 1588 1263, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,2372,192,1402,0,0,0,595.6321,1402 1588 1310 3091 649, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,1619,228,1256,0,0,0,965.9437,1256 3091 3236 649 922, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,1006,181,1402,0,0,0,387.3578,1402 1588 1178 1310 3091, banana, mango
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,5667,808,3155,0,0,0,864.3152,3155 1256 1178 1263 649, banana, grape
+h17,fruit-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,1584,262,1588,0,0,0,904.1634,1588 4286 890 845 1402, banana, strawberry
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,lens,-1,1,44501,49364,1,1,1,667.8662,49364 717 749 691 530, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,71,39,8234,0,0,0,520.2802,8234 530 6029 749 691, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,1203,90,530,0,0,0,887.8662,530 749 8234 717 1266, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,262,57,8234,0,0,0,997.275,8234 530 717 749 366, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,71,13,6029,0,0,0,435.0417,6029 8234 25996 530 749, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,720,44,530,0,0,0,362.7837,530 6029 8234 749 2060, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,52,70,6029,0,0,1,966.3528,6029 8234 749 530 17180, strawberry, mango
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,57,16,366,0,0,0,862.5378,366 749 6029 530 2818, banana, grape
+h17,fruit-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,46,407,749,0,0,1,1175.7338,749 6029 1266 530 691, strawberry, grape
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,lens,-1,1583,1,23612,0,0,0,1154.9901,23612 6029 749 530 691, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,42,9,8234,0,0,0,746.9694,8234 530 6029 25996 749, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,16,8,749,0,0,0,541.8994,749 530 8234 6029 691, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,32,20,6029,0,0,0,1003.2618,6029 530 8234 25996 2266, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,44,15,530,0,0,0,595.1089,530 749 8234 1266 2818, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,58,18,8234,0,0,0,575.5089,8234 6029 749 530 1611, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,299,104,749,0,0,0,796.7876,749 1266 691 5509 6029, cherry, strawberry
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,36,31,717,0,0,0,681.7617,717 530 6029 749 366, cherry, grape
+h17,fruit-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,299,104,749,0,0,0,796.7876,749 1266 691 5509 6029, cherry, strawberry
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,lens,-1,1,48940,49364,1,1,1,637.4833,49364 845 1310 1402 1643, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,23,89,845,0,0,1,710.1246,845 1310 1643 6029 1402, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,170,14,845,0,0,0,1108.1178,845 8234 1643 22802 25996, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,100,31,1643,0,0,0,998.4364,1643 845 1310 1402 1178, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,55,8,845,0,0,0,438.2525,845 1310 1643 1402 6029, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,213,10,1643,0,0,0,369.8102,1643 1310 845 6029 1402, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,51,38,1310,0,0,0,969.5557,1310 845 1107 922 3621, strawberry, mango
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,77,153,845,0,0,1,864.2481,845 1263 3621 1657 1310, grape, banana
+h17,fruit-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,894,10,1310,0,0,0,444.2113,1310 845 6029 1402 3621, strawberry, apple
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,lens,-1,1,48940,49364,1,1,1,637.4833,49364 845 1310 1402 1643, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,65,7,1643,0,0,0,203.7975,1643 1310 845 1402 6029, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,39,6,845,0,0,0,245.8785,845 6029 1310 1643 3621, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,100,31,1643,0,0,0,998.4364,1643 845 1310 1402 1178, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,55,8,845,0,0,0,438.2525,845 1310 1643 1402 6029, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,213,10,1643,0,0,0,369.8102,1643 1310 845 6029 1402, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,51,38,1310,0,0,0,969.5557,1310 845 1107 922 3621, strawberry, mango
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,154,762,6087,0,0,1,1391.8265,6087 1178 845 3155 922, strawberry, grape
+h17,fruit-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,894,10,1310,0,0,0,444.2113,1310 845 6029 1402 3621, strawberry, apple
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,lens,-1,1,50084,30777,1,1,1,2076.0396,30777 36656 8237 262 48315, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,143,44,262,0,0,0,743.5154,262 257 607 428 6029, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,42,7,262,0,0,0,1100.134,262 257 46593 616 36973, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,35,3,262,0,0,0,557.8867,262 257 41236 428 49364, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,112,4,262,0,0,0,582.2045,262 257 6029 41236 616, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,945,921,262,0,0,0,1389.3053,262 257 465 1737 281, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,39,53,262,0,0,1,1176.2007,262 257 35484 428 783, strawberry, grape
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,89,189,262,0,0,1,861.8247,262 257 479 616 284, grape, banana
+h17,fruit-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,969,61,257,0,0,0,843.3791,257 262 1444 523 783, cherry, apple
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,lens,-1,1,50084,30777,1,1,1,2076.0396,30777 36656 8237 262 48315, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,56,4,262,0,0,0,548.9517,262 257 616 41236 607, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,53,3,262,0,0,0,267.763,262 257 41236 6029 45540, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,35,3,262,0,0,0,557.8867,262 257 41236 428 49364, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,112,4,262,0,0,0,582.2045,262 257 6029 41236 616, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,945,921,262,0,0,0,1389.3053,262 257 465 1737 281, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,39,53,262,0,0,1,1176.2007,262 257 35484 428 783, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,945,921,262,0,0,0,1389.3053,262 257 465 1737 281, strawberry, grape
+h17,fruit-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,194,15,262,0,0,0,794.3106,262 257 465 1444 45540, strawberry, cherry
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,lens,-1,12856,1,14032,0,0,0,361.3015,14032 4171 17265 262 4753, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,17,7,262,0,0,0,473.1406,262 4171 2042 257 2330, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,29,60,262,0,0,1,990.83,262 3221 2192 257 2330, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,13,15,262,0,0,1,723.8184,262 2042 4171 4077 257, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,203,237,262,0,0,1,856.8748,262 257 616 428 674, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,154,8,262,0,0,0,664.2628,262 257 1849 4171 287, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,13,6,262,0,0,0,1038.8499,262 2042 4171 2266 257, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,154,8,262,0,0,0,664.2628,262 257 1849 4171 287, purple, yellow
+h17,colour-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,900,20,262,0,0,0,546.4192,262 2266 2042 257 4171, purple, gray
+h17,colour-00-output,,tuning,7-8-9,2.0,all,lens,-1,1,27741,7872,1,1,1,979.1061,7872 10912 262 11398 9568, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,85,4,262,0,0,0,994.9575,262 257 616 4171 2266, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,32,3,262,0,0,0,766.831,262 257 4171 616 2330, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,16,3,262,0,0,0,782.9064,262 2266 4171 616 257, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,18,2,262,0,0,0,397.3173,262 4171 2042 257 2330, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,79,2,262,0,0,0,920.3312,262 4171 257 2042 616, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,24,5,2042,0,0,0,906.9,2042 262 257 2619 4171, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,79,2,262,0,0,0,920.3312,262 4171 257 2042 616, blue, yellow
+h17,colour-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,535,4,262,0,0,0,579.5055,262 257 2042 4171 2266, blue, gray
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,lens,-1,2522,1,14032,0,0,0,287.9151,14032 4171 262 4753 257, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,38,17,2042,0,0,0,595.6839,2042 262 257 2266 616, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,48,45,10912,0,0,0,1195.1702,10912 262 257 366 407, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,16,13,262,0,0,0,723.5455,262 2042 4171 257 4077, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,193,167,262,0,0,0,857.4623,262 257 616 428 530, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,123,4,262,0,0,0,664.0987,262 257 4171 14032 644, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,16,6,262,0,0,0,1039.028,262 2042 2266 4171 257, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,123,4,262,0,0,0,664.0987,262 257 4171 14032 644, purple, yellow
+h17,colour-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,248,17,262,0,0,0,546.7424,262 2266 616 257 2042, purple, gray
+h17,colour-01-output,,heldout,7-8-9,2.0,all,lens,-1,1,28817,7872,1,1,1,981.1199,7872 10912 262 11398 523, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,14,4,262,0,0,0,397.8553,262 616 11398 4171 2266, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,12,2,262,0,0,0,328.6511,262 4171 11398 2266 10912, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,18,4,262,0,0,0,782.2538,262 616 2266 4171 257, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,16,2,262,0,0,0,397.5365,262 4171 257 428 616, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,71,2,262,0,0,0,920.5556,262 4171 257 616 2042, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,31,4,2042,0,0,0,908.0624,2042 257 262 4171 2266, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,71,2,262,0,0,0,920.5556,262 4171 257 616 2042, blue, yellow
+h17,colour-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,153,3,262,0,0,0,580.1936,262 257 4171 2042 2266, blue, gray
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,lens,-1,1,2439,11398,1,1,1,1594.7606,11398 262 2266 257 14657, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,10,7,262,0,0,0,262.0962,262 257 4171 4077 2266, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,30,175,262,0,0,1,1135.5895,262 407 2330 991 257, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,11,16,262,0,0,1,776.2863,262 257 616 10912 4171, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,76,59,262,0,0,0,718.0464,262 257 2266 4171 407, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,125,23,262,0,0,0,863.5164,262 4171 257 2042 4077, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,17,8,262,0,0,0,177.7025,262 4171 4077 257 2042, purple, pink
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,129,14,262,0,0,0,668.3467,262 257 644 287 663, purple, yellow
+h17,colour-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,46,290,262,0,0,1,958.6011,262 257 4171 2266 616, gray, yellow
+h17,colour-02-output,,tuning,7-8-9,2.0,all,lens,-1,1,34655,11398,1,1,1,1580.0934,11398 14657 41429 673 523, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,6,2,262,0,0,0,352.3338,262 4171 2266 257 2042, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,8,2,262,0,0,0,998.9783,262 4171 3223 616 257, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,18,9,2266,0,0,0,1005.598,2266 10912 262 7872 4077, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,3,2,262,1,0,0,642.2029,262 4171 11398 257 2330, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,21,6,262,0,0,0,296.9323,262 2042 257 2266 2330, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,16,3,262,0,0,0,181.4376,262 257 4171 2042 4077, blue, pink
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,61,2,262,0,0,0,920.6993,262 4171 4077 257 616, blue, yellow
+h17,colour-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,370,2,262,0,0,0,577.8618,262 4171 257 2042 2266, blue, gray
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,lens,-1,14,2998,314,0,0,1,1749.3739,314 3469 317 3594 383, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,1929,935,314,0,0,0,1137.963,314 2635 383 632 317, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,2199,943,314,0,0,0,641.9929,314 317 2011 383 2619, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,3138,2283,314,0,0,0,207.0304,314 383 317 632 2011, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,3499,1621,314,0,0,0,486.1079,314 383 317 632 770, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,6163,5570,314,0,0,0,673.3766,314 317 383 2011 632, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,2056,2200,314,0,0,1,865.6462,314 383 317 632 921, brown, purple
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,461,1749,314,0,0,1,922.1991,314 383 2619 632 2011, yellow, blue
+h17,colour-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,6105,9206,314,0,0,1,865.7673,314 383 632 317 2011, silver, gray
+h17,colour-03-output,,heldout,7-8-9,2.0,all,lens,-1,1,44581,7586,1,1,1,2994.2881,7586 4373 921 2011 33282, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,1482,385,314,0,0,0,1202.0809,314 2011 317 383 632, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,3228,2283,314,0,0,0,1205.4115,314 632 2011 383 3894, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,423,152,314,0,0,0,945.9222,314 383 921 317 632, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,1149,464,314,0,0,0,632.4611,314 383 317 2011 13980, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,1569,763,314,0,0,0,761.1624,314 317 383 2011 1002, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,766,401,314,0,0,0,403.3087,314 383 632 317 2011, black, brown
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,1191,328,314,0,0,0,647.8478,314 2619 383 317 921, black, yellow
+h17,colour-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,6971,387,314,0,0,0,632.507,314 383 632 921 317, black, silver
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,lens,-1,7062,1,14032,0,0,0,381.645,14032 4171 17265 2266 2042, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,11,10,2266,0,0,0,401.02,2266 4171 2042 262 11398, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,21,32,262,0,0,1,592.9251,262 2266 257 10912 4077, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,11,13,2042,0,0,1,723.4855,2042 4171 4077 2266 10912, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,126,146,262,0,0,1,856.8519,262 257 674 511 530, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,75,6,262,0,0,0,663.025,262 257 4171 2266 705, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,11,4,2266,0,0,0,1038.6576,2266 2042 4171 14032 4077, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,75,6,262,0,0,0,663.025,262 257 4171 2266 705, purple, yellow
+h17,colour-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,653,13,2266,0,0,0,547.1471,2266 262 4171 2042 257, purple, gray
+h17,colour-04-output,,tuning,7-8-9,2.0,all,lens,-1,1,15961,7872,1,1,1,953.986,7872 10912 11398 257 607, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,103,5,2266,0,0,0,1662.0354,2266 2042 262 257 4171, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,12,1,4171,0,0,0,275.6397,4171 11398 2266 257 2042, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,12,2,2266,0,0,0,782.2354,2266 4171 11398 4077 10912, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,13,1,4171,0,0,0,396.8915,4171 262 2042 257 2266, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,45,1,4171,0,0,0,919.8458,4171 257 4077 2042 262, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,16,2,2042,0,0,0,907.8663,2042 4171 2266 257 2330, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,45,1,4171,0,0,0,919.8458,4171 257 4077 2042 262, blue, yellow
+h17,colour-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,442,1,4171,0,0,0,580.0632,4171 2042 2266 257 262, blue, gray
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,lens,-1,6244,1,14032,0,0,0,326.8896,14032 4171 17265 2266 2042, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,28,31,257,0,0,1,787.0209,257 262 2042 4171 2266, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,11,10,10912,0,0,0,559.3464,10912 366 4171 2266 2330, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,11,13,2042,0,0,1,722.9311,2042 4077 4171 257 2266, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,96,93,262,0,0,0,858.936,262 257 674 530 511, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,51,5,262,0,0,0,663.9698,262 4171 257 2266 14032, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,12,4,2266,0,0,0,1038.7388,2266 4171 2042 14032 257, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,51,5,262,0,0,0,663.9698,262 4171 257 2266 14032, purple, yellow
+h17,colour-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,15,6,4171,0,0,0,859.1285,4171 262 2266 4077 257, black, gray
+h17,colour-05-output,,heldout,7-8-9,2.0,all,lens,-1,1,21919,7872,1,1,1,967.731,7872 10912 2330 11398 262, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,12,2,2266,0,0,0,437.5248,2266 4171 2042 2330 4077, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,16,6,262,0,0,0,784.8474,262 465 257 2266 2330, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,13,2,2266,0,0,0,780.6412,2266 4171 2330 4077 257, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,12,1,4171,0,0,0,397.0074,4171 262 257 2042 2266, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,34,1,4171,0,0,0,920.3156,4171 4077 257 2042 262, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,17,3,2042,0,0,0,908.6724,2042 257 4171 2266 14032, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,34,1,4171,0,0,0,920.3156,4171 4077 257 2042 262, blue, yellow
+h17,colour-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,51,1,4171,0,0,0,579.1072,4171 2266 2042 257 2330, blue, gray
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,lens,-1,13,18,2266,0,0,1,1187.2797,2266 4171 4077 11 290, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,11,7,11,0,0,0,737.3462,11 2266 290 1657 4171, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,13,14,2266,0,0,1,771.282,2266 4171 11398 11 4077, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,6,5,4171,0,0,0,666.0264,4171 2266 11 11398 10912, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,9,5,2266,0,0,0,462.0529,2266 4171 11398 7872 10912, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,11,16,2266,0,0,1,459.5941,2266 11 4171 290 11398, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,11,4,2266,0,0,0,565.8522,2266 4171 7872 10912 11, orange, purple
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,23,5,2266,0,0,0,678.8857,2266 11 11398 4171 14032, purple, black
+h17,colour-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,31,21,2266,0,0,0,860.8949,2266 4171 11398 11 4077, gray, silver
+h17,colour-06-output,,tuning,7-8-9,2.0,all,lens,-1,1,4660,14032,1,1,1,993.8661,14032 11398 290 3931 3124, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,41,1,2266,0,0,0,1137.4177,2266 11 4171 2330 290, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,11,1,2266,0,0,0,422.2225,2266 4171 10912 11398 4077, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,12,2,4171,0,0,0,730.4808,4171 2266 11398 7872 2330, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,22,1,2266,0,0,0,1058.1752,2266 4171 4077 11 290, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,15,1,2266,0,0,0,478.169,2266 4171 11 290 4077, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,12,1,2266,0,0,0,317.9722,2266 4171 11 4077 11398, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,15,1,2266,0,0,0,478.169,2266 4171 11 290 4077, red, purple
+h17,colour-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,20,1,2266,0,0,0,371.0718,2266 4171 11398 11 7872, red, gray
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,lens,-1,1370,435,257,0,0,0,237.8899,257 9909 262 1043 407, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,1013,666,257,0,0,0,517.9307,257 262 9909 1043 407, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,626,1098,257,0,0,1,508.0723,257 262 973 407 530, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,836,609,257,0,0,0,310.3393,257 9909 262 530 407, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,5442,2405,257,0,0,0,1269.9137,257 262 281 973 407, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,2745,1525,257,0,0,0,775.4993,257 2861 546 9909 7986, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,559,655,257,0,0,1,929.7517,257 407 925 287 635, silver, pink
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,692,1797,257,0,0,1,662.3604,257 9909 262 287 1043, yellow, purple
+h17,colour-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,1201,1656,257,0,0,1,911.4191,257 287 262 1043 973, silver, purple
+h17,colour-07-output,,heldout,7-8-9,2.0,all,lens,-1,1,48921,8465,1,1,1,2868.8347,8465 7698 3869 2702 14119, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,1520,81,257,0,0,0,1176.8818,257 262 407 9909 287, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,3806,639,407,0,0,0,961.079,407 257 287 262 477, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,180,391,257,0,0,1,938.5312,257 1043 262 407 281, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,1133,127,257,0,0,0,954.645,257 262 287 6572 530, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,1168,758,257,0,0,0,946.408,257 262 9909 973 287, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,1218,65,257,0,0,0,627.7621,257 9909 262 281 2077, black, silver
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,1183,80,257,0,0,0,644.5354,257 407 1043 262 6898, black, yellow
+h17,colour-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,1218,65,257,0,0,0,627.7621,257 9909 262 281 2077, black, silver
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,lens,-1,4023,1,11398,0,0,0,1194.108,11398 14657 23612 262 616, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,18,33,262,0,0,1,783.7171,262 2330 257 616 2266, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,47,19,262,0,0,0,997.2985,262 2330 257 2042 11, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,12,7,262,0,0,0,349.2639,262 2042 2266 2330 4171, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,16,14,262,0,0,0,602.2621,262 2330 4171 2042 2266, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,16,121,262,0,0,1,1127.4554,262 4171 2330 2042 2266, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,32,20,262,0,0,0,999.0963,262 2266 2330 2042 616, pink, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,119,11,262,0,0,0,667.5287,262 2266 257 287 4171, purple, yellow
+h17,colour-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,176,6,262,0,0,0,860.1479,262 4171 616 2266 2330, black, gray
+h17,colour-08-output,,tuning,7-8-9,2.0,all,lens,-1,1,9884,7872,1,1,1,903.9305,7872 10912 4077 11398 2266, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,25,3,262,0,0,0,479.3551,262 616 2330 2042 2266, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,11,2,262,0,0,0,1606.2234,262 2330 257 2266 13791, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,10,8,262,0,0,0,1135.3096,262 2266 2297 4171 14032, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,22,11,262,0,0,0,1001.3531,262 2266 257 366 10912, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,11,3,262,0,0,0,827.9258,262 257 2330 2042 4171, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,13,3,2042,0,0,0,689.8156,2042 262 2330 10912 2266, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,11,3,262,0,0,0,827.9258,262 257 2330 2042 4171, white, yellow
+h17,colour-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,242,3,262,0,0,0,980.8611,262 2042 2330 4171 2619, white, gray
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,lens,-1,16312,1,14032,0,0,0,540.1711,14032 523 4171 257 4602, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,7,8,4077,0,0,1,1045.6293,4077 2266 257 6016 845, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,518,434,407,0,0,0,851.464,407 257 845 287 925, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,37,47,257,0,0,1,723.4246,257 2042 2266 262 407, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,249,285,523,0,0,1,857.1379,523 257 262 884 845, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,182,15,257,0,0,0,664.0038,257 262 2266 845 14005, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,38,10,257,0,0,0,1039.9623,257 2266 2042 407 6016, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,182,15,257,0,0,0,664.0038,257 262 2266 845 14005, purple, yellow
+h17,colour-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,129,42,523,0,0,0,810.5354,523 257 2266 6016 4171, orange, gray
+h17,colour-09-output,,heldout,7-8-9,2.0,all,lens,-1,1,5148,14032,1,1,1,909.3975,14032 288 546 11398 523, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,100,2,257,0,0,0,1047.5607,257 2266 4171 262 635, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,21,10,257,0,0,0,1041.0072,257 523 262 407 287, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,33,5,257,0,0,0,729.5406,257 6016 262 523 2266, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,47,2,257,0,0,0,1058.2227,257 2266 407 4171 262, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,57,12,257,0,0,0,480.5809,257 262 407 355 845, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,38,6,257,0,0,0,321.5923,257 262 523 6016 635, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,57,12,257,0,0,0,480.5809,257 262 407 355 845, red, purple
+h17,colour-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,55,4,257,0,0,0,387.2418,257 14005 355 2266 845, red, orange
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,lens,-1,50248,1,44136,0,0,0,1745.5656,44136 36798 44576 24635 22206, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,263,390,262,0,0,1,922.9211,262 257 534 284 635, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,249,2504,262,0,0,1,733.6002,262 257 407 281 530, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,275,2697,262,0,0,1,844.2029,262 257 281 530 616, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,1762,2081,262,0,0,1,594.5698,262 257 281 616 407, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,755,1193,262,0,0,1,878.7621,262 257 281 635 2192, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,922,1385,262,0,0,1,386.9129,262 257 616 281 407, dolphin, snake
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,588,225,262,0,0,0,813.326,262 257 281 616 2192, horse, tiger
+h17,animal-00-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,112,231,257,0,0,1,502.9578,257 262 281 616 607, deer, dog
+h17,animal-00-output,,tuning,7-8-9,2.0,all,lens,-1,1,40855,44136,1,1,1,1257.5011,44136 36798 44576 287 16050, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,722,269,262,0,0,0,764.8891,262 257 607 281 635, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,8014,147,262,0,0,0,1003.8251,262 257 616 284 281, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,358,153,262,0,0,0,744.1857,262 257 616 281 284, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,816,70,257,0,0,0,534.452,257 262 281 635 530, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,427,23,262,0,0,0,1119.7095,262 257 635 479 407, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,563,13,262,0,0,0,883.7914,262 257 407 5053 1444, cat, dolphin
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,307,96,262,0,0,0,803.1073,262 257 616 281 407, cat, horse
+h17,animal-00-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,247,153,262,0,0,0,509.7837,262 257 1682 635 1444, cat, deer
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,lens,-1,1,50247,44136,1,1,1,1749.9626,44136 36798 44576 24635 22206, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,1774,1138,262,0,0,0,732.6063,262 257 326 407 281, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,1598,1117,262,0,0,0,580.0413,262 257 407 281 616, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,156,352,262,0,0,1,558.3663,262 257 407 616 326, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,1966,1014,262,0,0,0,684.212,262 257 281 616 530, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,1603,573,262,0,0,0,881.525,262 257 281 407 2192, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,1429,722,262,0,0,0,390.6606,262 257 407 616 281, snake, dolphin
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,59,97,262,0,0,1,730.0491,262 257 407 607 326, horse, dog
+h17,animal-01-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,164,106,262,0,0,0,505.5577,262 257 281 607 530, dog, deer
+h17,animal-01-output,,heldout,7-8-9,2.0,all,lens,-1,1,46619,17522,1,1,1,1114.5784,17522 26042 16705 30318 262, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,248,106,262,0,0,0,633.0456,262 257 407 530 616, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,280,135,262,0,0,0,687.6691,262 257 530 616 281, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,4974,242,262,0,0,0,791.4997,262 616 257 287 326, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,1994,122,262,0,0,0,961.4018,262 257 616 530 281, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,643,302,262,0,0,0,610.5482,262 257 616 407 281, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,890,45,262,0,0,0,674.5058,262 257 407 11 1682, cat, snake
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,345,122,262,0,0,0,806.14,262 257 407 616 281, cat, horse
+h17,animal-01-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,112,370,262,0,0,1,590.9026,262 257 530 281 407, cat, dog
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,lens,-1,1,50192,44136,1,1,1,2481.3887,44136 44576 36798 21668 383, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,15933,11285,314,0,0,0,468.2233,314 383 317 2011 775, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,7673,5174,314,0,0,0,202.4495,314 383 2011 317 13792, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,15815,4314,383,0,0,0,1663.464,383 314 317 632 1002, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,7501,3257,314,0,0,0,586.8984,314 383 317 2011 2773, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,7939,3808,383,0,0,0,941.7768,383 314 317 679 2011, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,10164,8981,314,0,0,0,625.7856,314 383 2011 317 632, deer, dolphin
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,9570,10647,314,0,0,1,814.103,314 383 317 632 2011, tiger, horse
+h17,animal-02-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,6223,7144,314,0,0,1,290.8092,314 383 317 2011 632, mouse, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,lens,-1,1,49053,20096,1,1,1,753.4965,20096 34022 317 554 412, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,8490,4537,314,0,0,0,790.3918,314 383 775 317 632, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,12318,6112,314,0,0,0,775.6628,314 383 317 366 632, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,15191,1009,383,0,0,0,1733.3036,383 314 317 632 198, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,4017,2458,314,0,0,0,224.9639,314 383 317 2011 632, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,7796,3690,314,0,0,0,675.0576,314 383 317 2011 632, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,8223,5210,314,0,0,0,509.7379,314 383 317 2011 632, cat, deer
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,6992,4487,314,0,0,0,574.2653,314 383 317 632 2011, cat, tiger
+h17,animal-02-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,8243,3493,314,0,0,0,650.0685,314 383 317 4042 13792, cat, mouse
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,lens,-1,50217,1,44136,0,0,0,1744.2507,44136 36798 44576 24635 22206, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,625,338,257,0,0,0,1124.067,257 262 281 635 607, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,231,2714,262,0,0,1,919.4357,262 257 635 281 1444, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,86,1181,257,0,0,1,844.4298,257 262 281 635 530, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,519,771,257,0,0,1,594.47,257 262 281 607 635, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,220,472,257,0,0,1,879.6103,257 262 281 635 15900, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,265,556,257,0,0,1,388.4482,257 262 281 607 705, dolphin, snake
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,75,17,257,0,0,0,821.1063,257 262 281 607 635, rabbit, horse
+h17,animal-03-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,56,85,257,0,0,1,501.6339,257 262 607 281 635, deer, dog
+h17,animal-03-output,,heldout,7-8-9,2.0,all,lens,-1,1,50144,44136,1,1,1,1995.9551,44136 36798 22206 44576 262, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,560,34,262,0,0,0,769.5131,262 257 465 635 281, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,1184,30,257,0,0,0,458.524,257 262 281 635 607, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,253,24,257,0,0,0,158.17,257 262 635 607 281, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,455,74,257,0,0,0,619.4536,257 262 281 607 635, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,425,9,257,0,0,0,352.3087,257 262 607 281 635, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,630,30,262,0,0,0,332.6118,262 257 607 281 635, fox, dolphin
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,79,41,257,0,0,0,856.0748,257 262 281 607 635, fox, rabbit
+h17,animal-03-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,67,8,262,0,0,0,547.9128,262 257 607 635 281, fox, deer
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,lens,-1,50246,1,44136,0,0,0,1751.4935,44136 36798 44576 24635 22206, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,478,480,257,0,0,1,487.5849,257 262 281 465 635, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,132,387,262,0,0,1,224.0911,262 257 635 281 465, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,73,1171,257,0,0,1,844.0556,257 262 281 635 465, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,512,857,257,0,0,1,594.6423,257 262 281 465 635, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,240,446,257,0,0,1,878.8591,257 262 281 635 15900, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,252,609,257,0,0,1,388.8553,257 262 281 465 705, dolphin, snake
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,16,55,257,0,0,1,821.4247,257 262 281 465 366, horse, rabbit
+h17,animal-04-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,44,74,257,0,0,1,502.1889,257 262 465 281 635, deer, dog
+h17,animal-04-output,,tuning,7-8-9,2.0,all,lens,-1,1,50189,44136,1,1,1,1581.8569,44136 44576 36798 262 257, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,6636,809,262,0,0,0,1491.6312,262 257 465 284 1583, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,607,16,257,0,0,0,1110.2275,257 262 11 635 281, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,144,34,257,0,0,0,1439.531,257 262 281 465 635, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,141,23,262,0,0,0,739.7996,262 257 635 281 465, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,1126,20,257,0,0,0,847.8781,257 262 281 465 11676, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,293,55,262,0,0,0,606.0468,262 257 281 465 705, sheep, dolphin
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,356,564,262,0,0,1,1048.6346,262 257 465 281 339, sheep, horse
+h17,animal-04-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,74,61,257,0,0,0,416.9033,257 262 635 281 465, sheep, deer
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,lens,-1,50257,1,44136,0,0,0,4622.5176,44136 36798 44576 24635 22206, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,373,687,366,0,0,1,743.674,366 530 976 2927 3290, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,22,86,530,0,0,1,903.7667,530 691 976 749 717, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,121,142,530,0,0,1,525.1547,530 691 749 3290 3797, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,37,83,530,0,0,1,339.2696,530 6473 20950 18744 976, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,581,342,37370,0,0,0,1069.8684,37370 749 530 366 1862, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,23,131,530,0,0,1,720.9954,530 749 366 20950 6175, dolphin, monkey
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,91,20,530,0,0,0,182.4534,530 18744 20950 1263 691, tiger, wolf
+h17,animal-05-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,10,227,530,0,0,1,509.9333,530 691 1310 1263 749, deer, dog
+h17,animal-05-output,,heldout,7-8-9,2.0,all,lens,-1,1,3092,44136,1,1,1,441.2578,44136 530 976 691 749, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,118,9,530,0,0,0,409.0476,530 749 6175 691 1263, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,6187,575,530,0,0,0,1349.6849,530 1266 717 749 976, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,1599,20,530,0,0,0,614.3173,530 691 976 717 1862, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,627,4,530,0,0,0,642.6243,530 366 691 20950 749, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,211,3,37370,0,0,0,1198.7581,37370 530 20950 21657 9529, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,142,1,20950,0,0,0,1102.2131,20950 705 18744 366 3290, elephant, dolphin
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,14,9,530,0,0,0,519.7635,530 1310 749 976 691, elephant, tiger
+h17,animal-05-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,301,2,18744,0,0,0,464.0775,18744 20950 2042 37370 2266, elephant, deer
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,lens,-1,694,1,44136,0,0,0,350.9681,44136 749 1266 530 4387, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,27,222,530,0,0,1,928.0798,530 749 1263 18744 41919, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,17,275,749,0,0,1,318.9302,749 530 5044 18744 3290, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,106,750,749,0,0,1,834.4953,749 530 4387 5044 4094, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,55,209,530,0,0,1,354.3935,530 749 1266 18744 3290, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,19,271,530,0,0,1,1197.6033,530 3797 9529 5044 2219, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,13,198,3290,0,0,1,1098.3418,3290 705 18744 749 17481, dolphin, elephant
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,51,68,749,0,0,1,754.3788,749 5044 18744 20950 10211, wolf, horse
+h17,animal-06-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,47,53,749,0,0,1,573.8848,749 1049 5044 20950 4387, deer, tiger
+h17,animal-06-output,,tuning,7-8-9,2.0,all,lens,-1,1,50189,44136,1,1,1,2637.3386,44136 36798 44576 24635 22206, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,98,9,749,0,0,0,389.8352,749 530 1266 3290 3797, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,309,6,530,0,0,0,622.2652,530 749 3797 17481 22746, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,302,26,530,0,0,0,470.0304,530 366 21831 749 5044, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,518,22,20950,0,0,0,1373.2175,20950 749 5044 1049 2208, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,336,17,530,0,0,0,659.224,530 4295 1885 2219 717, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,735,22,530,0,0,0,929.2519,530 749 5044 366 1049, lion, dolphin
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,13,17,749,0,0,1,587.2579,749 530 1266 691 4387, lion, wolf
+h17,animal-06-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,249,13,749,0,0,0,919.1171,749 1049 530 366 4387, lion, deer
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,lens,-1,50257,1,44136,0,0,0,4607.3374,44136 36798 44576 24635 22206, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,348,526,262,0,0,1,793.7125,262 257 465 635 915, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,76,799,262,0,0,1,795.765,262 257 465 281 616, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,250,377,262,0,0,1,522.1755,262 257 465 281 616, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,111,409,262,0,0,1,346.9403,262 257 465 281 616, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,1057,601,262,0,0,0,1064.8192,262 257 41271 465 11, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,96,988,262,0,0,1,720.1996,262 257 609 465 705, dolphin, monkey
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,343,144,262,0,0,0,814.252,262 257 281 616 465, horse, tiger
+h17,animal-07-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,55,100,257,0,0,1,504.2715,257 262 465 281 616, deer, dog
+h17,animal-07-output,,heldout,7-8-9,2.0,all,lens,-1,1,38831,44136,1,1,1,1291.764,44136 36798 44576 287 262, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,1482,298,262,0,0,0,619.3931,262 257 616 281 607, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,7345,84,262,0,0,0,617.8005,262 257 465 616 281, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,275,75,262,0,0,0,750.5486,262 257 616 465 281, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,563,32,257,0,0,0,536.8445,257 262 281 465 635, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,383,16,262,0,0,0,1121.7612,262 257 479 635 41271, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,316,4,262,0,0,0,886.6587,262 257 41559 3797 616, cat, dolphin
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,184,47,262,0,0,0,803.0593,262 257 465 281 616, cat, horse
+h17,animal-07-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,100,75,262,0,0,0,514.2953,262 257 635 281 1682, cat, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,lens,-1,50257,1,44136,0,0,0,2498.3997,44136 44576 36798 27161 16050, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,0,91,1324,5022,0,0,1,380.8292,5022 2888 366 1862 4257, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_source,1,44,1965,366,0,0,1,635.4163,366 2330 1643 2219 1588, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,73,473,4257,0,0,1,340.2521,4257 1862 2042 2330 1402, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,106,389,1862,0,0,1,766.3857,1862 1402 3290 2679 4295, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,0,449,708,366,0,0,1,939.9719,366 2330 2888 4295 1310, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_by_token,1,216,161,366,0,0,0,626.4449,366 1588 1402 1862 3290, dolphin, deer
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,0,17,256,6028,0,0,1,859.1855,6028 1862 1402 1588 4257, lion, rabbit
+h17,animal-08-lens,,tuning,7-8-9,2.0,all,randdir_mirrored,1,25,87,1862,0,0,1,295.5901,1862 4257 4295 4048 2679, deer, mouse
+h17,animal-08-output,,tuning,7-8-9,2.0,all,lens,-1,1,49589,44136,1,1,1,2655.1182,44136 44576 36798 21668 16050, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,0,45,91,1402,0,0,1,1027.5043,1402 1588 1862 4048 718, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_shared_source,1,513,8,1862,0,0,0,622.0575,1862 2330 366 1402 4295, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,0,1136,83,366,0,0,0,1043.3958,366 5156 1862 890 471, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_shared_pair,1,5673,513,198,0,0,0,1665.1752,198 14780 366 20493 890, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,0,2247,201,1310,0,0,0,1114.1974,1310 4257 1643 4048 5156, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_by_token,1,527,7,366,0,0,0,957.0469,366 1402 2219 4071 1588, dog, dolphin
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,0,248,4,4048,0,0,0,694.4248,4048 2330 4257 3290 5022, dog, lion
+h17,animal-08-output,,tuning,7-8-9,2.0,all,randdir_mirrored,1,97,10,6028,0,0,0,505.1891,6028 1402 1862 4257 4048, dog, deer
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,lens,-1,50257,1,44136,0,0,0,820.4728,44136 36798 44576 22206 21668, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,0,41,456,3290,0,0,1,342.0663,3290 26188 3797 4273 5156, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_source,1,37,451,3290,0,0,1,731.7991,3290 4273 3797 649 42143, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,24,120,13373,0,0,1,1048.5156,13373 3290 4273 3797 5156, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,3,220,3290,1,0,1,741.9375,3290 3797 22746 1310 6029, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,0,84,221,3290,0,0,1,1000.863,3290 26188 3797 1310 42143, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_by_token,1,21,119,3290,0,0,1,387.8052,3290 3797 4273 26188 42143, dolphin, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,0,4,213,3290,1,0,1,861.5732,3290 3797 4273 22746 1692, lion, rabbit
+h17,animal-09-lens,,heldout,7-8-9,2.0,all,randdir_mirrored,1,18,202,3290,0,0,1,291.414,3290 3797 26188 4273 649, deer, mouse
+h17,animal-09-output,,heldout,7-8-9,2.0,all,lens,-1,1,49714,44136,1,1,1,2775.9612,44136 44576 36798 21668 287, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,0,495,1,3290,0,0,0,925.4258,3290 3797 4273 22746 1588, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_shared_source,1,501,1,3290,0,0,0,941.8509,3290 3797 13373 4273 26188, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,0,385,3,366,0,0,0,1038.1235,366 5156 3290 471 582, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_shared_pair,1,8139,538,198,0,0,0,1663.5846,198 14780 8301 4286 13, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,0,2618,43,1310,0,0,0,1114.6366,1310 649 2576 5156 2266, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_by_token,1,627,1,3290,0,0,0,957.6829,3290 3797 8532 1402 649, dog, dolphin
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,0,264,1,3290,0,0,0,695.8563,3290 3797 13373 4273 649, dog, lion
+h17,animal-09-output,,heldout,7-8-9,2.0,all,randdir_mirrored,1,192,1,3290,0,0,0,506.6867,3290 3797 26188 4273 13373, dog, deer
+h17a,France->Germany,capital,tuning,6,2.0,all,lens,-1,1,1410,11307,1,1,1,130.4146,11307 34923 32526 46993 22418,France,Germany
+h17a,France->Germany,capital,tuning,6,2.0,all,randdir_shared_source,0,96,1,6342,0,0,0,431.4014,6342 9281 45996 13876 4689,France,Germany
+h17a,France->Germany,capital,tuning,6,2.0,all,randdir_shared_source,1,324,2,45996,0,0,0,305.0148,45996 6342 18460 520 262,France,Germany
+h17a,France->Germany,capital,tuning,6,2.0,all,randdir_by_token,0,431,1,6342,0,0,0,223.5846,6342 45996 35193 5575 9281,France,Germany
+h17a,France->Germany,capital,tuning,6,2.0,all,randdir_by_token,1,406,6,45996,0,0,0,428.4308,45996 520 9281 569 347,France,Germany
+h17a,France->Germany,capital,tuning,9,2.0,all,lens,-1,1,2690,11307,1,1,1,154.1616,11307 34923 36888 22418 32526,France,Germany
+h17a,France->Germany,capital,tuning,9,2.0,all,randdir_shared_source,0,302,1,6342,0,0,0,275.5223,6342 45996 520 9281 262,France,Germany
+h17a,France->Germany,capital,tuning,9,2.0,all,randdir_shared_source,1,326,1,6342,0,0,0,42.3142,6342 45996 9281 35193 520,France,Germany
+h17a,France->Germany,capital,tuning,9,2.0,all,randdir_by_token,0,498,2,45996,0,0,0,162.4536,45996 6342 9281 18460 520,France,Germany
+h17a,France->Germany,capital,tuning,9,2.0,all,randdir_by_token,1,136,1,6342,0,0,0,147.8782,6342 9281 45996 262 520,France,Germany
+h17a,France->Germany,language,tuning,6,2.0,all,lens,-1,1,317,2679,1,1,1,130.1875,2679 262 257 3594 286,France,Germany
+h17a,France->Germany,language,tuning,6,2.0,all,randdir_shared_source,0,9,1,4141,0,0,0,430.4528,4141 262 3594 257 286,France,Germany
+h17a,France->Germany,language,tuning,6,2.0,all,randdir_shared_source,1,21,1,4141,0,0,0,304.9765,4141 286 3594 257 262,France,Germany
+h17a,France->Germany,language,tuning,6,2.0,all,randdir_by_token,0,25,1,4141,0,0,0,223.053,4141 286 262 3594 257,France,Germany
+h17a,France->Germany,language,tuning,6,2.0,all,randdir_by_token,1,29,1,4141,0,0,0,428.3451,4141 262 286 3594 546,France,Germany
+h17a,France->Germany,language,tuning,9,2.0,all,lens,-1,1,111,2679,1,1,1,130.4116,2679 262 286 257 3594,France,Germany
+h17a,France->Germany,language,tuning,9,2.0,all,randdir_shared_source,0,10,2,3594,0,0,0,269.2021,3594 4141 262 286 257,France,Germany
+h17a,France->Germany,language,tuning,9,2.0,all,randdir_shared_source,1,10,1,4141,0,0,0,40.1691,4141 3594 286 262 257,France,Germany
+h17a,France->Germany,language,tuning,9,2.0,all,randdir_by_token,0,13,1,4141,0,0,0,163.4676,4141 3594 286 262 257,France,Germany
+h17a,France->Germany,language,tuning,9,2.0,all,randdir_by_token,1,13,1,4141,0,0,0,122.0231,4141 286 3594 262 257,France,Germany
+h17a,France->Ireland,capital,tuning,6,2.0,all,lens,-1,1,2068,18220,1,1,1,132.1572,18220 29713 25567 7517 520,France,Ireland
+h17a,France->Ireland,capital,tuning,6,2.0,all,randdir_shared_source,0,774,2,45996,0,0,0,86.4632,45996 6342 35193 520 9281,France,Ireland
+h17a,France->Ireland,capital,tuning,6,2.0,all,randdir_shared_source,1,214,1,6342,0,0,0,632.6846,6342 520 262 663 45996,France,Ireland
+h17a,France->Ireland,capital,tuning,6,2.0,all,randdir_by_token,0,729,1,6342,0,0,0,667.2776,6342 4689 262 347 45996,France,Ireland
+h17a,France->Ireland,capital,tuning,6,2.0,all,randdir_by_token,1,921,2,45996,0,0,0,334.538,45996 6342 18460 520 9281,France,Ireland
+h17a,France->Ireland,capital,tuning,9,2.0,all,lens,-1,2,13248,7517,1,0,1,321.3759,7517 18220 8685 25567 29713,France,Ireland
+h17a,France->Ireland,capital,tuning,9,2.0,all,randdir_shared_source,0,1287,1,6342,0,0,0,338.1907,6342 45996 35193 262 520,France,Ireland
+h17a,France->Ireland,capital,tuning,9,2.0,all,randdir_shared_source,1,773,1,6342,0,0,0,79.1442,6342 45996 9281 35193 520,France,Ireland
+h17a,France->Ireland,capital,tuning,9,2.0,all,randdir_by_token,0,798,2,45996,0,0,0,113.6562,45996 6342 9281 520 35193,France,Ireland
+h17a,France->Ireland,capital,tuning,9,2.0,all,randdir_by_token,1,2127,1,6342,0,0,0,711.666,6342 5575 45996 1962 262,France,Ireland
+h17a,France->Ireland,language,tuning,6,2.0,all,lens,-1,3,357,8685,1,0,1,130.077,8685 286 3594 257 284,France,Ireland
+h17a,France->Ireland,language,tuning,6,2.0,all,randdir_shared_source,0,2,1,4141,1,0,0,92.5649,4141 3594 286 262 257,France,Ireland
+h17a,France->Ireland,language,tuning,6,2.0,all,randdir_shared_source,1,2,1,4141,1,0,0,632.6843,4141 3594 286 257 262,France,Ireland
+h17a,France->Ireland,language,tuning,6,2.0,all,randdir_by_token,0,3,7,257,1,0,1,667.3822,257 262 3594 287 351,France,Ireland
+h17a,France->Ireland,language,tuning,6,2.0,all,randdir_by_token,1,2,3,286,1,0,1,333.9968,286 3594 4141 262 257,France,Ireland
+h17a,France->Ireland,language,tuning,9,2.0,all,lens,-1,6,1119,8685,0,0,1,301.9496,8685 257 286 262 7517,France,Ireland
+h17a,France->Ireland,language,tuning,9,2.0,all,randdir_shared_source,0,2,1,4141,1,0,0,342.4566,4141 3594 286 262 257,France,Ireland
+h17a,France->Ireland,language,tuning,9,2.0,all,randdir_shared_source,1,2,1,4141,1,0,0,68.8335,4141 3594 286 262 257,France,Ireland
+h17a,France->Ireland,language,tuning,9,2.0,all,randdir_by_token,0,2,1,4141,1,0,0,108.7326,4141 3594 286 262 257,France,Ireland
+h17a,France->Ireland,language,tuning,9,2.0,all,randdir_by_token,1,5,2,286,1,0,0,712.445,286 4141 262 257 3594,France,Ireland
+h17a,France->Japan,capital,tuning,6,2.0,all,lens,-1,1,1930,11790,1,1,1,79.9066,11790 36298 42429 42922 15196,France,Japan
+h17a,France->Japan,capital,tuning,6,2.0,all,randdir_shared_source,0,3623,1,6342,0,0,0,99.2904,6342 45996 9281 5575 520,France,Japan
+h17a,France->Japan,capital,tuning,6,2.0,all,randdir_shared_source,1,6050,2,45996,0,0,0,255.6351,45996 6342 35193 262 9281,France,Japan
+h17a,France->Japan,capital,tuning,6,2.0,all,randdir_by_token,0,9176,9,262,0,0,0,644.3954,262 18460 347 978 520,France,Japan
+h17a,France->Japan,capital,tuning,6,2.0,all,randdir_by_token,1,1795,23,262,0,0,0,744.3275,262 520 4643 3175 347,France,Japan
+h17a,France->Japan,capital,tuning,9,2.0,all,lens,-1,1,4795,11790,1,1,1,143.7549,11790 2869 42922 42429 48663,France,Japan
+h17a,France->Japan,capital,tuning,9,2.0,all,randdir_shared_source,0,2930,1,6342,0,0,0,117.2494,6342 45996 9281 35193 520,France,Japan
+h17a,France->Japan,capital,tuning,9,2.0,all,randdir_shared_source,1,3180,1,6342,0,0,0,272.2123,6342 45996 520 18460 5575,France,Japan
+h17a,France->Japan,capital,tuning,9,2.0,all,randdir_by_token,0,3422,2,45996,0,0,0,199.4685,45996 6342 9281 520 18460,France,Japan
+h17a,France->Japan,capital,tuning,9,2.0,all,randdir_by_token,1,6493,1,6342,0,0,0,443.0041,6342 45996 35193 5575 21435,France,Japan
+h17a,France->Japan,language,tuning,6,2.0,all,lens,-1,2,86,3594,1,0,1,71.9826,3594 4960 262 257 286,France,Japan
+h17a,France->Japan,language,tuning,6,2.0,all,randdir_shared_source,0,251,1,4141,0,0,0,96.9082,4141 286 262 3594 257,France,Japan
+h17a,France->Japan,language,tuning,6,2.0,all,randdir_shared_source,1,278,1,4141,0,0,0,254.06,4141 3594 286 262 257,France,Japan
+h17a,France->Japan,language,tuning,6,2.0,all,randdir_by_token,0,1478,7,286,0,0,0,644.3851,286 257 262 351 3594,France,Japan
+h17a,France->Japan,language,tuning,6,2.0,all,randdir_by_token,1,217,6,3594,0,0,0,744.0221,3594 262 257 286 546,France,Japan
+h17a,France->Japan,language,tuning,9,2.0,all,lens,-1,1,124,4960,1,1,1,90.9825,4960 286 262 257 3594,France,Japan
+h17a,France->Japan,language,tuning,9,2.0,all,randdir_shared_source,0,181,1,4141,0,0,0,100.6319,4141 3594 286 262 257,France,Japan
+h17a,France->Japan,language,tuning,9,2.0,all,randdir_shared_source,1,184,1,4141,0,0,0,271.4816,4141 3594 262 286 257,France,Japan
+h17a,France->Japan,language,tuning,9,2.0,all,randdir_by_token,0,212,1,4141,0,0,0,199.7545,4141 3594 286 262 257,France,Japan
+h17a,France->Japan,language,tuning,9,2.0,all,randdir_by_token,1,837,3,286,0,0,0,446.0685,286 546 4141 257 3594,France,Japan
+h17a,France->Japan,continent,tuning,6,2.0,all,lens,-1,1,4,7229,1,1,1,70.9555,7229 262 5478 2031 2869,France,Japan
+h17a,France->Japan,continent,tuning,6,2.0,all,randdir_shared_source,0,7,2,5478,0,0,0,105.0068,5478 2031 262 4881 2520,France,Japan
+h17a,France->Japan,continent,tuning,6,2.0,all,randdir_shared_source,1,6,1,2031,0,0,0,254.4695,2031 262 5478 2258 4881,France,Japan
+h17a,France->Japan,continent,tuning,6,2.0,all,randdir_by_token,0,318,4,262,0,0,0,644.0823,262 663 257 2031 749,France,Japan
+h17a,France->Japan,continent,tuning,6,2.0,all,randdir_by_token,1,51,2,262,0,0,0,744.3302,262 2031 734 530 257,France,Japan
+h17a,France->Japan,continent,tuning,9,2.0,all,lens,-1,1,8,7229,1,1,1,100.6648,7229 262 2869 5478 2520,France,Japan
+h17a,France->Japan,continent,tuning,9,2.0,all,randdir_shared_source,0,4,1,2031,1,0,0,97.28,2031 5478 262 7229 2258,France,Japan
+h17a,France->Japan,continent,tuning,9,2.0,all,randdir_shared_source,1,4,1,2031,1,0,0,274.3669,2031 262 5478 7229 2258,France,Japan
+h17a,France->Japan,continent,tuning,9,2.0,all,randdir_by_token,0,4,1,2031,1,0,0,201.2162,2031 262 5478 7229 2258,France,Japan
+h17a,France->Japan,continent,tuning,9,2.0,all,randdir_by_token,1,17,1,2031,0,0,0,445.5387,2031 262 5478 9133 663,France,Japan
+h17a,Germany->Greece,capital,heldout,6,2.0,all,lens,-1,1,331,21891,1,1,1,94.0275,21891 27872 8377 31268 3175,Germany,Greece
+h17a,Germany->Greece,capital,heldout,6,2.0,all,randdir_shared_source,0,486,1,11307,0,0,0,144.2454,11307 34923 32526 46993 3059,Germany,Greece
+h17a,Germany->Greece,capital,heldout,6,2.0,all,randdir_shared_source,1,295,2,34923,0,0,0,168.8248,34923 11307 46993 32526 22418,Germany,Greece
+h17a,Germany->Greece,capital,heldout,6,2.0,all,randdir_by_token,0,355,4,22418,0,0,0,291.4534,22418 520 262 11307 32526,Germany,Greece
+h17a,Germany->Greece,capital,heldout,6,2.0,all,randdir_by_token,1,358,4,262,0,0,0,636.2495,262 569 317 11307 509,Germany,Greece
+h17a,Germany->Greece,capital,heldout,9,2.0,all,lens,-1,1,1865,21891,1,1,1,170.0022,21891 10315 8312 31268 402,Germany,Greece
+h17a,Germany->Greece,capital,heldout,9,2.0,all,randdir_shared_source,0,316,3,34923,0,0,0,498.6954,34923 32526 11307 46993 22418,Germany,Greece
+h17a,Germany->Greece,capital,heldout,9,2.0,all,randdir_shared_source,1,439,2,34923,0,0,0,356.2373,34923 11307 46993 32526 22418,Germany,Greece
+h17a,Germany->Greece,capital,heldout,9,2.0,all,randdir_by_token,0,412,2,34923,0,0,0,170.9097,34923 11307 32526 46993 7772,Germany,Greece
+h17a,Germany->Greece,capital,heldout,9,2.0,all,randdir_by_token,1,243,1,11307,0,0,0,136.0323,11307 46993 34923 32526 40790,Germany,Greece
+h17a,Germany->Greece,language,heldout,6,2.0,all,lens,-1,2,49,3594,1,0,1,98.5209,3594 8312 257 262 284,Germany,Greece
+h17a,Germany->Greece,language,heldout,6,2.0,all,randdir_shared_source,0,141,1,2679,0,0,0,141.3719,2679 3594 286 257 262,Germany,Greece
+h17a,Germany->Greece,language,heldout,6,2.0,all,randdir_shared_source,1,81,1,2679,0,0,0,169.5551,2679 3594 262 257 286,Germany,Greece
+h17a,Germany->Greece,language,heldout,6,2.0,all,randdir_by_token,0,102,1,2679,0,0,0,289.6127,2679 262 257 286 3594,Germany,Greece
+h17a,Germany->Greece,language,heldout,6,2.0,all,randdir_by_token,1,140,6,262,0,0,0,635.1425,262 286 257 546 290,Germany,Greece
+h17a,Germany->Greece,language,heldout,9,2.0,all,lens,-1,1,73,8312,1,1,1,124.9326,8312 3594 257 262 286,Germany,Greece
+h17a,Germany->Greece,language,heldout,9,2.0,all,randdir_shared_source,0,35,1,2679,0,0,0,499.4463,2679 3594 262 257 286,Germany,Greece
+h17a,Germany->Greece,language,heldout,9,2.0,all,randdir_shared_source,1,147,1,2679,0,0,0,356.8508,2679 257 262 3594 286,Germany,Greece
+h17a,Germany->Greece,language,heldout,9,2.0,all,randdir_by_token,0,60,1,2679,0,0,0,170.1568,2679 3594 262 286 257,Germany,Greece
+h17a,Germany->Greece,language,heldout,9,2.0,all,randdir_by_token,1,88,1,2679,0,0,0,129.0892,2679 3594 262 257 286,Germany,Greece
+h17a,Germany->Italy,capital,heldout,6,2.0,all,lens,-1,2,2213,21574,1,0,1,133.9164,21574 10598 49404 3175 46997,Germany,Italy
+h17a,Germany->Italy,capital,heldout,6,2.0,all,randdir_shared_source,0,551,4,3059,0,0,0,555.5298,3059 262 22418 11307 360,Germany,Italy
+h17a,Germany->Italy,capital,heldout,6,2.0,all,randdir_shared_source,1,831,10,40790,0,0,0,723.8596,40790 32526 367 22418 8774,Germany,Italy
+h17a,Germany->Italy,capital,heldout,6,2.0,all,randdir_by_token,0,379,3,34923,0,0,0,383.3486,34923 32526 11307 360 347,Germany,Italy
+h17a,Germany->Italy,capital,heldout,6,2.0,all,randdir_by_token,1,286,1,11307,0,0,0,420.1294,11307 32526 34923 402 7772,Germany,Italy
+h17a,Germany->Italy,capital,heldout,9,2.0,all,lens,-1,2,7849,49404,1,0,1,168.0917,49404 10598 21574 28537 29702,Germany,Italy
+h17a,Germany->Italy,capital,heldout,9,2.0,all,randdir_shared_source,0,668,2,34923,0,0,0,460.8691,34923 11307 32526 3059 22418,Germany,Italy
+h17a,Germany->Italy,capital,heldout,9,2.0,all,randdir_shared_source,1,243,1,11307,0,0,0,124.6868,11307 34923 46993 22418 32526,Germany,Italy
+h17a,Germany->Italy,capital,heldout,9,2.0,all,randdir_by_token,0,697,3,32526,0,0,0,111.3643,32526 46993 11307 402 34923,Germany,Italy
+h17a,Germany->Italy,capital,heldout,9,2.0,all,randdir_by_token,1,424,1,11307,0,0,0,337.1915,11307 34923 46993 32526 22418,Germany,Italy
+h17a,Germany->Italy,language,heldout,6,2.0,all,lens,-1,1,246,8200,1,1,1,138.1976,8200 3594 257 262 351,Germany,Italy
+h17a,Germany->Italy,language,heldout,6,2.0,all,randdir_shared_source,0,98,1,2679,0,0,0,557.2857,2679 262 257 3594 351,Germany,Italy
+h17a,Germany->Italy,language,heldout,6,2.0,all,randdir_shared_source,1,654,8,286,0,0,0,723.7505,286 262 257 287 546,Germany,Italy
+h17a,Germany->Italy,language,heldout,6,2.0,all,randdir_by_token,0,88,2,286,0,0,0,383.756,286 2679 546 257 262,Germany,Italy
+h17a,Germany->Italy,language,heldout,6,2.0,all,randdir_by_token,1,58,1,2679,0,0,0,420.1876,2679 262 257 3594 286,Germany,Italy
+h17a,Germany->Italy,language,heldout,9,2.0,all,lens,-1,1,300,8200,1,1,1,118.8261,8200 257 262 286 3594,Germany,Italy
+h17a,Germany->Italy,language,heldout,9,2.0,all,randdir_shared_source,0,89,1,2679,0,0,0,461.0635,2679 257 3594 262 286,Germany,Italy
+h17a,Germany->Italy,language,heldout,9,2.0,all,randdir_shared_source,1,30,1,2679,0,0,0,118.5927,2679 3594 262 286 257,Germany,Italy
+h17a,Germany->Italy,language,heldout,9,2.0,all,randdir_by_token,0,43,1,2679,0,0,0,112.1057,2679 3594 262 257 286,Germany,Italy
+h17a,Germany->Italy,language,heldout,9,2.0,all,randdir_by_token,1,54,1,2679,0,0,0,337.8822,2679 3594 257 262 286,Germany,Italy
+h17a,Germany->Poland,capital,heldout,6,2.0,all,lens,-1,1,204,32955,1,1,1,115.1451,32955 509 520 22761 24388,Germany,Poland
+h17a,Germany->Poland,capital,heldout,6,2.0,all,randdir_shared_source,0,326,1,11307,0,0,0,234.1124,11307 22418 34923 46993 40790,Germany,Poland
+h17a,Germany->Poland,capital,heldout,6,2.0,all,randdir_shared_source,1,370,1,11307,0,0,0,130.4382,11307 32526 46993 34923 360,Germany,Poland
+h17a,Germany->Poland,capital,heldout,6,2.0,all,randdir_by_token,0,1119,6,262,0,0,0,489.6969,262 22418 257 11853 402,Germany,Poland
+h17a,Germany->Poland,capital,heldout,6,2.0,all,randdir_by_token,1,1658,43,371,0,0,0,688.2952,371 347 3059 520 679,Germany,Poland
+h17a,Germany->Poland,capital,heldout,9,2.0,all,lens,-1,1,1203,32955,1,1,1,151.1616,32955 12873 350 15945 18481,Germany,Poland
+h17a,Germany->Poland,capital,heldout,9,2.0,all,randdir_shared_source,0,629,2,34923,0,0,0,506.9539,34923 11307 46993 32526 22418,Germany,Poland
+h17a,Germany->Poland,capital,heldout,9,2.0,all,randdir_shared_source,1,440,1,11307,0,0,0,133.0239,11307 34923 46993 32526 22418,Germany,Poland
+h17a,Germany->Poland,capital,heldout,9,2.0,all,randdir_by_token,0,755,4,34923,0,0,0,282.0993,34923 46993 32526 11307 370,Germany,Poland
+h17a,Germany->Poland,capital,heldout,9,2.0,all,randdir_by_token,1,343,1,11307,0,0,0,133.0267,11307 34923 40790 46993 32526,Germany,Poland
+h17a,Germany->Poland,language,heldout,6,2.0,all,lens,-1,2,16,3594,1,0,1,116.9397,3594 15945 262 257 3394,Germany,Poland
+h17a,Germany->Poland,language,heldout,6,2.0,all,randdir_shared_source,0,74,1,2679,0,0,0,234.7749,2679 262 257 3594 286,Germany,Poland
+h17a,Germany->Poland,language,heldout,6,2.0,all,randdir_shared_source,1,52,1,2679,0,0,0,125.73,2679 286 3594 257 262,Germany,Poland
+h17a,Germany->Poland,language,heldout,6,2.0,all,randdir_by_token,0,375,14,286,0,0,0,487.2423,286 257 284 290 262,Germany,Poland
+h17a,Germany->Poland,language,heldout,6,2.0,all,randdir_by_token,1,404,5,286,0,0,0,686.0006,286 257 262 287 2679,Germany,Poland
+h17a,Germany->Poland,language,heldout,9,2.0,all,lens,-1,1,8,15945,1,1,1,116.288,15945 3594 257 262 286,Germany,Poland
+h17a,Germany->Poland,language,heldout,9,2.0,all,randdir_shared_source,0,88,1,2679,0,0,0,506.3434,2679 3594 262 257 286,Germany,Poland
+h17a,Germany->Poland,language,heldout,9,2.0,all,randdir_shared_source,1,46,1,2679,0,0,0,135.5165,2679 3594 286 262 257,Germany,Poland
+h17a,Germany->Poland,language,heldout,9,2.0,all,randdir_by_token,0,36,1,2679,0,0,0,282.7803,2679 3594 262 286 257,Germany,Poland
+h17a,Germany->Poland,language,heldout,9,2.0,all,randdir_by_token,1,40,1,2679,0,0,0,113.457,2679 3594 286 262 257,Germany,Poland
+h17a,Greece->Ireland,capital,tuning,6,2.0,all,lens,-1,1,1915,18220,1,1,1,64.5183,18220 520 25567 29713 406,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,6,2.0,all,randdir_shared_source,0,1811,1,21891,0,0,0,36.7109,21891 262 10334 309 402,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,6,2.0,all,randdir_shared_source,1,4626,2,10315,0,0,0,787.2968,10315 21891 262 465 314,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,6,2.0,all,randdir_by_token,0,2119,1,21891,0,0,0,165.314,21891 569 10334 402 309,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,6,2.0,all,randdir_by_token,1,807,1,21891,0,0,0,484.0002,21891 262 3738 12372 5844,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,9,2.0,all,lens,-1,2,5207,7517,1,0,1,178.9891,7517 18220 262 360 520,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,9,2.0,all,randdir_shared_source,0,1580,1,21891,0,0,0,463.3865,21891 262 309 8377 402,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,9,2.0,all,randdir_shared_source,1,1500,1,21891,0,0,0,85.2127,21891 309 262 402 10334,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,9,2.0,all,randdir_by_token,0,1404,1,21891,0,0,0,247.7966,21891 10334 262 309 402,Greece,Ireland
+h17a,Greece->Ireland,capital,tuning,9,2.0,all,randdir_by_token,1,2654,1,21891,0,0,0,573.6993,21891 262 402 3738 350,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,6,2.0,all,lens,-1,2,113,286,1,0,1,62.7768,286 3594 262 257 287,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,6,2.0,all,randdir_shared_source,0,4,1,8312,1,0,0,21.6792,8312 286 262 3594 257,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,6,2.0,all,randdir_shared_source,1,6,31,257,0,0,1,787.724,257 284 262 845 329,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,6,2.0,all,randdir_by_token,0,5,2,286,1,0,0,161.1921,286 8312 262 257 3594,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,6,2.0,all,randdir_by_token,1,6,7,286,0,0,1,481.5374,286 262 257 546 691,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,9,2.0,all,lens,-1,5,650,8685,1,0,1,146.6285,8685 286 262 257 3594,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,9,2.0,all,randdir_shared_source,0,9,1,8312,0,0,0,463.9705,8312 262 286 257 691,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,9,2.0,all,randdir_shared_source,1,7,1,8312,0,0,0,80.7347,8312 286 262 257 284,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,9,2.0,all,randdir_by_token,0,4,1,8312,1,0,0,245.3715,8312 286 262 3594 257,Greece,Ireland
+h17a,Greece->Ireland,language,tuning,9,2.0,all,randdir_by_token,1,10,3,286,0,0,0,575.2156,286 262 8312 546 257,Greece,Ireland
+h17a,Greece->Japan,capital,tuning,6,2.0,all,lens,-1,2,940,15196,1,0,1,87.3995,15196 11790 36298 911 22431,Greece,Japan
+h17a,Greece->Japan,capital,tuning,6,2.0,all,randdir_shared_source,0,4412,5,663,0,0,0,498.2923,663 5027 262 11732 21891,Greece,Japan
+h17a,Greece->Japan,capital,tuning,6,2.0,all,randdir_shared_source,1,5312,1,21891,0,0,0,547.0708,21891 262 10315 10334 5783,Greece,Japan
+h17a,Greece->Japan,capital,tuning,6,2.0,all,randdir_by_token,0,2715,1,21891,0,0,0,221.7815,21891 10334 262 34077 520,Greece,Japan
+h17a,Greece->Japan,capital,tuning,6,2.0,all,randdir_by_token,1,4252,6,262,0,0,0,972.2614,262 1793 10598 402 350,Greece,Japan
+h17a,Greece->Japan,capital,tuning,9,2.0,all,lens,-1,1,138,11790,1,1,1,182.8263,11790 262 2869 402 42429,Greece,Japan
+h17a,Greece->Japan,capital,tuning,9,2.0,all,randdir_shared_source,0,4153,1,21891,0,0,0,112.5944,21891 402 309 262 31268,Greece,Japan
+h17a,Greece->Japan,capital,tuning,9,2.0,all,randdir_shared_source,1,3388,1,21891,0,0,0,302.909,21891 262 10334 8377 31268,Greece,Japan
+h17a,Greece->Japan,capital,tuning,9,2.0,all,randdir_by_token,0,3678,1,21891,0,0,0,110.3122,21891 10334 262 309 402,Greece,Japan
+h17a,Greece->Japan,capital,tuning,9,2.0,all,randdir_by_token,1,3873,1,21891,0,0,0,277.1694,21891 11732 10334 402 31268,Greece,Japan
+h17a,Greece->Japan,language,tuning,6,2.0,all,lens,-1,2,24,3594,1,0,1,82.9178,3594 4960 262 286 257,Greece,Japan
+h17a,Greece->Japan,language,tuning,6,2.0,all,randdir_shared_source,0,338,14,262,0,0,0,497.0735,262 257 691 511 284,Greece,Japan
+h17a,Greece->Japan,language,tuning,6,2.0,all,randdir_shared_source,1,976,13,257,0,0,0,548.0784,257 262 286 287 546,Greece,Japan
+h17a,Greece->Japan,language,tuning,6,2.0,all,randdir_by_token,0,153,2,286,0,0,0,220.0267,286 8312 3594 262 257,Greece,Japan
+h17a,Greece->Japan,language,tuning,6,2.0,all,randdir_by_token,1,893,27,262,0,0,0,971.2787,262 287 351 257 286,Greece,Japan
+h17a,Greece->Japan,language,tuning,9,2.0,all,lens,-1,1,22,4960,1,1,1,155.4825,4960 286 3594 262 257,Greece,Japan
+h17a,Greece->Japan,language,tuning,9,2.0,all,randdir_shared_source,0,149,1,8312,0,0,0,96.5407,8312 286 3594 262 257,Greece,Japan
+h17a,Greece->Japan,language,tuning,9,2.0,all,randdir_shared_source,1,189,1,8312,0,0,0,302.2931,8312 286 262 3594 284,Greece,Japan
+h17a,Greece->Japan,language,tuning,9,2.0,all,randdir_by_token,0,181,1,8312,0,0,0,108.0506,8312 262 286 257 3594,Greece,Japan
+h17a,Greece->Japan,language,tuning,9,2.0,all,randdir_by_token,1,433,5,546,0,0,0,282.3957,546 286 257 284 8312,Greece,Japan
+h17a,Greece->Japan,continent,tuning,6,2.0,all,lens,-1,3,2,5478,1,0,0,75.3162,5478 2031 7229 10315 262,Greece,Japan
+h17a,Greece->Japan,continent,tuning,6,2.0,all,randdir_shared_source,0,21,2,262,0,0,0,498.6566,262 2031 10315 2520 5478,Greece,Japan
+h17a,Greece->Japan,continent,tuning,6,2.0,all,randdir_shared_source,1,15,3,262,0,0,0,546.8622,262 5478 2031 674 257,Greece,Japan
+h17a,Greece->Japan,continent,tuning,6,2.0,all,randdir_by_token,0,5,2,5478,1,0,0,219.6528,5478 2031 262 2258 7229,Greece,Japan
+h17a,Greece->Japan,continent,tuning,6,2.0,all,randdir_by_token,1,78,12,262,0,0,0,972.9434,262 1793 465 257 428,Greece,Japan
+h17a,Greece->Japan,continent,tuning,9,2.0,all,lens,-1,5,2,5478,1,0,0,147.9443,5478 2031 262 2258 7229,Greece,Japan
+h17a,Greece->Japan,continent,tuning,9,2.0,all,randdir_shared_source,0,4,2,5478,1,0,0,126.2627,5478 2031 262 7229 2258,Greece,Japan
+h17a,Greece->Japan,continent,tuning,9,2.0,all,randdir_shared_source,1,5,2,5478,1,0,0,301.942,5478 2031 262 2258 7229,Greece,Japan
+h17a,Greece->Japan,continent,tuning,9,2.0,all,randdir_by_token,0,5,2,5478,1,0,0,119.4114,5478 2031 262 2258 7229,Greece,Japan
+h17a,Greece->Japan,continent,tuning,9,2.0,all,randdir_by_token,1,6,2,5478,0,0,0,278.3639,5478 2031 262 9133 2520,Greece,Japan
+h17a,Greece->Portugal,capital,tuning,6,2.0,all,lens,-1,1,167,41898,1,1,1,171.1266,41898 327 350 262 3738,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,6,2.0,all,randdir_shared_source,0,658,1,21891,0,0,0,245.6108,21891 262 34077 12903 10334,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,6,2.0,all,randdir_shared_source,1,6891,1,21891,0,0,0,591.6408,21891 34077 8498 402 10334,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,6,2.0,all,randdir_by_token,0,1626,1,21891,0,0,0,384.1095,21891 262 20711 11732 8498,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,6,2.0,all,randdir_by_token,1,1600,1,21891,0,0,0,214.646,21891 31268 5783 7039 309,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,9,2.0,all,lens,-1,2,553,19101,1,0,1,154.5282,19101 41898 10334 309 4347,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,9,2.0,all,randdir_shared_source,0,1195,1,21891,0,0,0,489.0429,21891 262 10334 309 402,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,9,2.0,all,randdir_shared_source,1,1093,1,21891,0,0,0,529.7289,21891 10334 11732 12903 7039,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,9,2.0,all,randdir_by_token,0,1473,1,21891,0,0,0,289.1505,21891 10334 262 12903 309,Greece,Portugal
+h17a,Greece->Portugal,capital,tuning,9,2.0,all,randdir_by_token,1,1297,1,21891,0,0,0,92.2793,21891 10334 262 402 8377,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,6,2.0,all,lens,-1,5,19,3594,1,0,1,167.6426,3594 286 262 257 21813,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,6,2.0,all,randdir_shared_source,0,93,1,8312,0,0,0,245.4569,8312 286 262 351 3594,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,6,2.0,all,randdir_shared_source,1,1549,17,262,0,0,0,591.9669,262 257 546 379 416,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,6,2.0,all,randdir_by_token,0,107,1,8312,0,0,0,385.0705,8312 262 257 286 284,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,6,2.0,all,randdir_by_token,1,67,1,8312,0,0,0,207.6692,8312 286 262 546 257,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,9,2.0,all,lens,-1,1,109,21813,1,1,1,120.1932,21813 3594 257 262 286,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,9,2.0,all,randdir_shared_source,0,58,1,8312,0,0,0,487.7025,8312 286 262 3594 257,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,9,2.0,all,randdir_shared_source,1,87,4,262,0,0,0,531.1667,262 286 257 8312 3594,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,9,2.0,all,randdir_by_token,0,112,1,8312,0,0,0,287.0977,8312 262 286 257 3594,Greece,Portugal
+h17a,Greece->Portugal,language,tuning,9,2.0,all,randdir_by_token,1,77,1,8312,0,0,0,76.0323,8312 286 262 3594 257,Greece,Portugal
+h17a,Ireland->Italy,capital,heldout,6,2.0,all,lens,-1,2,5432,21574,1,0,1,108.9007,21574 10598 49404 28537 520,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,6,2.0,all,randdir_shared_source,0,41,1,18220,0,0,0,849.4846,18220 50026 25567 7517 440,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,6,2.0,all,randdir_shared_source,1,189,1,18220,0,0,0,344.3309,18220 25567 7517 262 520,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,6,2.0,all,randdir_by_token,0,164,1,18220,0,0,0,43.6168,18220 25567 29713 520 7517,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,6,2.0,all,randdir_by_token,1,289,1,18220,0,0,0,296.1057,18220 25567 29713 520 406,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,9,2.0,all,lens,-1,1,420,10598,1,1,1,182.2499,10598 21574 49404 28537 262,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,9,2.0,all,randdir_shared_source,0,59,1,18220,0,0,0,92.8697,18220 25567 29713 520 7517,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,9,2.0,all,randdir_shared_source,1,393,1,18220,0,0,0,533.158,18220 25567 29713 262 360,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,9,2.0,all,randdir_by_token,0,117,1,18220,0,0,0,43.0743,18220 25567 29713 520 7517,Ireland,Italy
+h17a,Ireland->Italy,capital,heldout,9,2.0,all,randdir_by_token,1,94,1,18220,0,0,0,289.3391,18220 25567 29713 520 262,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,6,2.0,all,lens,-1,1,2,8200,1,1,1,113.8414,8200 3594 262 257 286,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,6,2.0,all,randdir_shared_source,0,137,2,8685,0,0,0,848.4373,8685 3594 257 262 645,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,6,2.0,all,randdir_shared_source,1,121,2,262,0,0,0,344.0032,262 3594 8685 286 257,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,6,2.0,all,randdir_by_token,0,59,2,286,0,0,0,38.3811,286 3594 257 546 262,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,6,2.0,all,randdir_by_token,1,113,3,286,0,0,0,296.0061,286 262 3594 257 284,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,9,2.0,all,lens,-1,1,4,8200,1,1,1,171.496,8200 262 286 3594 257,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,9,2.0,all,randdir_shared_source,0,50,2,286,0,0,0,94.6231,286 3594 262 257 8685,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,9,2.0,all,randdir_shared_source,1,139,3,286,0,0,0,533.5297,286 262 3594 257 8685,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,9,2.0,all,randdir_by_token,0,55,2,286,0,0,0,39.8662,286 3594 262 257 8685,Ireland,Italy
+h17a,Ireland->Italy,language,heldout,9,2.0,all,randdir_by_token,1,55,3,286,0,0,0,291.3429,286 262 3594 257 8685,Ireland,Italy
+h17a,Ireland->Poland,capital,heldout,6,2.0,all,lens,-1,3,3677,520,1,0,1,103.3102,520 509 32955 262 309,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,6,2.0,all,randdir_shared_source,0,629,1,18220,0,0,0,458.4344,18220 25567 7517 968 262,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,6,2.0,all,randdir_shared_source,1,1352,2,25567,0,0,0,481.243,25567 18220 520 262 7517,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,6,2.0,all,randdir_by_token,0,865,2,25567,0,0,0,62.1387,25567 18220 520 29713 262,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,6,2.0,all,randdir_by_token,1,1300,3,6669,0,0,0,864.6047,6669 11294 18220 25567 347,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,9,2.0,all,lens,-1,1,247,32955,1,1,1,286.8311,32955 12873 520 350 509,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,9,2.0,all,randdir_shared_source,0,1597,2,25567,0,0,0,99.4453,25567 18220 29713 7517 520,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,9,2.0,all,randdir_shared_source,1,738,1,18220,0,0,0,227.184,18220 25567 29713 520 262,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,9,2.0,all,randdir_by_token,0,857,1,18220,0,0,0,206.1285,18220 25567 29713 520 19902,Ireland,Poland
+h17a,Ireland->Poland,capital,heldout,9,2.0,all,randdir_by_token,1,423,1,18220,0,0,0,621.3755,18220 25567 520 7517 262,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,6,2.0,all,lens,-1,4,2,262,1,0,0,108.1259,262 3594 257 15945 3394,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,6,2.0,all,randdir_shared_source,0,201,1,3594,0,0,0,453.975,3594 257 8685 286 262,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,6,2.0,all,randdir_shared_source,1,206,3,286,0,0,0,480.987,286 8685 3594 262 39652,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,6,2.0,all,randdir_by_token,0,97,3,286,0,0,0,36.913,286 257 3594 262 8685,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,6,2.0,all,randdir_by_token,1,203,18,546,0,0,0,862.8502,546 262 257 287 286,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,9,2.0,all,lens,-1,1,5,15945,1,1,1,277.2233,15945 286 262 257 3594,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,9,2.0,all,randdir_shared_source,0,131,3,286,0,0,0,73.9335,286 262 3594 257 8685,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,9,2.0,all,randdir_shared_source,1,68,2,286,0,0,0,226.1347,286 3594 262 257 8685,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,9,2.0,all,randdir_by_token,0,59,1,3594,0,0,0,210.1857,3594 286 262 257 8685,Ireland,Poland
+h17a,Ireland->Poland,language,heldout,9,2.0,all,randdir_by_token,1,110,6,286,0,0,0,621.6764,286 262 8685 257 546,Ireland,Poland
+h17a,Ireland->Spain,capital,heldout,6,2.0,all,lens,-1,3,935,35773,1,0,1,171.7571,35773 15142 14708 2986 309,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,6,2.0,all,randdir_shared_source,0,713,1,18220,0,0,0,563.394,18220 25567 262 749 7517,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,6,2.0,all,randdir_shared_source,1,719,1,18220,0,0,0,220.4327,18220 25567 520 29713 262,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,6,2.0,all,randdir_by_token,0,790,1,18220,0,0,0,225.0307,18220 25567 29713 520 406,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,6,2.0,all,randdir_by_token,1,1074,1,18220,0,0,0,607.8871,18220 25567 520 10322 262,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,9,2.0,all,lens,-1,1,239,14708,1,1,1,233.424,14708 15142 35773 8602 309,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,9,2.0,all,randdir_shared_source,0,1204,1,18220,0,0,0,167.9669,18220 25567 7517 29713 520,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,9,2.0,all,randdir_shared_source,1,3284,2,25567,0,0,0,895.9459,25567 18220 520 262 327,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,9,2.0,all,randdir_by_token,0,517,1,18220,0,0,0,133.8094,18220 25567 29713 520 262,Ireland,Spain
+h17a,Ireland->Spain,capital,heldout,9,2.0,all,randdir_by_token,1,1063,1,18220,0,0,0,801.6008,18220 25567 262 520 7517,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,6,2.0,all,lens,-1,1,2,7897,1,1,1,172.0437,7897 3594 262 257 286,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,6,2.0,all,randdir_shared_source,0,25,2,8685,0,0,0,562.4799,8685 3594 257 39652 379,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,6,2.0,all,randdir_shared_source,1,29,2,286,0,0,0,220.2686,286 3594 262 257 546,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,6,2.0,all,randdir_by_token,0,27,2,286,0,0,0,223.0439,286 3594 262 257 8685,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,6,2.0,all,randdir_by_token,1,25,2,262,0,0,0,607.6245,262 3594 284 257 286,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,9,2.0,all,lens,-1,1,3,7897,1,1,1,217.4377,7897 286 3594 262 257,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,9,2.0,all,randdir_shared_source,0,25,5,286,0,0,0,155.5454,286 262 257 8685 3594,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,9,2.0,all,randdir_shared_source,1,132,6,262,0,0,0,896.905,262 257 286 329 511,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,9,2.0,all,randdir_by_token,0,24,2,286,0,0,0,130.0947,286 3594 262 257 8685,Ireland,Spain
+h17a,Ireland->Spain,language,heldout,9,2.0,all,randdir_by_token,1,43,4,286,0,0,0,801.6329,286 262 257 3594 8685,Ireland,Spain
+h17a,Italy->Japan,capital,tuning,6,2.0,all,lens,-1,3,220,36298,1,0,1,152.5252,36298 309 11790 911 509,Italy,Japan
+h17a,Italy->Japan,capital,tuning,6,2.0,all,randdir_shared_source,0,2864,2,21574,0,0,0,51.7839,21574 10598 28537 49404 309,Italy,Japan
+h17a,Italy->Japan,capital,tuning,6,2.0,all,randdir_shared_source,1,3678,4,21574,0,0,0,244.2011,21574 28537 49404 10598 520,Italy,Japan
+h17a,Italy->Japan,capital,tuning,6,2.0,all,randdir_by_token,0,3395,2,21574,0,0,0,94.958,21574 10598 28537 49404 520,Italy,Japan
+h17a,Italy->Japan,capital,tuning,6,2.0,all,randdir_by_token,1,1860,2,262,0,0,0,771.2183,262 10598 49404 28537 21574,Italy,Japan
+h17a,Italy->Japan,capital,tuning,9,2.0,all,lens,-1,1,151,11790,1,1,1,177.5308,11790 2869 262 42429 449,Italy,Japan
+h17a,Italy->Japan,capital,tuning,9,2.0,all,randdir_shared_source,0,2707,2,21574,0,0,0,180.6434,21574 10598 49404 28537 520,Italy,Japan
+h17a,Italy->Japan,capital,tuning,9,2.0,all,randdir_shared_source,1,3607,2,21574,0,0,0,162.0572,21574 10598 49404 28537 327,Italy,Japan
+h17a,Italy->Japan,capital,tuning,9,2.0,all,randdir_by_token,0,2816,1,10598,0,0,0,137.8471,10598 21574 28537 49404 309,Italy,Japan
+h17a,Italy->Japan,capital,tuning,9,2.0,all,randdir_by_token,1,3400,2,21574,0,0,0,50.8721,21574 10598 28537 49404 309,Italy,Japan
+h17a,Italy->Japan,language,tuning,6,2.0,all,lens,-1,6,1,8200,0,0,0,150.6177,8200 3594 262 286 257,Italy,Japan
+h17a,Italy->Japan,language,tuning,6,2.0,all,randdir_shared_source,0,171,1,8200,0,0,0,48.9921,8200 262 286 257 3594,Italy,Japan
+h17a,Italy->Japan,language,tuning,6,2.0,all,randdir_shared_source,1,213,1,8200,0,0,0,243.1537,8200 262 3594 286 257,Italy,Japan
+h17a,Italy->Japan,language,tuning,6,2.0,all,randdir_by_token,0,177,1,8200,0,0,0,96.2549,8200 286 262 3594 257,Italy,Japan
+h17a,Italy->Japan,language,tuning,6,2.0,all,randdir_by_token,1,578,4,262,0,0,0,771.3007,262 257 287 8200 351,Italy,Japan
+h17a,Italy->Japan,language,tuning,9,2.0,all,lens,-1,1,12,4960,1,1,1,148.2453,4960 3594 286 262 257,Italy,Japan
+h17a,Italy->Japan,language,tuning,9,2.0,all,randdir_shared_source,0,130,3,286,0,0,0,179.8108,286 262 8200 257 3594,Italy,Japan
+h17a,Italy->Japan,language,tuning,9,2.0,all,randdir_shared_source,1,191,1,8200,0,0,0,158.2866,8200 262 286 3594 257,Italy,Japan
+h17a,Italy->Japan,language,tuning,9,2.0,all,randdir_by_token,0,207,2,262,0,0,0,137.4254,262 8200 286 257 3594,Italy,Japan
+h17a,Italy->Japan,language,tuning,9,2.0,all,randdir_by_token,1,167,8,257,0,0,0,72.0247,257 546 262 286 351,Italy,Japan
+h17a,Italy->Japan,continent,tuning,6,2.0,all,lens,-1,21,1,2031,0,0,0,148.175,2031 8031 5478 262 49301,Italy,Japan
+h17a,Italy->Japan,continent,tuning,6,2.0,all,randdir_shared_source,0,4,1,2031,1,0,0,49.7517,2031 262 5478 7229 9133,Italy,Japan
+h17a,Italy->Japan,continent,tuning,6,2.0,all,randdir_shared_source,1,4,2,262,1,0,0,243.6865,262 2031 5478 7229 9133,Italy,Japan
+h17a,Italy->Japan,continent,tuning,6,2.0,all,randdir_by_token,0,4,1,2031,1,0,0,95.1392,2031 262 5478 7229 9133,Italy,Japan
+h17a,Italy->Japan,continent,tuning,6,2.0,all,randdir_by_token,1,185,6,262,0,0,0,771.0861,262 257 465 281 734,Italy,Japan
+h17a,Italy->Japan,continent,tuning,9,2.0,all,lens,-1,4,2,262,1,0,0,142.4221,262 2031 5478 7229 2520,Italy,Japan
+h17a,Italy->Japan,continent,tuning,9,2.0,all,randdir_shared_source,0,4,3,262,1,0,0,185.3726,262 5478 2031 7229 257,Italy,Japan
+h17a,Italy->Japan,continent,tuning,9,2.0,all,randdir_shared_source,1,6,1,2031,0,0,0,167.8489,2031 262 5478 5694 9133,Italy,Japan
+h17a,Italy->Japan,continent,tuning,9,2.0,all,randdir_by_token,0,4,2,262,1,0,0,139.6033,262 2031 5478 7229 9133,Italy,Japan
+h17a,Italy->Japan,continent,tuning,9,2.0,all,randdir_by_token,1,4,1,2031,1,0,0,67.4239,2031 262 5478 7229 9133,Italy,Japan
+h17a,Italy->Portugal,capital,tuning,6,2.0,all,lens,-1,1,54,41898,1,1,1,258.6272,41898 262 3738 327 406,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,6,2.0,all,randdir_shared_source,0,547,2,21574,0,0,0,61.2556,21574 10598 28537 49404 520,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,6,2.0,all,randdir_shared_source,1,475,2,21574,0,0,0,153.4776,21574 10598 28537 49404 520,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,6,2.0,all,randdir_by_token,0,556,2,49404,0,0,0,484.7728,49404 10598 21574 327 347,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,6,2.0,all,randdir_by_token,1,615,2,21574,0,0,0,31.929,21574 10598 28537 49404 520,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,9,2.0,all,lens,-1,1,186,41898,1,1,1,137.0343,41898 19101 10334 4347 11294,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,9,2.0,all,randdir_shared_source,0,732,2,21574,0,0,0,333.7491,21574 10598 49404 28537 3175,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,9,2.0,all,randdir_shared_source,1,456,1,10598,0,0,0,508.2303,10598 49404 21574 520 5215,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,9,2.0,all,randdir_by_token,0,583,5,309,0,0,0,561.3049,309 3175 29600 21574 10598,Italy,Portugal
+h17a,Italy->Portugal,capital,tuning,9,2.0,all,randdir_by_token,1,729,1,10598,0,0,0,305.898,10598 21574 49404 520 28537,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,6,2.0,all,lens,-1,1,12,21813,1,1,1,255.4671,21813 3594 286 262 7897,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,6,2.0,all,randdir_shared_source,0,38,1,8200,0,0,0,61.0346,8200 262 286 257 3594,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,6,2.0,all,randdir_shared_source,1,44,1,8200,0,0,0,153.6209,8200 262 286 257 3594,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,6,2.0,all,randdir_by_token,0,37,3,286,0,0,0,486.106,286 262 8200 284 546,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,6,2.0,all,randdir_by_token,1,44,1,8200,0,0,0,36.6637,8200 262 286 257 3594,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,9,2.0,all,lens,-1,1,20,21813,1,1,1,100.669,21813 3594 257 262 286,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,9,2.0,all,randdir_shared_source,0,84,3,262,0,0,0,335.5977,262 286 8200 257 3594,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,9,2.0,all,randdir_shared_source,1,27,1,8200,0,0,0,506.1192,8200 262 286 3594 257,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,9,2.0,all,randdir_by_token,0,29,1,8200,0,0,0,559.7463,8200 262 286 3594 257,Italy,Portugal
+h17a,Italy->Portugal,language,tuning,9,2.0,all,randdir_by_token,1,50,1,8200,0,0,0,305.8433,8200 262 286 257 3594,Italy,Portugal
+h17a,Italy->Sweden,capital,tuning,6,2.0,all,lens,-1,2,1300,11853,1,0,1,127.1143,11853 29679 520 569 311,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,6,2.0,all,randdir_shared_source,0,4392,4,21574,0,0,0,342.536,21574 3175 350 10598 309,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,6,2.0,all,randdir_shared_source,1,2440,2,21574,0,0,0,266.649,21574 10598 49404 28537 520,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,6,2.0,all,randdir_by_token,0,1948,2,21574,0,0,0,236.5702,21574 10598 49404 28537 520,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,6,2.0,all,randdir_by_token,1,1214,4,28537,0,0,0,657.6352,28537 21574 49404 10598 262,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,9,2.0,all,lens,-1,1,877,29679,1,1,1,122.0543,29679 10710 11853 520 311,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,9,2.0,all,randdir_shared_source,0,2393,3,21574,0,0,0,755.5662,21574 49404 10598 28537 5215,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,9,2.0,all,randdir_shared_source,1,1994,3,21574,0,0,0,577.7963,21574 28537 10598 5215 520,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,9,2.0,all,randdir_by_token,0,2250,2,21574,0,0,0,42.7843,21574 10598 49404 28537 520,Italy,Sweden
+h17a,Italy->Sweden,capital,tuning,9,2.0,all,randdir_by_token,1,2296,1,10598,0,0,0,445.6529,10598 21574 49404 3175 402,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,6,2.0,all,lens,-1,5,60,262,1,0,1,126.6347,262 3594 286 257 14023,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,6,2.0,all,randdir_shared_source,0,552,2,262,0,0,0,342.2759,262 8200 286 257 3594,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,6,2.0,all,randdir_shared_source,1,333,1,8200,0,0,0,266.6047,8200 3594 262 286 546,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,6,2.0,all,randdir_by_token,0,546,2,262,0,0,0,235.2122,262 8200 286 257 3594,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,6,2.0,all,randdir_by_token,1,238,1,8200,0,0,0,657.712,8200 3594 257 262 284,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,9,2.0,all,lens,-1,1,113,14023,1,1,1,90.564,14023 262 257 3594 286,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,9,2.0,all,randdir_shared_source,0,594,1,8200,0,0,0,754.6451,8200 286 262 257 3594,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,9,2.0,all,randdir_shared_source,1,361,2,262,0,0,0,577.3194,262 8200 257 3594 286,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,9,2.0,all,randdir_by_token,0,332,1,8200,0,0,0,25.6612,8200 262 286 3594 257,Italy,Sweden
+h17a,Italy->Sweden,language,tuning,9,2.0,all,randdir_by_token,1,453,1,8200,0,0,0,441.741,8200 262 257 286 3594,Italy,Sweden
+h17a,Japan->Poland,capital,heldout,6,2.0,all,lens,-1,4,9113,520,1,0,1,96.9096,520 37079 509 32955 262,Japan,Poland
+h17a,Japan->Poland,capital,heldout,6,2.0,all,randdir_shared_source,0,3634,2,36298,0,0,0,143.227,36298 11790 42429 15196 42922,Japan,Poland
+h17a,Japan->Poland,capital,heldout,6,2.0,all,randdir_shared_source,1,6421,1,11790,0,0,0,239.3073,11790 262 509 42429 15196,Japan,Poland
+h17a,Japan->Poland,capital,heldout,6,2.0,all,randdir_by_token,0,3249,1,11790,0,0,0,67.9315,11790 36298 42429 262 42922,Japan,Poland
+h17a,Japan->Poland,capital,heldout,6,2.0,all,randdir_by_token,1,7076,2,911,0,0,0,221.0692,911 11790 36298 45138 42429,Japan,Poland
+h17a,Japan->Poland,capital,heldout,9,2.0,all,lens,-1,2,16314,12873,1,0,1,155.5059,12873 32955 15945 8595 25370,Japan,Poland
+h17a,Japan->Poland,capital,heldout,9,2.0,all,randdir_shared_source,0,4628,1,11790,0,0,0,50.7376,11790 36298 42429 15196 42922,Japan,Poland
+h17a,Japan->Poland,capital,heldout,9,2.0,all,randdir_shared_source,1,6326,1,11790,0,0,0,790.9789,11790 36298 42429 262 45138,Japan,Poland
+h17a,Japan->Poland,capital,heldout,9,2.0,all,randdir_by_token,0,9514,1,11790,0,0,0,320.9993,11790 36298 42429 911 45138,Japan,Poland
+h17a,Japan->Poland,capital,heldout,9,2.0,all,randdir_by_token,1,6691,1,11790,0,0,0,312.9769,11790 36298 15196 42429 42922,Japan,Poland
+h17a,Japan->Poland,language,heldout,6,2.0,all,lens,-1,2,1352,3594,1,0,1,97.2002,3594 15945 257 262 284,Japan,Poland
+h17a,Japan->Poland,language,heldout,6,2.0,all,randdir_shared_source,0,261,2,3594,0,0,0,143.5854,3594 4960 262 257 286,Japan,Poland
+h17a,Japan->Poland,language,heldout,6,2.0,all,randdir_shared_source,1,228,5,257,0,0,0,237.8997,257 3594 262 691 4960,Japan,Poland
+h17a,Japan->Poland,language,heldout,6,2.0,all,randdir_by_token,0,282,2,3594,0,0,0,56.7972,3594 4960 257 262 286,Japan,Poland
+h17a,Japan->Poland,language,heldout,6,2.0,all,randdir_by_token,1,576,1,4960,0,0,0,217.3579,4960 3594 262 257 286,Japan,Poland
+h17a,Japan->Poland,language,heldout,9,2.0,all,lens,-1,1,684,15945,1,1,1,115.1716,15945 257 3594 262 287,Japan,Poland
+h17a,Japan->Poland,language,heldout,9,2.0,all,randdir_shared_source,0,322,4,3594,0,0,0,48.7014,3594 262 257 4960 286,Japan,Poland
+h17a,Japan->Poland,language,heldout,9,2.0,all,randdir_shared_source,1,878,4,3594,0,0,0,790.8062,3594 257 262 4960 691,Japan,Poland
+h17a,Japan->Poland,language,heldout,9,2.0,all,randdir_by_token,0,1653,4,262,0,0,0,323.2344,262 257 3594 4960 286,Japan,Poland
+h17a,Japan->Poland,language,heldout,9,2.0,all,randdir_by_token,1,1643,1,4960,0,0,0,317.6461,4960 257 3594 286 546,Japan,Poland
+h17a,Japan->Poland,continent,heldout,6,2.0,all,lens,-1,1,13,2031,1,1,1,96.5257,2031 262 5478 12873 2258,Japan,Poland
+h17a,Japan->Poland,continent,heldout,6,2.0,all,randdir_shared_source,0,2,3,262,1,0,1,142.2679,262 2031 7229 5478 2258,Japan,Poland
+h17a,Japan->Poland,continent,heldout,6,2.0,all,randdir_shared_source,1,4,2,262,1,0,0,234.9543,262 7229 5478 2031 35769,Japan,Poland
+h17a,Japan->Poland,continent,heldout,6,2.0,all,randdir_by_token,0,3,4,262,1,0,1,58.7461,262 5478 2031 7229 2258,Japan,Poland
+h17a,Japan->Poland,continent,heldout,6,2.0,all,randdir_by_token,1,4,3,262,1,0,0,222.9549,262 2869 7229 2031 2807,Japan,Poland
+h17a,Japan->Poland,continent,heldout,9,2.0,all,lens,-1,1,15,2031,1,1,1,111.8379,2031 12873 262 5478 2258,Japan,Poland
+h17a,Japan->Poland,continent,heldout,9,2.0,all,randdir_shared_source,0,3,2,262,1,0,0,59.3406,262 7229 2031 5478 2258,Japan,Poland
+h17a,Japan->Poland,continent,heldout,9,2.0,all,randdir_shared_source,1,3,4,262,1,0,1,791.3704,262 5478 2031 7229 257,Japan,Poland
+h17a,Japan->Poland,continent,heldout,9,2.0,all,randdir_by_token,0,5,2,262,1,0,0,323.3332,262 7229 5478 2869 2031,Japan,Poland
+h17a,Japan->Poland,continent,heldout,9,2.0,all,randdir_by_token,1,3,2,262,1,0,0,313.8749,262 7229 2031 5478 2869,Japan,Poland
+h17a,Japan->Spain,capital,heldout,6,2.0,all,lens,-1,11,11440,15142,0,0,1,109.2918,15142 35773 327 1879 6455,Japan,Spain
+h17a,Japan->Spain,capital,heldout,6,2.0,all,randdir_shared_source,0,1652,3,36298,0,0,0,434.2815,36298 42429 11790 15196 28675,Japan,Spain
+h17a,Japan->Spain,capital,heldout,6,2.0,all,randdir_shared_source,1,5508,19,554,0,0,0,841.2906,554 14063 14248 16092 19743,Japan,Spain
+h17a,Japan->Spain,capital,heldout,6,2.0,all,randdir_by_token,0,2358,2,36298,0,0,0,130.8923,36298 11790 42429 42922 15196,Japan,Spain
+h17a,Japan->Spain,capital,heldout,6,2.0,all,randdir_by_token,1,302,2,262,0,0,0,1100.9908,262 11790 968 32701 42429,Japan,Spain
+h17a,Japan->Spain,capital,heldout,9,2.0,all,lens,-1,6,27098,15142,0,0,1,171.5951,15142 35773 8602 309 37918,Japan,Spain
+h17a,Japan->Spain,capital,heldout,9,2.0,all,randdir_shared_source,0,2778,3,42429,0,0,0,630.1858,42429 15196 11790 11118 36298,Japan,Spain
+h17a,Japan->Spain,capital,heldout,9,2.0,all,randdir_shared_source,1,3715,3,36298,0,0,0,932.4679,36298 42429 11790 42922 509,Japan,Spain
+h17a,Japan->Spain,capital,heldout,9,2.0,all,randdir_by_token,0,2282,1,11790,0,0,0,33.9347,11790 36298 42429 15196 911,Japan,Spain
+h17a,Japan->Spain,capital,heldout,9,2.0,all,randdir_by_token,1,2220,1,11790,0,0,0,501.7062,11790 11118 36298 509 45138,Japan,Spain
+h17a,Japan->Spain,language,heldout,6,2.0,all,lens,-1,1,384,7897,1,1,1,105.9481,7897 3594 257 262 286,Japan,Spain
+h17a,Japan->Spain,language,heldout,6,2.0,all,randdir_shared_source,0,49,4,3594,0,0,0,434.1655,3594 257 262 4960 546,Japan,Spain
+h17a,Japan->Spain,language,heldout,6,2.0,all,randdir_shared_source,1,141,22,511,0,0,0,841.5283,511 262 257 3771 11,Japan,Spain
+h17a,Japan->Spain,language,heldout,6,2.0,all,randdir_by_token,0,31,2,3594,0,0,0,130.1674,3594 4960 262 257 286,Japan,Spain
+h17a,Japan->Spain,language,heldout,6,2.0,all,randdir_by_token,1,23,17,262,0,0,0,1100.9512,262 284 3594 257 287,Japan,Spain
+h17a,Japan->Spain,language,heldout,9,2.0,all,lens,-1,1,1151,7897,1,1,1,124.727,7897 257 3594 262 530,Japan,Spain
+h17a,Japan->Spain,language,heldout,9,2.0,all,randdir_shared_source,0,64,4,262,0,0,0,628.0234,262 257 3594 4960 286,Japan,Spain
+h17a,Japan->Spain,language,heldout,9,2.0,all,randdir_shared_source,1,42,5,257,0,0,0,931.7985,257 262 3594 691 4960,Japan,Spain
+h17a,Japan->Spain,language,heldout,9,2.0,all,randdir_by_token,0,44,2,3594,0,0,0,34.3125,3594 4960 262 257 286,Japan,Spain
+h17a,Japan->Spain,language,heldout,9,2.0,all,randdir_by_token,1,22,3,3594,0,0,0,502.3257,3594 257 4960 262 546,Japan,Spain
+h17a,Japan->Spain,continent,heldout,6,2.0,all,lens,-1,1,5,2031,1,1,1,110.4274,2031 5478 262 9133 7229,Japan,Spain
+h17a,Japan->Spain,continent,heldout,6,2.0,all,randdir_shared_source,0,4,3,262,1,0,0,434.1352,262 2869 7229 2031 5478,Japan,Spain
+h17a,Japan->Spain,continent,heldout,6,2.0,all,randdir_shared_source,1,1021,1009,705,0,0,0,840.7177,705 11 14063 3771 262,Japan,Spain
+h17a,Japan->Spain,continent,heldout,6,2.0,all,randdir_by_token,0,3,2,262,1,0,0,132.4352,262 7229 2031 5478 2869,Japan,Spain
+h17a,Japan->Spain,continent,heldout,6,2.0,all,randdir_by_token,1,7,15,262,0,0,1,1101.3041,262 257 3660 2253 326,Japan,Spain
+h17a,Japan->Spain,continent,heldout,9,2.0,all,lens,-1,2,42,8602,1,0,1,132.3077,8602 2031 5478 262 9133,Japan,Spain
+h17a,Japan->Spain,continent,heldout,9,2.0,all,randdir_shared_source,0,2,3,262,1,0,1,631.4029,262 2031 7229 2869 2258,Japan,Spain
+h17a,Japan->Spain,continent,heldout,9,2.0,all,randdir_shared_source,1,2,5,262,1,0,1,932.056,262 2031 2807 257 7229,Japan,Spain
+h17a,Japan->Spain,continent,heldout,9,2.0,all,randdir_by_token,0,3,2,262,1,0,0,35.4794,262 7229 2031 5478 2258,Japan,Spain
+h17a,Japan->Spain,continent,heldout,9,2.0,all,randdir_by_token,1,2,4,262,1,0,1,502.422,262 2031 5478 7229 2520,Japan,Spain
+h17a,Japan->France,capital,heldout,6,2.0,all,lens,-1,2,13054,45996,1,0,1,77.3197,45996 6342 9281 520 262,Japan,France
+h17a,Japan->France,capital,heldout,6,2.0,all,randdir_shared_source,0,948,3,36298,0,0,0,335.9344,36298 42429 11790 22431 911,Japan,France
+h17a,Japan->France,capital,heldout,6,2.0,all,randdir_shared_source,1,418,1,11790,0,0,0,218.3288,11790 36298 262 15196 42429,Japan,France
+h17a,Japan->France,capital,heldout,6,2.0,all,randdir_by_token,0,2914,1,11790,0,0,0,644.692,11790 42429 262 45138 399,Japan,France
+h17a,Japan->France,capital,heldout,6,2.0,all,randdir_by_token,1,1035,1,11790,0,0,0,744.5131,11790 2869 262 575 42922,Japan,France
+h17a,Japan->France,capital,heldout,9,2.0,all,lens,-1,1,17274,6342,1,1,1,147.1648,6342 45996 4881 35193 18460,Japan,France
+h17a,Japan->France,capital,heldout,9,2.0,all,randdir_shared_source,0,878,1,11790,0,0,0,52.4083,11790 36298 42429 15196 42922,Japan,France
+h17a,Japan->France,capital,heldout,9,2.0,all,randdir_shared_source,1,999,1,11790,0,0,0,353.1136,11790 42429 36298 15196 911,Japan,France
+h17a,Japan->France,capital,heldout,9,2.0,all,randdir_by_token,0,824,2,36298,0,0,0,199.8588,36298 11790 42429 15196 911,Japan,France
+h17a,Japan->France,capital,heldout,9,2.0,all,randdir_by_token,1,680,1,11790,0,0,0,446.0798,11790 45138 22431 29493 36298,Japan,France
+h17a,Japan->France,language,heldout,6,2.0,all,lens,-1,2,1048,3594,1,0,1,72.8454,3594 4141 286 262 257,Japan,France
+h17a,Japan->France,language,heldout,6,2.0,all,randdir_shared_source,0,24,4,3594,0,0,0,335.7605,3594 257 262 4960 546,Japan,France
+h17a,Japan->France,language,heldout,6,2.0,all,randdir_shared_source,1,30,4,3594,0,0,0,217.022,3594 262 257 4960 286,Japan,France
+h17a,Japan->France,language,heldout,6,2.0,all,randdir_by_token,0,145,12,257,0,0,0,644.5792,257 3594 262 286 351,Japan,France
+h17a,Japan->France,language,heldout,6,2.0,all,randdir_by_token,1,28,11,3594,0,0,0,744.1516,3594 262 257 530 546,Japan,France
+h17a,Japan->France,language,heldout,9,2.0,all,lens,-1,1,3805,4141,1,1,1,97.9654,4141 3594 257 262 286,Japan,France
+h17a,Japan->France,language,heldout,9,2.0,all,randdir_shared_source,0,48,3,3594,0,0,0,48.7455,3594 257 4960 262 286,Japan,France
+h17a,Japan->France,language,heldout,9,2.0,all,randdir_shared_source,1,45,3,3594,0,0,0,352.4162,3594 257 4960 262 286,Japan,France
+h17a,Japan->France,language,heldout,9,2.0,all,randdir_by_token,0,47,4,3594,0,0,0,199.2376,3594 257 262 4960 286,Japan,France
+h17a,Japan->France,language,heldout,9,2.0,all,randdir_by_token,1,51,7,286,0,0,0,448.4605,286 546 257 3594 262,Japan,France
+h17a,Japan->France,continent,heldout,6,2.0,all,lens,-1,1,4,2031,1,1,1,71.35,2031 262 5478 7229 2258,Japan,France
+h17a,Japan->France,continent,heldout,6,2.0,all,randdir_shared_source,0,2,3,262,1,0,1,335.522,262 2031 7229 2258 2869,Japan,France
+h17a,Japan->France,continent,heldout,6,2.0,all,randdir_shared_source,1,2,4,262,1,0,1,216.5123,262 2031 5478 7229 35769,Japan,France
+h17a,Japan->France,continent,heldout,6,2.0,all,randdir_by_token,0,22,60,262,0,0,1,644.4526,262 663 257 749 2520,Japan,France
+h17a,Japan->France,continent,heldout,6,2.0,all,randdir_by_token,1,3,20,262,1,0,1,744.4919,262 734 2031 257 674,Japan,France
+h17a,Japan->France,continent,heldout,9,2.0,all,lens,-1,1,10,2031,1,1,1,88.0019,2031 262 5478 4881 2258,Japan,France
+h17a,Japan->France,continent,heldout,9,2.0,all,randdir_shared_source,0,2,3,262,1,0,1,60.3986,262 2031 7229 5478 2258,Japan,France
+h17a,Japan->France,continent,heldout,9,2.0,all,randdir_shared_source,1,3,2,262,1,0,0,351.7347,262 7229 2031 2869 5478,Japan,France
+h17a,Japan->France,continent,heldout,9,2.0,all,randdir_by_token,0,2,3,262,1,0,1,201.5951,262 2031 7229 5478 2869,Japan,France
+h17a,Japan->France,continent,heldout,9,2.0,all,randdir_by_token,1,2,4,262,1,0,1,448.8741,262 2031 5478 7229 2520,Japan,France
+h17a,Poland->Portugal,capital,tuning,6,2.0,all,lens,-1,1,7419,41898,1,1,1,106.6027,41898 4347 327 3738 15338,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,6,2.0,all,randdir_shared_source,0,4008,1,32955,0,0,0,56.8175,32955 509 40753 520 27974,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,6,2.0,all,randdir_shared_source,1,1504,1,32955,0,0,0,521.482,32955 27974 509 17437 520,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,6,2.0,all,randdir_by_token,0,5034,8,262,0,0,0,605.1721,262 1168 509 347 520,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,6,2.0,all,randdir_by_token,1,16687,464,262,0,0,0,1338.2506,262 11 465 9842 257,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,9,2.0,all,lens,-1,2,17810,19101,1,0,1,150.7163,19101 41898 4347 10334 3738,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,9,2.0,all,randdir_shared_source,0,11353,29,509,0,0,0,576.476,509 520 406 309 314,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,9,2.0,all,randdir_shared_source,1,3997,1,32955,0,0,0,211.8464,32955 509 520 40753 309,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,9,2.0,all,randdir_by_token,0,9954,33,509,0,0,0,807.5978,509 262 412 347 440,Poland,Portugal
+h17a,Poland->Portugal,capital,tuning,9,2.0,all,randdir_by_token,1,3225,1,32955,0,0,0,119.7925,32955 509 40753 27974 1168,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,6,2.0,all,lens,-1,1,506,21813,1,1,1,101.7662,21813 3594 257 262 7897,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,6,2.0,all,randdir_shared_source,0,585,1,15945,0,0,0,51.2418,15945 262 257 286 3594,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,6,2.0,all,randdir_shared_source,1,180,1,15945,0,0,0,521.0103,15945 257 262 286 546,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,6,2.0,all,randdir_by_token,0,995,22,262,0,0,0,604.4706,262 257 546 284 286,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,6,2.0,all,randdir_by_token,1,1491,189,257,0,0,0,1337.6667,257 286 262 11 546,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,9,2.0,all,lens,-1,1,2928,21813,1,1,1,95.3795,21813 262 257 286 3594,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,9,2.0,all,randdir_shared_source,0,1789,68,257,0,0,0,578.0812,257 262 286 351 281,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,9,2.0,all,randdir_shared_source,1,381,2,262,0,0,0,211.0149,262 15945 257 286 3594,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,9,2.0,all,randdir_by_token,0,707,2,262,0,0,0,807.3341,262 15945 257 3594 286,Poland,Portugal
+h17a,Poland->Portugal,language,tuning,9,2.0,all,randdir_by_token,1,454,2,262,0,0,0,78.2643,262 15945 286 257 3594,Poland,Portugal
+h17a,Poland->Sweden,capital,tuning,6,2.0,all,lens,-1,1,2056,29679,1,1,1,69.4956,29679 11853 509 43307 50182,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,6,2.0,all,randdir_shared_source,0,1758,1,32955,0,0,0,221.5063,32955 509 520 25370 27974,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,6,2.0,all,randdir_shared_source,1,926,1,32955,0,0,0,214.4032,32955 509 520 350 27974,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,6,2.0,all,randdir_by_token,0,871,1,32955,0,0,0,207.6214,32955 509 520 40753 25370,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,6,2.0,all,randdir_by_token,1,2754,21,509,0,0,0,495.8455,509 520 1168 406 309,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,9,2.0,all,lens,-1,1,481,29679,1,1,1,121.0164,29679 509 520 10710 6544,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,9,2.0,all,randdir_shared_source,0,1005,1,32955,0,0,0,305.5663,32955 509 40753 520 27974,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,9,2.0,all,randdir_shared_source,1,1090,1,32955,0,0,0,212.2572,32955 509 520 350 40753,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,9,2.0,all,randdir_by_token,0,1049,1,32955,0,0,0,217.4792,32955 509 520 40753 350,Poland,Sweden
+h17a,Poland->Sweden,capital,tuning,9,2.0,all,randdir_by_token,1,895,1,32955,0,0,0,181.2126,32955 509 520 1168 40753,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,6,2.0,all,lens,-1,1,251,14023,1,1,1,68.322,14023 262 257 3594 286,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,6,2.0,all,randdir_shared_source,0,150,1,15945,0,0,0,219.1369,15945 262 257 286 3594,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,6,2.0,all,randdir_shared_source,1,110,1,15945,0,0,0,212.9503,15945 286 257 262 3594,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,6,2.0,all,randdir_by_token,0,123,2,262,0,0,0,207.4437,262 15945 257 3594 286,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,6,2.0,all,randdir_by_token,1,72,7,262,0,0,0,495.1077,262 286 546 257 287,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,9,2.0,all,lens,-1,1,153,14023,1,1,1,94.9656,14023 262 257 286 546,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,9,2.0,all,randdir_shared_source,0,113,1,15945,0,0,0,307.8624,15945 262 257 3594 286,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,9,2.0,all,randdir_shared_source,1,175,2,262,0,0,0,211.929,262 15945 257 3594 286,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,9,2.0,all,randdir_by_token,0,120,1,15945,0,0,0,219.1294,15945 262 257 286 3594,Poland,Sweden
+h17a,Poland->Sweden,language,tuning,9,2.0,all,randdir_by_token,1,135,1,15945,0,0,0,179.939,15945 262 257 286 3594,Poland,Sweden
+h17a,Poland->Germany,capital,tuning,6,2.0,all,lens,-1,21,29,509,0,0,1,75.3325,509 520 402 350 1168,Poland,Germany
+h17a,Poland->Germany,capital,tuning,6,2.0,all,randdir_shared_source,0,510,2,509,0,0,0,260.3915,509 32955 520 406 360,Poland,Germany
+h17a,Poland->Germany,capital,tuning,6,2.0,all,randdir_shared_source,1,253,2,509,0,0,0,129.2881,509 32955 40753 520 309,Poland,Germany
+h17a,Poland->Germany,capital,tuning,6,2.0,all,randdir_by_token,0,511,9,262,0,0,0,489.0481,262 257 1168 520 509,Poland,Germany
+h17a,Poland->Germany,capital,tuning,6,2.0,all,randdir_by_token,1,1166,23,1168,0,0,0,689.1168,1168 406 9842 371 509,Poland,Germany
+h17a,Poland->Germany,capital,tuning,9,2.0,all,lens,-1,5,6,509,1,0,1,92.3715,509 262 520 350 11307,Poland,Germany
+h17a,Poland->Germany,capital,tuning,9,2.0,all,randdir_shared_source,0,282,2,509,0,0,0,307.5374,509 32955 520 309 1168,Poland,Germany
+h17a,Poland->Germany,capital,tuning,9,2.0,all,randdir_shared_source,1,295,1,32955,0,0,0,246.5088,32955 509 520 1168 40753,Poland,Germany
+h17a,Poland->Germany,capital,tuning,9,2.0,all,randdir_by_token,0,481,1,32955,0,0,0,279.0792,32955 509 350 370 309,Poland,Germany
+h17a,Poland->Germany,capital,tuning,9,2.0,all,randdir_by_token,1,194,1,32955,0,0,0,139.3974,32955 509 520 1168 309,Poland,Germany
+h17a,Poland->Germany,language,tuning,6,2.0,all,lens,-1,1,6,2679,1,1,1,71.572,2679 262 286 3594 257,Poland,Germany
+h17a,Poland->Germany,language,tuning,6,2.0,all,randdir_shared_source,0,12,2,262,0,0,0,257.8954,262 15945 257 3594 286,Poland,Germany
+h17a,Poland->Germany,language,tuning,6,2.0,all,randdir_shared_source,1,9,3,262,0,0,0,131.867,262 257 15945 3594 286,Poland,Germany
+h17a,Poland->Germany,language,tuning,6,2.0,all,randdir_by_token,0,79,9,257,0,0,0,486.9424,257 286 284 262 546,Poland,Germany
+h17a,Poland->Germany,language,tuning,6,2.0,all,randdir_by_token,1,22,18,286,0,0,0,686.9752,286 262 257 546 284,Poland,Germany
+h17a,Poland->Germany,language,tuning,9,2.0,all,lens,-1,2,6,262,1,0,1,80.2879,262 2679 257 286 3594,Poland,Germany
+h17a,Poland->Germany,language,tuning,9,2.0,all,randdir_shared_source,0,12,4,262,0,0,0,308.706,262 257 286 15945 3594,Poland,Germany
+h17a,Poland->Germany,language,tuning,9,2.0,all,randdir_shared_source,1,11,1,15945,0,0,0,244.149,15945 262 257 286 3594,Poland,Germany
+h17a,Poland->Germany,language,tuning,9,2.0,all,randdir_by_token,0,11,1,15945,0,0,0,282.0393,15945 262 3594 257 286,Poland,Germany
+h17a,Poland->Germany,language,tuning,9,2.0,all,randdir_by_token,1,9,1,15945,0,0,0,116.6135,15945 262 286 257 3594,Poland,Germany
+h17a,Portugal->Spain,capital,heldout,6,2.0,all,lens,-1,10,12,327,0,0,1,78.8955,327 350 5027 15142 1879,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,6,2.0,all,randdir_shared_source,0,61,1,41898,0,0,0,104.0423,41898 4347 327 350 3738,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,6,2.0,all,randdir_shared_source,1,88,1,41898,0,0,0,152.824,41898 4347 327 350 11294,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,6,2.0,all,randdir_by_token,0,187,1,41898,0,0,0,751.2808,41898 262 327 4347 347,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,6,2.0,all,randdir_by_token,1,154,1,41898,0,0,0,362.1967,41898 4347 327 3738 1879,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,9,2.0,all,lens,-1,13,3,350,0,0,0,47.5592,350 327 41898 11294 4347,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,9,2.0,all,randdir_shared_source,0,51,2,4347,0,0,0,202.541,4347 41898 327 15338 350,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,9,2.0,all,randdir_shared_source,1,65,1,41898,0,0,0,194.102,41898 4347 327 11294 15338,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,9,2.0,all,randdir_by_token,0,127,1,41898,0,0,0,380.4248,41898 4347 3738 350 327,Portugal,Spain
+h17a,Portugal->Spain,capital,heldout,9,2.0,all,randdir_by_token,1,39,1,41898,0,0,0,250.792,41898 3738 327 4347 11294,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,6,2.0,all,lens,-1,3,1,21813,1,0,0,80.1393,21813 3594 7897 262 257,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,6,2.0,all,randdir_shared_source,0,6,1,21813,0,0,0,102.741,21813 3594 262 257 286,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,6,2.0,all,randdir_shared_source,1,6,1,21813,0,0,0,153.7725,21813 3594 262 257 286,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,6,2.0,all,randdir_by_token,0,6,1,21813,0,0,0,751.5065,21813 3594 262 257 286,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,6,2.0,all,randdir_by_token,1,6,1,21813,0,0,0,361.7381,21813 262 3594 257 284,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,9,2.0,all,lens,-1,5,1,21813,1,0,0,38.1982,21813 3594 262 257 7897,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,9,2.0,all,randdir_shared_source,0,5,1,21813,1,0,0,196.1505,21813 3594 257 262 7897,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,9,2.0,all,randdir_shared_source,1,5,1,21813,1,0,0,186.9749,21813 3594 262 257 7897,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,9,2.0,all,randdir_by_token,0,5,1,21813,1,0,0,379.2062,21813 3594 262 257 7897,Portugal,Spain
+h17a,Portugal->Spain,language,heldout,9,2.0,all,randdir_by_token,1,5,1,21813,1,0,0,241.1936,21813 3594 262 257 7897,Portugal,Spain
+h17a,Portugal->France,capital,heldout,6,2.0,all,lens,-1,9,27,327,0,0,1,60.6421,327 45996 3738 350 520,Portugal,France
+h17a,Portugal->France,capital,heldout,6,2.0,all,randdir_shared_source,0,252,1,41898,0,0,0,60.0253,41898 4347 327 350 3738,Portugal,France
+h17a,Portugal->France,capital,heldout,6,2.0,all,randdir_shared_source,1,194,1,41898,0,0,0,144.3563,41898 4347 327 350 309,Portugal,France
+h17a,Portugal->France,capital,heldout,6,2.0,all,randdir_by_token,0,231,1,41898,0,0,0,236.4799,41898 4347 350 1879 327,Portugal,France
+h17a,Portugal->France,capital,heldout,6,2.0,all,randdir_by_token,1,322,1,41898,0,0,0,92.5502,41898 4347 350 327 3738,Portugal,France
+h17a,Portugal->France,capital,heldout,9,2.0,all,lens,-1,18,4,350,0,0,0,103.5634,350 262 4347 41898 327,Portugal,France
+h17a,Portugal->France,capital,heldout,9,2.0,all,randdir_shared_source,0,432,1,41898,0,0,0,768.9196,41898 350 3738 5027 19101,Portugal,France
+h17a,Portugal->France,capital,heldout,9,2.0,all,randdir_shared_source,1,327,1,41898,0,0,0,283.5338,41898 4347 350 327 11294,Portugal,France
+h17a,Portugal->France,capital,heldout,9,2.0,all,randdir_by_token,0,584,1,41898,0,0,0,589.9578,41898 327 3738 4347 10334,Portugal,France
+h17a,Portugal->France,capital,heldout,9,2.0,all,randdir_by_token,1,187,1,41898,0,0,0,226.0741,41898 327 4347 3738 350,Portugal,France
+h17a,Portugal->France,language,heldout,6,2.0,all,lens,-1,4,3,3594,1,0,0,58.775,3594 262 21813 4141 286,Portugal,France
+h17a,Portugal->France,language,heldout,6,2.0,all,randdir_shared_source,0,16,1,21813,0,0,0,64.7959,21813 3594 262 257 7897,Portugal,France
+h17a,Portugal->France,language,heldout,6,2.0,all,randdir_shared_source,1,17,1,21813,0,0,0,142.7831,21813 3594 262 257 7897,Portugal,France
+h17a,Portugal->France,language,heldout,6,2.0,all,randdir_by_token,0,21,1,21813,0,0,0,236.0303,21813 3594 262 257 7897,Portugal,France
+h17a,Portugal->France,language,heldout,6,2.0,all,randdir_by_token,1,16,1,21813,0,0,0,87.7922,21813 3594 262 257 286,Portugal,France
+h17a,Portugal->France,language,heldout,9,2.0,all,lens,-1,7,1,21813,0,0,0,99.7619,21813 3594 262 257 7897,Portugal,France
+h17a,Portugal->France,language,heldout,9,2.0,all,randdir_shared_source,0,28,1,21813,0,0,0,766.6942,21813 3594 257 262 7897,Portugal,France
+h17a,Portugal->France,language,heldout,9,2.0,all,randdir_shared_source,1,11,1,21813,0,0,0,285.1905,21813 3594 7897 257 262,Portugal,France
+h17a,Portugal->France,language,heldout,9,2.0,all,randdir_by_token,0,25,1,21813,0,0,0,590.1322,21813 3594 262 257 7897,Portugal,France
+h17a,Portugal->France,language,heldout,9,2.0,all,randdir_by_token,1,19,1,21813,0,0,0,209.2137,21813 3594 7897 257 262,Portugal,France
+h17a,Portugal->Greece,capital,heldout,6,2.0,all,lens,-1,1,7901,21891,1,1,1,170.1395,21891 262 31268 8377 309,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,6,2.0,all,randdir_shared_source,0,316,1,41898,0,0,0,41.733,41898 4347 327 350 11294,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,6,2.0,all,randdir_shared_source,1,142,1,41898,0,0,0,508.5043,41898 327 4347 350 5027,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,6,2.0,all,randdir_by_token,0,299,4,327,0,0,0,384.7055,327 4347 262 41898 4689,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,6,2.0,all,randdir_by_token,1,120,2,327,0,0,0,216.0593,327 41898 350 3738 4347,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,9,2.0,all,lens,-1,1,313,21891,1,1,1,121.7235,21891 262 350 402 3175,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,9,2.0,all,randdir_shared_source,0,266,1,41898,0,0,0,376.8292,41898 4347 350 327 3738,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,9,2.0,all,randdir_shared_source,1,187,1,41898,0,0,0,213.9745,41898 4347 327 350 11294,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,9,2.0,all,randdir_by_token,0,252,1,41898,0,0,0,292.1892,41898 4347 3738 10334 350,Portugal,Greece
+h17a,Portugal->Greece,capital,heldout,9,2.0,all,randdir_by_token,1,240,1,41898,0,0,0,92.1513,41898 4347 327 3738 11294,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,6,2.0,all,lens,-1,1,2828,8312,1,1,1,170.7453,8312 262 286 257 287,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,6,2.0,all,randdir_shared_source,0,77,1,21813,0,0,0,31.1493,21813 3594 262 257 7897,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,6,2.0,all,randdir_shared_source,1,116,2,3594,0,0,0,509.0984,3594 21813 546 262 257,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,6,2.0,all,randdir_by_token,0,111,1,21813,0,0,0,385.4959,21813 262 257 3594 546,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,6,2.0,all,randdir_by_token,1,79,1,21813,0,0,0,209.0683,21813 262 257 3594 286,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,9,2.0,all,lens,-1,1,32,8312,1,1,1,110.949,8312 262 3594 257 286,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,9,2.0,all,randdir_shared_source,0,53,1,21813,0,0,0,376.4659,21813 3594 257 262 7897,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,9,2.0,all,randdir_shared_source,1,73,1,21813,0,0,0,196.1621,21813 3594 262 257 7897,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,9,2.0,all,randdir_by_token,0,56,1,21813,0,0,0,290.132,21813 262 3594 257 7897,Portugal,Greece
+h17a,Portugal->Greece,language,heldout,9,2.0,all,randdir_by_token,1,76,1,21813,0,0,0,77.5437,21813 3594 262 257 7897,Portugal,Greece
+h17a,Spain->Sweden,capital,tuning,6,2.0,all,lens,-1,1,11576,29679,1,1,1,136.4724,29679 11853 10710 33609 6184,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,6,2.0,all,randdir_shared_source,0,2625,2,35773,0,0,0,254.6409,35773 14708 15142 1526 34802,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,6,2.0,all,randdir_shared_source,1,1359,3,35773,0,0,0,485.1405,35773 15142 14708 262 11294,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,6,2.0,all,randdir_by_token,0,2289,3,15142,0,0,0,38.1333,15142 35773 14708 34745 3175,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,6,2.0,all,randdir_by_token,1,1260,12,262,0,0,0,976.5072,262 314 6455 15142 41898,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,9,2.0,all,lens,-1,1,3970,29679,1,1,1,106.8445,29679 10710 11853 50182 6184,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,9,2.0,all,randdir_shared_source,0,3365,3,15142,0,0,0,87.2382,15142 35773 14708 327 1879,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,9,2.0,all,randdir_shared_source,1,2537,3,15142,0,0,0,248.1505,15142 35773 14708 34745 1879,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,9,2.0,all,randdir_by_token,0,2475,3,35773,0,0,0,129.7357,35773 15142 14708 327 34745,Spain,Sweden
+h17a,Spain->Sweden,capital,tuning,9,2.0,all,randdir_by_token,1,2657,3,35773,0,0,0,95.3769,35773 15142 14708 327 350,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,6,2.0,all,lens,-1,1,865,14023,1,1,1,139.5957,14023 257 262 546 284,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,6,2.0,all,randdir_shared_source,0,294,1,7897,0,0,0,254.4019,7897 257 262 3594 286,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,6,2.0,all,randdir_shared_source,1,76,2,262,0,0,0,484.941,262 7897 3594 257 286,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,6,2.0,all,randdir_by_token,0,261,1,7897,0,0,0,23.3141,7897 262 3594 257 546,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,6,2.0,all,randdir_by_token,1,661,5,3594,0,0,0,976.2725,3594 284 262 511 7897,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,9,2.0,all,lens,-1,1,271,14023,1,1,1,82.2098,14023 262 257 10710 3594,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,9,2.0,all,randdir_shared_source,0,333,1,7897,0,0,0,63.9714,7897 262 3594 257 286,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,9,2.0,all,randdir_shared_source,1,265,1,7897,0,0,0,242.3596,7897 262 3594 257 286,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,9,2.0,all,randdir_by_token,0,256,1,7897,0,0,0,130.9477,7897 262 3594 257 286,Spain,Sweden
+h17a,Spain->Sweden,language,tuning,9,2.0,all,randdir_by_token,1,257,1,7897,0,0,0,78.7135,7897 262 3594 257 286,Spain,Sweden
+h17a,Spain->Germany,capital,tuning,6,2.0,all,lens,-1,1,3105,11307,1,1,1,158.8232,11307 34923 46993 520 32526,Spain,Germany
+h17a,Spain->Germany,capital,tuning,6,2.0,all,randdir_shared_source,0,975,3,35773,0,0,0,33.9092,35773 15142 14708 350 3175,Spain,Germany
+h17a,Spain->Germany,capital,tuning,6,2.0,all,randdir_shared_source,1,242,3,262,0,0,0,713.4979,262 15142 14708 2986 3175,Spain,Germany
+h17a,Spain->Germany,capital,tuning,6,2.0,all,randdir_by_token,0,315,3,15142,0,0,0,616.1606,15142 3175 14708 33859 35773,Spain,Germany
+h17a,Spain->Germany,capital,tuning,6,2.0,all,randdir_by_token,1,408,13,262,0,0,0,713.7659,262 15142 6955 314 1526,Spain,Germany
+h17a,Spain->Germany,capital,tuning,9,2.0,all,lens,-1,1,156,11307,1,1,1,96.1672,11307 262 34923 520 4486,Spain,Germany
+h17a,Spain->Germany,capital,tuning,9,2.0,all,randdir_shared_source,0,695,4,35773,0,0,0,765.0178,35773 15142 34745 14708 10844,Spain,Germany
+h17a,Spain->Germany,capital,tuning,9,2.0,all,randdir_shared_source,1,533,9,35773,0,0,0,961.3329,35773 1879 3175 15142 11294,Spain,Germany
+h17a,Spain->Germany,capital,tuning,9,2.0,all,randdir_by_token,0,966,3,35773,0,0,0,57.6583,35773 15142 14708 350 1879,Spain,Germany
+h17a,Spain->Germany,capital,tuning,9,2.0,all,randdir_by_token,1,761,5,35773,0,0,0,154.9415,35773 15142 3175 350 14708,Spain,Germany
+h17a,Spain->Germany,language,tuning,6,2.0,all,lens,-1,1,352,2679,1,1,1,159.6608,2679 262 286 257 3594,Spain,Germany
+h17a,Spain->Germany,language,tuning,6,2.0,all,randdir_shared_source,0,26,1,7897,0,0,0,28.455,7897 3594 262 257 286,Spain,Germany
+h17a,Spain->Germany,language,tuning,6,2.0,all,randdir_shared_source,1,48,8,262,0,0,0,713.2265,262 257 351 546 3594,Spain,Germany
+h17a,Spain->Germany,language,tuning,6,2.0,all,randdir_by_token,0,19,2,3594,0,0,0,615.8021,3594 7897 262 257 546,Spain,Germany
+h17a,Spain->Germany,language,tuning,6,2.0,all,randdir_by_token,1,46,2,262,0,0,0,714.0173,262 7897 3594 257 284,Spain,Germany
+h17a,Spain->Germany,language,tuning,9,2.0,all,lens,-1,1,22,2679,1,1,1,67.531,2679 262 3594 257 286,Spain,Germany
+h17a,Spain->Germany,language,tuning,9,2.0,all,randdir_shared_source,0,39,2,262,0,0,0,766.5128,262 7897 257 3594 530,Spain,Germany
+h17a,Spain->Germany,language,tuning,9,2.0,all,randdir_shared_source,1,16,3,262,0,0,0,962.6932,262 257 7897 286 691,Spain,Germany
+h17a,Spain->Germany,language,tuning,9,2.0,all,randdir_by_token,0,22,1,7897,0,0,0,55.5765,7897 262 3594 257 286,Spain,Germany
+h17a,Spain->Germany,language,tuning,9,2.0,all,randdir_by_token,1,23,1,7897,0,0,0,138.5199,7897 262 3594 257 286,Spain,Germany
+h17a,Spain->Ireland,capital,tuning,6,2.0,all,lens,-1,1,7913,18220,1,1,1,162.8083,18220 29713 25567 520 7517,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,6,2.0,all,randdir_shared_source,0,2306,1,14708,0,0,0,633.7908,14708 35773 15142 262 5027,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,6,2.0,all,randdir_shared_source,1,682,5,262,0,0,0,795.9841,262 257 350 15142 14708,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,6,2.0,all,randdir_by_token,0,912,3,15142,0,0,0,224.9256,15142 35773 14708 350 309,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,6,2.0,all,randdir_by_token,1,260,2,15142,0,0,0,607.7852,15142 14708 3738 35773 6955,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,9,2.0,all,lens,-1,2,15527,7517,1,0,1,238.4299,7517 18220 25567 8685 29713,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,9,2.0,all,randdir_shared_source,0,1294,5,35773,0,0,0,577.332,35773 34745 15142 3738 14708,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,9,2.0,all,randdir_shared_source,1,841,3,35773,0,0,0,147.6364,35773 15142 14708 1879 34745,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,9,2.0,all,randdir_by_token,0,1057,3,35773,0,0,0,132.0824,35773 15142 14708 327 1879,Spain,Ireland
+h17a,Spain->Ireland,capital,tuning,9,2.0,all,randdir_by_token,1,798,3,35773,0,0,0,801.7714,35773 15142 14708 3175 350,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,6,2.0,all,lens,-1,5,435,8685,1,0,1,164.6452,8685 257 286 262 3594,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,6,2.0,all,randdir_shared_source,0,5,2,257,1,0,0,633.9613,257 7897 262 546 3594,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,6,2.0,all,randdir_shared_source,1,10,11,546,0,0,1,795.8807,546 262 511 11 290,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,6,2.0,all,randdir_by_token,0,3,1,7897,1,0,0,223.256,7897 262 3594 286 257,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,6,2.0,all,randdir_by_token,1,2,3,262,1,0,1,607.5414,262 3594 7897 284 257,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,9,2.0,all,lens,-1,5,381,8685,1,0,1,221.0916,8685 257 262 7517 3594,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,9,2.0,all,randdir_shared_source,0,2,1,7897,1,0,0,574.4357,7897 3594 262 257 286,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,9,2.0,all,randdir_shared_source,1,2,1,7897,1,0,0,152.5767,7897 3594 262 257 286,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,9,2.0,all,randdir_by_token,0,4,1,7897,1,0,0,128.8919,7897 262 257 3594 286,Spain,Ireland
+h17a,Spain->Ireland,language,tuning,9,2.0,all,randdir_by_token,1,4,1,7897,1,0,0,801.6348,7897 262 257 3594 281,Spain,Ireland
+h17a,Sweden->France,capital,heldout,6,2.0,all,lens,-1,2,1552,45996,1,0,1,104.2779,45996 6342 520 9281 35193,Sweden,France
+h17a,Sweden->France,capital,heldout,6,2.0,all,randdir_shared_source,0,1648,2,11853,0,0,0,316.5955,11853 29679 569 520 3661,Sweden,France
+h17a,Sweden->France,capital,heldout,6,2.0,all,randdir_shared_source,1,1125,37,520,0,0,0,893.9749,520 11853 311 20291 7273,Sweden,France
+h17a,Sweden->France,capital,heldout,6,2.0,all,randdir_by_token,0,1162,19,262,0,0,0,872.2974,262 337 311 367 347,Sweden,France
+h17a,Sweden->France,capital,heldout,6,2.0,all,randdir_by_token,1,1726,1,29679,0,0,0,669.3524,29679 520 11853 262 509,Sweden,France
+h17a,Sweden->France,capital,heldout,9,2.0,all,lens,-1,1,470,6342,1,1,1,144.6,6342 262 520 360 569,Sweden,France
+h17a,Sweden->France,capital,heldout,9,2.0,all,randdir_shared_source,0,1394,1,29679,0,0,0,416.7848,29679 11853 520 6184 262,Sweden,France
+h17a,Sweden->France,capital,heldout,9,2.0,all,randdir_shared_source,1,1206,3,11853,0,0,0,281.2982,11853 520 29679 33609 311,Sweden,France
+h17a,Sweden->France,capital,heldout,9,2.0,all,randdir_by_token,0,1225,1,29679,0,0,0,104.9764,29679 11853 520 311 33609,Sweden,France
+h17a,Sweden->France,capital,heldout,9,2.0,all,randdir_by_token,1,1194,1,29679,0,0,0,53.6326,29679 11853 520 311 33609,Sweden,France
+h17a,Sweden->France,language,heldout,6,2.0,all,lens,-1,2,41,3594,1,0,1,98.5936,3594 4141 262 257 286,Sweden,France
+h17a,Sweden->France,language,heldout,6,2.0,all,randdir_shared_source,0,20,1,14023,0,0,0,317.5881,14023 262 3594 257 286,Sweden,France
+h17a,Sweden->France,language,heldout,6,2.0,all,randdir_shared_source,1,231,60,262,0,0,0,894.6199,262 257 366 281 530,Sweden,France
+h17a,Sweden->France,language,heldout,6,2.0,all,randdir_by_token,0,217,84,257,0,0,0,872.1202,257 546 262 286 11,Sweden,France
+h17a,Sweden->France,language,heldout,6,2.0,all,randdir_by_token,1,58,3,3594,0,0,0,668.7303,3594 257 14023 262 546,Sweden,France
+h17a,Sweden->France,language,heldout,9,2.0,all,lens,-1,2,31,3594,1,0,1,114.9666,3594 4141 262 257 286,Sweden,France
+h17a,Sweden->France,language,heldout,9,2.0,all,randdir_shared_source,0,58,1,14023,0,0,0,405.2451,14023 262 3594 257 286,Sweden,France
+h17a,Sweden->France,language,heldout,9,2.0,all,randdir_shared_source,1,34,2,262,0,0,0,275.1975,262 14023 257 3594 286,Sweden,France
+h17a,Sweden->France,language,heldout,9,2.0,all,randdir_by_token,0,32,1,14023,0,0,0,107.4264,14023 3594 262 257 286,Sweden,France
+h17a,Sweden->France,language,heldout,9,2.0,all,randdir_by_token,1,28,1,14023,0,0,0,60.6037,14023 3594 257 262 286,Sweden,France
+h17a,Sweden->Greece,capital,heldout,6,2.0,all,lens,-1,1,21950,21891,1,1,1,104.6468,21891 31268 8377 262 6031,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,6,2.0,all,randdir_shared_source,0,5339,4,11853,0,0,0,380.6754,11853 569 520 29679 309,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,6,2.0,all,randdir_shared_source,1,9598,3,520,0,0,0,295.1462,520 11853 29679 311 6544,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,6,2.0,all,randdir_by_token,0,5194,1,29679,0,0,0,380.6592,29679 311 520 11853 367,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,6,2.0,all,randdir_by_token,1,352,2,262,0,0,0,878.845,262 29679 317 257 663,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,9,2.0,all,lens,-1,1,20519,21891,1,1,1,155.8486,21891 10315 31268 309 8312,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,9,2.0,all,randdir_shared_source,0,9534,2,520,0,0,0,387.6318,520 29679 262 11853 6184,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,9,2.0,all,randdir_shared_source,1,4226,2,11853,0,0,0,285.4301,11853 29679 520 311 33609,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,9,2.0,all,randdir_by_token,0,5391,2,11853,0,0,0,258.8419,11853 29679 520 311 367,Sweden,Greece
+h17a,Sweden->Greece,capital,heldout,9,2.0,all,randdir_by_token,1,2997,1,29679,0,0,0,206.6723,29679 11853 520 311 33609,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,6,2.0,all,lens,-1,4,6502,257,1,0,1,102.1095,257 3594 262 8312 286,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,6,2.0,all,randdir_shared_source,0,683,1,14023,0,0,0,380.1568,14023 3594 257 262 286,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,6,2.0,all,randdir_shared_source,1,543,2,262,0,0,0,295.1689,262 14023 257 546 3594,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,6,2.0,all,randdir_by_token,0,261,6,286,0,0,0,380.6054,286 257 546 262 3594,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,6,2.0,all,randdir_by_token,1,518,12,257,0,0,0,876.779,257 262 3594 287 290,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,9,2.0,all,lens,-1,1,4370,8312,1,1,1,119.2448,8312 3594 257 262 286,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,9,2.0,all,randdir_shared_source,0,337,4,3594,0,0,0,380.6224,3594 257 262 14023 286,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,9,2.0,all,randdir_shared_source,1,383,3,3594,0,0,0,283.8427,3594 262 14023 257 286,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,9,2.0,all,randdir_by_token,0,280,2,3594,0,0,0,257.1749,3594 14023 262 257 546,Sweden,Greece
+h17a,Sweden->Greece,language,heldout,9,2.0,all,randdir_by_token,1,272,1,14023,0,0,0,204.0612,14023 3594 262 257 286,Sweden,Greece
+h17a,Sweden->Italy,capital,heldout,6,2.0,all,lens,-1,1,26585,10598,1,1,1,140.8944,10598 21574 28537 5215 3175,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,6,2.0,all,randdir_shared_source,0,4015,1346,262,0,0,0,1004.431,262 11 517 674 534,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,6,2.0,all,randdir_shared_source,1,2181,2,11853,0,0,0,241.1533,11853 29679 520 311 569,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,6,2.0,all,randdir_by_token,0,1022,2,11853,0,0,0,237.1426,11853 29679 520 311 569,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,6,2.0,all,randdir_by_token,1,1579,1,29679,0,0,0,657.6125,29679 262 509 11853 520,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,9,2.0,all,lens,-1,1,13641,10598,1,1,1,142.0132,10598 21574 309 8031 49404,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,9,2.0,all,randdir_shared_source,0,4090,1,29679,0,0,0,809.676,29679 367 11853 262 569,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,9,2.0,all,randdir_shared_source,1,1984,1,29679,0,0,0,134.7754,29679 11853 520 311 569,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,9,2.0,all,randdir_by_token,0,2308,2,11853,0,0,0,41.1903,11853 29679 520 311 33609,Sweden,Italy
+h17a,Sweden->Italy,capital,heldout,9,2.0,all,randdir_by_token,1,1476,2,11853,0,0,0,445.5902,11853 29679 311 520 569,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,6,2.0,all,lens,-1,2,20324,262,1,0,1,139.9566,262 8200 286 257 287,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,6,2.0,all,randdir_shared_source,0,520,31,290,0,0,0,1004.0176,290 262 11 534 351,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,6,2.0,all,randdir_shared_source,1,184,4,262,0,0,0,239.4454,262 257 3594 14023 286,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,6,2.0,all,randdir_by_token,0,77,5,262,0,0,0,235.7586,262 3594 257 546 14023,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,6,2.0,all,randdir_by_token,1,258,1,14023,0,0,0,657.6932,14023 257 3594 262 284,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,9,2.0,all,lens,-1,1,3549,8200,1,1,1,105.6449,8200 262 257 286 3594,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,9,2.0,all,randdir_shared_source,0,216,2,257,0,0,0,806.2166,257 14023 262 286 3594,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,9,2.0,all,randdir_shared_source,1,96,1,14023,0,0,0,129.206,14023 3594 257 262 284,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,9,2.0,all,randdir_by_token,0,122,1,14023,0,0,0,20.7217,14023 3594 262 257 286,Sweden,Italy
+h17a,Sweden->Italy,language,heldout,9,2.0,all,randdir_by_token,1,154,2,257,0,0,0,441.7726,257 14023 262 3594 546,Sweden,Italy

@@ -1,0 +1,149 @@
+EXP_016 run log. Branch claude/latent-context-small-llms-u2jdig-exp016.
+All times are wall clock. Machine: processor only, one torch thread per
+script, four cores shared with three other agents, 15 GB of memory shared.
+Versions: Python 3.11.15, torch 2.14.0+cpu, transformers 5.16.1,
+transformer_lens 3.8.1, numpy 2.4.6.
+Lens: jlens_gpt2_small_neuronpedia.pt, SHA-256
+d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762,
+reference code anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82ba8e.
+
+2026-09-05  Environment check. transformer_lens loaded with
+  from_pretrained_no_processing agrees with the plain Hugging Face model:
+  largest disagreement 0.00006 in the residual stream at layer 5 on numbers
+  reaching 2917, and 0.00004 in the final word scores. Timing measured: one
+  forward pass over a batch of 32 copies of an 18-token prompt, reading out
+  the final position only, took 1.13 s, which is 35 ms per condition. Peak
+  memory 1.7 GB.
+
+2026-09-05  pilot_clean.py  exit 0, 154.5 s.
+  No intervention. 42 report frames read clean and through the lens at layer
+  8; 25 countries times 3 functions times 4 candidate frames read clean; 20
+  two-step completions read clean.
+  Output: output/pilot_clean.json
+
+2026-09-05  pilot_clean2.py  exit 0, 13.8 s.
+  No intervention. 16 further two-step completions read clean, plus the gate
+  arithmetic for the country battery.
+  Output: output/pilot_clean2.json
+
+2026-09-05  Specification committed at 47efd8d before any swap was run.
+
+2026-09-05  build_batteries.py  exit 0.
+  battery_h17.json 84 items (42 tuning, 42 held out)
+  battery_h17a.json 50 pairs (27 tuning, 23 held out), 24 with all three
+    functions scoreable
+  battery_h17b.json 16 items (8 tuning, 8 held out)
+
+2026-09-05  check_engine.py  exit 0.
+  (1) swapping a token with itself changed the log-probabilities by at most
+      0.0000343.
+  (2) the two coordinates at the final position were exchanged exactly:
+      1.594 and 0.362 became 0.362 and 1.594.
+  (3) the part of the change lying outside the plane of the two lens vectors
+      was 0.00000126 against a change of total size 9.528.
+  (4) the batched path agreed with the single-element path to 0.0000353.
+  Demonstration: on "My favourite sport is", the clean top five were
+  ' football', ' to', ' the', ' rugby', ' swimming'; after exchanging the
+  football and cricket lens coordinates at layer 8 at all positions at
+  strength 1 they were ' cricket', ' to', ' tennis', ' rugby', ' swimming'.
+
+2026-09-05  Batteries launched sequentially in one background process, in
+  the order h17b, h17, h17a, each with its own fresh Python process.
+
+2026-09-05  DEVIATION, recorded while h17b was still running and before h17
+  or h17a had started. Measured throughput fell from the 28.6 conditions per
+  second the specification's budget assumed (35 milliseconds per condition)
+  to 18.2 conditions per second, because the four shared cores were carrying
+  a load average of 4.9 from the other agents. Extrapolating the full
+  pre-registered grid at that rate gave about 2 hours of further computation
+  on top of the 1 hour 50 minutes already spent, which risks the five-hour
+  target. Two whole settings were therefore dropped from the two batteries
+  that had not yet started, never any items, as section 7 of the
+  specification requires:
+    (a) the position mode `all_no_bos` was dropped from H17 and from H17a,
+        leaving `all` and `last` for H17 and `all` alone for H17a. That mode
+        differs from `all` only in whether the single prepended
+        beginning-of-text token is patched.
+    (b) the number of control seeds was reduced from three to two for H17
+        and H17a. H17b keeps all three. Two seeds still give 168 control
+        trials per setting for H17 and 248 for H17a.
+  H17b was unaffected and ran the full pre-registered grid.
+  Revised counts: H17 35,280 conditions (was 74,088), H17a 18,600 (was
+  52,080), H17b 14,112 (unchanged).
+
+2026-09-05  ERRATUM found and corrected during the run, before any result
+  was read. The position of the swapped concept's first mention, used only
+  by the H17b position mode `from_mention`, was computed one token too high.
+  The cause: the offsets were taken from the plain Hugging Face tokenizer
+  encoding, which does not prepend the beginning-of-text token, and then one
+  was added to account for the prepended token, but the transformer_lens
+  tokenizer used to read those offsets does prepend it, so the correction was
+  applied twice. Fourteen of the sixteen items moved from position 2 to
+  position 1, one from 5 to 4 and one from 8 to 7. Effect: the `from_mention`
+  arm of the first H17b run began one token after the concept's first token
+  instead of at it. The other two H17b position modes, `all_no_bos` and
+  `answer_only`, were unaffected, and no other battery uses the mention
+  position. The first H17b run was stopped at roughly 9,000 of its 14,112
+  conditions, its partial records were discarded unread except for a
+  pipeline check, the position finder was rewritten to walk the model's own
+  token strings, `battery_h17b.json` was rebuilt (only `first_mention_pos`
+  changed; every other field is byte-identical), and H17b was queued to run
+  again in full after H17a.
+
+2026-09-05 12:03  All three batteries complete. Wall clock for the whole
+  experiment, from first environment check to last figure, 1 hour 26 minutes.
+  Peak memory stayed under 2 GB throughout, against the 3 GB ceiling.
+    run_swaps.py h17b (first, superseded)  STOPPED at ~9,000 of 14,112
+    run_swaps.py h17    exit 0  35,280 conditions, 23.1 min, seeds [0,1],
+      position modes ['all','last']
+    run_swaps.py h17a   exit 0  18,600 conditions, 14.0 min, seeds [0,1],
+      position modes ['all']
+    run_swaps.py h17b   exit 0  14,112 conditions, 13.0 min, seeds [0,1,2],
+      position modes ['all_no_bos','from_mention','answer_only']
+  Total 68,000 swap conditions actually scored.
+  Outputs: records_h17.csv, records_h17a.csv, records_h17b.csv (one row per
+  condition), provenance_h17*.json, summary_h17*.json, qual_jobs.json,
+  qualitative.json, fig_layers.png, fig_heldout.png.
+
+2026-09-05 12:03  analyse.py h17 h17a h17b  exit 0. Tuned settings chosen on
+  the tuning half, scored on the held-out half:
+    H17  layers 7-8-9, strength 2, all positions: held-out lens 27/42
+      (64 percent), control A 0/84 (0 percent), control B 0/84.
+    H17a layer 6, strength 2, all positions: held-out lens 52/57
+      (91 percent) per question, control A 18/114 (16 percent); at pair
+      level, at least two of three questions redirected 13/15 (87 percent)
+      against 0/30.
+    H17b layer 7, strength 2, all positions except the prepended
+      beginning-of-text token: held-out lens 1/8, control A 0/24; over all
+      16 items 4/16 against 0/48, one-sided Fisher exact probability 0.0029.
+
+2026-09-05 12:03  qualitative.py exit 0 (18 conditions re-run for the actual
+  words), make_figures.py exit 0 (two PNG figures). matplotlib 3.11.1 was
+  installed during the run for the figures only; it touches no measurement.
+
+[2026-09-05T17:31:59.067398Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 133.9 s
+
+[2026-09-05T17:43:38.499619Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (fresh control draws, no verdict weight); wrote output/disturbance_sizes.json in 136.7 s
+
+[2026-09-05T17:50:00Z] review follow-up: check_engine.py re-run with its checks now asserting (exit 0, all four passed); analyse.py h17 h17a h17b re-run to add the source-rule, pair-level and position-mode selection routes to the summary files (chosen settings unchanged); make_tables.py output re-pasted into RESULTS_EXP016.md.
+[2026-09-05T18:05:00Z] review follow-up: analyse.py re-run to add the rank-one sensitivity readings the specification promised and to leave pairs with too few scoreable questions out of the at-least-three denominators; make_tables.py output re-pasted into RESULTS_EXP016.md.
+[2026-09-05T18:20:00Z] review follow-up: analyse.py re-run to add the exact within-item tests and the registered alternating-pair split reading for H17a to the summary files; make_tables.py output re-pasted into RESULTS_EXP016.md. No swap was re-run.
+[2026-09-05T18:55:00Z] review follow-up (Codex review of ea9073d, four findings): clean_ranks.py added and run (exit 0, 29 s, one clean forward pass per distinct battery prompt, no intervention), writing output/clean_target_ranks.json; it reproduces the committed clean ranks exactly for H17a's 124 questions and H17b's 16 items and to within one rank on one of H17's 84 items, and finds 24 of the 124 H17a questions whose target answer was already in the unmodified model's top five. analyse.py h17 h17a h17b re-run (exit 0) to add the baseline-hit counts, the two stricter H17a success readings and the cluster-level exact tests to the summary files; every key that existed before is byte identical, chosen settings and every previously reported number unchanged. make_tables.py output re-pasted into RESULTS_EXP016.md. make_figures.py re-run (exit 0): fig_heldout.png regenerated so that the H17 panel plots the tuning-selected source rule's held-out rate, 18 of 21, with the pooled 27 of 42 beside it; fig_layers.png unchanged. lib_exp016.py no longer forces Hugging Face offline mode by default (environment variable EXP016_OFFLINE=1 restores it); loading the model with and without it gives identical weights, SHA-256 0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1 over the ordered parameter tensors, and identical next-word scores. No swap was re-run.
+
+[2026-09-06T03:23:10.886277Z] cluster_control.py h17 h17a: exit 0, 71.9 s, 816 conditions. The cluster-matched control arms for the cluster-level exact tests (one random source direction shared across the units that share a source lens direction, an independent random target direction per item, both norm matched; and for H17 a second arm sharing both directions across the units that share source and target). The lens arm was re-run beside them and reproduces the committed record files on every scored unit at these settings. Wrote output/cluster_control_records.csv and output/cluster_control_provenance.json; no committed file was overwritten.
+
+[2026-09-06T03:26:01.777970Z] measure_disturbance.py: disturbance sizes at the chosen settings recomputed after the fact for all three batteries (control draws from the fixed checksum seeds, no verdict weight), now dividing the total change by the untouched residual streams of every patched layer taken together rather than by the first patched layer alone, with per-layer ratios beside it; wrote output/disturbance_sizes_2026-09-06.json in 186.4 s; no committed file was overwritten
+
+[2026-09-06T03:40:00Z] review follow-up (Codex review of 3dcfaa5, six findings): all six confirmed against the code and the committed records, all six fixed. (1) The cluster-level exact test was being computed against control A, whose two random directions are drawn afresh for every item, while the lens arm gives every unit of a cluster the identical source direction, so the two arms' cluster totals are not exchangeable; cluster_control.py was written and run (see the line above) and analyse.py now reports cluster_tests_shared_control beside cluster_tests. Against the cluster-matched control the held-out probabilities are H17a 0.0041 (pairs, at its resolution), 0.037 (rank-one questions) and 0.0041 (layer 9), and H17 5.1e-05 by source concept and 2.09e-07 by source and target at the protocol setting, all unchanged in value; pooled over both source rules they move from 1.88e-06 to 3.76e-06 and from 8.6e-10 to 9.46e-09, and the lens source rule alone from 0.0123 to 0.0247 and from 4.57e-04 to 2.29e-03. (2) The test's resolution now counts only the clusters whose draws are not all equal: H17b's held-out resolution moves from 1.53e-05 to 0.25 and its all-items resolution from 2.33e-10 to 0.00391, and H17's six move likewise; no probability changes. (3) measure_disturbance.py now divides by the untouched residual streams of every patched layer taken together; the H17 ratios move from 0.34, 0.23 and 0.13 to 0.194, 0.134 and 0.074 and the lens maximum from 1.47 to 0.842, while every change size is identical to the 2026-09-05 file to three decimals. (4) Decision item 2's H17b held-out probability corrected from 0.5 to 0.25. (5) run_swaps.py writes its record file through a temporary file and moves it into place only after the whole plan is scored, and analyse.load refuses a record file whose row count does not match the plan in its provenance (checked: 35,280, 18,600 and 14,112 rows, each equal to its plan; a truncated copy is refused with the shortfall named). (6) lib_exp016.load_model pins the Hugging Face revision 607a30d783dfa663caf39e06633721c8d4cfcd7e and refuses weights whose ordered-parameter SHA-256 is not 0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1; the committed cache passes and a deliberately wrong expected digest is refused. analyse.py h17 h17a h17b re-run (exit 0): the only values that changed are the eight resolutions, and the only new key is cluster_tests_shared_control. make_tables.py output re-pasted into RESULTS_EXP016.md. make_figures.py re-run (exit 0): both PNG files are byte identical to the committed ones. No swap condition of the three committed batteries was re-run and no committed output file was overwritten.
+
+[2026-09-06T04:01:19.430741Z] cluster_control.py h17 h17a: exit 0, 107.5 s, 1416 conditions. Four cluster-matched control arms for the cluster-level exact tests: shared_source (one random source direction per cluster, an independent random target direction per item), shared_pair (both shared across the units that share source and target), by_token (every random direction seeded by the token it stands in for, so reuse across units matches the lens arm's exactly) and, for H17, mirrored (token-seeded, and the control picks its own target, and for the lens source rule its own source, by the battery's layer-8 rule applied to its own random directions, scored on its own chosen concept). The lens arm was re-run beside them and reproduces the committed record files on every scored unit at these settings. Wrote output/cluster_control_records_v2.csv and output/cluster_control_provenance_v2.json; no committed file was overwritten.
+
+[2026-09-06T04:20:00Z] review follow-up (second Codex review of the day, of 093454d, four findings): all four confirmed and all four answered. (1) Grouping the scored units by source concept, or by source and target concept, leaves different groups sharing a lens direction: in the held-out output half of H17 three groups swap out of ' football' and four groups with different sources swap into ' dolphin', and ' strawberry' is a source in two frames and a target in two others. analyse.py now also groups the units into the connected components of the graph that joins two units using the same lens direction in either role, and reports those tests beside the others. Component counts on the held-out half: H17 output rule 7 (6 informative), H17 lens rule 5 (3), H17 pooled 4 (4), H17a 1 (1), H17b 8 (1) and 13 over all 16 items (3). Floors: 1 in 729 for the H17 protocol reading, 1 in 81 pooled, 1 in 3 for H17a, 1 in 4 for H17b held out. (2) The cluster-matched control of the previous commit redrew the target direction per item where the lens arm reuses one direction across items (four football to cricket frames, two blue to yellow). cluster_control.py gained the arm randdir_by_token, which seeds every random direction by the token it stands in for, and the arm randdir_mirrored (see 3), and wrote output/cluster_control_records_v2.csv, which reproduces the 816 rows of the first run byte for byte and adds 600. Against the token-seeded control the H17 pooled by-source-and-target figure moves from 9.46e-09 to 1.72e-09 and the lens rule's from 2.29e-03 to 4.57e-04, while every protocol figure and every H17a figure is unchanged; that control succeeded on one held-out frame in 168 draws. (3) The layer-8 target selection is pre-registered design (specification section 5.1, committed 47efd8d), so the finding is about interpretation, not a coding fault: every H17 probability except the mirrored ones is conditional on the lens-selected targets. The mirrored control ran inside the same 108 seconds: it gives every candidate a random direction of that candidate's lens length seeded by the candidate's token, picks its target (and, for lens-rule frames, its source) by the same layer-8 rule applied to those directions, and is scored on its own chosen concept. It chose the lens arm's target on 21 of 168 draws and succeeded 0 of 42 times on held-out output-rule frames and 2 of 42 on held-out lens-rule frames. Against it the H17 protocol reading is unchanged at 0.00137 by component, 5.08e-05 by source and 2.09e-07 by source and target; the pooled reading is unchanged at 0.0123 by component; the lens rule weakens from 0.037 to 0.0741 by component. (4) lib_exp016.load_lens now catches the missing jlens package and names the clone, checkout and install of anthropics/jacobian-lens at 581d398613e5602a5af361e1c34d3a92ea82ba8e, and the reproduction section carries the same step. analyse.py h17 h17a h17b re-run (exit 0): every value that existed before is byte identical, and the only additions are the by-component entries and the two new test blocks. make_tables.py output re-pasted into RESULTS_EXP016.md. make_figures.py re-run (exit 0): both PNG files byte identical to the committed ones. No swap condition of the three committed batteries was re-run and no committed output file was overwritten.
+
+[2026-09-06T04:22:53.295968Z] global_draw_control.py: exit 0, 15.9 s, 32 scored conditions over 4 draws. One draw is one random direction per concept, seeded by the concept's token, the layer and the draw index, with the battery's own target selection applied where the battery selects its target by a lens reading; a whole held-out set is scored under one draw and yields one number. Sets: h17b_committed_heldout lens 1 of 8. The lens arm was re-run and reproduces the committed record files on every set. Wrote output/global_draw_records.csv and output/global_draw_provenance.json; no committed file was overwritten.
+
+[2026-09-06T04:24:10.440390Z] global_draw_control.py: exit 0, 57.4 s, 1344 scored conditions over 64 draws. One draw is one random direction per concept, seeded by the concept's token, the layer and the draw index, with the battery's own target selection applied where the battery selects its target by a lens reading; a whole held-out set is scored under one draw and yields one number. Sets: h17_committed_heldout lens 18 of 21. The lens arm was re-run and reproduces the committed record files on every set. Wrote output/global_draw_records.csv and output/global_draw_provenance.json; no committed file was overwritten.
+
+[2026-09-06T04:37:52.563623Z] global_draw_control.py: exit 0, 798.9 s, 25449 scored conditions over 499 draws. One draw is one random direction per concept, seeded by the concept's token, the layer and the draw index, with the battery's own target selection applied where the battery selects its target by a lens reading; a whole held-out set is scored under one draw and yields one number. Sets: h17_committed_heldout lens 18 of 21, h17_component_split_heldout lens 20 of 22, h17b_committed_heldout lens 1 of 8. The lens arm was re-run and reproduces the committed record files on every set. Wrote output/global_draw_records.csv and output/global_draw_provenance.json; no committed file was overwritten.
+
+[2026-09-06T05:10:00Z] review follow-up (third Codex review of the day, of f871571, two findings): both confirmed and both answered. (1) The tuning and held-out halves share lens directions: 19 of the 36 concepts H17 uses appear in both halves, all 14 of H17a's do, and 3 of H17b's 16 do, so the setting chosen on the tuning half is not independent of the held-out outcomes under the null. analyse.component_split joins frames that share a concept in either role, which divides H17's 84 frames into 4 groups of 24, 20, 20 and 20, one per category, and deals whole groups alternately by smallest frame identifier, giving a tuning half of 40 frames and a held-out half of 44 with no concept in common. Redoing the whole selection there chooses layers 6-7-8, strength 2.0, all, source rule output; the held-out result is 20 of 22 against 1 of 44 for control A, beside the committed split's 18 of 21 against 0 of 42, and both clear the registered thresholds. H17a admits no such split, its 50 pairs forming one group over a single pool of 14 countries. (2) The component product is not valid against the mirrored control, which chooses its own concepts: in this battery the crossing is narrow, since the control always chooses inside the frame's own category and the components are exactly the four categories, but ' orange' belongs to both the fruit and the colour word list, so one draw can act in two components. Codex's cited example, ' grape' at seed 0, does not cross a component: it is only a fruit, and no target picked at seed 0 crosses a component boundary. global_draw_control.py replaces the product with a Monte Carlo randomisation test over 499 draws, one draw being one random direction per concept seeded by token, layer and draw index with the mirrored target selection applied, a whole held-out set scored under each draw: 21 frames under the committed split at layers 7-8-9 give 0.002 (0 of 499 draws reaching the lens arm's 18), 22 frames under the component-respecting split at layers 6-7-8 give 0.002 (0 of 499 reaching 20), and H17b's 8 held-out items give 0.002 (0 of 499 reaching 1). The lens arm was re-run for every set and reproduces the committed record files exactly. Two short timing probes at 4 and 64 draws preceded the full run and their lines are above; the full run replaced their output before anything was committed. analyse.py h17 h17a h17b re-run (exit 0), make_tables.py output re-pasted into RESULTS_EXP016.md, make_figures.py re-run (exit 0). No swap condition of the three committed batteries was re-run and no committed output file was overwritten.

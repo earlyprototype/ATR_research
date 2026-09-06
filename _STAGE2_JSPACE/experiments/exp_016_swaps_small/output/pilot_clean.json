@@ -1,0 +1,4445 @@
+{
+ "battery1": [
+  {
+   "category": "sport",
+   "frame": "My favourite sport is",
+   "n_tokens": 5,
+   "argmax": " football",
+   "lens_top_in_category": " cricket",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 14,
+   "clean_top10": [
+    " football",
+    " to",
+    " the",
+    " rugby",
+    " swimming",
+    " running",
+    " basketball",
+    " tennis",
+    " soccer",
+    " golf"
+   ],
+   "members_in_clean_top10": [
+    " basketball",
+    " football",
+    " golf",
+    " rugby",
+    " running",
+    " soccer",
+    " swimming",
+    " tennis"
+   ],
+   "lens_ranks": {
+    " baseball": 77,
+    " basketball": 23,
+    " boxing": 55,
+    " cricket": 2,
+    " cycling": 115,
+    " football": 37,
+    " golf": 32,
+    " hockey": 39,
+    " rugby": 4,
+    " running": 3220,
+    " skiing": 15,
+    " soccer": 36,
+    " surfing": 49,
+    " swimming": 69,
+    " tennis": 17,
+    " wrestling": 34
+   },
+   "clean_ranks": {
+    " baseball": 20,
+    " basketball": 7,
+    " boxing": 18,
+    " cricket": 14,
+    " cycling": 17,
+    " football": 1,
+    " golf": 10,
+    " hockey": 11,
+    " rugby": 4,
+    " running": 6,
+    " skiing": 12,
+    " soccer": 9,
+    " surfing": 37,
+    " swimming": 5,
+    " tennis": 8,
+    " wrestling": 35
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "The sport I like best is",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " basketball",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 4,
+   "clean_top10": [
+    " the",
+    " football",
+    " to",
+    " basketball",
+    " running",
+    " soccer",
+    " a",
+    " hockey",
+    " getting",
+    " tennis"
+   ],
+   "members_in_clean_top10": [
+    " basketball",
+    " football",
+    " hockey",
+    " running",
+    " soccer",
+    " tennis"
+   ],
+   "lens_ranks": {
+    " baseball": 93,
+    " basketball": 3,
+    " boxing": 82,
+    " cricket": 12,
+    " cycling": 348,
+    " football": 50,
+    " golf": 30,
+    " hockey": 35,
+    " rugby": 7,
+    " running": 7426,
+    " skiing": 15,
+    " soccer": 27,
+    " surfing": 29,
+    " swimming": 155,
+    " tennis": 17,
+    " wrestling": 37
+   },
+   "clean_ranks": {
+    " baseball": 11,
+    " basketball": 4,
+    " boxing": 18,
+    " cricket": 48,
+    " cycling": 19,
+    " football": 2,
+    " golf": 14,
+    " hockey": 8,
+    " rugby": 13,
+    " running": 5,
+    " skiing": 24,
+    " soccer": 6,
+    " surfing": 34,
+    " swimming": 20,
+    " tennis": 10,
+    " wrestling": 26
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "Q: Which sport do you like? A:",
+   "n_tokens": 11,
+   "argmax": " I",
+   "lens_top_in_category": " cricket",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 3989,
+   "clean_top10": [
+    " I",
+    " Baseball",
+    " Football",
+    " Golf",
+    " Soccer",
+    " Basketball",
+    " The",
+    " Hockey",
+    " My",
+    " It"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " baseball": 622,
+    " basketball": 187,
+    " boxing": 1504,
+    " cricket": 74,
+    " cycling": 5630,
+    " football": 134,
+    " golf": 462,
+    " hockey": 203,
+    " rugby": 489,
+    " running": 28573,
+    " skiing": 628,
+    " soccer": 112,
+    " surfing": 1927,
+    " swimming": 6990,
+    " tennis": 465,
+    " wrestling": 540
+   },
+   "clean_ranks": {
+    " baseball": 1769,
+    " basketball": 2507,
+    " boxing": 7624,
+    " cricket": 3989,
+    " cycling": 8298,
+    " football": 1126,
+    " golf": 3692,
+    " hockey": 2289,
+    " rugby": 4279,
+    " running": 8811,
+    " skiing": 9668,
+    " soccer": 1280,
+    " surfing": 7976,
+    " swimming": 10962,
+    " tennis": 2243,
+    " wrestling": 5201
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "Her favourite sport is",
+   "n_tokens": 5,
+   "argmax": " football",
+   "lens_top_in_category": " rugby",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 3,
+   "clean_top10": [
+    " football",
+    " swimming",
+    " rugby",
+    " volleyball",
+    " to",
+    " the",
+    " tennis",
+    " skiing",
+    " golf",
+    " running"
+   ],
+   "members_in_clean_top10": [
+    " football",
+    " golf",
+    " rugby",
+    " running",
+    " skiing",
+    " swimming",
+    " tennis"
+   ],
+   "lens_ranks": {
+    " baseball": 137,
+    " basketball": 24,
+    " boxing": 48,
+    " cricket": 2,
+    " cycling": 84,
+    " football": 36,
+    " golf": 16,
+    " hockey": 35,
+    " rugby": 1,
+    " running": 2557,
+    " skiing": 7,
+    " soccer": 38,
+    " surfing": 19,
+    " swimming": 44,
+    " tennis": 10,
+    " wrestling": 22
+   },
+   "clean_ranks": {
+    " baseball": 32,
+    " basketball": 12,
+    " boxing": 16,
+    " cricket": 11,
+    " cycling": 15,
+    " football": 1,
+    " golf": 9,
+    " hockey": 19,
+    " rugby": 3,
+    " running": 10,
+    " skiing": 8,
+    " soccer": 13,
+    " surfing": 23,
+    " swimming": 2,
+    " tennis": 7,
+    " wrestling": 35
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "His favourite sport is",
+   "n_tokens": 5,
+   "argmax": " football",
+   "lens_top_in_category": " rugby",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 2,
+   "clean_top10": [
+    " football",
+    " rugby",
+    " golf",
+    " swimming",
+    " the",
+    " tennis",
+    " cricket",
+    " to",
+    " boxing",
+    " skiing"
+   ],
+   "members_in_clean_top10": [
+    " boxing",
+    " cricket",
+    " football",
+    " golf",
+    " rugby",
+    " skiing",
+    " swimming",
+    " tennis"
+   ],
+   "lens_ranks": {
+    " baseball": 53,
+    " basketball": 21,
+    " boxing": 23,
+    " cricket": 3,
+    " cycling": 92,
+    " football": 28,
+    " golf": 7,
+    " hockey": 27,
+    " rugby": 1,
+    " running": 2438,
+    " skiing": 8,
+    " soccer": 37,
+    " surfing": 17,
+    " swimming": 52,
+    " tennis": 10,
+    " wrestling": 14
+   },
+   "clean_ranks": {
+    " baseball": 19,
+    " basketball": 11,
+    " boxing": 9,
+    " cricket": 7,
+    " cycling": 16,
+    " football": 1,
+    " golf": 3,
+    " hockey": 15,
+    " rugby": 2,
+    " running": 12,
+    " skiing": 10,
+    " soccer": 14,
+    " surfing": 25,
+    " swimming": 4,
+    " tennis": 6,
+    " wrestling": 27
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "The sport I play most often is",
+   "n_tokens": 8,
+   "argmax": " the",
+   "lens_top_in_category": " basketball",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 3,
+   "clean_top10": [
+    " the",
+    " football",
+    " basketball",
+    " soccer",
+    " a",
+    " rugby",
+    " running",
+    " volleyball",
+    " hockey",
+    " baseball"
+   ],
+   "members_in_clean_top10": [
+    " baseball",
+    " basketball",
+    " football",
+    " hockey",
+    " rugby",
+    " running",
+    " soccer"
+   ],
+   "lens_ranks": {
+    " baseball": 50,
+    " basketball": 2,
+    " boxing": 47,
+    " cricket": 3,
+    " cycling": 805,
+    " football": 40,
+    " golf": 28,
+    " hockey": 16,
+    " rugby": 4,
+    " running": 5631,
+    " skiing": 36,
+    " soccer": 25,
+    " surfing": 71,
+    " swimming": 386,
+    " tennis": 13,
+    " wrestling": 20
+   },
+   "clean_ranks": {
+    " baseball": 10,
+    " basketball": 3,
+    " boxing": 14,
+    " cricket": 30,
+    " cycling": 29,
+    " football": 2,
+    " golf": 12,
+    " hockey": 9,
+    " rugby": 6,
+    " running": 7,
+    " skiing": 35,
+    " soccer": 4,
+    " surfing": 71,
+    " swimming": 41,
+    " tennis": 11,
+    " wrestling": 20
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "When I have free time, the sport I play is",
+   "n_tokens": 12,
+   "argmax": " the",
+   "lens_top_in_category": " basketball",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 8,
+   "clean_top10": [
+    " the",
+    " football",
+    " a",
+    " not",
+    " to",
+    " my",
+    " one",
+    " basketball",
+    " always",
+    " something"
+   ],
+   "members_in_clean_top10": [
+    " basketball",
+    " football"
+   ],
+   "lens_ranks": {
+    " baseball": 112,
+    " basketball": 5,
+    " boxing": 262,
+    " cricket": 13,
+    " cycling": 2451,
+    " football": 73,
+    " golf": 81,
+    " hockey": 74,
+    " rugby": 16,
+    " running": 9576,
+    " skiing": 315,
+    " soccer": 25,
+    " surfing": 616,
+    " swimming": 1698,
+    " tennis": 27,
+    " wrestling": 306
+   },
+   "clean_ranks": {
+    " baseball": 20,
+    " basketball": 8,
+    " boxing": 54,
+    " cricket": 58,
+    " cycling": 122,
+    " football": 2,
+    " golf": 33,
+    " hockey": 26,
+    " rugby": 43,
+    " running": 73,
+    " skiing": 133,
+    " soccer": 12,
+    " surfing": 193,
+    " swimming": 158,
+    " tennis": 32,
+    " wrestling": 104
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "I told my friend that my favourite sport is",
+   "n_tokens": 10,
+   "argmax": " football",
+   "lens_top_in_category": " cricket",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 18,
+   "clean_top10": [
+    " football",
+    " basketball",
+    " the",
+    " swimming",
+    " soccer",
+    " rugby",
+    " hockey",
+    " tennis",
+    " volleyball",
+    " running"
+   ],
+   "members_in_clean_top10": [
+    " basketball",
+    " football",
+    " hockey",
+    " rugby",
+    " running",
+    " soccer",
+    " swimming",
+    " tennis"
+   ],
+   "lens_ranks": {
+    " baseball": 40,
+    " basketball": 15,
+    " boxing": 38,
+    " cricket": 4,
+    " cycling": 126,
+    " football": 41,
+    " golf": 17,
+    " hockey": 21,
+    " rugby": 5,
+    " running": 3578,
+    " skiing": 14,
+    " soccer": 18,
+    " surfing": 36,
+    " swimming": 73,
+    " tennis": 9,
+    " wrestling": 26
+   },
+   "clean_ranks": {
+    " baseball": 13,
+    " basketball": 2,
+    " boxing": 16,
+    " cricket": 18,
+    " cycling": 15,
+    " football": 1,
+    " golf": 12,
+    " hockey": 7,
+    " rugby": 6,
+    " running": 10,
+    " skiing": 14,
+    " soccer": 5,
+    " surfing": 31,
+    " swimming": 4,
+    " tennis": 8,
+    " wrestling": 26
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "My brother's favourite sport is",
+   "n_tokens": 7,
+   "argmax": " football",
+   "lens_top_in_category": " rugby",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 2,
+   "clean_top10": [
+    " football",
+    " rugby",
+    " basketball",
+    " the",
+    " swimming",
+    " hockey",
+    " soccer",
+    " golf",
+    " to",
+    " skiing"
+   ],
+   "members_in_clean_top10": [
+    " basketball",
+    " football",
+    " golf",
+    " hockey",
+    " rugby",
+    " skiing",
+    " soccer",
+    " swimming"
+   ],
+   "lens_ranks": {
+    " baseball": 50,
+    " basketball": 12,
+    " boxing": 45,
+    " cricket": 4,
+    " cycling": 164,
+    " football": 33,
+    " golf": 13,
+    " hockey": 19,
+    " rugby": 1,
+    " running": 2688,
+    " skiing": 6,
+    " soccer": 24,
+    " surfing": 18,
+    " swimming": 56,
+    " tennis": 8,
+    " wrestling": 30
+   },
+   "clean_ranks": {
+    " baseball": 15,
+    " basketball": 3,
+    " boxing": 19,
+    " cricket": 14,
+    " cycling": 16,
+    " football": 1,
+    " golf": 8,
+    " hockey": 6,
+    " rugby": 2,
+    " running": 11,
+    " skiing": 10,
+    " soccer": 7,
+    " surfing": 26,
+    " swimming": 5,
+    " tennis": 12,
+    " wrestling": 33
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "The best sport in the world is",
+   "n_tokens": 8,
+   "argmax": " football",
+   "lens_top_in_category": " cricket",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 21,
+   "clean_top10": [
+    " football",
+    " the",
+    " to",
+    " soccer",
+    " a",
+    " basketball",
+    " not",
+    " hockey",
+    " baseball",
+    " sports"
+   ],
+   "members_in_clean_top10": [
+    " baseball",
+    " basketball",
+    " football",
+    " hockey",
+    " soccer"
+   ],
+   "lens_ranks": {
+    " baseball": 80,
+    " basketball": 15,
+    " boxing": 185,
+    " cricket": 3,
+    " cycling": 248,
+    " football": 38,
+    " golf": 20,
+    " hockey": 39,
+    " rugby": 5,
+    " running": 3552,
+    " skiing": 23,
+    " soccer": 14,
+    " surfing": 50,
+    " swimming": 177,
+    " tennis": 35,
+    " wrestling": 56
+   },
+   "clean_ranks": {
+    " baseball": 9,
+    " basketball": 6,
+    " boxing": 17,
+    " cricket": 21,
+    " cycling": 30,
+    " football": 1,
+    " golf": 12,
+    " hockey": 8,
+    " rugby": 13,
+    " running": 15,
+    " skiing": 53,
+    " soccer": 4,
+    " surfing": 69,
+    " swimming": 16,
+    " tennis": 18,
+    " wrestling": 38
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "If I had to pick one sport, it would be",
+   "n_tokens": 12,
+   "argmax": " football",
+   "lens_top_in_category": " basketball",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 4,
+   "clean_top10": [
+    " football",
+    " baseball",
+    " the",
+    " basketball",
+    " hockey",
+    " soccer",
+    " golf",
+    " rugby",
+    " sports",
+    " boxing"
+   ],
+   "members_in_clean_top10": [
+    " baseball",
+    " basketball",
+    " boxing",
+    " football",
+    " golf",
+    " hockey",
+    " rugby",
+    " soccer"
+   ],
+   "lens_ranks": {
+    " baseball": 17,
+    " basketball": 1,
+    " boxing": 31,
+    " cricket": 3,
+    " cycling": 605,
+    " football": 21,
+    " golf": 20,
+    " hockey": 11,
+    " rugby": 10,
+    " running": 9498,
+    " skiing": 32,
+    " soccer": 15,
+    " surfing": 165,
+    " swimming": 139,
+    " tennis": 9,
+    " wrestling": 7
+   },
+   "clean_ranks": {
+    " baseball": 2,
+    " basketball": 4,
+    " boxing": 10,
+    " cricket": 20,
+    " cycling": 15,
+    " football": 1,
+    " golf": 7,
+    " hockey": 5,
+    " rugby": 8,
+    " running": 17,
+    " skiing": 24,
+    " soccer": 6,
+    " surfing": 56,
+    " swimming": 14,
+    " tennis": 11,
+    " wrestling": 16
+   }
+  },
+  {
+   "category": "sport",
+   "frame": "At school, the sport I enjoyed most was",
+   "n_tokens": 10,
+   "argmax": " football",
+   "lens_top_in_category": " basketball",
+   "clean_top_in_category": " football",
+   "clean_rank_of_lens_top": 2,
+   "clean_top10": [
+    " football",
+    " basketball",
+    " the",
+    " volleyball",
+    " soccer",
+    " baseball",
+    " rugby",
+    " swimming",
+    " running",
+    " tennis"
+   ],
+   "members_in_clean_top10": [
+    " baseball",
+    " basketball",
+    " football",
+    " rugby",
+    " running",
+    " soccer",
+    " swimming",
+    " tennis"
+   ],
+   "lens_ranks": {
+    " baseball": 48,
+    " basketball": 2,
+    " boxing": 32,
+    " cricket": 12,
+    " cycling": 506,
+    " football": 37,
+    " golf": 35,
+    " hockey": 31,
+    " rugby": 3,
+    " running": 2941,
+    " skiing": 18,
+    " soccer": 16,
+    " surfing": 41,
+    " swimming": 63,
+    " tennis": 10,
+    " wrestling": 8
+   },
+   "clean_ranks": {
+    " baseball": 6,
+    " basketball": 2,
+    " boxing": 17,
+    " cricket": 34,
+    " cycling": 47,
+    " football": 1,
+    " golf": 19,
+    " hockey": 15,
+    " rugby": 7,
+    " running": 9,
+    " skiing": 48,
+    " soccer": 5,
+    " surfing": 36,
+    " swimming": 8,
+    " tennis": 10,
+    " wrestling": 11
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "My favourite fruit is",
+   "n_tokens": 5,
+   "argmax": " the",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " strawberry",
+   "clean_rank_of_lens_top": 5,
+   "clean_top10": [
+    " the",
+    " a",
+    " my",
+    " sweet",
+    " strawberry",
+    " not",
+    " probably",
+    " actually",
+    " pineapple",
+    " called"
+   ],
+   "members_in_clean_top10": [
+    " pineapple",
+    " strawberry"
+   ],
+   "lens_ranks": {
+    " apple": 35,
+    " banana": 210,
+    " cherry": 108,
+    " grape": 47,
+    " lemon": 26,
+    " mango": 10,
+    " orange": 439,
+    " peach": 36,
+    " pear": 198,
+    " pineapple": 13,
+    " plum": 452,
+    " strawberry": 1
+   },
+   "clean_ranks": {
+    " apple": 38,
+    " banana": 27,
+    " cherry": 54,
+    " grape": 62,
+    " lemon": 19,
+    " mango": 16,
+    " orange": 23,
+    " peach": 33,
+    " pear": 86,
+    " pineapple": 9,
+    " plum": 75,
+    " strawberry": 5
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "The fruit I like best is",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " pineapple",
+   "clean_rank_of_lens_top": 7,
+   "clean_top10": [
+    " the",
+    " a",
+    " sweet",
+    " ripe",
+    " not",
+    " pineapple",
+    " strawberry",
+    " my",
+    " fresh",
+    " mango"
+   ],
+   "members_in_clean_top10": [
+    " mango",
+    " pineapple",
+    " strawberry"
+   ],
+   "lens_ranks": {
+    " apple": 65,
+    " banana": 244,
+    " cherry": 113,
+    " grape": 43,
+    " lemon": 20,
+    " mango": 12,
+    " orange": 311,
+    " peach": 16,
+    " pear": 345,
+    " pineapple": 9,
+    " plum": 304,
+    " strawberry": 1
+   },
+   "clean_ranks": {
+    " apple": 27,
+    " banana": 22,
+    " cherry": 25,
+    " grape": 28,
+    " lemon": 14,
+    " mango": 10,
+    " orange": 15,
+    " peach": 31,
+    " pear": 132,
+    " pineapple": 6,
+    " plum": 63,
+    " strawberry": 7
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "Q: Which fruit do you like? A:",
+   "n_tokens": 11,
+   "argmax": " I",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " apple",
+   "clean_rank_of_lens_top": 3274,
+   "clean_top10": [
+    " I",
+    " The",
+    " Fruit",
+    " A",
+    " It",
+    " Strawberry",
+    " My",
+    " Banana",
+    " If",
+    " We"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " apple": 150,
+    " banana": 789,
+    " cherry": 154,
+    " grape": 585,
+    " lemon": 187,
+    " mango": 93,
+    " orange": 2667,
+    " peach": 490,
+    " pear": 2543,
+    " pineapple": 81,
+    " plum": 3406,
+    " strawberry": 24
+   },
+   "clean_ranks": {
+    " apple": 1345,
+    " banana": 4600,
+    " cherry": 3911,
+    " grape": 4912,
+    " lemon": 3912,
+    " mango": 5445,
+    " orange": 4128,
+    " peach": 7205,
+    " pear": 13215,
+    " pineapple": 3487,
+    " plum": 13093,
+    " strawberry": 3274
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "Her favourite fruit is",
+   "n_tokens": 5,
+   "argmax": " the",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " strawberry",
+   "clean_rank_of_lens_top": 3,
+   "clean_top10": [
+    " the",
+    " a",
+    " strawberry",
+    " sweet",
+    " pineapple",
+    " her",
+    " '",
+    " also",
+    " strawberries",
+    " lemon"
+   ],
+   "members_in_clean_top10": [
+    " lemon",
+    " pineapple",
+    " strawberry"
+   ],
+   "lens_ranks": {
+    " apple": 37,
+    " banana": 161,
+    " cherry": 64,
+    " grape": 20,
+    " lemon": 17,
+    " mango": 6,
+    " orange": 367,
+    " peach": 24,
+    " pear": 143,
+    " pineapple": 7,
+    " plum": 325,
+    " strawberry": 1
+   },
+   "clean_ranks": {
+    " apple": 24,
+    " banana": 23,
+    " cherry": 20,
+    " grape": 29,
+    " lemon": 10,
+    " mango": 15,
+    " orange": 11,
+    " peach": 12,
+    " pear": 37,
+    " pineapple": 5,
+    " plum": 22,
+    " strawberry": 3
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "His favourite fruit is",
+   "n_tokens": 5,
+   "argmax": " the",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " pineapple",
+   "clean_rank_of_lens_top": 5,
+   "clean_top10": [
+    " the",
+    " a",
+    " pineapple",
+    " his",
+    " strawberry",
+    " '",
+    " sweet",
+    " lemon",
+    " orange",
+    " also"
+   ],
+   "members_in_clean_top10": [
+    " lemon",
+    " orange",
+    " pineapple",
+    " strawberry"
+   ],
+   "lens_ranks": {
+    " apple": 41,
+    " banana": 124,
+    " cherry": 75,
+    " grape": 20,
+    " lemon": 16,
+    " mango": 7,
+    " orange": 389,
+    " peach": 34,
+    " pear": 228,
+    " pineapple": 6,
+    " plum": 406,
+    " strawberry": 1
+   },
+   "clean_ranks": {
+    " apple": 20,
+    " banana": 18,
+    " cherry": 19,
+    " grape": 28,
+    " lemon": 8,
+    " mango": 11,
+    " orange": 9,
+    " peach": 16,
+    " pear": 63,
+    " pineapple": 3,
+    " plum": 33,
+    " strawberry": 5
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "The fruit I eat every morning is",
+   "n_tokens": 8,
+   "argmax": " a",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " mango",
+   "clean_rank_of_lens_top": 52,
+   "clean_top10": [
+    " a",
+    " the",
+    " so",
+    " not",
+    " sweet",
+    " my",
+    " delicious",
+    " called",
+    " very",
+    " one"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " apple": 167,
+    " banana": 302,
+    " cherry": 278,
+    " grape": 83,
+    " lemon": 319,
+    " mango": 26,
+    " orange": 624,
+    " peach": 107,
+    " pear": 354,
+    " pineapple": 69,
+    " plum": 535,
+    " strawberry": 7
+   },
+   "clean_ranks": {
+    " apple": 144,
+    " banana": 73,
+    " cherry": 154,
+    " grape": 128,
+    " lemon": 244,
+    " mango": 51,
+    " orange": 61,
+    " peach": 227,
+    " pear": 304,
+    " pineapple": 76,
+    " plum": 322,
+    " strawberry": 52
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "In my lunchbox there is always a",
+   "n_tokens": 9,
+   "argmax": " small",
+   "lens_top_in_category": " mango",
+   "clean_top_in_category": " banana",
+   "clean_rank_of_lens_top": 1220,
+   "clean_top10": [
+    " small",
+    " box",
+    " little",
+    " large",
+    " few",
+    " big",
+    " new",
+    " lot",
+    " huge",
+    " piece"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " apple": 6513,
+    " banana": 1813,
+    " cherry": 995,
+    " grape": 9976,
+    " lemon": 6867,
+    " mango": 778,
+    " orange": 3256,
+    " peach": 1343,
+    " pear": 7557,
+    " pineapple": 5305,
+    " plum": 13884,
+    " strawberry": 836
+   },
+   "clean_ranks": {
+    " apple": 4387,
+    " banana": 218,
+    " cherry": 982,
+    " grape": 3692,
+    " lemon": 1129,
+    " mango": 1220,
+    " orange": 3011,
+    " peach": 1601,
+    " pear": 4312,
+    " pineapple": 2725,
+    " plum": 4122,
+    " strawberry": 1018
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "The sweetest fruit is the",
+   "n_tokens": 7,
+   "argmax": " sweet",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " cherry",
+   "clean_rank_of_lens_top": 22,
+   "clean_top10": [
+    " sweet",
+    " most",
+    " fruit",
+    " one",
+    " only",
+    " cherry",
+    " banana",
+    " first",
+    " best",
+    " apple"
+   ],
+   "members_in_clean_top10": [
+    " apple",
+    " banana",
+    " cherry"
+   ],
+   "lens_ranks": {
+    " apple": 56,
+    " banana": 43,
+    " cherry": 41,
+    " grape": 10,
+    " lemon": 45,
+    " mango": 5,
+    " orange": 446,
+    " peach": 20,
+    " pear": 136,
+    " pineapple": 6,
+    " plum": 310,
+    " strawberry": 3
+   },
+   "clean_ranks": {
+    " apple": 10,
+    " banana": 7,
+    " cherry": 6,
+    " grape": 21,
+    " lemon": 38,
+    " mango": 60,
+    " orange": 17,
+    " peach": 27,
+    " pear": 91,
+    " pineapple": 39,
+    " plum": 120,
+    " strawberry": 22
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "The fruit I bought at the market was a",
+   "n_tokens": 10,
+   "argmax": " little",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " strawberry",
+   "clean_rank_of_lens_top": 9,
+   "clean_top10": [
+    " little",
+    " bit",
+    " very",
+    " nice",
+    " sweet",
+    " small",
+    " good",
+    " beautiful",
+    " strawberry",
+    " lot"
+   ],
+   "members_in_clean_top10": [
+    " strawberry"
+   ],
+   "lens_ranks": {
+    " apple": 1603,
+    " banana": 452,
+    " cherry": 90,
+    " grape": 65,
+    " lemon": 313,
+    " mango": 12,
+    " orange": 1393,
+    " peach": 18,
+    " pear": 429,
+    " pineapple": 52,
+    " plum": 270,
+    " strawberry": 2
+   },
+   "clean_ranks": {
+    " apple": 945,
+    " banana": 22,
+    " cherry": 35,
+    " grape": 28,
+    " lemon": 39,
+    " mango": 48,
+    " orange": 713,
+    " peach": 26,
+    " pear": 141,
+    " pineapple": 66,
+    " plum": 60,
+    " strawberry": 9
+   }
+  },
+  {
+   "category": "fruit",
+   "frame": "My daughter's favourite fruit is",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " strawberry",
+   "clean_top_in_category": " strawberry",
+   "clean_rank_of_lens_top": 3,
+   "clean_top10": [
+    " the",
+    " a",
+    " strawberry",
+    " strawberries",
+    " pineapple",
+    " sweet",
+    " my",
+    " her",
+    " mango",
+    " lemon"
+   ],
+   "members_in_clean_top10": [
+    " lemon",
+    " mango",
+    " pineapple",
+    " strawberry"
+   ],
+   "lens_ranks": {
+    " apple": 46,
+    " banana": 136,
+    " cherry": 86,
+    " grape": 32,
+    " lemon": 25,
+    " mango": 8,
+    " orange": 436,
+    " peach": 41,
+    " pear": 217,
+    " pineapple": 12,
+    " plum": 509,
+    " strawberry": 1
+   },
+   "clean_ranks": {
+    " apple": 22,
+    " banana": 14,
+    " cherry": 27,
+    " grape": 37,
+    " lemon": 10,
+    " mango": 9,
+    " orange": 17,
+    " peach": 12,
+    " pear": 49,
+    " pineapple": 5,
+    " plum": 57,
+    " strawberry": 3
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "My favourite colour is",
+   "n_tokens": 5,
+   "argmax": " the",
+   "lens_top_in_category": " purple",
+   "clean_top_in_category": " blue",
+   "clean_rank_of_lens_top": 8,
+   "clean_top10": [
+    " the",
+    " blue",
+    " black",
+    " red",
+    " pink",
+    " white",
+    " a",
+    " purple",
+    " green",
+    " orange"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " blue",
+    " green",
+    " orange",
+    " pink",
+    " purple",
+    " red",
+    " white"
+   ],
+   "lens_ranks": {
+    " black": 264,
+    " blue": 17,
+    " brown": 69,
+    " gold": 1268,
+    " gray": 241,
+    " green": 80,
+    " grey": 39,
+    " orange": 15,
+    " pink": 8,
+    " purple": 5,
+    " red": 100,
+    " silver": 251,
+    " white": 148,
+    " yellow": 24
+   },
+   "clean_ranks": {
+    " black": 3,
+    " blue": 2,
+    " brown": 19,
+    " gold": 47,
+    " gray": 117,
+    " green": 9,
+    " grey": 13,
+    " orange": 10,
+    " pink": 5,
+    " purple": 8,
+    " red": 4,
+    " silver": 39,
+    " white": 6,
+    " yellow": 12
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "My favorite color is",
+   "n_tokens": 5,
+   "argmax": " the",
+   "lens_top_in_category": " purple",
+   "clean_top_in_category": " blue",
+   "clean_rank_of_lens_top": 6,
+   "clean_top10": [
+    " the",
+    " blue",
+    " black",
+    " a",
+    " red",
+    " purple",
+    " pink",
+    " white",
+    " my",
+    " orange"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " blue",
+    " orange",
+    " pink",
+    " purple",
+    " red",
+    " white"
+   ],
+   "lens_ranks": {
+    " black": 268,
+    " blue": 16,
+    " brown": 59,
+    " gold": 1639,
+    " gray": 70,
+    " green": 75,
+    " grey": 145,
+    " orange": 10,
+    " pink": 5,
+    " purple": 4,
+    " red": 104,
+    " silver": 295,
+    " white": 132,
+    " yellow": 25
+   },
+   "clean_ranks": {
+    " black": 3,
+    " blue": 2,
+    " brown": 20,
+    " gold": 34,
+    " gray": 35,
+    " green": 11,
+    " grey": 41,
+    " orange": 10,
+    " pink": 7,
+    " purple": 6,
+    " red": 5,
+    " silver": 48,
+    " white": 8,
+    " yellow": 12
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "The colour I like best is",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " purple",
+   "clean_top_in_category": " blue",
+   "clean_rank_of_lens_top": 10,
+   "clean_top10": [
+    " the",
+    " blue",
+    " a",
+    " black",
+    " white",
+    " red",
+    " orange",
+    " green",
+    " my",
+    " purple"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " blue",
+    " green",
+    " orange",
+    " purple",
+    " red",
+    " white"
+   ],
+   "lens_ranks": {
+    " black": 284,
+    " blue": 21,
+    " brown": 96,
+    " gold": 1883,
+    " gray": 110,
+    " green": 83,
+    " grey": 90,
+    " orange": 13,
+    " pink": 12,
+    " purple": 11,
+    " red": 104,
+    " silver": 327,
+    " white": 91,
+    " yellow": 31
+   },
+   "clean_ranks": {
+    " black": 4,
+    " blue": 2,
+    " brown": 25,
+    " gold": 52,
+    " gray": 106,
+    " green": 8,
+    " grey": 17,
+    " orange": 7,
+    " pink": 15,
+    " purple": 10,
+    " red": 6,
+    " silver": 46,
+    " white": 5,
+    " yellow": 12
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "Q: What colour do you like? A:",
+   "n_tokens": 11,
+   "argmax": " I",
+   "lens_top_in_category": " brown",
+   "clean_top_in_category": " black",
+   "clean_rank_of_lens_top": 1094,
+   "clean_top10": [
+    " I",
+    " The",
+    " It",
+    " A",
+    " My",
+    " Black",
+    " You",
+    " This",
+    " White",
+    " Well"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " black": 3265,
+    " blue": 799,
+    " brown": 130,
+    " gold": 5621,
+    " gray": 1977,
+    " green": 1699,
+    " grey": 467,
+    " orange": 375,
+    " pink": 614,
+    " purple": 299,
+    " red": 1141,
+    " silver": 2146,
+    " white": 1881,
+    " yellow": 455
+   },
+   "clean_ranks": {
+    " black": 494,
+    " blue": 1044,
+    " brown": 1094,
+    " gold": 4769,
+    " gray": 6864,
+    " green": 2250,
+    " grey": 1521,
+    " orange": 2324,
+    " pink": 2947,
+    " purple": 1745,
+    " red": 1366,
+    " silver": 6667,
+    " white": 781,
+    " yellow": 1122
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "Her favourite colour is",
+   "n_tokens": 5,
+   "argmax": " blue",
+   "lens_top_in_category": " purple",
+   "clean_top_in_category": " blue",
+   "clean_rank_of_lens_top": 10,
+   "clean_top10": [
+    " blue",
+    " red",
+    " pink",
+    " black",
+    " green",
+    " white",
+    " the",
+    " orange",
+    " a",
+    " purple"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " blue",
+    " green",
+    " orange",
+    " pink",
+    " purple",
+    " red",
+    " white"
+   ],
+   "lens_ranks": {
+    " black": 289,
+    " blue": 22,
+    " brown": 54,
+    " gold": 807,
+    " gray": 344,
+    " green": 59,
+    " grey": 49,
+    " orange": 16,
+    " pink": 8,
+    " purple": 7,
+    " red": 70,
+    " silver": 201,
+    " white": 141,
+    " yellow": 23
+   },
+   "clean_ranks": {
+    " black": 4,
+    " blue": 1,
+    " brown": 14,
+    " gold": 29,
+    " gray": 94,
+    " green": 5,
+    " grey": 15,
+    " orange": 8,
+    " pink": 3,
+    " purple": 10,
+    " red": 2,
+    " silver": 37,
+    " white": 6,
+    " yellow": 11
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "His favorite color is",
+   "n_tokens": 5,
+   "argmax": " blue",
+   "lens_top_in_category": " purple",
+   "clean_top_in_category": " blue",
+   "clean_rank_of_lens_top": 6,
+   "clean_top10": [
+    " blue",
+    " red",
+    " black",
+    " green",
+    " white",
+    " purple",
+    " a",
+    " orange",
+    " the",
+    " pink"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " blue",
+    " green",
+    " orange",
+    " pink",
+    " purple",
+    " red",
+    " white"
+   ],
+   "lens_ranks": {
+    " black": 192,
+    " blue": 15,
+    " brown": 43,
+    " gold": 765,
+    " gray": 48,
+    " green": 37,
+    " grey": 100,
+    " orange": 12,
+    " pink": 10,
+    " purple": 3,
+    " red": 66,
+    " silver": 207,
+    " white": 82,
+    " yellow": 17
+   },
+   "clean_ranks": {
+    " black": 3,
+    " blue": 1,
+    " brown": 12,
+    " gold": 20,
+    " gray": 16,
+    " green": 4,
+    " grey": 21,
+    " orange": 8,
+    " pink": 10,
+    " purple": 6,
+    " red": 2,
+    " silver": 32,
+    " white": 5,
+    " yellow": 11
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "She painted the wall a bright",
+   "n_tokens": 7,
+   "argmax": " red",
+   "lens_top_in_category": " orange",
+   "clean_top_in_category": " red",
+   "clean_rank_of_lens_top": 7,
+   "clean_top10": [
+    " red",
+    " blue",
+    " pink",
+    ",",
+    " yellow",
+    " green",
+    " orange",
+    " shade",
+    " and",
+    " white"
+   ],
+   "members_in_clean_top10": [
+    " blue",
+    " green",
+    " orange",
+    " pink",
+    " red",
+    " white",
+    " yellow"
+   ],
+   "lens_ranks": {
+    " black": 299,
+    " blue": 22,
+    " brown": 106,
+    " gold": 467,
+    " gray": 212,
+    " green": 28,
+    " grey": 134,
+    " orange": 9,
+    " pink": 18,
+    " purple": 26,
+    " red": 30,
+    " silver": 147,
+    " white": 94,
+    " yellow": 17
+   },
+   "clean_ranks": {
+    " black": 19,
+    " blue": 2,
+    " brown": 22,
+    " gold": 34,
+    " gray": 23,
+    " green": 6,
+    " grey": 30,
+    " orange": 7,
+    " pink": 3,
+    " purple": 12,
+    " red": 1,
+    " silver": 24,
+    " white": 10,
+    " yellow": 5
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "The car she bought was",
+   "n_tokens": 6,
+   "argmax": " a",
+   "lens_top_in_category": " silver",
+   "clean_top_in_category": " black",
+   "clean_rank_of_lens_top": 667,
+   "clean_top10": [
+    " a",
+    " stolen",
+    " the",
+    " found",
+    " not",
+    " sold",
+    " worth",
+    " an",
+    " one",
+    " in"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " black": 8671,
+    " blue": 5133,
+    " brown": 5326,
+    " gold": 6048,
+    " gray": 4793,
+    " green": 10502,
+    " grey": 3917,
+    " orange": 6013,
+    " pink": 2012,
+    " purple": 3781,
+    " red": 4195,
+    " silver": 1518,
+    " white": 3445,
+    " yellow": 2096
+   },
+   "clean_ranks": {
+    " black": 138,
+    " blue": 412,
+    " brown": 1450,
+    " gold": 874,
+    " gray": 1296,
+    " green": 609,
+    " grey": 921,
+    " orange": 1391,
+    " pink": 1064,
+    " purple": 1400,
+    " red": 257,
+    " silver": 667,
+    " white": 242,
+    " yellow": 750
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "My favourite colour has always been",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " pink",
+   "clean_top_in_category": " white",
+   "clean_rank_of_lens_top": 8,
+   "clean_top10": [
+    " the",
+    " white",
+    " red",
+    " black",
+    " blue",
+    " green",
+    " orange",
+    " pink",
+    " my",
+    " purple"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " blue",
+    " green",
+    " orange",
+    " pink",
+    " purple",
+    " red",
+    " white"
+   ],
+   "lens_ranks": {
+    " black": 115,
+    " blue": 14,
+    " brown": 34,
+    " gold": 982,
+    " gray": 565,
+    " green": 55,
+    " grey": 63,
+    " orange": 16,
+    " pink": 6,
+    " purple": 9,
+    " red": 53,
+    " silver": 211,
+    " white": 43,
+    " yellow": 19
+   },
+   "clean_ranks": {
+    " black": 4,
+    " blue": 5,
+    " brown": 14,
+    " gold": 27,
+    " gray": 75,
+    " green": 6,
+    " grey": 13,
+    " orange": 7,
+    " pink": 8,
+    " purple": 10,
+    " red": 3,
+    " silver": 23,
+    " white": 2,
+    " yellow": 12
+   }
+  },
+  {
+   "category": "colour",
+   "frame": "The colour of her dress was",
+   "n_tokens": 7,
+   "argmax": " a",
+   "lens_top_in_category": " purple",
+   "clean_top_in_category": " red",
+   "clean_rank_of_lens_top": 22,
+   "clean_top10": [
+    " a",
+    " red",
+    " so",
+    " not",
+    " very",
+    " the",
+    " pale",
+    " black",
+    " pink",
+    " different"
+   ],
+   "members_in_clean_top10": [
+    " black",
+    " pink",
+    " red"
+   ],
+   "lens_ranks": {
+    " black": 566,
+    " blue": 128,
+    " brown": 155,
+    " gold": 1008,
+    " gray": 239,
+    " green": 223,
+    " grey": 138,
+    " orange": 39,
+    " pink": 17,
+    " purple": 16,
+    " red": 101,
+    " silver": 557,
+    " white": 228,
+    " yellow": 30
+   },
+   "clean_ranks": {
+    " black": 8,
+    " blue": 12,
+    " brown": 63,
+    " gold": 200,
+    " gray": 220,
+    " green": 27,
+    " grey": 35,
+    " orange": 50,
+    " pink": 9,
+    " purple": 22,
+    " red": 2,
+    " silver": 175,
+    " white": 13,
+    " yellow": 43
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "My favourite animal is",
+   "n_tokens": 5,
+   "argmax": " the",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " cat",
+   "clean_rank_of_lens_top": 871,
+   "clean_top10": [
+    " the",
+    " a",
+    " my",
+    " an",
+    " probably",
+    " also",
+    " actually",
+    " one",
+    " not",
+    " that"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 3603,
+    " bird": 87,
+    " cat": 1854,
+    " cow": 270,
+    " deer": 204,
+    " dog": 235,
+    " dolphin": 20,
+    " elephant": 101,
+    " fish": 409,
+    " fox": 167,
+    " horse": 277,
+    " lion": 422,
+    " monkey": 62,
+    " mouse": 983,
+    " pig": 1129,
+    " rabbit": 171,
+    " sheep": 77,
+    " snake": 43,
+    " tiger": 492,
+    " wolf": 575
+   },
+   "clean_ranks": {
+    " bear": 259,
+    " bird": 611,
+    " cat": 37,
+    " cow": 288,
+    " deer": 141,
+    " dog": 57,
+    " dolphin": 871,
+    " elephant": 203,
+    " fish": 240,
+    " fox": 38,
+    " horse": 239,
+    " lion": 166,
+    " monkey": 260,
+    " mouse": 826,
+    " pig": 281,
+    " rabbit": 95,
+    " sheep": 59,
+    " snake": 742,
+    " tiger": 640,
+    " wolf": 539
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "The animal I like best is",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " snake",
+   "clean_top_in_category": " cat",
+   "clean_rank_of_lens_top": 542,
+   "clean_top10": [
+    " the",
+    " a",
+    " not",
+    " an",
+    " my",
+    " one",
+    " called",
+    " that",
+    " probably",
+    " actually"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 9192,
+    " bird": 332,
+    " cat": 4760,
+    " cow": 355,
+    " deer": 271,
+    " dog": 513,
+    " dolphin": 101,
+    " elephant": 118,
+    " fish": 736,
+    " fox": 568,
+    " horse": 694,
+    " lion": 1156,
+    " monkey": 119,
+    " mouse": 3285,
+    " pig": 2571,
+    " rabbit": 268,
+    " sheep": 131,
+    " snake": 63,
+    " tiger": 674,
+    " wolf": 960
+   },
+   "clean_ranks": {
+    " bear": 231,
+    " bird": 793,
+    " cat": 43,
+    " cow": 235,
+    " deer": 92,
+    " dog": 66,
+    " dolphin": 1031,
+    " elephant": 271,
+    " fish": 168,
+    " fox": 114,
+    " horse": 234,
+    " lion": 206,
+    " monkey": 428,
+    " mouse": 1069,
+    " pig": 218,
+    " rabbit": 70,
+    " sheep": 79,
+    " snake": 542,
+    " tiger": 372,
+    " wolf": 400
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "Q: Which animal do you like? A:",
+   "n_tokens": 11,
+   "argmax": " I",
+   "lens_top_in_category": " deer",
+   "clean_top_in_category": " cat",
+   "clean_rank_of_lens_top": 7305,
+   "clean_top10": [
+    " I",
+    " The",
+    " A",
+    " My",
+    " It",
+    " Some",
+    " We",
+    " Most",
+    " You",
+    " Well"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 17203,
+    " bird": 1836,
+    " cat": 8650,
+    " cow": 4818,
+    " deer": 390,
+    " dog": 2358,
+    " dolphin": 607,
+    " elephant": 3550,
+    " fish": 2058,
+    " fox": 1270,
+    " horse": 2132,
+    " lion": 4103,
+    " monkey": 668,
+    " mouse": 4542,
+    " pig": 5911,
+    " rabbit": 1520,
+    " sheep": 697,
+    " snake": 610,
+    " tiger": 3962,
+    " wolf": 11393
+   },
+   "clean_ranks": {
+    " bear": 10461,
+    " bird": 11063,
+    " cat": 4308,
+    " cow": 9592,
+    " deer": 7305,
+    " dog": 5406,
+    " dolphin": 12547,
+    " elephant": 9492,
+    " fish": 8317,
+    " fox": 5610,
+    " horse": 8586,
+    " lion": 5309,
+    " monkey": 5614,
+    " mouse": 9361,
+    " pig": 8113,
+    " rabbit": 6092,
+    " sheep": 6773,
+    " snake": 9914,
+    " tiger": 9261,
+    " wolf": 6887
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "Her favourite animal is",
+   "n_tokens": 5,
+   "argmax": " a",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " fox",
+   "clean_rank_of_lens_top": 252,
+   "clean_top10": [
+    " a",
+    " the",
+    " an",
+    " her",
+    " also",
+    " not",
+    " probably",
+    " called",
+    " one",
+    " '"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 2515,
+    " bird": 64,
+    " cat": 1732,
+    " cow": 132,
+    " deer": 151,
+    " dog": 261,
+    " dolphin": 14,
+    " elephant": 43,
+    " fish": 200,
+    " fox": 150,
+    " horse": 129,
+    " lion": 300,
+    " monkey": 62,
+    " mouse": 898,
+    " pig": 648,
+    " rabbit": 142,
+    " sheep": 49,
+    " snake": 30,
+    " tiger": 259,
+    " wolf": 455
+   },
+   "clean_ranks": {
+    " bear": 70,
+    " bird": 220,
+    " cat": 19,
+    " cow": 41,
+    " deer": 45,
+    " dog": 31,
+    " dolphin": 252,
+    " elephant": 67,
+    " fish": 40,
+    " fox": 13,
+    " horse": 57,
+    " lion": 88,
+    " monkey": 94,
+    " mouse": 333,
+    " pig": 68,
+    " rabbit": 22,
+    " sheep": 14,
+    " snake": 165,
+    " tiger": 132,
+    " wolf": 276
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "His favourite animal is",
+   "n_tokens": 5,
+   "argmax": " a",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " sheep",
+   "clean_rank_of_lens_top": 300,
+   "clean_top10": [
+    " a",
+    " the",
+    " an",
+    " his",
+    " also",
+    " not",
+    " probably",
+    " one",
+    " \"",
+    " called"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 2549,
+    " bird": 86,
+    " cat": 1843,
+    " cow": 181,
+    " deer": 150,
+    " dog": 275,
+    " dolphin": 14,
+    " elephant": 40,
+    " fish": 197,
+    " fox": 179,
+    " horse": 128,
+    " lion": 292,
+    " monkey": 59,
+    " mouse": 887,
+    " pig": 605,
+    " rabbit": 140,
+    " sheep": 60,
+    " snake": 24,
+    " tiger": 204,
+    " wolf": 463
+   },
+   "clean_ranks": {
+    " bear": 55,
+    " bird": 241,
+    " cat": 21,
+    " cow": 60,
+    " deer": 41,
+    " dog": 27,
+    " dolphin": 300,
+    " elephant": 73,
+    " fish": 38,
+    " fox": 17,
+    " horse": 37,
+    " lion": 81,
+    " monkey": 77,
+    " mouse": 313,
+    " pig": 65,
+    " rabbit": 20,
+    " sheep": 15,
+    " snake": 171,
+    " tiger": 96,
+    " wolf": 295
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "At the zoo, the animal I wanted to see was the",
+   "n_tokens": 13,
+   "argmax": " one",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " elephant",
+   "clean_rank_of_lens_top": 166,
+   "clean_top10": [
+    " one",
+    " elephant",
+    " lion",
+    " only",
+    " gir",
+    " giant",
+    " big",
+    " most",
+    " same",
+    " black"
+   ],
+   "members_in_clean_top10": [
+    " elephant",
+    " lion"
+   ],
+   "lens_ranks": {
+    " bear": 5445,
+    " bird": 170,
+    " cat": 1253,
+    " cow": 541,
+    " deer": 187,
+    " dog": 332,
+    " dolphin": 6,
+    " elephant": 14,
+    " fish": 257,
+    " fox": 325,
+    " horse": 1079,
+    " lion": 168,
+    " monkey": 54,
+    " mouse": 114,
+    " pig": 2400,
+    " rabbit": 77,
+    " sheep": 142,
+    " snake": 161,
+    " tiger": 127,
+    " wolf": 374
+   },
+   "clean_ranks": {
+    " bear": 53,
+    " bird": 119,
+    " cat": 22,
+    " cow": 235,
+    " deer": 173,
+    " dog": 16,
+    " dolphin": 166,
+    " elephant": 2,
+    " fish": 301,
+    " fox": 64,
+    " horse": 190,
+    " lion": 3,
+    " monkey": 34,
+    " mouse": 52,
+    " pig": 80,
+    " rabbit": 33,
+    " sheep": 159,
+    " snake": 132,
+    " tiger": 18,
+    " wolf": 91
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "The strongest animal is the",
+   "n_tokens": 6,
+   "argmax": " most",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " lion",
+   "clean_rank_of_lens_top": 200,
+   "clean_top10": [
+    " most",
+    " one",
+    " lion",
+    " largest",
+    " best",
+    " big",
+    " wild",
+    " smallest",
+    " dog",
+    " great"
+   ],
+   "members_in_clean_top10": [
+    " dog",
+    " lion"
+   ],
+   "lens_ranks": {
+    " bear": 3674,
+    " bird": 135,
+    " cat": 958,
+    " cow": 147,
+    " deer": 109,
+    " dog": 334,
+    " dolphin": 20,
+    " elephant": 23,
+    " fish": 279,
+    " fox": 339,
+    " horse": 295,
+    " lion": 63,
+    " monkey": 150,
+    " mouse": 473,
+    " pig": 2436,
+    " rabbit": 138,
+    " sheep": 64,
+    " snake": 139,
+    " tiger": 60,
+    " wolf": 161
+   },
+   "clean_ranks": {
+    " bear": 68,
+    " bird": 150,
+    " cat": 12,
+    " cow": 66,
+    " deer": 59,
+    " dog": 9,
+    " dolphin": 200,
+    " elephant": 17,
+    " fish": 196,
+    " fox": 23,
+    " horse": 25,
+    " lion": 3,
+    " monkey": 204,
+    " mouse": 48,
+    " pig": 37,
+    " rabbit": 20,
+    " sheep": 47,
+    " snake": 271,
+    " tiger": 19,
+    " wolf": 18
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "My son's favourite animal is",
+   "n_tokens": 7,
+   "argmax": " the",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " cat",
+   "clean_rank_of_lens_top": 679,
+   "clean_top10": [
+    " the",
+    " a",
+    " his",
+    " an",
+    " my",
+    " also",
+    " probably",
+    " actually",
+    " one",
+    " not"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 3519,
+    " bird": 85,
+    " cat": 1569,
+    " cow": 212,
+    " deer": 141,
+    " dog": 173,
+    " dolphin": 20,
+    " elephant": 54,
+    " fish": 257,
+    " fox": 156,
+    " horse": 222,
+    " lion": 358,
+    " monkey": 33,
+    " mouse": 764,
+    " pig": 868,
+    " rabbit": 185,
+    " sheep": 64,
+    " snake": 38,
+    " tiger": 416,
+    " wolf": 527
+   },
+   "clean_ranks": {
+    " bear": 119,
+    " bird": 495,
+    " cat": 17,
+    " cow": 146,
+    " deer": 48,
+    " dog": 30,
+    " dolphin": 679,
+    " elephant": 130,
+    " fish": 149,
+    " fox": 22,
+    " horse": 110,
+    " lion": 153,
+    " monkey": 80,
+    " mouse": 405,
+    " pig": 137,
+    " rabbit": 43,
+    " sheep": 38,
+    " snake": 385,
+    " tiger": 346,
+    " wolf": 329
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "The animal on the farm was a",
+   "n_tokens": 8,
+   "argmax": " young",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " dog",
+   "clean_rank_of_lens_top": 393,
+   "clean_top10": [
+    " young",
+    " male",
+    " small",
+    " white",
+    " black",
+    " mix",
+    " large",
+    " wild",
+    " female",
+    " pit"
+   ],
+   "members_in_clean_top10": [],
+   "lens_ranks": {
+    " bear": 4836,
+    " bird": 506,
+    " cat": 2926,
+    " cow": 623,
+    " deer": 32,
+    " dog": 275,
+    " dolphin": 14,
+    " elephant": 294,
+    " fish": 128,
+    " fox": 336,
+    " horse": 1141,
+    " lion": 869,
+    " monkey": 188,
+    " mouse": 447,
+    " pig": 1028,
+    " rabbit": 53,
+    " sheep": 36,
+    " snake": 509,
+    " tiger": 146,
+    " wolf": 252
+   },
+   "clean_ranks": {
+    " bear": 92,
+    " bird": 223,
+    " cat": 42,
+    " cow": 56,
+    " deer": 97,
+    " dog": 13,
+    " dolphin": 393,
+    " elephant": 3400,
+    " fish": 228,
+    " fox": 114,
+    " horse": 109,
+    " lion": 83,
+    " monkey": 191,
+    " mouse": 98,
+    " pig": 23,
+    " rabbit": 40,
+    " sheep": 33,
+    " snake": 263,
+    " tiger": 201,
+    " wolf": 88
+   }
+  },
+  {
+   "category": "animal",
+   "frame": "The pet I want most is a",
+   "n_tokens": 8,
+   "argmax": " dog",
+   "lens_top_in_category": " dolphin",
+   "clean_top_in_category": " dog",
+   "clean_rank_of_lens_top": 207,
+   "clean_top10": [
+    " dog",
+    " cat",
+    " pet",
+    " puppy",
+    " small",
+    " kitten",
+    " little",
+    " baby",
+    " new",
+    " toy"
+   ],
+   "members_in_clean_top10": [
+    " cat",
+    " dog"
+   ],
+   "lens_ranks": {
+    " bear": 9388,
+    " bird": 485,
+    " cat": 2017,
+    " cow": 389,
+    " deer": 299,
+    " dog": 162,
+    " dolphin": 50,
+    " elephant": 966,
+    " fish": 476,
+    " fox": 261,
+    " horse": 768,
+    " lion": 2134,
+    " monkey": 401,
+    " mouse": 487,
+    " pig": 1911,
+    " rabbit": 55,
+    " sheep": 136,
+    " snake": 749,
+    " tiger": 812,
+    " wolf": 437
+   },
+   "clean_ranks": {
+    " bear": 31,
+    " bird": 16,
+    " cat": 2,
+    " cow": 68,
+    " deer": 221,
+    " dog": 1,
+    " dolphin": 207,
+    " elephant": 1323,
+    " fish": 137,
+    " fox": 54,
+    " horse": 14,
+    " lion": 73,
+    " monkey": 193,
+    " mouse": 37,
+    " pig": 55,
+    " rabbit": 12,
+    " sheep": 184,
+    " snake": 63,
+    " tiger": 49,
+    " wolf": 62
+   }
+  }
+ ],
+ "battery2": [
+  {
+   "func": "capital",
+   "frame": "The capital of {X} is the city of",
+   "n": 25,
+   "top1": 12,
+   "top3": 17,
+   "top5": 21,
+   "per_country": {
+    "France": {
+     "rank": 1,
+     "argmax": " Paris"
+    },
+    "Germany": {
+     "rank": 1,
+     "argmax": " Berlin"
+    },
+    "Italy": {
+     "rank": 2,
+     "argmax": " Milan"
+    },
+    "Spain": {
+     "rank": 3,
+     "argmax": " Valencia"
+    },
+    "Russia": {
+     "rank": 4,
+     "argmax": " St"
+    },
+    "Poland": {
+     "rank": 1,
+     "argmax": " Warsaw"
+    },
+    "Greece": {
+     "rank": 1,
+     "argmax": " Athens"
+    },
+    "Ireland": {
+     "rank": 1,
+     "argmax": " Dublin"
+    },
+    "Portugal": {
+     "rank": 1,
+     "argmax": " Lisbon"
+    },
+    "Norway": {
+     "rank": 1,
+     "argmax": " Oslo"
+    },
+    "Sweden": {
+     "rank": 1,
+     "argmax": " Stockholm"
+    },
+    "China": {
+     "rank": 2,
+     "argmax": " Tian"
+    },
+    "Japan": {
+     "rank": 1,
+     "argmax": " Tokyo"
+    },
+    "India": {
+     "rank": 1,
+     "argmax": " Delhi"
+    },
+    "Iran": {
+     "rank": 4,
+     "argmax": " Q"
+    },
+    "Israel": {
+     "rank": 1,
+     "argmax": " Jerusalem"
+    },
+    "Egypt": {
+     "rank": 7,
+     "argmax": " Alexandria"
+    },
+    "Kenya": {
+     "rank": 2,
+     "argmax": " K"
+    },
+    "Nigeria": {
+     "rank": 7,
+     "argmax": " Maid"
+    },
+    "Canada": {
+     "rank": 2,
+     "argmax": " Toronto"
+    },
+    "Mexico": {
+     "rank": 39,
+     "argmax": " San"
+    },
+    "Brazil": {
+     "rank": 5,
+     "argmax": " Rio"
+    },
+    "Chile": {
+     "rank": 1,
+     "argmax": " Santiago"
+    },
+    "Australia": {
+     "rank": 4,
+     "argmax": " Sydney"
+    },
+    "Turkey": {
+     "rank": 7,
+     "argmax": " Iz"
+    }
+   }
+  },
+  {
+   "func": "capital",
+   "frame": "The capital of {X} is",
+   "n": 25,
+   "top1": 0,
+   "top3": 0,
+   "top5": 0,
+   "per_country": {
+    "France": {
+     "rank": 93,
+     "argmax": " now"
+    },
+    "Germany": {
+     "rank": 28,
+     "argmax": " now"
+    },
+    "Italy": {
+     "rank": 8,
+     "argmax": " now"
+    },
+    "Spain": {
+     "rank": 12,
+     "argmax": " the"
+    },
+    "Russia": {
+     "rank": 28,
+     "argmax": " now"
+    },
+    "Poland": {
+     "rank": 10,
+     "argmax": " now"
+    },
+    "Greece": {
+     "rank": 11,
+     "argmax": " now"
+    },
+    "Ireland": {
+     "rank": 27,
+     "argmax": " now"
+    },
+    "Portugal": {
+     "rank": 40,
+     "argmax": " now"
+    },
+    "Norway": {
+     "rank": 534,
+     "argmax": " a"
+    },
+    "Sweden": {
+     "rank": 303,
+     "argmax": " now"
+    },
+    "China": {
+     "rank": 32,
+     "argmax": " home"
+    },
+    "Japan": {
+     "rank": 26,
+     "argmax": " home"
+    },
+    "India": {
+     "rank": 95,
+     "argmax": " home"
+    },
+    "Iran": {
+     "rank": 22,
+     "argmax": " home"
+    },
+    "Israel": {
+     "rank": 71,
+     "argmax": " home"
+    },
+    "Egypt": {
+     "rank": 28,
+     "argmax": " the"
+    },
+    "Kenya": {
+     "rank": 205,
+     "argmax": " a"
+    },
+    "Nigeria": {
+     "rank": 271,
+     "argmax": " now"
+    },
+    "Canada": {
+     "rank": 220,
+     "argmax": " home"
+    },
+    "Mexico": {
+     "rank": 23,
+     "argmax": " home"
+    },
+    "Brazil": {
+     "rank": 415,
+     "argmax": " the"
+    },
+    "Chile": {
+     "rank": 175,
+     "argmax": " the"
+    },
+    "Australia": {
+     "rank": 151,
+     "argmax": " home"
+    },
+    "Turkey": {
+     "rank": 62,
+     "argmax": " home"
+    }
+   }
+  },
+  {
+   "func": "capital",
+   "frame": "The capital city of {X} is",
+   "n": 25,
+   "top1": 0,
+   "top3": 0,
+   "top5": 0,
+   "per_country": {
+    "France": {
+     "rank": 537,
+     "argmax": " now"
+    },
+    "Germany": {
+     "rank": 284,
+     "argmax": " now"
+    },
+    "Italy": {
+     "rank": 120,
+     "argmax": " home"
+    },
+    "Spain": {
+     "rank": 257,
+     "argmax": " now"
+    },
+    "Russia": {
+     "rank": 186,
+     "argmax": " home"
+    },
+    "Poland": {
+     "rank": 200,
+     "argmax": " home"
+    },
+    "Greece": {
+     "rank": 143,
+     "argmax": " now"
+    },
+    "Ireland": {
+     "rank": 363,
+     "argmax": " home"
+    },
+    "Portugal": {
+     "rank": 899,
+     "argmax": " now"
+    },
+    "Norway": {
+     "rank": 3354,
+     "argmax": " home"
+    },
+    "Sweden": {
+     "rank": 1897,
+     "argmax": " now"
+    },
+    "China": {
+     "rank": 191,
+     "argmax": " home"
+    },
+    "Japan": {
+     "rank": 165,
+     "argmax": " home"
+    },
+    "India": {
+     "rank": 534,
+     "argmax": " home"
+    },
+    "Iran": {
+     "rank": 233,
+     "argmax": " home"
+    },
+    "Israel": {
+     "rank": 677,
+     "argmax": " home"
+    },
+    "Egypt": {
+     "rank": 299,
+     "argmax": " home"
+    },
+    "Kenya": {
+     "rank": 1138,
+     "argmax": " home"
+    },
+    "Nigeria": {
+     "rank": 1275,
+     "argmax": " home"
+    },
+    "Canada": {
+     "rank": 877,
+     "argmax": " home"
+    },
+    "Mexico": {
+     "rank": 103,
+     "argmax": " home"
+    },
+    "Brazil": {
+     "rank": 3185,
+     "argmax": " home"
+    },
+    "Chile": {
+     "rank": 1615,
+     "argmax": " home"
+    },
+    "Australia": {
+     "rank": 686,
+     "argmax": " home"
+    },
+    "Turkey": {
+     "rank": 471,
+     "argmax": " home"
+    }
+   }
+  },
+  {
+   "func": "capital",
+   "frame": "Q: What is the capital of {X}? A:",
+   "n": 25,
+   "top1": 1,
+   "top3": 1,
+   "top5": 14,
+   "per_country": {
+    "France": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Germany": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Italy": {
+     "rank": 6,
+     "argmax": " The"
+    },
+    "Spain": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Russia": {
+     "rank": 4,
+     "argmax": " The"
+    },
+    "Poland": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Greece": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Ireland": {
+     "rank": 6,
+     "argmax": " The"
+    },
+    "Portugal": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Norway": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Sweden": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "China": {
+     "rank": 5,
+     "argmax": " The"
+    },
+    "Japan": {
+     "rank": 7,
+     "argmax": " The"
+    },
+    "India": {
+     "rank": 10,
+     "argmax": " The"
+    },
+    "Iran": {
+     "rank": 4,
+     "argmax": " The"
+    },
+    "Israel": {
+     "rank": 8,
+     "argmax": " The"
+    },
+    "Egypt": {
+     "rank": 4,
+     "argmax": " The"
+    },
+    "Kenya": {
+     "rank": 11,
+     "argmax": " The"
+    },
+    "Nigeria": {
+     "rank": 20,
+     "argmax": " The"
+    },
+    "Canada": {
+     "rank": 7,
+     "argmax": " The"
+    },
+    "Mexico": {
+     "rank": 1,
+     "argmax": " Mexico"
+    },
+    "Brazil": {
+     "rank": 6,
+     "argmax": " The"
+    },
+    "Chile": {
+     "rank": 4,
+     "argmax": " The"
+    },
+    "Australia": {
+     "rank": 15,
+     "argmax": " The"
+    },
+    "Turkey": {
+     "rank": 6,
+     "argmax": " The"
+    }
+   }
+  },
+  {
+   "func": "language",
+   "frame": "Most people in {X} speak",
+   "n": 25,
+   "top1": 14,
+   "top3": 18,
+   "top5": 24,
+   "per_country": {
+    "France": {
+     "rank": 1,
+     "argmax": " French"
+    },
+    "Germany": {
+     "rank": 1,
+     "argmax": " German"
+    },
+    "Italy": {
+     "rank": 1,
+     "argmax": " Italian"
+    },
+    "Spain": {
+     "rank": 1,
+     "argmax": " Spanish"
+    },
+    "Russia": {
+     "rank": 1,
+     "argmax": " Russian"
+    },
+    "Poland": {
+     "rank": 1,
+     "argmax": " Polish"
+    },
+    "Greece": {
+     "rank": 1,
+     "argmax": " Greek"
+    },
+    "Ireland": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Portugal": {
+     "rank": 1,
+     "argmax": " Portuguese"
+    },
+    "Norway": {
+     "rank": 4,
+     "argmax": " the"
+    },
+    "Sweden": {
+     "rank": 1,
+     "argmax": " Swedish"
+    },
+    "China": {
+     "rank": 5,
+     "argmax": " a"
+    },
+    "Japan": {
+     "rank": 2,
+     "argmax": " English"
+    },
+    "India": {
+     "rank": 5,
+     "argmax": " English"
+    },
+    "Iran": {
+     "rank": 4,
+     "argmax": " the"
+    },
+    "Israel": {
+     "rank": 4,
+     "argmax": " of"
+    },
+    "Egypt": {
+     "rank": 1,
+     "argmax": " Arabic"
+    },
+    "Kenya": {
+     "rank": 173,
+     "argmax": " English"
+    },
+    "Nigeria": {
+     "rank": 1,
+     "argmax": " English"
+    },
+    "Canada": {
+     "rank": 1,
+     "argmax": " English"
+    },
+    "Mexico": {
+     "rank": 4,
+     "argmax": " the"
+    },
+    "Brazil": {
+     "rank": 1,
+     "argmax": " Portuguese"
+    },
+    "Chile": {
+     "rank": 3,
+     "argmax": " the"
+    },
+    "Australia": {
+     "rank": 1,
+     "argmax": " English"
+    },
+    "Turkey": {
+     "rank": 3,
+     "argmax": " the"
+    }
+   }
+  },
+  {
+   "func": "language",
+   "frame": "The language spoken in {X} is",
+   "n": 25,
+   "top1": 1,
+   "top3": 2,
+   "top5": 10,
+   "per_country": {
+    "France": {
+     "rank": 4,
+     "argmax": " not"
+    },
+    "Germany": {
+     "rank": 5,
+     "argmax": " not"
+    },
+    "Italy": {
+     "rank": 5,
+     "argmax": " not"
+    },
+    "Spain": {
+     "rank": 3,
+     "argmax": " a"
+    },
+    "Russia": {
+     "rank": 4,
+     "argmax": " not"
+    },
+    "Poland": {
+     "rank": 5,
+     "argmax": " a"
+    },
+    "Greece": {
+     "rank": 5,
+     "argmax": " not"
+    },
+    "Ireland": {
+     "rank": 15,
+     "argmax": " not"
+    },
+    "Portugal": {
+     "rank": 1,
+     "argmax": " Portuguese"
+    },
+    "Norway": {
+     "rank": 4,
+     "argmax": " a"
+    },
+    "Sweden": {
+     "rank": 5,
+     "argmax": " a"
+    },
+    "China": {
+     "rank": 33,
+     "argmax": " not"
+    },
+    "Japan": {
+     "rank": 11,
+     "argmax": " a"
+    },
+    "India": {
+     "rank": 45,
+     "argmax": " not"
+    },
+    "Iran": {
+     "rank": 85,
+     "argmax": " not"
+    },
+    "Israel": {
+     "rank": 20,
+     "argmax": " not"
+    },
+    "Egypt": {
+     "rank": 7,
+     "argmax": " not"
+    },
+    "Kenya": {
+     "rank": 1445,
+     "argmax": " a"
+    },
+    "Nigeria": {
+     "rank": 69,
+     "argmax": " not"
+    },
+    "Canada": {
+     "rank": 24,
+     "argmax": " not"
+    },
+    "Mexico": {
+     "rank": 33,
+     "argmax": " not"
+    },
+    "Brazil": {
+     "rank": 21,
+     "argmax": " a"
+    },
+    "Chile": {
+     "rank": 20,
+     "argmax": " a"
+    },
+    "Australia": {
+     "rank": 21,
+     "argmax": " not"
+    },
+    "Turkey": {
+     "rank": 6,
+     "argmax": " not"
+    }
+   }
+  },
+  {
+   "func": "language",
+   "frame": "People in {X} speak",
+   "n": 25,
+   "top1": 7,
+   "top3": 16,
+   "top5": 21,
+   "per_country": {
+    "France": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Germany": {
+     "rank": 1,
+     "argmax": " German"
+    },
+    "Italy": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Spain": {
+     "rank": 1,
+     "argmax": " Spanish"
+    },
+    "Russia": {
+     "rank": 1,
+     "argmax": " Russian"
+    },
+    "Poland": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Greece": {
+     "rank": 5,
+     "argmax": " of"
+    },
+    "Ireland": {
+     "rank": 3,
+     "argmax": " of"
+    },
+    "Portugal": {
+     "rank": 1,
+     "argmax": " Portuguese"
+    },
+    "Norway": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Sweden": {
+     "rank": 4,
+     "argmax": " of"
+    },
+    "China": {
+     "rank": 5,
+     "argmax": " of"
+    },
+    "Japan": {
+     "rank": 4,
+     "argmax": " of"
+    },
+    "India": {
+     "rank": 6,
+     "argmax": " of"
+    },
+    "Iran": {
+     "rank": 11,
+     "argmax": " in"
+    },
+    "Israel": {
+     "rank": 12,
+     "argmax": " of"
+    },
+    "Egypt": {
+     "rank": 1,
+     "argmax": " Arabic"
+    },
+    "Kenya": {
+     "rank": 324,
+     "argmax": " of"
+    },
+    "Nigeria": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Canada": {
+     "rank": 3,
+     "argmax": " of"
+    },
+    "Mexico": {
+     "rank": 1,
+     "argmax": " Spanish"
+    },
+    "Brazil": {
+     "rank": 1,
+     "argmax": " Portuguese"
+    },
+    "Chile": {
+     "rank": 2,
+     "argmax": " of"
+    },
+    "Australia": {
+     "rank": 4,
+     "argmax": " of"
+    },
+    "Turkey": {
+     "rank": 2,
+     "argmax": " of"
+    }
+   }
+  },
+  {
+   "func": "language",
+   "frame": "In {X} the people speak the language of",
+   "n": 25,
+   "top1": 0,
+   "top3": 0,
+   "top5": 2,
+   "per_country": {
+    "France": {
+     "rank": 13,
+     "argmax": " the"
+    },
+    "Germany": {
+     "rank": 13,
+     "argmax": " the"
+    },
+    "Italy": {
+     "rank": 20,
+     "argmax": " the"
+    },
+    "Spain": {
+     "rank": 12,
+     "argmax": " the"
+    },
+    "Russia": {
+     "rank": 7,
+     "argmax": " the"
+    },
+    "Poland": {
+     "rank": 9,
+     "argmax": " the"
+    },
+    "Greece": {
+     "rank": 9,
+     "argmax": " the"
+    },
+    "Ireland": {
+     "rank": 15,
+     "argmax": " the"
+    },
+    "Portugal": {
+     "rank": 4,
+     "argmax": " the"
+    },
+    "Norway": {
+     "rank": 23,
+     "argmax": " the"
+    },
+    "Sweden": {
+     "rank": 13,
+     "argmax": " the"
+    },
+    "China": {
+     "rank": 5,
+     "argmax": " the"
+    },
+    "Japan": {
+     "rank": 6,
+     "argmax": " the"
+    },
+    "India": {
+     "rank": 48,
+     "argmax": " the"
+    },
+    "Iran": {
+     "rank": 69,
+     "argmax": " the"
+    },
+    "Israel": {
+     "rank": 90,
+     "argmax": " the"
+    },
+    "Egypt": {
+     "rank": 42,
+     "argmax": " the"
+    },
+    "Kenya": {
+     "rank": 259,
+     "argmax": " the"
+    },
+    "Nigeria": {
+     "rank": 64,
+     "argmax": " the"
+    },
+    "Canada": {
+     "rank": 23,
+     "argmax": " the"
+    },
+    "Mexico": {
+     "rank": 67,
+     "argmax": " the"
+    },
+    "Brazil": {
+     "rank": 38,
+     "argmax": " the"
+    },
+    "Chile": {
+     "rank": 51,
+     "argmax": " the"
+    },
+    "Australia": {
+     "rank": 24,
+     "argmax": " the"
+    },
+    "Turkey": {
+     "rank": 11,
+     "argmax": " the"
+    }
+   }
+  },
+  {
+   "func": "continent",
+   "frame": "{X} is a country on the continent of",
+   "n": 25,
+   "top1": 12,
+   "top3": 17,
+   "top5": 24,
+   "per_country": {
+    "France": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Germany": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Italy": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Spain": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Russia": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Poland": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Greece": {
+     "rank": 2,
+     "argmax": " Africa"
+    },
+    "Ireland": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Portugal": {
+     "rank": 2,
+     "argmax": " Africa"
+    },
+    "Norway": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Sweden": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "China": {
+     "rank": 3,
+     "argmax": " the"
+    },
+    "Japan": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "India": {
+     "rank": 3,
+     "argmax": " Africa"
+    },
+    "Iran": {
+     "rank": 5,
+     "argmax": " the"
+    },
+    "Israel": {
+     "rank": 4,
+     "argmax": " the"
+    },
+    "Egypt": {
+     "rank": 1,
+     "argmax": " Africa"
+    },
+    "Kenya": {
+     "rank": 1,
+     "argmax": " Africa"
+    },
+    "Nigeria": {
+     "rank": 1,
+     "argmax": " Africa"
+    },
+    "Canada": {
+     "rank": 5,
+     "argmax": " the"
+    },
+    "Mexico": {
+     "rank": 7,
+     "argmax": " the"
+    },
+    "Brazil": {
+     "rank": 4,
+     "argmax": " the"
+    },
+    "Chile": {
+     "rank": 4,
+     "argmax": " Africa"
+    },
+    "Australia": {
+     "rank": 5,
+     "argmax": " the"
+    },
+    "Turkey": {
+     "rank": 4,
+     "argmax": " Europe"
+    }
+   }
+  },
+  {
+   "func": "continent",
+   "frame": "{X} is a country in",
+   "n": 25,
+   "top1": 0,
+   "top3": 2,
+   "top5": 11,
+   "per_country": {
+    "France": {
+     "rank": 5,
+     "argmax": " which"
+    },
+    "Germany": {
+     "rank": 4,
+     "argmax": " which"
+    },
+    "Italy": {
+     "rank": 4,
+     "argmax": " which"
+    },
+    "Spain": {
+     "rank": 4,
+     "argmax": " which"
+    },
+    "Russia": {
+     "rank": 12,
+     "argmax": " which"
+    },
+    "Poland": {
+     "rank": 3,
+     "argmax": " which"
+    },
+    "Greece": {
+     "rank": 4,
+     "argmax": " which"
+    },
+    "Ireland": {
+     "rank": 4,
+     "argmax": " which"
+    },
+    "Portugal": {
+     "rank": 3,
+     "argmax": " which"
+    },
+    "Norway": {
+     "rank": 5,
+     "argmax": " which"
+    },
+    "Sweden": {
+     "rank": 5,
+     "argmax": " which"
+    },
+    "China": {
+     "rank": 11,
+     "argmax": " which"
+    },
+    "Japan": {
+     "rank": 7,
+     "argmax": " which"
+    },
+    "India": {
+     "rank": 11,
+     "argmax": " which"
+    },
+    "Iran": {
+     "rank": 17,
+     "argmax": " which"
+    },
+    "Israel": {
+     "rank": 21,
+     "argmax": " which"
+    },
+    "Egypt": {
+     "rank": 19,
+     "argmax": " which"
+    },
+    "Kenya": {
+     "rank": 7,
+     "argmax": " which"
+    },
+    "Nigeria": {
+     "rank": 5,
+     "argmax": " which"
+    },
+    "Canada": {
+     "rank": 70,
+     "argmax": " which"
+    },
+    "Mexico": {
+     "rank": 44,
+     "argmax": " which"
+    },
+    "Brazil": {
+     "rank": 18,
+     "argmax": " which"
+    },
+    "Chile": {
+     "rank": 6,
+     "argmax": " which"
+    },
+    "Australia": {
+     "rank": 21,
+     "argmax": " which"
+    },
+    "Turkey": {
+     "rank": 14,
+     "argmax": " which"
+    }
+   }
+  },
+  {
+   "func": "continent",
+   "frame": "{X} is located on the continent of",
+   "n": 25,
+   "top1": 4,
+   "top3": 20,
+   "top5": 22,
+   "per_country": {
+    "France": {
+     "rank": 2,
+     "argmax": " Africa"
+    },
+    "Germany": {
+     "rank": 1,
+     "argmax": " Europe"
+    },
+    "Italy": {
+     "rank": 3,
+     "argmax": " the"
+    },
+    "Spain": {
+     "rank": 3,
+     "argmax": " the"
+    },
+    "Russia": {
+     "rank": 3,
+     "argmax": " the"
+    },
+    "Poland": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "Greece": {
+     "rank": 3,
+     "argmax": " Africa"
+    },
+    "Ireland": {
+     "rank": 2,
+     "argmax": " Africa"
+    },
+    "Portugal": {
+     "rank": 3,
+     "argmax": " Africa"
+    },
+    "Norway": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "Sweden": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "China": {
+     "rank": 3,
+     "argmax": " Africa"
+    },
+    "Japan": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "India": {
+     "rank": 5,
+     "argmax": " Africa"
+    },
+    "Iran": {
+     "rank": 7,
+     "argmax": " Africa"
+    },
+    "Israel": {
+     "rank": 8,
+     "argmax": " Africa"
+    },
+    "Egypt": {
+     "rank": 1,
+     "argmax": " Africa"
+    },
+    "Kenya": {
+     "rank": 1,
+     "argmax": " Africa"
+    },
+    "Nigeria": {
+     "rank": 1,
+     "argmax": " Africa"
+    },
+    "Canada": {
+     "rank": 3,
+     "argmax": " Africa"
+    },
+    "Mexico": {
+     "rank": 5,
+     "argmax": " the"
+    },
+    "Brazil": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "Chile": {
+     "rank": 2,
+     "argmax": " the"
+    },
+    "Australia": {
+     "rank": 3,
+     "argmax": " Africa"
+    },
+    "Turkey": {
+     "rank": 6,
+     "argmax": " the"
+    }
+   }
+  },
+  {
+   "func": "continent",
+   "frame": "Q: Which continent is {X} on? A:",
+   "n": 25,
+   "top1": 1,
+   "top3": 2,
+   "top5": 3,
+   "per_country": {
+    "France": {
+     "rank": 10,
+     "argmax": " France"
+    },
+    "Germany": {
+     "rank": 7,
+     "argmax": " Germany"
+    },
+    "Italy": {
+     "rank": 15,
+     "argmax": " Italy"
+    },
+    "Spain": {
+     "rank": 23,
+     "argmax": " Spain"
+    },
+    "Russia": {
+     "rank": 15,
+     "argmax": " Russia"
+    },
+    "Poland": {
+     "rank": 14,
+     "argmax": " Poland"
+    },
+    "Greece": {
+     "rank": 11,
+     "argmax": " Greece"
+    },
+    "Ireland": {
+     "rank": 29,
+     "argmax": " Ireland"
+    },
+    "Portugal": {
+     "rank": 47,
+     "argmax": " Portugal"
+    },
+    "Norway": {
+     "rank": 32,
+     "argmax": " Norway"
+    },
+    "Sweden": {
+     "rank": 36,
+     "argmax": " Sweden"
+    },
+    "China": {
+     "rank": 24,
+     "argmax": " China"
+    },
+    "Japan": {
+     "rank": 35,
+     "argmax": " Japan"
+    },
+    "India": {
+     "rank": 23,
+     "argmax": " India"
+    },
+    "Iran": {
+     "rank": 94,
+     "argmax": " Iran"
+    },
+    "Israel": {
+     "rank": 158,
+     "argmax": " Israel"
+    },
+    "Egypt": {
+     "rank": 11,
+     "argmax": " Egypt"
+    },
+    "Kenya": {
+     "rank": 3,
+     "argmax": " Kenya"
+    },
+    "Nigeria": {
+     "rank": 4,
+     "argmax": " Nigeria"
+    },
+    "Canada": {
+     "rank": 6,
+     "argmax": " Canada"
+    },
+    "Mexico": {
+     "rank": 36,
+     "argmax": " Mexico"
+    },
+    "Brazil": {
+     "rank": 10,
+     "argmax": " Brazil"
+    },
+    "Chile": {
+     "rank": 10,
+     "argmax": " Chile"
+    },
+    "Australia": {
+     "rank": 1,
+     "argmax": " Australia"
+    },
+    "Turkey": {
+     "rank": 161,
+     "argmax": " Turkey"
+    }
+   }
+  }
+ ],
+ "battery3": [
+  {
+   "name": "spider-legs",
+   "prompt": "Spiders have eight legs and ants have six legs. The animal that spins webs has",
+   "answer": " eight",
+   "alt": " six",
+   "swap_from": " spider",
+   "swap_to": " ant",
+   "n_tokens": 18,
+   "src_tok": 19230,
+   "tgt_tok": 1885,
+   "answer_rank": 2,
+   "alt_rank": 5,
+   "argmax": " four",
+   "top5": [
+    " four",
+    " eight",
+    " a",
+    " two",
+    " six"
+   ]
+  },
+  {
+   "name": "sport-ball",
+   "prompt": "Football is played with a round ball and rugby is played with an oval ball. My favourite sport is football, so the ball I play with is",
+   "answer": " round",
+   "alt": " oval",
+   "swap_from": " football",
+   "swap_to": " rugby",
+   "n_tokens": 30,
+   "src_tok": 4346,
+   "tgt_tok": 22948,
+   "answer_rank": 9,
+   "alt_rank": 6,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " a",
+    " called",
+    " my",
+    " rugby"
+   ]
+  },
+  {
+   "name": "dog-sound",
+   "prompt": "Dogs say woof and cats say meow. The animal that fetches sticks says",
+   "answer": " woof",
+   "alt": " meow",
+   "swap_from": " dog",
+   "swap_to": " cat",
+   "n_tokens": 19,
+   "src_tok": 3290,
+   "tgt_tok": 3797,
+   "answer_rank": 2,
+   "alt_rank": 8,
+   "argmax": " \"",
+   "top5": [
+    " \"",
+    " wo",
+    " '",
+    ",",
+    " it"
+   ]
+  },
+  {
+   "name": "lion-place",
+   "prompt": "Lions live in Africa and tigers live in Asia. The big cat with a mane lives in",
+   "answer": " Africa",
+   "alt": " Asia",
+   "swap_from": " lion",
+   "swap_to": " tiger",
+   "n_tokens": 21,
+   "src_tok": 18744,
+   "tgt_tok": 26241,
+   "answer_rank": 3,
+   "alt_rank": 2,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " Asia",
+    " Africa",
+    " China",
+    " India"
+   ]
+  },
+  {
+   "name": "banana-colour",
+   "prompt": "Apples are red and bananas are yellow. The fruit that monkeys love is",
+   "answer": " yellow",
+   "alt": " red",
+   "swap_from": " banana",
+   "swap_to": " apple",
+   "n_tokens": 16,
+   "src_tok": 25996,
+   "tgt_tok": 17180,
+   "answer_rank": 11,
+   "alt_rank": 8,
+   "argmax": " called",
+   "top5": [
+    " called",
+    " the",
+    " sweet",
+    " a",
+    " bananas"
+   ]
+  },
+  {
+   "name": "sun-heat",
+   "prompt": "The sun is hot and the moon is cold. The thing in the sky that gives us daylight is",
+   "answer": " hot",
+   "alt": " cold",
+   "swap_from": " sun",
+   "swap_to": " moon",
+   "n_tokens": 21,
+   "src_tok": 4252,
+   "tgt_tok": 8824,
+   "answer_rank": 35,
+   "alt_rank": 22,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " a",
+    " our",
+    " not",
+    " that"
+   ]
+  },
+  {
+   "name": "cow-product",
+   "prompt": "Cows give milk and hens give eggs. The animal that moos gives",
+   "answer": " milk",
+   "alt": " eggs",
+   "swap_from": " cow",
+   "swap_to": " hen",
+   "n_tokens": 17,
+   "src_tok": 9875,
+   "tgt_tok": 30963,
+   "answer_rank": 1,
+   "alt_rank": 2,
+   "argmax": " milk",
+   "top5": [
+    " milk",
+    " eggs",
+    " the",
+    " them",
+    " a"
+   ]
+  },
+  {
+   "name": "bird-action",
+   "prompt": "Fish swim and birds fly. The animal with feathers can",
+   "answer": " fly",
+   "alt": " swim",
+   "swap_from": " bird",
+   "swap_to": " fish",
+   "n_tokens": 12,
+   "src_tok": 6512,
+   "tgt_tok": 5916,
+   "answer_rank": 2,
+   "alt_rank": 4,
+   "argmax": " be",
+   "top5": [
+    " be",
+    " fly",
+    " also",
+    " swim",
+    "'t"
+   ]
+  },
+  {
+   "name": "snow-colour",
+   "prompt": "Snow is white and coal is black. The thing that falls from the sky in winter is",
+   "answer": " white",
+   "alt": " black",
+   "swap_from": " snow",
+   "swap_to": " coal",
+   "n_tokens": 19,
+   "src_tok": 6729,
+   "tgt_tok": 5655,
+   "answer_rank": 5,
+   "alt_rank": 7,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " a",
+    " not",
+    " snow",
+    " white"
+   ]
+  },
+  {
+   "name": "bike-wheels",
+   "prompt": "Cars have four wheels and bikes have two wheels. The vehicle that you pedal has",
+   "answer": " two",
+   "alt": " four",
+   "swap_from": " bike",
+   "swap_to": " car",
+   "n_tokens": 18,
+   "src_tok": 7161,
+   "tgt_tok": 1097,
+   "answer_rank": 3,
+   "alt_rank": 1,
+   "argmax": " four",
+   "top5": [
+    " four",
+    " a",
+    " two",
+    " the",
+    " three"
+   ]
+  },
+  {
+   "name": "paris-country",
+   "prompt": "Paris is in France and Rome is in Italy. The city with the Eiffel Tower is in",
+   "answer": " France",
+   "alt": " Italy",
+   "swap_from": " Paris",
+   "swap_to": " Rome",
+   "n_tokens": 21,
+   "src_tok": 6342,
+   "tgt_tok": 10598,
+   "answer_rank": 4,
+   "alt_rank": 6,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " Paris",
+    " London",
+    " France",
+    " Rome"
+   ]
+  },
+  {
+   "name": "winter-temp",
+   "prompt": "Winter is cold and summer is hot. The season when it snows is",
+   "answer": " cold",
+   "alt": " hot",
+   "swap_from": " winter",
+   "swap_to": " summer",
+   "n_tokens": 16,
+   "src_tok": 7374,
+   "tgt_tok": 3931,
+   "answer_rank": 7,
+   "alt_rank": 33,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " called",
+    " also",
+    " a",
+    " usually"
+   ]
+  },
+  {
+   "name": "doctor-place",
+   "prompt": "Doctors work in hospitals and teachers work in schools. The person who treats sick patients works in",
+   "answer": " hospitals",
+   "alt": " schools",
+   "swap_from": " doctor",
+   "swap_to": " teacher",
+   "n_tokens": 19,
+   "src_tok": 6253,
+   "tgt_tok": 4701,
+   "answer_rank": 3,
+   "alt_rank": 4,
+   "argmax": " the",
+   "top5": [
+    " the",
+    " a",
+    " hospitals",
+    " schools",
+    " an"
+   ]
+  },
+  {
+   "name": "bee-product",
+   "prompt": "Bees make honey and cows make milk. The insect that lives in a hive makes",
+   "answer": " honey",
+   "alt": " milk",
+   "swap_from": " bee",
+   "swap_to": " cow",
+   "n_tokens": 18,
+   "src_tok": 20697,
+   "tgt_tok": 9875,
+   "answer_rank": 1,
+   "alt_rank": 3,
+   "argmax": " honey",
+   "top5": [
+    " honey",
+    " the",
+    " milk",
+    " a",
+    " bees"
+   ]
+  },
+  {
+   "name": "gold-price",
+   "prompt": "Gold is expensive and iron is cheap. The metal that wedding rings are made of is",
+   "answer": " expensive",
+   "alt": " cheap",
+   "swap_from": " gold",
+   "swap_to": " iron",
+   "n_tokens": 18,
+   "src_tok": 3869,
+   "tgt_tok": 6953,
+   "answer_rank": 4,
+   "alt_rank": 14,
+   "argmax": " made",
+   "top5": [
+    " made",
+    " not",
+    " a",
+    " expensive",
+    " also"
+   ]
+  },
+  {
+   "name": "cat-feature",
+   "prompt": "Cats have whiskers and birds have beaks. The animal that purrs has",
+   "answer": " whiskers",
+   "alt": " beaks",
+   "swap_from": " cat",
+   "swap_to": " bird",
+   "n_tokens": 18,
+   "src_tok": 3797,
+   "tgt_tok": 6512,
+   "answer_rank": 2,
+   "alt_rank": 14,
+   "argmax": " a",
+   "top5": [
+    " a",
+    " whisk",
+    " been",
+    " the",
+    " no"
+   ]
+  },
+  {
+   "name": "train-track",
+   "prompt": "Trains run on rails and boats run on water. The vehicle that pulls carriages runs on",
+   "answer": " rails",
+   "alt": " water",
+   "swap_from": " train",
+   "swap_to": " boat",
+   "n_tokens": 20,
+   "src_tok": 4512,
+   "tgt_tok": 8848,
+   "answer_rank": 1,
+   "alt_rank": 2,
+   "argmax": " rails",
+   "top5": [
+    " rails",
+    " water",
+    " the",
+    " a",
+    " steam"
+   ]
+  },
+  {
+   "name": "book-verb",
+   "prompt": "Books are read and songs are sung. The thing with pages is",
+   "answer": " read",
+   "alt": " sung",
+   "swap_from": " book",
+   "swap_to": " song",
+   "n_tokens": 14,
+   "src_tok": 1492,
+   "tgt_tok": 3496,
+   "answer_rank": 60,
+   "alt_rank": 2474,
+   "argmax": " that",
+   "top5": [
+    " that",
+    " they",
+    ",",
+    " you",
+    " the"
+   ]
+  },
+  {
+   "name": "elephant-colour",
+   "prompt": "Elephants are grey and swans are white. The animal with a trunk is",
+   "answer": " grey",
+   "alt": " white",
+   "swap_from": " elephant",
+   "swap_to": " swan",
+   "n_tokens": 18,
+   "src_tok": 20950,
+   "tgt_tok": null,
+   "answer_rank": 22,
+   "alt_rank": 5,
+   "argmax": " called",
+   "top5": [
+    " called",
+    " the",
+    " usually",
+    " a",
+    " white"
+   ]
+  },
+  {
+   "name": "fire-feel",
+   "prompt": "Fire is hot and ice is cold. The thing that burns wood is",
+   "answer": " hot",
+   "alt": " cold",
+   "swap_from": " fire",
+   "swap_to": " ice",
+   "n_tokens": 15,
+   "src_tok": 2046,
+   "tgt_tok": 4771,
+   "answer_rank": 7,
+   "alt_rank": 14,
+   "argmax": " heat",
+   "top5": [
+    " heat",
+    " the",
+    " fire",
+    " not",
+    " wood"
+   ]
+  }
+ ],
+ "tokens": {
+  "sport": {
+   "kept": [
+    " baseball",
+    " basketball",
+    " boxing",
+    " cricket",
+    " cycling",
+    " football",
+    " golf",
+    " hockey",
+    " rugby",
+    " running",
+    " skiing",
+    " soccer",
+    " surfing",
+    " swimming",
+    " tennis",
+    " wrestling"
+   ],
+   "dropped": []
+  },
+  "fruit": {
+   "kept": [
+    " apple",
+    " banana",
+    " cherry",
+    " grape",
+    " lemon",
+    " mango",
+    " orange",
+    " peach",
+    " pear",
+    " pineapple",
+    " plum",
+    " strawberry"
+   ],
+   "dropped": [
+    " melon"
+   ]
+  },
+  "colour": {
+   "kept": [
+    " black",
+    " blue",
+    " brown",
+    " gold",
+    " gray",
+    " green",
+    " grey",
+    " orange",
+    " pink",
+    " purple",
+    " red",
+    " silver",
+    " white",
+    " yellow"
+   ],
+   "dropped": []
+  },
+  "animal": {
+   "kept": [
+    " bear",
+    " bird",
+    " cat",
+    " cow",
+    " deer",
+    " dog",
+    " dolphin",
+    " elephant",
+    " fish",
+    " fox",
+    " horse",
+    " lion",
+    " monkey",
+    " mouse",
+    " pig",
+    " rabbit",
+    " sheep",
+    " snake",
+    " tiger",
+    " wolf"
+   ],
+   "dropped": []
+  }
+ },
+ "country_tok": {
+  "France": 4881,
+  "Germany": 4486,
+  "Italy": 8031,
+  "Spain": 8602,
+  "Russia": 3284,
+  "Poland": 12873,
+  "Greece": 10315,
+  "Ireland": 7517,
+  "Portugal": 19101,
+  "Norway": 15238,
+  "Sweden": 10710,
+  "China": 2807,
+  "Japan": 2869,
+  "India": 3794,
+  "Iran": 4068,
+  "Israel": 2692,
+  "Egypt": 6365,
+  "Kenya": 21506,
+  "Nigeria": 19398,
+  "Canada": 3340,
+  "Mexico": 5828,
+  "Brazil": 7595,
+  "Chile": 17456,
+  "Australia": 4505,
+  "Turkey": 7137
+ },
+ "read_layer": 8,
+ "wall_seconds": 154.5
+}

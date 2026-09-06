@@ -1,0 +1,279 @@
+{
+ "measured_at": "2026-09-05T17:43:38.499619Z",
+ "lens_sha256": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
+ "note": "sizes are Euclidean norms of the total residual-stream change over patched positions and layers; stream_norm is the norm of the untouched residual stream over the same positions at the first patched layer; ratio is change divided by stream_norm",
+ "batteries": {
+  "h17": {
+   "chosen_cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 84,
+   "seeds": [
+    0,
+    1
+   ],
+   "total": {
+    "lens": {
+     "n": 84,
+     "median": 1065.032,
+     "min": 236.924,
+     "max": 4622.518
+    },
+    "randdir": {
+     "n": 168,
+     "median": 731.894,
+     "min": 166.441,
+     "max": 1549.468
+    },
+    "randnorm": {
+     "n": 168,
+     "median": 403.548,
+     "min": 68.2,
+     "max": 1217.774
+    }
+   },
+   "ratio_to_stream": {
+    "lens": {
+     "n": 84,
+     "median": 0.339,
+     "min": 0.076,
+     "max": 1.47
+    },
+    "randdir": {
+     "n": 168,
+     "median": 0.233,
+     "min": 0.053,
+     "max": 0.495
+    },
+    "randnorm": {
+     "n": 168,
+     "median": 0.129,
+     "min": 0.022,
+     "max": 0.388
+    }
+   },
+   "per_layer": {
+    "lens": {
+     "7": {
+      "n": 84,
+      "median": 138.857,
+      "min": 15.248,
+      "max": 513.384
+     },
+     "8": {
+      "n": 84,
+      "median": 357.675,
+      "min": 67.839,
+      "max": 1399.758
+     },
+     "9": {
+      "n": 84,
+      "median": 1017.068,
+      "min": 224.487,
+      "max": 4375.475
+     }
+    },
+    "randdir": {
+     "7": {
+      "n": 168,
+      "median": 292.17,
+      "min": 13.318,
+      "max": 1535.455
+     },
+     "8": {
+      "n": 168,
+      "median": 343.971,
+      "min": 25.143,
+      "max": 1070.531
+     },
+     "9": {
+      "n": 168,
+      "median": 327.189,
+      "min": 27.373,
+      "max": 1289.062
+     }
+    },
+    "randnorm": {
+     "7": {
+      "n": 168,
+      "median": 138.857,
+      "min": 15.248,
+      "max": 513.384
+     },
+     "8": {
+      "n": 168,
+      "median": 208.395,
+      "min": 30.458,
+      "max": 701.493
+     },
+     "9": {
+      "n": 168,
+      "median": 251.512,
+      "min": 9.079,
+      "max": 900.183
+     }
+    }
+   }
+  },
+  "h17a": {
+   "chosen_cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 124,
+   "seeds": [
+    0,
+    1
+   ],
+   "total": {
+    "lens": {
+     "n": 124,
+     "median": 97.055,
+     "min": 57.753,
+     "max": 258.627
+    },
+    "randdir": {
+     "n": 248,
+     "median": 303.183,
+     "min": 14.33,
+     "max": 1229.032
+    },
+    "randnorm": {
+     "n": 248,
+     "median": 97.055,
+     "min": 57.753,
+     "max": 258.627
+    }
+   },
+   "ratio_to_stream": {
+    "lens": {
+     "n": 124,
+     "median": 0.031,
+     "min": 0.019,
+     "max": 0.083
+    },
+    "randdir": {
+     "n": 248,
+     "median": 0.098,
+     "min": 0.005,
+     "max": 0.397
+    },
+    "randnorm": {
+     "n": 248,
+     "median": 0.031,
+     "min": 0.019,
+     "max": 0.083
+    }
+   },
+   "per_layer": {
+    "lens": {
+     "6": {
+      "n": 124,
+      "median": 97.055,
+      "min": 57.753,
+      "max": 258.627
+     }
+    },
+    "randdir": {
+     "6": {
+      "n": 248,
+      "median": 303.183,
+      "min": 14.33,
+      "max": 1229.032
+     }
+    },
+    "randnorm": {
+     "6": {
+      "n": 248,
+      "median": 97.055,
+      "min": 57.753,
+      "max": 258.627
+     }
+    }
+   }
+  },
+  "h17b": {
+   "chosen_cell": [
+    "7",
+    2.0,
+    "all_no_bos"
+   ],
+   "n_units": 16,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "total": {
+    "lens": {
+     "n": 16,
+     "median": 108.862,
+     "min": 69.108,
+     "max": 153.327
+    },
+    "randdir": {
+     "n": 48,
+     "median": 49.972,
+     "min": 25.019,
+     "max": 145.847
+    },
+    "randnorm": {
+     "n": 48,
+     "median": 108.862,
+     "min": 69.108,
+     "max": 153.327
+    }
+   },
+   "ratio_to_stream": {
+    "lens": {
+     "n": 16,
+     "median": 0.262,
+     "min": 0.16,
+     "max": 0.352
+    },
+    "randdir": {
+     "n": 48,
+     "median": 0.118,
+     "min": 0.057,
+     "max": 0.333
+    },
+    "randnorm": {
+     "n": 48,
+     "median": 0.262,
+     "min": 0.16,
+     "max": 0.352
+    }
+   },
+   "per_layer": {
+    "lens": {
+     "7": {
+      "n": 16,
+      "median": 108.862,
+      "min": 69.108,
+      "max": 153.327
+     }
+    },
+    "randdir": {
+     "7": {
+      "n": 48,
+      "median": 49.972,
+      "min": 25.019,
+      "max": 145.847
+     }
+    },
+    "randnorm": {
+     "7": {
+      "n": 48,
+      "median": 108.862,
+      "min": 69.108,
+      "max": 153.327
+     }
+    }
+   }
+  }
+ },
+ "wall_seconds": 136.7
+}

@@ -1,0 +1,212 @@
+[
+ {
+  "prompt": "My favourite animal is",
+  "s_tok": 3797,
+  "t_tok": 44136,
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "The animal I like best is",
+  "s_tok": 17522,
+  "t_tok": 44136,
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "The animal I like best is",
+  "s_tok": 3797,
+  "t_tok": 17522,
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "Q: Which animal do you like? A:",
+  "s_tok": 20096,
+  "t_tok": 44136,
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "My favourite animal is",
+  "s_tok": 44136,
+  "t_tok": 17522,
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "Her favourite animal is",
+  "s_tok": 44136,
+  "t_tok": 17522,
+  "layer_set": [
+   7,
+   8,
+   9
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "Australia is a country on the continent of",
+  "s_tok": 4505,
+  "t_tok": 7595,
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "Most people in Australia speak",
+  "s_tok": 4505,
+  "t_tok": 7595,
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "The capital of Australia is the city of",
+  "s_tok": 4505,
+  "t_tok": 3340,
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "Australia is a country on the continent of",
+  "s_tok": 4505,
+  "t_tok": 3340,
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "The capital of Australia is the city of",
+  "s_tok": 4505,
+  "t_tok": 7595,
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "The capital of Brazil is the city of",
+  "s_tok": 7595,
+  "t_tok": 4505,
+  "layer_set": [
+   6
+  ],
+  "alpha": 2.0,
+  "mode": "all",
+  "mention": 1
+ },
+ {
+  "prompt": "Bees make honey and cows make milk. The insect that lives in a hive makes",
+  "s_tok": 20697,
+  "t_tok": 9875,
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "mode": "all_no_bos",
+  "mention": 1
+ },
+ {
+  "prompt": "Cows give milk and hens give eggs. The animal that moos gives",
+  "s_tok": 9875,
+  "t_tok": 30963,
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "mode": "all_no_bos",
+  "mention": 1
+ },
+ {
+  "prompt": "Roses are red and violets are blue. The flower with thorns is",
+  "s_tok": 8278,
+  "t_tok": 45725,
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "mode": "all_no_bos",
+  "mention": 1
+ },
+ {
+  "prompt": "Trains run on rails and boats run on water. The vehicle that pulls carriages runs on",
+  "s_tok": 4512,
+  "t_tok": 8848,
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "mode": "all_no_bos",
+  "mention": 1
+ },
+ {
+  "prompt": "Bananas grow on trees and potatoes grow underground. The long yellow fruit grows on",
+  "s_tok": 25996,
+  "t_tok": 21219,
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "mode": "all_no_bos",
+  "mention": 1
+ },
+ {
+  "prompt": "Fish swim and birds fly. The animal with feathers can",
+  "s_tok": 6512,
+  "t_tok": 5916,
+  "layer_set": [
+   7
+  ],
+  "alpha": 2.0,
+  "mode": "all_no_bos",
+  "mention": 4
+ }
+]
