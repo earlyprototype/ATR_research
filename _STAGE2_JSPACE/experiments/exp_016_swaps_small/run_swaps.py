@@ -37,6 +37,15 @@ def control_seed(item_id, layer, seed):
     return zlib.crc32(f"{item_id}|{layer}|{seed}".encode("utf-8"))
 
 
+def expected_conditions(battery, n_units, sets, alphas, modes, seeds):
+    """How many rows a complete run of this battery writes: one per scored
+    prompt, layer set, strength, position mode and arm, where the arms are the
+    lens and, per control seed, control A and control B. `analyse.load` checks
+    a record file against this count before analysing it."""
+    return (n_units * len(sets) * len(alphas) * len(modes)
+            * len(arms(seeds)))
+
+
 def arms(seeds):
     out = [("lens", -1)]
     out += [("randdir", s) for s in seeds]
@@ -83,7 +92,14 @@ def main(battery):
     units = units_for(battery, items)
 
 
-    fh = open(D + f"output/records_{battery}.csv", "w", newline="")
+    # The record file is written through a temporary file and moved into
+    # place only after the last condition has been scored, so that an
+    # interrupted run leaves the committed record untouched and its own
+    # partial output beside it under the `.partial` name, rather than
+    # truncating the record before the first condition executes.
+    final_path = D + f"output/records_{battery}.csv"
+    partial_path = final_path + ".partial"
+    fh = open(partial_path, "w", newline="")
     w = csv.writer(fh)
     w.writerow(["item_id", "func", "split", "layers", "alpha", "posmode",
                 "arm", "seed", "good_rank", "bad_rank", "argmax_tok",
@@ -131,12 +147,19 @@ def main(battery):
                   f"eta {el/max(n_done,1)*(len(units)*len(conds)-n_done)/60:.1f} min",
                   flush=True)
     fh.close()
+    expected = expected_conditions(battery, len(units), sets, ALPHAS, modes, seeds)
+    if n_done != expected:
+        raise RuntimeError(f"{battery}: scored {n_done} conditions, the plan is "
+                           f"{expected}; {partial_path} left in place unmoved")
+    os.replace(partial_path, final_path)
     json.dump(dict(battery=battery, n_units=len(units), n_conditions=n_done,
                    layer_sets=[list(s) for s in sets], alphas=ALPHAS,
                    posmodes=modes, seeds=seeds, chunk=CHUNK,
                    control_seed_scheme="crc32(item_id|layer|seed), shared across the functions of a pair",
                    patch_norm="Euclidean norm of the total residual change over patched positions and layers",
                    lens_sha256=lib_exp016.LENS_SHA256_MEASURED, jlens_commit=JLENS_COMMIT,
+                   model_revision=lib_exp016.MODEL_REVISION,
+                   model_param_sha256=lib_exp016.MODEL_PARAM_SHA256_MEASURED,
                    torch=torch.__version__,
                    wall_seconds=round(time.time() - t0, 1)),
               open(D + f"output/provenance_{battery}.json", "w"), indent=1)

@@ -40,15 +40,67 @@ JLENS_COMMIT = "581d398613e5602a5af361e1c34d3a92ea82ba8e"
 # so provenance records a measured value rather than the constant above.
 LENS_SHA256_MEASURED = None
 
+# The model is pinned the way the lens is. MODEL_REVISION is the commit of
+# the Hugging Face repository `gpt2` that the committed runs loaded, read
+# from this machine's Hugging Face cache (the file
+# `models--gpt2/refs/main`); MODEL_PARAM_SHA256 is the digest of the weights
+# that revision produces once transformer_lens has assembled them, so that a
+# different revision, a re-tagged repository or a corrupted cache cannot
+# stand in for the weights behind the committed records. The digest is the
+# one the run log recorded on 2026-09-05; the scheme that produces it is
+# `parameter_digest` below. EXP016_MODEL_REVISION overrides the revision and
+# EXP016_SKIP_MODEL_DIGEST set to 1 turns the refusal into a warning, both
+# for a reader who deliberately wants different weights.
+MODEL_NAME = "gpt2"
+MODEL_REVISION = os.environ.get(
+    "EXP016_MODEL_REVISION", "607a30d783dfa663caf39e06633721c8d4cfcd7e")
+MODEL_PARAM_SHA256 = "0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1"
+# Set by load_model() to the digest computed from the weights actually
+# loaded, so provenance records a measured value rather than the constant.
+MODEL_PARAM_SHA256_MEASURED = None
+
+
+def parameter_digest(model):
+    """SHA-256 over the model's ordered parameter tensors: every entry of the
+    state dictionary in alphabetical order by name, the name's bytes followed
+    by the tensor's bytes. Ordering by name rather than by insertion makes the
+    digest independent of the order transformer_lens happens to register its
+    modules in."""
+    h = hashlib.sha256()
+    for name, tensor in sorted(model.state_dict().items()):
+        h.update(name.encode("utf-8"))
+        h.update(tensor.detach().cpu().numpy().tobytes())
+    return h.hexdigest()
+
 
 def load_model():
     """Base GPT-2 Small with no weight processing, so its residual stream is
-    numerically identical to the HuggingFace model the lens was fitted on."""
+    numerically identical to the HuggingFace model the lens was fitted on.
+
+    The weights are pinned twice over: the Hugging Face repository revision is
+    fixed at MODEL_REVISION, and the assembled parameters are hashed and
+    checked against MODEL_PARAM_SHA256, so that weights other than the ones
+    behind the committed records raise instead of quietly standing in for
+    them."""
+    global MODEL_PARAM_SHA256_MEASURED
     from transformer_lens import HookedTransformer
-    model = HookedTransformer.from_pretrained_no_processing("gpt2", device="cpu")
+    model = HookedTransformer.from_pretrained_no_processing(
+        MODEL_NAME, device="cpu", revision=MODEL_REVISION)
     model.eval()
     for p in model.parameters():
         p.requires_grad_(False)
+    digest = parameter_digest(model)
+    MODEL_PARAM_SHA256_MEASURED = digest
+    if digest != MODEL_PARAM_SHA256:
+        msg = (f"model {MODEL_NAME} at revision {MODEL_REVISION} has "
+               f"ordered-parameter SHA-256 {digest}, expected "
+               f"{MODEL_PARAM_SHA256}; these are not the weights the "
+               f"committed records were measured on")
+        if os.environ.get("EXP016_SKIP_MODEL_DIGEST", "0").strip().lower() \
+                not in ("", "0", "false", "no"):
+            print("WARNING: " + msg, flush=True)
+        else:
+            raise RuntimeError(msg)
     return model
 
 

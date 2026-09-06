@@ -392,12 +392,13 @@ for the swap question to arise.
 
 ---
 
-## Addendum, 2026-09-05
+## Addendum, 2026-09-05, extended 2026-09-06
 
 This addendum is appended after the run. It changes nothing that was
-pre-registered above; it records two things a reader of this specification
-alone would otherwise not know, both found by review of the results record
-and both answered there in full.
+pre-registered above; it records three things a reader of this specification
+alone would otherwise not know, all found by review of the results record
+and all answered there in full. The first two were added on 2026-09-05 and
+the third on 2026-09-06.
 
 1. **The success criterion for H17a in section 5.2 admits answers the model
    already gave.** It counts a question as redirected when the target
@@ -422,3 +423,25 @@ and both answered there in full.
    conservative reading: H17a's three pairs per source country share that
    country's direction, and H17's frames often share a source concept. The
    grouped reading is the one the record leads with.
+
+3. **The control this specification registers cannot support a grouped
+   test, and a third control was run after the fact so that one exists.**
+   Section 3 registers control A, two random directions rescaled to the
+   lengths of the two lens directions, drawn independently for each item. A
+   test that groups the units sharing one source lens direction and treats
+   the lens arm as a single draw for the whole group is only fair if the
+   control's randomness is shared inside the group the same way, and control
+   A's is not: the lens arm gives every unit of a group the identical source
+   direction, while control A gives each unit its own random pair. The
+   grouped probabilities the results record reported on 2026-09-05 were
+   computed against control A and are withdrawn there by name. A
+   cluster-matched control, one random direction standing in for the source
+   concept and shared across the group with an independent random direction
+   standing in for each item's target concept, both norm matched as control
+   A's are, was run on 2026-09-06 at the settings the grouped tests use, and
+   the grouped probabilities are now measured against it. No rate in the
+   record and no registered threshold is affected, because the thresholds
+   compare the lens arm's success rate with control A's, as this
+   specification registers. A later battery of this shape should register a
+   control of the cluster-matched form from the start if it intends to
+   report a grouped probability.

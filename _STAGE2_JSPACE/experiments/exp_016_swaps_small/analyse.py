@@ -28,6 +28,23 @@ def clean_target_ranks(battery):
             for r in json.load(open(path))["units"][battery]}
 
 
+def planned_conditions(battery):
+    """How many rows a complete record file for this battery holds, read from
+    the provenance file the run wrote beside it: one row per scored prompt,
+    layer set, strength, position mode and arm, where the arms are the lens
+    draw and, for each control seed, control A and control B. Returns
+    (expected rows, the provenance dictionary)."""
+    path = D + f"output/provenance_{battery}.json"
+    if not os.path.exists(path):
+        raise FileNotFoundError(
+            f"{path} not found; it records the plan a record file is checked "
+            f"against, and `python3 run_swaps.py {battery}` writes it")
+    prov = json.load(open(path))
+    n = (prov["n_units"] * len(prov["layer_sets"]) * len(prov["alphas"])
+         * len(prov["posmodes"]) * (1 + 2 * len(prov["seeds"])))
+    return n, prov
+
+
 def load(battery):
     rows = []
     with open(D + f"output/records_{battery}.csv") as fh:
@@ -37,6 +54,23 @@ def load(battery):
                 r[k] = int(r[k])
             r["alpha"] = float(r["alpha"])
             rows.append(r)
+    # Refuse a record file that does not hold the whole plan. An interrupted
+    # run used to leave a short record file beside intact provenance, and
+    # nothing here noticed; every rate below would then be computed over
+    # whatever conditions happened to finish.
+    expected, prov = planned_conditions(battery)
+    if prov.get("n_conditions") != expected:
+        raise RuntimeError(
+            f"output/provenance_{battery}.json says {prov.get('n_conditions')} "
+            f"conditions but its own plan of units, layer sets, strengths, "
+            f"position modes and arms comes to {expected}; the provenance and "
+            f"the plan disagree, so nothing is analysed")
+    if len(rows) != expected:
+        raise RuntimeError(
+            f"output/records_{battery}.csv holds {len(rows)} rows, the plan is "
+            f"{expected}; this record file is incomplete (an interrupted run "
+            f"leaves its partial output at records_{battery}.csv.partial), so "
+            f"nothing is analysed. Re-run `python3 run_swaps.py {battery}`")
     ranks = clean_target_ranks(battery)
     for r in rows:
         r["clean_target_rank"] = ranks[(r["item_id"], r["func"])]
@@ -286,17 +320,25 @@ def cluster_exact_test(clusters):
     sum of one uniformly chosen draw per cluster and its distribution is the
     product over clusters. Returns (observed lens successes, clusters,
     clusters whose draws are not all equal, probability of at least the
-    observed total under the null, resolution). Resolution is the smallest
-    probability this many clusters and draws can produce, one divided by the
-    number of draws per cluster raised to the number of clusters, which is
-    the floor the test cannot go below however large the effect."""
+    observed total under the null, resolution).
+
+    Resolution is the smallest probability these outcomes can produce: one
+    divided by the number of draws per cluster raised to the number of
+    clusters whose draws are not all equal. Only those clusters count. A
+    cluster whose lens draw and control draws collected the same number of
+    successes contributes the same total under every relabelling, so it
+    cannot make one labelling rarer than another and cannot lower the
+    probability. An earlier version of this function divided by the draws of
+    every cluster, informative or not, and so reported a floor the test could
+    not actually reach: for the held-out H17b test, one informative cluster of
+    eight, it reported 1 in 65,536 where the attainable floor is 1 in 4."""
     obs = sum(l for l, _ in clusters)
     dist, informative, floor = {0: 1.0}, 0, 1.0
     for lens, ctrls in clusters:
         draws = [lens] + list(ctrls)
         if len(set(draws)) > 1:
             informative += 1
-        floor /= len(draws)
+            floor /= len(draws)
         nd = defaultdict(float)
         for tot, v in dist.items():
             for d in draws:
@@ -318,6 +360,40 @@ def clusters_of(outcomes, key_of):
         for i, c in enumerate(ctrls):
             acc[k][1][i] += c
     return {k: (v[0], v[1]) for k, v in acc.items()}
+
+
+def shared_control_rows(battery, kind):
+    """The cluster-matched control run, in the shape the cluster-level test
+    reads. `cluster_control.py` measures a control arm whose randomness is
+    shared inside a cluster the way the lens arm's is: kind `shared_source`
+    draws one random direction for the source concept per cluster and an
+    independent random direction for the target concept per item, and kind
+    `shared_pair` draws both once per group of units that share source and
+    target, so that every member of such a group receives the identical random
+    swap. Returns the lens rows and that arm's rows with the arm relabelled
+    `randdir`, so the grouping and test code below is unchanged, or None when
+    the run has not been made in this checkout."""
+    path = D + "output/cluster_control_records.csv"
+    if not os.path.exists(path):
+        return None
+    rows = []
+    with open(path) as fh:
+        for r in csv.DictReader(fh):
+            if r["battery"] != battery:
+                continue
+            if r["arm"] == "lens":
+                arm = "lens"
+            elif r["arm"] == f"randdir_{kind}":
+                arm = "randdir"
+            else:
+                continue
+            r = dict(r, arm=arm)
+            for k in ("good_rank", "bad_rank", "in_top5", "is_top1",
+                      "beats_bad", "seed"):
+                r[k] = int(r[k])
+            r["alpha"] = float(r["alpha"])
+            rows.append(r)
+    return rows or None
 
 
 def cluster_tests(rows, battery, cell, rule_cell=None):
@@ -372,6 +448,42 @@ def cluster_tests(rows, battery, cell, rule_cell=None):
                              n_units=len(o), n_clusters=len(cl),
                              test=list(cluster_exact_test(list(cl.values()))))
     return out
+
+
+def cluster_tests_shared_control(battery, cell, rule_cell=None):
+    """The same cluster-level exact tests, against the cluster-matched control
+    instead of the registered control A. Control A draws both of its random
+    directions independently for every item, while the lens arm gives the
+    members of a cluster the identical source direction, so the two arms'
+    cluster totals are not exchangeable and a probability computed against
+    control A is not valid as a cluster-level test. The cluster-matched
+    control shares its randomness the way the lens arm does, which restores
+    the exchangeability the test needs. Returns None when the control run is
+    not present in this checkout.
+
+    The lens outcomes here come from the same re-run that produced the control
+    rows; `cluster_control.py` refuses to write unless that re-run reproduces
+    the committed record files on every scored unit, so these are the
+    committed lens outcomes."""
+    kinds = {"h17": {"by_source": "shared_source",
+                     "by_source_and_target": "shared_pair"},
+             "h17a": {"": "shared_source"}}.get(battery)
+    if kinds is None:
+        return None
+    out, order = {}, []
+    for suffix, kind in kinds.items():
+        rows = shared_control_rows(battery, kind)
+        if rows is None:
+            return None
+        part = cluster_tests(rows, battery, cell, rule_cell)
+        order = order or list(part)
+        for name, d in part.items():
+            if suffix and not name.endswith(suffix):
+                continue
+            out[name] = dict(d, control=f"cluster matched, {kind.replace('_', ' ')}")
+    # Keep the reading order of the control A block, so the two can be read
+    # line against line.
+    return {k: out[k] for k in order if k in out} or None
 
 
 def baseline_hit_counts(rows, cell):
@@ -647,6 +759,9 @@ if __name__ == "__main__":
         rule_cell = (out["source_rule_selection"]["chosen_cell"]
                      if b == "h17" else None)
         out["cluster_tests"] = cluster_tests(rows, b, out["chosen_cell"], rule_cell)
+        shared = cluster_tests_shared_control(b, out["chosen_cell"], rule_cell)
+        if shared:
+            out["cluster_tests_shared_control"] = shared
         json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
         c = out["chosen_cell"]
         print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "

@@ -1,0 +1,58 @@
+{
+ "measured_at": "2026-09-06T03:23:10.886277Z",
+ "batteries": [
+  "h17",
+  "h17a"
+ ],
+ "cells": {
+  "h17": [
+   [
+    "7-8-9",
+    2.0,
+    "all"
+   ]
+  ],
+  "h17a": [
+   [
+    "6",
+    2.0,
+    "all"
+   ],
+   [
+    "9",
+    2.0,
+    "all"
+   ]
+  ]
+ },
+ "arms": {
+  "h17": [
+   "lens",
+   "randdir_shared_source",
+   "randdir_shared_pair"
+  ],
+  "h17a": [
+   "lens",
+   "randdir_shared_source"
+  ]
+ },
+ "seeds": {
+  "h17": [
+   0,
+   1
+  ],
+  "h17a": [
+   0,
+   1
+  ]
+ },
+ "n_conditions": 816,
+ "n_rows": 816,
+ "lens_arm_reproduces_committed_records": true,
+ "lens_sha256": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
+ "jlens_commit": "581d398613e5602a5af361e1c34d3a92ea82ba8e",
+ "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+ "model_param_sha256": "0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1",
+ "torch": "2.14.0+cpu",
+ "wall_seconds": 71.9
+}

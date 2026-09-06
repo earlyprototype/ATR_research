@@ -248,23 +248,51 @@ for b in BATTERIES:
         print(f"- {name.replace('_', ' ')}: {fmt(t)}{tag}")
     print("\nOnly the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.")
 
+    def cluster_lines(block):
+        for name, d in block.items():
+            obs, n_cl, n_inf, p, floor = d["test"]
+            s_obs = "success" if obs == 1 else "successes"
+            s_unit = "unit" if d["n_units"] == 1 else "units"
+            s_cl = "cluster" if n_cl == 1 else "clusters"
+            print(f"- {name.replace('_', ' ')}: cluster is the {d['cluster']}; "
+                  f"{obs} lens {s_obs} over {d['n_units']} scored {s_unit} in "
+                  f"{n_cl} {s_cl} ({n_inf} of them informative), probability "
+                  f"{p:.3g}, resolution {floor:.3g}"
+                  + ("" if "heldout" in name else
+                     " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)") + ".")
+
+    shared = s.get("cluster_tests_shared_control")
+    if shared:
+        print("\nCluster-level exact tests against the cluster-matched control, which "
+              "treat the scored units that share one source lens direction as a single "
+              "draw rather than as independent ones. The cluster-matched control shares "
+              "its randomness inside a cluster the way the lens arm does (one random "
+              "source direction for the whole cluster, an independent random target "
+              "direction per item, or both shared where the lens arm shares both), which "
+              "is what makes the two arms' cluster totals exchangeable. These are the "
+              "cluster-level probabilities that are valid as stated. Resolution is the "
+              "smallest probability these outcomes can produce, one over the draws per "
+              "cluster raised to the number of clusters whose draws are not all equal, so "
+              "a value equal to its resolution means the lens beat every control draw in "
+              "every cluster that could tell them apart:\n")
+        cluster_lines(shared)
+
     ct = s["cluster_tests"]
-    print("\nCluster-level exact tests against control A, which treat the scored units "
-          "that share one source lens direction as a single draw rather than as "
-          "independent ones. Resolution is the smallest probability the test can "
-          "return with that many clusters and draws, so a value equal to its "
-          "resolution means the lens beat every control draw in every cluster:\n")
-    for name, d in ct.items():
-        obs, n_cl, n_inf, p, floor = d["test"]
-        s_obs = "success" if obs == 1 else "successes"
-        s_unit = "unit" if d["n_units"] == 1 else "units"
-        s_cl = "cluster" if n_cl == 1 else "clusters"
-        print(f"- {name.replace('_', ' ')}: cluster is the {d['cluster']}; "
-              f"{obs} lens {s_obs} over {d['n_units']} scored {s_unit} in "
-              f"{n_cl} {s_cl} ({n_inf} of them informative), probability "
-              f"{p:.3g}, resolution {floor:.3g}"
-              + ("" if "heldout" in name else
-                 " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)") + ".")
+    if shared:
+        print("\nThe same cluster-level tests against control A, the registered control, "
+              "which draws both of its random directions afresh for every item. Its "
+              "cluster totals are not exchangeable with the lens arm's, whose members "
+              "share a source direction, so these probabilities are reported for "
+              "comparison only and are not valid as cluster-level tests:\n")
+    else:
+        print("\nCluster-level exact tests against control A, the registered control. "
+              "Every cluster in this battery holds a single item, because no two items "
+              "share a source concept, so the lens draw and each control draw are "
+              "exchangeable inside the cluster and these probabilities are valid as they "
+              "stand; they are the within-item tests above. Resolution is the smallest "
+              "probability these outcomes can produce, one over the draws per cluster "
+              "raised to the number of clusters whose draws are not all equal:\n")
+    cluster_lines(ct)
     if b == "h17a":
         rs = s["registered_split"]
         fl, pl = rs["function_level"], rs["pair_level"]
