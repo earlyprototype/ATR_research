@@ -90,5 +90,46 @@ def check_against_decomposition(shares_path, lens_id, log=None):
     return recorded
 
 
+def check_atom_records_against_shares(atom_records, shares_path, log=None):
+    """Refuse a shares file and an atom-record file that are not the same run's.
+
+    A run writes its shares to one file and the atom indices and coefficients of
+    the same decomposition to another. From 2026-09-06 the atom-record file
+    carries a `_meta` block naming the shares file it was written beside and the
+    lens digest that run used, because until then a scratch run under a custom
+    output name wrote its atom records over the official `atom_records.json`, and
+    a stage opening the default names would then have combined one run's shares
+    with another run's atoms while looking normal. Returns that metadata block, or
+    None when the file predates it. Raises SystemExit when the two disagree.
+    """
+    meta = atom_records.get("_meta") if isinstance(atom_records, dict) else None
+    if meta is None:
+        if log is not None:
+            log("the atom-record file carries no pairing metadata, so it predates "
+                "the 2026-09-06 field and cannot be tied to a shares file by name; "
+                "it rests on the pinned lens check alone")
+        return None
+    want = os.path.basename(shares_path)
+    if meta.get("shares_file") != want:
+        raise SystemExit(
+            "GATE FAILED: the atom records were written beside shares file "
+            f"{meta.get('shares_file')!r}, and this stage was given {want!r}. One "
+            "run's atom indices would be read against another run's shares. "
+            "Refusing to write a readout.")
+    recorded = None
+    if os.path.exists(shares_path):
+        with open(shares_path) as fh:
+            recorded = json.load(fh).get("lens_sha256")
+    if recorded is not None and meta.get("lens_sha256") != recorded:
+        raise SystemExit(
+            f"GATE FAILED: the atom records were computed against lens "
+            f"{meta.get('lens_sha256')} and {want} records lens {recorded}. "
+            "Refusing to write a readout.")
+    if log is not None:
+        log(f"the atom records name shares file {want}, which is the one this stage "
+            "opened, so the two artifacts are one decomposition")
+    return meta
+
+
 if __name__ == "__main__":
     print(verify_lens(log=print, stage="gate self-check"))

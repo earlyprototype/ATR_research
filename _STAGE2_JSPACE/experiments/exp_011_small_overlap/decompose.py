@@ -75,6 +75,30 @@ def write_json(path, payload, merge):
     return out
 
 
+ATOM_RECORDS_DEFAULT = "atom_records.json"
+
+
+def atom_records_name(out_name):
+    """The atom-record file that belongs to this run's shares file.
+
+    Every run writes two files: the shares go to --out, and the atom indices and
+    coefficients of the same decomposition go beside them. Until 2026-09-06 any
+    --out name without the substring "shares" in it sent the atom records to the
+    official `atom_records.json`, so `--out scratch.json` wrote its shares to a
+    scratch file and its selected atoms over the official artifact, after which
+    readouts.py, which opens the default names, would have combined one run's
+    shares with another run's atoms while looking normal. The official pairing is
+    now the only case that yields the official name, and every other output name
+    derives its own.
+    """
+    if out_name == "shares.json":
+        return ATOM_RECORDS_DEFAULT
+    if "shares" in out_name:
+        return out_name.replace("shares", "atom_records")
+    stem, ext = os.path.splitext(out_name)
+    return f"{stem}_atom_records{ext or '.json'}"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--layers", default=",".join(str(l) for l in range(N_LAYERS)))
@@ -83,6 +107,14 @@ def main():
     ap.add_argument("--out", default="shares.json",
                     help="output file name inside output/ (default shares.json)")
     args = ap.parse_args()
+    # An --out that would land on an atom-record file is refused rather than
+    # silently overwriting one artifact with the other kind of payload.
+    if args.out in (ATOM_RECORDS_DEFAULT, atom_records_name(args.out)):
+        raise SystemExit(
+            f"REFUSING TO RUN: --out {args.out} names the file this run's atom "
+            f"records would be written to ({atom_records_name(args.out)}), so the "
+            "shares would overwrite the atom records or the other way round. "
+            "Choose another output name.")
     layers = [int(x) for x in args.layers.split(",") if x != ""]
     # A run that does not cover every layer with every arm is partial, and its
     # results are merged into whatever is already on disk rather than replacing it.
@@ -231,8 +263,27 @@ def main():
     if n_flagged:
         log(f"  WARNING: {n_flagged} decompositions stopped on the iteration safety "
             f"bound rather than a real stopping condition")
-    atoms_path = os.path.join(OUT, args.out.replace("shares", "atom_records")
-                              if "shares" in args.out else "atom_records.json")
+    atoms_path = os.path.join(OUT, atom_records_name(args.out))
+    # The atom records say which shares file they belong to and which lens the
+    # decomposition ran against, so a consuming stage can refuse a mismatched pair
+    # instead of combining one run's shares with another run's atoms. On a merged
+    # file this block describes the run that wrote last; every entry in it was
+    # written against the same shares file, because the pairing is now one to one.
+    atom_records["_meta"] = {
+        "shares_file": os.path.basename(args.out),
+        "atom_records_file": os.path.basename(atoms_path),
+        "lens_file": lens_id["lens_file"],
+        "lens_sha256": lens_id["lens_sha256"],
+        "lens_bytes": lens_id["lens_bytes"],
+        "k_atoms": K_ATOMS,
+        "layers_this_run": layers,
+        "partial_run": partial,
+        "generated": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "note": ("Written by decompose.py beside its shares file. Every other key "
+                 "is a state family. On a file merged from several runs this block "
+                 "describes the most recent write, and all of them wrote against "
+                 "the shares file named here."),
+    }
     merged = write_json(os.path.join(OUT, args.out), results, partial)
     write_json(atoms_path, atom_records, partial)
     # "layers" must describe the file, not just this run, once runs are merged.

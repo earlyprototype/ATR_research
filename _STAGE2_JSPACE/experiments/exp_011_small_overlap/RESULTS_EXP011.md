@@ -1170,6 +1170,59 @@ including loading the model's unembedding matrix, against the 25 seconds of
 measurement in the committed log, and the dated line is appended to
 `output/exp011_dictionary_geometry.log`.
 
+**Two more defects in the supporting tools, found on the sixth review and
+repaired, 2026-09-06.** Neither changes a verdict or a number in this record, and
+both are ways a later run could have gone wrong quietly. First, the repair
+described in the paragraph above was incomplete. It handled a shares file whose
+control arms are missing altogether and a file missing whole layers, and it did
+not handle a file merged from partial runs with different coverage. Running
+`decompose.py --quick --layers 5`, which decomposes layer 5 against the lens
+alone, and then `decompose.py --layers 6`, which decomposes layer 6 against every
+arm, leaves one file in which the lens arm covers layers 5 and 6 while each
+control arm covers layer 6 only, because a partial run merges into the file rather
+than replacing it. The share-table comprehension then read every control family at
+every layer the lens arm holds and stopped with a KeyError at layer 5, again
+before any of the four diagnostic outputs was written. Reproduced on a copy of the
+committed shares file cut to exactly that coverage. Coverage is now asked for one
+arm, one family and one layer at a time, everywhere: in the share tables, in the
+pooled control tables, in each of the four hypotheses, in the descriptive
+readings, in the comma-separated table and in every series of the figure. What is
+absent is left out and named, so on that merged copy the diagnostic scoring
+completes and reports, for example, that the H16 rule's third condition and the
+rotated-lens robustness reading could not be computed at layer 5 while both are
+computed at layer 6. **Correction, dated 2026-09-06:** the paragraph above says
+the script "now computes what its input can support and records everything else as
+not computed". That was true of whole missing arms and whole missing layers and
+not of mixed coverage, where it still stopped with an error. It is true as written
+now, and the three partial shapes were each run to check it: the lens-only file,
+the two-layer file and the merged file.
+
+Second, a scratch decomposition could overwrite the record's own atom records.
+`decompose.py --out NAME` writes that run's shares to `output/NAME`, and it
+derived the file for the same run's selected atoms and coefficients by replacing
+the substring "shares" in that name. A name without that substring, such as
+`--out scratch.json`, fell back to the official `output/atom_records.json`, so a
+scratch run left its shares in a scratch file and its atoms in the record's file.
+Nothing in this record was produced that way, and that is checkable rather than
+asserted: the committed `output/atom_records.json` is the one the committed
+decomposition wrote, its 12-layer coverage matches `output/shares.json`, and the
+decomposition log shows one end-to-end run under the default names. The hazard is
+that `readouts.py` opens the default names, so it would have combined one run's
+shares with another run's atoms while looking normal. Three changes close it.
+Every output name now derives its own atom-record file and only the official
+`shares.json` yields `atom_records.json`, so `--out scratch.json` writes
+`scratch_atom_records.json`; an `--out` that would land on an atom-record file is
+refused before anything is read. The atom-record file now carries a metadata block
+naming the shares file it was written beside and the lens digest that run used.
+And `readouts.py` checks that pairing through `lens_gate.py` before it writes
+anything, takes `--shares` and `--atom-records` so a scratch pair can be read out
+deliberately, and stamps its two outputs with that pair's name so a scratch
+readout cannot overwrite `output/top_atoms.json` or `output/clamping_check.json`.
+The committed atom records predate the metadata block, so the new check reports
+that it cannot be applied rather than passing silently, which is the same
+behaviour the lens-digest check has on the committed shares file. The readout
+stage was not re-run: its committed outputs are unchanged and predate both blocks.
+
 **The decomposition self-test.** Before every run, the decomposition is asked to
 recover a state deliberately built from five known dictionary atoms with positive
 weights. It recovers share 1.000000 using exactly those five atoms, while a

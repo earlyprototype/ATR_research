@@ -189,3 +189,43 @@ readout stage was not re-run: nothing in it changed.
 [03:28:18] drawing the figures
 [03:28:20] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
 [03:28:20] not computed from this input: nothing; every arm and every layer the scoring reads was present
+
+=== 2026-09-06, re-scored after the sixth review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json, with no decomposition and no state rebuild. The change
+being checked is a repair to the diagnostic path alone: coverage is now asked for
+one arm, one family and one layer at a time, because a shares file merged from
+partial runs with different coverage, such as decompose.py --quick --layers 5
+followed by decompose.py --layers 6, holds layers 5 and 6 for the lens arm and
+layer 6 alone for each control arm, and the share-table comprehension then read
+every control family at every lens layer and stopped with a KeyError at layer 5
+before writing any diagnostic output. Effect on the record: none at all. All four
+outputs are byte-identical to their committed versions, verdicts.json,
+per_layer_tables.json, per_layer_shares.csv and exp011_share_curves.png, so no
+key and no value in verdicts.json changed and nothing was added either. All four
+verdicts reproduce: H6 NOT SUPPORTED, H16 NOT SUPPORTED, H16a NOT SUPPORTED, H16b
+SUPPORTED. Three partial shapes were built in the scratchpad from the committed
+shares and each was scored with --allow-partial: the lens-only file, the two-layer
+file and the merged file with mixed coverage. All three now write the four stamped
+diagnostic outputs and name what could not be computed, the merged one reporting
+that H16's third condition and the rotated-lens robustness reading are missing at
+layer 5 while both are computed at layer 6. decompose.py and readouts.py were not
+run: the changes to them are a filename derivation, a refusal path and a pairing
+check, none of which can alter a committed artifact without a run.
+[03:49:58] completeness check: layers 0 to 11 present for every family in all 7 scoring arms, and the file is from before the partial_run flag existed, which decompose.py began writing on 2026-09-05
+[03:49:58] iteration-safety-bound check: the committed shares.json predates the flag and does not carry it, so this check cannot be applied to it; the flag was added to decompose.py on 2026-09-05 and applies from the next decomposition run (672 groups, none carrying the field)
+[03:49:58] building the per-layer share tables
+[03:49:58] H6: five basin representatives against eighteen null-model basins
+[03:49:58]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[03:49:58]   eighteen null basins: 18 representatives
+[03:50:02]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[03:50:02]   H6 under control (b), reported not scoring: band layers with the basins above the nulls at p below 0.05: []; below them: []
+[03:50:02] H16: language terminals against the run-17 matched-scale noise terminals
+[03:50:37]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[03:50:37] H16a: the prolet attractor against the Divine cycle's two phases
+[03:50:37]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[03:50:37] H16b: terminals against the same prompts' ordinary residuals
+[03:50:47]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[03:50:47] drawing the figures
+[03:50:49] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+[03:50:49] not computed from this input: nothing; every arm and every layer the scoring reads was present

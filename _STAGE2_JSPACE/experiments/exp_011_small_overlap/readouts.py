@@ -9,8 +9,15 @@
    modified state back into the model at that layer and letting the rest of the
    network run.
 
-Run: python3 readouts.py
+The shares file and the atom-record file this stage reads must be the pair one
+decomposition wrote. They are `output/shares.json` and `output/atom_records.json`
+by default, and --shares and --atom-records name another pair, in which case the
+two outputs are stamped with that pair's name so they cannot overwrite the
+official ones. A pair that does not belong together is refused.
+
+Run: python3 readouts.py [--shares NAME] [--atom-records NAME]
 """
+import argparse
 import json
 import os
 import sys
@@ -26,7 +33,26 @@ OUT = os.path.join(HERE, "output")
 sys.path.insert(0, HERE)
 from jspace import decompose, unit_rows  # noqa: E402
 from lens_gate import (LENS_PT, check_against_decomposition,  # noqa: E402
-                       verify_lens)
+                       check_atom_records_against_shares, verify_lens)
+
+ap = argparse.ArgumentParser(description="EXP_011 stage 4: the two readouts.")
+ap.add_argument("--shares", default="shares.json",
+                help="the shares file inside output/ (default shares.json)")
+ap.add_argument("--atom-records", default="atom_records.json",
+                help="the atom-record file inside output/ that the same "
+                     "decomposition wrote (default atom_records.json)")
+ARGS = ap.parse_args()
+OFFICIAL_PAIR = (ARGS.shares == "shares.json"
+                 and ARGS.atom_records == "atom_records.json")
+
+
+def outname(base):
+    """Official output names for the official pair, stamped names for any other,
+    so a readout of a scratch decomposition cannot overwrite the record's own."""
+    if OFFICIAL_PAIR:
+        return base
+    root, ext = os.path.splitext(base)
+    return f"{root}.{os.path.splitext(ARGS.shares)[0]}{ext}"
 
 BAND = [5, 6, 7, 8, 9, 10]
 ALPHAS = [0.0, 0.5, 1.0, 2.0]
@@ -51,11 +77,19 @@ def log(msg):
 LENS_ID = verify_lens(log=log, stage="readouts")
 
 meta = json.load(open(os.path.join(OUT, "states_meta.json")))
-atom_records = json.load(open(os.path.join(OUT, "atom_records.json")))
+SHARES_PATH = os.path.join(OUT, ARGS.shares)
+ATOMS_PATH = os.path.join(OUT, ARGS.atom_records)
+atom_records = json.load(open(ATOMS_PATH))
 npz = np.load(os.path.join(OUT, "states.npz"))
+log(f"reading shares {os.path.basename(SHARES_PATH)} and atom records "
+    f"{os.path.basename(ATOMS_PATH)}")
 
 DECOMPOSITION_LENS_SHA256 = check_against_decomposition(
-    os.path.join(OUT, "shares.json"), LENS_ID, log=log)
+    SHARES_PATH, LENS_ID, log=log)
+# The third check: the atom records must be the ones written beside this shares
+# file, not another run's left behind under the same name.
+ATOM_RECORDS_META = check_atom_records_against_shares(
+    atom_records, SHARES_PATH, log=log)
 named_keys = meta["named"]["keys"]
 NIDX = {k: i for i, k in enumerate(named_keys)}
 LAYERS = sorted(int(x) for x in atom_records["named"].keys())
@@ -101,11 +135,15 @@ for l in LAYERS:
 top_atoms["_meta"] = dict(
     LENS_ID,
     decomposition_lens_sha256=DECOMPOSITION_LENS_SHA256,
+    shares_file=os.path.basename(SHARES_PATH),
+    atom_records_file=os.path.basename(ATOMS_PATH),
+    atom_records_pairing=ATOM_RECORDS_META,
     note=("The lens file was checked against the digest and size specification "
           "section 3 pins before this readout was written, and against the digest "
           "output/shares.json records for the decomposition that chose these "
-          "atoms. Every other key is a named state."))
-with open(os.path.join(OUT, "top_atoms.json"), "w") as fh:
+          "atoms. The atom records were checked against the shares file named "
+          "here. Every other key is a named state."))
+with open(os.path.join(OUT, outname("top_atoms.json")), "w") as fh:
     json.dump(top_atoms, fh, indent=1)
 for key in ("prolet1000", "phaseA", "phaseB", "pivotM"):
     for l in (5, 8, 10, 11):
@@ -176,9 +214,11 @@ for l in BAND:
 clamp["_meta"] = dict(
     LENS_ID,
     decomposition_lens_sha256=DECOMPOSITION_LENS_SHA256,
+    shares_file=os.path.basename(SHARES_PATH),
+    atom_records_file=os.path.basename(ATOMS_PATH),
     note=("The lens file was checked against the digest and size specification "
           "section 3 pins before this check was written. Every other key is a "
           "clamped state."))
-with open(os.path.join(OUT, "clamping_check.json"), "w") as fh:
+with open(os.path.join(OUT, outname("clamping_check.json")), "w") as fh:
     json.dump(clamp, fh, indent=1)
-log("wrote top_atoms.json and clamping_check.json")
+log(f"wrote {outname('top_atoms.json')} and {outname('clamping_check.json')}")
