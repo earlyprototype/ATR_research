@@ -1,0 +1,185 @@
+[10:59:58] loading GPT-2 Small through TransformerLens
+/home/user/wt/exp011/_STAGE2_JSPACE/experiments/exp_011_small_overlap/build_states.py:53: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", device="cpu")
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 1861.09it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+[11:00:11] model ready: n_layers=12 d_model=768
+[11:00:11] loading committed Stage 1 records (read-only)
+[11:00:11] checking position collapse in the committed tensors
+[11:00:11]   worst pairwise cosine between token positions: 0.99999964
+[11:00:13]   tiling identity: min cosine 0.99999976
+[11:00:13] building per-layer states: lang (125 language terminals, iteration 100)
+[11:00:55] building per-layer states: noise17 (run 17 matched-scale noise terminals)
+[11:01:36] building per-layer states: nullold (original noise arm, iteration 100)
+[11:02:19] building per-layer states: clean (the same 125 prompts, no injection)
+[11:03:03]   token-count agreement with the loop's recorded sequence length: 125/125
+[11:03:03] building per-layer states: Divine phases, pivot, prolet, pilot noise
+[11:03:04]   Divine cycle gate: cos(A,B)=0.68491167 (record 0.68491167), cos(A,f(f(A)))=1.00000000 (record 1.00000000)
+[11:03:07]   reconstruction gate: lang 91/125, noise17 90/125, nullold 98/125 (need 85 in each of the first two)
+[11:03:08] wrote output/states.npz (21.8 MB) and output/states_meta.json
+[11:03:08] stage 1 complete
+
+real	3m13.142s
+user	2m16.562s
+sys	0m42.917s
+
+=== 2026-09-06, the original noise arm's position-collapse gate, run standalone ===
+No state was rebuilt and no model was loaded: output/states.npz and
+output/states_meta.json are untouched by this run and still hold what the
+2026-09-05 build wrote. What ran is the new gate alone, over the committed
+original-noise record, invoked as `python3 build_states.py
+--check-nullold-collapse`, which reads that record and exits before the model
+load. It exists because the fifth review of pull request 84 found that the state
+builder measured position collapse on the first five of the arm's 125 trials,
+logged the numbers without enforcing them, and then rebuilt all 125 by repeating
+each trial's last-position vector, so seventeen of the eighteen null-basin
+representatives hypothesis H6 is scored on came from trials that had never been
+measured. All 125 now pass, with two orders of magnitude of room against both
+tolerances, and so do all eighteen representatives. The gate is a hard stop
+inside build_states.py from now on, which means a future rebuild refuses to tile
+a trial that is not position-collapsed rather than logging it. Wall clock 3.1
+seconds. Recorded as deviation 15 in RESULTS_EXP011.md.
+[03:12:14] standalone gate only: original-noise position collapse, no model loaded
+[03:12:15]   H6 null-basin representatives read from output/verdicts.json: 18
+[03:12:15]   original-noise position collapse, all 125 stored terminal tensors: smallest cosine between two token positions 0.9999991655 (trial R046), largest longest-over-shortest position length ratio 1.0000016689 (trial R065), 125/125 inside the tolerances
+[03:12:15]   the 18 H6 null-basin representatives: all pass, worst cosine 0.9999995232, worst length ratio 1.0000010729
+{
+ "n_trials": 125,
+ "source": "the committed original-noise record's iteration-100 snapshot for every trial, field `tensor`, which is the full terminal tensor of shape [positions, 768]. No model and no forward pass are used.",
+ "thresholds": {
+  "min_pairwise_cosine_at_least": 0.9999,
+  "norm_ratio_max_over_min_at_most": 1.001
+ },
+ "worst_min_pairwise_cosine": {
+  "value": 0.9999991655349731,
+  "trial": "R046",
+  "positions": 18
+ },
+ "worst_norm_ratio_max_over_min": {
+  "value": 1.0000016689300537,
+  "trial": "R065",
+  "positions": 15
+ },
+ "positions_min": 2,
+ "positions_max": 25,
+ "n_pass": 125,
+ "failed_trials": [],
+ "h6_null_representatives": {
+  "n": 18,
+  "all_pass": true,
+  "worst_min_pairwise_cosine": 0.9999995231628418,
+  "worst_norm_ratio_max_over_min": 1.000001072883606,
+  "per_representative": {
+   " Brah": {
+    "trial": "R079",
+    "positions": 10,
+    "min_pairwise_cosine": 1.0,
+    "norm_ratio_max_over_min": 1.000000238418579
+   },
+   " Hindu": {
+    "trial": "R085",
+    "positions": 9,
+    "min_pairwise_cosine": 0.9999998807907104,
+    "norm_ratio_max_over_min": 1.0000001192092896
+   },
+   " Kobe": {
+    "trial": "R033",
+    "positions": 10,
+    "min_pairwise_cosine": 0.9999998211860657,
+    "norm_ratio_max_over_min": 1.0000003576278687
+   },
+   " NP": {
+    "trial": "R051",
+    "positions": 12,
+    "min_pairwise_cosine": 0.9999998211860657,
+    "norm_ratio_max_over_min": 1.0000004768371582
+   },
+   " Nero": {
+    "trial": "R052",
+    "positions": 17,
+    "min_pairwise_cosine": 0.9999995231628418,
+    "norm_ratio_max_over_min": 1.0000004768371582
+   },
+   " abs": {
+    "trial": "R105",
+    "positions": 4,
+    "min_pairwise_cosine": 1.0,
+    "norm_ratio_max_over_min": 1.0
+   },
+   " arbit": {
+    "trial": "R055",
+    "positions": 20,
+    "min_pairwise_cosine": 0.9999995231628418,
+    "norm_ratio_max_over_min": 1.000001072883606
+   },
+   " cond": {
+    "trial": "R117",
+    "positions": 17,
+    "min_pairwise_cosine": 1.0,
+    "norm_ratio_max_over_min": 1.0000008344650269
+   },
+   " exchanged": {
+    "trial": "R002",
+    "positions": 11,
+    "min_pairwise_cosine": 0.9999998211860657,
+    "norm_ratio_max_over_min": 1.0000005960464478
+   },
+   " instant": {
+    "trial": "R013",
+    "positions": 10,
+    "min_pairwise_cosine": 0.9999998211860657,
+    "norm_ratio_max_over_min": 1.000000238418579
+   },
+   " justified": {
+    "trial": "R084",
+    "positions": 9,
+    "min_pairwise_cosine": 0.9999999403953552,
+    "norm_ratio_max_over_min": 1.000000238418579
+   },
+   " prolet": {
+    "trial": "R104",
+    "positions": 2,
+    "min_pairwise_cosine": 1.0,
+    "norm_ratio_max_over_min": 1.0
+   },
+   " relat": {
+    "trial": "R083",
+    "positions": 9,
+    "min_pairwise_cosine": 1.0,
+    "norm_ratio_max_over_min": 1.0000001192092896
+   },
+   "ei": {
+    "trial": "R049",
+    "positions": 16,
+    "min_pairwise_cosine": 0.9999997019767761,
+    "norm_ratio_max_over_min": 1.0000005960464478
+   },
+   "ision": {
+    "trial": "R048",
+    "positions": 18,
+    "min_pairwise_cosine": 0.9999998211860657,
+    "norm_ratio_max_over_min": 1.000001072883606
+   },
+   "strike": {
+    "trial": "R070",
+    "positions": 11,
+    "min_pairwise_cosine": 0.9999998211860657,
+    "norm_ratio_max_over_min": 1.0000008344650269
+   },
+   "vp": {
+    "trial": "R103",
+    "positions": 2,
+    "min_pairwise_cosine": 1.0,
+    "norm_ratio_max_over_min": 1.0
+   },
+   "\u2015": {
+    "trial": "R042",
+    "positions": 9,
+    "min_pairwise_cosine": 0.9999998807907104,
+    "norm_ratio_max_over_min": 1.0000004768371582
+   }
+  }
+ }
+}
+[03:12:15] standalone gate complete; nothing was written

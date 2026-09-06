@@ -1,0 +1,31 @@
+state         L  EXP_011 NN-OMP  pilot published  atoms
+Semantic      6          0.0983           0.0964     25
+Semantic      9          0.1011           0.0952     25
+Semantic     11          0.1002           0.0916     25
+Syntactic     6          0.1119           0.1111     25
+Syntactic     9          0.1100           0.1081     25
+Syntactic    11          0.1061           0.0975     25
+Lucier        6          0.0992           0.0947     25
+Lucier        9          0.1016           0.0959     25
+Lucier       11          0.1009           0.0914     25
+Nonsense      6          0.0983           0.0948     25
+Nonsense      9          0.1011           0.0952     25
+Nonsense     11          0.1003           0.0914     25
+Imperative    6          0.0983           0.0948     25
+Imperative    9          0.1011           0.0952     25
+Imperative   11          0.1002           0.0914     25
+
+ordering (pilot reported Divine >= prolet at 11 of 12 layers):
+  L 0: mine Divine 0.1213 vs prolet 0.1003 (D>P); pilot 0.1040 vs 0.0844 (D>P) agree
+  L 1: mine Divine 0.1163 vs prolet 0.1170 (P>D); pilot 0.1095 vs 0.1119 (P>D) agree
+  L 2: mine Divine 0.1113 vs prolet 0.1000 (D>P); pilot 0.1045 vs 0.0955 (D>P) agree
+  L 3: mine Divine 0.1122 vs prolet 0.0983 (D>P); pilot 0.1071 vs 0.0953 (D>P) agree
+  L 4: mine Divine 0.1002 vs prolet 0.0862 (D>P); pilot 0.0950 vs 0.0810 (D>P) agree
+  L 5: mine Divine 0.1051 vs prolet 0.1022 (D>P); pilot 0.0986 vs 0.0928 (D>P) agree
+  L 6: mine Divine 0.1119 vs prolet 0.0983 (D>P); pilot 0.1111 vs 0.0964 (D>P) agree
+  L 7: mine Divine 0.1171 vs prolet 0.1008 (D>P); pilot 0.1150 vs 0.0969 (D>P) agree
+  L 8: mine Divine 0.1165 vs prolet 0.1046 (D>P); pilot 0.1148 vs 0.0986 (D>P) agree
+  L 9: mine Divine 0.1100 vs prolet 0.1011 (D>P); pilot 0.1081 vs 0.0952 (D>P) agree
+  L10: mine Divine 0.1017 vs prolet 0.0940 (D>P); pilot 0.0956 vs 0.0916 (D>P) agree
+  L11: mine Divine 0.1061 vs prolet 0.1002 (D>P); pilot 0.0975 vs 0.0916 (D>P) agree
+orderings agreeing: 12/12

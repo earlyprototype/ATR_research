@@ -1,0 +1,57 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 28117.81it/s]
+[11:22:24] L 0: concentration 0.8846 (gaussian control 0.0044), fraction positive 0.9910; state cosine medians lang=-0.066, noise17=-0.043, nullold=+0.082, clean_last=-0.023, clean_mean=+0.007
+[11:22:26] L 1: concentration 0.8377 (gaussian control 0.0044), fraction positive 0.9905; state cosine medians lang=-0.055, noise17=-0.052, nullold=+0.006, clean_last=-0.042, clean_mean=+0.067
+[11:22:29] L 2: concentration 0.8217 (gaussian control 0.0044), fraction positive 0.9904; state cosine medians lang=-0.115, noise17=-0.110, nullold=-0.010, clean_last=-0.053, clean_mean=+0.024
+[11:22:32] L 3: concentration 0.8330 (gaussian control 0.0044), fraction positive 0.9904; state cosine medians lang=-0.149, noise17=-0.140, nullold=-0.046, clean_last=-0.085, clean_mean=-0.015
+[11:22:34] L 4: concentration 0.8489 (gaussian control 0.0044), fraction positive 0.9899; state cosine medians lang=-0.164, noise17=-0.148, nullold=-0.094, clean_last=-0.062, clean_mean=-0.063
+[11:22:37] L 5: concentration 0.8688 (gaussian control 0.0044), fraction positive 0.9903; state cosine medians lang=-0.182, noise17=-0.166, nullold=-0.119, clean_last=-0.070, clean_mean=-0.085
+[11:22:39] L 6: concentration 0.8715 (gaussian control 0.0044), fraction positive 0.9929; state cosine medians lang=-0.170, noise17=-0.152, nullold=-0.123, clean_last=-0.040, clean_mean=-0.088
+[11:22:41] L 7: concentration 0.8567 (gaussian control 0.0044), fraction positive 0.9943; state cosine medians lang=-0.173, noise17=-0.153, nullold=-0.123, clean_last=-0.035, clean_mean=-0.086
+[11:22:43] L 8: concentration 0.8595 (gaussian control 0.0044), fraction positive 0.9959; state cosine medians lang=-0.105, noise17=-0.095, nullold=-0.101, clean_last=+0.024, clean_mean=-0.071
+[11:22:44] L 9: concentration 0.8442 (gaussian control 0.0044), fraction positive 0.9963; state cosine medians lang=-0.045, noise17=-0.041, nullold=-0.060, clean_last=+0.040, clean_mean=-0.037
+[11:22:47] L10: concentration 0.7862 (gaussian control 0.0044), fraction positive 0.9947; state cosine medians lang=-0.061, noise17=-0.050, nullold=-0.005, clean_last=-0.017, clean_mean=+0.003
+[11:22:49] L11: concentration 0.5178 (gaussian control 0.0044), fraction positive 1.0000; state cosine medians lang=-0.366, noise17=-0.362, nullold=-0.080, clean_last=-0.417, clean_mean=-0.425
+wrote output/dictionary_geometry.json
+
+=== 2026-09-06, re-run so the output can name the lens it was measured against ===
+Re-run of dictionary_geometry.py against the same committed output/states.npz and
+the same pinned lens file. Nothing else changed and no decomposition was run. The
+fifth review of pull request 84 found that this diagnostic opened the lens with no
+gate and overwrote output/dictionary_geometry.json with nothing in it to say which
+lens file had produced the numbers, although this record's explanation of the
+dictionary's anisotropy, meaning the packing of the 50,257 lens directions around
+one common direction, rests on that file. The script now calls the same
+pinned-lens gate as the decomposition and the readout (lens_gate.py): the file
+must match the digest and byte count specification section 3 pins, and it must
+match the digest output/shares.json records for the decomposition. The committed
+shares file predates that digest field, so the second check reports that it cannot
+be applied rather than passing silently. Effect on the output: every number is
+unchanged, a leaf-by-leaf comparison of the old and new files found all 252 values
+in the twelve per-layer blocks identical, 0 changed and 0 removed, and the note
+field identical; the only difference is the new metadata block naming the lens
+file, its size of 12,980,477 bytes, its SHA-256 digest, which is
+d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762, and the absence
+of a recorded decomposition digest. Wall clock 38 seconds, of which about 28 seconds is loading
+the unembedding matrix and the lens.
+[03:13:00] lens file /home/user/ATR_research/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt (dictionary geometry)
+[03:13:00]   SHA-256 d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762 (12980477 bytes)
+[03:13:00] the shares file records no lens digest of its own, so it predates the 2026-09-05 gate; the saved atom records cannot be tied to a lens file by digest and rest on the pinned check alone
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7959.85it/s]
+[03:13:08] L 0: concentration 0.8846 (gaussian control 0.0044), fraction positive 0.9910; state cosine medians lang=-0.066, noise17=-0.043, nullold=+0.082, clean_last=-0.023, clean_mean=+0.007
+[03:13:11] L 1: concentration 0.8377 (gaussian control 0.0044), fraction positive 0.9905; state cosine medians lang=-0.055, noise17=-0.052, nullold=+0.006, clean_last=-0.042, clean_mean=+0.067
+[03:13:13] L 2: concentration 0.8217 (gaussian control 0.0044), fraction positive 0.9904; state cosine medians lang=-0.115, noise17=-0.110, nullold=-0.010, clean_last=-0.053, clean_mean=+0.024
+[03:13:15] L 3: concentration 0.8330 (gaussian control 0.0044), fraction positive 0.9904; state cosine medians lang=-0.149, noise17=-0.140, nullold=-0.046, clean_last=-0.085, clean_mean=-0.015
+[03:13:17] L 4: concentration 0.8489 (gaussian control 0.0044), fraction positive 0.9899; state cosine medians lang=-0.164, noise17=-0.148, nullold=-0.094, clean_last=-0.062, clean_mean=-0.063
+[03:13:19] L 5: concentration 0.8688 (gaussian control 0.0044), fraction positive 0.9903; state cosine medians lang=-0.182, noise17=-0.166, nullold=-0.119, clean_last=-0.070, clean_mean=-0.085
+[03:13:20] L 6: concentration 0.8715 (gaussian control 0.0044), fraction positive 0.9929; state cosine medians lang=-0.170, noise17=-0.152, nullold=-0.123, clean_last=-0.040, clean_mean=-0.088
+[03:13:22] L 7: concentration 0.8567 (gaussian control 0.0044), fraction positive 0.9943; state cosine medians lang=-0.173, noise17=-0.153, nullold=-0.123, clean_last=-0.035, clean_mean=-0.086
+[03:13:24] L 8: concentration 0.8595 (gaussian control 0.0044), fraction positive 0.9959; state cosine medians lang=-0.105, noise17=-0.095, nullold=-0.101, clean_last=+0.024, clean_mean=-0.071
+[03:13:25] L 9: concentration 0.8442 (gaussian control 0.0044), fraction positive 0.9963; state cosine medians lang=-0.045, noise17=-0.041, nullold=-0.060, clean_last=+0.040, clean_mean=-0.037
+[03:13:27] L10: concentration 0.7862 (gaussian control 0.0044), fraction positive 0.9947; state cosine medians lang=-0.061, noise17=-0.050, nullold=-0.005, clean_last=-0.017, clean_mean=+0.003
+[03:13:28] L11: concentration 0.5178 (gaussian control 0.0044), fraction positive 1.0000; state cosine medians lang=-0.366, noise17=-0.362, nullold=-0.080, clean_last=-0.417, clean_mean=-0.425
+[03:13:28] wrote output/dictionary_geometry.json against lens d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762

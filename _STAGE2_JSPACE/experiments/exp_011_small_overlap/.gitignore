@@ -1,0 +1,3 @@
+# Intermediate per-layer state cache (21.8 MB, regenerated in about three
+# minutes by `python3 build_states.py` from read-only Stage 1 sources).
+output/states.npz
