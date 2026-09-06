@@ -125,3 +125,50 @@ artifact under output/ is listed here with what wrote it, per rule R5.
   python3 run_jspace.py --selftest -> ALL PASS, 22 checks, now including the
        twin lens provenance gate and a check that lowering the module's shuffle
        count really lowers the number of shuffles run.
+
+2026-09-06, fourth round of pull request review fixes. Six findings, all six
+real. Nothing new was written under output/ in this round, so there is no new
+artifact to log under rule R5; these lines record the checks instead, because
+this log is the dated trail the results record cites.
+  python3 make_tables.py
+    -> regenerated output/tables.md with no line added, changed or removed, so
+       every table quoted in RESULTS_EXP017.md still matches its artifact.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 36 checks, six of them new:
+       a checkpoint already sitting at the fit's own output path is refused when
+       it carries no provenance sidecar, refused when its model or its corpus
+       digest disagrees with this fit, resumed only with the explicit
+       acceptance, which is then written beside it, resumed silently when it
+       matches, and an absent checkpoint is not an error.
+  python3 run_jspace.py --selftest -> ALL PASS, 36 checks, fourteen of them new:
+       a lens stamped with a fit outcome of overran or short is refused however
+       many prompts it averaged, a lens fitted under a cap longer than the
+       registered 9,000 seconds is refused, a stamp that does not name its cap
+       is refused, an overridden prompt-count requirement is not the registered
+       requirement, and each way a run can be a sensitivity reading is named
+       rather than only the first.
+  python3 run_jspace.py --frame hf --accept-unstamped-twin-lens --twin-lens
+      ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    -> exits 1 within seconds, before loading any model, with "REFUSING TO WRITE
+       THE REGISTERED FILENAME", because a run in the other coordinate frame
+       must be given its own --out-suffix. The same run with
+       --twin-lens-min-prompts 5 against the five-prompt probe lens refuses the
+       same way and names the overridden requirement. output/exp017_jspace.json
+       was not touched by either.
+  the weight-digest scan in verify_model.py, checked twice.
+    -> against an empty cache directory, a scan after the configuration call
+       alone returns one file, config.json at 665 bytes, and no weight file,
+       which is the bug: the scan used to run before the models were loaded.
+    -> against this machine's warm cache, the scan now returns all 10 rows for
+       MBZUAI/LaMini-GPT-124M and all 7 for gpt2 that the committed
+       output/model_verification.json holds, with the same byte sizes and the
+       same SHA-256 digests, so the committed artifact is unaffected and was not
+       rewritten.
+  every number in REGISTER_VERDICTS.md checked back to the artifact that
+    produced it, after one was found wrong. The same-lens cross-check range
+    reads 0.0167 to 0.0889 in output/exp017_jspace.json, not the 0.015 to 0.086
+    the proposed row carried; that file's note 7 records the correction and
+    lists the numbers that reproduce. The terminal word agreeing on 25 of 25
+    prompts was re-checked against
+    experiments/exp_010c_windows/output/results_small010b_SB.json and
+    reproduces at 25 of 25.

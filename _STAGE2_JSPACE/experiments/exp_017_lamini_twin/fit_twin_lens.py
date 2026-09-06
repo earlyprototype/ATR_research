@@ -33,11 +33,16 @@ writes a provenance sidecar beside its checkpoint, named CHECKPOINT.provenance
 .json, recording the model repository, the pinned revision, the fitting corpus
 and its SHA-256 digest, and the sequence and layer settings the fit used. A
 checkpoint is seeded from only when its sidecar agrees with this fit field for
-field. The instrument rewrites the checkpoint file itself after every prompt, so
-the sidecar sits beside it rather than inside it. The committed five-prompt probe
-checkpoint predates the sidecar and has none, so seeding from it now needs the
-explicit --accept-unstamped-checkpoint, which is recorded in the sidecar this
-fit writes.
+field, and the checkpoint at this fit's own path is checked the same way before
+the instrument resumes it. That second check matters because a checkpoint
+reaches a fit two ways and only one of them passes through seeding: an earlier
+invocation of this script with --model-path or --allow-different-prompts leaves
+its own checkpoint under the same name, and seeding steps over an existing
+target rather than validating it. The instrument rewrites the checkpoint file
+itself after every prompt, so the sidecar sits beside it rather than inside it.
+The committed five-prompt probe checkpoint predates the sidecar and has none, so
+seeding from it now needs the explicit --accept-unstamped-checkpoint, which is
+recorded in the sidecar this fit writes.
 
 Weights: pinned to the revision, that is the Hugging Face repository commit,
 recorded in exp017_models.py, unless --model-path names a local directory.
@@ -302,7 +307,8 @@ def seed_checkpoint(target, source, n_prompts, want=None,
     if os.path.exists(target):
         done, fitted = lens_from_checkpoint.progress(target)
         return (f"not seeding: this fit already has a checkpoint at {target} "
-                f"with {fitted} prompts fitted")
+                f"with {fitted} prompts fitted, which checkpoint_ready checks "
+                f"before this fit resumes it")
     if not os.path.exists(source):
         return f"not seeding: no checkpoint at {source}"
     state = torch.load(source, map_location="cpu", weights_only=True)
@@ -342,6 +348,55 @@ def seed_checkpoint(target, source, n_prompts, want=None,
     return (f"seeded {target} from {source}: {state['n_done']} prompts already "
             f"fitted, so this fit continues at prompt "
             f"{int(state['next_idx']) + 1}{seeded_note}")
+
+
+def checkpoint_ready(target, want, accept_unstamped=False):
+    """Whether this fit may resume the checkpoint it is about to write to.
+
+    Returns (True, sentence) when the checkpoint does not exist yet, or exists
+    and was built by a fit this one may continue, and (False, sentence) when it
+    was not. This is checked separately from seeding, because a checkpoint can
+    reach this fit two ways: seeded from an earlier one, which compares
+    provenance as it copies, or already sitting at this fit's own path from an
+    earlier invocation, which nothing compared until now. The second is the
+    dangerous one: an earlier run with --model-path or --allow-different-prompts
+    leaves a checkpoint under the same name, and the instrument would resume its
+    Jacobian sums and this script would stamp the result with the current run's
+    provenance.
+
+    An accepted unstamped checkpoint has this fit's provenance written beside it
+    so that the next invocation compares rather than trusts.
+    """
+    if not os.path.exists(target):
+        return True, f"no checkpoint at {target} yet, so this fit starts fresh"
+    state = torch.load(target, map_location="cpu", weights_only=True)
+    for key, expected in EXPECTED_CKPT_SHAPE.items():
+        got = state.get(key)
+        if isinstance(expected, list) and got is not None:
+            got = list(got)
+        if got != expected:
+            return False, (f"refusing to resume {target}: it was built with "
+                           f"{key}={got!r}, not {expected!r}")
+    have = read_provenance(target)
+    if have is None:
+        if not accept_unstamped:
+            return False, (
+                f"refusing to resume {target}: it has no provenance sidecar at "
+                f"{provenance_path(target)}, so nothing says which model or "
+                f"which corpus its Jacobian sums came from. Pass "
+                f"--accept-unstamped-checkpoint to resume it anyway and have "
+                f"that recorded, or move it aside to fit from nothing.")
+        record = dict(want)
+        record["resumed_an_unstamped_checkpoint"] = True
+        write_provenance(target, record)
+        return True, (f"resuming {target}, whose provenance was not stamped and "
+                      f"was accepted explicitly; this fit's provenance is now "
+                      f"written beside it")
+    bad = provenance_mismatches(have, want)
+    if bad:
+        return False, (f"refusing to resume {target}: it was fitted with a "
+                       f"different setup: " + "; ".join(bad))
+    return True, f"resuming {target}, whose provenance matches this fit"
 
 
 def load_model(model_path=TWIN, revision=TWIN_REVISION):
@@ -642,6 +697,36 @@ def selftest():
               provenance_mismatches(dict(want, dim_batch=8), want) == [],
               "dim_batch batches backward passes and is stamped, not compared")
 
+        # The checkpoint already sitting at this fit's own path, which seeding
+        # steps over rather than validates.
+        mine = os.path.join(tmp, "mine.ckpt.pt")
+        torch.save({"jacobian_sum": {l: torch.zeros(2, 2) for l in range(11)},
+                    "n_done": 7, "next_idx": 7, **EXPECTED_CKPT_SHAPE}, mine)
+        ready, msg = checkpoint_ready(mine, want)
+        check("an existing checkpoint with no provenance is refused, not resumed",
+              ready is False and "no provenance sidecar" in msg, msg)
+        ready, msg = checkpoint_ready(mine, want, accept_unstamped=True)
+        check("that checkpoint resumes only with the explicit acceptance, and "
+              "is stamped as it does",
+              ready and (read_provenance(mine) or {}).get(
+                  "resumed_an_unstamped_checkpoint") is True, msg)
+        write_provenance(mine, dict(want, corpus_sha256="1" * 64))
+        ready, msg = checkpoint_ready(mine, want)
+        check("an existing checkpoint from another corpus is refused",
+              ready is False and "corpus_sha256" in msg, msg)
+        write_provenance(mine, dict(want, model="/local/checkout",
+                                    revision="local path, no revision pinned"))
+        ready, msg = checkpoint_ready(mine, want)
+        check("an existing checkpoint from another model is refused",
+              ready is False and "model" in msg, msg)
+        write_provenance(mine, want)
+        ready, msg = checkpoint_ready(mine, want)
+        check("an existing checkpoint that matches this fit is resumed",
+              ready and msg.startswith("resuming"), msg)
+        ready, msg = checkpoint_ready(os.path.join(tmp, "absent.ckpt.pt"), want)
+        check("no checkpoint at all is not an error", ready and "starts fresh" in msg,
+              msg)
+
         # A lens file carries the same record, and the instrument's own loader
         # still reads a stamped lens.
         lens_file = os.path.join(tmp, "lens.pt")
@@ -754,6 +839,14 @@ def main():
     print(seed_checkpoint(ckpt, args.resume_from, len(prompts), want,
                           accept_unstamped=args.accept_unstamped_checkpoint),
           flush=True)
+
+    # Whatever route the checkpoint at this fit's own path arrived by, it is
+    # checked before the instrument resumes its Jacobian sums.
+    ready, message = checkpoint_ready(
+        ckpt, want, accept_unstamped=args.accept_unstamped_checkpoint)
+    print(message, flush=True)
+    if not ready:
+        raise SystemExit(message)
     if not os.path.exists(provenance_path(ckpt)):
         print(f"provenance stamped -> {os.path.basename(write_provenance(ckpt, want))}",
               flush=True)

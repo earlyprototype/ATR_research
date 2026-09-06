@@ -243,13 +243,20 @@ def main():
         },
     }
 
-    # ---- 2. weight-file digests ---------------------------------------------
-    rec["files"] = {TWIN: cached_files(TWIN), BASE: cached_files(BASE)}
-
-    # ---- 3. load both models, compare weight layout --------------------------
+    # ---- 2. load both models, then take the weight-file digests --------------
+    # The order matters and is not cosmetic. The digest scan reads the local
+    # Hugging Face cache, and the configuration calls above fetch configuration
+    # files only, so on a machine that has never downloaded these models the
+    # scan would run before any weight file existed and the artifact would carry
+    # no weight digest at all. Loading first puts the pinned weights in the
+    # cache; the scan then sees them. Checked on 2026-09-06 against an empty
+    # cache directory, where a scan after the configuration calls alone found
+    # one file, config.json at 665 bytes, and no weight file.
     hf_twin, tok_twin = load_pair(TWIN)
     hf_base, tok_base = load_pair(BASE)
+    rec["files"] = {TWIN: cached_files(TWIN), BASE: cached_files(BASE)}
 
+    # ---- 3. compare the weight layout ---------------------------------------
     sd_t, sd_b = hf_twin.state_dict(), hf_base.state_dict()
     rec["state_dict"] = {
         "twin_n_tensors": len(sd_t), "base_n_tensors": len(sd_b),

@@ -942,9 +942,10 @@ is probably small in its own setting too.
 
 Recorded flat, whether or not they change a verdict, per the folder rule. The
 first four were written into the spec before any run, with their reasons.
-Deviations 5 to 9 arose during the run. Deviations 10 to 18 were found after it
+Deviations 5 to 9 arose during the run. Deviations 10 to 20 were found after it
 by reviews of the pull request, on 2026-09-05 for 10 to 14 and on 2026-09-06 for
-15 to 18, and each names what was found and what changed in response. None of
+15 to 20, the last two by a second review of the changes the first one asked
+for, and each names what was found and what changed in response. None of
 them was found by the run itself, which is worth saying plainly: this record's
 own checks did not catch them.
 
@@ -1194,6 +1195,59 @@ own checks did not catch them.
     into the output artifact under `twin_lens_provenance`. Section 8 names both
     in the reproduction commands, so the documented route still runs on the
     committed files.
+
+19. **Four gates added on 2026-09-06 were each incomplete, and a fifth number
+    was mistyped.** A second review of the same day found them, after the
+    changes deviations 15 to 18 describe were already committed. None of them
+    touches a committed number; all four are about what the code would allow a
+    later run to do. First, `fit_twin_lens.py` compared provenance when it
+    seeded a checkpoint from another one but not when a checkpoint was already
+    sitting at the path the fit writes to, which is exactly where an earlier
+    invocation with `--model-path` or `--allow-different-prompts` leaves one, so
+    the instrument would have resumed those Jacobian sums and the finished lens
+    would have been stamped with the current run's provenance. A checkpoint at
+    the fit's own path is now checked the same way a seeded one is, and an
+    unstamped one is refused unless `--accept-unstamped-checkpoint` says
+    otherwise, which is then written beside it. Second, `run_jspace.py` compared
+    the stamped fields but not the stamped fit outcome, so a lens from a fit
+    that crossed its cap, which the code of deviation 17 marks `overran` and
+    still averages over the full prompt count, would have carried a registered
+    verdict. Registered scoring now requires an outcome of `complete`, a stamped
+    wall-clock cap no longer than the spec's 9,000 seconds, and a measured fit
+    time inside it. Third, `--twin-lens-min-prompts` replaced the requirement
+    the budget rule chose, so passing 5 made the five-prompt probe lens
+    "accepted" and set the registered flag without anyone asking for a
+    sensitivity reading; any requirement that is not the budget artifact's own
+    count now makes the run a sensitivity reading whatever it then accepts.
+    Fourth, a run that is not the registered comparison, whether by frame, by a
+    short lens or by an overridden requirement, could still write to
+    `output/exp017_jspace.json`, which is the file `make_tables.py` reads and
+    this record quotes; such a run now refuses to start without its own
+    `--out-suffix`, and it refuses before the expensive part rather than after
+    it. All four are asserted in `run_jspace.py --selftest` and
+    `fit_twin_lens.py --selftest`, which now run 36 checks each. The fifth
+    item is not code: the proposed register row in `REGISTER_VERDICTS.md` gave
+    the same-lens cross-check as 0.015 to 0.086 where the artifact gives 0.0167
+    to 0.0889. That file's note 7 corrects it, withdraws the old range by name,
+    and records that every other number in its rows was then checked back to the
+    artifact that produced it.
+
+20. **On a machine that had never downloaded these models, the provenance
+    artifact would have carried no weight digests.** Found by the same review.
+    `verify_model.py` scanned the local Hugging Face cache for file sizes and
+    SHA-256 digests before it loaded the models, and the steps before the scan
+    read configuration files only, so on a cold cache the scan would have found
+    nothing but `config.json`. **Measured rather than reasoned about:** running
+    the scan against an empty cache directory after the configuration call alone
+    returns one file, `config.json` at 665 bytes, and no weight file. The load
+    now happens before the scan. **The committed artifact is unaffected, and
+    that is checked rather than assumed:** `output/model_verification.json` was
+    written on a warm cache and already carries all 17 rows, including the twin's
+    `model.safetensors` at 510,362,696 bytes and base's at 548,105,171, and
+    re-running the scan today reproduces all 17 rows with the same sizes and the
+    same digests, which is the check section 1.1 rests on. The artifact was not
+    rewritten, because its `generated` timestamp would change and the run that
+    produced it is the record.
 
 ## 5. H18b verdict: **SUPPORTED, at exactly the pre-registered threshold**
 
@@ -1507,7 +1561,11 @@ no timing written down, so none is given here.
    committed probe checkpoint, which predates the provenance sidecar described
    in deviation 18 and so says nothing about which model or corpus it came
    from; a probe run today writes that sidecar and the fit then continues it
-   with no option at all.
+   with no option at all. Since 2026-09-06 the fit also checks the
+   checkpoint sitting at its own output path before resuming it, and
+   refuses one whose stamped model, revision, corpus digest or settings
+   disagree, so a checkpoint left by an earlier run with different
+   arguments stops the fit instead of feeding it.
 
    **The order matters, and so does the reuse.** The 40-prompt lens is not 40
    prompts of fresh work. The probe fits the first 5 prompts of the same list in
@@ -1541,8 +1599,13 @@ no timing written down, so none is given here.
    carries the stamp and needs no option. Omitting `--twin-lens`, or offering a
    lens either check refuses, runs the spec's section 6.2 fallback, scoring both
    sides on the base lens. The lens-quality sensitivity check of deviation 9
-   passes `--allow-short-twin-lens` on purpose and its output is stamped as a
-   sensitivity reading. **Re-running this command on 2026-09-06 with the
+   passes `--allow-short-twin-lens` on purpose, together with
+   `--out-suffix _lens5`, and its output is stamped as a sensitivity
+   reading. Since 2026-09-06 that suffix is not a courtesy but a rule: any
+   run that is not the registered comparison, whether because of the
+   coordinate convention, a short lens or an overridden prompt-count
+   requirement, refuses to start without an `--out-suffix` of its own, so
+   that `output/exp017_jspace.json` keeps the registered result. **Re-running this command on 2026-09-06 with the
    current code reproduced every number in the committed
    `output/exp017_jspace.json` exactly, to the last digit of every share, every
    control and every permutation p; the scratch copy was compared field by

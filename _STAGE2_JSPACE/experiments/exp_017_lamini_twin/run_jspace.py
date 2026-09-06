@@ -30,6 +30,13 @@ lens-quality sensitivity check, which is not registered and carries no verdict
 weight, opts in with --allow-short-twin-lens and is stamped as a sensitivity
 reading in its own output.
 
+One filename rule, enforced rather than trusted. output/exp017_jspace.json is
+the registered result: make_tables.py reads it and the results record quotes it.
+Any run that is not the registered comparison, because of the coordinate frame,
+because a short lens was admitted, or because the prompt-count requirement was
+overridden, must be given its own --out-suffix, and this script refuses to start
+the expensive part without one.
+
 Coordinate frames, and why there is a choice. The states and the dictionary have
 to be in the same coordinates for the share to mean anything. --frame tl, the
 default and the frame every committed number was measured in, reads the states
@@ -99,9 +106,17 @@ FRAMES = ("tl", "hf")
 CORPUS_COMMITTED = HERE / "wikitext_prompts_160.json"
 
 # What a twin lens's provenance stamp must say for it to carry the registered
-# comparison. The sequence and layer settings are the ones EXP_017's fit used.
+# comparison. The sequence and layer settings are the ones EXP_017's fit used,
+# and "complete" is the fit outcome of a fit that reached every prompt it asked
+# for inside its cap, as against "short" or "overran".
 EXPECTED_TWIN_LENS_FIT = {"max_seq_len": 128, "source_layers": list(range(11)),
-                          "target_layer": 11, "skip_first": 16}
+                          "target_layer": 11, "skip_first": 16,
+                          "fit_outcome": "complete"}
+
+# The wall-clock cap the spec's section 6.2 sets on the twin's lens fit, in
+# seconds. A lens fitted under a cap of its own that is longer than this is not
+# the registered instrument however cleanly it finished.
+REGISTERED_CAP_SECONDS = 9000.0
 
 
 def sha256_file(path):
@@ -295,13 +310,21 @@ def expected_twin_lens_provenance(corpus=CORPUS_COMMITTED):
     return want
 
 
-def twin_lens_provenance_decision(stamp, want, accept_unstamped):
+def twin_lens_provenance_decision(stamp, want, accept_unstamped,
+                                  cap_seconds=REGISTERED_CAP_SECONDS):
     """Whether a twin lens's provenance stamp permits registered scoring.
 
-    Returns ("accepted", []) when the stamp agrees with `want` field for field,
+    Returns ("accepted", []) when the stamp agrees with `want` field for field
+    and the fit it describes finished inside the registered wall-clock cap,
     ("unstamped", []) when there is no stamp and the caller has opted in to
-    that, ("refused", reasons) when there is no stamp and no opt-in, or when the
-    stamp disagrees. The reasons are sentences naming the fields that differ.
+    that, ("refused", reasons) when there is no stamp and no opt-in, or when
+    anything disagrees. The reasons are sentences naming what differs.
+
+    The clock is checked as well as the fields, because a fit can be stopped by
+    its own deadline and still produce a lens averaged over the prompt count the
+    budget asked for: the stamp then says so, and such a lens is not the
+    registered instrument. A stamp that raised its own cap above the spec's
+    `cap_seconds` is refused for the same reason.
     """
     if stamp is None:
         if accept_unstamped:
@@ -316,7 +339,55 @@ def twin_lens_provenance_decision(stamp, want, accept_unstamped):
             got = list(got)
         if got != expected:
             bad.append(f"{key} is {got!r} in the lens and {expected!r} here")
+    deadline = stamp.get("deadline_seconds")
+    if deadline is None:
+        bad.append("the stamp does not say what wall-clock cap the fit ran "
+                   f"under, and the registered cap is {cap_seconds:.0f} seconds")
+    elif float(deadline) > cap_seconds:
+        bad.append(f"the fit ran under a {float(deadline):.0f} second cap of its "
+                   f"own, longer than the registered {cap_seconds:.0f} seconds")
+    wall = stamp.get("fit_wall_seconds")
+    if wall is not None and float(wall) > cap_seconds:
+        bad.append(f"the fit took {float(wall):.0f} seconds against the "
+                   f"registered {cap_seconds:.0f} second cap")
     return ("accepted", []) if not bad else ("refused", bad)
+
+
+def sensitivity_reasons(*, frame, short_reading, twin_n_prompts, required,
+                        registered_requirement, budget):
+    """Why this run is not the registered comparison, as sentences.
+
+    An empty list means it is the registered comparison. Each entry is written
+    to be read on its own, because they are joined into the verdict string, into
+    the artifact and into the message that refuses the registered filename.
+    """
+    reasons = []
+    if frame != FRAME_REGISTERED:
+        reasons.append(f"this run measured states and dictionary in the {frame} "
+                       f"frame, and every registered number was measured in the "
+                       f"{FRAME_REGISTERED} frame")
+    if short_reading:
+        reasons.append(f"the twin lens was fitted on {twin_n_prompts} prompts "
+                       f"against the {required} the budget rule chose")
+    if not registered_requirement:
+        reasons.append(f"this run required {required} fitting prompts of a twin "
+                       f"lens where the budget rule chose {budget}")
+    return reasons
+
+
+def requirement_decision(override, budget):
+    """The prompt count a twin lens must have been fitted on, and whether that
+    requirement is the registered one.
+
+    The registered requirement is the count the spec's budget rule chose, which
+    `output/fit_budget_decision.json` records. `--twin-lens-min-prompts` may
+    lower or raise it for a deliberate check, but a run whose requirement is not
+    the budget's own count is not the registered comparison, whatever it then
+    accepts, so this returns that fact rather than leaving it implicit.
+    """
+    if override is None:
+        return budget, True
+    return override, budget is not None and int(override) == int(budget)
 
 
 def permutation_p_two_sided(a, b, n_perm=None, seed=PERM_SEED):
@@ -394,7 +465,8 @@ def selftest():
           want["corpus_sha256"] is not None
           and len(str(want["corpus_sha256"])) == 64,
           f"{str(want['corpus_sha256'])[:12]} from {CORPUS_COMMITTED.name}")
-    good = dict(want, model="MBZUAI/LaMini-GPT-124M", n_prompts_fitted=40)
+    good = dict(want, model="MBZUAI/LaMini-GPT-124M", n_prompts_fitted=40,
+                fit_wall_seconds=8253.0, deadline_seconds=REGISTERED_CAP_SECONDS)
     got, why = twin_lens_provenance_decision(good, want, False)
     check("a lens stamped with this experiment's own fit is accepted",
           got == "accepted", f"{got} {why}")
@@ -417,6 +489,70 @@ def selftest():
     got, why = twin_lens_provenance_decision(dict(good, max_seq_len=512), want, True)
     check("a lens fitted at another sequence length is refused",
           got == "refused" and any("max_seq_len" in w for w in why), "; ".join(why))
+    # A fit the deadline stopped can still average the prompt count the budget
+    # asked for, so the outcome stamp is checked, not just the count.
+    got, why = twin_lens_provenance_decision(
+        dict(good, fit_outcome="overran", fit_wall_seconds=9619.0), want, True)
+    check("a lens from a fit that crossed its cap is refused, whatever its "
+          "prompt count", got == "refused"
+          and any("fit_outcome" in w for w in why), "; ".join(why))
+    got, why = twin_lens_provenance_decision(dict(good, fit_outcome="short"),
+                                             want, True)
+    check("a lens from a fit stopped short is refused", got == "refused"
+          and any("fit_outcome" in w for w in why), "; ".join(why))
+    got, why = twin_lens_provenance_decision(
+        dict(good, deadline_seconds=36000.0), want, True)
+    check("a lens fitted under a cap longer than the registered one is refused",
+          got == "refused" and any("cap of its own" in w for w in why),
+          "; ".join(why))
+    stamp = dict(good)
+    stamp.pop("deadline_seconds")
+    got, why = twin_lens_provenance_decision(stamp, want, True)
+    check("a lens whose stamp does not name its cap is refused",
+          got == "refused" and any("wall-clock cap" in w for w in why),
+          "; ".join(why))
+
+    # The prompt-count requirement, and what overriding it means.
+    got = requirement_decision(None, 40)
+    check("with no override the budget rule's count is the requirement",
+          got == (40, True), str(got))
+    got = requirement_decision(40, 40)
+    check("an override equal to the budget rule's count is still registered",
+          got == (40, True), str(got))
+    got = requirement_decision(5, 40)
+    check("an override below the budget rule's count is not the registered "
+          "requirement", got == (5, False), str(got))
+    got = requirement_decision(100, 40)
+    check("an override above it is not the registered requirement either",
+          got == (100, False), str(got))
+    got = requirement_decision(5, None)
+    check("an override with no budget artifact to compare is not registered",
+          got == (5, False), str(got))
+
+    # What makes a run a sensitivity reading, and therefore what may not be
+    # written to the registered filename.
+    args_registered = dict(frame=FRAME_REGISTERED, short_reading=False,
+                           twin_n_prompts=40, required=40,
+                           registered_requirement=True, budget=40)
+    check("the registered run has no sensitivity reason",
+          sensitivity_reasons(**args_registered) == [],
+          "no reason, so it may write output/exp017_jspace.json")
+    got = sensitivity_reasons(**{**args_registered, "frame": "hf"})
+    check("a run in the other frame is a sensitivity reading",
+          len(got) == 1 and "hf frame" in got[0], "; ".join(got))
+    got = sensitivity_reasons(**{**args_registered, "short_reading": True,
+                                 "twin_n_prompts": 5})
+    check("a run on a short lens is a sensitivity reading",
+          len(got) == 1 and "5 prompts" in got[0], "; ".join(got))
+    got = sensitivity_reasons(**{**args_registered, "registered_requirement": False,
+                                 "required": 5})
+    check("a run with the requirement overridden is a sensitivity reading",
+          len(got) == 1 and "required 5 fitting prompts" in got[0],
+          "; ".join(got))
+    got = sensitivity_reasons(**{**args_registered, "frame": "hf",
+                                 "short_reading": True, "twin_n_prompts": 5})
+    check("two reasons are both named rather than the first only",
+          len(got) == 2, "; ".join(got))
     for name in ("jlens_lamini_gpt2_124m_40_twin.pt",):
         path = ARTIFACTS / name
         if not path.exists():
@@ -474,9 +610,11 @@ def main():
                          "checked against the digest the spec records")
     ap.add_argument("--twin-lens-min-prompts", type=int, default=None,
                     help="the prompt count a twin lens must have been fitted "
-                         "on to count as the registered instrument; defaults "
-                         "to the count the budget rule chose in "
-                         "output/fit_budget_decision.json")
+                         "on; defaults to the count the budget rule chose in "
+                         "output/fit_budget_decision.json, which is the "
+                         "registered requirement. Any other value makes the run "
+                         "a sensitivity reading, whatever it then accepts, and "
+                         "the run must then be given its own --out-suffix")
     ap.add_argument("--allow-short-twin-lens", action="store_true",
                     help="score a twin lens fitted on fewer prompts than the "
                          "budget chose; the result is stamped as a sensitivity "
@@ -538,15 +676,22 @@ def main():
     # is either a fit the wall-clock cap stopped or a deliberately smaller one,
     # and scoring it as registered would report SUPPORTED or NOT SUPPORTED where
     # spec section 6.2 requires the base lens on both sides.
-    required = (args.twin_lens_min_prompts if args.twin_lens_min_prompts is not None
-                else budget_n_prompts())
+    budget = budget_n_prompts()
+    required, registered_requirement = requirement_decision(
+        args.twin_lens_min_prompts, budget)
     short_reading = False
     rep["twin_lens_budget"] = {
         "required_n_prompts": required,
         "source_of_requirement": ("--twin-lens-min-prompts"
                                   if args.twin_lens_min_prompts is not None
                                   else "output/fit_budget_decision.json"),
+        "budget_rule_n_prompts": budget,
+        "requirement_is_the_registered_one": registered_requirement,
         "allow_short_twin_lens": bool(args.allow_short_twin_lens)}
+    if not registered_requirement:
+        print(f"REQUIREMENT OVERRIDDEN: this run asks a twin lens for "
+              f"{required} prompts where the budget rule chose {budget}, so it "
+              f"is a sensitivity reading whatever it accepts.", flush=True)
     if args.twin_lens:
         p = Path(args.twin_lens)
         J_twin, meta_twin = load_lens(p)
@@ -610,6 +755,26 @@ def main():
         rep["twin_lens_budget"].update(twin_lens_n_prompts=None, meets_budget=None,
                                        action="no twin lens offered")
         print("NO TWIN LENS: base lens only (spec section 6.2 fallback)", flush=True)
+
+    # Everything that makes this run something other than the registered
+    # comparison, collected in one place so the verdict string, the artifact and
+    # the filename rule all read from the same list.
+    not_registered = sensitivity_reasons(
+        frame=args.frame, short_reading=short_reading,
+        twin_n_prompts=rep["twin_lens_budget"].get("twin_lens_n_prompts"),
+        required=required, registered_requirement=registered_requirement,
+        budget=budget)
+    rep["sensitivity_reasons"] = not_registered
+    # A run that is not the registered comparison never writes to the registered
+    # filename, because output/exp017_jspace.json is what make_tables.py reads
+    # and what the results record quotes.
+    if not_registered and not args.out_suffix:
+        raise SystemExit(
+            "REFUSING TO WRITE THE REGISTERED FILENAME: this run is not the "
+            "registered comparison (" + "; ".join(not_registered) + "). Pass "
+            "--out-suffix with a name of its own, for example --out-suffix "
+            "_sensitivity, so that output/exp017_jspace.json keeps the "
+            "registered result.")
 
     # ---- per-layer states, one model at a time so only one is resident -------
     states, W_U, rescale = {}, {}, {}
@@ -713,32 +878,21 @@ def main():
     hits = [l for l in BAND if primary["per_layer"][str(l)]["both_conditions"]]
     primary["band_layers_meeting_both"] = hits
     primary["n_band_layers_meeting_both"] = len(hits)
-    off_frame = args.frame != FRAME_REGISTERED
     if not have_twin_lens:
         why = rep["twin_lens_budget"].get("action", "no twin lens offered")
         primary["h18b"] = (f"UNTESTABLE as registered (base lens both sides: "
                            f"{why})")
         primary["registered_scoring"] = False
-    elif off_frame:
+    elif not_registered:
         verdict = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
         primary["h18b"] = (
             f"{verdict} as a sensitivity reading only, NOT the registered "
-            f"comparison: this run measured states and dictionary in the "
-            f"{args.frame} frame, and every registered number was measured in "
-            f"the {FRAME_REGISTERED} frame")
-        primary["registered_scoring"] = False
-    elif short_reading:
-        verdict = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
-        primary["h18b"] = (
-            f"{verdict} as a sensitivity reading only, NOT the registered "
-            f"comparison: the twin lens was fitted on "
-            f"{rep['twin_lens_budget']['twin_lens_n_prompts']} prompts against "
-            f"the {rep['twin_lens_budget']['required_n_prompts']} the budget "
-            f"rule chose")
+            f"comparison: " + "; ".join(not_registered))
         primary["registered_scoring"] = False
     else:
         primary["h18b"] = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
         primary["registered_scoring"] = True
+    primary["sensitivity_reasons"] = not_registered
     # Kept beside the verdict rather than inside its wording, so that a reader
     # of the artifact sees on what terms the twin lens was admitted.
     primary["frame"] = args.frame
