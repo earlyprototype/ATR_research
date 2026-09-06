@@ -9,6 +9,14 @@ Stages, in the order they are meant to run:
   loop     The registered run. `--arm bare` is the main arm (bare text, the
            25-prompt Small subset); `--arm chat` is the pilot arm (the first
            five of the same prompts wrapped as a user turn, thinking mode off).
+           `--resume` picks up a partly finished arm, and refuses any resume
+           that would put records made under two settings into one file: the
+           precision, the weights revision and every loop parameter must match
+           what the saved file records. A saved file that records no weights
+           revision at all, which is the state of both files committed with
+           this experiment, needs `--assume-legacy-revision` before it will run
+           anything further, because otherwise the prompts still to run would
+           go through whatever the cache pointer names today.
   states   Per-layer states for the J-space test (H19b): inject each settled
            tensor at the layer-0 entry and read every scored layer, and run the
            same prompts clean for the comparison arm. The precision is the one
@@ -231,13 +239,18 @@ def check_resume_compatible(prior: dict, arm: str, dtype: str, revision: str,
     changed would leave one results file holding records made under two
     settings and labelled with only the second, so any contradiction stops the
     run. A field the saved file does not carry cannot be compared and is
-    reported rather than counted as agreement.
+    reported rather than counted as agreement, with one exception: a saved file
+    that carries no weights revision at all has already been settled by
+    `resume_revision_plan`, which runs before the model is loaded and either
+    refuses the resume or takes the operator's confirmed legacy revision, so it
+    is not reported again here.
     """
     clashes, unknown = [], []
     for name, now in (("dtype", dtype), ("model_revision", revision)):
         before = prior.get(name)
         if before is None:
-            unknown.append(name)
+            if name != "model_revision":
+                unknown.append(name)
         elif before != now:
             clashes.append(f"{name}: the saved records were made with "
                            f"{before!r}, this run would use {now!r}")
@@ -266,24 +279,119 @@ def check_resume_compatible(prior: dict, arm: str, dtype: str, revision: str,
               f"against this invocation", flush=True)
 
 
+def resume_revision_plan(saved: dict, arm: str, explicit: str | None,
+                         assumed: str | None, work_left: bool
+                         ) -> tuple[str | None, bool, str]:
+    """Which weights a resume may run on, and whether that is a record or an
+    assumption. Runs before the model is loaded, so a refusal costs nothing.
+
+    A revision is the 40-character commit identifier naming one exact version of
+    the model's files on the Hugging Face hub. A resume adds new prompt records
+    to records made earlier, and the file it writes carries one revision for all
+    of them, so every record in it has to have been made on the same weights.
+
+    The hazard this closes is a results file written before the runner recorded
+    the field, which is the state both committed files are in. Such a file names
+    no weights at all, so nothing contradicts anything; the resume would run the
+    missing prompts on whatever the cache pointer names today, mix those records
+    in with the earlier ones, and label the whole file with today's revision
+    alone. So a legacy resume with work left to do requires
+    `--assume-legacy-revision`, which names the weights the earlier prompts were
+    run at, pins this run's load to them, and is written into the file as an
+    assumption rather than a measurement.
+
+    Returns the revision to pin the load to, None meaning "do not pin, resolve
+    the pointer after loading", whether the revision this run writes is an
+    assumption, and one sentence saying where it came from.
+    """
+    recorded = saved.get("model_revision")
+    if recorded:
+        if assumed and assumed != recorded:
+            raise SystemExit(
+                f"--assume-legacy-revision {assumed} contradicts "
+                f"results_{arm}.json, which records that its prompts were run "
+                f"at {recorded}. The option is for a file that records no "
+                f"revision at all; this one does, so drop the option.")
+        if explicit and explicit != recorded:
+            raise SystemExit(
+                f"--revision {explicit} contradicts results_{arm}.json, which "
+                f"records that the prompts already in it were run at "
+                f"{recorded}. Resuming would add records made on one version of "
+                f"the weights to records made on another and label the file "
+                f"with one of them. Drop the flag to resume on the recorded "
+                f"weights, or move results_{arm}.json and "
+                f"terminal_states_{arm}.npz aside and start the arm again.")
+        if assumed:
+            print(f"resume: --assume-legacy-revision was not needed, because "
+                  f"results_{arm}.json records revision {recorded} itself",
+                  flush=True)
+        # Pin to what the file records, so the prompts still to run go through
+        # the same weights as the ones already in it rather than through
+        # whatever an unpinned load fetches today.
+        was_assumed = bool(saved.get("model_revision_assumed"))
+        return recorded, was_assumed, (
+            f"the revision results_{arm}.json records for the prompts already "
+            f"in it, which this resume pinned its load to"
+            + (", itself confirmed by hand on an earlier resume rather than "
+               "measured at the time" if was_assumed else ""))
+    if not work_left:
+        print(f"resume: results_{arm}.json records no weights revision, and "
+              f"every prompt in it is already finished, so this invocation has "
+              f"nothing to run and writes nothing. A resume that did have work "
+              f"to do would need --assume-legacy-revision naming the weights "
+              f"those records were made on.", flush=True)
+        return explicit, False, "no record was written by this invocation"
+    if not assumed:
+        raise SystemExit(
+            f"refusing to resume results_{arm}.json: it records no weights "
+            f"revision, so nothing here can tell which version of the model's "
+            f"files its existing records were made on, and there are prompts "
+            f"left to run. Running them on whatever the cache pointer "
+            f"refs/main names today would mix two versions of the weights in "
+            f"one file and label it with today's version alone.\n"
+            f"Pass --assume-legacy-revision <40-character identifier> naming "
+            f"the weights the existing records were made on. It pins this "
+            f"run's load to those weights and is written into the file as "
+            f"assumed rather than recorded. Both results files committed with "
+            f"EXP_018 are in this state, and this experiment's record names "
+            f"the revision to pass for them.\n"
+            f"The alternative is to move results_{arm}.json and "
+            f"terminal_states_{arm}.npz aside and run the arm from the start.")
+    if explicit and explicit != assumed:
+        raise SystemExit(
+            f"--revision {explicit} contradicts --assume-legacy-revision "
+            f"{assumed}. The second says the records already in "
+            f"results_{arm}.json were made on {assumed}, and the first would "
+            f"run the remaining prompts on {explicit}, which would put two "
+            f"versions of the weights in one file. Pass one revision, or "
+            f"neither and start the arm again.")
+    return assumed, True, (
+        f"the --assume-legacy-revision option: results_{arm}.json recorded no "
+        f"revision, so the records inherited from it are taken to have been "
+        f"made on this one, confirmed by hand rather than measured at the time, "
+        f"and this run's load was pinned to it")
+
+
 def stage_loop(args) -> None:
     """The registered run for one arm."""
     t_start = time.time()
     dtype = dtype_name(args)
-    model = load_model(dtype=DTYPES[dtype], revision=args.revision)
-    revision = resolve_revision(args.revision)
-    print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
-          f"dtype={dtype} revision={revision}", flush=True)
     cfg = LoopConfig(max_iter=args.max_iter, check_start=args.check_start,
                      check_every=args.check_every, seed=args.seed)
     records = load_prompts(args.n_prompts, args.arm, args.n_chat)
     OUT.mkdir(parents=True, exist_ok=True)
     res_path = OUT / f"results_{args.arm}.json"
     npz_path = OUT / f"terminal_states_{args.arm}.npz"
-    results, tensors = [], {}
+    results, tensors, saved = [], {}, None
+    pin, revision_assumed = args.revision, False
+    revision_source = ("the --revision option, which pinned the load"
+                       if args.revision else
+                       "the cache pointer refs/main that this unpinned load "
+                       "followed, read after the load")
+    # Everything a resume can refuse is settled before the model is loaded, so
+    # a refusal costs no minutes and no gigabytes.
     if args.resume and res_path.exists():
         saved = json.loads(res_path.read_text())
-        check_resume_compatible(saved, args.arm, dtype, revision, vars(cfg))
         prior = saved["records"]
         if npz_path.exists():
             with np.load(npz_path) as npz:
@@ -301,6 +409,23 @@ def stage_loop(args) -> None:
                   f"checkpoint but not the other: {', '.join(half)}", flush=True)
         records = [r for r in records if r["id"] not in done]
         print(f"resume: {len(done)} done, {len(records)} to go", flush=True)
+        pin, revision_assumed, revision_source = resume_revision_plan(
+            saved, args.arm, args.revision, args.assume_legacy_revision,
+            bool(records))
+    elif args.assume_legacy_revision:
+        print(f"note: --assume-legacy-revision names the weights that records "
+              f"already in a results file were made on, and this invocation is "
+              f"not resuming one, so the option has nothing to apply to and is "
+              f"ignored", flush=True)
+
+    model = load_model(dtype=DTYPES[dtype], revision=pin)
+    revision = resolve_revision(pin)
+    print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
+          f"dtype={dtype} revision={revision}"
+          f"{' (assumed for the inherited records)' if revision_assumed else ''}",
+          flush=True)
+    if saved is not None:
+        check_resume_compatible(saved, args.arm, dtype, revision, vars(cfg))
 
     for n, rec in enumerate(records, 1):
         text = rec["prompt"] if args.arm == "bare" else chat_wrap(model, rec["prompt"])
@@ -322,7 +447,9 @@ def stage_loop(args) -> None:
               f"({dt:.0f}s, {dt/r['n_iters']:.2f} s/pass, "
               f"rss={rss_gb():.1f} GB, free={free_gb():.1f} GB)", flush=True)
         payload = {"arm": args.arm, "model": "Qwen/Qwen3-1.7B",
-                   "model_revision": revision, "dtype": dtype,
+                   "model_revision": revision,
+                   "model_revision_assumed": revision_assumed,
+                   "model_revision_source": revision_source, "dtype": dtype,
                    "loop_config": vars(cfg), "versions": versions(),
                    "scored_layers": SCORED_LAYERS,
                    "wall_seconds": round(time.time() - t_start, 1),
@@ -380,8 +507,9 @@ def dtype_from_results(args, res: dict, stage: str) -> str:
 
 
 def revision_from_results(res: dict, stage: str,
-                          explicit: str | None = None) -> tuple[str, str]:
-    """The revision to pin a follow-on stage to, and the revision to record.
+                          explicit: str | None = None) -> tuple[str, str, bool]:
+    """The revision to pin a follow-on stage to, the revision to record, and
+    whether that revision is an assumption rather than a measurement.
 
     A revision is the 40-character commit identifier naming one exact version
     of the model's files on the Hugging Face hub. A stage that runs saved
@@ -394,6 +522,13 @@ def revision_from_results(res: dict, stage: str,
     the metadata written afterwards would then label mismatched states with a
     revision they did not come from. A pointer that disagrees with the pin is
     named rather than followed.
+
+    The third return value says whether the revision was confirmed by hand
+    rather than recorded by the run, which is the case whenever `--revision`
+    supplies what the results file does not, and it stays true down the chain
+    if the results file was itself labelled that way. Without it an operator's
+    assumption would be written into this stage's metadata as a plain field and
+    read by the next stage as a measurement.
     """
     recorded = res.get("model_revision")
     arm = res.get("arm", "?")
@@ -425,7 +560,12 @@ def revision_from_results(res: dict, stage: str,
               f"stage is pinned to {pin} "
               f"({'the --revision option' if explicit else 'the loop record'}), "
               f"so the weights match the saved tensors", flush=True)
-    return pin, pin
+    assumed = bool(res.get("model_revision_assumed")) or not recorded
+    if assumed:
+        print(f"note: revision {pin} is an assumption and not a measurement: it "
+              f"was confirmed by hand rather than recorded by the run that made "
+              f"the saved tensors, and this stage's metadata says so", flush=True)
+    return pin, pin, assumed
 
 
 def stage_states(args) -> None:
@@ -435,9 +575,11 @@ def stage_states(args) -> None:
     # says which precision to load.
     res = json.loads((OUT / f"results_{args.arm}.json").read_text())
     dtype = dtype_from_results(args, res, "states")
-    pin, revision = revision_from_results(res, "states", args.revision)
+    pin, revision, rev_assumed = revision_from_results(
+        res, "states", args.revision)
     print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})  "
-          f"revision={revision} (pinned)", flush=True)
+          f"revision={revision} (pinned"
+          f"{', assumed' if rev_assumed else ''})", flush=True)
     model = load_model(dtype=DTYPES[dtype], revision=pin)
     inject_name, _ = hook_names(model)
     tensors = np.load(OUT / f"terminal_states_{args.arm}.npz")
@@ -486,8 +628,10 @@ def stage_states(args) -> None:
     (outdir / f"layer_states_{args.arm}_meta.json").write_text(json.dumps(
         {"arm": args.arm, "scored_layers": SCORED_LAYERS, "dtype": dtype,
          "model": "Qwen/Qwen3-1.7B", "model_revision": revision,
+         "model_revision_assumed": rev_assumed,
          "loop_dtype": res.get("dtype"),
          "loop_model_revision": res.get("model_revision"),
+         "loop_model_revision_assumed": bool(res.get("model_revision_assumed")),
          "prompts": meta}, indent=2))
     print(f"wrote layer states to {outdir}, {(time.time()-t_start)/60:.1f} min, "
           f"peak={peak_gb():.2f} GB", flush=True)
@@ -508,21 +652,25 @@ def stage_lagscan(args) -> None:
     if res_path.exists():
         res = json.loads(res_path.read_text())
         dtype = dtype_from_results(args, res, "lagscan")
-        pin, revision = revision_from_results(res, "lagscan", args.revision)
+        pin, revision, rev_assumed = revision_from_results(
+            res, "lagscan", args.revision)
     else:
-        dtype, pin = dtype_name(args), args.revision
+        dtype, pin, rev_assumed = dtype_name(args), args.revision, False
         revision = resolve_revision(args.revision)
         print(f"note: no results_{args.arm}.json to check against, so this lag "
               f"scan runs at {dtype} on revision {revision} without matching "
               f"any recorded loop", flush=True)
     print(f"dtype={dtype}  revision={revision}"
-          f"{' (pinned)' if pin else ''}", flush=True)
+          f"{' (pinned)' if pin else ''}"
+          f"{' (assumed, not recorded by the loop)' if rev_assumed else ''}",
+          flush=True)
     model = load_model(dtype=DTYPES[dtype], revision=pin)
     inject_name, extract_name = hook_names(model)
     records = load_prompts(args.n_prompts, args.arm, args.n_chat)
     out = {"arm": args.arm, "iterations": args.max_iter, "max_lag": 8,
            "dtype": dtype, "model": "Qwen/Qwen3-1.7B",
-           "model_revision": revision, "prompts": {}}
+           "model_revision": revision,
+           "model_revision_assumed": rev_assumed, "prompts": {}}
     for rec in records:
         text = rec["prompt"] if args.arm == "bare" else chat_wrap(model, rec["prompt"])
         tokens = tokenise(model, text)
@@ -574,6 +722,14 @@ def main() -> None:
                          "40-character identifier; required by --stage states "
                          "and --stage lagscan when the results file records "
                          "none, as the committed runs do")
+    ap.add_argument("--assume-legacy-revision", default=None,
+                    help="for --stage loop --resume only: the 40-character "
+                         "identifier of the weights the prompt records already "
+                         "in the results file were run on, confirmed by hand "
+                         "for a file written before the runner recorded that "
+                         "field, as both results files committed with EXP_018 "
+                         "were. It pins this run's load to those weights and is "
+                         "written into the file as assumed rather than recorded")
     ap.add_argument("--allow-dtype-mismatch", action="store_true",
                     help="let --stage states or --stage lagscan run at a "
                          "precision the loop did not record")

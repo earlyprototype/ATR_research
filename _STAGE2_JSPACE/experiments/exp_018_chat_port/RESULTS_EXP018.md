@@ -42,11 +42,21 @@ Two prompts do cross it in passing and fall straight back: `F01_anger` is above
 0.99 at repetitions 24, 27, 28, 32 and 33, reaching 0.997077, and is back at
 0.729 by repetition 36 and 0.684 at the cap; `B03_moon` is above it at
 repetitions 74 and 75, reaching 0.996001, and is back at 0.652 by repetition 76
-and 0.846 at the cap. Merging therefore happens in flashes on 2 of the 25
-prompts and is never held. The measure does not creep upward with repetition
-either: it oscillates around its own level for all 150 repetitions. **H19 is
-SUPPORTED on its registered wording**, which scores the state the prompt ends
-on.
+and 0.846 at the cap. The tables below carry a second column for the same
+measure taken over word positions 1 and later, leaving out the first position,
+and on that second measure two further prompts cross 0.99 for a single
+repetition each and nowhere else: `A03_neuro` at repetition 3 in the main arm,
+reaching 0.992037, and `A08_linguistics` at repetition 128 in the pilot arm,
+reaching 0.991633. H19 and every corrected sentence in this record are scored
+on the all-positions measure, which is the one the hypothesis names, and no
+prompt in either arm ends at or above 0.99 on either measure: the highest
+terminal value anywhere is 0.929 over all positions and 0.966 leaving position 0
+out, both in the main arm. Merging therefore happens in flashes on 2 of the 25
+main-arm prompts as the hypothesis measures them, and on 4 of the 30 prompts
+across both arms and both measures, and is never held. The measure does not
+creep upward with repetition either: it oscillates around its own level for all
+150 repetitions. **H19 is SUPPORTED on its registered wording**, which scores
+the state the prompt ends on.
 
 **Result 2, the loop never stops moving.** The convergence test asks whether the
 average direction of the state now agrees with its direction two repetitions ago
@@ -535,7 +545,10 @@ files, both without loading the model.
    pre-registered verdict is unaffected, because H19 is scored on the state each
    prompt ends on and 0 of 25 end at or above 0.99. The record now says that
    merging is never sustained rather than that it never happens, and the figure
-   caption says which two lines touch the line and where.
+   caption says which two lines touch the line and where. Both counts here are
+   on the measure taken over all word positions, which is the one H19 names;
+   result 1 above records the two further prompts that cross 0.99 on the
+   position-0-excluded measure the tables carry beside it.
 6. **The loudness figure stopped one hook short of the loop's extraction point,
    and now carries it.** `make_figures.py` plotted the entry to each of the 28
    blocks, `blocks.<l>.hook_resid_pre`, so its last point was the entry to block
@@ -549,6 +562,98 @@ files, both without loading the model.
    three numbers; the caption and this record's description of the curve are
    rewritten to match. The rebuild reads only the committed probe file and runs
    no model.
+
+**Three findings from a fourth review, on 2026-09-06, all of them in the code,
+and what each one changes.** A fourth review, of the code as it stood after the
+third round of fixes, found three faults. All three are real. All three are in
+code paths the registered run did not take, so no hypothesis verdict moves and
+no number this record prints changes. Nothing was re-run for them, because every
+stage that touches the model needs the Qwen3-1.7B weights and hours of machine
+time; each fix was instead exercised against doctored copies of the committed
+files in a scratch directory, which does not load the model.
+
+1. **A resume could have finished an arm on one version of the weights and
+   labelled the whole file with another.** The runner's resume compares the
+   precision, the weights revision and every loop parameter of a saved results
+   file against the invocation resuming it, and stops on any contradiction, which
+   is the second review's item 3 above. A field the saved file does not carry
+   cannot contradict anything, so a missing weights revision only printed a note
+   and the run carried on. **Established from the committed artifacts:** neither
+   `output/results_bare.json` nor `output/results_chat.json` records a
+   `model_revision` at all, so both are in exactly that state. Had a prompt been
+   missing from the terminal-state archive while this machine's cache pointer had
+   moved on to a newer version of the model's files, that one prompt would have
+   been rerun on the newer weights, its record combined with the 24 made on the
+   older ones, and the file stamped with the newer revision as though all 25 had
+   been made there. The runner now refuses such a resume unless
+   `--assume-legacy-revision` names the version the existing records were made
+   on; it then pins its own load to that version and writes it into the file
+   marked as assumed rather than recorded, so the file never claims to have
+   measured something an operator asserted. A resume of a file that does record
+   a revision now pins its load to that revision as well, so the prompts still
+   to run go through the same weights as the ones already in the file; before,
+   the run loaded whatever the machine's pointer named and then refused if the
+   two turned out to differ, which wasted the load and could not help a machine
+   whose pointer had moved. **The committed run was not affected:** both arms are complete, 25 of 25 records in the main arm and 5 of
+   5 in the pilot arm have their terminal state in the matching archive, so no
+   prompt was ever rerun. **What this means for the resume command in
+   `_run_all.sh`:** run against the committed files it still does nothing and
+   still writes nothing, because there is no prompt left to run, and that is
+   checked here; a resume of an incomplete arm made from these two files would
+   stop and ask for `--assume-legacy-revision
+   70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, this run's revision, which remains
+   inferred from this machine holding exactly one version of the weights rather
+   than established from anything the run recorded. The script now carries that
+   sentence as a comment.
+
+2. **The J-space stage read the lens file without checking it was the lens the
+   specification names.** The Jacobian lens, the third-party set of matrices
+   through which every H19b number is measured, is downloaded into
+   `_STAGE2_JSPACE/artifacts/`, which repository convention leaves unversioned,
+   so nothing committed in this repository could vouch for the copy on any given
+   machine. Section 2 of the specification fixes the lens file's SHA-256
+   fingerprint, the standard 64-character summary of a file's exact contents, and
+   the stage ignored it, so a truncated download or a later re-fit published
+   under the same name would have changed every share with nothing to show for
+   it. The stage now computes that fingerprint before it reads a single tensor,
+   refuses any file that does not match, and writes the fingerprint into its own
+   output beside the numbers it produced. **Verified on this machine:** the lens
+   file here fingerprints to
+   `6fcc79011bd921ffd87612255e2e99950a124fa519470ee44ebaf161c39be9d6`, which is
+   character for character the value the specification fixes, so the committed
+   H19b numbers were measured through the registered instrument. **The committed
+   J-space artifacts predate the field:** `output/jspace_shares_bare.json` and
+   `output/jspace_shares_chat.json` carry no fingerprint and no weights revision,
+   because both were written before either was recorded, and neither file was
+   edited to add one, for the same reason the results files were left alone in
+   the third review's item 1, that writing a value found today into an artifact
+   written yesterday presents a later check as part of the run.
+
+3. **A hand-given weights revision could override what the run recorded, on the
+   stage where the two must agree.** The J-space stage reads two things out of
+   the model's weight files, the unembedding matrix, meaning the matrix that
+   turns an internal state into a score for every word piece, and the gain of the
+   final normalisation, and multiplies them into the lens directions that score
+   states an earlier stage produced. Those states came out of one exact version
+   of the weights, so both halves of the multiplication have to come from that
+   same version. The stage took `--revision` as its first authority without ever
+   comparing it against the `model_revision` and `loop_model_revision` the states
+   stage records, so a mistyped or stale identifier would have scored one
+   version's states against another version's unembedding and labelled the
+   result with the second alone. It now checks an explicit revision against every
+   revision an earlier stage recorded and stops on any disagreement, which is the
+   rule the states runner has followed since the second review's item 2. Two
+   further changes follow from it. First, when no earlier stage recorded a
+   revision, `--revision` is now required and the output marks it assumed rather
+   than recorded; **this withdraws the fallback described in item 6 of the first
+   review above**, which let the stage follow this machine's cache pointer
+   `refs/main` when the run recorded nothing, and that pointer can name weights a
+   run never used. Second, a stage handed its revision by hand now records that
+   fact in its own metadata, so the stage after it reads an assumption as an
+   assumption rather than as a measurement. **The committed run was not affected,
+   established here:** this machine holds exactly one version of the Qwen3-1.7B
+   weights, `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, and the cache pointer
+   names that one, so the old rule and the new one read the same files.
 
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
@@ -913,11 +1018,12 @@ Approximation check at layer 18, ordinary states: the largest difference between
 
 ![The mean cosine between word positions, repetition by repetition, for every prompt in both arms](output/collapse_over_iterations.png)
 
-*What to look at: no line reaches the upper reference line at 1.00, and only 2
-of the 30 lines touch the lower one at 0.99, briefly, before dropping back:
-`F01_anger` at five repetitions between 24 and 33, and `B03_moon` at
-repetitions 74 and 75, both in the main arm. No line ends above 0.99 and none
-climbs steadily toward either reference line. The horizontal axis is compressed
+*What to look at: the figure draws the merging measure over all word positions,
+which is the one H19 is scored on. No line reaches the upper reference line at
+1.00, and only 2 of the 30 lines touch the lower one at 0.99, briefly, before
+dropping back: `F01_anger` at five repetitions between 24 and 33, and
+`B03_moon` at repetitions 74 and 75, both in the main arm. No line ends above
+0.99 and none climbs steadily toward either reference line. The horizontal axis is compressed
 at the left so the first ten repetitions, where GPT-2 Small has already finished
 merging, are visible.*
 
@@ -972,9 +1078,28 @@ files were written before the runner recorded that field in them, so the stage
 cannot read it from them; without it the stage now stops rather than loading
 whatever the machine's cache pointer names today, which need not be the version
 this run used. Neither command needs a precision flag, because that stage reads
-the precision out of the results file, which is bfloat16 for this run.
+the precision out of the results file, which is bfloat16 for this run. Because
+the revision is supplied by hand, the states the command writes are marked in
+their own metadata as carrying an assumed revision rather than a recorded one,
+and that mark travels into anything scored from them.
+
+The J-space shares are then rebuilt from those states with `python3
+analyze_jspace.py --arm bare` and the same command with `--arm chat`, which take
+about 16 minutes and 6 minutes respectively on one processor thread of this
+machine. Each reads the revision out of the states metadata written by the
+command above and refuses to run if that metadata and any `--revision` given on
+the command line disagree.
+
+The two loop commands in `_run_all.sh` can be rerun as they stand: against the
+committed results files they find both arms complete, run no prompt and write
+nothing. Only a resume that still had a prompt to run would need
+`--assume-legacy-revision 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, because
+neither committed results file records the weights it was run on, and the runner
+will not put records made on two versions of the weights into one file.
 
 The lens files themselves are not committed either, because
 `_STAGE2_JSPACE/artifacts/` is not versioned by repository convention. Their
-SHA-256 fingerprints are in the specification and above, and the download
-command is one line of the specification.
+SHA-256 fingerprints are in the specification and above, the download command is
+one line of the specification, and the J-space stage now checks the lens file
+against the fingerprint the specification fixes and refuses to read a file that
+does not match.

@@ -21,16 +21,28 @@ Jacobians out of the lens file, and the per-layer states written by
 `run_exp018.py --stage states`.
 
 The weight files are read from one exact revision of the model, meaning one
-named version of its files on the Hugging Face hub. The revision comes from
-`--revision` if given, otherwise from the metadata the states stage or the loop
-recorded, otherwise from the cache pointer an unpinned load follows. It is
-never chosen by sorting the cache directory, which orders revisions by their
-identifiers and not by which one a run used.
+named version of its files on the Hugging Face hub. A `--revision` given on the
+command line is checked against every revision the states stage and the loop
+recorded and stops the run if it contradicts one, because the unembedding
+matrix and the normalisation gain read here have to come from the same weights
+that produced the states being scored. When no earlier stage recorded a
+revision, `--revision` is required and what it names is written into the output
+as assumed rather than recorded. The revision is never chosen by sorting the
+cache directory, which orders revisions by their identifiers and not by which
+one a run used, and it is no longer taken from the cache pointer either, which
+can name weights the run never used.
+
+The lens file is downloaded rather than committed, so nothing in the repository
+vouches for the copy on this machine. Its SHA-256 fingerprint, the standard
+64-character summary of a file's exact contents, is checked against the one the
+specification fixes before any tensor is read, and is written into the output
+beside every number it produced.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 import time
@@ -42,13 +54,23 @@ import torch
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from qwen_port import resolve_revision, snapshot_dir  # noqa: E402
+from qwen_port import snapshot_dir  # noqa: E402
 
 torch.set_num_threads(1)
 
 OUT = HERE / "output"
 ART = (HERE / ".." / ".." / "artifacts").resolve()
 LENS_PT = ART / "qwen3-1.7b_jacobian_lens.pt"
+
+# The SHA-256 fingerprint the specification fixes for the lens file, in section
+# 2 of `_STAGE2_JSPACE/EXP_018_SPEC.md` under "The instrument". A SHA-256 is the
+# standard 64-character hexadecimal summary of a file's exact contents: two
+# files with the same fingerprint are the same file. The lens lives in
+# `_STAGE2_JSPACE/artifacts/`, which is not versioned, so this constant is the
+# only thing in the repository that says which lens produced a number. If the
+# lens is ever meant to change, the new fingerprint goes into a dated addendum
+# to the specification and into this constant in the same commit.
+LENS_SHA256 = "6fcc79011bd921ffd87612255e2e99950a124fa519470ee44ebaf161c39be9d6"
 
 BAND_LAYERS = list(range(11, 26))
 EARLY_LAYERS = [2, 5]
@@ -80,35 +102,143 @@ def load_unembed(revision: str) -> tuple[torch.Tensor, torch.Tensor]:
     return want["model.embed_tokens.weight"], want["model.norm.weight"]
 
 
-def revision_for(arm: str, meta: dict, explicit: str | None) -> tuple[str, str]:
-    """The revision of the weights to read, and the one-line reason for it.
+def recorded_revisions(arm: str, meta: dict) -> list[tuple[str, str, bool]]:
+    """Every weights revision an earlier stage recorded, each with its source
+    and with whether that stage marked it an assumption rather than a record.
 
-    A revision is the 40-character commit identifier naming one exact version
-    of the model's files on the Hugging Face hub. Order of authority: the
-    `--revision` option, then the revision the states stage recorded, then the
-    revision the loop recorded in its own results file, then the cache pointer
-    `refs/main`, which is the one an unpinned load follows. `resolve_revision`
-    stops with a message naming the directory it searched if that last step
-    cannot decide.
+    A revision is the 40-character commit identifier naming one exact version of
+    the model's files on the Hugging Face hub. Three places may carry one: the
+    states stage records the revision it pinned its own load to as
+    `model_revision` and the revision the loop had recorded as
+    `loop_model_revision`, and the loop's own results file records
+    `model_revision`. Any of the three may be absent, as all three are for the
+    runs committed with this experiment, which were made before the runner wrote
+    the field.
+
+    A stage that was handed its revision by hand rather than reading it from the
+    run before it says so in a companion field, and that mark travels with the
+    revision here, so an assumption made two stages ago is not read as a
+    measurement now.
     """
-    if explicit:
-        return explicit, "the --revision option"
+    found = []
     for key, where in (("model_revision", "the states stage metadata"),
                        ("loop_model_revision", "the loop metadata carried by "
                                                "the states stage")):
         if meta.get(key):
-            return meta[key], where
+            found.append((meta[key], where,
+                          bool(meta.get(f"{key}_assumed"))))
     res_path = OUT / f"results_{arm}.json"
     if res_path.exists():
-        rev = json.loads(res_path.read_text()).get("model_revision")
-        if rev:
-            return rev, f"the loop metadata in results_{arm}.json"
-    return (resolve_revision(),
-            "the local cache pointer refs/main, because neither the states "
-            "metadata nor the loop results record a revision")
+        loop = json.loads(res_path.read_text())
+        if loop.get("model_revision"):
+            found.append((loop["model_revision"],
+                          f"the loop metadata in results_{arm}.json",
+                          bool(loop.get("model_revision_assumed"))))
+    return found
 
 
-def load_lens() -> dict[int, torch.Tensor]:
+def revision_for(arm: str, meta: dict,
+                 explicit: str | None) -> tuple[str, str, bool]:
+    """The revision of the weights to read, the reason for it, and whether that
+    reason is an assumption rather than a record.
+
+    This stage reads the unembedding matrix and the final normalisation gain out
+    of the weight files and multiplies them into the lens directions that score
+    states another stage produced. Those states came out of one exact version of
+    the weights, so a `--revision` given here does not override what an earlier
+    stage recorded: it is checked against every recorded revision and any
+    disagreement stops the run, because a state made by one version and scored
+    against another version's unembedding is two experiments inside one number.
+
+    When nothing recorded a revision, as in the runs committed with this
+    experiment, `--revision` is required and the third return value is True, so
+    the output can say that the revision was confirmed by hand rather than
+    measured at the time. Falling back to the local cache pointer `refs/main`,
+    which this stage did before, is no longer allowed: that pointer can name
+    weights the run never used and the output would then be labelled with them.
+    """
+    found = recorded_revisions(arm, meta)
+    if explicit:
+        clashes = [f"{where} records {rev}" for rev, where, _ in found
+                   if rev != explicit]
+        if clashes:
+            raise SystemExit(
+                f"--revision {explicit} contradicts what an earlier stage "
+                f"recorded for arm {arm}: " + "; ".join(clashes) + ".\n"
+                f"The states about to be scored came out of the recorded "
+                f"version, so reading the unembedding matrix and the "
+                f"normalisation gain from {explicit} would put two versions of "
+                f"the weights inside one measurement. Drop the flag to use the "
+                f"recorded revision.")
+        if found:
+            rev, where, was_assumed = found[0]
+            return explicit, (f"the --revision option, which agrees with "
+                              f"{where}"
+                              + (", which is itself an assumption confirmed by "
+                                 "hand rather than a record"
+                                 if was_assumed else "")), was_assumed
+        return explicit, ("the --revision option, assumed rather than recorded: "
+                          "neither the states metadata nor the loop results "
+                          "record a revision, so this is what the operator "
+                          "confirmed by hand"), True
+    if found:
+        rev, where, was_assumed = found[0]
+        return rev, (where + (", which records it as an assumption confirmed by "
+                              "hand rather than a measurement"
+                              if was_assumed else "")), was_assumed
+    raise SystemExit(
+        f"neither the states metadata for arm {arm} nor results_{arm}.json "
+        f"records a weights revision, so this stage cannot tell which version "
+        f"of the model's files produced the states it is about to score. Pass "
+        f"--revision <40-character identifier> naming the weights that run "
+        f"used; the output records it as assumed rather than measured. "
+        f"Following the local cache pointer refs/main instead, which this stage "
+        f"did before, can read a version the run never used and then label "
+        f"every share with it.")
+
+
+def verify_lens_file() -> str:
+    """Check the lens file against the fingerprint the specification fixes, and
+    return that fingerprint. Refuses before a single tensor is read.
+
+    The lens file is downloaded into `_STAGE2_JSPACE/artifacts/`, which is not
+    versioned, so the repository holds no copy to compare against and a wrong or
+    truncated download would change every H19b number without changing anything
+    a reader could see. Reading 226 megabytes to compute the fingerprint takes
+    about 20 seconds, which is under 3 percent of this stage's 16-minute run on
+    the main arm.
+    """
+    if not LENS_PT.exists():
+        raise SystemExit(
+            f"the Jacobian lens file is not on this machine: expected it at "
+            f"{LENS_PT}. It is downloaded rather than committed, because "
+            f"_STAGE2_JSPACE/artifacts/ is not versioned. Section 2 of "
+            f"_STAGE2_JSPACE/EXP_018_SPEC.md names the source, "
+            f"neuronpedia/jacobian-lens at path "
+            f"qwen3-1.7b/jlens/Salesforce-wikitext, and the fingerprint to "
+            f"expect.")
+    h = hashlib.sha256()
+    with LENS_PT.open("rb") as fh:
+        for block in iter(lambda: fh.read(1 << 20), b""):
+            h.update(block)
+    digest = h.hexdigest()
+    if digest != LENS_SHA256:
+        raise SystemExit(
+            f"refusing to read {LENS_PT}: its SHA-256 fingerprint, the "
+            f"64-character summary of its exact contents, is {digest}, and the "
+            f"specification fixes {LENS_SHA256} for this file. A different lens "
+            f"gives different J-space shares, so this is not the instrument "
+            f"EXP_018 registered. Download the file again from "
+            f"neuronpedia/jacobian-lens, path "
+            f"qwen3-1.7b/jlens/Salesforce-wikitext; if the lens is meant to "
+            f"change, record the new fingerprint in a dated addendum to the "
+            f"specification and in LENS_SHA256 here, in the same commit.")
+    return digest
+
+
+def load_lens() -> tuple[dict[int, torch.Tensor], int]:
+    """The fitted Jacobians by layer, and the number of prompts they were fitted
+    on. Call `verify_lens_file` first: this reads the file without checking it."""
     ck = torch.load(LENS_PT, map_location="cpu", weights_only=True)
     return {int(l): J.float() for l, J in ck["J"].items()}, ck["n_prompts"]
 
@@ -217,7 +347,11 @@ def main() -> None:
     ap.add_argument("--draws", type=int, default=10000)
     ap.add_argument("--revision", default=None,
                     help="the exact Hugging Face revision of the weights to "
-                         "read; defaults to the one the run recorded")
+                         "read, given as its 40-character identifier. It must "
+                         "agree with every revision the states stage and the "
+                         "loop recorded, and is required when neither recorded "
+                         "one, as is the case for the committed runs; the "
+                         "output then marks it assumed rather than recorded")
     args = ap.parse_args()
 
     t_start = time.time()
@@ -225,8 +359,14 @@ def main() -> None:
     meta = json.loads((Path(args.states_dir)
                        / f"layer_states_{args.arm}_meta.json").read_text())
     prompt_ids = [p["id"] for p in meta["prompts"]]
-    revision, rev_source = revision_for(args.arm, meta, args.revision)
-    print(f"weights revision {revision}, from {rev_source}", flush=True)
+    # Both of these refuse before anything large is read: the revision decision
+    # costs nothing, and the fingerprint check reads the lens file once.
+    revision, rev_source, rev_assumed = revision_for(args.arm, meta, args.revision)
+    print(f"weights revision {revision}, from {rev_source}"
+          f"{' (assumed, not recorded)' if rev_assumed else ''}", flush=True)
+    lens_sha256 = verify_lens_file()
+    print(f"lens {LENS_PT.name}: SHA-256 {lens_sha256} matches the one the "
+          f"specification fixes", flush=True)
     W_U, gamma = load_unembed(revision)
     lens, lens_n_prompts = load_lens()
     d_model = W_U.shape[1]
@@ -240,6 +380,8 @@ def main() -> None:
     results = {
         "arm": args.arm, "model_revision": revision,
         "model_revision_source": rev_source,
+        "model_revision_assumed": rev_assumed,
+        "lens_file": LENS_PT.name, "lens_sha256": lens_sha256,
         "k_atoms": K_ATOMS, "candidate_pool": CANDIDATE_POOL,
         "scored_layers": SCORED_LAYERS, "band_layers": BAND_LAYERS,
         "early_layers": EARLY_LAYERS, "rotation_seeds": rot_seeds,
