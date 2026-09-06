@@ -57,7 +57,7 @@ Format as in `REGISTER.md` section 2:
    identifiers erratum (f) allocated on 2026-09-05, and this experiment used
    only those, plus existing identifiers in citations.
 4. **Deviations** are listed flat in `RESULTS_EXP017.md` §4, and there are now
-   twenty. The one a register reader is most likely to want is that the
+   twenty-two. The one a register reader is most likely to want is that the
    twin's Jacobian lens was fitted on 40 WikiText-103 prompts, below the 50 the
    spec named as a deviation threshold and well below the 277 of the
    Neuronpedia lens it is compared against, by the mechanical application of
@@ -83,7 +83,9 @@ Format as in `REGISTER.md` section 2:
    and layers 5, 6, 7 and 8 in the second. The same-lens cross-check quoted in
    the H18b row above has the twin above base in all 22 comparisons by 0.0167
    to 0.0889 in the first convention, and in 4 of 22 by at most 0.0122 in the
-   second. Artifacts: `output/exp017_jspace.json` and
+   second. Artifacts: `output/exp017_jspace.json`, regenerated on 2026-09-06
+   with every result field identical to the version first committed and the
+   provenance stamps added, as deviation 22 records, and
    `output/exp017_jspace_hfframe.json`, with the frame measurement itself in
    `output/frame_check.json`. **This session changed no verdict and proposes
    none:** the row above still carries the numbers this run measured, and

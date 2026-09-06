@@ -129,8 +129,16 @@ def main():
 
     # ---- H18b ---------------------------------------------------------------
     jp = OUT / "exp017_jspace.json"
-    if jp.exists():
-        j = json.load(open(jp))
+    j = json.load(open(jp)) if jp.exists() else None
+    # The four combinations of whose states and whose lens, in the order the
+    # record's control tables use them. Defined here rather than inside the
+    # registered section, because the Hugging Face frame section below renders
+    # the same table and must not depend on the registered artifact existing.
+    adjusted_all = [("base-on-base", "base states, base lens"),
+                    ("twin-on-twin", "twin states, twin lens"),
+                    ("twin-on-base", "twin states, base lens"),
+                    ("base-on-twin", "base states, twin lens")]
+    if j is not None:
         hb = j["h18b"]
         lines += ["## H18b: the J-space share", "",
                   f"- Verdict: **{hb['h18b']}** "
@@ -164,11 +172,8 @@ def main():
         # over the three rotation seeds of that control's median share, so a
         # positive number means the real dictionary explains more of the state
         # than a randomly rotated copy of the same dictionary does.
-        adjusted = [("base-on-base", "base states, base lens"),
-                    ("twin-on-twin", "twin states, twin lens"),
-                    ("twin-on-base", "twin states, base lens"),
-                    ("base-on-twin", "base states, twin lens")]
-        adjusted = [(k, label) for k, label in adjusted if k in j["cross_checks"]]
+        adjusted = [(k, label) for k, label in adjusted_all
+                    if k in j["cross_checks"]]
         lines += ["", "### Real minus its own rotation control", "",
                   "Each cell is the median share over the 25 prompts minus the "
                   "mean over the three seeds of the control's median share. A "
@@ -262,18 +267,23 @@ def main():
                 f"| {r['abs_median_difference']:.4f} | {r['control_spread']:.4f} "
                 f"| {r['perm_p']} | {fmt(r['both_conditions'])} "
                 f"| {'yes' if r['in_band'] else 'no'} |")
+        # The registered artifact is optional here: without it this section
+        # renders the Hugging Face columns alone rather than failing.
+        sources = [(j, "registered frame"), (hj, "Hugging Face frame")]
+        sources = [(s, label) for s, label in sources if s is not None]
+        header = " | ".join(f"{label}, {lens} lens"
+                            for s, label in sources for lens in ("base", "twin"))
         lines += ["", "### The same-lens comparison in the two frames", "",
                   "The model effect holds the lens fixed and swaps whose settled "
                   "states are decomposed, so a positive number means the twin's "
                   "states have the higher share. The registered frame is the "
                   "TransformerLens one; the Hugging Face frame is the sensitivity "
                   "arm.", "",
-                  "| layer | registered frame, base lens | registered frame, twin "
-                  "lens | Hugging Face frame, base lens | Hugging Face frame, twin "
-                  "lens |", "|---|---|---|---|---|"]
+                  f"| layer | {header} |",
+                  "|---" * (1 + 2 * len(sources)) + "|"]
         for l in hj["probe_layers"]:
             cells = []
-            for source in (j, hj):
+            for source, _ in sources:
                 for lens in ("base", "twin"):
                     rows = source.get("same_lens_model_effect", {}).get(lens)
                     if rows is None:
@@ -294,13 +304,16 @@ def main():
                     f"| {l} | {r['smallest_model_effect']:.4f} "
                     f"| {r['largest_lens_effect']:.4f} "
                     f"| {r['ratio_smallest_model_over_largest_lens']:.1f} times |")
+        adjusted_hf = [(k, label) for k, label in adjusted_all
+                       if k in hj["cross_checks"]]
         lines += ["", "### Real minus its own rotation control, Hugging Face "
                   "frame", "",
-                  "| layer | " + " | ".join(label for _, label in adjusted) + " |",
-                  "|---" * (1 + len(adjusted)) + "|"]
+                  "| layer | " + " | ".join(label for _, label in adjusted_hf)
+                  + " |",
+                  "|---" * (1 + len(adjusted_hf)) + "|"]
         for l in hj["probe_layers"]:
             cells = []
-            for key, _ in adjusted:
+            for key, _ in adjusted_hf:
                 c = hj["cross_checks"][key][str(l)]
                 ctrls = c["median_controls"]
                 cells.append(f"{c['median_real'] - sum(ctrls) / len(ctrls):+.4f}")

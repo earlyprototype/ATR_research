@@ -259,13 +259,35 @@ def _states_hf(which, prompt_ids):
     return states, W_U, rescales
 
 
-def budget_n_prompts(path=BUDGET_JSON):
+def budget_requirement(path=BUDGET_JSON):
     """The prompt count the spec's budget rule chose for the twin's lens fit,
-    read from the decision that rule already wrote. Returns None when that file
-    is absent, in which case the caller has nothing to validate against."""
+    and a sentence saying where it came from.
+
+    Returns (count, sentence) with a positive count, or (None, sentence) in the
+    two cases where there is no count to require: the decision file is absent,
+    which is a broken checkout, and the decision itself says no positive prompt
+    count fits inside the wall-clock cap, which is the spec's section 6.2
+    fallback reached before any fitting starts. Both are fail-closed for the
+    caller: with no requirement, no lens can be shown to be the registered
+    instrument.
+    """
     if not path.exists():
-        return None
-    return int(json.load(open(path))["chosen_n_prompts"])
+        return None, (f"{path.name} is absent, so the prompt count the budget "
+                      f"rule chose cannot be read")
+    record = json.load(open(path))
+    chosen = record.get("chosen_n_prompts")
+    count = int(chosen) if chosen is not None else 0
+    if count <= 0:
+        return None, (f"{path.name} records that no positive prompt count fits "
+                      f"inside the fit's wall-clock cap: "
+                      f"{record.get('rule', 'no reason recorded')}")
+    return count, f"the budget rule chose {count} prompts ({path.name})"
+
+
+def budget_n_prompts(path=BUDGET_JSON):
+    """The prompt count the budget rule chose, or None when there is none. The
+    reason for a None is available from budget_requirement."""
+    return budget_requirement(path)[0]
 
 
 def twin_lens_decision(n_fitted, required, allow_short):
@@ -275,10 +297,17 @@ def twin_lens_decision(n_fitted, required, allow_short):
     the budget rule chose, "sensitivity" when it is shorter and the caller has
     opted in, and "refused" when it is shorter and has not. A refused lens sends
     the run down the spec's section 6.2 route, both sides on the base lens.
+
+    A requirement of None means the budget rule's decision could not be read,
+    which is a broken checkout rather than a permissive one: nothing then
+    establishes that any lens is the registered instrument, so the lens is
+    refused rather than waved through. That is the fail-closed direction, and it
+    matters because the alternative reading, accepting every prompt count, would
+    have let a bare verdict out of a tree missing its own budget artifact.
     """
-    if n_fitted is None:
+    if n_fitted is None or required is None:
         return "refused"
-    if required is None or n_fitted >= required:
+    if n_fitted >= required:
         return "accepted"
     return "sensitivity" if allow_short else "refused"
 
@@ -369,7 +398,11 @@ def sensitivity_reasons(*, frame, short_reading, twin_n_prompts, required,
     if short_reading:
         reasons.append(f"the twin lens was fitted on {twin_n_prompts} prompts "
                        f"against the {required} the budget rule chose")
-    if not registered_requirement:
+    if required is None:
+        reasons.append("the prompt count the budget rule chose could not be "
+                       "read, so nothing establishes that any twin lens is the "
+                       "registered instrument")
+    elif not registered_requirement:
         reasons.append(f"this run required {required} fitting prompts of a twin "
                        f"lens where the budget rule chose {budget}")
     return reasons
@@ -384,9 +417,12 @@ def requirement_decision(override, budget):
     lower or raise it for a deliberate check, but a run whose requirement is not
     the budget's own count is not the registered comparison, whatever it then
     accepts, so this returns that fact rather than leaving it implicit.
+
+    A budget of None, meaning that decision could not be read, is never
+    registered: with no requirement to meet there is nothing to establish.
     """
     if override is None:
-        return budget, True
+        return budget, budget is not None
     return override, budget is not None and int(override) == int(budget)
 
 
@@ -442,6 +478,41 @@ def selftest():
           got == "sensitivity", got)
     got = twin_lens_decision(None, 40, True)
     check("no lens is never accepted", got == "refused", got)
+    got = twin_lens_decision(40, None, False)
+    check("with no requirement to meet, a lens is refused rather than waved "
+          "through", got == "refused", got)
+    got = twin_lens_decision(1000, None, True)
+    check("that holds however many prompts the lens was fitted on",
+          got == "refused", got)
+
+    # Where the requirement comes from, and the two ways there can be none.
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        missing = Path(tmp) / "fit_budget_decision.json"
+        n, why = budget_requirement(missing)
+        check("an absent budget decision leaves no requirement",
+              n is None and "absent" in why, why)
+        zero = Path(tmp) / "zero.json"
+        zero.write_text(json.dumps(
+            {"chosen_n_prompts": 0,
+             "rule": "no positive multiple of ten fits inside the cap"}))
+        n, why = budget_requirement(zero)
+        check("a budget decision that says nothing fits leaves no requirement",
+              n is None and "no positive prompt count fits" in why, why)
+        forty = Path(tmp) / "forty.json"
+        forty.write_text(json.dumps({"chosen_n_prompts": 40}))
+        n, why = budget_requirement(forty)
+        check("a budget decision with a positive count gives the requirement",
+              n == 40, why)
+        got = requirement_decision(None, budget_requirement(zero)[0])
+        check("no requirement is never the registered requirement",
+              got == (None, False), str(got))
+        got = sensitivity_reasons(frame=FRAME_REGISTERED, short_reading=False,
+                                  twin_n_prompts=40, required=None,
+                                  registered_requirement=False, budget=None)
+        check("a run with no requirement to check is a sensitivity reading and "
+              "says why", len(got) == 1 and "could not be read" in got[0],
+              "; ".join(got))
 
     required = budget_n_prompts()
     check("the budget rule's chosen prompt count is readable",
@@ -676,7 +747,7 @@ def main():
     # is either a fit the wall-clock cap stopped or a deliberately smaller one,
     # and scoring it as registered would report SUPPORTED or NOT SUPPORTED where
     # spec section 6.2 requires the base lens on both sides.
-    budget = budget_n_prompts()
+    budget, budget_why = budget_requirement()
     required, registered_requirement = requirement_decision(
         args.twin_lens_min_prompts, budget)
     short_reading = False
@@ -686,9 +757,14 @@ def main():
                                   if args.twin_lens_min_prompts is not None
                                   else "output/fit_budget_decision.json"),
         "budget_rule_n_prompts": budget,
+        "budget_rule_note": budget_why,
         "requirement_is_the_registered_one": registered_requirement,
         "allow_short_twin_lens": bool(args.allow_short_twin_lens)}
-    if not registered_requirement:
+    if budget is None:
+        print(f"NO BUDGET REQUIREMENT: {budget_why}. No twin lens can be shown "
+              f"to be the registered instrument, so any lens offered is refused "
+              f"and the spec's section 6.2 route is taken.", flush=True)
+    if args.twin_lens_min_prompts is not None and not registered_requirement:
         print(f"REQUIREMENT OVERRIDDEN: this run asks a twin lens for "
               f"{required} prompts where the budget rule chose {budget}, so it "
               f"is a sensitivity reading whatever it accepts.", flush=True)
@@ -728,9 +804,13 @@ def main():
                 "refused for registered scoring; spec section 6.2 route taken")
             rep["lenses"]["twin_refused"] = rep["lenses"].pop("twin")
             rep["lenses"]["twin"] = None
-            why = ("its provenance: " + "; ".join(reasons) if prov == "refused"
-                   else f"it was fitted on {n_fitted} prompts, short of the "
-                        f"{required} the budget rule chose")
+            if prov == "refused":
+                why = "its provenance: " + "; ".join(reasons)
+            elif required is None:
+                why = f"there is no requirement to check it against: {budget_why}"
+            else:
+                why = (f"it was fitted on {n_fitted} prompts, short of the "
+                       f"{required} the budget rule chose")
             print(f"TWIN LENS REFUSED because {why}. Scoring both sides on "
                   f"the base lens (spec section 6.2 fallback). Pass "
                   f"--allow-short-twin-lens to score a short lens as a "

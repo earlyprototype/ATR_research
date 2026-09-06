@@ -1,10 +1,15 @@
 base lens: {'n_prompts': 277, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 twin lens: {'n_prompts': 5, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 6380.64it/s]
+
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 149/149 [00:00<00:00, 6380.64it/s]
 Loaded pretrained model gpt2 into HookedTransformer
 twin: per-layer states read, rescale factor mean 0.269268
-Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights:  20%|██        | 30/148 [00:00<00:00, 281.96it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 961.91it/s]
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights:  20%|██        | 30/148 [00:00<00:00, 281.96it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 961.91it/s]
 Loaded pretrained model gpt2 into HookedTransformer
 base: per-layer states read, rescale factor mean 0.281368
 lens diagnostics: {"0": {"base": {"frobenius_norm": 23.46354103088379}, "twin": {"frobenius_norm": 26.428678512573242}, "cosine_between_the_two_lenses": 0.8486043214797974}, "10": {"base": {"frobenius_norm": 47.43286895751953}, "twin": {"frobenius_norm": 49.11417770385742}, "cosine_between_the_two_lenses": 0.9822151064872742}}
@@ -172,3 +177,51 @@ this log is the dated trail the results record cites.
     prompts was re-checked against
     experiments/exp_010c_windows/output/results_small010b_SB.json and
     reproduces at 25 of 25.
+
+2026-09-06, fifth round of pull request review fixes. Five findings, all five
+real. One registered artifact was regenerated, with every result field identical,
+and that is the only artifact under output/ this round changed.
+  python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+      --accept-unstamped-twin-lens --out-suffix _regen
+    -> 213 seconds. Compared with the committed output/exp017_jspace.json field
+       by field: all 4,400 share values, every control spread, every permutation
+       p, every cross-check, every model-effect and instrument-effect number,
+       every lens diagnostic, the rescale factors and the verdict string
+       SUPPORTED with band layers 6, 7, 9 and 10 are identical. Exactly one
+       numeric field differs, wall_seconds at 213.4 against 159.5, which is the
+       clock rather than a result; two path strings differ, now holding the
+       paths the documented command passes rather than one absolute path from
+       the machine that ran it on 2026-09-05; and 13 fields are added, all of
+       them provenance, budget and frame stamps. On that evidence the
+       regenerated file replaced output/exp017_jspace.json, so the artifact now
+       carries the twin_lens_provenance record the results record describes. The
+       version it replaces stands in this branch's history at commit 1effbab.
+  python3 make_tables.py
+    -> regenerated output/tables.md from the replaced artifact with no line
+       added, changed or removed, which is the check that the replacement
+       changed no number the record quotes.
+  choose_fit_budget.py, re-run in a scratch directory on the committed probe log
+    -> reproduces output/fit_budget_decision.json byte for byte, 221.0 seconds a
+       prompt and 40 prompts, so the committed decision is unaffected by the new
+       handling of a probe too slow for any fit. On a doctored log at 1,000
+       seconds a prompt the rule now writes a chosen count of zero and says the
+       section 6.2 fallback applies, where it used to write ten and call it a
+       fit.
+  make_tables.py, run in a scratch directory on all three artifact states
+    -> with the Hugging Face frame artifact alone it renders 197 lines and its
+       sensitivity columns without the registered ones, where it used to fail
+       with an unbound local variable; with the registered artifact alone it
+       renders 185 lines and no Hugging Face section; with neither it says the
+       J-space share is not yet computed. All three exit 0.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 42 checks, six of them new:
+       a checkpoint whose fit was stopped as short or as overran is refused on
+       both the resume path and the seeding path rather than being given a
+       second wall-clock cap, a checkpoint from a fit that finished inside its
+       cap is resumed, and a sidecar with no outcome recorded, which is what a
+       fit in progress leaves, stays continuable.
+  python3 run_jspace.py --selftest -> ALL PASS, 43 checks, seven of them new: a
+       lens is refused when there is no requirement to check it against, an
+       absent budget decision and one recording that nothing fits both leave no
+       requirement, no requirement is never the registered requirement, and a
+       run in that state is a sensitivity reading that says why.

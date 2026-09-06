@@ -6,6 +6,13 @@ measured seconds per prompt from the five-prompt probe; choose 100 prompts if
 the largest multiple of 10 whose projected time is at most 9000. A count below
 50 is a recorded deviation.
 
+Above 900 seconds a prompt the rule has nothing to choose, because not even ten
+prompts fit inside the cap. That case writes a chosen count of zero and says so
+in the decision's own `rule` field, which run_jspace.py reads as the spec's
+section 6.2 fallback: no twin lens can be the registered instrument, so H18b is
+scored with the base lens on both sides. The committed decision is not that
+case: the probe measured 221.0 seconds a prompt and the rule chose 40.
+
 Writes output/fit_budget_decision.json and prints the chosen count.
 """
 import json
@@ -28,15 +35,28 @@ if 100 * t <= CAP:
 elif 50 * t <= CAP:
     n, why = 50, "100 prompts exceed the cap, 50 fit inside it"
 else:
-    n = max(10, (int(CAP // t) // 10) * 10)
-    why = ("neither 100 nor 50 prompts fit inside the cap, so the largest "
-           "multiple of ten that does was taken")
+    n = (int(CAP // t) // 10) * 10
+    if n >= 10:
+        why = ("neither 100 nor 50 prompts fit inside the cap, so the largest "
+               "multiple of ten that does was taken")
+    else:
+        # Above 900 seconds a prompt, even ten prompts cost more than the cap
+        # allows, so there is no count for the rule to choose. Recording ten
+        # here and calling it a fit would be a false statement about the clock;
+        # the spec's section 6.2 fallback is the honest outcome, and
+        # run_jspace.py reads a count of zero as exactly that.
+        n = 0
+        why = ("no positive multiple of ten fits inside the cap at "
+               f"{round(t, 1)} seconds a prompt, so no twin lens can be fitted "
+               "as the registered instrument and the spec's section 6.2 "
+               "fallback applies: H18b is scored with the base lens on both "
+               "sides")
 
 rec = {"per_prompt_seconds": times, "n_probe_prompts": len(times),
        "mean_seconds_per_prompt": round(t, 1), "cap_seconds": CAP,
        "chosen_n_prompts": n, "projected_seconds": round(n * t),
        "rule": why,
-       "below_50_is_a_recorded_deviation": n < 50,
+       "below_50_is_a_recorded_deviation": 0 < n < 50,
        "dim_batch": 16,
        "dim_batch_reason": ("peak resident memory measured at about 2.5 "
                             "gigabytes at dim_batch 16, and the spec caps peak "

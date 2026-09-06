@@ -44,6 +44,17 @@ The committed five-prompt probe checkpoint predates the sidecar and has none, so
 seeding from it now needs the explicit --accept-unstamped-checkpoint, which is
 recorded in the sidecar this fit writes.
 
+One kind of checkpoint is never continued: one whose sidecar records that the
+fit which wrote it was stopped by the clock, either short of the prompt count or
+past the cap. Continuing that work would hand it a second full cap, and the
+resumed fit, measuring only its own hours, would finish as complete and stamp a
+lens whose true cost was the sum of both runs. Spec section 6.2 already says
+what a fit the cap stops means, which is that H18b is scored with the base lens
+on both sides, so both the seeding path and the resume path refuse it and say
+so. A deliberately longer fit is still possible under its own --tag with its own
+--deadline-seconds, and the lens it writes carries that longer cap in its stamp,
+which run_jspace.py refuses to score as the registered comparison.
+
 Weights: pinned to the revision, that is the Hugging Face repository commit,
 recorded in exp017_models.py, unless --model-path names a local directory.
 
@@ -252,6 +263,38 @@ def provenance_mismatches(have, want, keys=PROVENANCE_KEYS_COMPARED):
     return out
 
 
+def stopped_fit_reason(have):
+    """Why a checkpoint may not be continued, when the fit that wrote it was
+    stopped by the clock rather than finished.
+
+    Returns None when the checkpoint is continuable. A sidecar carrying
+    `fit_outcome` of "short" or "overran" was written by a fit that the
+    wall-clock cap stopped, and continuing it hands that work a second full cap:
+    the resumed fit would measure only its own hours, finish as "complete", and
+    stamp a lens whose true cost was the sum of both runs. The spec's section
+    6.2 says what to do with a fit the cap stops, which is to score H18b on the
+    base lens for both sides, so this refuses rather than restarting the clock.
+    Raising --deadline-seconds is still possible for a deliberate longer fit,
+    and the lens it produces is stamped with that longer cap, which
+    run_jspace.py already refuses to score as the registered comparison.
+    """
+    if not have:
+        return None
+    outcome = have.get("fit_outcome")
+    if outcome in (None, "complete"):
+        return None
+    spent = have.get("fit_wall_seconds")
+    cap = have.get("deadline_seconds")
+    spent_text = "" if spent is None else f" after {float(spent):.0f} seconds"
+    cap_text = "" if cap is None else f" against a {float(cap):.0f} second cap"
+    return (f"the fit that wrote it was stopped as {outcome!r}{spent_text}"
+            f"{cap_text}, and continuing it would give that work a second full "
+            f"cap. Spec section 6.2 covers a fit the cap stops: score H18b with "
+            f"the base lens on both sides. To fit more prompts deliberately, "
+            f"start a fit under its own --tag with a --deadline-seconds you are "
+            f"willing to record, which stamps the lens with that cap")
+
+
 def read_provenance(checkpoint_path):
     """The provenance sidecar beside a checkpoint, or None when it has none."""
     path = provenance_path(checkpoint_path)
@@ -339,6 +382,9 @@ def seed_checkpoint(target, source, n_prompts, want=None,
             if bad:
                 return (f"not seeding: {source} was fitted with a different "
                         f"setup: " + "; ".join(bad))
+            stopped = stopped_fit_reason(have)
+            if stopped:
+                return f"not seeding: {source} cannot be continued because " + stopped
     shutil.copyfile(source, target)
     if want is not None:
         record = dict(want)
@@ -396,6 +442,9 @@ def checkpoint_ready(target, want, accept_unstamped=False):
     if bad:
         return False, (f"refusing to resume {target}: it was fitted with a "
                        f"different setup: " + "; ".join(bad))
+    stopped = stopped_fit_reason(have)
+    if stopped:
+        return False, f"refusing to resume {target}: " + stopped
     return True, f"resuming {target}, whose provenance matches this fit"
 
 
@@ -723,6 +772,33 @@ def selftest():
         ready, msg = checkpoint_ready(mine, want)
         check("an existing checkpoint that matches this fit is resumed",
               ready and msg.startswith("resuming"), msg)
+
+        # A checkpoint the clock stopped is not continuable, because continuing
+        # it would hand the same work a second full cap.
+        for outcome, spent in (("overran", 9619.0), ("short", 8950.0)):
+            write_provenance(mine, dict(want, fit_outcome=outcome,
+                                        fit_wall_seconds=spent,
+                                        deadline_seconds=CAP_SECONDS))
+            ready, msg = checkpoint_ready(mine, want)
+            check(f"a checkpoint whose fit was stopped as {outcome} is refused, "
+                  f"not given a second cap",
+                  ready is False and outcome in msg and "second full cap" in msg,
+                  msg)
+            seeded = seed_checkpoint(os.path.join(tmp, f"s_{outcome}.ckpt.pt"),
+                                     mine, 40, want)
+            check(f"seeding from a {outcome} checkpoint is refused too",
+                  seeded.startswith("not seeding") and "second full cap" in seeded,
+                  seeded)
+        write_provenance(mine, dict(want, fit_outcome="complete",
+                                    fit_wall_seconds=8253.0,
+                                    deadline_seconds=CAP_SECONDS))
+        ready, msg = checkpoint_ready(mine, want)
+        check("a checkpoint from a fit that finished inside its cap is resumed",
+              ready and msg.startswith("resuming"), msg)
+        check("a sidecar with no outcome recorded, which is what a fit in "
+              "progress leaves, is continuable",
+              stopped_fit_reason(want) is None
+              and stopped_fit_reason(None) is None)
         ready, msg = checkpoint_ready(os.path.join(tmp, "absent.ckpt.pt"), want)
         check("no checkpoint at all is not an error", ready and "starts fresh" in msg,
               msg)

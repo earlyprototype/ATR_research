@@ -59,7 +59,7 @@
   ],
   "lenses": {
     "base": {
-      "path": "/home/user/ATR_research/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt",
+      "path": "/home/user/wt/exp017/_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt",
       "sha256": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
       "sha256_expected": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
       "digest_verified": true,
@@ -77,10 +77,11 @@
         8,
         9,
         10
-      ]
+      ],
+      "provenance": null
     },
     "twin": {
-      "path": "/home/user/wt/exp017/_STAGE2_JSPACE/artifacts/jlens_lamini_gpt2_124m_40_twin.pt",
+      "path": "../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt",
       "sha256": "8ccf4b7a12b1c4f3bd56df5cbe2ec8228260ca676618c7fa09f7f2b83595c280",
       "n_prompts": 40,
       "d_model": 768,
@@ -96,7 +97,62 @@
         8,
         9,
         10
-      ]
+      ],
+      "provenance": null
+    }
+  },
+  "frame": "tl",
+  "registered_frame": "tl",
+  "frame_note": "tl: states and dictionary from the TransformerLens conversion, whose unembedding folds in the final normalisation gain and subtracts a common vector from every vocabulary direction. hf: states and dictionary from the Hugging Face model, the frame the Jacobians were fitted in.",
+  "twin_lens_budget": {
+    "required_n_prompts": 40,
+    "source_of_requirement": "output/fit_budget_decision.json",
+    "budget_rule_n_prompts": 40,
+    "budget_rule_note": "the budget rule chose 40 prompts (fit_budget_decision.json)",
+    "requirement_is_the_registered_one": true,
+    "allow_short_twin_lens": false,
+    "twin_lens_n_prompts": 40,
+    "meets_budget": true,
+    "decision": "accepted",
+    "action": "accepted as registered"
+  },
+  "twin_lens_provenance": {
+    "expected": {
+      "model": "MBZUAI/LaMini-GPT-124M",
+      "revision": "fc740804ff49f50fe3ef871b31eb2d5a5584132c",
+      "corpus_sha256": "c325a40c06f5dcfe14a3cea02afe1d64d42914146822c63e111dc665fdeba8d7",
+      "max_seq_len": 128,
+      "source_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "target_layer": 11,
+      "skip_first": 16,
+      "fit_outcome": "complete"
+    },
+    "stamped": null,
+    "decision": "unstamped",
+    "reasons": [],
+    "accept_unstamped_twin_lens": true
+  },
+  "sensitivity_reasons": [],
+  "state_mean_over_coordinates": {
+    "twin": {
+      "max_abs_mean": 8.766849646235642e-07,
+      "mean_state_norm": 750.0070190429688
+    },
+    "base": {
+      "max_abs_mean": 1.1262794714639313e-06,
+      "mean_state_norm": 866.960205078125
     }
   },
   "terminal_rescale_to_injection_size": {
@@ -6345,7 +6401,11 @@
       10
     ],
     "n_band_layers_meeting_both": 4,
-    "h18b": "SUPPORTED"
+    "h18b": "SUPPORTED",
+    "registered_scoring": true,
+    "sensitivity_reasons": [],
+    "frame": "tl",
+    "twin_lens_provenance_decision": "unstamped"
   },
   "cross_checks": {
     "twin-on-base": {
@@ -7075,5 +7135,5 @@
       "ratio_smallest_model_over_largest_lens": 8.353442475891455
     }
   },
-  "wall_seconds": 159.5
+  "wall_seconds": 213.4
 }
