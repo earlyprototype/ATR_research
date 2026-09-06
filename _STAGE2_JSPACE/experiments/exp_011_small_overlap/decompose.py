@@ -26,7 +26,7 @@ OUT = os.path.join(HERE, "output")
 sys.path.insert(0, HERE)
 from jspace import (decompose, unit_rows, random_rotation,          # noqa: E402
                     gaussian_dictionary_like, K_ATOMS, _self_test)
-from lens_gate import LENS_PT, verify_lens                          # noqa: E402
+from lens_gate import LENS_PT, sha256, verify_lens                  # noqa: E402
 
 # The lens path, digest and size the specification's section 3 pins live in
 # lens_gate.py, and every stage that opens the lens calls the same gate: a lens
@@ -127,9 +127,27 @@ def main():
     log("self-test of the decomposition")
     _self_test()
 
-    npz = np.load(os.path.join(OUT, "states.npz"))
+    npz_path = os.path.join(OUT, "states.npz")
+    meta_path = os.path.join(OUT, "states_meta.json")
+    npz = np.load(npz_path)
     families = [k for k in npz.files if k != "directions"]
     log(f"state families: {[(f, npz[f].shape) for f in families]}")
+    # Which state files these shares were computed from, so that a later stage can
+    # refuse to combine them with states rebuilt afterwards. The metadata carries
+    # the positional indices the scoring and the readout apply to the arrays saved
+    # below: the medoid representatives, the run-17 convergence mask and the order
+    # of the named states. Rebuilding the states without re-running this stage
+    # would leave those indices addressing a different ordering.
+    state_binding = {
+        "states_npz_sha256": sha256(npz_path),
+        "states_npz_bytes": os.path.getsize(npz_path),
+        "states_meta_sha256": sha256(meta_path),
+        "states_meta_generated": json.load(open(meta_path)).get("generated"),
+        "state_counts": {k: int(npz[k].shape[0]) for k in npz.files},
+    }
+    log(f"state files: states.npz {state_binding['states_npz_sha256'][:16]}..., "
+        f"states_meta.json {state_binding['states_meta_sha256'][:16]}..., built "
+        f"{state_binding['states_meta_generated']}")
 
     from jlens.lens import JacobianLens
     from transformers import AutoModelForCausalLM
@@ -160,7 +178,8 @@ def main():
                "lens_sha256": lens_id["lens_sha256"],
                "lens_bytes": lens_id["lens_bytes"],
                "lens_digest_matches_spec": lens_id["lens_digest_matches_spec"],
-               "partial_run": partial}
+               "partial_run": partial,
+               **state_binding}
     atom_records = {}
     identity_check = {}
 

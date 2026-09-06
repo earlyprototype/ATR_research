@@ -1223,6 +1223,66 @@ that it cannot be applied rather than passing silently, which is the same
 behaviour the lens-digest check has on the committed shares file. The readout
 stage was not re-run: its committed outputs are unchanged and predate both blocks.
 
+**Two more defects in the supporting tools, found on the seventh review and
+repaired, 2026-09-06.** Neither changes a verdict or a number in this record.
+First, nothing tied the shares file to the state files it was computed from. The
+scoring takes positional indices out of `output/states_meta.json`, which are the
+five basin representatives and the eighteen null-basin representatives hypothesis
+H6 is scored on, the mask of the 90 run-17 trials out of 125 that passed the
+convergence gate, and the order of the ten named single states, and it applies
+them to arrays an earlier decomposition saved in `output/shares.json`. Re-running
+`build_states.py` without re-running the decomposition would leave those indices
+addressing a new ordering while the shares still held the old one, and every
+number would still look like a number. Two checks now stand in the way, and both
+run in `score.py` and in `readouts.py` before anything is scored or written. The
+counts check compares the number of states in every saved share array with the
+number the metadata records for that family, and it applies to every shares file
+including the committed one. The digest check compares the digests `decompose.py`
+now records for both state artifacts, `output/states.npz` and
+`output/states_meta.json`, with the files on disk; the committed shares file
+predates that field, so the check reports that it cannot be applied and says so in
+the scoring log, which is the treatment the lens-digest check already gets. What
+the scoring checked is written into `output/verdicts.json` under
+`state_artifact_binding`, which adds 14 values beside the verdicts and changes
+none of the 1,504 that were already there.
+
+**What the committed state files and the committed shares were shown to belong
+together by.** Four things, all from the committed logs and files rather than from
+assumption, and all established rather than inferred. The states were built
+between 10:59:58 and 11:03:08 on 2026-09-05, and `output/states_meta.json` records
+itself as generated at 11:00:11 that day; the decomposition ran from 11:07:37 to
+12:05:36 the same day, which is after them. The decomposition log's own second
+line records the families and shapes it read out of `output/states.npz`: `lang`,
+`noise17`, `nullold`, `clean_last` and `clean_mean` at 125 states each, by 12
+layers, by 768 numbers, and `named` at 10 states by 12 layers by 768 numbers,
+which is exactly what `states_meta.json` records under `array_shapes`. The saved
+share arrays hold those same counts, 125 for each of the five families of 125, 10
+for the named single states and 2 for the two signs of the flip axis, and the new
+counts check confirms it at every arm, every family and every layer, which is 672
+groups. And the decomposition's first per-layer line reports 637 states, which is
+125 times 5, plus 10, plus 2. None of that is a digest, and from the next
+decomposition onward there will be one.
+
+Second, the readout could stop half way through on a partial decomposition.
+`readouts.py` takes its layer list from the atom records, which a partial
+decomposition such as `decompose.py --layers 5` writes for the layers it ran, and
+then its top-atom log line indexed layers 5, 8, 10 and 11 whatever the file held.
+On a layer-5 record that raised a lookup error at layer 8, after `top_atoms.json`
+had been written and before the clamping check ran, which leaves one artifact on
+disk and the other never made. Reproduced without loading the model, by replaying
+that loop over the structure a layer-5 record produces. The coverage is now
+established before anything is written: the stage names the layers the records
+cover and the layers they lack, the log line shows the layers that are there and
+names the ones that are not, and a readout built from partial records is written
+as `top_atoms.partial.json` so that it cannot be mistaken for, or overwrite, the
+record's own. The clamping check is unaffected either way, because it decomposes
+the states again rather than reading the saved records. On the committed complete
+records nothing changes: the log still shows layers 5, 8, 10 and 11, and the two
+outputs still carry their own names, which was checked by running the naming
+function out of the file itself over four cases. The readout was not re-run, so
+`output/top_atoms.json` and `output/clamping_check.json` predate the metadata
+these changes add.
+
 **The decomposition self-test.** Before every run, the decomposition is asked to
 recover a state deliberately built from five known dictionary atoms with positive
 weights. It recovers share 1.000000 using exactly those five atoms, while a

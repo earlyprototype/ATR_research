@@ -112,6 +112,24 @@
    11
   ]
  },
+ "state_artifact_binding": {
+  "counts_checked": true,
+  "digests_checked": false,
+  "states_meta_sha256_in_shares": null,
+  "states_npz_sha256_in_shares": null,
+  "states_meta_sha256_on_disk": null,
+  "states_npz_sha256_on_disk": null,
+  "state_counts": {
+   "lang": 125,
+   "noise17": 125,
+   "nullold": 125,
+   "clean_last": 125,
+   "clean_mean": 125,
+   "named": 10,
+   "directions": 2
+  },
+  "note": "The scoring applies positional indices from output/states_meta.json to the share arrays in output/shares.json, so the two must be the same run's. The state counts are compared for every shares file; the digests are compared from the 2026-09-06 field onward, and are absent from a shares file written before it. The digest of output/states.npz names the copy on the machine that scored, because that archive is not committed."
+ },
  "H6": {
   "basin_representatives": {
    " Anarch": "D04_equation",

@@ -27,6 +27,8 @@ import torch
 from scipy.stats import mannwhitneyu
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from lens_gate import check_states_against_shares                   # noqa: E402
 OUT = os.path.join(HERE, "output")
 FROZEN = "/home/user/shared/stage1_frozen/experiments/gpt2_small"
 
@@ -58,6 +60,17 @@ ARGS = ap.parse_args()
 
 shares = json.load(open(os.path.join(OUT, "shares.json")))
 meta = json.load(open(os.path.join(OUT, "states_meta.json")))
+
+# ------------------------------------------------ state-artifact binding gate ---
+# Everything below takes positional indices out of the state metadata and applies
+# them to arrays a previous decomposition saved: the five basin representatives and
+# the eighteen null-basin representatives hypothesis H6 is scored on, the mask of
+# the 90 run-17 trials that passed the convergence gate, and the order of the ten
+# named single states. Those indices are only meaningful for the states the shares
+# were computed from, so the two artifacts are checked against each other before
+# any of it happens. The committed shares file predates the digests decompose.py
+# now writes, and the state-count check covers it.
+STATE_BINDING = check_states_against_shares(shares, meta, OUT, log=log)
 
 # The lens arm and the seven state families are the floor: without them there is
 # nothing to diagnose, let alone to score, so a file lacking any of them is
@@ -372,6 +385,16 @@ verdicts = {"band_layers": BAND, "majority_needed": MAJORITY, "alpha": ALPHA,
 # decomposition in it carried the iteration-safety-bound flag.
 verdicts["input_completeness"] = COMPLETENESS
 verdicts["iteration_safety_bound_flag_coverage"] = FLAG_COVERAGE
+# Which state files these verdicts were scored against, and how that was checked.
+verdicts["state_artifact_binding"] = dict(
+    STATE_BINDING,
+    note=("The scoring applies positional indices from output/states_meta.json to "
+          "the share arrays in output/shares.json, so the two must be the same "
+          "run's. The state counts are compared for every shares file; the digests "
+          "are compared from the 2026-09-06 field onward, and are absent from a "
+          "shares file written before it. The digest of output/states.npz names "
+          "the copy on the machine that scored, because that archive is not "
+          "committed."))
 
 named_keys = meta["named"]["keys"]
 NIDX = {k: i for i, k in enumerate(named_keys)}

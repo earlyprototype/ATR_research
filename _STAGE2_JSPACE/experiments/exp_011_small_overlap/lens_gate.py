@@ -1,4 +1,4 @@
-"""EXP_011: the pinned-lens gate, shared by every stage that opens the lens file.
+"""EXP_011: the pinned-lens gate and the artifact-binding gates every stage shares.
 
 Specification section 3 pins the instrument by path, SHA-256 digest and byte
 count: the file
@@ -10,7 +10,14 @@ stages cannot be analysed while the outputs inherit an earlier stage's
 attribution. Duplicating the constant in each stage was the earlier arrangement
 and is exactly what this module replaces.
 
-Added on 2026-09-05 in review of pull request 84.
+Beside the lens gate this module holds the checks that tie one stage's inputs to
+another stage's outputs: the lens the decomposition ran against, the pairing of a
+shares file with its own atom records, the binding of a shares file to the state
+files it was computed from, and the layers an atom-record file actually covers.
+They live together because two stages, the scoring and the readout, need the same
+ones and must not each keep their own copy.
+
+Added on 2026-09-05 in review of pull request 84, and extended on 2026-09-06.
 """
 import hashlib
 import json
@@ -129,6 +136,113 @@ def check_atom_records_against_shares(atom_records, shares_path, log=None):
         log(f"the atom records name shares file {want}, which is the one this stage "
             "opened, so the two artifacts are one decomposition")
     return meta
+
+
+def check_states_against_shares(shares, meta, out_dir, log=None):
+    """Refuse a shares file that was not computed from the state files on disk.
+
+    Two stages take positional indices out of `output/states_meta.json` and apply
+    them to arrays saved in `output/shares.json` by an earlier decomposition: the
+    scoring takes the medoid representatives hypothesis H6 is scored on, the run-17
+    convergence mask and the order of the named states, and the readout takes the
+    order of the named states again. If `build_states.py` is re-run without
+    re-running the decomposition, those indices address the new ordering while the
+    shares still hold the old one, and until 2026-09-06 nothing said so. Two checks
+    now do. The counts check compares the number of states in every saved share
+    array with the number of states the metadata records for that family, and it
+    applies to every shares file including the ones written before this field
+    existed. The digest check compares the digests `decompose.py` records for both
+    state artifacts with the files on disk, and reports that it cannot be applied
+    when the shares file predates the field. Returns what was checked. Raises
+    SystemExit on a mismatch.
+    """
+    meta_path = os.path.join(out_dir, "states_meta.json")
+    npz_path = os.path.join(out_dir, "states.npz")
+    out = {"counts_checked": False, "digests_checked": False,
+           "states_meta_sha256_in_shares": shares.get("states_meta_sha256"),
+           "states_npz_sha256_in_shares": shares.get("states_npz_sha256"),
+           "states_meta_sha256_on_disk": None, "states_npz_sha256_on_disk": None,
+           "state_counts": {}}
+
+    # 1. The counts check, which needs no recorded field and so covers every file.
+    expected = {fam: int(shape[0])
+                for fam, shape in (meta.get("array_shapes") or {}).items()}
+    out["state_counts"] = expected
+    bad = []
+    for arm, fams in shares.get("arms", {}).items():
+        for fam, layers in fams.items():
+            if fam not in expected:
+                continue
+            for layer, entry in layers.items():
+                if len(entry.get("share", [])) != expected[fam]:
+                    bad.append((arm, fam, layer, len(entry.get("share", [])),
+                                expected[fam]))
+    if not expected:
+        if log is not None:
+            log("the state metadata records no array shapes, so the number of states "
+                "in the shares file cannot be checked against it")
+    else:
+        out["counts_checked"] = True
+        if bad:
+            raise SystemExit(
+                "GATE FAILED: the shares file holds a different number of states "
+                "from the state metadata beside it, in {} arm-family-layer groups, "
+                "for example {} (arm, family, layer, states in the shares file, "
+                "states in the metadata). The metadata's positional indices would "
+                "address the wrong states. Re-run the decomposition against these "
+                "states before scoring or reading out."
+                .format(len(bad), bad[:3]))
+        if log is not None:
+            log("state-count check: every saved share array holds the number of "
+                "states the metadata records for its family "
+                + ", ".join(f"{f} {n}" for f, n in sorted(expected.items())))
+
+    # 2. The digest check, which applies from the 2026-09-06 field onward.
+    recorded_meta = shares.get("states_meta_sha256")
+    recorded_npz = shares.get("states_npz_sha256")
+    if recorded_meta is None and recorded_npz is None:
+        if log is not None:
+            log("the shares file records no digest of the state files it was "
+                "computed from, so it predates the 2026-09-06 field and the two "
+                "artifacts rest on the state-count check and the run logs alone")
+        return out
+    out["digests_checked"] = True
+    for label, recorded, path, key in (
+            ("states_meta.json", recorded_meta, meta_path, "states_meta_sha256_on_disk"),
+            ("states.npz", recorded_npz, npz_path, "states_npz_sha256_on_disk")):
+        if recorded is None:
+            continue
+        if not os.path.exists(path):
+            if log is not None:
+                log(f"{label} is not on disk beside this stage, so the digest the "
+                    "shares file records for it cannot be compared")
+            continue
+        found = sha256(path)
+        out[key] = found
+        if found != recorded:
+            raise SystemExit(
+                f"GATE FAILED: the shares file was computed from {label} with digest "
+                f"{recorded}, and the {label} on disk is {found}. The state files "
+                "have been rebuilt since the decomposition ran, so the metadata's "
+                "positional indices belong to a different ordering from the saved "
+                "shares. Re-run the decomposition against these states.")
+        if log is not None:
+            log(f"{label} matches the digest the shares file records for it, {found}")
+    return out
+
+
+def atom_record_layers(atom_records, family="named", n_layers=12):
+    """Which layers an atom-record file covers for one family, and which it lacks.
+
+    A partial decomposition, `decompose.py --layers 5` for instance, writes atom
+    records for those layers alone. A stage that reads fixed layers out of them has
+    to ask first, rather than raising a lookup error part of the way through and
+    leaving half its outputs written. Returns the covered layers and the absent
+    ones, both sorted, out of the layers 0 to n_layers - 1.
+    """
+    covered = sorted(int(x) for x in atom_records.get(family, {}))
+    absent = [l for l in range(n_layers) if l not in covered]
+    return covered, absent
 
 
 if __name__ == "__main__":

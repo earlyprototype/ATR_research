@@ -229,3 +229,50 @@ check, none of which can alter a committed artifact without a run.
 [03:50:47] drawing the figures
 [03:50:49] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
 [03:50:49] not computed from this input: nothing; every arm and every layer the scoring reads was present
+
+=== 2026-09-06, re-scored after the seventh review of pull request 84 ===
+Re-run of score.py against the same committed output/shares.json and
+output/states_meta.json, with no decomposition and no state rebuild. One check was
+added and nothing else changed. The scoring applies positional indices taken from
+the state metadata to arrays a previous decomposition saved, namely the five basin
+representatives and the eighteen null-basin representatives H6 is scored on, the
+mask of the 90 run-17 trials out of 125 that passed the convergence gate, and the
+order of the ten named single states, and until now nothing tied the two files
+together, so rebuilding the states without re-running the decomposition would have
+addressed the wrong states without any error. The new gate, shared with the readout
+stage, compares the number of states in every saved share array with the number the
+metadata records for that family, which is a check every shares file supports, and
+compares the digests decompose.py now records for output/states.npz and
+output/states_meta.json with the files on disk, which this file predates. Both are
+reported at the top of this run: the counts agree for all seven families over all
+672 arm-family-layer groups, and the digest check reports that it cannot be applied
+to a file written before the field existed. Effect on the record: every value that
+existed in the previous verdicts.json is unchanged, a leaf-by-leaf comparison found
+14 values added, 0 changed and 0 removed, and the 14 sit under one new top-level
+key, state_artifact_binding. per_layer_tables.json, per_layer_shares.csv and
+exp011_share_curves.png are byte-identical to their committed versions. All four
+verdicts reproduce: H6 NOT SUPPORTED, H16 NOT SUPPORTED, H16a NOT SUPPORTED, H16b
+SUPPORTED. The gate's refusal paths were exercised directly on copies in the
+scratchpad: a recorded metadata digest that does not match the file on disk, a
+recorded states.npz digest that does not match, and a metadata file claiming a
+different number of states from the shares are each refused, and a pair whose
+recorded digests match is accepted. decompose.py and readouts.py were not run.
+[04:08:28] state-count check: every saved share array holds the number of states the metadata records for its family clean_last 125, clean_mean 125, directions 2, lang 125, named 10, noise17 125, nullold 125
+[04:08:28] the shares file records no digest of the state files it was computed from, so it predates the 2026-09-06 field and the two artifacts rest on the state-count check and the run logs alone
+[04:08:28] completeness check: layers 0 to 11 present for every family in all 7 scoring arms, and the file is from before the partial_run flag existed, which decompose.py began writing on 2026-09-05
+[04:08:28] iteration-safety-bound check: the committed shares.json predates the flag and does not carry it, so this check cannot be applied to it; the flag was added to decompose.py on 2026-09-05 and applies from the next decomposition run (672 groups, none carrying the field)
+[04:08:28] building the per-layer share tables
+[04:08:28] H6: five basin representatives against eighteen null-model basins
+[04:08:29]   five basins: {' Anarch': 'D04_equation', ' Divine': 'E02_tech', ' prolet': 'G29_palindrome', ' solidarity': 'D08_math', ' till': 'G01_punctuation'}
+[04:08:29]   eighteen null basins: 18 representatives
+[04:08:32]   H6 verdict: NOT SUPPORTED (supporting layers [5, 6, 7], refuting [10])
+[04:08:32]   H6 under control (b), reported not scoring: band layers with the basins above the nulls at p below 0.05: []; below them: []
+[04:08:32] H16: language terminals against the run-17 matched-scale noise terminals
+[04:09:06]   H16 verdict: NOT SUPPORTED (supporting [], refuting [5, 8, 10])
+[04:09:06] H16a: the prolet attractor against the Divine cycle's two phases
+[04:09:06]   H16a verdict: NOT SUPPORTED (prolet above phase A at [5, 6, 7], above phase B at [5])
+[04:09:06] H16b: terminals against the same prompts' ordinary residuals
+[04:09:15]   H16b verdict: SUPPORTED (supporting [5, 6, 7, 8, 9], refuting [])
+[04:09:15] drawing the figures
+[04:09:17] wrote per_layer_tables.json, verdicts.json, per_layer_shares.csv, exp011_share_curves.png
+[04:09:17] not computed from this input: nothing; every arm and every layer the scoring reads was present

@@ -9,6 +9,13 @@
    modified state back into the model at that layer and letting the rest of the
    network run.
 
+The atom records may cover fewer than the twelve layers, because a partial
+decomposition such as `decompose.py --layers 5` writes records for the layers it
+ran. The layers this stage reads are checked against what the file holds before
+anything is written, the log names the layers it cannot show, and a readout built
+from partial records is written under a stamped name so it cannot be mistaken for,
+or overwrite, the record's own.
+
 The shares file and the atom-record file this stage reads must be the pair one
 decomposition wrote. They are `output/shares.json` and `output/atom_records.json`
 by default, and --shares and --atom-records name another pair, in which case the
@@ -32,8 +39,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "output")
 sys.path.insert(0, HERE)
 from jspace import decompose, unit_rows  # noqa: E402
-from lens_gate import (LENS_PT, check_against_decomposition,  # noqa: E402
-                       check_atom_records_against_shares, verify_lens)
+from lens_gate import (LENS_PT, atom_record_layers,  # noqa: E402
+                       check_against_decomposition,
+                       check_atom_records_against_shares,
+                       check_states_against_shares, verify_lens)
 
 ap = argparse.ArgumentParser(description="EXP_011 stage 4: the two readouts.")
 ap.add_argument("--shares", default="shares.json",
@@ -46,18 +55,23 @@ OFFICIAL_PAIR = (ARGS.shares == "shares.json"
                  and ARGS.atom_records == "atom_records.json")
 
 
-def outname(base):
-    """Official output names for the official pair, stamped names for any other,
-    so a readout of a scratch decomposition cannot overwrite the record's own."""
-    if OFFICIAL_PAIR:
-        return base
+def outname(base, partial=False):
+    """Official output names for the official pair and a complete decomposition,
+    stamped names otherwise, so a readout of a scratch or partial decomposition
+    cannot overwrite the record's own."""
     root, ext = os.path.splitext(base)
-    return f"{root}.{os.path.splitext(ARGS.shares)[0]}{ext}"
+    if not OFFICIAL_PAIR:
+        root = f"{root}.{os.path.splitext(ARGS.shares)[0]}"
+    if partial:
+        root = f"{root}.partial"
+    return f"{root}{ext}"
 
 BAND = [5, 6, 7, 8, 9, 10]
 ALPHAS = [0.0, 0.5, 1.0, 2.0]
 CLAMP_STATES = ["prolet1000", "phaseA"]
 TOP_N = 8
+LOG_LAYERS = [5, 8, 10, 11]     # the layers the top-atom log line shows
+N_LAYERS = 12
 
 
 def log(msg):
@@ -90,9 +104,38 @@ DECOMPOSITION_LENS_SHA256 = check_against_decomposition(
 # file, not another run's left behind under the same name.
 ATOM_RECORDS_META = check_atom_records_against_shares(
     atom_records, SHARES_PATH, log=log)
+# The fourth check: the shares were computed from the state files on disk, whose
+# metadata gives the order of the named states this stage indexes positionally.
+if os.path.exists(SHARES_PATH):
+    STATE_BINDING = check_states_against_shares(
+        json.load(open(SHARES_PATH)), meta, OUT, log=log)
+else:
+    STATE_BINDING = None
+    log(f"no {os.path.basename(SHARES_PATH)} beside this stage, so the state files "
+        "cannot be tied to a decomposition here")
 named_keys = meta["named"]["keys"]
 NIDX = {k: i for i, k in enumerate(named_keys)}
-LAYERS = sorted(int(x) for x in atom_records["named"].keys())
+
+# Which layers the atom records actually hold. A partial decomposition writes them
+# for the layers it ran, and until 2026-09-06 the top-atom log line below indexed
+# layers 5, 8, 10 and 11 whatever the file held, so a readout of a layer-5 run
+# stopped with a lookup error after top_atoms.json had been written and before the
+# clamping check ran, leaving one artifact on disk and the other never made. The
+# coverage is now established before anything is written.
+LAYERS, ABSENT_LAYERS = atom_record_layers(atom_records, "named", N_LAYERS)
+if not LAYERS:
+    raise SystemExit(
+        f"REFUSING TO READ OUT: {os.path.basename(ATOMS_PATH)} holds no layers for "
+        "the named states, so there are no selected atoms to name.")
+ATOMS_PARTIAL = bool(ABSENT_LAYERS)
+if ATOMS_PARTIAL:
+    log(f"PARTIAL ATOM RECORDS: they cover layers {LAYERS} and not {ABSENT_LAYERS}. "
+        "The top-atom readout covers the layers they hold, is written under a "
+        "stamped name and is not the record's own file. The clamping check is "
+        "unaffected: it decomposes the states again rather than reading these "
+        "records.")
+else:
+    log(f"the atom records cover all {N_LAYERS} layers for the named states")
 
 from jlens.lens import JacobianLens  # noqa: E402
 from transformers import AutoModelForCausalLM, AutoTokenizer  # noqa: E402
@@ -138,15 +181,24 @@ top_atoms["_meta"] = dict(
     shares_file=os.path.basename(SHARES_PATH),
     atom_records_file=os.path.basename(ATOMS_PATH),
     atom_records_pairing=ATOM_RECORDS_META,
+    state_artifact_binding=STATE_BINDING,
+    layers_covered=LAYERS,
+    layers_absent=ABSENT_LAYERS,
+    partial_atom_records=ATOMS_PARTIAL,
     note=("The lens file was checked against the digest and size specification "
           "section 3 pins before this readout was written, and against the digest "
           "output/shares.json records for the decomposition that chose these "
           "atoms. The atom records were checked against the shares file named "
           "here. Every other key is a named state."))
-with open(os.path.join(OUT, outname("top_atoms.json")), "w") as fh:
+with open(os.path.join(OUT, outname("top_atoms.json", ATOMS_PARTIAL)), "w") as fh:
     json.dump(top_atoms, fh, indent=1)
+_log_layers = [l for l in LOG_LAYERS if l in LAYERS]
+if _log_layers != LOG_LAYERS:
+    log(f"  the log below shows layers {_log_layers}; layers "
+        f"{[l for l in LOG_LAYERS if l not in LAYERS]} are absent from these atom "
+        "records")
 for key in ("prolet1000", "phaseA", "phaseB", "pivotM"):
-    for l in (5, 8, 10, 11):
+    for l in _log_layers:
         toks = [e["token"] for e in top_atoms[key][str(l)][:6]]
         log(f"  {key:11s} L{l:2d}: {toks}")
 
@@ -216,9 +268,13 @@ clamp["_meta"] = dict(
     decomposition_lens_sha256=DECOMPOSITION_LENS_SHA256,
     shares_file=os.path.basename(SHARES_PATH),
     atom_records_file=os.path.basename(ATOMS_PATH),
+    state_artifact_binding=STATE_BINDING,
     note=("The lens file was checked against the digest and size specification "
-          "section 3 pins before this check was written. Every other key is a "
+          "section 3 pins before this check was written. This check decomposes the "
+          "states again rather than reading the saved atom records, so it covers "
+          "the band layers whatever those records hold. Every other key is a "
           "clamped state."))
 with open(os.path.join(OUT, outname("clamping_check.json")), "w") as fh:
     json.dump(clamp, fh, indent=1)
-log(f"wrote {outname('top_atoms.json')} and {outname('clamping_check.json')}")
+log(f"wrote {outname('top_atoms.json', ATOMS_PARTIAL)} and "
+    f"{outname('clamping_check.json')}")
