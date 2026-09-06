@@ -1,0 +1,103 @@
+the fit finished on its own
+using lens /home/user/wt/exp017/_STAGE2_JSPACE/artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+base lens: {'n_prompts': 277, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+twin lens: {'n_prompts': 40, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 6520.44it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/home/user/wt/exp017/_STAGE2_JSPACE/experiments/exp_017_lamini_twin/run_jspace.py:68: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok,
+Loaded pretrained model gpt2 into HookedTransformer
+twin: per-layer states read, rescale factor mean 0.269268
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 7618.05it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+base: per-layer states read, rescale factor mean 0.281368
+lens diagnostics: {"0": {"base": {"frobenius_norm": 23.46354103088379}, "twin": {"frobenius_norm": 23.54874610900879}, "cosine_between_the_two_lenses": 0.9065948724746704}, "1": {"base": {"frobenius_norm": 28.265697479248047}, "twin": {"frobenius_norm": 28.886762619018555}, "cosine_between_the_two_lenses": 0.9062153697013855}, "2": {"base": {"frobenius_norm": 31.89774513244629}, "twin": {"frobenius_norm": 33.653541564941406}, "cosine_between_the_two_lenses": 0.9058218598365784}, "3": {"base": {"frobenius_norm": 34.01523208618164}, "twin": {"frobenius_norm": 36.400917053222656}, "cosine_between_the_two_lenses": 0.9053232073783875}, "4": {"base": {"frobenius_norm": 37.34474563598633}, "twin": {"frobenius_norm": 39.26308822631836}, "cosine_between_the_two_lenses": 0.9137306809425354}, "5": {"base": {"frobenius_norm": 42.09891891479492}, "twin": {"frobenius_norm": 43.6984748840332}, "cosine_between_the_two_lenses": 0.9218020439147949}, "6": {"base": {"frobenius_norm": 43.92559051513672}, "twin": {"frobenius_norm": 44.661190032958984}, "cosine_between_the_two_lenses": 0.9396519064903259}, "7": {"base": {"frobenius_norm": 44.60871887207031}, "twin": {"frobenius_norm": 45.508338928222656}, "cosine_between_the_two_lenses": 0.9534271955490112}, "8": {"base": {"frobenius_norm": 44.76261901855469}, "twin": {"frobenius_norm": 46.402652740478516}, "cosine_between_the_two_lenses": 0.9680944681167603}, "9": {"base": {"frobenius_norm": 43.7777214050293}, "twin": {"frobenius_norm": 44.97612380981445}, "cosine_between_the_two_lenses": 0.9753057360649109}, "10": {"base": {"frobenius_norm": 47.43286895751953}, "twin": {"frobenius_norm": 48.34418869018555}, "cosine_between_the_two_lenses": 0.9857620000839233}}
+  lens=base layer=0: twin real median 0.3962 base real median 0.3106 (7s)
+  lens=base layer=1: twin real median 0.3842 base real median 0.3064 (8s)
+  lens=base layer=2: twin real median 0.3124 base real median 0.2520 (8s)
+  lens=base layer=3: twin real median 0.3031 base real median 0.2519 (8s)
+  lens=base layer=4: twin real median 0.2939 base real median 0.2517 (7s)
+  lens=base layer=5: twin real median 0.2903 base real median 0.2538 (7s)
+  lens=base layer=6: twin real median 0.2931 base real median 0.2570 (8s)
+  lens=base layer=7: twin real median 0.3028 base real median 0.2700 (8s)
+  lens=base layer=8: twin real median 0.3113 base real median 0.2861 (7s)
+  lens=base layer=9: twin real median 0.3323 base real median 0.2964 (8s)
+  lens=base layer=10: twin real median 0.3115 base real median 0.2949 (8s)
+  lens=twin layer=0: twin real median 0.3753 base real median 0.2864 (8s)
+  lens=twin layer=1: twin real median 0.3751 base real median 0.2930 (8s)
+  lens=twin layer=2: twin real median 0.3074 base real median 0.2490 (7s)
+  lens=twin layer=3: twin real median 0.3017 base real median 0.2555 (8s)
+  lens=twin layer=4: twin real median 0.2874 base real median 0.2431 (7s)
+  lens=twin layer=5: twin real median 0.2851 base real median 0.2517 (8s)
+  lens=twin layer=6: twin real median 0.2872 base real median 0.2529 (7s)
+  lens=twin layer=7: twin real median 0.3055 base real median 0.2691 (7s)
+  lens=twin layer=8: twin real median 0.3069 base real median 0.2867 (7s)
+  lens=twin layer=9: twin real median 0.3221 base real median 0.2905 (8s)
+  lens=twin layer=10: twin real median 0.3133 base real median 0.2929 (7s)
+
+=== H18b: SUPPORTED (4/6 band layers meet both conditions: [6, 7, 9, 10]) ===
+layer  twin     base     |diff|   ctrl spread  perm p   both
+0      0.3753   0.3106   0.0647   0.0167       0.0001   True
+1      0.3751   0.3064   0.0687   0.0342       0.0001   True
+2      0.3074   0.2520   0.0554   0.0301       0.0001   True
+3      0.3017   0.2519   0.0498   0.0115       0.0001   True
+4      0.2874   0.2517   0.0357   0.0228       0.0001   True
+5      0.2851   0.2538   0.0313   0.0325       0.0001   False  <- band
+6      0.2872   0.2570   0.0303   0.0282       0.0001   True  <- band
+7      0.3055   0.2700   0.0355   0.0215       0.0001   True  <- band
+8      0.3069   0.2861   0.0209   0.0254       0.0001   False  <- band
+9      0.3221   0.2964   0.0258   0.0197       0.0001   True  <- band
+10     0.3133   0.2949   0.0185   0.0059       0.0001   True  <- band
+
+Saved -> output/exp017_jspace.json (209s)
+JSPACE_CHAIN_DONE
+base lens: {'n_prompts': 277, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+twin lens: {'n_prompts': 40, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]Loading weights: 100%|██████████| 149/149 [00:00<00:00, 7745.86it/s]
+/home/user/wt/exp017/_STAGE2_JSPACE/experiments/exp_017_lamini_twin/run_jspace.py:68: DeprecationWarning: HookedTransformer.from_pretrained is deprecated and will be removed in a future major release. Use TransformerBridge.boot_transformers(...) instead, then call enable_compatibility_mode() for HookedTransformer-equivalent numerics. See docs/source/content/migrating_to_v3.md.
+  model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok,
+Loaded pretrained model gpt2 into HookedTransformer
+twin: per-layer states read, rescale factor mean 0.269268
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2728.42it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+base: per-layer states read, rescale factor mean 0.281368
+lens diagnostics: {"0": {"base": {"frobenius_norm": 23.46354103088379}, "twin": {"frobenius_norm": 23.54874610900879}, "cosine_between_the_two_lenses": 0.9065948724746704}, "1": {"base": {"frobenius_norm": 28.265697479248047}, "twin": {"frobenius_norm": 28.886762619018555}, "cosine_between_the_two_lenses": 0.9062153697013855}, "2": {"base": {"frobenius_norm": 31.89774513244629}, "twin": {"frobenius_norm": 33.653541564941406}, "cosine_between_the_two_lenses": 0.9058218598365784}, "3": {"base": {"frobenius_norm": 34.01523208618164}, "twin": {"frobenius_norm": 36.400917053222656}, "cosine_between_the_two_lenses": 0.9053232073783875}, "4": {"base": {"frobenius_norm": 37.34474563598633}, "twin": {"frobenius_norm": 39.26308822631836}, "cosine_between_the_two_lenses": 0.9137306809425354}, "5": {"base": {"frobenius_norm": 42.09891891479492}, "twin": {"frobenius_norm": 43.6984748840332}, "cosine_between_the_two_lenses": 0.9218020439147949}, "6": {"base": {"frobenius_norm": 43.92559051513672}, "twin": {"frobenius_norm": 44.661190032958984}, "cosine_between_the_two_lenses": 0.9396519064903259}, "7": {"base": {"frobenius_norm": 44.60871887207031}, "twin": {"frobenius_norm": 45.508338928222656}, "cosine_between_the_two_lenses": 0.9534271955490112}, "8": {"base": {"frobenius_norm": 44.76261901855469}, "twin": {"frobenius_norm": 46.402652740478516}, "cosine_between_the_two_lenses": 0.9680944681167603}, "9": {"base": {"frobenius_norm": 43.7777214050293}, "twin": {"frobenius_norm": 44.97612380981445}, "cosine_between_the_two_lenses": 0.9753057360649109}, "10": {"base": {"frobenius_norm": 47.43286895751953}, "twin": {"frobenius_norm": 48.34418869018555}, "cosine_between_the_two_lenses": 0.9857620000839233}}
+  lens=base layer=0: twin real median 0.3962 base real median 0.3106 (7s)
+  lens=base layer=1: twin real median 0.3842 base real median 0.3064 (6s)
+  lens=base layer=2: twin real median 0.3124 base real median 0.2520 (5s)
+  lens=base layer=3: twin real median 0.3031 base real median 0.2519 (5s)
+  lens=base layer=4: twin real median 0.2939 base real median 0.2517 (5s)
+  lens=base layer=5: twin real median 0.2903 base real median 0.2538 (5s)
+  lens=base layer=6: twin real median 0.2931 base real median 0.2570 (5s)
+  lens=base layer=7: twin real median 0.3028 base real median 0.2700 (5s)
+  lens=base layer=8: twin real median 0.3113 base real median 0.2861 (5s)
+  lens=base layer=9: twin real median 0.3323 base real median 0.2964 (5s)
+  lens=base layer=10: twin real median 0.3115 base real median 0.2949 (5s)
+  lens=twin layer=0: twin real median 0.3753 base real median 0.2864 (5s)
+  lens=twin layer=1: twin real median 0.3751 base real median 0.2930 (5s)
+  lens=twin layer=2: twin real median 0.3074 base real median 0.2490 (5s)
+  lens=twin layer=3: twin real median 0.3017 base real median 0.2555 (5s)
+  lens=twin layer=4: twin real median 0.2874 base real median 0.2431 (6s)
+  lens=twin layer=5: twin real median 0.2851 base real median 0.2517 (7s)
+  lens=twin layer=6: twin real median 0.2872 base real median 0.2529 (6s)
+  lens=twin layer=7: twin real median 0.3055 base real median 0.2691 (6s)
+  lens=twin layer=8: twin real median 0.3069 base real median 0.2867 (5s)
+  lens=twin layer=9: twin real median 0.3221 base real median 0.2905 (5s)
+  lens=twin layer=10: twin real median 0.3133 base real median 0.2929 (6s)
+
+=== H18b: SUPPORTED (4/6 band layers meet both conditions: [6, 7, 9, 10]) ===
+layer  twin     base     |diff|   ctrl spread  perm p   both
+0      0.3753   0.3106   0.0647   0.0167       0.0001   True
+1      0.3751   0.3064   0.0687   0.0342       0.0001   True
+2      0.3074   0.2520   0.0554   0.0301       0.0001   True
+3      0.3017   0.2519   0.0498   0.0115       0.0001   True
+4      0.2874   0.2517   0.0357   0.0228       0.0001   True
+5      0.2851   0.2538   0.0313   0.0325       0.0001   False  <- band
+6      0.2872   0.2570   0.0303   0.0282       0.0001   True  <- band
+7      0.3055   0.2700   0.0355   0.0215       0.0001   True  <- band
+8      0.3069   0.2861   0.0209   0.0254       0.0001   False  <- band
+9      0.3221   0.2964   0.0258   0.0197       0.0001   True  <- band
+10     0.3133   0.2949   0.0185   0.0059       0.0001   True  <- band
+
+Saved -> output/exp017_jspace.json (160s)

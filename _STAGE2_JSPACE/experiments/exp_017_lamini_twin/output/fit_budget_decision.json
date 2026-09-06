@@ -1,0 +1,18 @@
+{
+  "per_prompt_seconds": [
+    245.0,
+    209.0,
+    208.0,
+    207.0,
+    236.0
+  ],
+  "n_probe_prompts": 5,
+  "mean_seconds_per_prompt": 221.0,
+  "cap_seconds": 9000.0,
+  "chosen_n_prompts": 40,
+  "projected_seconds": 8840,
+  "rule": "neither 100 nor 50 prompts fit inside the cap, so the largest multiple of ten that does was taken",
+  "below_50_is_a_recorded_deviation": true,
+  "dim_batch": 16,
+  "dim_batch_reason": "peak resident memory measured at about 2.5 gigabytes at dim_batch 16, and the spec caps peak memory at 3 gigabytes, so it was not raised"
+}

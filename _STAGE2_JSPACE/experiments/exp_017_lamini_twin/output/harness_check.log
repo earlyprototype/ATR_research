@@ -1,0 +1,262 @@
+base lens: {'n_prompts': 277, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+twin lens: {'n_prompts': 5, 'd_model': 768, 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/149 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 149/149 [00:00<00:00, 6380.64it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+twin: per-layer states read, rescale factor mean 0.269268
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights:  20%|██        | 30/148 [00:00<00:00, 281.96it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 961.91it/s]
+Loaded pretrained model gpt2 into HookedTransformer
+base: per-layer states read, rescale factor mean 0.281368
+lens diagnostics: {"0": {"base": {"frobenius_norm": 23.46354103088379}, "twin": {"frobenius_norm": 26.428678512573242}, "cosine_between_the_two_lenses": 0.8486043214797974}, "10": {"base": {"frobenius_norm": 47.43286895751953}, "twin": {"frobenius_norm": 49.11417770385742}, "cosine_between_the_two_lenses": 0.9822151064872742}}
+  lens=base layer=0: twin real median 0.3962 base real median 0.3106 (24s)
+  lens=base layer=10: twin real median 0.3115 base real median 0.2949 (25s)
+  lens=twin layer=0: twin real median 0.3856 base real median 0.2907 (23s)
+  lens=twin layer=10: twin real median 0.3069 base real median 0.2949 (22s)
+
+=== H18b: NOT SUPPORTED (1/6 band layers meet both conditions: [10]) ===
+layer  twin     base     |diff|   ctrl spread  perm p   both
+0      0.3856   0.3106   0.0749   0.0183       0.0001   True
+10     0.3069   0.2949   0.0121   0.0067       0.0001   True  <- band
+
+Saved -> output/exp017_jspace_harness.json (209s)
+
+2026-09-05, after the run, fixing findings from the pull request review. These
+are cheap checks; none of them carries verdict weight and none refits a lens or
+re-runs the loop.
+  python3 verify_model.py --conversion-check-only
+    -> regenerated output/tl_conversion_check.json, which came out byte for
+       byte identical to the version committed at 93bf517, so the calculation
+       now committed in verify_model.py reproduces every number the results
+       record's section 2.3 quotes. Both models were loaded at the pinned
+       revisions, the twin at fc740804ff49f50fe3ef871b31eb2d5a5584132c and base
+       GPT-2 Small at 607a30d783dfa663caf39e06633721c8d4cfcd7e.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, now including the spec's
+       requirement that a state built from 40 atoms gets a share below 1: the
+       measured share is 0.986468 on a scale from 0 to 1.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 7 checks of the wall-clock
+       deadline arithmetic, including a replay of this run's own timings that
+       confirms the committed fit would not have been stopped by the cap.
+  base lens digest re-checked at the checkout-relative path
+    ../../artifacts/jlens_gpt2_small_neuronpedia.pt ->
+    d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762, which
+    matches the digest the spec records; lens metadata 277 prompts, d_model 768,
+    source layers 0 to 10.
+
+2026-09-05, second round of pull request review fixes. Cheap checks only; no
+lens was refitted, no loop and no J-space probe was re-run.
+  python3 make_tables.py
+    -> regenerated output/tables.md, adding one section, "Real minus its own
+       rotation control", and changing no existing line. Its eleven rows match
+       the table in RESULTS_EXP017.md section 3.5 verbatim, sign for sign.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 14 checks, now covering the
+       committed corpus digest
+       c325a40c06f5dcfe14a3cea02afe1d64d42914146822c63e111dc665fdeba8d7, the
+       checkpoint reuse rules, and two replays of the recorded per-prompt
+       timings: continuing the probe's five prompts reaches all 40, while a fit
+       started from nothing stops after 38 of 40 at 8950 seconds.
+  python3 run_jspace.py --selftest -> ALL PASS, 9 checks of the twin lens budget
+       gate. The committed jlens_lamini_gpt2_124m_40_twin.pt, fitted on 40
+       prompts, is accepted as the registered instrument against the 40 the
+       budget rule chose; the five-prompt probe lens is refused without
+       --allow-short-twin-lens.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  fitting corpus checked against the run logs through the instrument's own
+    encoder (jlens.from_hf, which prepends a beginning-of-sequence token):
+    all 40 of 40 prompts reproduce the seq_len and n_valid recorded in
+    fit_probe_db16.log and fit_twin.log, including prompt 30 at seq_len 117 and
+    n_valid 100. The committed wikitext_prompts_160.json is therefore the
+    corpus the committed lens was fitted on.
+
+2026-09-06, third round of pull request review fixes. Five findings, of which
+four were real. No lens was refitted and the loop was not re-run. Every new
+artifact under output/ is listed here with what wrote it, per rule R5.
+  python3 run_jspace.py --out-suffix _regcheck --accept-unstamped-twin-lens
+      --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    -> a regression check of the edited probe against the committed registered
+       artifact, 188 seconds. Compared field by field with
+       output/exp017_jspace.json: the worst absolute difference over every
+       shared numeric field is exactly 0, and no field disagrees in text. The
+       only fields the new run adds are the frame stamp, the state-centring
+       diagnostic and the twin lens provenance decision. The scratch file was
+       then deleted rather than committed, because the committed artifact is
+       the record and this was a check on the code, not a new measurement.
+  python3 frame_check.py
+    -> output/frame_check.json, 73 seconds. The TransformerLens loader defaults
+       in force for the loop, the states and the probe (fold_ln, centre writing
+       weights, centre unembedding and fold value biases all true); the
+       unembedding the probe used against each model's own output matrix
+       (difference 0.6845 of the size of the Hugging Face matrix for the twin
+       and 0.6823 for base, common shift 0.52 of a typical direction's length,
+       65 percent of the difference left after removing that shift, per-token
+       cosine median 0.81, final normalisation gain from 0.0044 to 17.42, and
+       the converted matrix rebuilt from the Hugging Face one to 2.0e-07
+       relative); the states in both frames (TransformerLens states centred to
+       5.2e-07 on lengths of 634 to 1128, the two frames differing by one
+       constant per state worth 0.04 to 2.4 percent of a state's length); and
+       the share on five prompts at layers 0 and 5 under three combinations.
+  python3 run_jspace.py --frame hf --out-suffix _hfframe
+      --accept-unstamped-twin-lens
+      --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    -> output/exp017_jspace_hfframe.json, 114 seconds. The whole H18b
+       comparison in the convention the lens matrices were fitted in, stamped
+       as a sensitivity reading with no verdict weight. Reading: SUPPORTED at
+       4 of the 6 band layers, on layers 5, 6, 7 and 8, against the registered
+       run's 4 of 6 on layers 6, 7, 9 and 10.
+  python3 harness_check_jspace.py _harness_p200
+    -> output/exp017_jspace_harness_p200.json, 48 seconds, against the
+       committed harness artifact's 209 seconds. The shuffle count now takes
+       effect: both layers' shares reproduce to four decimal places and the
+       permutation p is 0.00498, the floor of a 200-shuffle test, where the
+       committed artifact records 0.0001, the floor of a 10,000-shuffle test it
+       ran while recording 200. The committed harness artifact was not
+       overwritten.
+  python3 make_tables.py
+    -> regenerated output/tables.md. 99 lines added, none removed and none
+       changed, so every table already quoted in RESULTS_EXP017.md still
+       matches its artifact line for line. The added lines are the Hugging Face
+       frame tables and the frame measurement of section 3.6.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 30 checks, now including the
+       deadline read after the fitting call returns (39 prompts at the
+       predicted 221 seconds and a fortieth at 1,000 gives 40 prompts consumed
+       in 9,619 seconds against the 9,000 second cap, and that is scored as a
+       stopped fit) and the checkpoint provenance gate, which refuses an
+       unstamped or mismatched checkpoint.
+  python3 run_jspace.py --selftest -> ALL PASS, 22 checks, now including the
+       twin lens provenance gate and a check that lowering the module's shuffle
+       count really lowers the number of shuffles run.
+
+2026-09-06, fourth round of pull request review fixes. Six findings, all six
+real. Nothing new was written under output/ in this round, so there is no new
+artifact to log under rule R5; these lines record the checks instead, because
+this log is the dated trail the results record cites.
+  python3 make_tables.py
+    -> regenerated output/tables.md with no line added, changed or removed, so
+       every table quoted in RESULTS_EXP017.md still matches its artifact.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 36 checks, six of them new:
+       a checkpoint already sitting at the fit's own output path is refused when
+       it carries no provenance sidecar, refused when its model or its corpus
+       digest disagrees with this fit, resumed only with the explicit
+       acceptance, which is then written beside it, resumed silently when it
+       matches, and an absent checkpoint is not an error.
+  python3 run_jspace.py --selftest -> ALL PASS, 36 checks, fourteen of them new:
+       a lens stamped with a fit outcome of overran or short is refused however
+       many prompts it averaged, a lens fitted under a cap longer than the
+       registered 9,000 seconds is refused, a stamp that does not name its cap
+       is refused, an overridden prompt-count requirement is not the registered
+       requirement, and each way a run can be a sensitivity reading is named
+       rather than only the first.
+  python3 run_jspace.py --frame hf --accept-unstamped-twin-lens --twin-lens
+      ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    -> exits 1 within seconds, before loading any model, with "REFUSING TO WRITE
+       THE REGISTERED FILENAME", because a run in the other coordinate frame
+       must be given its own --out-suffix. The same run with
+       --twin-lens-min-prompts 5 against the five-prompt probe lens refuses the
+       same way and names the overridden requirement. output/exp017_jspace.json
+       was not touched by either.
+  the weight-digest scan in verify_model.py, checked twice.
+    -> against an empty cache directory, a scan after the configuration call
+       alone returns one file, config.json at 665 bytes, and no weight file,
+       which is the bug: the scan used to run before the models were loaded.
+    -> against this machine's warm cache, the scan now returns all 10 rows for
+       MBZUAI/LaMini-GPT-124M and all 7 for gpt2 that the committed
+       output/model_verification.json holds, with the same byte sizes and the
+       same SHA-256 digests, so the committed artifact is unaffected and was not
+       rewritten.
+  every number in REGISTER_VERDICTS.md checked back to the artifact that
+    produced it, after one was found wrong. The same-lens cross-check range
+    reads 0.0167 to 0.0889 in output/exp017_jspace.json, not the 0.015 to 0.086
+    the proposed row carried; that file's note 7 records the correction and
+    lists the numbers that reproduce. The terminal word agreeing on 25 of 25
+    prompts was re-checked against
+    experiments/exp_010c_windows/output/results_small010b_SB.json and
+    reproduces at 25 of 25.
+
+2026-09-06, fifth round of pull request review fixes. Five findings, all five
+real. One registered artifact was regenerated, with every result field identical,
+and that is the only artifact under output/ this round changed.
+  python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+      --accept-unstamped-twin-lens --out-suffix _regen
+    -> 213 seconds. Compared with the committed output/exp017_jspace.json field
+       by field: all 4,400 share values, every control spread, every permutation
+       p, every cross-check, every model-effect and instrument-effect number,
+       every lens diagnostic, the rescale factors and the verdict string
+       SUPPORTED with band layers 6, 7, 9 and 10 are identical. Exactly one
+       numeric field differs, wall_seconds at 213.4 against 159.5, which is the
+       clock rather than a result; two path strings differ, now holding the
+       paths the documented command passes rather than one absolute path from
+       the machine that ran it on 2026-09-05; and 13 fields are added, all of
+       them provenance, budget and frame stamps. On that evidence the
+       regenerated file replaced output/exp017_jspace.json, so the artifact now
+       carries the twin_lens_provenance record the results record describes. The
+       version it replaces stands in this branch's history at commit 1effbab.
+  python3 make_tables.py
+    -> regenerated output/tables.md from the replaced artifact with no line
+       added, changed or removed, which is the check that the replacement
+       changed no number the record quotes.
+  choose_fit_budget.py, re-run in a scratch directory on the committed probe log
+    -> reproduces output/fit_budget_decision.json byte for byte, 221.0 seconds a
+       prompt and 40 prompts, so the committed decision is unaffected by the new
+       handling of a probe too slow for any fit. On a doctored log at 1,000
+       seconds a prompt the rule now writes a chosen count of zero and says the
+       section 6.2 fallback applies, where it used to write ten and call it a
+       fit.
+  make_tables.py, run in a scratch directory on all three artifact states
+    -> with the Hugging Face frame artifact alone it renders 197 lines and its
+       sensitivity columns without the registered ones, where it used to fail
+       with an unbound local variable; with the registered artifact alone it
+       renders 185 lines and no Hugging Face section; with neither it says the
+       J-space share is not yet computed. All three exit 0.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 42 checks, six of them new:
+       a checkpoint whose fit was stopped as short or as overran is refused on
+       both the resume path and the seeding path rather than being given a
+       second wall-clock cap, a checkpoint from a fit that finished inside its
+       cap is resumed, and a sidecar with no outcome recorded, which is what a
+       fit in progress leaves, stays continuable.
+  python3 run_jspace.py --selftest -> ALL PASS, 43 checks, seven of them new: a
+       lens is refused when there is no requirement to check it against, an
+       absent budget decision and one recording that nothing fits both leave no
+       requirement, no requirement is never the registered requirement, and a
+       run in that state is a sensitivity reading that says why.
+
+2026-09-06, sixth round of pull request review fixes. Four findings, all four
+real. Nothing new was written under output/ in this round: the two artifacts a
+run would now produce, a fit's own timings file and the budget decision's
+provenance sidecar, are written only when those steps are re-run, and neither
+step was re-run here. These lines record the checks instead.
+  choose_fit_budget.py, re-run in a scratch directory
+    -> with no source named it refuses, saying that reading a log from another
+       machine silently is how the rule went wrong.
+    -> with --probe-log against the committed output/fit_probe_db16.log it
+       reproduces output/fit_budget_decision.json byte for byte, 221.0 seconds a
+       prompt and 40 prompts, and writes a provenance sidecar naming the log,
+       its SHA-256 2c608d83174b0ccf21f204b18e23878590758b8cca458949958cb1fa364b3fed
+       and a mean of 221.0 seconds.
+    -> with --timings against a fixture at 1,000 seconds a prompt it chooses
+       zero prompts and names the section 6.2 fallback; against a fixture naming
+       neither machine nor day it refuses.
+  harness_check_jspace.py, both existing destinations
+    -> refuses to overwrite exp017_jspace_harness.json and
+       exp017_jspace_harness_p200.json, naming a dated suffix to use instead.
+       With no argument it now writes exp017_jspace_harness_<date>.json.
+  python3 make_tables.py
+    -> regenerated output/tables.md with no line added, changed or removed.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 47 checks, five of them new:
+       a checkpoint completed under a 36,000 second cap is refused by a fit
+       under the registered 9,000, on both the resume path and the seeding path,
+       the same checkpoint is continuable by a fit under its own cap, a caller
+       naming no cap makes no comparison, and the fitting loop's own measurement
+       of what each prompt cost is what a probe now hands the budget rule.
+  python3 run_jspace.py --selftest -> ALL PASS, 47 checks, four of them new: a
+       lens fitted on more prompts than the budget chose is refused rather than
+       accepted as registered, it becomes a sensitivity reading with the opt-in,
+       a lens whose fit asked for another prompt count is refused, and the
+       requested count is part of what a stamp must match.
