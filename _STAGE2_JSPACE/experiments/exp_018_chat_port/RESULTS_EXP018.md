@@ -808,6 +808,60 @@ record changes.
    matching archive, 25 of 25 in the main arm and 5 of 5 in the pilot arm, which
    the fourth review already established and this session rechecked.
 
+**Two findings from a seventh review, on 2026-09-06, both in the code, and what
+each one changes.** A seventh review found two more faults. Both are real, both
+are in the order in which the runner does things rather than in any arithmetic,
+and neither can have touched the committed run, for reasons given under each.
+No hypothesis verdict moves and no number this record prints changes. Nothing
+was re-run; both fixes were exercised against doctored copies in a scratch
+directory, with a stand-in standing where the model would be.
+
+1. **A run without an explicit weights revision could label its tensors with a
+   version it did not load.** A load that is not pinned follows the machine's
+   cache pointer `refs/main`, and the runner read that pointer afterwards to
+   record what had been loaded. Those are not the same thing: another process
+   can move the pointer between the load and the read, and the run would then
+   write a revision its tensors did not come from into its own results file,
+   where every later stage compares it as a string and finds agreement. The
+   order is now the other way round in all three stages that load the model for
+   themselves, the probe, the loop and the lag scan: the pointer is read first,
+   the load is pinned to the commit it named, and that commit is what gets
+   recorded, so the load cannot follow the pointer anywhere else. On top of
+   that, each stage now asks the loaded model which commit its files actually
+   came from and stops if the answer is not the commit it pinned, which turns
+   the recorded revision from an inference about what the loader must have done
+   into something the loader reported. **Established on this machine:** the
+   configuration object the model library builds carries the commit as
+   `_commit_hash`, and on this machine it reads
+   `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, the same commit the cache pointer
+   names. Where nothing is cached at all there is no pointer to read and nothing
+   to pin to, so the load goes out unpinned and the revision is read afterwards;
+   that is the one order that can mislabel a run, and it now says so in a
+   printed line rather than passing in silence. **This fix takes effect from the
+   next run and changes nothing about the committed one**, which recorded no
+   revision at all, as the third review's item 1 above already states and as the
+   regeneration commands under "Artifacts" already work around.
+
+2. **The states stage checked one file and then read another.** That stage
+   reads the pair the loop published, the results rows and the terminal-state
+   archive, and since the sixth review it checks that both carry the same
+   generation stamp before trusting them together. It checked the archive,
+   closed it, loaded the model, which takes tens of seconds, and then reopened
+   whatever file was at that path by then. A loop invocation publishing new
+   checkpoints during the load would therefore have put tensors the stage never
+   checked underneath the rows it did check. The tensors are now read into
+   memory from the same open file whose stamp was checked, and the path is never
+   read again; holding them costs about 2 megabytes for the 25-prompt main arm
+   and about 1 megabyte for the 5-prompt pilot arm, against the roughly 4
+   gigabytes the loaded model needs. **Established by test:** with a stand-in
+   load that republishes the archive while it runs, the code as it stood
+   injected the substituted tensor and the code as it stands now injects the
+   one it verified. **The committed run was not affected**, because its states
+   were produced by a single session with no second invocation writing to that
+   directory, and because the committed archives and results files carry no
+   generation stamp at all, so nothing about them was ever republished under a
+   running stage.
+
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
 state once, the search for the best 25 keeps only the 4,096 best-correlating
@@ -1351,7 +1405,11 @@ will not put records made on two versions of the weights into one file. Every
 revision passed by hand, to that option or to `--revision`, now has to be the
 40-character identifier of one exact commit; a branch or tag name such as `main`
 is refused, because it can name different weights on a later day while every
-comparison in the harness still reports agreement.
+comparison in the harness still reports agreement. A run that passes no revision
+at all reads the machine's cache pointer once, before the load, pins the load to
+the commit that pointer names, records that commit, and checks it against the
+commit the loaded model reports; that is a change from the next run onward and
+has no bearing on the committed runs, which recorded no revision at all.
 
 The lens files themselves are not committed either, because
 `_STAGE2_JSPACE/artifacts/` is not versioned by repository convention. Their

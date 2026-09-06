@@ -201,6 +201,59 @@ def resolve_revision(revision: str | None = None, model: str = MODEL_NAME,
         f"explicitly, one of: {', '.join(snaps)}")
 
 
+def loaded_revision(model) -> str | None:
+    """The commit a loaded model's files actually came from, if it reports one.
+
+    `transformers` records the commit it resolved on the configuration object it
+    builds, as the attribute `_commit_hash`. The leading underscore means the
+    library treats it as private, so it can be renamed or dropped in a later
+    version; this therefore returns None when it cannot be found rather than
+    failing, and every caller has to treat None as "could not be checked" and
+    not as disagreement. The bridge loader keeps the Hugging Face model at
+    `original_model`, and the other names are tried in case that changes.
+    """
+    seen = set()
+    for owner in (model, getattr(model, "original_model", None),
+                  getattr(model, "hf_model", None), getattr(model, "model", None)):
+        if owner is None or id(owner) in seen:
+            continue
+        seen.add(id(owner))
+        cfg = getattr(owner, "config", None)
+        commit = getattr(cfg, "_commit_hash", None) if cfg is not None else None
+        if isinstance(commit, str) and COMMIT_RE.match(commit):
+            return commit
+    return None
+
+
+def confirm_loaded_revision(model, expected: str, stage: str) -> str | None:
+    """Check the commit a loaded model reports against the one it was pinned to.
+
+    A pin tells the loader which commit to fetch; this asks the loaded model
+    which commit it actually got, so the revision a stage records is a fact the
+    loader reported rather than an inference about what it must have done. A
+    disagreement stops the run, because everything downstream compares that
+    recorded string. A model that reports nothing is said to report nothing.
+    """
+    got = loaded_revision(model)
+    if got is None:
+        print(f"note: the loaded model does not report which commit its files "
+              f"came from, so the {stage} stage records {expected} on the "
+              f"strength of the pin it loaded with", flush=True)
+        return None
+    if got != expected:
+        raise SystemExit(
+            f"the {stage} stage loaded weights it did not ask for: it pinned "
+            f"the load to commit {expected} and the loaded model reports that "
+            f"its files came from {got}. Everything downstream compares the "
+            f"recorded revision as a string, so recording {expected} here would "
+            f"hide the difference. Clear the local cache entry for this model "
+            f"and load again, or pass --revision {got} if that is the version "
+            f"you meant.")
+    print(f"the loaded model confirms its files came from commit {got}",
+          flush=True)
+    return got
+
+
 def snapshot_dir(revision: str, model: str = MODEL_NAME) -> Path:
     """The directory holding the files of one exact revision of the weights."""
     check_commit_revision(revision, "the revision to read weight files from",

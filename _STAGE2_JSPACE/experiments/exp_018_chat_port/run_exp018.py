@@ -62,10 +62,10 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from qwen_port import (  # noqa: E402
-    GENERATION_KEY, LoopConfig, chat_wrap, check_commit_revision, free_gb,
-    generation_stamp, hook_names, load_model, make_injection_hook,
-    natural_profile, peak_gb, position_collapse, readout, resolve_revision,
-    rss_gb, run_loop, tokenise, versions,
+    GENERATION_KEY, LoopConfig, chat_wrap, check_commit_revision,
+    confirm_loaded_revision, free_gb, generation_stamp, hook_names, load_model,
+    make_injection_hook, natural_profile, peak_gb, position_collapse, readout,
+    resolve_revision, rss_gb, run_loop, tokenise, versions,
 )
 
 OUT = HERE / "output"
@@ -147,6 +147,39 @@ def atomic_write_group(items: list, tag: str | None = None) -> None:
                 tmp.unlink()
 
 
+def revision_to_load(explicit: str | None, stage: str) -> tuple[str | None, str]:
+    """The exact commit a fresh load is pinned to, decided before the load runs.
+
+    A load that is not pinned follows the cache pointer `refs/main`, which can
+    move, and reading that pointer afterwards to record what was loaded is not
+    the same thing as knowing: another process can move it between the load and
+    the read, and the run would then label its tensors with a version they did
+    not come from. So the pointer is read once, first, and the load is pinned to
+    the commit it named, which cannot move. `--revision` overrides it and is
+    already checked to be a commit identifier in `main`.
+
+    When nothing is cached there is no pointer to read and nothing to pin to, so
+    the load has to go to the hub as it is and the caller reads the revision
+    afterwards; that case is the one order that can mislabel a run, so it is
+    printed rather than passed over. Returns the pin, which is None in exactly
+    that case, and one sentence saying where it came from.
+    """
+    if explicit:
+        return explicit, "the --revision option, which pinned the load"
+    try:
+        pointer = resolve_revision()
+    except FileNotFoundError as exc:
+        print(f"note: {exc}. The {stage} stage therefore loads without a pin "
+              f"and reads the revision afterwards, which is the one order that "
+              f"can record a version a run did not use. Pass --revision, or "
+              f"run this again once the weights are cached.", flush=True)
+        return None, ("read from the cache pointer refs/main after an unpinned "
+                      "load, because nothing was cached to pin to before it")
+    return pointer, ("the cache pointer refs/main, read before the load and "
+                     "pinned, so the load could not follow that pointer "
+                     "somewhere else")
+
+
 def load_prompts(n: int | None = None, arm: str = "bare",
                  n_chat: int = 5) -> list[dict]:
     """The registered Small subset, in file order.
@@ -167,9 +200,15 @@ def stage_probe(args) -> None:
     t_start = time.time()
     dtype = dtype_name(args)
     print(f"free={free_gb():.1f} GB before load", flush=True)
+    # The commit is resolved before the load and the load is pinned to it, so
+    # the revision recorded below is the one the weights came from and not
+    # whatever the cache pointer names by the time the load finishes.
+    pin, rev_source = revision_to_load(args.revision, "probe")
     t0 = time.time()
-    model = load_model(dtype=DTYPES[dtype], revision=args.revision)
+    model = load_model(dtype=DTYPES[dtype], revision=pin)
     load_s = time.time() - t0
+    revision = pin or resolve_revision()
+    confirm_loaded_revision(model, revision, "probe")
     print(f"loaded in {load_s:.1f}s  rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
           f"free={free_gb():.1f} GB", flush=True)
     inject_name, extract_name = hook_names(model)
@@ -178,7 +217,8 @@ def stage_probe(args) -> None:
     records = load_prompts()
     out = {
         "model": "Qwen/Qwen3-1.7B",
-        "model_revision": resolve_revision(args.revision),
+        "model_revision": revision,
+        "model_revision_source": rev_source,
         "dtype": dtype,
         "versions": versions(),
         "cfg": {k: getattr(model.cfg, k, None) for k in
@@ -490,10 +530,7 @@ def stage_loop(args) -> None:
     npz_path = OUT / f"terminal_states_{args.arm}.npz"
     results, tensors, saved = [], {}, None
     pin, revision_assumed = args.revision, False
-    revision_source = ("the --revision option, which pinned the load"
-                       if args.revision else
-                       "the cache pointer refs/main that this unpinned load "
-                       "followed, read after the load")
+    revision_source = "the --revision option, which pinned the load"
     # Everything a resume can refuse is settled before the model is loaded, so
     # a refusal costs no minutes and no gigabytes.
     if args.resume and res_path.exists():
@@ -553,8 +590,12 @@ def stage_loop(args) -> None:
                   f"nothing to run and the model was not loaded", flush=True)
         return
 
+    if pin is None:
+        # A fresh run with no --revision and no resume to inherit one from.
+        pin, revision_source = revision_to_load(args.revision, "loop")
     model = load_model(dtype=DTYPES[dtype], revision=pin)
-    revision = resolve_revision(pin)
+    revision = pin or resolve_revision()
+    confirm_loaded_revision(model, revision, "loop")
     print(f"loaded rss={rss_gb():.2f} GB peak={peak_gb():.2f} GB "
           f"dtype={dtype} revision={revision}"
           f"{' (assumed for the inherited records)' if revision_assumed else ''}",
@@ -724,17 +765,26 @@ def stage_states(args) -> None:
     dtype = dtype_from_results(args, res, "states")
     # This stage reads the same pair the loop published, one row per prompt and
     # one terminal tensor per prompt, so it checks the same stamp the resume
-    # checks before pairing them by identifier.
+    # checks before pairing them by identifier. The tensors are read into memory
+    # here, from the same open file whose stamp was just checked against `res`,
+    # and never read from the path again. Checking the file and then reopening
+    # the path after the model load, which takes tens of seconds, would read
+    # whatever file is at that path by then: a loop invocation publishing new
+    # checkpoints in the meantime would put tensors this stage never verified
+    # underneath the rows it did verify. Holding them costs about 2 megabytes
+    # for the 25-prompt main arm and about 1 megabyte for the 5-prompt pilot
+    # arm, against the roughly 4 gigabytes the loaded model needs.
     with np.load(OUT / f"terminal_states_{args.arm}.npz") as _npz:
         loop_pair_generation(res, _npz, args.arm)
+        tensors = {k: v for k, v in _npz.items() if k != GENERATION_KEY}
     pin, revision, rev_assumed = revision_from_results(
         res, "states", args.revision)
     print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})  "
           f"revision={revision} (pinned"
           f"{', assumed' if rev_assumed else ''})", flush=True)
     model = load_model(dtype=DTYPES[dtype], revision=pin)
+    confirm_loaded_revision(model, revision, "states")
     inject_name, _ = hook_names(model)
-    tensors = np.load(OUT / f"terminal_states_{args.arm}.npz")
     want = {f"blocks.{l}.hook_resid_post" for l in SCORED_LAYERS}
     settled, clean, meta = {}, {}, []
 
@@ -825,9 +875,12 @@ def stage_lagscan(args) -> None:
         dtype = dtype_from_results(args, res, "lagscan")
         pin, revision, rev_assumed = revision_from_results(
             res, "lagscan", args.revision)
+        rev_source = (f"the revision results_{args.arm}.json records for the "
+                      f"loop this scan describes, which pinned the load")
     else:
-        dtype, pin, rev_assumed = dtype_name(args), args.revision, False
-        revision = resolve_revision(args.revision)
+        dtype, rev_assumed = dtype_name(args), False
+        pin, rev_source = revision_to_load(args.revision, "lag scan")
+        revision = pin
         print(f"note: no results_{args.arm}.json to check against, so this lag "
               f"scan runs at {dtype} on revision {revision} without matching "
               f"any recorded loop", flush=True)
@@ -836,12 +889,15 @@ def stage_lagscan(args) -> None:
           f"{' (assumed, not recorded by the loop)' if rev_assumed else ''}",
           flush=True)
     model = load_model(dtype=DTYPES[dtype], revision=pin)
+    revision = revision or resolve_revision()
+    confirm_loaded_revision(model, revision, "lag scan")
     inject_name, extract_name = hook_names(model)
     records = load_prompts(args.n_prompts, args.arm, args.n_chat)
     out = {"arm": args.arm, "iterations": args.max_iter, "max_lag": 8,
            "dtype": dtype, "model": "Qwen/Qwen3-1.7B",
            "model_revision": revision,
-           "model_revision_assumed": rev_assumed, "prompts": {}}
+           "model_revision_assumed": rev_assumed,
+           "model_revision_source": rev_source, "prompts": {}}
     for rec in records:
         text = rec["prompt"] if args.arm == "bare" else chat_wrap(model, rec["prompt"])
         tokens = tokenise(model, text)
