@@ -395,10 +395,10 @@ for the swap question to arise.
 ## Addendum, 2026-09-05, extended 2026-09-06
 
 This addendum is appended after the run. It changes nothing that was
-pre-registered above; it records three things a reader of this specification
+pre-registered above; it records four things a reader of this specification
 alone would otherwise not know, all found by review of the results record
 and all answered there in full. The first two were added on 2026-09-05 and
-the third on 2026-09-06.
+the third and fourth on 2026-09-06.
 
 1. **The success criterion for H17a in section 5.2 admits answers the model
    already gave.** It counts a question as redirected when the target
@@ -444,4 +444,32 @@ the third on 2026-09-06.
    compare the lens arm's success rate with control A's, as this
    specification registers. A later battery of this shape should register a
    control of the cluster-matched form from the start if it intends to
-   report a grouped probability.
+   report a grouped probability. Two further corrections to that control and
+   to the grouping followed later the same day and are recorded in the
+   results record as corrections 25 and 26: the control's random directions
+   must be seeded by the concept they stand in for rather than by the item,
+   because the lens arm gives two units that swap the same concept the same
+   direction; and the groups must be the connected components of the units
+   that share any direction, because groups formed by source concept alone
+   still share target concepts with one another. Under that grouping the
+   held-out country pairs of H17a form a single group, so no grouped
+   probability is available for H17a at all, and its verdict rests on the
+   counts against the registered thresholds, which is what section 5.2
+   registers.
+
+4. **The target concept of every H17 item is chosen by a lens reading, and
+   the control's random direction is chosen by nothing.** Section 5.1 above
+   sets the rule, which is pre-registered design: the target is the category
+   member the lens ranks highest at layer 8 among those absent from the
+   model's ten most likely next words. Under the null the significance tests
+   assert, that a lens direction is nothing but a norm-matched random
+   direction, this gives the lens arm a selection advantage the control does
+   not have, so every H17 probability in the results record other than the
+   mirrored ones is conditional on the lens-selected targets and cannot be
+   read as an unconditional null. A mirrored control was run on 2026-09-06
+   that applies the same rule to its own random directions and is scored on
+   its own chosen concept; the protocol reading is unchanged against it. The
+   registered rate thresholds are unaffected, since they compare success
+   rates and name no test. A later battery that wants an unconditional
+   probability should either register the mirrored control from the start or
+   choose its targets without consulting the instrument under test.

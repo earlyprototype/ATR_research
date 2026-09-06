@@ -261,24 +261,61 @@ for b in BATTERIES:
                   + ("" if "heldout" in name else
                      " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)") + ".")
 
+    tok = s.get("cluster_tests_token_control")
+    if tok:
+        print("\nCluster-level exact tests against the token-seeded cluster-matched "
+              "control, which treat the scored units that share a lens direction as a "
+              "single draw rather than as independent ones. This control seeds every "
+              "random direction by the token it stands in for, so it reuses a direction "
+              "across units wherever the lens arm reuses one. The grouping `by "
+              "component` is the connected components of the graph that joins two units "
+              "whenever they use the same lens direction, in either the source or the "
+              "target role, so two different components share no direction at all; the "
+              "groupings by source and by source and target leave different groups "
+              "sharing a direction and so still assume more independence than the design "
+              "supports. Resolution is the smallest probability these outcomes can "
+              "produce, one over the draws per cluster raised to the number of clusters "
+              "whose draws are not all equal:\n")
+        cluster_lines(tok)
+
+    mir = s.get("mirrored_target_tests")
+    if mir:
+        print("\nExact tests against the mirrored-selection control, which is the "
+              "token-seeded control with one addition: it picks its own target concept, "
+              "and for the `lens` source rule its own source concept, by the rule the "
+              "battery used, meaning the candidate its own random directions make the "
+              "layer-8 readout rank highest among the category members absent from the "
+              "model's ten most likely next words, and it succeeds when that chosen "
+              "concept enters the model's five most likely next words. Every other test "
+              "here compares a lens arm whose target was selected for a high lens "
+              "reading with a control whose target was not selected at all, so every "
+              "other probability is conditional on the selected targets; these are not. "
+              "Within-item first, then the same cluster groupings:\n")
+        for name, t in mir["item_level"].items():
+            print(f"- {name.replace('_', ' ')}: {fmt(t)}")
+        print()
+        cluster_lines(mir["cluster_level"])
+
     shared = s.get("cluster_tests_shared_control")
     if shared:
-        print("\nCluster-level exact tests against the cluster-matched control, which "
+        print("\nCluster-level exact tests against the item-seeded cluster-matched control of the first run, which "
               "treat the scored units that share one source lens direction as a single "
               "draw rather than as independent ones. The cluster-matched control shares "
               "its randomness inside a cluster the way the lens arm does (one random "
               "source direction for the whole cluster, an independent random target "
               "direction per item, or both shared where the lens arm shares both), which "
-              "is what makes the two arms' cluster totals exchangeable. These are the "
-              "cluster-level probabilities that are valid as stated. Resolution is the "
-              "smallest probability these outcomes can produce, one over the draws per "
+              "makes the two arms' cluster totals exchangeable at the level of the "
+              "cluster but still gives two units of one cluster independent target "
+              "directions where the lens arm gives them the same one; the token-seeded "
+              "block above is the corrected version and the one the record leads with. "
+              "Resolution is the smallest probability these outcomes can produce, one over the draws per "
               "cluster raised to the number of clusters whose draws are not all equal, so "
               "a value equal to its resolution means the lens beat every control draw in "
               "every cluster that could tell them apart:\n")
         cluster_lines(shared)
 
     ct = s["cluster_tests"]
-    if shared:
+    if shared or tok:
         print("\nThe same cluster-level tests against control A, the registered control, "
               "which draws both of its random directions afresh for every item. Its "
               "cluster totals are not exchangeable with the lens arm's, whose members "

@@ -109,7 +109,20 @@ def load_lens():
     different file at LENS_PATH (or at EXP016_LENS_PATH) cannot silently
     stand in for the registered instrument."""
     global LENS_SHA256_MEASURED
-    from jlens.lens import JacobianLens
+    try:
+        from jlens.lens import JacobianLens
+    except ImportError as exc:
+        raise ImportError(
+            f"the reader package `jlens` is not importable ({exc}). It is the "
+            f"reference code of the lens, the repository "
+            f"https://github.com/anthropics/jacobian-lens at commit "
+            f"{JLENS_COMMIT}. Clone it and install it in place with `git clone "
+            f"https://github.com/anthropics/jacobian-lens && cd jacobian-lens "
+            f"&& git checkout {JLENS_COMMIT} && pip install -e .`, or put that "
+            f"clone on PYTHONPATH. Everything in this experiment uses exactly "
+            f"two things from it: `JacobianLens.load(path)`, which reads the "
+            f"lens file, and the `.jacobians` list it returns, whose entry for "
+            f"a layer is the 768 by 768 matrix this code multiplies by") from exc
     if not os.path.exists(LENS_PATH):
         raise FileNotFoundError(
             f"lens not found at {LENS_PATH}; download gpt2-small from the Hugging "

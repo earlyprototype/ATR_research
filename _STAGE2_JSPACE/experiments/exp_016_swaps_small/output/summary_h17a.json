@@ -3975,6 +3975,32 @@
     0.004115226337448559
    ]
   },
+  "pairs_primary_heldout_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 1,
+   "per_cluster": {
+    "Germany->Greece": [
+     13,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
+   ]
+  },
   "pairs_primary_both": {
    "cluster": "source country",
    "cell": [
@@ -4064,6 +4090,32 @@
     1.693508780843029e-05
    ]
   },
+  "pairs_primary_both_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 30,
+   "n_clusters": 1,
+   "per_cluster": {
+    "France->Germany": [
+     26,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    26,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
+   ]
+  },
   "pairs_primary_heldout_rank1": {
    "cluster": "source country",
    "cell": [
@@ -4102,6 +4154,32 @@
     3,
     0.037037037037037035,
     0.037037037037037035
+   ]
+  },
+  "pairs_primary_heldout_rank1_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 9,
+   "n_clusters": 1,
+   "per_cluster": {
+    "Germany->Greece": [
+     7,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    7,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
    ]
   },
   "pairs_primary_heldout_layer9": {
@@ -4156,6 +4234,32 @@
     5,
     0.004115226337448559,
     0.004115226337448559
+   ]
+  },
+  "pairs_primary_heldout_layer9_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "9",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 1,
+   "per_cluster": {
+    "Germany->Greece": [
+     13,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
    ]
   }
  },
@@ -4400,6 +4504,357 @@
     0.004115226337448559
    ],
    "control": "cluster matched, shared source"
+  }
+ },
+ "cluster_tests_token_control": {
+  "pairs_primary_heldout": {
+   "cluster": "source country",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 5,
+   "per_cluster": {
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Ireland": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Japan": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    5,
+    5,
+    0.004115226337448559,
+    0.004115226337448559
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_heldout_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 1,
+   "per_cluster": {
+    "Germany->Greece": [
+     13,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_both": {
+   "cluster": "source country",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 30,
+   "n_clusters": 10,
+   "per_cluster": {
+    "France": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Greece": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Ireland": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Italy": [
+     2,
+     [
+      0,
+      0
+     ]
+    ],
+    "Japan": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Poland": [
+     2,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Spain": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    26,
+    10,
+    10,
+    1.693508780843029e-05,
+    1.693508780843029e-05
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_both_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 30,
+   "n_clusters": 1,
+   "per_cluster": {
+    "France->Germany": [
+     26,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    26,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_heldout_rank1": {
+   "cluster": "source country",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 9,
+   "n_clusters": 3,
+   "per_cluster": {
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    7,
+    3,
+    3,
+    0.037037037037037035,
+    0.037037037037037035
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_heldout_rank1_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "6",
+    2.0,
+    "all"
+   ],
+   "n_units": 9,
+   "n_clusters": 1,
+   "per_cluster": {
+    "Germany->Greece": [
+     7,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    7,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_heldout_layer9": {
+   "cluster": "source country",
+   "cell": [
+    "9",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 5,
+   "per_cluster": {
+    "Germany": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Ireland": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Japan": [
+     3,
+     [
+      0,
+      0
+     ]
+    ],
+    "Portugal": [
+     1,
+     [
+      0,
+      0
+     ]
+    ],
+    "Sweden": [
+     3,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    5,
+    5,
+    0.004115226337448559,
+    0.004115226337448559
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pairs_primary_heldout_layer9_by_component": {
+   "cluster": "connected component of pairs sharing any lens direction, source or target",
+   "cell": [
+    "9",
+    2.0,
+    "all"
+   ],
+   "n_units": 15,
+   "n_clusters": 1,
+   "per_cluster": {
+    "Germany->Greece": [
+     13,
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "test": [
+    13,
+    1,
+    1,
+    0.3333333333333333,
+    0.3333333333333333
+   ],
+   "control": "cluster matched, seeded by token"
   }
  }
 }

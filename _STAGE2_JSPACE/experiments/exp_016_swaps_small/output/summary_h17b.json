@@ -8209,8 +8209,42 @@
     0.00390625
    ]
   },
+  "items_all_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7",
+    2.0,
+    "all_no_bos"
+   ],
+   "n_units": 16,
+   "n_clusters": 13,
+   "test": [
+    4,
+    13,
+    3,
+    0.015625,
+    0.015625
+   ]
+  },
   "items_heldout": {
    "cluster": "source concept",
+   "cell": [
+    "7",
+    2.0,
+    "all_no_bos"
+   ],
+   "n_units": 8,
+   "n_clusters": 8,
+   "test": [
+    1,
+    8,
+    1,
+    0.25,
+    0.25
+   ]
+  },
+  "items_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
    "cell": [
     "7",
     2.0,

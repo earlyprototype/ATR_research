@@ -348,6 +348,43 @@ def cluster_exact_test(clusters):
             sum(v for tot, v in dist.items() if tot >= obs), floor)
 
 
+def component_key_of(ids, tokens_of):
+    """Group units into the connected components of the graph whose nodes are
+    the units in `ids` and whose edges join two units that use the same lens
+    direction, meaning the same token in either the source or the target role.
+    Grouping by source concept alone leaves distinct groups sharing a
+    direction: in the held-out `output` half of H17, four frames swap
+    ' football' to ' cricket' while two others swap ' football' to ' rugby' and
+    to ' wrestling', so three groups share the source direction, and four
+    different sources all point at the target ' dolphin'. Components are the
+    coarsest grouping under which two different groups share no direction at
+    all, so they are the grouping whose independence assumption the design
+    actually supports. Returns a dictionary from unit identifier to the
+    smallest unit identifier in its component, which labels the component.
+    Components must be formed over the units of the test in hand: two held-out
+    units that share nothing with each other are independent even when each
+    shares a token with some tuning unit that the test does not score."""
+    parent = {}
+    def find(x):
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[ra] = rb
+    for i in ids:
+        toks = list(tokens_of(i))
+        for t in toks[1:]:
+            union(("tok", toks[0]), ("tok", t))
+    label = {}
+    for i in sorted(ids):
+        label.setdefault(find(("tok", list(tokens_of(i))[0])), i)
+    return {i: label[find(("tok", list(tokens_of(i))[0]))] for i in ids}
+
+
 def clusters_of(outcomes, key_of):
     """Group per-unit (lens, [control per seed]) outcomes into clusters by
     `key_of(unit identifier)`, summing successes within each cluster."""
@@ -373,7 +410,9 @@ def shared_control_rows(battery, kind):
     swap. Returns the lens rows and that arm's rows with the arm relabelled
     `randdir`, so the grouping and test code below is unchanged, or None when
     the run has not been made in this checkout."""
-    path = D + "output/cluster_control_records.csv"
+    path = D + "output/cluster_control_records_v2.csv"
+    if not os.path.exists(path):
+        path = D + "output/cluster_control_records.csv"
     if not os.path.exists(path):
         return None
     rows = []
@@ -407,18 +446,25 @@ def cluster_tests(rows, battery, cell, rule_cell=None):
     out = {}
     if battery == "h17a":
         items = {it["item_id"]: it for it in json.load(open(D + "battery_h17a.json"))}
-        src = lambda iid: items[iid]["source"]
+        toks = lambda iid: (items[iid]["source_tok"], items[iid]["target_tok"])
         for name, c, split, rank1 in (
                 ("pairs_primary_heldout", cell, "heldout", False),
                 ("pairs_primary_both", cell, None, False),
                 ("pairs_primary_heldout_rank1", cell, "heldout", True),
                 ("pairs_primary_heldout_layer9", ("9", 2.0, "all"), "heldout", False)):
             o = pair_outcomes_by_id(rows, c, split, "primary", rank1=rank1)
-            cl = clusters_of(o, src)
-            out[name] = dict(cluster="source country", cell=list(c),
-                             n_units=len(o), n_clusters=len(cl),
-                             per_cluster={k: [v[0], v[1]] for k, v in cl.items()},
-                             test=list(cluster_exact_test(list(cl.values()))))
+            for suffix, label, keymap in (
+                    ("", "source country",
+                     {i: items[i]["source"] for i in o}),
+                    ("_by_component", "connected component of pairs sharing any "
+                                      "lens direction, source or target",
+                     component_key_of(list(o), toks))):
+                cl = clusters_of(o, keymap.__getitem__)
+                out[name + suffix] = dict(
+                    cluster=label, cell=list(c),
+                    n_units=len(o), n_clusters=len(cl),
+                    per_cluster={str(k): [v[0], v[1]] for k, v in cl.items()},
+                    test=list(cluster_exact_test(list(cl.values()))))
     elif battery == "h17":
         items = {it["item_id"]: it for it in json.load(open(D + "battery_h17.json"))}
         held = lambda r: items[r["item_id"]]["split"] == "heldout"
@@ -427,26 +473,39 @@ def cluster_tests(rows, battery, cell, rule_cell=None):
             preds[f"rule_{rule}_heldout"] = (
                 rule_cell or cell,
                 lambda r, rule=rule: held(r) and items[r["item_id"]]["source_rule"] == rule)
-        groupings = (("by_source", "source concept", lambda i: items[i]["source"]),
-                     ("by_source_and_target", "source and target concepts",
-                      lambda i: (items[i]["source"], items[i]["target"])))
+        toks = lambda i: (items[i]["source_tok"], items[i]["target_tok"])
+        groupings = (
+            ("by_source", "source concept",
+             lambda o: {i: items[i]["source"] for i in o}),
+            ("by_source_and_target", "source and target concepts",
+             lambda o: {i: (items[i]["source"], items[i]["target"]) for i in o}),
+            ("by_component", "connected component of items sharing any lens "
+                             "direction, source or target",
+             lambda o: component_key_of(list(o), toks)))
         for name, (c, pred) in preds.items():
             o = item_outcomes_by_id(rows, c, "in_top5", pred)
-            for suffix, label, key_of in groupings:
-                cl = clusters_of(o, key_of)
+            for suffix, label, keymap_of in groupings:
+                cl = clusters_of(o, keymap_of(o).__getitem__)
                 out[f"{name}_{suffix}"] = dict(
                     cluster=label, cell=list(c), n_units=len(o), n_clusters=len(cl),
                     test=list(cluster_exact_test(list(cl.values()))))
     else:
         items = {it["item_id"]: it for it in json.load(open(D + "battery_h17b.json"))}
+        toks = lambda i: (items[i]["source_tok"], items[i]["target_tok"])
         for name, pred in (("items_all", lambda r: True),
                            ("items_heldout",
                             lambda r: items[r["item_id"]]["split"] == "heldout")):
             o = item_outcomes_by_id(rows, cell, "is_top1", pred)
-            cl = clusters_of(o, lambda i: items[i]["source"])
-            out[name] = dict(cluster="source concept", cell=list(cell),
-                             n_units=len(o), n_clusters=len(cl),
-                             test=list(cluster_exact_test(list(cl.values()))))
+            for suffix, label, keymap in (
+                    ("", "source concept", {i: items[i]["source"] for i in o}),
+                    ("_by_component", "connected component of items sharing any "
+                                      "lens direction, source or target",
+                     component_key_of(list(o), toks))):
+                cl = clusters_of(o, keymap.__getitem__)
+                out[name + suffix] = dict(
+                    cluster=label, cell=list(cell),
+                    n_units=len(o), n_clusters=len(cl),
+                    test=list(cluster_exact_test(list(cl.values()))))
     return out
 
 
@@ -476,14 +535,99 @@ def cluster_tests_shared_control(battery, cell, rule_cell=None):
         if rows is None:
             return None
         part = cluster_tests(rows, battery, cell, rule_cell)
-        order = order or list(part)
+        order = order or [k for k in part if not k.endswith("by_component")]
         for name, d in part.items():
+            if name.endswith("by_component"):
+                # The connected-component grouping is reported only against the
+                # token-seeded control below, which is the only control here
+                # whose directions are reused across units exactly as the lens
+                # directions are.
+                continue
             if suffix and not name.endswith(suffix):
                 continue
             out[name] = dict(d, control=f"cluster matched, {kind.replace('_', ' ')}")
     # Keep the reading order of the control A block, so the two can be read
     # line against line.
     return {k: out[k] for k in order if k in out} or None
+
+
+def token_control_rows(battery, arm):
+    """One arm of the second cluster-matched control run, in the shape the
+    cluster-level test reads. The arm `randdir_by_token` seeds each random
+    direction by the token it stands in for, so that two units swapping the
+    same concept receive the same random direction exactly as they receive the
+    same lens direction; the first run seeded the target direction by item, so
+    the four held-out frames that all swap ' football' to ' cricket' got four
+    independent random targets where the lens arm gives them one. The arm
+    `randdir_mirrored` additionally chooses its own target concept by the
+    layer-8 rule the battery used, applied to its own random directions.
+    Returns the lens rows and that arm's rows with the arm relabelled
+    `randdir`, or None when the run is not present in this checkout."""
+    path = D + "output/cluster_control_records_v2.csv"
+    if not os.path.exists(path):
+        return None
+    rows = []
+    with open(path) as fh:
+        for r in csv.DictReader(fh):
+            if r["battery"] != battery:
+                continue
+            if r["arm"] == "lens":
+                a = "lens"
+            elif r["arm"] == arm:
+                a = "randdir"
+            else:
+                continue
+            r = dict(r, arm=a)
+            for k in ("good_rank", "bad_rank", "in_top5", "is_top1",
+                      "beats_bad", "seed"):
+                r[k] = int(r[k])
+            r["alpha"] = float(r["alpha"])
+            rows.append(r)
+    return rows or None
+
+
+def cluster_tests_token_control(battery, cell, rule_cell=None, arm="randdir_by_token"):
+    """The cluster-level exact tests against a control whose random directions
+    are seeded by the token they stand in for, so that the control reuses a
+    direction across units wherever the lens arm reuses one. Every grouping is
+    reported, including the connected-component grouping, which is the only
+    one under which two different clusters share no lens direction at all."""
+    rows = token_control_rows(battery, arm)
+    if rows is None:
+        return None
+    part = cluster_tests(rows, battery, cell, rule_cell)
+    label = ("cluster matched, seeded by token" if arm == "randdir_by_token"
+             else "cluster matched by token, target chosen by the same layer-8 rule")
+    return {k: dict(v, control=label) for k, v in part.items()}
+
+
+def mirrored_target_tests(battery, cell, rule_cell=None):
+    """For H17 only: the exact tests against the mirrored-selection control,
+    whose target concept is picked by the same layer-8 rule the battery used to
+    pick the lens arm's target, applied to the control's own random directions,
+    and whose success is that chosen concept entering the model's five most
+    likely next words. Every other test in this record compares a lens arm
+    whose target was selected for a high lens readout with a control whose
+    target was not selected at all, so those probabilities are conditional on
+    the selected targets; this one is not."""
+    rows = token_control_rows(battery, "randdir_mirrored")
+    if rows is None or battery != "h17":
+        return None
+    items = {it["item_id"]: it for it in json.load(open(D + "battery_h17.json"))}
+    held = lambda r: items[r["item_id"]]["split"] == "heldout"
+    out = {"item_level": {}, "cluster_level": {}}
+    preds = {"pooled_heldout": (cell, held)}
+    for rule in ("lens", "output"):
+        preds[f"rule_{rule}_heldout"] = (
+            rule_cell or cell,
+            lambda r, rule=rule: held(r) and items[r["item_id"]]["source_rule"] == rule)
+    for name, (c, pred) in preds.items():
+        out["item_level"][name] = list(exact_within_item_test(
+            item_outcomes(rows, c, "in_top5", pred)))
+    part = cluster_tests(rows, battery, cell, rule_cell)
+    out["cluster_level"] = {k: dict(v, control="mirrored target selection")
+                            for k, v in part.items()}
+    return out
 
 
 def baseline_hit_counts(rows, cell):
@@ -762,6 +906,12 @@ if __name__ == "__main__":
         shared = cluster_tests_shared_control(b, out["chosen_cell"], rule_cell)
         if shared:
             out["cluster_tests_shared_control"] = shared
+        tok = cluster_tests_token_control(b, out["chosen_cell"], rule_cell)
+        if tok:
+            out["cluster_tests_token_control"] = tok
+        mir = mirrored_target_tests(b, out["chosen_cell"], rule_cell)
+        if mir:
+            out["mirrored_target_tests"] = mir
         json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
         c = out["chosen_cell"]
         print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "

@@ -50,21 +50,25 @@ register:
   that the lens direction is no better than a random direction of the same
   lengths, the lens draw is exchangeable with the two control draws inside
   each item. Several frames share one source concept, so the items are not
-  independent of one another; grouping the 21 held-out items of the
-  `output` rule into the 12 groups that share a source concept and treating
-  the lens as one draw per group, the exact test (see "Statistical
-  distinguishability" below) gives a probability of 5 in 100,000, and
-  grouping into the 17 groups that share both source and target concept
-  gives 2 in 10,000,000. Both of those are measured against a control run
-  on 2026-09-06 whose randomness is shared inside a group the way the lens
-  arm's is, which is the only control a group-level test may use; the same
-  two figures as the record computed them on 2026-09-05, against the
-  registered control A, are withdrawn because control A draws its random
-  directions afresh for every item and so is not exchangeable with the lens
-  arm at the level of a group (correction 19). The earlier figures of 3 in
-  1,000,000,000 for the protocol gap and 1 in 10,000,000,000,000 for the
-  pooled one are withdrawn as headlines as well: they counted every item as
-  an independent draw (correction 16).
+  independent of one another. Grouping the 21 held-out items of the
+  `output` rule into the 7 connected groups within which any two frames
+  share a lens direction, and comparing them with a control whose random
+  directions are reused across frames exactly as the lens directions are,
+  the exact test (see "Statistical distinguishability" below) gives 0.00137,
+  which is 1 in 729 and is the smallest value 6 informative groups of 3
+  draws can return. The same 0.00137 comes out of the stricter control that
+  also chooses its own target concept by the rule the battery used, so this
+  number does not depend on the lens arm having been allowed to pick a
+  favourable target. Three earlier figures for this gap are withdrawn as
+  headlines: 3 in 1,000,000,000, which counted every item as an independent
+  draw (correction 16); 5 in 100,000 computed against the registered
+  control A, whose random directions are not shared inside a group as the
+  lens arm's are (correction 19); and 5 in 100,000 computed with the source
+  concept as the group, a grouping under which different groups still share
+  a direction (correction 25). The last of those three is still reported
+  below, against the corrected control, because earlier versions of this
+  record and of the proposed register row led with it; the component
+  grouping is what both lead with now.
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
   questions about that country on **87 percent of the held-out pairs, 13 of
@@ -111,17 +115,21 @@ register:
   (decision item 7). A fourth caveat (correction 16): the 15 held-out pairs
   are three pairs for each of five source countries, and the three pairs of
   one country share that country's lens direction, so they are not 15
-  independent draws. Treating the source country as the unit, and measuring
-  against a control run on 2026-09-06 that shares its random source
-  direction across a country's three pairs the way the lens arm shares that
-  country's lens direction, the exact test gives 0.0041, which is 1 in 243
-  and is the smallest probability that five groups of three draws each can
-  produce; the item-level 6.3 times 10 to the power minus 7 is withdrawn as
-  the headline for H17a. The same 0.0041 as the record computed it on
-  2026-09-05, against the registered control A, is withdrawn on its own
-  account, because control A draws a fresh random direction for every pair
-  and so is not exchangeable with the lens arm at the level of a country
-  (correction 19); the value is unchanged, its warrant is not.
+  independent draws. Worse than that, the five countries the pairs point at
+  are the same five countries the pairs start from, so every held-out pair
+  is joined to every other by a shared country direction and the held-out
+  half is a single group, not five. A single group of three draws, one lens
+  and two control, cannot return a probability below one third, and it
+  returns exactly one third, so no grouped significance test can separate
+  the arms here at all. H17a rests on its counts, 13 of 15 held-out pairs
+  redirected against 0 of 30 control trials, and on the registered threshold
+  they clear. Three probabilities offered for H17a in earlier versions of
+  this record are withdrawn as headlines: the item-level 6.3 times 10 to the
+  power minus 7, which counted every pair as an independent draw (correction
+  16); 0.0041 computed against the registered control A (correction 19); and
+  0.0041 computed with the source country as the group, which assumes the
+  five countries are independent of one another when they share their target
+  countries (correction 25).
 - **H17b, intermediate-step surgery: SUPPORTED on its registered wording,
   weakly.** Exchanging the concept in the middle of a two-step completion
   changed the model's actual answer to the predicted alternative on **4 of 16
@@ -321,7 +329,35 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
-Cluster-level exact tests against the cluster-matched control, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. The cluster-matched control shares its randomness inside a cluster the way the lens arm does (one random source direction for the whole cluster, an independent random target direction per item, or both shared where the lens arm shares both), which is what makes the two arms' cluster totals exchangeable. These are the cluster-level probabilities that are valid as stated. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal, so a value equal to its resolution means the lens beat every control draw in every cluster that could tell them apart:
+Cluster-level exact tests against the token-seeded cluster-matched control, which treat the scored units that share a lens direction as a single draw rather than as independent ones. This control seeds every random direction by the token it stands in for, so it reuses a direction across units wherever the lens arm reuses one. The grouping `by component` is the connected components of the graph that joins two units whenever they use the same lens direction, in either the source or the target role, so two different components share no direction at all; the groupings by source and by source and target leave different groups sharing a direction and so still assume more independence than the design supports. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
+
+- pooled heldout by source: cluster is the source concept; 27 lens successes over 42 scored units in 20 clusters (12 of them informative), probability 1.88e-06, resolution 1.88e-06.
+- pooled heldout by source and target: cluster is the source and target concepts; 27 lens successes over 42 scored units in 31 clusters (19 of them informative), probability 1.72e-09, resolution 8.6e-10.
+- pooled heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 27 lens successes over 42 scored units in 4 clusters (4 of them informative), probability 0.0123, resolution 0.0123.
+- rule lens heldout by source: cluster is the source concept; 9 lens successes over 21 scored units in 9 clusters (4 of them informative), probability 0.0123, resolution 0.0123.
+- rule lens heldout by source and target: cluster is the source and target concepts; 9 lens successes over 21 scored units in 16 clusters (7 of them informative), probability 0.000457, resolution 0.000457.
+- rule lens heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 9 lens successes over 21 scored units in 5 clusters (3 of them informative), probability 0.037, resolution 0.037.
+- rule output heldout by source: cluster is the source concept; 18 lens successes over 21 scored units in 12 clusters (9 of them informative), probability 5.08e-05, resolution 5.08e-05.
+- rule output heldout by source and target: cluster is the source and target concepts; 18 lens successes over 21 scored units in 17 clusters (14 of them informative), probability 4.18e-07, resolution 2.09e-07.
+- rule output heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 18 lens successes over 21 scored units in 7 clusters (6 of them informative), probability 0.00137, resolution 0.00137.
+
+Exact tests against the mirrored-selection control, which is the token-seeded control with one addition: it picks its own target concept, and for the `lens` source rule its own source concept, by the rule the battery used, meaning the candidate its own random directions make the layer-8 readout rank highest among the category members absent from the model's ten most likely next words, and it succeeds when that chosen concept enters the model's five most likely next words. Every other test here compares a lens arm whose target was selected for a high lens reading with a control whose target was not selected at all, so every other probability is conditional on the selected targets; these are not. Within-item first, then the same cluster groupings:
+
+- pooled heldout: 27 lens successes over 29 informative items, probability 2.45e-11
+- rule lens heldout: 9 lens successes over 11 informative items, probability 0.00137
+- rule output heldout: 18 lens successes over 18 informative items, probability 2.58e-09
+
+- pooled heldout by source: cluster is the source concept; 27 lens successes over 42 scored units in 20 clusters (14 of them informative), probability 2.86e-05, resolution 2.09e-07.
+- pooled heldout by source and target: cluster is the source and target concepts; 27 lens successes over 42 scored units in 31 clusters (21 of them informative), probability 5.57e-08, resolution 9.56e-11.
+- pooled heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 27 lens successes over 42 scored units in 4 clusters (4 of them informative), probability 0.0123, resolution 0.0123.
+- rule lens heldout by source: cluster is the source concept; 9 lens successes over 21 scored units in 9 clusters (6 of them informative), probability 0.048, resolution 0.00137.
+- rule lens heldout by source and target: cluster is the source and target concepts; 9 lens successes over 21 scored units in 16 clusters (9 of them informative), probability 0.00655, resolution 5.08e-05.
+- rule lens heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 9 lens successes over 21 scored units in 5 clusters (3 of them informative), probability 0.0741, resolution 0.037.
+- rule output heldout by source: cluster is the source concept; 18 lens successes over 21 scored units in 12 clusters (9 of them informative), probability 5.08e-05, resolution 5.08e-05.
+- rule output heldout by source and target: cluster is the source and target concepts; 18 lens successes over 21 scored units in 17 clusters (14 of them informative), probability 2.09e-07, resolution 2.09e-07.
+- rule output heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 18 lens successes over 21 scored units in 7 clusters (6 of them informative), probability 0.00137, resolution 0.00137.
+
+Cluster-level exact tests against the item-seeded cluster-matched control of the first run, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. The cluster-matched control shares its randomness inside a cluster the way the lens arm does (one random source direction for the whole cluster, an independent random target direction per item, or both shared where the lens arm shares both), which makes the two arms' cluster totals exchangeable at the level of the cluster but still gives two units of one cluster independent target directions where the lens arm gives them the same one; the token-seeded block above is the corrected version and the one the record leads with. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal, so a value equal to its resolution means the lens beat every control draw in every cluster that could tell them apart:
 
 - pooled heldout by source: cluster is the source concept; 27 lens successes over 42 scored units in 20 clusters (12 of them informative), probability 3.76e-06, resolution 1.88e-06.
 - pooled heldout by source and target: cluster is the source and target concepts; 27 lens successes over 42 scored units in 31 clusters (20 of them informative), probability 9.46e-09, resolution 2.87e-10.
@@ -334,10 +370,13 @@ The same cluster-level tests against control A, the registered control, which dr
 
 - pooled heldout by source: cluster is the source concept; 27 lens successes over 42 scored units in 20 clusters (12 of them informative), probability 1.88e-06, resolution 1.88e-06.
 - pooled heldout by source and target: cluster is the source and target concepts; 27 lens successes over 42 scored units in 31 clusters (19 of them informative), probability 8.6e-10, resolution 8.6e-10.
+- pooled heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 27 lens successes over 42 scored units in 4 clusters (4 of them informative), probability 0.0123, resolution 0.0123.
 - rule lens heldout by source: cluster is the source concept; 9 lens successes over 21 scored units in 9 clusters (4 of them informative), probability 0.0123, resolution 0.0123.
 - rule lens heldout by source and target: cluster is the source and target concepts; 9 lens successes over 21 scored units in 16 clusters (7 of them informative), probability 0.000457, resolution 0.000457.
+- rule lens heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 9 lens successes over 21 scored units in 5 clusters (3 of them informative), probability 0.037, resolution 0.037.
 - rule output heldout by source: cluster is the source concept; 18 lens successes over 21 scored units in 12 clusters (9 of them informative), probability 5.08e-05, resolution 5.08e-05.
 - rule output heldout by source and target: cluster is the source and target concepts; 18 lens successes over 21 scored units in 17 clusters (14 of them informative), probability 2.09e-07, resolution 2.09e-07.
+- rule output heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 18 lens successes over 21 scored units in 7 clusters (6 of them informative), probability 0.00137, resolution 0.00137.
 
 ### H17A: tuned setting = layers 6, strength 2.0, positions all   (18600 records)
 
@@ -478,7 +517,18 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
-Cluster-level exact tests against the cluster-matched control, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. The cluster-matched control shares its randomness inside a cluster the way the lens arm does (one random source direction for the whole cluster, an independent random target direction per item, or both shared where the lens arm shares both), which is what makes the two arms' cluster totals exchangeable. These are the cluster-level probabilities that are valid as stated. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal, so a value equal to its resolution means the lens beat every control draw in every cluster that could tell them apart:
+Cluster-level exact tests against the token-seeded cluster-matched control, which treat the scored units that share a lens direction as a single draw rather than as independent ones. This control seeds every random direction by the token it stands in for, so it reuses a direction across units wherever the lens arm reuses one. The grouping `by component` is the connected components of the graph that joins two units whenever they use the same lens direction, in either the source or the target role, so two different components share no direction at all; the groupings by source and by source and target leave different groups sharing a direction and so still assume more independence than the design supports. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
+
+- pairs primary heldout: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
+- pairs primary heldout by component: cluster is the connected component of pairs sharing any lens direction, source or target; 13 lens successes over 15 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
+- pairs primary both: cluster is the source country; 26 lens successes over 30 scored units in 10 clusters (10 of them informative), probability 1.69e-05, resolution 1.69e-05 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
+- pairs primary both by component: cluster is the connected component of pairs sharing any lens direction, source or target; 26 lens successes over 30 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
+- pairs primary heldout rank1: cluster is the source country; 7 lens successes over 9 scored units in 3 clusters (3 of them informative), probability 0.037, resolution 0.037.
+- pairs primary heldout rank1 by component: cluster is the connected component of pairs sharing any lens direction, source or target; 7 lens successes over 9 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
+- pairs primary heldout layer9: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
+- pairs primary heldout layer9 by component: cluster is the connected component of pairs sharing any lens direction, source or target; 13 lens successes over 15 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
+
+Cluster-level exact tests against the item-seeded cluster-matched control of the first run, which treat the scored units that share one source lens direction as a single draw rather than as independent ones. The cluster-matched control shares its randomness inside a cluster the way the lens arm does (one random source direction for the whole cluster, an independent random target direction per item, or both shared where the lens arm shares both), which makes the two arms' cluster totals exchangeable at the level of the cluster but still gives two units of one cluster independent target directions where the lens arm gives them the same one; the token-seeded block above is the corrected version and the one the record leads with. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal, so a value equal to its resolution means the lens beat every control draw in every cluster that could tell them apart:
 
 - pairs primary heldout: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
 - pairs primary both: cluster is the source country; 26 lens successes over 30 scored units in 10 clusters (10 of them informative), probability 1.69e-05, resolution 1.69e-05 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
@@ -488,9 +538,13 @@ Cluster-level exact tests against the cluster-matched control, which treat the s
 The same cluster-level tests against control A, the registered control, which draws both of its random directions afresh for every item. Its cluster totals are not exchangeable with the lens arm's, whose members share a source direction, so these probabilities are reported for comparison only and are not valid as cluster-level tests:
 
 - pairs primary heldout: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
+- pairs primary heldout by component: cluster is the connected component of pairs sharing any lens direction, source or target; 13 lens successes over 15 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
 - pairs primary both: cluster is the source country; 26 lens successes over 30 scored units in 10 clusters (10 of them informative), probability 1.69e-05, resolution 1.69e-05 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
+- pairs primary both by component: cluster is the connected component of pairs sharing any lens direction, source or target; 26 lens successes over 30 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
 - pairs primary heldout rank1: cluster is the source country; 7 lens successes over 9 scored units in 3 clusters (3 of them informative), probability 0.037, resolution 0.037.
+- pairs primary heldout rank1 by component: cluster is the connected component of pairs sharing any lens direction, source or target; 7 lens successes over 9 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
 - pairs primary heldout layer9: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
+- pairs primary heldout layer9 by component: cluster is the connected component of pairs sharing any lens direction, source or target; 13 lens successes over 15 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
 
 Under the specification's own split rule (alternate pairs in the committed order, 25 tuning and 25 held-out, against the country-wise 27 and 23 the battery was built with): function-level selection picks layers 10, strength 2.0, all (tuning 87 percent (54 of 62), held-out 85 percent (53 of 62) per question; held-out primary pairs 14 of 15 against 0 of 30); pair-level selection picks layers 9 (held-out primary pairs 13 of 15 against 0 of 30). At the committed cells, held-out primary pairs under that split: layer 6 14 of 15, layer 9 13 of 15, control A 0 of 30 at both.
 
@@ -577,7 +631,9 @@ Only the held-out lines test the selected setting; the tuning half chose it, so 
 Cluster-level exact tests against control A, the registered control. Every cluster in this battery holds a single item, because no two items share a source concept, so the lens draw and each control draw are exchangeable inside the cluster and these probabilities are valid as they stand; they are the within-item tests above. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
 
 - items all: cluster is the source concept; 4 lens successes over 16 scored units in 16 clusters (4 of them informative), probability 0.00391, resolution 0.00391 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
+- items all by component: cluster is the connected component of items sharing any lens direction, source or target; 4 lens successes over 16 scored units in 13 clusters (3 of them informative), probability 0.0156, resolution 0.0156 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
 - items heldout: cluster is the source concept; 1 lens success over 8 scored units in 8 clusters (1 of them informative), probability 0.25, resolution 0.25.
+- items heldout by component: cluster is the connected component of items sharing any lens direction, source or target; 1 lens success over 8 scored units in 8 clusters (1 of them informative), probability 0.25, resolution 0.25.
 
 ### Numbers not in the tables above
 
@@ -627,22 +683,61 @@ item level, and the third ran a sign test against the union of an item's
 control draws, which is not an exchangeable pair because a union of draws
 succeeds more often than one draw (deviation 13).
 
-**Statistical distinguishability when the items share a direction.** What
-is valid here, in one place, before the reasoning. The redirection counts
-themselves are descriptive measurements and they stand unchanged: 13 of 15
-held-out country pairs redirected against 0 of 30 control trials for H17a,
-and 18 of 21 held-out report frames against 0 of 42 for H17 at the protocol
-setting. The exact test that treats every scored unit as an independent
-draw overstates the evidence, because units sharing a source concept are not
-independent of one another, and its probabilities are withdrawn as headlines
-(correction 16). The first cluster-level test, which grouped those units
-correctly but compared them with the registered control A, is not valid
-either, because control A's randomness is not shared inside a group the way
-the lens arm's is, and its probabilities are withdrawn too (correction 19).
-A control that shares its randomness the way the lens arm does was run on
-2026-09-06, and the probabilities in this section are measured against it;
-they are the only cluster-level probabilities this record asks to be
-believed. The rest of this section says why, and what the numbers are.
+**Statistical distinguishability when the items share a direction.** Which
+probabilities this record asks to be believed, and what each one assumes,
+in one place and before the reasoning. This paragraph was rewritten on
+2026-09-06 after a second review of the same day; the trail of what each
+earlier version claimed is in corrections 16, 19, 25, 26 and 27.
+
+The redirection counts are descriptive measurements and they stand
+unchanged, assuming nothing beyond the scoring rule: 13 of 15 held-out
+country pairs redirected against 0 of 30 control trials for H17a, and 18 of
+21 held-out report frames against 0 of 42 for H17 at the protocol setting.
+The registered verdicts rest on those counts against the registered
+thresholds, and on nothing below.
+
+Two probabilities are asked to be believed, both for H17 and both at the
+protocol setting, meaning the tuning-selected source rule `output`, and both
+on the held-out half. Grouping the 21 held-out frames into the 7 connected
+groups within which any two frames share a lens direction, and comparing the
+lens arm with a control whose random directions are reused across frames
+exactly as the lens directions are, the exact test gives 0.00137, which is 1
+in 729 and is the smallest value 6 informative groups of 3 draws can return.
+Adding the battery's own target-selection rule to that control, so that the
+control picks its own target concept by the same layer-8 reading applied to
+its own random directions rather than being handed the concept the lens
+picked, gives the same 0.00137. The first assumes that groups sharing no
+lens direction are independent of one another, which is what the design
+supports, and that the lens arm's target is comparable with a control target
+that was not selected; the second drops that second assumption and is the
+only probability here that does not condition on the lens-selected targets.
+Both assume the exchangeability that the registered null itself asserts,
+that a lens direction is nothing but a norm-matched random direction.
+
+Everything else in this section is reported for the trail and is not asked
+to be believed as a probability. The item-level tests treat every scored
+unit as an independent draw and overstate the evidence (correction 16). The
+cluster-level tests against control A, the registered control, use a control
+whose randomness is not shared inside a group as the lens arm's is
+(correction 19). The cluster-level tests against the first cluster-matched
+control of 2026-09-06 fix that at the level of the group but still redraw
+the target direction for every unit where the lens arm reuses one direction
+across units (correction 26). The groupings by source concept, and by source
+and target concept, leave different groups sharing a direction, so their
+independence assumption is not supported by the design (correction 25).
+
+For H17a there is no probability to believe. Its 15 held-out pairs are
+three pairs for each of five source countries drawn from the same five
+target countries, so every pair is connected to every other by a shared
+country direction and the whole held-out half is a single group. A single
+group of three draws cannot return less than one third, and it returns
+exactly that, so the grouped test cannot distinguish the arms at all. The
+descriptive count, 13 of 15 pairs against 0 of 30 control trials, is what
+H17a rests on, and the value 0.0041 that earlier versions of this record
+gave is withdrawn (correction 25). For H17b the held-out test is unchanged
+at 0.25, because no two of its eight held-out items share a concept.
+
+The rest of this section says why, and gives every number.
 
 The test just described treats every item as an independent draw, and for
 two of the three batteries that is wrong, which review found on 2026-09-05
@@ -715,7 +810,11 @@ scored units, which is what makes it sound to test the committed lens
 outcomes against the new control rows; `cluster_control.py` refuses to write
 its output otherwise. The rows are in
 `output/cluster_control_records.csv` and the summary files carry the tests
-under `cluster_tests_shared_control`.
+under `cluster_tests_shared_control`. That control was itself superseded
+later the same day, because it shares randomness at the level of the group
+and not at the level of the concept: see "The control corrected again"
+below (correction 26). The paragraph that follows records what it gave, and
+the numbers in it are no longer the ones the record leads with.
 
 Against that cluster-matched control, on the held-out half, with the source
 concept or source country as the group: H17a's pair-level result gives
@@ -765,6 +864,109 @@ the null being tested, that the lens directions are nothing but norm-matched
 random directions, the two arms are exchangeable regardless, so the test is
 valid under its own null; how much that residual mismatch costs the test in
 power is not measured here. Inferred, not established.
+
+**The control corrected again, and the groups formed again, on 2026-09-06.**
+Two things were still wrong, and a second review of the same day found both.
+
+The first is the control. The control just described draws one random source
+direction per group and an independent random target direction per item.
+The lens arm does not work that way: its directions belong to concepts, not
+to items, so any two units that swap the same concept get the same direction
+whatever their group. Four of the 21 held-out `output`-rule frames swap
+' football' to ' cricket' and receive one lens target direction between
+them, and two swap ' blue' to ' yellow'; the control gave each of those
+frames its own random target direction. The corrected control seeds every
+random direction by the token it stands in for, together with the layer and
+the seed index, so it reuses a direction across units wherever the lens arm
+reuses one, in the source role and the target role alike. It is the arm
+`randdir_by_token` of `output/cluster_control_records_v2.csv`, and the
+summary files carry its tests under `cluster_tests_token_control`.
+
+The second is the grouping. Grouping by source concept, or by source and
+target concept together, does not make the groups independent, because
+different groups still share directions. In the held-out `output` half the
+groups for ' football' to ' rugby', to ' cricket' and to ' wrestling' share
+the source direction, and four groups with different sources all point at
+the target ' dolphin', while ' strawberry' is the source of two frames and
+the target of two others. The coarsest grouping under which two different
+groups share no direction at all is the connected components of the graph
+that joins two units whenever they use the same lens direction in either
+role. On the held-out half those components number 7 for the `output` rule,
+5 for the `lens` rule and 4 pooled, which is one per category, against the
+12, 9 and 20 groups the source-concept grouping counted. For H17a the whole
+held-out half is one component, because its five source countries and five
+target countries are the same pool. For H17b the held-out half is still 8
+components, since no two of its held-out items share a concept, while over
+all 16 items three pairs of items share a concept and the 16 groups become
+13.
+
+Against the token-seeded control, on the held-out half, with the connected
+component as the group: H17 at the protocol setting gives 0.00137, which is
+1 in 729 over 7 components of which 6 can tell the arms apart, and that is
+the smallest value those components can return; pooled over both source
+rules it gives 0.0123, which is 1 in 81 over 4 components, again at its
+floor; the `lens` source rule alone gives 0.037. With the source concept as
+the group the same control gives 5.1 times 10 to the power minus 5 for the
+protocol reading and 1.9 times 10 to the power minus 6 pooled, both at their
+floors and both identical to the values the earlier controls gave, because
+this control succeeded on only one held-out frame in 168 draws. H17a gives
+one third at every setting and every reading, which is the floor for a
+single group, so it distinguishes nothing. H17b is unchanged at 0.25 on the
+held-out half and moves from 0.0039 to 0.0156 over all 16 items, where the
+components merge ' bee' to ' cow' with ' cow' to ' hen'.
+
+**The selection the control was never given, and the mirrored control that
+gives it.** Every probability above compares a lens arm whose target concept
+was chosen for a high lens reading with a control whose target was not
+chosen at all. Section 5.1 of the specification, committed before any swap
+ran, sets the rule: the target is the category member the lens ranks highest
+at layer 8 among those absent from the model's ten most likely next words.
+That is pre-registered design and not a fault in the code, but it means that
+under the null being tested, that a lens direction is nothing but a random
+direction, the lens arm's target still enjoys a selection the control's does
+not, and every probability above is therefore conditional on the selected
+targets rather than unconditional (correction 27). H17a and H17b are not
+affected: H17a's target country comes from a fixed rotation over the gated
+countries and H17b's alternative answer is written into the item, so no lens
+reading enters either.
+
+The mirrored control removes that asymmetry for H17. It is the token-seeded
+control with the battery's own rule applied to its own directions: every
+category member is given a random direction of the length of that member's
+lens direction, seeded by its token, and the control takes as its target the
+member whose random direction the layer-8 residual stream carries most,
+among the same candidates the battery allowed, and succeeds when that
+member's word enters the model's five most likely next words. For frames
+built by the `lens` source rule, whose source the lens also chose, the
+control chooses its source the same way. It picked the same target as the
+lens arm on 21 of its 168 draws, which is 13 percent, and the same source on
+14 of the 84 lens-rule draws, so it is genuinely choosing for itself. Its
+success rate on the held-out half is 0 of 42 draws on the `output`-rule
+frames and 2 of 42 on the `lens`-rule frames.
+
+Against the mirrored control, on the held-out half: H17 at the protocol
+setting gives 0.00137 by component, 5.1 times 10 to the power minus 5 by
+source concept and 2.1 times 10 to the power minus 7 by source and target,
+every one of them identical to the token-seeded control's, because the
+mirrored control redirected nothing at all on the held-out `output`-rule
+frames. Pooled over both source rules it gives 0.0123 by component, again
+identical. The `lens` source rule alone weakens, from 0.037 to 0.074 by
+component and from 0.0123 to 0.048 by source concept, because the mirrored
+control's two successes both fall there. The protocol reading, which is the
+one the register row quotes, therefore survives the removal of the selection
+advantage unchanged. Established as a measurement.
+
+One honest qualification about the mirror, because it is not exact. The
+battery ranked candidates by the full lens readout at layer 8, which passes
+the transformed residual stream through the model's final normalisation and
+its output matrix, while the mirrored control ranks candidates by how much
+of each random direction the residual stream carries, which is the natural
+analogue but not the same function. Ranking the real lens directions that
+way picks the committed target on 51 of the 84 items, which is 61 percent,
+so the two rules agree more often than chance over roughly a dozen
+candidates but are not the same rule. The mirror therefore matches the kind
+of conditioning the battery applied, not its exact form. Inferred, not
+established.
 
 **H17b under the looser score.** If success is counted as the alternative
 answer merely entering the top five rather than becoming the model's actual
@@ -1135,8 +1337,8 @@ number reported as a verdict was chosen on the data it is reported for.
 
 ## What this does not show
 
-Ten limits, stated before a reader finds them. The eighth and ninth were
-added on 2026-09-05 after review, and the tenth on 2026-09-06.
+Eleven limits, stated before a reader finds them. The eighth and ninth were
+added on 2026-09-05 after review, and the tenth and eleventh on 2026-09-06.
 
 First, a successful swap shows that the lens direction for a word is a
 handle the model responds to, not that the model "contains a concept" in any
@@ -1224,9 +1426,19 @@ significance test is entitled to say about them from five or twelve
 independent draws.
 
 Tenth, a cluster-level test needs a control whose randomness is shared
-inside a cluster the way the lens arm's is, and the registered control is
-not one. Control A draws both of its random directions afresh for every
-item, while the lens arm gives every unit of a cluster the same source
+inside a cluster the way the lens arm's is, and it needs clusters that
+really are independent of one another. Neither was true when this limit was
+first written on 2026-09-06, and both were corrected later the same day: the
+control now seeds its random directions by concept rather than by item
+(correction 26), and the clusters are now the connected components of the
+units that share any direction rather than the units that share a source
+(correction 25). The paragraph below is the original wording of this limit,
+kept because the corrections refer to it, and its closing sentence about the
+descriptive gaps is the part that still stands unaltered.
+
+The registered control is not a control a cluster-level test may use.
+Control A draws both of its random directions afresh for every item, while
+the lens arm gives every unit of a cluster the same source
 direction, so control A's cluster totals and the lens arm's are not
 exchangeable and a probability computed between them is not valid at the
 level of the cluster. The record of 2026-09-05 computed its cluster-level
@@ -1240,6 +1452,27 @@ one cluster have with one another, and the cost of that residual mismatch
 in the test's power is not measured; and the descriptive gaps, 13 of 15
 held-out pairs against 0 of 30 and 18 of 21 held-out items against 0 of 42,
 never depended on any of this.
+
+Eleventh, and this one limits H17 rather than the test of it, the target
+concept of every H17 item was chosen because the lens ranked it highest at
+layer 8 among the allowed candidates, which is what section 5.1 of the
+specification registers, while the control's random direction is chosen for
+nothing. Under the null the test asserts, that a lens direction is nothing
+but a norm-matched random direction, that is an advantage the lens arm holds
+and the control does not, so every H17 probability in this record except the
+mirrored ones is conditional on the selected targets. The mirrored control
+run on 2026-09-06 removes the advantage by letting the control choose its
+own target under the same rule, and the protocol reading survives it
+unchanged at 0.00137 by component, which is 1 in 729; the `lens` source
+rule's reading weakens from 0.037 to 0.074. That the protocol reading
+survives is established as a measurement, and it is worth saying what it
+does not establish: the mirror ranks candidates by how much of a random
+direction the residual stream carries, while the battery ranked them by the
+full lens readout, and those two rules pick the same target on 51 of the 84
+items, 61 percent, so the mirror is an analogue of the battery's
+conditioning and not the identical operation. H17a and H17b carry no such
+limit, because their targets are fixed by the item design rather than by a
+lens reading.
 
 ## Deviations from the specification, stated flat
 
@@ -1493,6 +1726,23 @@ never depended on any of this.
     with control A, as registered, and every rate in this record is
     unchanged. What it changes is which probabilities the cluster-level test
     may quote (correction 19).
+
+21. **Two further controls were run after the fact, later on 2026-09-06,
+    after a second review.** The first replaces the control of deviation 20:
+    it seeds every random direction by the token it stands in for, so that
+    the control reuses a direction across units wherever the lens arm reuses
+    one, which the control of deviation 20 did not do for target concepts
+    (correction 26). The second adds the battery's own target-selection rule
+    to it, so that the control picks its own target concept by the layer-8
+    reading applied to its own random directions rather than being handed the
+    concept the lens picked, and succeeds when that concept enters the top
+    five (correction 27). Both were run at the settings the cluster-level
+    tests use and nowhere else, 1,416 conditions in 108 seconds of processor
+    time, and both are recorded in
+    `output/cluster_control_records_v2.csv`, which reproduces the earlier
+    control's rows exactly and adds the new arms. Neither is in the
+    specification, neither changes a rate and neither changes a verdict: the
+    registered thresholds compare the lens arm with control A, as registered.
 
 ## Errata found during the run
 
@@ -1754,6 +2004,93 @@ incomplete, and what is true instead.
     name, the name's bytes followed by the tensor's bytes, which is the
     scheme that reproduces the recorded value.
 
+The four corrections below come from a second review of 2026-09-06, of
+commit `093454d`. Each says what the record said, that it was wrong or
+incomplete, and what is true instead.
+
+25. It grouped the scored units by source concept, or by source and target
+    concept together, and treated the groups as independent of one another.
+    They are not independent, because different groups still share lens
+    directions. Among the 21 held-out `output`-rule frames of H17, three
+    groups swap out of ' football', to ' rugby', to ' cricket' and to
+    ' wrestling', and four groups with four different sources all swap into
+    ' dolphin', while ' strawberry' is the source of two frames and the
+    target of two others. The grouping that the design does support is the
+    connected components of the graph that joins two units whenever they use
+    the same lens direction in either role, since two different components
+    then share nothing. Withdrawn by name as headline values: H17's 5.1 times
+    10 to the power minus 5 at the protocol setting and 1.9 times 10 to the
+    power minus 6 pooled, both grouped by source concept, and H17a's 0.0041
+    grouped by source country. What replaces them, measured against the
+    corrected control of correction 26: H17 at the protocol setting 0.00137,
+    which is 1 in 729 over 7 components, and pooled 0.0123, which is 1 in 81
+    over 4 components. For H17a nothing replaces it, because its five source
+    countries and five target countries are the same pool, so the 15
+    held-out pairs form a single component and the grouped test returns its
+    floor of one third and distinguishes nothing. H17b's held-out test is
+    unchanged at 0.25, its eight held-out items sharing no concept, while its
+    all-items figure moves from 0.0039 to 0.0156 because ' bee' to ' cow' and
+    ' cow' to ' hen' are one component. The by-source figures are still
+    reported beside the component ones, because they are what the register
+    rows quoted, and they are now computed against the corrected control.
+
+26. The cluster-matched control committed earlier on 2026-09-06 drew one
+    random source direction for a whole group but a fresh random target
+    direction for every item, while the lens arm's directions belong to
+    concepts and not to items: any two units that swap the same concept
+    receive the same lens direction. Four held-out `output`-rule frames swap
+    ' football' to ' cricket' and share one lens target direction, and two
+    swap ' blue' to ' yellow', and that control gave each of them its own
+    random target. The corrected control seeds every random direction by the
+    token it stands in for, with the layer and the seed index, so it reuses a
+    direction wherever the lens arm reuses one. It was run on 2026-09-06 as
+    the arm `randdir_by_token` of `output/cluster_control_records_v2.csv`.
+    Withdrawn by name, as computed against the item-seeded control: H17's
+    pooled 3.8 times 10 to the power minus 6 by source concept and 9.5 times
+    10 to the power minus 9 by source and target, and the `lens` source
+    rule's 0.025 and 0.0023. Against the token-seeded control the same four
+    are 1.9 times 10 to the power minus 6, 1.7 times 10 to the power minus 9,
+    0.0123 and 0.000457. The protocol figures and every H17a figure are
+    unchanged, because neither control redirected anything in those groups.
+
+27. It reported the H17 probabilities without saying that the lens arm's
+    target concept is selected and the control's is not. Section 5.1 of the
+    specification, committed before any swap ran, chooses each H17 target as
+    the category member the lens ranks highest at layer 8 among those absent
+    from the model's ten most likely next words. That is pre-registered
+    design, not a fault, but under the null being tested, that a lens
+    direction is nothing but a norm-matched random direction, the lens arm's
+    target has been picked for a high lens reading while the control's random
+    direction has not been picked for anything. Every H17 probability in this
+    record other than the mirrored ones is therefore conditional on the
+    lens-selected targets and cannot be read as an unconditional null. A
+    mirrored control was run on 2026-09-06 to remove the asymmetry: it gives
+    every candidate a random direction of that candidate's own lens length,
+    seeded by the candidate's token, picks its target by the same layer-8
+    rule applied to those random directions, and succeeds when its own chosen
+    concept enters the model's five most likely next words. Against it the
+    protocol reading is unchanged at 0.00137 by component, 5.1 times 10 to
+    the power minus 5 by source concept and 2.1 times 10 to the power minus 7
+    by source and target, because it redirected nothing on the held-out
+    `output`-rule frames; the pooled reading is unchanged at 0.0123 by
+    component; and the `lens` source rule alone weakens from 0.037 to 0.074
+    by component and from 0.0123 to 0.048 by source concept. H17a and H17b
+    need no mirror, since neither chooses its target by a lens reading.
+
+28. The reproduction section named the lens file and the model but not the
+    reader package. The scripts import `jlens`, which on the machine that ran
+    them is an editable install of the repository
+    `https://github.com/anthropics/jacobian-lens` at commit
+    `581d398613e5602a5af361e1c34d3a92ea82ba8e`, sitting at a path outside
+    this repository, so a fresh checkout fails at import with
+    ModuleNotFoundError before it reaches the lens file. The reproduction
+    section now gives the clone, checkout and install commands and says what
+    the code uses from the package, which is only `JacobianLens.load`, which
+    reads the lens file, and the `.jacobians` list it returns, whose entry
+    for a layer is the 768 by 768 matrix this code multiplies by.
+    `lib_exp016.py` now catches the failed import and repeats those
+    instructions in the error.
+
 ## What remains
 
 These are the things this experiment did not settle, in rough order of how
@@ -1890,13 +2227,57 @@ much they would add.
    control matches the sharing of the source direction and cannot match
    whatever relationship the lens target directions of one cluster have with
    one another, so a battery that wants a fully matched control would have
-   to hold the target concept fixed within a cluster as well.
+   to hold the target concept fixed within a cluster as well. Later on
+   2026-09-06 the control was corrected again, to seed every random direction
+   by the concept it stands in for rather than by the item, which is how the
+   lens arm's directions actually behave (correction 26), and a second
+   control was added that also picks its own target concept by the battery's
+   own rule (correction 27). The shape the operator would be registering is
+   the corrected one: directions seeded by concept, and, wherever the battery
+   selects its target by a lens reading, the same selection applied to the
+   control's own directions.
+
+10. **What a battery must look like for a grouped significance test to say
+   anything, and which number the register rows should quote** (correction
+   25). A grouped test can only treat two groups as independent if they share
+   no lens direction, and the groups are then the connected components of the
+   units that share a direction in either role. H17's held-out `output` half
+   falls into 7 such components and its test can reach 1 in 729, which is
+   enough to be worth quoting. H17a's held-out half falls into a single
+   component, because its five source countries and its five target countries
+   are the same five countries, so its grouped test cannot return less than
+   one third however large the effect, and H17a has no grouped probability to
+   quote at all. Two questions follow for the operator. The first is whether
+   later batteries must be designed so that their units fall into many
+   components, which for a country battery means drawing the target countries
+   from a pool disjoint from the source countries, at the cost of items. The
+   second is what the register rows for H17 and H17a should carry now: the
+   proposed rows in `REGISTER_VERDICTS.md` quote the component-grouped
+   0.00137 for H17 and, for H17a, the counts alone with a plain statement
+   that no grouped probability is available. Nothing in the register is
+   changed from this branch either way (rule R8).
 
 ## Reproducing this
 
 Everything needed is in `experiments/exp_016_swaps_small/`, except the model
-weights and the lens file, which are downloaded. Two acquisitions come
-first. The model is base GPT-2 Small, the Hugging Face repository `gpt2`,
+weights, the lens file and the package that reads the lens, all three of
+which are downloaded. Three acquisitions come first.
+
+The reader package comes first of the three, because without it the scripts
+fail at import. It is the lens's reference code, the repository
+`https://github.com/anthropics/jacobian-lens` at the pinned commit
+`581d398613e5602a5af361e1c34d3a92ea82ba8e` that the specification records:
+`git clone https://github.com/anthropics/jacobian-lens && cd jacobian-lens
+&& git checkout 581d398613e5602a5af361e1c34d3a92ea82ba8e && pip install -e .`,
+or put that clone on `PYTHONPATH` instead of installing it. On the machine
+that produced these records it was an editable install at a path outside
+this repository, so a fresh checkout raised ModuleNotFoundError for `jlens`
+rather than fetching anything (correction 28). This experiment uses exactly
+two things from the package: `JacobianLens.load(path)`, which reads the lens
+file, and the `.jacobians` list on the object it returns, whose entry for a
+layer is the 768 by 768 matrix that the lens directions are built from.
+`lib_exp016.py` repeats these instructions in its error if the import
+fails. The model is base GPT-2 Small, the Hugging Face repository `gpt2`,
 about 500 megabytes, which transformer_lens fetches into the local Hugging
 Face cache the first time `lib_exp016.load_model()` runs, so the first run
 needs network access; `python3 -c "import transformers;
@@ -1928,10 +2309,12 @@ two figures; `measure_disturbance.py` recomputes the disturbance sizes at the
 chosen settings (deviation 8), writing a file named for the day it runs so
 that it never overwrites a measurement a record quotes;
 `cluster_control.py` runs the cluster-matched control arms the cluster-level
-tests need (deviation 20) and writes
-`output/cluster_control_records.csv`, after which `analyse.py h17 h17a h17b`
-is run again so that the summaries carry the tests against that control, and
-`make_tables.py` is run again. The lens file is not committed: download the
+tests need (deviations 20 and 21) and writes
+`output/cluster_control_records_v2.csv`, which carries all four control arms
+and reproduces the first run's `output/cluster_control_records.csv` row for
+row, after which `analyse.py h17 h17a h17b`
+is run again so that the summaries carry the tests against those controls,
+and `make_tables.py` is run again. The lens file is not committed: download the
 `gpt2-small` lens from the Hugging Face repository `neuronpedia/jacobian-lens`
 and place it at `_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt`
 in the checkout, or point the environment variable `EXP016_LENS_PATH` at it;

@@ -5662,6 +5662,23 @@
     8.603915972377327e-10
    ]
   },
+  "pooled_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 42,
+   "n_clusters": 4,
+   "test": [
+    27,
+    4,
+    4,
+    0.012345679012345678,
+    0.012345679012345678
+   ]
+  },
   "rule_lens_heldout_by_source": {
    "cluster": "source concept",
    "cell": [
@@ -5696,6 +5713,23 @@
     0.0004572473708276177
    ]
   },
+  "rule_lens_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 5,
+   "test": [
+    9,
+    5,
+    3,
+    0.037037037037037035,
+    0.037037037037037035
+   ]
+  },
   "rule_output_heldout_by_source": {
    "cluster": "source concept",
    "cell": [
@@ -5728,6 +5762,23 @@
     14,
     2.0907515812876902e-07,
     2.0907515812876902e-07
+   ]
+  },
+  "rule_output_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 7,
+   "test": [
+    18,
+    7,
+    6,
+    0.0013717421124828531,
+    0.0013717421124828531
    ]
   }
  },
@@ -5839,6 +5890,353 @@
     2.0907515812876902e-07
    ],
    "control": "cluster matched, shared pair"
+  }
+ },
+ "cluster_tests_token_control": {
+  "pooled_heldout_by_source": {
+   "cluster": "source concept",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 42,
+   "n_clusters": 20,
+   "test": [
+    27,
+    20,
+    12,
+    1.881676423158921e-06,
+    1.881676423158921e-06
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pooled_heldout_by_source_and_target": {
+   "cluster": "source and target concepts",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 42,
+   "n_clusters": 31,
+   "test": [
+    27,
+    31,
+    19,
+    1.7207831944754653e-09,
+    8.603915972377327e-10
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "pooled_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 42,
+   "n_clusters": 4,
+   "test": [
+    27,
+    4,
+    4,
+    0.012345679012345678,
+    0.012345679012345678
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "rule_lens_heldout_by_source": {
+   "cluster": "source concept",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 9,
+   "test": [
+    9,
+    9,
+    4,
+    0.012345679012345678,
+    0.012345679012345678
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "rule_lens_heldout_by_source_and_target": {
+   "cluster": "source and target concepts",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 16,
+   "test": [
+    9,
+    16,
+    7,
+    0.0004572473708276177,
+    0.0004572473708276177
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "rule_lens_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 5,
+   "test": [
+    9,
+    5,
+    3,
+    0.037037037037037035,
+    0.037037037037037035
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "rule_output_heldout_by_source": {
+   "cluster": "source concept",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 12,
+   "test": [
+    18,
+    12,
+    9,
+    5.0805263425290864e-05,
+    5.0805263425290864e-05
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "rule_output_heldout_by_source_and_target": {
+   "cluster": "source and target concepts",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 17,
+   "test": [
+    18,
+    17,
+    14,
+    4.1815031625753804e-07,
+    2.0907515812876902e-07
+   ],
+   "control": "cluster matched, seeded by token"
+  },
+  "rule_output_heldout_by_component": {
+   "cluster": "connected component of items sharing any lens direction, source or target",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "n_units": 21,
+   "n_clusters": 7,
+   "test": [
+    18,
+    7,
+    6,
+    0.0013717421124828531,
+    0.0013717421124828531
+   ],
+   "control": "cluster matched, seeded by token"
+  }
+ },
+ "mirrored_target_tests": {
+  "item_level": {
+   "pooled_heldout": [
+    27,
+    29,
+    2.45226685998256e-11
+   ],
+   "rule_lens_heldout": [
+    9,
+    11,
+    0.001371742112482853
+   ],
+   "rule_output_heldout": [
+    18,
+    18,
+    2.581174791713195e-09
+   ]
+  },
+  "cluster_level": {
+   "pooled_heldout_by_source": {
+    "cluster": "source concept",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 42,
+    "n_clusters": 20,
+    "test": [
+     27,
+     20,
+     14,
+     2.8643296663641342e-05,
+     2.0907515812876902e-07
+    ],
+    "control": "mirrored target selection"
+   },
+   "pooled_heldout_by_source_and_target": {
+    "cluster": "source and target concepts",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 42,
+    "n_clusters": 31,
+    "test": [
+     27,
+     31,
+     21,
+     5.5734255687733115e-08,
+     9.559906635974808e-11
+    ],
+    "control": "mirrored target selection"
+   },
+   "pooled_heldout_by_component": {
+    "cluster": "connected component of items sharing any lens direction, source or target",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 42,
+    "n_clusters": 4,
+    "test": [
+     27,
+     4,
+     4,
+     0.012345679012345678,
+     0.012345679012345678
+    ],
+    "control": "mirrored target selection"
+   },
+   "rule_lens_heldout_by_source": {
+    "cluster": "source concept",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 21,
+    "n_clusters": 9,
+    "test": [
+     9,
+     9,
+     6,
+     0.04801097393689986,
+     0.0013717421124828531
+    ],
+    "control": "mirrored target selection"
+   },
+   "rule_lens_heldout_by_source_and_target": {
+    "cluster": "source and target concepts",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 21,
+    "n_clusters": 16,
+    "test": [
+     9,
+     16,
+     9,
+     0.006553878981862522,
+     5.0805263425290864e-05
+    ],
+    "control": "mirrored target selection"
+   },
+   "rule_lens_heldout_by_component": {
+    "cluster": "connected component of items sharing any lens direction, source or target",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 21,
+    "n_clusters": 5,
+    "test": [
+     9,
+     5,
+     3,
+     0.07407407407407407,
+     0.037037037037037035
+    ],
+    "control": "mirrored target selection"
+   },
+   "rule_output_heldout_by_source": {
+    "cluster": "source concept",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 21,
+    "n_clusters": 12,
+    "test": [
+     18,
+     12,
+     9,
+     5.0805263425290864e-05,
+     5.0805263425290864e-05
+    ],
+    "control": "mirrored target selection"
+   },
+   "rule_output_heldout_by_source_and_target": {
+    "cluster": "source and target concepts",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 21,
+    "n_clusters": 17,
+    "test": [
+     18,
+     17,
+     14,
+     2.0907515812876902e-07,
+     2.0907515812876902e-07
+    ],
+    "control": "mirrored target selection"
+   },
+   "rule_output_heldout_by_component": {
+    "cluster": "connected component of items sharing any lens direction, source or target",
+    "cell": [
+     "7-8-9",
+     2.0,
+     "all"
+    ],
+    "n_units": 21,
+    "n_clusters": 7,
+    "test": [
+     18,
+     7,
+     6,
+     0.0013717421124828531,
+     0.0013717421124828531
+    ],
+    "control": "mirrored target selection"
+   }
   }
  }
 }
