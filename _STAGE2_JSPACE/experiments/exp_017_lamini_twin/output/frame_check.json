@@ -1,0 +1,267 @@
+{
+  "experiment": "EXP_017",
+  "carries_verdict_weight": false,
+  "what_this_is": "the coordinate frame the H18b probe measured in, against the frame its Jacobian matrices were fitted in",
+  "transformer_lens_processing_defaults": {
+    "fold_ln": true,
+    "center_writing_weights": true,
+    "center_unembed": true,
+    "fold_value_biases": true,
+    "refactor_factored_attn_matrices": false
+  },
+  "loaded_by": "HookedTransformer.from_pretrained(\"gpt2\", hf_model=..., tokenizer=..., device=\"cpu\"), with no processing flag passed, in run_loop.py, verify_model.py and run_jspace.py alike",
+  "layers": [
+    0,
+    5
+  ],
+  "band_layers": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "prompt_ids": [
+    "A08_linguistics",
+    "A14_kant",
+    "A15_sartre",
+    "A17_marx",
+    "A21_dickens"
+  ],
+  "unembedding": {
+    "twin": {
+      "model": "MBZUAI/LaMini-GPT-124M",
+      "revision": "fc740804ff49f50fe3ef871b31eb2d5a5584132c",
+      "d_vocab_transformer_lens": 50258,
+      "d_vocab_hugging_face": 50258,
+      "frobenius_norm_transformer_lens": 1045.8805778285728,
+      "frobenius_norm_hugging_face": 892.4373297018869,
+      "frobenius_norm_of_the_difference": 610.9032161652024,
+      "difference_relative_to_hugging_face": 0.6845334633965511,
+      "common_shift_norm": 2.059661130568319,
+      "mean_column_norm_hugging_face": 3.9573303346398028,
+      "common_shift_over_mean_column_norm": 0.5204673242815828,
+      "fraction_of_the_difference_left_after_removing_the_common_shift": 0.6547642158852077,
+      "per_token_cosine_min": -0.0859191003661671,
+      "per_token_cosine_median": 0.8127865627186501,
+      "per_token_cosine_max": 0.9064740326424724,
+      "final_norm_gain_min": 0.010310228914022446,
+      "final_norm_gain_max": 17.36515998840332,
+      "final_norm_gain_mean": 1.5157259532958658,
+      "gain_fold_and_centring_explains_the_difference_to": 1.9657771346800986e-07
+    },
+    "base": {
+      "model": "gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "d_vocab_transformer_lens": 50257,
+      "d_vocab_hugging_face": 50257,
+      "frobenius_norm_transformer_lens": 1044.050629839701,
+      "frobenius_norm_hugging_face": 892.7373790778441,
+      "frobenius_norm_of_the_difference": 609.1398097967613,
+      "difference_relative_to_hugging_face": 0.6823281113489099,
+      "common_shift_norm": 2.0521308963512377,
+      "mean_column_norm_hugging_face": 3.95853632213707,
+      "common_shift_over_mean_column_norm": 0.5184064839509586,
+      "fraction_of_the_difference_left_after_removing_the_common_shift": 0.6554456021667104,
+      "per_token_cosine_min": 0.28802253586548243,
+      "per_token_cosine_median": 0.8134941940065428,
+      "per_token_cosine_max": 0.9085979304459826,
+      "final_norm_gain_min": 0.004427497740834951,
+      "final_norm_gain_max": 17.4193172454834,
+      "final_norm_gain_mean": 1.5078086526585441,
+      "gain_fold_and_centring_explains_the_difference_to": 1.606920931793743e-07
+    }
+  },
+  "states": {
+    "twin": {
+      "0": {
+        "mean_state_norm": 634.3040161132812,
+        "max_abs_mean_over_coordinates_transformer_lens": 5.21540641784668e-07,
+        "max_abs_mean_over_coordinates_hugging_face": 0.023817233741283417,
+        "max_departure_of_the_gap_from_one_constant": 5.257327575236559e-05,
+        "gap_length_over_state_length": 0.00038582316376558105
+      },
+      "5": {
+        "mean_state_norm": 723.233642578125,
+        "max_abs_mean_over_coordinates_transformer_lens": 4.333754475283058e-07,
+        "max_abs_mean_over_coordinates_hugging_face": 0.3526211977005005,
+        "max_departure_of_the_gap_from_one_constant": 0.00045433640480041504,
+        "gap_length_over_state_length": 0.013005856513977837
+      }
+    },
+    "base": {
+      "0": {
+        "mean_state_norm": 665.8302001953125,
+        "max_abs_mean_over_coordinates_transformer_lens": 3.81221383349839e-07,
+        "max_abs_mean_over_coordinates_hugging_face": 0.03249432146549225,
+        "max_departure_of_the_gap_from_one_constant": 4.2215920984745026e-05,
+        "gap_length_over_state_length": 0.0006509125103656358
+      },
+      "5": {
+        "mean_state_norm": 1128.357421875,
+        "max_abs_mean_over_coordinates_transformer_lens": 3.91155481338501e-07,
+        "max_abs_mean_over_coordinates_hugging_face": 1.022948145866394,
+        "max_departure_of_the_gap_from_one_constant": 0.0007390975952148438,
+        "gap_length_over_state_length": 0.024402580845702217
+      }
+    }
+  },
+  "subset_shares": {
+    "0": {
+      "registered": {
+        "twin": {
+          "median": 0.3728973865509033,
+          "per_prompt": [
+            0.398650586605072,
+            0.36448779702186584,
+            0.3763340413570404,
+            0.3728973865509033,
+            0.3645350933074951
+          ],
+          "mean_atom_norm": 4.213057994842529
+        },
+        "base": {
+          "median": 0.2998805046081543,
+          "per_prompt": [
+            0.3034340739250183,
+            0.29928410053253174,
+            0.2960209548473358,
+            0.302999883890152,
+            0.2998805046081543
+          ],
+          "mean_atom_norm": 4.242420673370361
+        },
+        "absolute_difference_of_medians": 0.07301688194274902
+      },
+      "hf_dictionary": {
+        "twin": {
+          "median": 0.03227647766470909,
+          "per_prompt": [
+            0.03388529270887375,
+            0.03227647766470909,
+            0.03188386559486389,
+            0.032777875661849976,
+            0.031686268746852875
+          ],
+          "mean_atom_norm": 7.329624176025391
+        },
+        "base": {
+          "median": 0.027930408716201782,
+          "per_prompt": [
+            0.02154470980167389,
+            0.028147727251052856,
+            0.025700204074382782,
+            0.027930408716201782,
+            0.028047295287251472
+          ],
+          "mean_atom_norm": 8.055538177490234
+        },
+        "absolute_difference_of_medians": 0.004346068948507309
+      },
+      "hf_frame": {
+        "twin": {
+          "median": 0.032276351004838943,
+          "per_prompt": [
+            0.03388484567403793,
+            0.032276351004838943,
+            0.031883809715509415,
+            0.03277765214443207,
+            0.03168623894453049
+          ],
+          "mean_atom_norm": 7.329624176025391
+        },
+        "base": {
+          "median": 0.027930522337555885,
+          "per_prompt": [
+            0.0215444378554821,
+            0.028147947043180466,
+            0.025700781494379044,
+            0.027930522337555885,
+            0.02804751880466938
+          ],
+          "mean_atom_norm": 8.055538177490234
+        },
+        "absolute_difference_of_medians": 0.004345828667283058
+      }
+    },
+    "5": {
+      "registered": {
+        "twin": {
+          "median": 0.28283387422561646,
+          "per_prompt": [
+            0.27926093339920044,
+            0.2796579897403717,
+            0.29100140929222107,
+            0.28283387422561646,
+            0.2862980365753174
+          ],
+          "mean_atom_norm": 7.368795871734619
+        },
+        "base": {
+          "median": 0.13678675889968872,
+          "per_prompt": [
+            0.12557058036327362,
+            0.13678675889968872,
+            0.14342333376407623,
+            0.12926079332828522,
+            0.13801337778568268
+          ],
+          "mean_atom_norm": 7.238246440887451
+        },
+        "absolute_difference_of_medians": 0.14604711532592773
+      },
+      "hf_dictionary": {
+        "twin": {
+          "median": 0.03479067236185074,
+          "per_prompt": [
+            0.033879946917295456,
+            0.03479067236185074,
+            0.03501572832465172,
+            0.034469861537218094,
+            0.03511888161301613
+          ],
+          "mean_atom_norm": 11.673162460327148
+        },
+        "base": {
+          "median": 0.009784113615751266,
+          "per_prompt": [
+            0.01141302939504385,
+            0.009727363474667072,
+            0.010376234538853168,
+            0.009681308642029762,
+            0.009784113615751266
+          ],
+          "mean_atom_norm": 12.759866714477539
+        },
+        "absolute_difference_of_medians": 0.025006558746099472
+      },
+      "hf_frame": {
+        "twin": {
+          "median": 0.03478622809052467,
+          "per_prompt": [
+            0.0338781476020813,
+            0.03478622809052467,
+            0.03501107543706894,
+            0.03446619585156441,
+            0.035113994032144547
+          ],
+          "mean_atom_norm": 11.673162460327148
+        },
+        "base": {
+          "median": 0.009765833616256714,
+          "per_prompt": [
+            0.011395905166864395,
+            0.009709002450108528,
+            0.010358580388128757,
+            0.009663321077823639,
+            0.009765833616256714
+          ],
+          "mean_atom_norm": 12.759866714477539
+        },
+        "absolute_difference_of_medians": 0.02502039447426796
+      }
+    }
+  },
+  "wall_seconds": 73.2
+}

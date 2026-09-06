@@ -238,6 +238,134 @@ def main():
     else:
         lines += ["## H18b: the J-space share", "", "Not yet computed.", ""]
 
+    # ---- the same measurement in the Hugging Face frame ---------------------
+    # A sensitivity arm, not the registered comparison: the states and the
+    # dictionary are read from the Hugging Face model rather than from the
+    # TransformerLens conversion, which is the frame the Jacobian matrices were
+    # fitted in. Section 3.6 of the record explains why both exist.
+    hp = OUT / "exp017_jspace_hfframe.json"
+    if hp.exists():
+        hj = json.load(open(hp))
+        hb = hj["h18b"]
+        lines += ["", "## H18b in the Hugging Face frame, a sensitivity arm "
+                  "with no verdict weight", "",
+                  f"- Reading: **{hb['h18b']}** "
+                  f"({hb['n_band_layers_meeting_both']} of the 6 band layers meet "
+                  f"both conditions: {hb['band_layers_meeting_both']}).", "",
+                  "| layer | twin median share | base median share | absolute "
+                  "difference | control spread | permutation p | both conditions "
+                  "| band |", "|---|---|---|---|---|---|---|---|"]
+        for l in hj["probe_layers"]:
+            r = hb["per_layer"][str(l)]
+            lines.append(
+                f"| {l} | {r['median_twin']:.4f} | {r['median_base']:.4f} "
+                f"| {r['abs_median_difference']:.4f} | {r['control_spread']:.4f} "
+                f"| {r['perm_p']} | {fmt(r['both_conditions'])} "
+                f"| {'yes' if r['in_band'] else 'no'} |")
+        lines += ["", "### The same-lens comparison in the two frames", "",
+                  "The model effect holds the lens fixed and swaps whose settled "
+                  "states are decomposed, so a positive number means the twin's "
+                  "states have the higher share. The registered frame is the "
+                  "TransformerLens one; the Hugging Face frame is the sensitivity "
+                  "arm.", "",
+                  "| layer | registered frame, base lens | registered frame, twin "
+                  "lens | Hugging Face frame, base lens | Hugging Face frame, twin "
+                  "lens |", "|---|---|---|---|---|"]
+        for l in hj["probe_layers"]:
+            cells = []
+            for source in (j, hj):
+                for lens in ("base", "twin"):
+                    rows = source.get("same_lens_model_effect", {}).get(lens)
+                    if rows is None:
+                        cells.append("not applicable")
+                        continue
+                    r = rows[str(l)]
+                    gap = r["median_twin_states"] - r["median_base_states"]
+                    cells.append(f"{gap:+.4f} (p {r['perm_p']})")
+            lines.append(f"| {l} | " + " | ".join(cells) + " |")
+        if "model_effect_over_lens_effect" in hj:
+            lines += ["", "### Model effect over instrument effect, Hugging Face "
+                      "frame", "",
+                      "| layer | smallest model effect | largest instrument "
+                      "effect | ratio |", "|---|---|---|---|"]
+            for l in hj["probe_layers"]:
+                r = hj["model_effect_over_lens_effect"][str(l)]
+                lines.append(
+                    f"| {l} | {r['smallest_model_effect']:.4f} "
+                    f"| {r['largest_lens_effect']:.4f} "
+                    f"| {r['ratio_smallest_model_over_largest_lens']:.1f} times |")
+        lines += ["", "### Real minus its own rotation control, Hugging Face "
+                  "frame", "",
+                  "| layer | " + " | ".join(label for _, label in adjusted) + " |",
+                  "|---" * (1 + len(adjusted)) + "|"]
+        for l in hj["probe_layers"]:
+            cells = []
+            for key, _ in adjusted:
+                c = hj["cross_checks"][key][str(l)]
+                ctrls = c["median_controls"]
+                cells.append(f"{c['median_real'] - sum(ctrls) / len(ctrls):+.4f}")
+            lines.append(f"| {l} | " + " | ".join(cells) + " |")
+        lines.append("")
+
+    # ---- the frame measurement itself ---------------------------------------
+    fp = OUT / "frame_check.json"
+    if fp.exists():
+        fc = json.load(open(fp))
+        lines += ["", "## The two frames, measured", "",
+                  "The unembedding the probe used against the model's own output "
+                  "matrix. The difference is given relative to the size of the "
+                  "Hugging Face matrix, and the common shift is the one vector "
+                  "that the two versions of every token direction differ by.", "",
+                  "| model | difference relative to the Hugging Face matrix | "
+                  "common shift length over mean direction length | fraction of "
+                  "the difference left after removing the common shift | per-token "
+                  "cosine, median | final normalisation gain, smallest to largest |",
+                  "|---|---|---|---|---|---|"]
+        for which in sorted(fc["unembedding"]):
+            u = fc["unembedding"][which]
+            lines.append(
+                f"| {which} | {u['difference_relative_to_hugging_face']:.4f} "
+                f"| {u['common_shift_over_mean_column_norm']:.4f} "
+                f"| {u['fraction_of_the_difference_left_after_removing_the_common_shift']:.4f} "
+                f"| {u['per_token_cosine_median']:.4f} "
+                f"| {u['final_norm_gain_min']:.4f} to {u['final_norm_gain_max']:.4f} |")
+        lines += ["", "The states in the two frames, at the layers measured. The "
+                  "mean over the 768 coordinates says whether a state is centred; "
+                  "the last column is how much of the state's own length the two "
+                  "frames differ by.", "",
+                  "| model | layer | mean state length | largest mean over "
+                  "coordinates, TransformerLens | largest mean over coordinates, "
+                  "Hugging Face | gap length over state length |",
+                  "|---|---|---|---|---|---|"]
+        for which in sorted(fc["states"]):
+            for l in sorted(fc["states"][which], key=int):
+                s = fc["states"][which][l]
+                lines.append(
+                    f"| {which} | {l} | {s['mean_state_norm']:.1f} "
+                    f"| {s['max_abs_mean_over_coordinates_transformer_lens']:.2e} "
+                    f"| {s['max_abs_mean_over_coordinates_hugging_face']:.4f} "
+                    f"| {s['gap_length_over_state_length']:.4f} |")
+        lines += ["", f"The share on the first {len(fc['prompt_ids'])} prompts of "
+                  "the subset, real dictionaries only, in three combinations: the "
+                  "states and dictionary the committed run used, the same states "
+                  "against the Hugging Face dictionary, and the Hugging Face "
+                  "states against the Hugging Face dictionary.", "",
+                  "| layer | combination | twin median | base median | absolute "
+                  "difference |", "|---|---|---|---|---|"]
+        labels = {"registered": "committed states and dictionary",
+                  "hf_dictionary": "committed states, Hugging Face dictionary",
+                  "hf_frame": "Hugging Face states and dictionary"}
+        for l in sorted(fc["subset_shares"], key=int):
+            for key, label in labels.items():
+                cell = fc["subset_shares"][l].get(key)
+                if cell is None:
+                    continue
+                lines.append(
+                    f"| {l} | {label} | {cell['twin']['median']:.4f} "
+                    f"| {cell['base']['median']:.4f} "
+                    f"| {cell['absolute_difference_of_medians']:.4f} |")
+        lines.append("")
+
     (OUT / "tables.md").write_text("\n".join(lines))
     print("\n".join(lines))
     print(f"\nSaved -> output/tables.md")

@@ -24,21 +24,40 @@ a checkpoint to seed this fit from, defaulting to the probe's, and it is copied
 into place only when this fit has no checkpoint of its own and the corpus digest
 matches, so the prompts already done are a prefix of this fit's list.
 
+What a checkpoint is stamped with. A checkpoint holds running sums of Jacobians,
+that is the matrices being averaged, and nothing in the instrument's own file
+says which model or which corpus they came from, so a checkpoint built with
+--model-path or --allow-different-prompts would seed this fit with sums from
+another model or another corpus and nothing would say so. Every fit therefore
+writes a provenance sidecar beside its checkpoint, named CHECKPOINT.provenance
+.json, recording the model repository, the pinned revision, the fitting corpus
+and its SHA-256 digest, and the sequence and layer settings the fit used. A
+checkpoint is seeded from only when its sidecar agrees with this fit field for
+field. The instrument rewrites the checkpoint file itself after every prompt, so
+the sidecar sits beside it rather than inside it. The committed five-prompt probe
+checkpoint predates the sidecar and has none, so seeding from it now needs the
+explicit --accept-unstamped-checkpoint, which is recorded in the sidecar this
+fit writes.
+
 Weights: pinned to the revision, that is the Hugging Face repository commit,
 recorded in exp017_models.py, unless --model-path names a local directory.
 
 The wall-clock cap, spec section 6.2. The spec caps the fit at 9,000 seconds
 and says that a fit which does not finish in budget falls back to scoring H18b
 with the base lens on both sides. The instrument's own jlens.fit call has no
-deadline of its own, so this script enforces one in two places. Before the fit
+deadline of its own, so this script enforces one in three places. Before the fit
 starts it refuses outright if the timing probe's measured cost per prompt
 predicts that not even one more prompt fits in the remaining budget. During the
 fit it works in chunks of whole prompts, resuming from the checkpoint the
 instrument writes after every prompt, and stops before starting a chunk whose
-predicted cost would cross the cap. Either way the prompts already completed
-still make a lens, which is written out with the count it was actually fitted
-on, and the exit code says which happened: 0 when every requested prompt was
-fitted, 3 when the deadline stopped it short and the section 6.2 fallback is
+predicted cost would cross the cap. After the fit it compares the wall time it
+actually took against the cap, because the cost per prompt is a prediction and a
+prompt that runs longer than predicted can return after the cap with every
+prompt consumed. Any of the three routes leaves the prompts already completed
+making a lens, which is written out with the count it was actually fitted on
+under a name marked partial, and the exit code says which happened: 0 when every
+requested prompt was fitted inside the cap, 3 when the fit was short of the
+requested count or crossed the cap, in which case the section 6.2 fallback is
 the caller's next step.
 
 Usage:
@@ -97,8 +116,17 @@ PROBE_CKPT = os.path.join(ARTIFACTS, "jlens_lamini_gpt2_124m_5_probe.ckpt.pt")
 EXPECTED_CKPT_SHAPE = {"source_layers": list(range(11)), "target_layer": 11,
                        "skip_first": 16}
 
-# Exit code for a fit the deadline stopped short of the requested prompt count.
+# Exit code for a fit the deadline stopped short of the requested prompt count,
+# or one whose measured wall time crossed the cap.
 EXIT_BUDGET_STOP = 3
+
+# The fitting settings that decide whether two sets of Jacobian sums may be
+# added together: the same model at the same revision, the same corpus, the same
+# sequence truncation, the same layers and the same leading positions skipped.
+# dim_batch is stamped but not compared, because it only decides how many output
+# dimensions share one backward pass and does not change the matrices.
+PROVENANCE_KEYS_COMPARED = ("model", "revision", "corpus_sha256", "max_seq_len",
+                            "source_layers", "target_layer", "skip_first")
 
 
 def lens_path(n, tag=""):
@@ -168,17 +196,104 @@ def load_prompts(path=None, require_digest=True):
     return json.load(open(chosen)), chosen, got
 
 
-def seed_checkpoint(target, source, n_prompts):
+def provenance_path(checkpoint_path):
+    """Where a checkpoint's provenance sidecar lives: beside the checkpoint,
+    with `.provenance.json` in place of the checkpoint's own `.pt`."""
+    stem = checkpoint_path[:-3] if checkpoint_path.endswith(".pt") else checkpoint_path
+    return stem + ".provenance.json"
+
+
+def provenance_record(*, model_path, revision, corpus_path, corpus_sha,
+                      digest_enforced, n_prompts, dim_batch, max_seq_len):
+    """What a fit was built from, in one dictionary.
+
+    Everything here decides whether one fit's Jacobian sums, that is the running
+    matrices being averaged, may be added to another's: the model repository and
+    the pinned revision, which is the 40-character commit identifier of that
+    repository's state, the fitting corpus and its SHA-256 digest, and the
+    sequence and layer settings. It is written beside a checkpoint as a sidecar
+    and inside a finished lens file, so that no later step has to trust a
+    filename.
+    """
+    return {
+        "experiment": "EXP_017",
+        "written_by": os.path.basename(__file__),
+        "model": model_path,
+        "revision": revision if revision else "local path, no revision pinned",
+        "corpus_file": os.path.basename(corpus_path),
+        "corpus_sha256": corpus_sha,
+        "corpus_digest_enforced": bool(digest_enforced),
+        "n_prompts_requested": int(n_prompts),
+        "dim_batch": int(dim_batch),
+        "max_seq_len": int(max_seq_len),
+        "source_layers": list(EXPECTED_CKPT_SHAPE["source_layers"]),
+        "target_layer": int(EXPECTED_CKPT_SHAPE["target_layer"]),
+        "skip_first": int(EXPECTED_CKPT_SHAPE["skip_first"]),
+    }
+
+
+def provenance_mismatches(have, want, keys=PROVENANCE_KEYS_COMPARED):
+    """The fields on which two provenance records disagree, as sentences.
+
+    An empty list means the two fits may be continued from one another.
+    """
+    out = []
+    for key in keys:
+        a, b = have.get(key), want.get(key)
+        if isinstance(b, list):
+            a = list(a) if a is not None else a
+        if a != b:
+            out.append(f"{key} is {a!r} there and {b!r} here")
+    return out
+
+
+def read_provenance(checkpoint_path):
+    """The provenance sidecar beside a checkpoint, or None when it has none."""
+    path = provenance_path(checkpoint_path)
+    if not os.path.exists(path):
+        return None
+    return json.load(open(path))
+
+
+def write_provenance(checkpoint_path, record):
+    """Write a checkpoint's provenance sidecar, and return the path written."""
+    path = provenance_path(checkpoint_path)
+    json.dump(record, open(path, "w"), indent=1)
+    return path
+
+
+def stamp_lens_provenance(lens_path_, record):
+    """Add a provenance record to a saved lens file, in place.
+
+    The instrument's own save writes the Jacobians, the prompt count, the source
+    layers and the width, and nothing about the model or the corpus. This adds
+    that under the key `provenance`. The instrument's loader reads the keys it
+    knows by name and ignores this one, so a stamped lens still loads anywhere.
+    """
+    payload = torch.load(lens_path_, map_location="cpu", weights_only=True)
+    payload["provenance"] = record
+    torch.save(payload, lens_path_)
+
+
+def seed_checkpoint(target, source, n_prompts, want=None,
+                    accept_unstamped=False):
     """Copy a compatible earlier checkpoint into place so this fit continues it.
 
     Used so that the registered 40-prompt fit continues the five-prompt timing
     probe rather than repeating its work, which is what the committed run did.
     Copies only when this fit has no checkpoint of its own, the source exists,
-    the source was built with this experiment's layer choices, and the source
-    has consumed no more prompts than this fit's list holds. The prompts already
-    done are then a prefix of this fit's list, because both take the first N
-    entries of the same corpus file in order and the corpus digest is checked
-    before this runs. Returns a sentence describing what happened.
+    the source was built with this experiment's layer choices, the source has
+    consumed no more prompts than this fit's list holds, and the source's
+    provenance sidecar agrees with this fit on the model, the revision, the
+    corpus digest and the sequence and layer settings. The prompts already done
+    are then a prefix of this fit's list, because both take the first N entries
+    of the same corpus file in order.
+
+    `want` is this fit's own provenance record, and a source whose sidecar
+    disagrees with it is refused. A source with no sidecar at all, which is what
+    every checkpoint written before 2026-09-05 looks like, is refused unless
+    `accept_unstamped` is true, and that acceptance is written into the sidecar
+    this fit leaves behind. Returns a sentence describing what happened.
     """
     if not source:
         return "not seeding: --resume-from was empty"
@@ -201,9 +316,32 @@ def seed_checkpoint(target, source, n_prompts):
     if int(state["next_idx"]) > n_prompts:
         return (f"not seeding: {source} has consumed {state['next_idx']} prompts, "
                 f"more than the {n_prompts} this fit asks for")
+    have = read_provenance(source)
+    seeded_note = ""
+    if want is not None:
+        if have is None:
+            if not accept_unstamped:
+                return (f"not seeding: {source} has no provenance sidecar at "
+                        f"{provenance_path(source)}, so nothing says which model "
+                        f"or which corpus its Jacobian sums came from. Pass "
+                        f"--accept-unstamped-checkpoint to seed from it anyway "
+                        f"and have that recorded.")
+            seeded_note = (" (its provenance was not stamped and was accepted "
+                           "explicitly)")
+        else:
+            bad = provenance_mismatches(have, want)
+            if bad:
+                return (f"not seeding: {source} was fitted with a different "
+                        f"setup: " + "; ".join(bad))
     shutil.copyfile(source, target)
+    if want is not None:
+        record = dict(want)
+        record["seeded_from"] = os.path.basename(source)
+        record["seeded_from_was_unstamped"] = have is None
+        write_provenance(target, record)
     return (f"seeded {target} from {source}: {state['n_done']} prompts already "
-            f"fitted, so this fit continues at prompt {int(state['next_idx']) + 1}")
+            f"fitted, so this fit continues at prompt "
+            f"{int(state['next_idx']) + 1}{seeded_note}")
 
 
 def load_model(model_path=TWIN, revision=TWIN_REVISION):
@@ -253,25 +391,51 @@ def plan_next_chunk(next_idx, n_prompts, elapsed, seconds_per_prompt,
     return max(0, min(chunk, remaining, affordable))
 
 
+def stop_decision(consumed, requested, wall, deadline):
+    """What the fit's outcome was, from the counts and the clock alone.
+
+    Returns "complete" when every requested prompt was fitted and the measured
+    wall time stayed inside the cap, "short" when the fit stopped before the
+    requested prompt count, and "overran" when every prompt was consumed but the
+    measured wall time crossed the cap. The third case is the one the cost per
+    prompt cannot rule out in advance: that figure is a prediction from a
+    five-prompt probe, and a prompt that runs longer than predicted returns
+    after the cap with nothing left to stop. All three are decided on measured
+    numbers, never on the prediction.
+    """
+    if consumed < requested:
+        return "short"
+    if wall > deadline:
+        return "overran"
+    return "complete"
+
+
 def fit_within_deadline(model, prompts, *, dim_batch, max_seq_len, ckpt,
-                        deadline, seconds_per_prompt, chunk, clock=time.perf_counter):
+                        deadline, seconds_per_prompt, chunk,
+                        clock=time.perf_counter, fit_fn=None, progress_fn=None):
     """Fit in resumable chunks, stopping before the wall-clock cap is crossed.
 
     Returns (lens, prompts_consumed, prompts_fitted, wall_seconds,
-    prompts_fitted_here), where prompts_fitted_here counts only the prompts
-    this invocation computed, as distinct from those it inherited from an
-    existing checkpoint.
+    prompts_fitted_here, overran), where prompts_fitted_here counts only the
+    prompts this invocation computed, as distinct from those it inherited from
+    an existing checkpoint, and overran says whether the measured wall time
+    crossed the cap even so. `fit_fn` and `progress_fn` default to the
+    instrument's fitting call and to reading a checkpoint's progress, and exist
+    so the self-test can drive this loop on a fake clock without a model.
     """
+    fit_fn = jlens.fit if fit_fn is None else fit_fn
+    progress_fn = (lens_from_checkpoint.progress if progress_fn is None
+                   else progress_fn)
     t0 = clock()
     lens = None
-    start_idx, start_done = lens_from_checkpoint.progress(ckpt)
+    start_idx, start_done = progress_fn(ckpt)
     next_idx, n_done = start_idx, start_done
     while True:
         take = plan_next_chunk(next_idx, len(prompts), clock() - t0,
                                seconds_per_prompt, deadline, chunk)
         if take == 0:
             break
-        lens = jlens.fit(
+        lens = fit_fn(
             model,
             prompts[: next_idx + take],
             dim_batch=dim_batch,
@@ -280,14 +444,19 @@ def fit_within_deadline(model, prompts, *, dim_batch, max_seq_len, ckpt,
             checkpoint_every=1,
             resume=True,
         )
-        moved_to, n_done = lens_from_checkpoint.progress(ckpt)
+        moved_to, n_done = progress_fn(ckpt)
         if moved_to <= next_idx:            # no progress; stop rather than spin
             break
         next_idx = moved_to
+        # The cost per prompt is a prediction, so the clock is read again after
+        # every chunk actually returns: a prompt slower than predicted can cross
+        # the cap with the whole list consumed, and that is a stopped fit too.
+        if clock() - t0 > deadline:
+            break
     wall = clock() - t0
     if lens is None:                        # nothing ran, so build from the checkpoint
         lens, _ = lens_from_checkpoint.build(ckpt)
-    return lens, next_idx, n_done, wall, n_done - start_done
+    return lens, next_idx, n_done, wall, n_done - start_done, wall > deadline
 
 
 def selftest():
@@ -335,6 +504,54 @@ def selftest():
         elapsed += 8253.0 / 35
     check("the committed 40-prompt fit would not have been stopped",
           idx == 40 and not fired, f"reached prompt {idx} at {elapsed:.0f}s")
+
+    # The outcome rule, on measured numbers only.
+    check("a fit that reaches every prompt inside the cap is complete",
+          stop_decision(40, 40, 8253.0, CAP_SECONDS) == "complete",
+          "the committed fit's 8,253s against the 9,000s cap")
+    check("a fit short of the requested prompts is a stop",
+          stop_decision(38, 40, 8950.0, CAP_SECONDS) == "short")
+    check("a fit that consumes every prompt but crosses the cap is a stop",
+          stop_decision(40, 40, 9001.0, CAP_SECONDS) == "overran")
+
+    # The overrun the prediction cannot rule out, driven through the fitting
+    # loop itself on a fake clock and a fake instrument. Thirty-nine prompts
+    # cost the predicted 221 seconds each and the fortieth costs 1,000, so every
+    # prompt is consumed and the fit still finishes outside the cap.
+    def replay(costs, per_prompt, deadline=CAP_SECONDS, start_idx=0, chunk=1):
+        """Run fit_within_deadline against scripted per-prompt costs."""
+        state = {"idx": start_idx, "now": 0.0}
+
+        def clock():
+            return state["now"]
+
+        def progress(_ckpt):
+            return state["idx"], state["idx"]
+
+        def fake_fit(_model, prompt_slice, **_kw):
+            while state["idx"] < len(prompt_slice):
+                state["now"] += costs[state["idx"]]
+                state["idx"] += 1
+            return "lens"
+
+        return fit_within_deadline(
+            None, list(range(len(costs))), dim_batch=16, max_seq_len=128,
+            ckpt="", deadline=deadline, seconds_per_prompt=per_prompt,
+            chunk=chunk, clock=clock, fit_fn=fake_fit, progress_fn=progress)
+
+    _, consumed, _, wall, _, overran = replay([221.0] * 39 + [1000.0], 221.0)
+    check("a final prompt slower than predicted is caught after the call",
+          consumed == 40 and overran and wall > CAP_SECONDS,
+          f"{consumed} prompts consumed in {wall:.0f}s, overran={overran}")
+    check("that overrun is scored as a stop, not a finished fit",
+          stop_decision(consumed, 40, wall, CAP_SECONDS) == "overran")
+    check("a stopped fit is named apart from the registered lens",
+          lens_path(40, "twin_partial") != lens_path(40, "twin"),
+          os.path.basename(lens_path(40, "twin_partial")))
+    _, consumed, _, wall, _, overran = replay([221.0] * 40, 221.0)
+    check("a fit inside the cap is not flagged as an overrun",
+          consumed == 40 and not overran and wall <= CAP_SECONDS,
+          f"{consumed} prompts consumed in {wall:.0f}s")
 
     # The same replay from nothing, using every one of the 40 prompts' recorded
     # times, including the five the probe paid for. This is why the fit has to
@@ -388,6 +605,67 @@ def selftest():
         msg = seed_checkpoint(os.path.join(tmp, "t4.ckpt.pt"), "", 40)
         check("an empty --resume-from seeds nothing", "not seeding" in msg, msg)
 
+        # The provenance gate: what a checkpoint was built from, not just what
+        # shape it is. The reference record is this experiment's own setup.
+        want = provenance_record(
+            model_path=TWIN, revision=TWIN_REVISION,
+            corpus_path=PROMPTS_COMMITTED, corpus_sha=PROMPTS_SHA,
+            digest_enforced=True, n_prompts=40, dim_batch=16, max_seq_len=128)
+        msg = seed_checkpoint(os.path.join(tmp, "p1.ckpt.pt"), good, 40, want)
+        check("a checkpoint with no provenance sidecar is refused by default",
+              msg.startswith("not seeding: ") and "no provenance sidecar" in msg,
+              msg)
+        t5 = os.path.join(tmp, "p2.ckpt.pt")
+        msg = seed_checkpoint(t5, good, 40, want, accept_unstamped=True)
+        stamped = read_provenance(t5) or {}
+        check("an unstamped checkpoint seeds only with the explicit acceptance",
+              msg.startswith("seeded") and stamped.get("seeded_from_was_unstamped")
+              is True, msg)
+        write_provenance(good, want)
+        t6 = os.path.join(tmp, "p3.ckpt.pt")
+        msg = seed_checkpoint(t6, good, 40, want)
+        check("a matching provenance sidecar seeds without any opt-in",
+              msg.startswith("seeded") and (read_provenance(t6) or {}).get(
+                  "seeded_from_was_unstamped") is False, msg)
+        other_corpus = dict(want, corpus_sha256="0" * 64)
+        write_provenance(good, other_corpus)
+        msg = seed_checkpoint(os.path.join(tmp, "p4.ckpt.pt"), good, 40, want)
+        check("a checkpoint fitted on another corpus is refused",
+              "corpus_sha256" in msg and msg.startswith("not seeding"), msg)
+        other_model = dict(want, model="/some/local/path", revision="local path, "
+                           "no revision pinned")
+        write_provenance(good, other_model)
+        msg = seed_checkpoint(os.path.join(tmp, "p5.ckpt.pt"), good, 40, want)
+        check("a checkpoint fitted on another model is refused",
+              "model" in msg and msg.startswith("not seeding"), msg)
+        check("nothing is compared that does not change the matrices",
+              provenance_mismatches(dict(want, dim_batch=8), want) == [],
+              "dim_batch batches backward passes and is stamped, not compared")
+
+        # A lens file carries the same record, and the instrument's own loader
+        # still reads a stamped lens.
+        lens_file = os.path.join(tmp, "lens.pt")
+        torch.save({"J": {0: torch.zeros(4, 4)}, "n_prompts": 40,
+                    "source_layers": [0], "d_model": 4}, lens_file)
+        stamp_lens_provenance(lens_file, want)
+        back = torch.load(lens_file, map_location="cpu", weights_only=True)
+        check("a saved lens can be stamped with what it was fitted from",
+              back["provenance"]["corpus_sha256"] == PROMPTS_SHA
+              and int(back["n_prompts"]) == 40,
+              f"{sorted(back)}")
+        check("the instrument's own loader still reads a stamped lens",
+              jlens.JacobianLens.load(lens_file).n_prompts == 40)
+
+    # What the committed five-prompt probe checkpoint establishes about itself.
+    if os.path.exists(PROBE_CKPT):
+        check("the committed probe checkpoint carries no provenance sidecar, "
+              "so seeding from it needs the explicit acceptance",
+              read_provenance(PROBE_CKPT) is None,
+              f"{os.path.basename(provenance_path(PROBE_CKPT))} absent")
+    else:
+        print(f"  [note] {os.path.basename(PROBE_CKPT)} is not on this machine, "
+              f"so its provenance state was not checked")
+
     print(f"\nselftest: {'ALL PASS' if ok else 'FAILURE'}")
     return 0 if ok else 1
 
@@ -415,6 +693,12 @@ def main():
                          "timing probe's checkpoint, which is what the "
                          "committed 40-prompt fit continued. Pass an empty "
                          "string to start from nothing.")
+    ap.add_argument("--accept-unstamped-checkpoint", action="store_true",
+                    help="seed from a checkpoint that carries no provenance "
+                         "sidecar, so nothing says which model or corpus its "
+                         "Jacobian sums came from; needed for the committed "
+                         "five-prompt probe checkpoint, which predates the "
+                         "sidecar, and recorded in the sidecar this fit writes")
     ap.add_argument("--selftest", action="store_true",
                     help="check the deadline arithmetic and exit")
     ap.add_argument("--deadline-seconds", type=float, default=CAP_SECONDS,
@@ -456,9 +740,23 @@ def main():
     ckpt = os.path.join(ARTIFACTS, f"jlens_lamini_gpt2_124m_{args.n}_{args.tag}.ckpt.pt")
     out = lens_path(args.n, args.tag)
 
+    # What this fit is: the model, the revision, the corpus and its digest, and
+    # the sequence and layer settings. It gates which checkpoints may seed this
+    # one and is stamped into the lens this fit saves.
+    revision = None if os.path.isdir(args.model_path) else args.revision
+    want = provenance_record(
+        model_path=args.model_path, revision=revision, corpus_path=corpus_path,
+        corpus_sha=corpus_sha, digest_enforced=not args.allow_different_prompts,
+        n_prompts=len(prompts), dim_batch=args.dim_batch, max_seq_len=128)
+
     # Continue the timing probe's work rather than repeating it, which is what
     # the committed run did by hand.
-    print(seed_checkpoint(ckpt, args.resume_from, len(prompts)), flush=True)
+    print(seed_checkpoint(ckpt, args.resume_from, len(prompts), want,
+                          accept_unstamped=args.accept_unstamped_checkpoint),
+          flush=True)
+    if not os.path.exists(provenance_path(ckpt)):
+        print(f"provenance stamped -> {os.path.basename(write_provenance(ckpt, want))}",
+              flush=True)
 
     # The pre-run budget check, spec section 6.2: refuse to start a fit whose
     # first remaining prompt is already predicted to cross the cap.
@@ -483,19 +781,27 @@ def main():
 
     model, _ = load_model(args.model_path, args.revision)
 
-    lens, consumed, fitted, wall, fitted_here = fit_within_deadline(
+    lens, consumed, fitted, wall, fitted_here, overran = fit_within_deadline(
         model, prompts,
         dim_batch=args.dim_batch, max_seq_len=128, ckpt=ckpt,
         deadline=args.deadline_seconds, seconds_per_prompt=per_prompt,
         chunk=args.chunk)
 
-    # A fit the deadline stopped short is never written under the name the
-    # registered probe looks for. It goes to its own file whose name carries the
-    # prompt count it actually reached, so that no later step can mistake it for
-    # the lens the budget rule asked for.
-    stopped = consumed < len(prompts)
+    # A fit the deadline stopped short, or one whose measured wall time crossed
+    # the cap, is never written under the name the registered probe looks for.
+    # It goes to its own file whose name carries the prompt count it actually
+    # reached, so that no later step can mistake it for the lens the budget rule
+    # asked for.
+    outcome = stop_decision(consumed, len(prompts), wall, args.deadline_seconds)
+    stopped = outcome != "complete"
     out = lens_path(fitted, f"{args.tag}_partial") if stopped else out
     lens.save(out)
+    want["n_prompts_fitted"] = int(fitted)
+    want["fit_outcome"] = outcome
+    want["fit_wall_seconds"] = round(wall, 1)
+    want["deadline_seconds"] = float(args.deadline_seconds)
+    stamp_lens_provenance(out, want)
+    write_provenance(ckpt, want)
 
     rate = wall / max(fitted_here, 1)
     print(f"DONE n={fitted} dim_batch={args.dim_batch} wall={wall:.0f}s "
@@ -503,9 +809,14 @@ def main():
           f"averages {fitted} prompts in all) -> {out}", flush=True)
     print(lens, flush=True)
     if stopped:
-        print(f"BUDGET STOP: {consumed} of {len(prompts)} prompts were reached "
-              f"inside the {args.deadline_seconds:.0f}s cap. The partial lens "
-              f"is fitted on {fitted} prompts and was written to {out}, not to "
+        why = (f"{consumed} of {len(prompts)} prompts were reached inside the "
+               f"{args.deadline_seconds:.0f}s cap"
+               if outcome == "short" else
+               f"all {consumed} prompts were consumed, but the fit took "
+               f"{wall:.0f}s against the {args.deadline_seconds:.0f}s cap, so it "
+               f"finished outside the budget")
+        print(f"BUDGET STOP: {why}. The partial lens is fitted on {fitted} "
+              f"prompts and was written to {out}, not to "
               f"{lens_path(args.n, args.tag)}, so it cannot be scored as the "
               f"registered twin lens. Spec section 6.2 fallback applies: run "
               f"run_jspace.py without --twin-lens, which scores H18b with the "

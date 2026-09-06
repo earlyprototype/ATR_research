@@ -14,21 +14,45 @@ overridden with --base-lens. That directory is not version controlled, so the
 file has to be placed there (or named on the command line) before this runs;
 its SHA-256 is checked against the digest the spec records either way.
 
-A twin lens offered here is checked against the prompt count the spec's budget
-rule chose, recorded in output/fit_budget_decision.json. A lens fitted on fewer
-prompts than that is not the registered instrument: it is either a fit the
-wall-clock cap stopped short or a deliberately smaller one, so by default it is
-refused and the run takes the spec's section 6.2 route, scoring both sides on
-the base lens and reporting H18b as untestable as registered. The lens-quality
-sensitivity check, which is not registered and carries no verdict weight, opts
-in with --allow-short-twin-lens and is stamped as a sensitivity reading in its
-own output.
+A twin lens offered here is checked twice before it may carry the registered
+comparison. It is checked against the prompt count the spec's budget rule chose,
+recorded in output/fit_budget_decision.json, and against the provenance record
+the fitting script now stamps into every lens file it writes, which says which
+model at which revision and which fitting corpus the lens came from. A lens
+fitted on fewer prompts than the budget chose is not the registered instrument:
+it is either a fit the wall-clock cap stopped short or a deliberately smaller
+one, so by default it is refused and the run takes the spec's section 6.2 route,
+scoring both sides on the base lens and reporting H18b as untestable as
+registered. A lens with no provenance stamp, which is what the committed twin
+lens is because it predates the stamp, is likewise refused unless
+--accept-unstamped-twin-lens is passed, which is recorded in the output. The
+lens-quality sensitivity check, which is not registered and carries no verdict
+weight, opts in with --allow-short-twin-lens and is stamped as a sensitivity
+reading in its own output.
+
+Coordinate frames, and why there is a choice. The states and the dictionary have
+to be in the same coordinates for the share to mean anything. --frame tl, the
+default and the frame every committed number was measured in, reads the states
+from the TransformerLens conversion of the model and builds the dictionary from
+that conversion's unembedding matrix, which folds the final normalisation step's
+learned per-coordinate gain into every vocabulary direction and then subtracts a
+common vector from all of them. --frame hf reads the states from the Hugging
+Face model directly and builds the dictionary from its raw output matrix, which
+is the frame the Jacobian matrices were fitted in and the one EXP_011 built its
+dictionary from. The
+two frames give different numbers, so only the registered frame can carry a
+verdict; a run in the other frame is stamped as a sensitivity reading. Section
+3.6 of the results record measures the difference.
 
 Usage:
-    python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt \
+        --accept-unstamped-twin-lens
     python3 run_jspace.py --base-lens /some/other/path/jlens_gpt2_small_neuronpedia.pt
     python3 run_jspace.py --out-suffix _lens5 --allow-short-twin-lens \
         --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_5_probe.pt
+    python3 run_jspace.py --frame hf --out-suffix _hfframe \
+        --accept-unstamped-twin-lens \
+        --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
 """
 import argparse
 import hashlib
@@ -63,6 +87,22 @@ ROT_SEEDS = (2026, 2027, 2028)
 N_PERM = 10000
 PERM_SEED = 42
 
+# The coordinate frame every committed number was measured in. See the module
+# docstring: "tl" reads states and unembedding from the TransformerLens
+# conversion, "hf" reads both from the Hugging Face model itself.
+FRAME_REGISTERED = "tl"
+FRAMES = ("tl", "hf")
+
+# The fitting corpus the registered twin lens was fitted on, committed beside
+# this script. A lens's stamped provenance is checked against this file's own
+# digest rather than against a copied-out constant, so the two cannot drift.
+CORPUS_COMMITTED = HERE / "wikitext_prompts_160.json"
+
+# What a twin lens's provenance stamp must say for it to carry the registered
+# comparison. The sequence and layer settings are the ones EXP_017's fit used.
+EXPECTED_TWIN_LENS_FIT = {"max_seq_len": 128, "source_layers": list(range(11)),
+                          "target_layer": 11, "skip_first": 16}
+
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -72,16 +112,27 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def per_layer_states(which, prompt_ids):
+def per_layer_states(which, prompt_ids, frame=FRAME_REGISTERED):
     """Inject each terminal tensor at the entrance to layer 0 and read the exit
-    of every probed layer, the way the lucier pilot read per-layer states.
+    of every probed layer, in the coordinate frame asked for.
+
+    Returns states [n_layers, d_model, n_prompts] (states as columns), the
+    unembedding matrix of that frame as numpy [d_model, d_vocab], and the
+    rescale factor applied to each terminal.
+    """
+    if frame not in FRAMES:
+        raise SystemExit(f"unknown frame {frame!r}; expected one of {FRAMES}")
+    reader = _states_tl if frame == "tl" else _states_hf
+    return reader(which, prompt_ids)
+
+
+def _states_tl(which, prompt_ids):
+    """The registered frame: states and unembedding from the TransformerLens
+    conversion, the way the lucier pilot read per-layer states.
 
     The terminal is rescaled to the loop's own re-injection size first, so the
     states are the ones the loop's next iteration would actually visit. The
     rescale factor is recorded; at a settled state it is close to 1.
-
-    Returns states [n_layers, d_model, n_prompts] (states as columns) and the
-    model's unembedding matrix as numpy [d_model, d_vocab].
     """
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from transformer_lens import HookedTransformer
@@ -125,6 +176,74 @@ def per_layer_states(which, prompt_ids):
     return states, W_U, rescales
 
 
+def _states_hf(which, prompt_ids):
+    """The same reading in the Hugging Face model's own coordinates.
+
+    The terminal is injected at the input of block 0 and the output of every
+    probed block is read, which is the same place the TransformerLens route
+    reads. Two differences are deliberate and are the whole point of this
+    frame. The states are not mean-centred across the 768 coordinates, because
+    no weight processing has been applied, and the unembedding returned is the
+    model's raw output matrix, with the final normalisation step's learned gain
+    left out of it. That is the frame the Jacobian matrices were fitted in, so
+    a dictionary built here is in the same coordinates as the states it is
+    scored against.
+
+    The beginning-of-sequence token is prepended by hand, because
+    TransformerLens prepends one by default and the terminal tensors were
+    captured with it, so the sequence lengths have to agree.
+    """
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    rev = exp017_models.revision(which)
+    hf = AutoModelForCausalLM.from_pretrained(MODELS[which], revision=rev)
+    tok = AutoTokenizer.from_pretrained(MODELS[which], revision=rev)
+    hf.eval()
+
+    terms = np.load(OUT / f"terminals_{which}.npz")
+    loop = {r["prompt_id"]: r for r in json.load(open(OUT / f"loop_results_{which}.json"))}
+    blocks = hf.transformer.h
+    d = int(hf.config.n_embd)
+    states = np.zeros((len(PROBE_LAYERS), d, len(prompt_ids)), dtype=np.float32)
+    rescales = {}
+    box = {}
+
+    def inject(module, args, kwargs):
+        return (box["injected"].unsqueeze(0),) + tuple(args[1:]), kwargs
+
+    def reader(li):
+        def read(module, args, kwargs, output):
+            resid = output[0] if isinstance(output, tuple) else output
+            box[f"out{li}"] = resid.detach()
+        return read
+
+    handles = [blocks[0].register_forward_pre_hook(inject, with_kwargs=True)]
+    handles += [blocks[l].register_forward_hook(reader(li), with_kwargs=True)
+                for li, l in enumerate(PROBE_LAYERS)]
+    try:
+        for pi, pid in enumerate(prompt_ids):
+            T = torch.from_numpy(terms[f"{pid}|full"])
+            factor = float(loop[pid]["target_norm"]) / float(T.norm())
+            rescales[pid] = factor
+            box["injected"] = T * factor
+            ids = tok(loop[pid]["prompt"], return_tensors="pt")["input_ids"]
+            bos = torch.tensor([[tok.bos_token_id]], dtype=ids.dtype)
+            ids = torch.cat([bos, ids], dim=1)
+            assert ids.shape[1] == box["injected"].shape[0], (
+                f"{pid}: {ids.shape[1]} tokens against a terminal of "
+                f"{box['injected'].shape[0]} positions")
+            with torch.no_grad():
+                hf(ids)
+            for li, l in enumerate(PROBE_LAYERS):
+                states[li, :, pi] = box[f"out{li}"][0, -1, :].numpy()
+    finally:
+        for handle in handles:
+            handle.remove()
+
+    W_U = hf.lm_head.weight.detach().numpy().T.astype(np.float32)  # [d, d_vocab]
+    del hf
+    return states, W_U, rescales
+
+
 def budget_n_prompts(path=BUDGET_JSON):
     """The prompt count the spec's budget rule chose for the twin's lens fit,
     read from the decision that rule already wrote. Returns None when that file
@@ -150,20 +269,68 @@ def twin_lens_decision(n_fitted, required, allow_short):
 
 
 def load_lens(path):
-    """Load a fitted lens; returns {layer: J as numpy [d, d]} and its metadata."""
+    """Load a fitted lens; returns {layer: J as numpy [d, d]} and its metadata.
+
+    The metadata includes the provenance record the fitting script stamps into
+    every lens file it writes, which says which model at which revision and
+    which corpus the lens was fitted from. A lens written before that stamp
+    existed has none, and the value is then None.
+    """
     ck = torch.load(path, map_location="cpu", weights_only=True)
     J = {int(l): ck["J"][l].float().numpy().astype(np.float32) for l in ck["J"]}
     return J, {"n_prompts": int(ck["n_prompts"]), "d_model": int(ck["d_model"]),
-               "source_layers": [int(x) for x in ck["source_layers"]]}
+               "source_layers": [int(x) for x in ck["source_layers"]],
+               "provenance": ck.get("provenance")}
 
 
-def permutation_p_two_sided(a, b, n_perm=N_PERM, seed=PERM_SEED):
+def expected_twin_lens_provenance(corpus=CORPUS_COMMITTED):
+    """What a twin lens's stamp has to say to carry the registered comparison:
+    the pinned twin weights and the committed fitting corpus, hashed here so
+    that no digest is copied out and left to drift, with the sequence and layer
+    settings EXP_017 fitted at."""
+    want = {"model": exp017_models.name("twin"),
+            "revision": exp017_models.revision("twin"),
+            "corpus_sha256": sha256_file(corpus) if Path(corpus).exists() else None}
+    want.update(EXPECTED_TWIN_LENS_FIT)
+    return want
+
+
+def twin_lens_provenance_decision(stamp, want, accept_unstamped):
+    """Whether a twin lens's provenance stamp permits registered scoring.
+
+    Returns ("accepted", []) when the stamp agrees with `want` field for field,
+    ("unstamped", []) when there is no stamp and the caller has opted in to
+    that, ("refused", reasons) when there is no stamp and no opt-in, or when the
+    stamp disagrees. The reasons are sentences naming the fields that differ.
+    """
+    if stamp is None:
+        if accept_unstamped:
+            return "unstamped", []
+        return "refused", ["the lens file carries no provenance stamp, so "
+                           "nothing in it says which model or which corpus it "
+                           "was fitted from"]
+    bad = []
+    for key, expected in want.items():
+        got = stamp.get(key)
+        if isinstance(expected, list) and got is not None:
+            got = list(got)
+        if got != expected:
+            bad.append(f"{key} is {got!r} in the lens and {expected!r} here")
+    return ("accepted", []) if not bad else ("refused", bad)
+
+
+def permutation_p_two_sided(a, b, n_perm=None, seed=PERM_SEED):
     """Two-sided permutation p on the difference of medians.
 
     Pool the two samples, reassign which model each value belongs to n_perm
     times, and report the fraction of reassignments whose absolute median
     difference reaches the observed one, with the standard add-one correction.
+
+    `n_perm` defaults to the module-level N_PERM, and it is read here rather
+    than bound when this function is defined, so that a caller which lowers
+    N_PERM for a cheap check really does run fewer reassignments.
     """
+    n_perm = N_PERM if n_perm is None else n_perm
     a, b = np.asarray(a, float), np.asarray(b, float)
     obs = abs(float(np.median(a) - np.median(b)))
     pool = np.concatenate([a, b])
@@ -220,6 +387,71 @@ def selftest():
         check(f"the committed {name} is {expect} without the opt-in",
               got == expect, f"fitted on {n} prompts, decision {got}")
 
+    # The provenance gate, which asks what a lens was fitted from rather than
+    # how many prompts it averaged.
+    want = expected_twin_lens_provenance()
+    check("the committed fitting corpus is hashed for the comparison",
+          want["corpus_sha256"] is not None
+          and len(str(want["corpus_sha256"])) == 64,
+          f"{str(want['corpus_sha256'])[:12]} from {CORPUS_COMMITTED.name}")
+    good = dict(want, model="MBZUAI/LaMini-GPT-124M", n_prompts_fitted=40)
+    got, why = twin_lens_provenance_decision(good, want, False)
+    check("a lens stamped with this experiment's own fit is accepted",
+          got == "accepted", f"{got} {why}")
+    got, why = twin_lens_provenance_decision(None, want, False)
+    check("an unstamped lens is refused without the opt-in", got == "refused",
+          "; ".join(why))
+    got, why = twin_lens_provenance_decision(None, want, True)
+    check("an unstamped lens with the opt-in is admitted and recorded as such",
+          got == "unstamped", got)
+    got, why = twin_lens_provenance_decision(
+        dict(good, corpus_sha256="0" * 64), want, True)
+    check("a lens fitted on another corpus is refused even with the opt-in",
+          got == "refused" and any("corpus_sha256" in w for w in why),
+          "; ".join(why))
+    got, why = twin_lens_provenance_decision(
+        dict(good, model="/local/checkout", revision="local path, no revision "
+             "pinned"), want, True)
+    check("a lens fitted from a local model path is refused",
+          got == "refused" and any("model" in w for w in why), "; ".join(why))
+    got, why = twin_lens_provenance_decision(dict(good, max_seq_len=512), want, True)
+    check("a lens fitted at another sequence length is refused",
+          got == "refused" and any("max_seq_len" in w for w in why), "; ".join(why))
+    for name in ("jlens_lamini_gpt2_124m_40_twin.pt",):
+        path = ARTIFACTS / name
+        if not path.exists():
+            check(f"{name} is present to check its stamp", False, "file absent")
+            continue
+        stamp = load_lens(path)[1]["provenance"]
+        got, why = twin_lens_provenance_decision(stamp, want, False)
+        check(f"the committed {name} carries no stamp, so registered scoring "
+              f"needs --accept-unstamped-twin-lens",
+              stamp is None and got == "refused", "; ".join(why))
+
+    # The permutation count is read when the test runs, not when this module is
+    # imported, so a caller that lowers it really does run fewer reassignments.
+    saved = globals()["N_PERM"]
+    try:
+        globals()["N_PERM"] = 9
+        p, obs = permutation_p_two_sided([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
+        check("lowering the module's permutation count changes the test's "
+              "denominator", abs(p * 10 - round(p * 10)) < 1e-9,
+              f"p {p:.4f} is a multiple of one tenth, so 9 reassignments ran")
+        p2, _ = permutation_p_two_sided([1.0, 2.0, 3.0], [4.0, 5.0, 6.0],
+                                        n_perm=99)
+        check("an explicit count still overrides the module's",
+              abs(p2 * 100 - round(p2 * 100)) < 1e-9, f"p {p2:.4f}")
+    finally:
+        globals()["N_PERM"] = saved
+    check("the default permutation count is restored after that check",
+          N_PERM == 10000, f"N_PERM {N_PERM}")
+
+    # The frame gate: only the registered frame may carry a verdict.
+    check("the registered frame is the TransformerLens one every committed "
+          "number was measured in", FRAME_REGISTERED == "tl", FRAME_REGISTERED)
+    check("the other frame is offered and named", set(FRAMES) == {"tl", "hf"},
+          ", ".join(FRAMES))
+
     print(f"\nselftest: {'ALL PASS' if ok else 'FAILURE'}")
     return 0 if ok else 1
 
@@ -249,6 +481,20 @@ def main():
                     help="score a twin lens fitted on fewer prompts than the "
                          "budget chose; the result is stamped as a sensitivity "
                          "reading and is not the registered comparison")
+    ap.add_argument("--accept-unstamped-twin-lens", action="store_true",
+                    help="score a twin lens that carries no provenance stamp, "
+                         "so nothing in the file says which model or which "
+                         "corpus it was fitted from; needed for the committed "
+                         "twin lens, which predates the stamp, and recorded in "
+                         "the output")
+    ap.add_argument("--frame", choices=FRAMES, default=FRAME_REGISTERED,
+                    help="coordinate frame for the states and the dictionary: "
+                         "tl reads both from the TransformerLens conversion and "
+                         "is the frame every committed number was measured in, "
+                         "hf reads both from the Hugging Face model, which is "
+                         "the frame the Jacobians were fitted in. A run in a "
+                         "frame other than the registered one is stamped as a "
+                         "sensitivity reading and carries no verdict weight.")
     args = ap.parse_args()
     if args.selftest:
         raise SystemExit(selftest())
@@ -267,7 +513,14 @@ def main():
     rep = {"experiment": "EXP_017", "spec": "../../EXP_017_SPEC.md",
            "k_atoms": K_ATOMS, "probe_layers": PROBE_LAYERS, "band_layers": BAND,
            "rotation_seeds": list(ROT_SEEDS), "n_perm": N_PERM,
-           "perm_seed": PERM_SEED, "prompt_ids": prompt_ids, "lenses": {}}
+           "perm_seed": PERM_SEED, "prompt_ids": prompt_ids, "lenses": {},
+           "frame": args.frame, "registered_frame": FRAME_REGISTERED,
+           "frame_note": (
+               "tl: states and dictionary from the TransformerLens conversion, "
+               "whose unembedding folds in the final normalisation gain and "
+               "subtracts a common vector from every vocabulary direction. "
+               "hf: states and dictionary from the Hugging Face model, the "
+               "frame the Jacobians were fitted in.")}
 
     # ---- lenses --------------------------------------------------------------
     got = sha256_file(base_lens)
@@ -304,16 +557,40 @@ def main():
         decision = twin_lens_decision(n_fitted, required, args.allow_short_twin_lens)
         rep["twin_lens_budget"]["meets_budget"] = decision == "accepted"
         rep["twin_lens_budget"]["decision"] = decision
+        # The second gate: what the lens says it was fitted from. A lens can
+        # meet the prompt-count budget and still have been fitted on another
+        # corpus, or on a local checkout of another 768-wide model, so the
+        # prompt count alone never establishes that it is the registered
+        # instrument.
+        want = expected_twin_lens_provenance()
+        prov, reasons = twin_lens_provenance_decision(
+            meta_twin.get("provenance"), want, args.accept_unstamped_twin_lens)
+        rep["twin_lens_provenance"] = {
+            "expected": want, "stamped": meta_twin.get("provenance"),
+            "decision": prov, "reasons": reasons,
+            "accept_unstamped_twin_lens": bool(args.accept_unstamped_twin_lens)}
+        if prov == "refused":
+            # The message is printed once, by the shared refusal branch below,
+            # which names the reason this gate gave.
+            decision = "refused"
+            rep["twin_lens_budget"]["decision"] = decision
+        elif prov == "unstamped":
+            print("UNSTAMPED TWIN LENS ACCEPTED: the lens file says nothing "
+                  "about which model or corpus it was fitted from, and that "
+                  "acceptance is recorded in the output.", flush=True)
         if decision == "refused":
             rep["twin_lens_budget"]["action"] = (
                 "refused for registered scoring; spec section 6.2 route taken")
             rep["lenses"]["twin_refused"] = rep["lenses"].pop("twin")
             rep["lenses"]["twin"] = None
-            print(f"TWIN LENS REFUSED: fitted on {n_fitted} prompts, short of "
-                  f"the {required} the budget rule chose. Scoring both sides on "
+            why = ("its provenance: " + "; ".join(reasons) if prov == "refused"
+                   else f"it was fitted on {n_fitted} prompts, short of the "
+                        f"{required} the budget rule chose")
+            print(f"TWIN LENS REFUSED because {why}. Scoring both sides on "
                   f"the base lens (spec section 6.2 fallback). Pass "
-                  f"--allow-short-twin-lens to score it as a sensitivity "
-                  f"reading instead.", flush=True)
+                  f"--allow-short-twin-lens to score a short lens as a "
+                  f"sensitivity reading, or --accept-unstamped-twin-lens to "
+                  f"score an unstamped one.", flush=True)
         else:
             if decision == "sensitivity":
                 short_reading = True
@@ -337,9 +614,20 @@ def main():
     # ---- per-layer states, one model at a time so only one is resident -------
     states, W_U, rescale = {}, {}, {}
     for which in ("twin", "base"):
-        states[which], W_U[which], rescale[which] = per_layer_states(which, prompt_ids)
-        print(f"{which}: per-layer states read, rescale factor mean "
+        states[which], W_U[which], rescale[which] = per_layer_states(
+            which, prompt_ids, args.frame)
+        print(f"{which}: per-layer states read in the {args.frame} frame, "
+              f"rescale factor mean "
               f"{np.mean(list(rescale[which].values())):.6f}", flush=True)
+    # How far the states sit from mean-centred across the 768 coordinates, which
+    # is what tells a reader of the artifact which frame it holds without
+    # trusting the label: the TransformerLens conversion centres every write, so
+    # its states have a mean of zero to floating-point noise.
+    rep["state_mean_over_coordinates"] = {
+        which: {"max_abs_mean": float(np.abs(states[which].mean(axis=1)).max()),
+                "mean_state_norm": float(
+                    np.linalg.norm(states[which], axis=1).mean())}
+        for which in states}
     rep["terminal_rescale_to_injection_size"] = {
         k: {"mean": float(np.mean(list(v.values()))),
             "min": float(np.min(list(v.values()))),
@@ -425,10 +713,19 @@ def main():
     hits = [l for l in BAND if primary["per_layer"][str(l)]["both_conditions"]]
     primary["band_layers_meeting_both"] = hits
     primary["n_band_layers_meeting_both"] = len(hits)
+    off_frame = args.frame != FRAME_REGISTERED
     if not have_twin_lens:
         why = rep["twin_lens_budget"].get("action", "no twin lens offered")
         primary["h18b"] = (f"UNTESTABLE as registered (base lens both sides: "
                            f"{why})")
+        primary["registered_scoring"] = False
+    elif off_frame:
+        verdict = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
+        primary["h18b"] = (
+            f"{verdict} as a sensitivity reading only, NOT the registered "
+            f"comparison: this run measured states and dictionary in the "
+            f"{args.frame} frame, and every registered number was measured in "
+            f"the {FRAME_REGISTERED} frame")
         primary["registered_scoring"] = False
     elif short_reading:
         verdict = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
@@ -442,6 +739,11 @@ def main():
     else:
         primary["h18b"] = "SUPPORTED" if len(hits) >= 4 else "NOT SUPPORTED"
         primary["registered_scoring"] = True
+    # Kept beside the verdict rather than inside its wording, so that a reader
+    # of the artifact sees on what terms the twin lens was admitted.
+    primary["frame"] = args.frame
+    primary["twin_lens_provenance_decision"] = rep.get(
+        "twin_lens_provenance", {}).get("decision")
     rep["h18b"] = primary
 
     # ---- cross-checks --------------------------------------------------------

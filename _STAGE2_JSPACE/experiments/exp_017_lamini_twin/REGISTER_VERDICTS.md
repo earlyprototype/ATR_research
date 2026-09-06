@@ -23,7 +23,7 @@ Format as in `REGISTER.md` section 1:
 |---|---|---|---|---|
 | H18 | EXP_017 | The post-trained twin LaMini-GPT-124M, run under the registered full-stack convention on the 25-prompt Small subset, partitions the prompts like base GPT-2 Small's terminals (adjusted Rand index above chance under the EXP_010d permutation test) | **SUPPORTED** (adjusted Rand index 0.1694, permutation p 0.0097, against a matched base arm re-run under the same lag-2 gate; above chance at three of the four sweep thresholds) | `experiments/exp_017_lamini_twin/RESULTS_EXP017.md` §2.5 |
 | H18a | EXP_017 | The twin's terminal readout tokens coincide with base GPT-2 Small's basin tokens on at least half of the 25 prompts | **REFUTED** (0 of 25 against Stage 1's five basin tokens, and 0 of 25 against the tokens base produced in this run's own matched arm; the twin reads ` anarchism` on 24 of 25 prompts and ` instant` on 1) | `RESULTS_EXP017.md` §2.6 |
-| H18b | EXP_017 | Post-training changes the terminal states' J-space share: the twin's share on a lens fitted to the twin differs from base's share on the Neuronpedia lens by more than the random-dictionary control spread, two-sided | **SUPPORTED at exactly the pre-registered threshold** (4 of the 6 band layers 5 to 10 meet both conditions, and 4 was the bar; permutation p 0.0001 at every layer; the same-lens cross-check, which does not depend on the threshold, has the twin above base at all 11 layers by 0.015 to 0.086). **Read with the control caveat in §3.5:** base's settled states lie no closer to the lens's nameable directions than to a randomly rotated copy of them from layer 4 onward, so the absolute share level at the band carries no evidence of verbalizable content | `RESULTS_EXP017.md` §3.3 to §3.5 and §5 |
+| H18b | EXP_017 | Post-training changes the terminal states' J-space share: the twin's share on a lens fitted to the twin differs from base's share on the Neuronpedia lens by more than the random-dictionary control spread, two-sided | **SUPPORTED at exactly the pre-registered threshold** (4 of the 6 band layers 5 to 10 meet both conditions, and 4 was the bar; permutation p 0.0001 at every layer; the same-lens cross-check, which does not depend on the threshold, has the twin above base at all 11 layers by 0.015 to 0.086). **Read with two caveats.** §3.5: base's settled states lie no closer to the lens's nameable directions than to a randomly rotated copy of them from layer 4 onward, so the absolute share level at the band carries no evidence of verbalizable content. §3.6, added 2026-09-06: every number above was measured in the TransformerLens coordinate convention while the lens matrices were fitted in the Hugging Face one, and the recomputation in the fitting convention keeps the verdict (SUPPORTED, 4 of 6 band layers, on layers 5, 6, 7 and 8 rather than 6, 7, 9 and 10) but reverses the cross-check (the twin above base in 4 of the 22 same-lens comparisons rather than all 22, and the model effect 0.1 to 0.5 times the instrument effect rather than 3.1 to 12.7 times). Note 5 below carries the numbers and the ruling this needs | `RESULTS_EXP017.md` §3.3 to §3.6 and §5 |
 
 ## 2. Experiment register row
 
@@ -56,10 +56,45 @@ Format as in `REGISTER.md` section 2:
 3. **No new identifier was created.** EXP_017, H18, H18a and H18b are the
    identifiers erratum (f) allocated on 2026-09-05, and this experiment used
    only those, plus existing identifiers in citations.
-4. **Deviations** are listed flat in `RESULTS_EXP017.md` §4. The one a register
-   reader is most likely to want is that the twin's Jacobian lens was fitted on
-   40 WikiText-103 prompts, below the 50 the spec named as a deviation
-   threshold and well below the 277 of the Neuronpedia lens it is compared
-   against, by the mechanical application of the spec's own budget rule. The
-   sensitivity check in §3.4 shows the H18b verdict is unchanged when that lens
-   is degraded to 5 prompts.
+4. **Deviations** are listed flat in `RESULTS_EXP017.md` §4, and there are now
+   eighteen. The one a register reader is most likely to want is that the
+   twin's Jacobian lens was fitted on 40 WikiText-103 prompts, below the 50 the
+   spec named as a deviation threshold and well below the 277 of the
+   Neuronpedia lens it is compared against, by the mechanical application of
+   the spec's own budget rule. The sensitivity check in §3.4 shows the H18b
+   verdict is unchanged when that lens is degraded to 5 prompts.
+
+5. **A coordinate-convention question that needs a ruling before this row is
+   swept, added 2026-09-06 after a review of the pull request.** The J-space
+   share of a state is the fraction of it that can be built from at most 25
+   vocabulary directions, and those directions are `W_U^T J_l`, so the answer
+   depends on which version of the unembedding matrix `W_U` is used. EXP_017
+   used the version TransformerLens produces when it converts a model, which
+   folds the model's final normalisation gain into every direction and then
+   subtracts a common vector; the lens matrices `J_l` were fitted against the
+   unconverted Hugging Face model, whose version does neither. The two
+   unembeddings differ by 68 percent of the size of the Hugging Face matrix, on
+   a scale where 0 means identical. **The numbers, so the register does not
+   have to take this on trust.** Median share at the six band layers, on a
+   scale from 0 to 1: twin 0.2851 to 0.3221 and base 0.2538 to 0.2964 in the
+   convention this run used, against twin 0.0087 to 0.0396 and base 0.0150 to
+   0.0217 in the fitting convention. Both give H18b SUPPORTED at 4 of the 6
+   band layers, the pre-registered bar, on layers 6, 7, 9 and 10 in the first
+   and layers 5, 6, 7 and 8 in the second. The same-lens cross-check quoted in
+   the H18b row above has the twin above base in all 22 comparisons by 0.0167
+   to 0.0889 in the first convention, and in 4 of 22 by at most 0.0122 in the
+   second. Artifacts: `output/exp017_jspace.json` and
+   `output/exp017_jspace_hfframe.json`, with the frame measurement itself in
+   `output/frame_check.json`. **This session changed no verdict and proposes
+   none:** the row above still carries the numbers this run measured, and
+   `RESULTS_EXP017.md` §6.3 item 5 asks TC which convention is the registered
+   one for J-space work, noting that EXP_011 built its dictionary from the
+   Hugging Face version and that H19b in EXP_018 will inherit whichever is
+   settled. Rule R8 reserves that choice.
+
+6. **A wording point for whoever sweeps this row.** If TC rules for the Hugging
+   Face convention, the H18b row's parenthetical "the same-lens cross-check,
+   which does not depend on the threshold, has the twin above base at all 11
+   layers by 0.015 to 0.086" must not be swept as written, because it holds
+   only in the convention this run measured. The verdict word itself,
+   SUPPORTED at exactly the pre-registered threshold, stands either way.

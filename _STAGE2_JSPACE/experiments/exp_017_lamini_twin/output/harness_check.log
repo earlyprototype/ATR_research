@@ -66,3 +66,62 @@ lens was refitted, no loop and no J-space probe was re-run.
     fit_probe_db16.log and fit_twin.log, including prompt 30 at seq_len 117 and
     n_valid 100. The committed wikitext_prompts_160.json is therefore the
     corpus the committed lens was fitted on.
+
+2026-09-06, third round of pull request review fixes. Five findings, of which
+four were real. No lens was refitted and the loop was not re-run. Every new
+artifact under output/ is listed here with what wrote it, per rule R5.
+  python3 run_jspace.py --out-suffix _regcheck --accept-unstamped-twin-lens
+      --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    -> a regression check of the edited probe against the committed registered
+       artifact, 188 seconds. Compared field by field with
+       output/exp017_jspace.json: the worst absolute difference over every
+       shared numeric field is exactly 0, and no field disagrees in text. The
+       only fields the new run adds are the frame stamp, the state-centring
+       diagnostic and the twin lens provenance decision. The scratch file was
+       then deleted rather than committed, because the committed artifact is
+       the record and this was a check on the code, not a new measurement.
+  python3 frame_check.py
+    -> output/frame_check.json, 73 seconds. The TransformerLens loader defaults
+       in force for the loop, the states and the probe (fold_ln, centre writing
+       weights, centre unembedding and fold value biases all true); the
+       unembedding the probe used against each model's own output matrix
+       (difference 0.6845 of the size of the Hugging Face matrix for the twin
+       and 0.6823 for base, common shift 0.52 of a typical direction's length,
+       65 percent of the difference left after removing that shift, per-token
+       cosine median 0.81, final normalisation gain from 0.0044 to 17.42, and
+       the converted matrix rebuilt from the Hugging Face one to 2.0e-07
+       relative); the states in both frames (TransformerLens states centred to
+       5.2e-07 on lengths of 634 to 1128, the two frames differing by one
+       constant per state worth 0.04 to 2.4 percent of a state's length); and
+       the share on five prompts at layers 0 and 5 under three combinations.
+  python3 run_jspace.py --frame hf --out-suffix _hfframe
+      --accept-unstamped-twin-lens
+      --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+    -> output/exp017_jspace_hfframe.json, 114 seconds. The whole H18b
+       comparison in the convention the lens matrices were fitted in, stamped
+       as a sensitivity reading with no verdict weight. Reading: SUPPORTED at
+       4 of the 6 band layers, on layers 5, 6, 7 and 8, against the registered
+       run's 4 of 6 on layers 6, 7, 9 and 10.
+  python3 harness_check_jspace.py _harness_p200
+    -> output/exp017_jspace_harness_p200.json, 48 seconds, against the
+       committed harness artifact's 209 seconds. The shuffle count now takes
+       effect: both layers' shares reproduce to four decimal places and the
+       permutation p is 0.00498, the floor of a 200-shuffle test, where the
+       committed artifact records 0.0001, the floor of a 10,000-shuffle test it
+       ran while recording 200. The committed harness artifact was not
+       overwritten.
+  python3 make_tables.py
+    -> regenerated output/tables.md. 99 lines added, none removed and none
+       changed, so every table already quoted in RESULTS_EXP017.md still
+       matches its artifact line for line. The added lines are the Hugging Face
+       frame tables and the frame measurement of section 3.6.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 30 checks, now including the
+       deadline read after the fitting call returns (39 prompts at the
+       predicted 221 seconds and a fortieth at 1,000 gives 40 prompts consumed
+       in 9,619 seconds against the 9,000 second cap, and that is scored as a
+       stopped fit) and the checkpoint provenance gate, which refuses an
+       unstamped or mismatched checkpoint.
+  python3 run_jspace.py --selftest -> ALL PASS, 22 checks, now including the
+       twin lens provenance gate and a check that lowering the module's shuffle
+       count really lowers the number of shuffles run.

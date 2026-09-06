@@ -17,7 +17,12 @@ the lens summary in section 3.2, whose fit timings are read from the committed
 run logs. Both cite their source where they appear. Neither carries a verdict.
 The control-adjusted table in section 3.5 was also outside the guard until
 2026-09-05, when it was added to `make_tables.py` and the regenerated table was
-confirmed to match the record row for row.
+confirmed to match the record row for row. The tables added in section 3.6 on
+2026-09-06 are inside the guard from the start: `make_tables.py` emits every one
+of them from `output/exp017_jspace_hfframe.json` and `output/frame_check.json`,
+and regenerating on that date changed no existing line of `output/tables.md`,
+which is the check that the numbers quoted in sections 2 and 3 still match their
+artifacts.
 
 ---
 
@@ -51,19 +56,28 @@ threshold was at least 13 of 25.
 
 **H18b, whether post-training changes how much of the settled state lies in the
 directions a Jacobian lens can name: SUPPORTED, at exactly the pre-registered
-threshold, with a caveat that matters more than the verdict.** Four of the six
+threshold, with two caveats that matter more than the verdict.** Four of the six
 band layers meet both scoring conditions, and four was the bar; had the bar been
-five, the same numbers would read NOT SUPPORTED. What does not sit on a
-threshold is the cross-check: measured on one and the same lens, the twin's
+five, the same numbers would read NOT SUPPORTED. The cross-check does not sit on
+a threshold: measured on one and the same lens, the twin's
 settled states have a higher share than base's at every one of the eleven
 layers, by 0.0167 to 0.0889 on a scale from 0 to 1, with the permutation test
 at its floor of 0.0001 in all twenty-two of those comparisons, and at every
 layer that gap is between 3.1 and 12.7 times larger than the largest effect the
-choice of lens produces there. The caveat is that base's settled
+choice of lens produces there. The first caveat is that base's settled
 states, at the band layers, lie no closer to the lens's nameable directions
 than to a randomly rotated copy of them, so the absolute level of this quantity
 cannot be read as evidence of verbalizable content. Section 3.5 gives the
-numbers.
+numbers. The second caveat, added on 2026-09-06 after a review of the pull
+request, is that the cross-check just quoted is specific to the coordinate
+convention this run measured in: the states and the dictionary were read from
+the TransformerLens conversion of each model, while the lens matrices they are
+built from were fitted against the unconverted Hugging Face model. Recomputing
+everything in the fitting convention leaves the H18b verdict at SUPPORTED with
+four of six band layers, on layers 5, 6, 7 and 8 instead of 6, 7, 9 and 10, but
+it reverses the cross-check, with the twin higher in four of the twenty-two
+comparisons instead of all twenty-two. Section 3.6 gives both sets of numbers
+and section 6.3 item 5 puts the choice of convention to the operator.
 
 The two Part 1 results point in opposite directions and that is the finding.
 The twin's end states still remember which prompts belong together, at a level
@@ -632,15 +646,30 @@ permutation test, 10,000 reassignments with seed 42.
 | 9 | 0.0360 (p 0.0001) | 0.0316 (p 0.0001) | 0.0102 | 0.0059 | 3.1 times |
 | 10 | 0.0167 (p 0.0001) | 0.0205 (p 0.0001) | 0.0018 | 0.0020 | 8.4 times |
 
-**Established from this run: the difference H18b measures is a property of the
-two models' settled states, not of the two lenses.** At every one of the eleven
-layers, on either lens taken alone, the twin's settled states have a higher
-J-space share than base's, by 0.0167 to 0.0889 on a scale from 0 to 1, and the
-permutation test is at its floor of 0.0001 in all twenty-two of those
-comparisons. At every layer that model effect is larger than the largest effect
-the choice of lens produces there, by a factor of between 3.1 and 12.7. The
-conclusion does not depend on the twin's lens being well fitted, because it can
-be read off base's lens alone.
+**Measured in the frame this run used: the difference H18b measures is a
+property of the two models' settled states, not of the two lenses.** At every
+one of the eleven layers, on either lens taken alone, the twin's settled states
+have a higher J-space share than base's, by 0.0167 to 0.0889 on a scale from 0
+to 1, and the permutation test is at its floor of 0.0001 in all twenty-two of
+those comparisons. At every layer that model effect is larger than the largest
+effect the choice of lens produces there, by a factor of between 3.1 and 12.7.
+That conclusion does not depend on the twin's lens being well fitted, because it
+can be read off base's lens alone.
+
+**Retraction, 2026-09-06, of the sentence this paragraph opened with.** Until
+that date this paragraph began "Established from this run: the difference H18b
+measures is a property of the two models' settled states, not of the two
+lenses." That was wrong as an unqualified claim and it is withdrawn. The
+numbers in it stand, every one of them, for the coordinate frame they were
+measured in, and that frame is not the one the lens matrices were fitted in.
+Recomputing the same comparison in the fitting frame reverses it: the twin is
+higher in four of the twenty-two comparisons rather than twenty-two, and the
+model effect is 0.1 to 0.5 times the instrument effect rather than 3.1 to 12.7
+times, so in that frame the choice of lens moves the share more than the choice
+of model does. Section 3.6 gives both sets of numbers side by side. What may be
+said without qualification is narrower: in the frame this run measured, the
+difference is a model property, and whether that holds in general is not
+settled by this experiment.
 
 **The lens-quality sensitivity check** (not pre-registered, no verdict weight,
 deviation 9). The whole comparison was repeated with the five-prompt probe lens
@@ -687,6 +716,12 @@ The twin's settled states stay above their control at every layer from 0 to 9
 and fall below only at layer 10. So the twin's states retain some alignment
 with the nameable directions exactly where base's have lost it.
 
+**Added 2026-09-06:** this table too depends on the coordinate convention the
+run measured in, and section 3.6 gives it in the other convention. The direction
+of base's finding survives there and starts one layer earlier, at layer 3
+instead of layer 4; the twin's does not survive intact, falling below its
+control at layers 4, 6, 9 and 10 rather than at layer 10 alone.
+
 Two consequences, stated plainly. First, the H18b comparison remains valid: it
 compares two models on the same measure with a matched control, and the
 difference between them is real, same-lens, and large relative to every control
@@ -697,11 +732,221 @@ what the share can support at those depths, and it is a finding in its own
 right, one that points the same way as H16b in EXP_011, which asks whether the
 loop leaves the verbalizable directions.
 
+### 3.6 The coordinate frame the dictionary sits in, and what the other frame gives
+
+**The answer first.** The dictionary every number in sections 3.3 to 3.5 was
+measured against is built in one set of coordinates, and the Jacobian matrices
+it is built from were fitted in another. Recomputing the whole comparison in
+the frame the Jacobians were fitted in leaves the H18b verdict where it stands,
+SUPPORTED at exactly four of the six band layers, but it changes which four,
+it divides every share by between 6.7 and 35.8, and it reverses the
+cross-check that section 3.4 called the stronger half of this result. A review of the pull request raised the possibility on 2026-09-06 and
+the numbers below are the answer, measured rather than argued. **Nothing here
+changes a registered verdict.** Section 6.3 item 5 puts the choice of frame to
+the operator, because rule R8 reserves it.
+
+**What the two frames are, in plain terms.** A model's internal activity is a
+list of 768 numbers per position, and there is more than one convention for
+writing that list down. TransformerLens, the instrumentation library this
+project uses to reach inside a model, rewrites a model's weights into its own
+convention when it loads one. Three scripts here load the two models the same
+way, `run_loop.py` for the loop, `verify_model.py` for the provenance check and
+`run_jspace.py` for the states this probe decomposes, and all three call
+`HookedTransformer.from_pretrained("gpt2", hf_model=..., tokenizer=...,
+device="cpu")` and pass none of that function's processing options, so the
+library's defaults apply. Read from the installed library on 2026-09-06 and
+recorded in `output/frame_check.json`, those defaults are `fold_ln` true,
+`center_writing_weights` true, `center_unembed` true and `fold_value_biases`
+true. The twin's lens, by contrast, was fitted by `jlens.from_hf` against the
+Hugging Face model as downloaded, with no rewriting at all. So the lens matrices
+speak the Hugging Face convention and the states and the dictionary the probe
+built speak the TransformerLens one.
+
+**How far apart the two unembeddings are.** The dictionary is built as
+`W_U^T J_l`, so the choice of unembedding matrix `W_U`, the matrix that turns
+internal activity into a score for every one of the 50,257 or 50,258
+vocabulary tokens, decides every direction in it. Comparing the matrix the
+probe used with the model's own output matrix, generated into `output/tables.md`
+under "The two frames, measured":
+
+| model | difference relative to the Hugging Face matrix | common shift length over mean direction length | fraction of the difference left after removing the common shift | per-token cosine, median | final normalisation gain, smallest to largest |
+|---|---|---|---|---|---|
+| base | 0.6823 | 0.5184 | 0.6554 | 0.8135 | 0.0044 to 17.4193 |
+| twin | 0.6845 | 0.5205 | 0.6548 | 0.8128 | 0.0103 to 17.3652 |
+
+Reading that row by row. The difference between the two matrices is 68 percent
+of the size of the Hugging Face matrix itself, on a scale where 0 would mean
+the two are identical, so this is not a small perturbation. The one vector by
+which every token's direction is shifted has 52 percent of the length of a
+typical direction, which is large, but removing that common shift still leaves
+65 percent of the difference, so the difference is not mainly a shift. The
+median angle between a token's direction in the two matrices has a cosine of
+0.81, where 1 would mean the same direction and 0 would mean at right angles.
+**Established by direct reconstruction:** the TransformerLens matrix is the
+Hugging Face matrix with each of the 768 coordinates multiplied by the final
+normalisation step's learned gain, then the mean over the coordinates removed
+from each token's direction, then the mean over the vocabulary removed from
+each coordinate. Rebuilding it that way reproduces it to a relative error of
+2.0e-07, that is two parts in ten million. The gain is the reason the two
+differ so much: it runs from 0.0044 to 17.42 across the 768 coordinates, so
+folding it in stretches some coordinates by a factor of seventeen and flattens
+others almost to nothing.
+
+**Whether the states are in centred coordinates: yes, and it does not matter
+here.** `center_writing_weights` makes every write into the internal state
+average to zero across the 768 coordinates, so the states this probe read are
+mean-centred by construction, which is the same thing EXP_011 recorded about
+its own states. Measured on the first five prompts at one layer inside the band
+and one outside it:
+
+| model | layer | mean state length | largest mean over coordinates, TransformerLens | largest mean over coordinates, Hugging Face | gap length over state length |
+|---|---|---|---|---|---|
+| base | 0 | 665.8 | 3.81e-07 | 0.0325 | 0.0007 |
+| base | 5 | 1128.4 | 3.91e-07 | 1.0229 | 0.0244 |
+| twin | 0 | 634.3 | 5.22e-07 | 0.0238 | 0.0004 |
+| twin | 5 | 723.2 | 4.33e-07 | 0.3526 | 0.0130 |
+
+The TransformerLens states average to at most 5.2e-07 across their 768
+coordinates against state lengths of 634 to 1,128, which is zero to
+floating-point noise, and the Hugging Face states do not. The two frames'
+states differ by one and the same number added to all 768 coordinates, to
+within 7.4e-04 on states of that length, and that difference is worth between
+0.04 percent and 2.4 percent of a state's own length. **Established from this
+run: the state half of the frame mismatch is negligible and the dictionary half
+is not.**
+
+**What it does to the share, on a subset first.** Five prompts per model, real
+dictionaries only, one layer inside the verdict-bearing band and one outside:
+
+| layer | combination | twin median | base median | absolute difference |
+|---|---|---|---|---|
+| 0 | committed states and dictionary | 0.3729 | 0.2999 | 0.0730 |
+| 0 | committed states, Hugging Face dictionary | 0.0323 | 0.0279 | 0.0043 |
+| 0 | Hugging Face states and dictionary | 0.0323 | 0.0279 | 0.0043 |
+| 5 | committed states and dictionary | 0.2828 | 0.1368 | 0.1460 |
+| 5 | committed states, Hugging Face dictionary | 0.0348 | 0.0098 | 0.0250 |
+| 5 | Hugging Face states and dictionary | 0.0348 | 0.0098 | 0.0250 |
+
+Swapping the dictionary alone moves the share by 0.34 and 0.27 at layer 0 and
+by 0.25 and 0.13 at layer 5, on the 0 to 1 share scale, which is far larger
+than any effect this experiment reports. Swapping the states as well changes
+nothing to four decimal places, which is the same finding as the table above
+seen from the other side.
+
+**The full recomputation.** The committed probe took 160 seconds of one
+processor thread, so recomputing everything in the consistent frame was cheap
+and was run rather than estimated. It took 114 seconds and wrote
+`output/exp017_jspace_hfframe.json`, which is stamped as a sensitivity reading
+and carries no verdict weight. Generated into `output/tables.md` under "H18b in
+the Hugging Face frame":
+
+| layer | twin median share | base median share | absolute difference | control spread | permutation p | both conditions | band |
+|---|---|---|---|---|---|---|---|
+| 0 | 0.0328 | 0.0309 | 0.0019 | 0.0085 | 0.0007 | no | no |
+| 1 | 0.0562 | 0.0442 | 0.0120 | 0.0272 | 0.0001 | no | no |
+| 2 | 0.0308 | 0.0258 | 0.0049 | 0.0093 | 0.0001 | no | no |
+| 3 | 0.0272 | 0.0159 | 0.0113 | 0.0046 | 0.0001 | yes | no |
+| 4 | 0.0247 | 0.0153 | 0.0094 | 0.0153 | 0.0001 | no | no |
+| 5 | 0.0345 | 0.0217 | 0.0127 | 0.0119 | 0.0001 | yes | yes |
+| 6 | 0.0327 | 0.0150 | 0.0176 | 0.0166 | 0.0001 | yes | yes |
+| 7 | 0.0396 | 0.0197 | 0.0199 | 0.0136 | 0.0001 | yes | yes |
+| 8 | 0.0327 | 0.0152 | 0.0175 | 0.0076 | 0.0001 | yes | yes |
+| 9 | 0.0253 | 0.0179 | 0.0073 | 0.0095 | 0.0001 | no | yes |
+| 10 | 0.0087 | 0.0158 | 0.0071 | 0.0084 | 0.0001 | no | yes |
+
+**Four of the six band layers meet both conditions in this frame as well, so
+the mechanical H18b verdict is the same, but they are layers 5, 6, 7 and 8
+rather than layers 6, 7, 9 and 10.** The share levels are much lower: across
+the six band layers the twin's median share runs from 0.0087 to 0.0396 here
+against 0.2851 to 0.3221 in the registered frame, and base's from 0.0150 to
+0.0217 against 0.2538 to 0.2964. The registered pairing still has the twin
+above base at ten of the eleven layers; at layer 10 it reverses, the twin
+reading 0.0087 against base's 0.0158.
+
+**The cross-check does not survive the change of frame, and that is the serious
+part.** Holding the lens fixed and swapping only whose states are decomposed,
+which section 3.4 used to argue that the difference is a property of the models
+rather than of the instrument:
+
+| layer | registered frame, base lens | registered frame, twin lens | Hugging Face frame, base lens | Hugging Face frame, twin lens |
+|---|---|---|---|---|
+| 0 | +0.0856 (p 0.0001) | +0.0889 (p 0.0001) | +0.0022 (p 0.0004) | -0.0062 (p 0.0001) |
+| 1 | +0.0778 (p 0.0001) | +0.0821 (p 0.0001) | +0.0039 (p 0.0004) | +0.0046 (p 0.0002) |
+| 2 | +0.0603 (p 0.0001) | +0.0584 (p 0.0001) | -0.0016 (p 0.0005) | +0.0006 (p 0.0226) |
+| 3 | +0.0512 (p 0.0001) | +0.0462 (p 0.0001) | -0.0018 (p 0.0005) | -0.0018 (p 0.0003) |
+| 4 | +0.0422 (p 0.0001) | +0.0443 (p 0.0001) | -0.0034 (p 0.0001) | -0.0015 (p 0.0001) |
+| 5 | +0.0364 (p 0.0001) | +0.0334 (p 0.0001) | -0.0057 (p 0.0002) | -0.0012 (p 0.0003) |
+| 6 | +0.0362 (p 0.0001) | +0.0343 (p 0.0001) | -0.0040 (p 0.0002) | -0.0020 (p 0.0001) |
+| 7 | +0.0329 (p 0.0001) | +0.0364 (p 0.0001) | -0.0045 (p 0.0002) | -0.0030 (p 0.0001) |
+| 8 | +0.0252 (p 0.0001) | +0.0202 (p 0.0001) | -0.0043 (p 0.0001) | -0.0120 (p 0.0001) |
+| 9 | +0.0360 (p 0.0001) | +0.0316 (p 0.0001) | -0.0041 (p 0.0001) | -0.0122 (p 0.0001) |
+| 10 | +0.0167 (p 0.0001) | +0.0205 (p 0.0001) | -0.0009 (p 0.0151) | -0.0018 (p 0.0001) |
+
+A positive number means the twin's settled states have the higher share. In the
+registered frame the twin is higher in all twenty-two comparisons, by 0.0167 to
+0.0889. In the Hugging Face frame the twin is higher in four of the twenty-two
+and lower in the other eighteen, by up to 0.0122, and the largest gap in either
+direction, 0.0122, is smaller than the smallest gap the registered frame
+reports, 0.0167. The ratio that section 3.4 leant on turns over with it: the
+smallest model effect divided by the largest instrument effect runs from 3.1 to
+12.7 times in the registered frame and from 0.1 to 0.5 times in the Hugging
+Face frame, so in that frame the choice of lens moves the share more than the
+choice of model does.
+
+**The rotation-control finding of section 3.5 survives in weakened form.** In
+the Hugging Face frame base's settled states fall below their own rotation
+control from layer 3 onward, one layer earlier than in the registered frame,
+and the twin's states sit above their control at layers 0, 1, 2, 3, 5, 7 and 8
+and below it at layers 4, 6, 9 and 10, where in the registered frame the twin
+was above at every layer but the last. The full table is in `output/tables.md`
+under "Real minus its own rotation control, Hugging Face frame".
+
+**What is established, and what is not.** Established from this run: the two
+frames give different J-space shares, by far more than any difference this
+experiment reports between the two models; the H18b verdict as the spec's
+scoring rule defines it is SUPPORTED at four of six band layers in both frames;
+and the same-lens cross-check that the registered frame reports does not hold
+in the other frame. Inferred, not established: because the Jacobian matrices
+were fitted against the unrewritten model, the Hugging Face frame is the
+self-consistent one, and a reader who wants the share to mean "how much of the
+state is built from directions that raise a token's score" should prefer it.
+Speculation, offered so it can be tested rather than believed: the registered
+frame's much higher shares come from its dictionary having the vocabulary mean
+removed, which spreads the directions out and widens the cone they span, and
+that is a geometric property of the dictionary rather than a fact about the
+model. **Not established either way:** which frame this project should register
+for J-space work. Both readings have an argument. The lens's own readout applies
+the final normalisation before the unembedding, which is the argument for
+folding the gain in as the registered frame does; the matrices being decomposed
+were fitted without it, which is the argument for the Hugging Face frame. The
+spec's section 6.4 says only "the model's unembedding matrix" and does not
+choose.
+
+**How this relates to EXP_011.** The EXP_011 results record,
+`experiments/exp_011_small_overlap/RESULTS_EXP011.md` on its own branch,
+records the same class of mismatch as its deviation 2 and its decision item 4:
+its states were mean-centred by the same loader defaults while its dictionary
+was built from the Hugging Face unembedding, and it states that how much that
+moves the shares is unmeasured. This experiment's case is related but not
+identical, and the difference matters. EXP_011's dictionary is the Hugging Face
+one, so its mismatch is the state half alone; this experiment's dictionary is
+the TransformerLens one, so it carries the final normalisation gain that
+EXP_011 explicitly left out and recorded as a limitation, and its mismatch is
+the dictionary half as well. Marked as inference for EXP_011 rather than
+established, because the states, the lens and the prompts all differ: the half
+EXP_011 left unmeasured is the half that turns out not to matter here, moving
+the share by nothing at four decimal places, so EXP_011's unmeasured deviation
+is probably small in its own setting too.
+
 ## 4. Deviations
 
 Recorded flat, whether or not they change a verdict, per the folder rule. The
-first four were written into the spec before any run, with their reasons; the
-rest arose during the run.
+first four were written into the spec before any run, with their reasons.
+Deviations 5 to 9 arose during the run. Deviations 10 to 18 were found after it
+by reviews of the pull request, on 2026-09-05 for 10 to 14 and on 2026-09-06 for
+15 to 18, and each names what was found and what changed in response. None of
+them was found by the run itself, which is worth saying plainly: this record's
+own checks did not catch them.
 
 1. **The provenance check and the lens-fit timing probe ran before the spec was
    committed** (spec section 9.1). The provenance check establishes what the
@@ -745,7 +990,10 @@ rest arose during the run.
    to surface coding errors cheaply and carries no verdict weight. Its output is
    `output/exp017_jspace_harness.json` and the registered run neither reads it
    nor overwrites it. This is the same pattern EXP_010b used for its
-   `small_smoke` tier.
+   `small_smoke` tier. **Correction, 2026-09-06, withdrawing the "200 shuffles"
+   in the sentence above:** that harness check asked for 200 shuffles and ran
+   10,000. Deviation 16 records why, what the committed artifact therefore
+   holds, and the re-run that shows the difference.
 9. **A lens-quality sensitivity check ran after the registered comparison**,
    repeating the whole probe with the five-prompt probe lens in place of the
    40-prompt lens. It was not pre-registered. It changes no verdict and no
@@ -835,6 +1083,118 @@ rest arose during the run.
     117 tokens and 100 valid positions. That establishes the committed file is
     the corpus the committed lens was fitted on.
 
+15. **The dictionary the J-space probe decomposed against was built in the
+    TransformerLens coordinate convention, while the lens matrices it is built
+    from were fitted in the Hugging Face one.** Found by a review of the pull
+    request on 2026-09-06, after the run. The probe builds each layer's
+    dictionary as `W_U^T J_l`, taking `W_U`, the matrix that turns internal
+    activity into a score for every vocabulary token, from the TransformerLens
+    conversion of the model, whose default processing folds the final
+    normalisation step's learned per-coordinate gain into it and then subtracts
+    a common vector from every token's direction. The matrices `J_l` were
+    fitted by `jlens.from_hf` against the Hugging Face model, which has no such
+    processing. The two versions of the unembedding differ by 68 percent of the
+    size of the Hugging Face matrix, and the resulting shares differ by far
+    more than anything this experiment reports between the two models. Section
+    3.6 measures all of it and gives the whole comparison recomputed in the
+    fitting convention, which was cheap enough to run rather than estimate:
+    `output/exp017_jspace_hfframe.json`, 114 seconds, written by
+    `run_jspace.py --frame hf` and stamped as a sensitivity reading with no
+    verdict weight. The mechanical H18b verdict is the same in both
+    conventions, SUPPORTED at four of the six band layers, on layers 5, 6, 7
+    and 8 there against 6, 7, 9 and 10 here; the same-lens cross-check of
+    section 3.4 reverses, and that sentence has been withdrawn by name in
+    section 3.4. `run_jspace.py` now takes the convention as an option, refuses
+    to call anything but the registered one a registered comparison, and
+    records which one produced every artifact. **No committed number was
+    recomputed away and no verdict was changed here:** the choice of registered
+    convention is decision item 5 in section 6.3, reserved for the operator
+    under rule R8.
+
+16. **The harness check asked for 200 shuffles and ran 10,000, and its
+    committed artifact records the number it asked for.** Found by the same
+    review. `run_jspace.py` took the shuffle count as a default argument, which
+    Python evaluates once when the file is read rather than each time the
+    function runs, so `harness_check_jspace.py` setting it to 200 had no
+    effect. The count written into the artifact was read separately, at run
+    time, so `output/exp017_jspace_harness.json` says `n_perm: 200` while the
+    permutation p values in it, all 0.0001, are the floor of a 10,000-shuffle
+    test rather than the 0.00498 floor of a 200-shuffle one. Nothing registered
+    is affected: the registered run asked for 10,000 and ran 10,000, and
+    `output/exp017_jspace.json` records 10,000. The count is now resolved when
+    the test runs, `run_jspace.py --selftest` checks that lowering it really
+    lowers the number of shuffles, and the harness was re-run with the fix to a
+    new file, `output/exp017_jspace_harness_p200.json`, so that the committed
+    artifact is not overwritten. **The re-run is the evidence, not the claim:**
+    it reproduces both layers' shares to four decimal places, its p values are
+    0.00498 where the committed ones are 0.0001, and it took 48 seconds against
+    the committed run's 209 seconds, a fall of 161 seconds that is the 9,800
+    shuffles per comparison that are no longer being run.
+
+17. **The lens fit's wall-clock cap was checked before every prompt and never
+    after the last one.** Found by the same review. Deviation 10 added a
+    deadline that refuses to start a prompt whose predicted cost would cross
+    the 9,000 second cap, and the prediction is a cost per prompt measured on a
+    five-prompt probe, so a prompt that runs slower than predicted could return
+    after the cap with every prompt consumed and the fit would have been
+    written out under the registered name. `fit_twin_lens.py` now reads the
+    clock again after each chunk returns and treats a wall time past the cap as
+    a stopped fit, which writes the partial lens to a separate file whose name
+    carries the count it reached and exits with code 3, the signal for the
+    spec's section 6.2 fallback. Its `--selftest` drives that case through the
+    fitting loop on a fake clock: thirty-nine prompts at the predicted 221
+    seconds and a fortieth at 1,000 seconds gives all 40 prompts consumed in
+    9,619 seconds against the 9,000 second cap, and the fit is scored as
+    stopped. **The committed lens is unaffected, and this is measured rather
+    than assumed:** the committed fit computed its 35 prompts in 8,253 seconds
+    against the cap, that is 92 percent of it, so the new check would have
+    passed it unchanged, and the self-test replays exactly that.
+
+18. **Neither a fit checkpoint nor a finished lens file said which model or
+    which corpus it came from, and now both do.** Found by the same review. A
+    checkpoint holds running sums of Jacobian matrices and the instrument's own
+    file format records only their shape, so a checkpoint built with
+    `--model-path` pointing at a local checkout, or with
+    `--allow-different-prompts`, would have seeded the registered fit with sums
+    from another model or another corpus and the shape check would have passed
+    it. The same gap existed one step later: `run_jspace.py` admitted any lens
+    whose prompt count met the budget, including one fitted on a different
+    768-wide model. Every fit now writes a provenance sidecar beside its
+    checkpoint, `CHECKPOINT.provenance.json`, holding the model repository, the
+    pinned revision, the corpus file and its SHA-256 digest, whether the digest
+    was enforced, and the sequence and layer settings, and stamps the same
+    record inside the lens file it saves. Seeding compares those fields and
+    refuses a mismatch; the probe compares them against the pinned twin
+    revision and the digest of the committed corpus file, hashed at run time so
+    that no digest is copied out to drift.
+
+    **What the committed artifacts establish about themselves, exactly.** Both
+    predate the stamp and carry none, so the honest answer is that the files
+    themselves establish nothing about their origin and the evidence is
+    elsewhere. For the five-prompt probe checkpoint
+    `jlens_lamini_gpt2_124m_5_probe.ckpt.pt`: its own run log
+    `output/fit_probe_db16.log` records `model=MBZUAI/LaMini-GPT-124M` on its
+    first line and the loader's report of that repository below it, the
+    checkpoint's stored settings are this experiment's own, source layers 0 to
+    10 with target layer 11 and 16 leading positions skipped, and deviation 14
+    establishes the corpus by passing all 40 prompts of the committed
+    `wikitext_prompts_160.json` through the instrument's encoder and
+    reproducing the sequence length and valid-position count that log records
+    for every one of the five prompts it fitted. What no log records is the
+    weight revision, because the probe ran before the revisions were pinned;
+    `output/model_verification.json` establishes which revision was on the
+    machine that day, the twin at `fc740804ff49f50fe3ef871b31eb2d5a5584132c`,
+    and that is inference from same-day provenance rather than a record the
+    checkpoint carries. For the lens `jlens_lamini_gpt2_124m_40_twin.pt` the
+    position is the same, with `output/fit_twin.log` in place of the probe's
+    log. **So both are admitted only by an explicit option, and both options
+    are recorded where they are used:** `fit_twin_lens.py
+    --accept-unstamped-checkpoint` writes the acceptance into the sidecar it
+    leaves behind, and `run_jspace.py --accept-unstamped-twin-lens` writes it
+    into the output artifact under `twin_lens_provenance`. Section 8 names both
+    in the reproduction commands, so the documented route still runs on the
+    committed files.
+
 ## 5. H18b verdict: **SUPPORTED, at exactly the pre-registered threshold**
 
 The registered wording asks whether post-training changes the settled states'
@@ -873,6 +1233,24 @@ absolute level carries no evidence of verbalizable content for base. It also
 does not establish a mechanism: a 3 percent weight change produced both this
 and the wholesale replacement of the readout vocabulary, and nothing here
 separates cause from coincidence between the two.
+
+**Added 2026-09-06, and it weakens the paragraph above.** Everything in this
+section was measured with the states and the dictionary read from the
+TransformerLens conversion of each model, while the lens matrices they are built
+from were fitted against the unconverted Hugging Face model. Section 3.6
+recomputes the whole comparison in the fitting convention. The verdict does not
+move: SUPPORTED, at four of the six band layers, at exactly the same bar, on
+layers 5, 6, 7 and 8 rather than 6, 7, 9 and 10. The stronger half does move,
+and against the direction this section argues: the same-lens cross-check has the
+twin above base in four of the twenty-two comparisons there rather than all
+twenty-two, and the model effect is 0.1 to 0.5 times the instrument effect
+rather than 3.1 to 12.7 times it. **So the honest summary of H18b is now
+narrower than the one above.** The mechanical verdict is robust to the
+convention and still sits on its threshold; the claim that the difference is a
+model property rather than an instrument property is not robust to it, and
+holds only in the convention this run measured. Which convention this project
+registers for J-space work is decision item 5 in section 6.3, and rule R8
+reserves it for the operator.
 
 ## 6. What it means, what remains, and what needs the operator's decision
 
@@ -944,6 +1322,13 @@ departures from a verified baseline.
    EXP_015 asked of Medium.
 5. **H18b sits on its threshold.** A second post-trained model, or a larger
    prompt set, would move it off the knife edge in one direction or the other.
+6. **Which coordinate convention the J-space share should be measured in is
+   open, and it changes the share by more than any model difference this
+   experiment reports.** Section 3.6 measures both and section 6.3 item 5 asks
+   for a ruling. What remains after a ruling is small in compute and large in
+   consequence: whichever convention is chosen, EXP_011's committed numbers, the
+   Medium record's and this one's should be stated in it, and the two that were
+   measured in the other one should say so.
 
 ### 6.3 What needs the operator's decision
 
@@ -980,6 +1365,37 @@ departures from a verified baseline.
    H16b, which EXP_011 is testing on a different comparison. Whether to charter
    a direct test, or to let EXP_011 carry it, is an allocation decision.
 
+5. **Which coordinate convention is the registered one for J-space work?** This
+   is the largest open question this record carries. The J-space share is
+   the fraction of a settled state that can be built from at most 25
+   vocabulary directions, and
+   the directions are `W_U^T J_l`, so the answer depends on which version of
+   the unembedding matrix `W_U` is used. This run used the TransformerLens
+   conversion's version, which folds the model's final normalisation gain into
+   every direction and then subtracts a common vector; the lens matrices `J_l`
+   were fitted against the Hugging Face model, whose version does neither. The
+   two give shares that differ by a factor of between 7.7 and 35.8 at the six
+   band layers, which is far larger than any difference this experiment
+   reports between the two models. Section 3.6 has the numbers and the argument
+   on each side: the lens's own readout applies the final normalisation before
+   the unembedding, which favours the converted version, and the matrices being
+   decomposed were fitted without it, which favours the Hugging Face version.
+   The spec's section 6.4 says only "the model's unembedding matrix" and does
+   not choose, so this is not a departure from the spec but a gap in it.
+   **What hangs on it beyond this experiment:** EXP_011 measured its shares
+   with the Hugging Face version against states from the converted model and
+   recorded the mismatch as its deviation 2 with the effect unmeasured, and
+   H19b in EXP_018 will inherit whichever convention is settled. **Cost of
+   acting either way, from this run's own logs:** recomputing this experiment
+   in the other convention took 114 seconds, so nothing here is expensive.
+   **Recommendation, offered not taken:** register the Hugging Face convention,
+   because it is the one the lens matrices were fitted in and the one EXP_011
+   built its dictionary from, and have this record's section 3.6 numbers stand
+   as the registered H18b reading if that is the ruling. **No verdict has been changed
+   in anticipation of it:** the register rows proposed in `REGISTER_VERDICTS.md`
+   still carry the numbers this run measured, with the other convention's
+   numbers beside them.
+
 ## 7. Artifacts
 
 All paths relative to this directory.
@@ -1000,6 +1416,19 @@ All paths relative to this directory.
   cross-checks. `output/exp017_jspace_lens5.json` is the lens-quality
   sensitivity check and `output/exp017_jspace_harness.json` the non-registered
   harness check; neither carries verdict weight.
+- `output/exp017_jspace_hfframe.json`: the whole H18b computation repeated in
+  the coordinate convention the lens matrices were fitted in, written on
+  2026-09-06 by `run_jspace.py --frame hf`. It is stamped as a sensitivity
+  reading, carries no verdict weight, and is the evidence behind section 3.6.
+- `output/frame_check.json`: the measurement of how far apart the two
+  coordinate conventions are, in the unembedding matrix and in the states, and
+  the share on five prompts under each. Written by `frame_check.py`, no verdict
+  weight.
+- `output/exp017_jspace_harness_p200.json`: the harness check re-run on
+  2026-09-06 with the shuffle count actually taking effect, written to its own
+  file so that the committed `output/exp017_jspace_harness.json` is preserved
+  as the record of what ran on 2026-09-05. Deviation 16 explains the difference
+  between the two.
 - `output/fit_budget_decision.json`: the mechanical application of the spec's
   budget rule to the timing probe.
 - `output/tables.md`: every table in this record, generated from the JSON.
@@ -1011,8 +1440,9 @@ All paths relative to this directory.
 - Scripts: `verify_model.py`, `run_loop.py`, `exp017_partition.py`,
   `fit_twin_lens.py`, `choose_fit_budget.py`, `lens_from_checkpoint.py`,
   `jspace.py`, `run_jspace.py`, `harness_check_jspace.py`, `make_tables.py`,
-  and `exp017_models.py`, which holds the two repository names and the two
-  pinned revisions that every other script loads its weights at.
+  `frame_check.py`, which measures the two coordinate conventions against each
+  other, and `exp017_models.py`, which holds the two repository names and the
+  two pinned revisions that every other script loads its weights at.
 - `wikitext_prompts_160.json`: the 160 WikiText-103 prompts the twin's lens was
   fitted on, committed so that a rerun cannot quietly fit a different corpus.
 - `REGISTER_VERDICTS.md`: proposed register rows for the orchestrator's sweep.
@@ -1071,8 +1501,13 @@ no timing written down, so none is given here.
    probe, 1,105 seconds for 5 prompts, that is 18 minutes
    (`output/fit_probe_db16.log`); then `python3 choose_fit_budget.py`, which
    applies the spec's budget rule to it; then `python3 fit_twin_lens.py --n 40
-   --dim-batch 16 --tag twin`, the lens fit, 8,253 seconds for the 35 prompts
-   it computed, that is 2 hours 18 minutes (`output/fit_twin.log`).
+   --dim-batch 16 --tag twin --accept-unstamped-checkpoint`, the lens fit,
+   8,253 seconds for the 35 prompts it computed, that is 2 hours 18 minutes
+   (`output/fit_twin.log`). The last option is needed only against the
+   committed probe checkpoint, which predates the provenance sidecar described
+   in deviation 18 and so says nothing about which model or corpus it came
+   from; a probe run today writes that sidecar and the fit then continues it
+   with no option at all.
 
    **The order matters, and so does the reuse.** The 40-prompt lens is not 40
    prompts of fresh work. The probe fits the first 5 prompts of the same list in
@@ -1093,18 +1528,47 @@ no timing written down, so none is given here.
    corpus digest and the checkpoint reuse; and `python3 run_jspace.py
    --selftest`, the twin lens budget gate. All three are expected to print ALL
    PASS, and none of them loads a model.
-6. `python3 run_jspace.py --twin-lens ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt`,
-   the J-space probe, 160 seconds, that is under 3 minutes (the `wall_seconds`
-   field of `output/exp017_jspace.json`). The probe checks the twin lens against
-   the prompt count the budget rule chose and refuses to score a shorter one as
-   the registered comparison. Omitting `--twin-lens`, or offering a lens the
-   check refuses, runs the spec's section 6.2 fallback, scoring both sides on
-   the base lens. The lens-quality sensitivity check of deviation 9 passes
-   `--allow-short-twin-lens` on purpose and its output is stamped as a
-   sensitivity reading.
+6. `python3 run_jspace.py --twin-lens
+   ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt
+   --accept-unstamped-twin-lens`, the J-space probe, 160 seconds, that is under
+   3 minutes (the `wall_seconds` field of `output/exp017_jspace.json`). The
+   probe checks the twin lens twice: against the prompt count the budget rule
+   chose, refusing to score a shorter one as the registered comparison, and
+   against the provenance stamp described in deviation 18, refusing to score an
+   unstamped one unless the second option above says so, which is then written
+   into the output under `twin_lens_provenance`. The committed lens predates the
+   stamp, so the documented command carries that option; a lens fitted today
+   carries the stamp and needs no option. Omitting `--twin-lens`, or offering a
+   lens either check refuses, runs the spec's section 6.2 fallback, scoring both
+   sides on the base lens. The lens-quality sensitivity check of deviation 9
+   passes `--allow-short-twin-lens` on purpose and its output is stamped as a
+   sensitivity reading. **Re-running this command on 2026-09-06 with the
+   current code reproduced every number in the committed
+   `output/exp017_jspace.json` exactly, to the last digit of every share, every
+   control and every permutation p; the scratch copy was compared field by
+   field and then deleted rather than committed.**
 7. `python3 make_tables.py`, which regenerates `output/tables.md` from the JSON
    so that no number in this record is hand-copied.
+8. Added 2026-09-06, and neither step carries verdict weight. `python3
+   frame_check.py` measures the two coordinate conventions against each other
+   and writes `output/frame_check.json`, 73 seconds. `python3 run_jspace.py
+   --frame hf --out-suffix _hfframe --accept-unstamped-twin-lens --twin-lens
+   ../../artifacts/jlens_lamini_gpt2_124m_40_twin.pt` repeats the whole
+   comparison in the convention the lens matrices were fitted in and writes
+   `output/exp017_jspace_hfframe.json`, 114 seconds. Both feed section 3.6, and
+   `make_tables.py` renders them into `output/tables.md` alongside the
+   registered tables. `python3 harness_check_jspace.py _harness_p200` re-runs
+   the cheap harness check with the shuffle count taking effect, 48 seconds,
+   writing to its own file so that the committed harness artifact stands.
 
 **EXP_017 COMPLETE. H18: SUPPORTED. H18a: REFUTED. H18b: SUPPORTED at exactly
-the pre-registered threshold, with the cross-check carrying the substantive
-claim.**
+the pre-registered threshold, in both coordinate conventions, on different band
+layers in each, and with the cross-check that section 3.4 offered as the
+substantive claim holding in one convention only.**
+
+**Amended 2026-09-06.** Until that date this closing line read "H18b: SUPPORTED
+at exactly the pre-registered threshold, with the cross-check carrying the
+substantive claim". The second half of that is withdrawn: section 3.6 shows the
+cross-check reverses when the same comparison is measured in the convention the
+lens matrices were fitted in, and section 3.4 carries the retraction in full.
+The verdict itself is unchanged and is unchanged in both conventions.

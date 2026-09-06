@@ -183,3 +183,102 @@ The model effect holds the lens fixed and swaps whose settled states are decompo
 | 10 | 47.433 | 48.344 | 0.9858 |
 
 Terminal rescale to the injection size before the per-layer read: {'twin': {'mean': 0.26926812887461105, 'min': 0.22363734806432856, 'max': 0.30540938680290775}, 'base': {'mean': 0.2813683065740832, 'min': 0.22874313599891785, 'max': 0.32863265980461226}}
+
+
+## H18b in the Hugging Face frame, a sensitivity arm with no verdict weight
+
+- Reading: **SUPPORTED as a sensitivity reading only, NOT the registered comparison: this run measured states and dictionary in the hf frame, and every registered number was measured in the tl frame** (4 of the 6 band layers meet both conditions: [5, 6, 7, 8]).
+
+| layer | twin median share | base median share | absolute difference | control spread | permutation p | both conditions | band |
+|---|---|---|---|---|---|---|---|
+| 0 | 0.0328 | 0.0309 | 0.0019 | 0.0085 | 0.0007 | no | no |
+| 1 | 0.0562 | 0.0442 | 0.0120 | 0.0272 | 0.0001 | no | no |
+| 2 | 0.0308 | 0.0258 | 0.0049 | 0.0093 | 0.0001 | no | no |
+| 3 | 0.0272 | 0.0159 | 0.0113 | 0.0046 | 0.0001 | yes | no |
+| 4 | 0.0247 | 0.0153 | 0.0094 | 0.0153 | 0.0001 | no | no |
+| 5 | 0.0345 | 0.0217 | 0.0127 | 0.0119 | 0.0001 | yes | yes |
+| 6 | 0.0327 | 0.0150 | 0.0176 | 0.0166 | 0.0001 | yes | yes |
+| 7 | 0.0396 | 0.0197 | 0.0199 | 0.0136 | 0.0001 | yes | yes |
+| 8 | 0.0327 | 0.0152 | 0.0175 | 0.0076 | 0.0001 | yes | yes |
+| 9 | 0.0253 | 0.0179 | 0.0073 | 0.0095 | 0.0001 | no | yes |
+| 10 | 0.0087 | 0.0158 | 0.0071 | 0.0084 | 0.0001 | no | yes |
+
+### The same-lens comparison in the two frames
+
+The model effect holds the lens fixed and swaps whose settled states are decomposed, so a positive number means the twin's states have the higher share. The registered frame is the TransformerLens one; the Hugging Face frame is the sensitivity arm.
+
+| layer | registered frame, base lens | registered frame, twin lens | Hugging Face frame, base lens | Hugging Face frame, twin lens |
+|---|---|---|---|---|
+| 0 | +0.0856 (p 0.0001) | +0.0889 (p 0.0001) | +0.0022 (p 0.0004) | -0.0062 (p 0.0001) |
+| 1 | +0.0778 (p 0.0001) | +0.0821 (p 0.0001) | +0.0039 (p 0.0004) | +0.0046 (p 0.0002) |
+| 2 | +0.0603 (p 0.0001) | +0.0584 (p 0.0001) | -0.0016 (p 0.0005) | +0.0006 (p 0.0226) |
+| 3 | +0.0512 (p 0.0001) | +0.0462 (p 0.0001) | -0.0018 (p 0.0005) | -0.0018 (p 0.0003) |
+| 4 | +0.0422 (p 0.0001) | +0.0443 (p 0.0001) | -0.0034 (p 0.0001) | -0.0015 (p 0.0001) |
+| 5 | +0.0364 (p 0.0001) | +0.0334 (p 0.0001) | -0.0057 (p 0.0002) | -0.0012 (p 0.0003) |
+| 6 | +0.0362 (p 0.0001) | +0.0343 (p 0.0001) | -0.0040 (p 0.0002) | -0.0020 (p 0.0001) |
+| 7 | +0.0329 (p 0.0001) | +0.0364 (p 0.0001) | -0.0045 (p 0.0002) | -0.0030 (p 0.0001) |
+| 8 | +0.0252 (p 0.0001) | +0.0202 (p 0.0001) | -0.0043 (p 0.0001) | -0.0120 (p 0.0001) |
+| 9 | +0.0360 (p 0.0001) | +0.0316 (p 0.0001) | -0.0041 (p 0.0001) | -0.0122 (p 0.0001) |
+| 10 | +0.0167 (p 0.0001) | +0.0205 (p 0.0001) | -0.0009 (p 0.0151) | -0.0018 (p 0.0001) |
+
+### Model effect over instrument effect, Hugging Face frame
+
+| layer | smallest model effect | largest instrument effect | ratio |
+|---|---|---|---|
+| 0 | 0.0022 | 0.0082 | 0.3 times |
+| 1 | 0.0039 | 0.0082 | 0.5 times |
+| 2 | 0.0006 | 0.0065 | 0.1 times |
+| 3 | 0.0018 | 0.0131 | 0.1 times |
+| 4 | 0.0015 | 0.0128 | 0.1 times |
+| 5 | 0.0012 | 0.0184 | 0.1 times |
+| 6 | 0.0020 | 0.0216 | 0.1 times |
+| 7 | 0.0030 | 0.0244 | 0.1 times |
+| 8 | 0.0043 | 0.0295 | 0.1 times |
+| 9 | 0.0041 | 0.0195 | 0.2 times |
+| 10 | 0.0009 | 0.0061 | 0.2 times |
+
+### Real minus its own rotation control, Hugging Face frame
+
+| layer | base states, base lens | twin states, twin lens | twin states, base lens | base states, twin lens |
+|---|---|---|---|---|
+| 0 | +0.0146 | +0.0222 | +0.0173 | +0.0264 |
+| 1 | +0.0154 | +0.0406 | +0.0191 | +0.0337 |
+| 2 | +0.0026 | +0.0123 | -0.0001 | +0.0078 |
+| 3 | -0.0066 | +0.0040 | -0.0129 | +0.0061 |
+| 4 | -0.0087 | -0.0027 | -0.0168 | +0.0020 |
+| 5 | -0.0015 | +0.0035 | -0.0132 | +0.0074 |
+| 6 | -0.0088 | -0.0047 | -0.0169 | +0.0001 |
+| 7 | -0.0023 | +0.0077 | -0.0109 | +0.0125 |
+| 8 | -0.0061 | +0.0059 | -0.0122 | +0.0180 |
+| 9 | -0.0010 | -0.0017 | -0.0058 | +0.0105 |
+| 10 | -0.0026 | -0.0141 | -0.0038 | -0.0132 |
+
+
+## The two frames, measured
+
+The unembedding the probe used against the model's own output matrix. The difference is given relative to the size of the Hugging Face matrix, and the common shift is the one vector that the two versions of every token direction differ by.
+
+| model | difference relative to the Hugging Face matrix | common shift length over mean direction length | fraction of the difference left after removing the common shift | per-token cosine, median | final normalisation gain, smallest to largest |
+|---|---|---|---|---|---|
+| base | 0.6823 | 0.5184 | 0.6554 | 0.8135 | 0.0044 to 17.4193 |
+| twin | 0.6845 | 0.5205 | 0.6548 | 0.8128 | 0.0103 to 17.3652 |
+
+The states in the two frames, at the layers measured. The mean over the 768 coordinates says whether a state is centred; the last column is how much of the state's own length the two frames differ by.
+
+| model | layer | mean state length | largest mean over coordinates, TransformerLens | largest mean over coordinates, Hugging Face | gap length over state length |
+|---|---|---|---|---|---|
+| base | 0 | 665.8 | 3.81e-07 | 0.0325 | 0.0007 |
+| base | 5 | 1128.4 | 3.91e-07 | 1.0229 | 0.0244 |
+| twin | 0 | 634.3 | 5.22e-07 | 0.0238 | 0.0004 |
+| twin | 5 | 723.2 | 4.33e-07 | 0.3526 | 0.0130 |
+
+The share on the first 5 prompts of the subset, real dictionaries only, in three combinations: the states and dictionary the committed run used, the same states against the Hugging Face dictionary, and the Hugging Face states against the Hugging Face dictionary.
+
+| layer | combination | twin median | base median | absolute difference |
+|---|---|---|---|---|
+| 0 | committed states and dictionary | 0.3729 | 0.2999 | 0.0730 |
+| 0 | committed states, Hugging Face dictionary | 0.0323 | 0.0279 | 0.0043 |
+| 0 | Hugging Face states and dictionary | 0.0323 | 0.0279 | 0.0043 |
+| 5 | committed states and dictionary | 0.2828 | 0.1368 | 0.1460 |
+| 5 | committed states, Hugging Face dictionary | 0.0348 | 0.0098 | 0.0250 |
+| 5 | Hugging Face states and dictionary | 0.0348 | 0.0098 | 0.0250 |
