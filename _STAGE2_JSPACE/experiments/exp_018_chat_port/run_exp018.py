@@ -16,14 +16,21 @@ Stages, in the order they are meant to run:
            revision at all, which is the state of both files committed with
            this experiment, needs `--assume-legacy-revision` before it will run
            anything further, because otherwise the prompts still to run would
-           go through whatever the cache pointer names today.
+           go through whatever the cache pointer names today. A resume with
+           nothing left to run says so and returns before the model is loaded,
+           so checking that a finished arm is finished costs seconds and needs
+           neither the weights nor the memory to hold them.
   states   Per-layer states for the J-space test (H19b): inject each settled
            tensor at the layer-0 entry and read every scored layer, and run the
            same prompts clean for the comparison arm. The precision is the one
            the loop recorded in its results file unless `--dtype` overrides it.
            The load is always pinned to one version of the weights, taken from
            `--revision` or from the revision the loop recorded; when neither
-           exists the stage stops rather than following the cache pointer.
+           exists the stage stops rather than following the cache pointer. The
+           two files this stage writes, the archive of tensors and the metadata
+           naming the weights they came from, carry one shared generation stamp
+           and are published together, so `analyze_jspace.py` can refuse a pair
+           that an interruption left half replaced.
   lagscan  Supplementary observation, no hypothesis attached: rerun a few
            prompts keeping every mean position vector, then report the average
            cosine between repetitions k apart for k = 1 to 8. Because it reruns
@@ -51,7 +58,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from qwen_port import (  # noqa: E402
-    LoopConfig, chat_wrap, free_gb, hook_names, load_model, make_injection_hook,
+    GENERATION_KEY, LoopConfig, chat_wrap, check_commit_revision, free_gb,
+    generation_stamp, hook_names, load_model, make_injection_hook,
     natural_profile, peak_gb, position_collapse, readout, resolve_revision,
     rss_gb, run_loop, tokenise, versions,
 )
@@ -80,23 +88,59 @@ def dtype_name(args) -> str:
     return args.dtype or DEFAULT_DTYPE
 
 
-def atomic_write(path: Path, write) -> None:
+def _tmp_name(path: Path, tag: str | None) -> Path:
+    """The temporary name a file is written under before it replaces its target.
+
+    The real suffix is kept because `numpy.savez_compressed` appends `.npz` to
+    any name that lacks it. `tag` makes the name specific to one run, so two
+    runs writing the same directory at once cannot write the same temporary
+    file and publish half of each other's work.
+    """
+    return path.with_name(f"{path.stem}.tmp{'.' + tag if tag else ''}"
+                          f"{path.suffix}")
+
+
+def atomic_write(path: Path, write, tag: str | None = None) -> None:
     """Write a file through a temporary name in the same directory, then rename.
 
     `write` is called with the temporary path. Renaming within one directory
     replaces the old file in a single step, so a crash part way through a write
     leaves the previous complete checkpoint in place instead of a half-written
-    file that a later resume would read as if it were whole. The temporary name
-    keeps the real suffix because `numpy.savez_compressed` appends `.npz` to
-    any name that lacks it.
+    file that a later resume would read as if it were whole.
     """
-    tmp = path.with_name(f"{path.stem}.tmp{path.suffix}")
+    tmp = _tmp_name(path, tag)
     try:
         write(tmp)
         tmp.replace(path)
     finally:
         if tmp.exists():
             tmp.unlink()
+
+
+def atomic_write_group(items: list, tag: str | None = None) -> None:
+    """Write several files that have to be read together, then publish them all.
+
+    `items` is a list of (path, write) pairs. Every file is written under its
+    own temporary name first, and only when all of them are complete are they
+    renamed onto their targets, one after another. That leaves a window of a
+    few microseconds in which some targets are new and some are old, because
+    two renames cannot be made one step; nothing here can close that window, so
+    the files themselves carry a shared generation stamp and the reader checks
+    it. What this does remove is the far longer window in which one file is
+    being written while another has already been published.
+    """
+    staged = []
+    try:
+        for path, write in items:
+            tmp = _tmp_name(path, tag)
+            write(tmp)
+            staged.append((tmp, path))
+        for tmp, path in staged:
+            tmp.replace(path)
+    finally:
+        for tmp, _ in staged:
+            if tmp.exists():
+                tmp.unlink()
 
 
 def load_prompts(n: int | None = None, arm: str = "bare",
@@ -244,9 +288,19 @@ def check_resume_compatible(prior: dict, arm: str, dtype: str, revision: str,
     `resume_revision_plan`, which runs before the model is loaded and either
     refuses the resume or takes the operator's confirmed legacy revision, so it
     is not reported again here.
+
+    `revision` may be None, which means this invocation is not going to load
+    any weights, so there is no revision of its own to compare and the field is
+    skipped and said to be skipped.
     """
     clashes, unknown = [], []
-    for name, now in (("dtype", dtype), ("model_revision", revision)):
+    fields = [("dtype", dtype)]
+    if revision is None:
+        print("resume: this invocation loads no weights, so the saved file's "
+              "weights revision has nothing to be compared against", flush=True)
+    else:
+        fields.append(("model_revision", revision))
+    for name, now in fields:
         before = prior.get(name)
         if before is None:
             if name != "model_revision":
@@ -335,11 +389,10 @@ def resume_revision_plan(saved: dict, arm: str, explicit: str | None,
             + (", itself confirmed by hand on an earlier resume rather than "
                "measured at the time" if was_assumed else ""))
     if not work_left:
-        print(f"resume: results_{arm}.json records no weights revision, and "
-              f"every prompt in it is already finished, so this invocation has "
-              f"nothing to run and writes nothing. A resume that did have work "
-              f"to do would need --assume-legacy-revision naming the weights "
-              f"those records were made on.", flush=True)
+        print(f"resume: results_{arm}.json records no weights revision, which "
+              f"only matters when a prompt has to be run; a resume that did "
+              f"have work to do would need --assume-legacy-revision naming the "
+              f"weights those records were made on.", flush=True)
         return explicit, False, "no record was written by this invocation"
     if not assumed:
         raise SystemExit(
@@ -417,6 +470,31 @@ def stage_loop(args) -> None:
               f"already in a results file were made on, and this invocation is "
               f"not resuming one, so the option has nothing to apply to and is "
               f"ignored", flush=True)
+
+    if not records:
+        # Nothing to run, so nothing to load. The weights are 3.4 gigabytes and
+        # the bridge loader needs torch and transformer_lens present, and a
+        # rerun of a finished arm should not depend on any of that to tell the
+        # operator that it is finished. It also writes nothing, so loading the
+        # model could only change whether the command succeeds, never what the
+        # artifacts hold.
+        if saved is not None:
+            check_resume_compatible(saved, args.arm, dtype, None, vars(cfg))
+            print(f"arm {args.arm}: all {len(results)} prompt(s) this "
+                  f"invocation asks for are already in both checkpoints, "
+                  f"results_{args.arm}.json and terminal_states_{args.arm}.npz, "
+                  f"so there is nothing to run. The model was not loaded and "
+                  f"no file was written.", flush=True)
+            if half:
+                print(f"note: {len(half)} prompt(s) sit in one checkpoint but "
+                      f"not the other and are outside what this invocation "
+                      f"asks for, so they were neither rerun nor dropped: "
+                      f"{', '.join(half)}. Rerun the arm without --n-prompts "
+                      f"to finish them.", flush=True)
+        else:
+            print(f"arm {args.arm}: no prompt was requested, so there is "
+                  f"nothing to run and the model was not loaded", flush=True)
+        return
 
     model = load_model(dtype=DTYPES[dtype], revision=pin)
     revision = resolve_revision(pin)
@@ -622,19 +700,38 @@ def stage_states(args) -> None:
 
     outdir = Path(args.states_dir)
     outdir.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(outdir / f"layer_states_{args.arm}.npz",
-                        **{f"settled|{k}": v for k, v in settled.items()},
-                        **{f"clean|{k}": v for k, v in clean.items()})
-    (outdir / f"layer_states_{args.arm}_meta.json").write_text(json.dumps(
-        {"arm": args.arm, "scored_layers": SCORED_LAYERS, "dtype": dtype,
-         "model": "Qwen/Qwen3-1.7B", "model_revision": revision,
-         "model_revision_assumed": rev_assumed,
-         "loop_dtype": res.get("dtype"),
-         "loop_model_revision": res.get("model_revision"),
-         "loop_model_revision_assumed": bool(res.get("model_revision_assumed")),
-         "prompts": meta}, indent=2))
-    print(f"wrote layer states to {outdir}, {(time.time()-t_start)/60:.1f} min, "
-          f"peak={peak_gb():.2f} GB", flush=True)
+    # This stage publishes two files that only mean anything together: the
+    # archive of tensors, and the metadata naming the weights those tensors
+    # came out of. Written one after the other in place, an interruption
+    # between them would leave the new archive beside the previous run's
+    # metadata, and the J-space stage would then score the new states through
+    # the old revision's unembedding matrix and label the answer with the old
+    # revision. Both now carry the same one-use generation stamp, both are
+    # written under names specific to this run, and both are renamed only once
+    # both are complete; `analyze_jspace.py` compares the two stamps and
+    # refuses a pair that does not match.
+    generation = generation_stamp()
+    npz_path = outdir / f"layer_states_{args.arm}.npz"
+    meta_path = outdir / f"layer_states_{args.arm}_meta.json"
+    meta_payload = {
+        "arm": args.arm, "generation": generation,
+        "scored_layers": SCORED_LAYERS, "dtype": dtype,
+        "model": "Qwen/Qwen3-1.7B", "model_revision": revision,
+        "model_revision_assumed": rev_assumed,
+        "loop_dtype": res.get("dtype"),
+        "loop_model_revision": res.get("model_revision"),
+        "loop_model_revision_assumed": bool(res.get("model_revision_assumed")),
+        "prompts": meta}
+    atomic_write_group([
+        (npz_path, lambda q: np.savez_compressed(
+            q, **{f"settled|{k}": v for k, v in settled.items()},
+            **{f"clean|{k}": v for k, v in clean.items()},
+            **{GENERATION_KEY: np.array(generation)})),
+        (meta_path, lambda q: q.write_text(json.dumps(meta_payload, indent=2))),
+    ], tag=generation)
+    print(f"wrote layer states to {outdir}, generation {generation}, "
+          f"{(time.time()-t_start)/60:.1f} min, peak={peak_gb():.2f} GB",
+          flush=True)
 
 
 @torch.no_grad()
@@ -718,10 +815,12 @@ def main() -> None:
                          "file for states and lagscan")
     ap.add_argument("--revision", default=None,
                     help="pin the load to one exact version of the model's "
-                         "files on the Hugging Face hub, given as its "
-                         "40-character identifier; required by --stage states "
-                         "and --stage lagscan when the results file records "
-                         "none, as the committed runs do")
+                         "files on the Hugging Face hub, given as the 40 "
+                         "lowercase hexadecimal characters of one commit; a "
+                         "branch or tag name such as main is refused because "
+                         "it can name different weights later. Required by "
+                         "--stage states and --stage lagscan when the results "
+                         "file records none, as the committed runs do")
     ap.add_argument("--assume-legacy-revision", default=None,
                     help="for --stage loop --resume only: the 40-character "
                          "identifier of the weights the prompt records already "
@@ -729,7 +828,9 @@ def main() -> None:
                          "for a file written before the runner recorded that "
                          "field, as both results files committed with EXP_018 "
                          "were. It pins this run's load to those weights and is "
-                         "written into the file as assumed rather than recorded")
+                         "written into the file as assumed rather than "
+                         "recorded, and it has to be a commit identifier for "
+                         "the same reason --revision does")
     ap.add_argument("--allow-dtype-mismatch", action="store_true",
                     help="let --stage states or --stage lagscan run at a "
                          "precision the loop did not record")
@@ -745,6 +846,14 @@ def main() -> None:
     ap.add_argument("--lag-window", type=int, default=40)
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
+    # Both options name one exact version of the weights, so both are checked
+    # here, before any stage runs, to be commit identifiers rather than branch
+    # or tag names that could name different weights on a later day.
+    if args.revision:
+        check_commit_revision(args.revision, "--revision")
+    if args.assume_legacy_revision:
+        check_commit_revision(args.assume_legacy_revision,
+                              "--assume-legacy-revision")
     {"probe": stage_probe, "loop": stage_loop, "states": stage_states,
      "lagscan": stage_lagscan}[args.stage](args)
 

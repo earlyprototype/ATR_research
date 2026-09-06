@@ -28,8 +28,10 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import resource
 import time
+import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -99,25 +101,88 @@ def hub_cache_dir() -> Path:
     return Path.home() / ".cache" / "huggingface" / "hub"
 
 
+# The key under which a paired artifact carries its generation stamp. A
+# generation stamp is a one-use identifier written into every file of a set
+# that has to be read together, so that a reader can tell whether the files in
+# front of it were published by the same run. The two halves of the per-layer
+# state set, the compressed archive of tensors and the metadata naming the
+# weights those tensors came from, are such a set: they are written as two
+# files, and two renames cannot be made one step, so a crash between them can
+# leave a new archive beside metadata from the run before. Matching stamps are
+# what says that did not happen.
+GENERATION_KEY = "__generation__"
+
+
+def generation_stamp() -> str:
+    """A fresh generation stamp: the UTC time to the second, then 12 random
+    hexadecimal characters so that two runs in the same second differ."""
+    return (time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+            + "-" + uuid.uuid4().hex[:12])
+
+
 def model_cache_dir(model: str = MODEL_NAME) -> Path:
     """The cache directory holding every downloaded version of one model."""
     return hub_cache_dir() / ("models--" + model.replace("/", "--"))
 
 
-def resolve_revision(revision: str | None = None, model: str = MODEL_NAME) -> str:
+# A commit identifier on the Hugging Face hub, written as 40 lowercase
+# hexadecimal characters. Only a commit identifier is immutable: a branch or a
+# tag name such as "main" or "v1" names whatever was published under it at the
+# moment of a load, so two stages that both recorded "main" could agree on the
+# string while having read different weights. Every revision check in this
+# experiment exists to catch exactly that, so every revision this harness
+# accepts or records has to match this pattern.
+COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
+
+
+def check_commit_revision(revision: str, where: str = "the revision given",
+                          model: str = MODEL_NAME) -> str:
+    """Return `revision` if it is an immutable commit identifier, else stop.
+
+    A commit identifier is the 40 lowercase hexadecimal characters naming one
+    exact version of a model's files on the Hugging Face hub, and it cannot
+    move. A branch or tag name can, so accepting one would let a run record a
+    revision that names different weights tomorrow while every string
+    comparison in this harness still reported agreement.
+    """
+    if COMMIT_RE.match(revision or ""):
+        return revision
+    root = model_cache_dir(model)
+    hint = ""
+    ref = root / "refs" / (revision or "")
+    if revision and ref.is_file():
+        hint = (f" On this machine the pointer refs/{revision} names "
+                f"{ref.read_text().strip()} today, which is where it points "
+                f"today and not a promise about any other day.")
+    raise SystemExit(
+        f"{where} is {revision!r}, which is not a commit identifier. This "
+        f"harness records a weights revision as the 40 lowercase hexadecimal "
+        f"characters of one exact commit on the Hugging Face hub, because only "
+        f"a commit cannot move. A branch or tag name such as 'main' names "
+        f"whatever was published under it at the moment of the load, so two "
+        f"stages could both record that name, agree on it as a string, and "
+        f"still have read different weights, which is the one thing every "
+        f"revision check here exists to prevent. Pass the commit identifier "
+        f"instead; the pointers this machine holds are files under "
+        f"{root / 'refs'}.{hint}")
+
+
+def resolve_revision(revision: str | None = None, model: str = MODEL_NAME,
+                     where: str = "the revision given") -> str:
     """The revision of the weights a load of `model` on this machine resolves to.
 
     A revision is the 40-character commit identifier that names one exact
-    version of a model's files on the Hugging Face hub. Returns `revision`
-    unchanged when one is given; otherwise the revision the cache's
-    `refs/main` pointer names, which is the one an unpinned load follows;
-    otherwise the only revision in the cache when there is exactly one.
+    version of a model's files on the Hugging Face hub. Returns `revision` when
+    one is given, after checking that it is a commit identifier and not a
+    branch or tag name that could move under it; otherwise the revision the
+    cache's `refs/main` pointer names, which is the one an unpinned load
+    follows; otherwise the only revision in the cache when there is exactly one.
     Raises `FileNotFoundError`, naming the directory it searched, when it
     cannot decide, because the alphabetically last revision in the cache is
     not necessarily the one a run used.
     """
     if revision:
-        return revision
+        return check_commit_revision(revision, where, model)
     root = model_cache_dir(model)
     ref = root / "refs" / "main"
     if ref.exists():
@@ -138,6 +203,8 @@ def resolve_revision(revision: str | None = None, model: str = MODEL_NAME) -> st
 
 def snapshot_dir(revision: str, model: str = MODEL_NAME) -> Path:
     """The directory holding the files of one exact revision of the weights."""
+    check_commit_revision(revision, "the revision to read weight files from",
+                          model)
     path = model_cache_dir(model) / "snapshots" / revision
     if not path.is_dir():
         raise FileNotFoundError(
@@ -159,8 +226,16 @@ def load_model(dtype=torch.float32, revision: str | None = None):
     `refs/main`, exactly as `resolve_revision()` does, and that pointer can
     move between one stage and the next; in that case call `resolve_revision()`
     after this returns, not before, and record what it says.
+
+    A pin has to be a commit identifier, meaning the 40 lowercase hexadecimal
+    characters of one exact commit. A branch or tag name would be accepted by
+    the hub and would then be recorded as the pin, and it could name different
+    weights the next day while every string comparison in this harness still
+    said the two stages agreed, so one is refused here.
     """
     from transformer_lens.model_bridge import TransformerBridge
+    if revision:
+        check_commit_revision(revision, "the revision to pin the load to")
     kwargs = {"revision": revision} if revision else {}
     model = TransformerBridge.boot_transformers(
         MODEL_NAME, device="cpu", dtype=dtype, **kwargs)

@@ -594,9 +594,10 @@ files in a scratch directory, which does not load the model.
    to run go through the same weights as the ones already in the file; before,
    the run loaded whatever the machine's pointer named and then refused if the
    two turned out to differ, which wasted the load and could not help a machine
-   whose pointer had moved. **The committed run was not affected:** both arms are complete, 25 of 25 records in the main arm and 5 of
-   5 in the pilot arm have their terminal state in the matching archive, so no
-   prompt was ever rerun. **What this means for the resume command in
+   whose pointer had moved. **The committed run was not affected:** both arms
+   are complete, 25 of 25 records in the main arm and 5 of 5 in the pilot arm
+   have their terminal state in the matching archive, so no prompt was ever
+   rerun. **What this means for the resume command in
    `_run_all.sh`:** run against the committed files it still does nothing and
    still writes nothing, because there is no prompt left to run, and that is
    checked here; a resume of an incomplete arm made from these two files would
@@ -654,6 +655,76 @@ files in a scratch directory, which does not load the model.
    established here:** this machine holds exactly one version of the Qwen3-1.7B
    weights, `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, and the cache pointer
    names that one, so the old rule and the new one read the same files.
+
+**Three findings from a fifth review, on 2026-09-06, all of them in the code,
+and what each one changes.** A fifth review, of the code as it stood after the
+fourth round of fixes, found three more faults. All three are real. All three
+are about how the harness behaves on a later machine or after an interruption,
+not about anything the registered run computed, so no hypothesis verdict moves
+and no number this record prints changes. Nothing was re-run for them; each fix
+was exercised against doctored copies of the committed files in a scratch
+directory, which loads no model.
+
+1. **A rerun of a finished arm still loaded the model, so it could fail on a
+   machine that has the results but not the weights.** The fourth review's item
+   1 above made a resume with nothing left to run exit without writing anything,
+   which it did, but it exited after loading the model rather than before.
+   Rerunning the two commands in `_run_all.sh` therefore loaded 3.4 gigabytes of
+   weights twice, once per arm, to discover that there was nothing to do, and it
+   would have failed outright on a machine without the weights, without
+   `transformer_lens` and `torch` installed, or without the memory to hold the
+   model, even though the answer was already on disk. The runner now validates
+   the finished checkpoints and returns before the load. **Established here:**
+   with the load replaced by a stand-in that records being called, the committed
+   command runs the arm to completion with the stand-in called zero times, and
+   the two files in the output directory come back byte for byte identical, so
+   the early exit changes what the command costs and never what it writes. What
+   is no longer compared in that case is the weights revision, because there is
+   no load to compare against, and the run says so in a printed line instead of
+   passing over it.
+
+2. **A branch or tag name was accepted where a commit identifier was meant, so
+   a moving name could defeat every revision check.** The harness records a
+   weights revision as one string and compares those strings across stages. It
+   accepted whatever string was passed, so `--revision main` would have been
+   recorded as `main`, and `main` names whatever was published under it at the
+   moment of each load. Two stages could then both record `main`, agree on it
+   character for character, and have read different weights, which is the exact
+   failure the revision checks added in the second, third and fourth reviews
+   exist to catch. Every revision the harness accepts or records is now required
+   to be a commit identifier, meaning the 40 lowercase hexadecimal characters
+   naming one exact commit, which cannot move; `--revision` and
+   `--assume-legacy-revision` are both checked before any stage runs, and the
+   loader, the resolver and the weight-file reader check again so no path can
+   slip past. The refusal names the pointer files on the machine so the operator
+   can look the commit up. **The committed run was not affected, established
+   here:** the revision it is labelled with,
+   `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, is already a commit identifier
+   and passes the new check unchanged.
+
+3. **The two halves of the per-layer state set were published one at a time, so
+   an interruption between them could pair new tensors with old metadata.** The
+   states stage writes an archive of tensors and a metadata file naming the
+   weights those tensors came out of, and the J-space stage reads the revision
+   from the metadata and the tensors from the archive. Written one after the
+   other in place, a crash between the two writes would have left the new
+   archive beside the previous run's metadata, and the J-space stage would then
+   have scored the new states through the old revision's unembedding matrix,
+   meaning the matrix that turns a state into a score for every word piece, and
+   labelled the answer with the old revision. Both halves now carry the same
+   one-use generation stamp, a stamp being an identifier that says which run
+   published a file; both are written under names specific to that run and
+   renamed only once both are complete; and the J-space stage compares the two
+   stamps and refuses a pair that disagrees, including a pair where only one
+   half carries a stamp. **What the pair on this machine carries:** nothing, in
+   either half, because it was written before the stamp existed. That is
+   accepted with a printed note saying the check could not be made, and the
+   output records the absence rather than an agreement, which is the same rule
+   the record follows everywhere else about not presenting a later check as part
+   of an earlier run. That pair is not committed in any case: the state
+   directory is excluded by `_STAGE2_JSPACE/.gitignore`, and every reader
+   rebuilds it from the committed terminal states with the command under
+   "Artifacts" below, which writes a stamped pair.
 
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
@@ -1081,21 +1152,43 @@ this run used. Neither command needs a precision flag, because that stage reads
 the precision out of the results file, which is bfloat16 for this run. Because
 the revision is supplied by hand, the states the command writes are marked in
 their own metadata as carrying an assumed revision rather than a recorded one,
-and that mark travels into anything scored from them.
+and that mark travels into anything scored from them. The stage writes two
+files that only mean anything together, the archive of tensors and the metadata
+naming the weights they came from, and it now stamps both with the same one-use
+identifier and publishes them together, so a reader can tell they came out of
+one run. The pair sitting in `_states/` on the machine that produced these
+results carries no such stamp in either half, because it was written before the
+stamp existed; that directory is not committed in any case, being excluded by
+`_STAGE2_JSPACE/.gitignore`, so every reader rebuilds the pair with the command
+above and gets a stamped one.
 
 The J-space shares are then rebuilt from those states with `python3
 analyze_jspace.py --arm bare` and the same command with `--arm chat`, which take
 about 16 minutes and 6 minutes respectively on one processor thread of this
 machine. Each reads the revision out of the states metadata written by the
 command above and refuses to run if that metadata and any `--revision` given on
-the command line disagree.
+the command line disagree. Each also compares the stamp in the archive with the
+stamp in the metadata and refuses a pair whose two halves disagree, meaning a
+pair that was not published by one run; a pair carrying no stamp at all, which
+is what a rebuild made before this change produces, is scored with a printed
+note saying that the check could not be made and with that absence recorded in
+the output rather than an agreement.
 
 The two loop commands in `_run_all.sh` can be rerun as they stand: against the
-committed results files they find both arms complete, run no prompt and write
+committed results files they find both arms complete, report that every prompt
+is already in both checkpoints, and stop there. They now stop before the model
+is loaded, so rerunning them costs seconds rather than the two loads of a
+3.4-gigabyte model they used to cost, and it needs neither the model weights nor
+enough memory to hold them, which matters because a reader checking that a
+finished arm is finished should not have to be able to run it. They still write
 nothing. Only a resume that still had a prompt to run would need
 `--assume-legacy-revision 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, because
 neither committed results file records the weights it was run on, and the runner
-will not put records made on two versions of the weights into one file.
+will not put records made on two versions of the weights into one file. Every
+revision passed by hand, to that option or to `--revision`, now has to be the
+40-character identifier of one exact commit; a branch or tag name such as `main`
+is refused, because it can name different weights on a later day while every
+comparison in the harness still reports agreement.
 
 The lens files themselves are not committed either, because
 `_STAGE2_JSPACE/artifacts/` is not versioned by repository convention. Their

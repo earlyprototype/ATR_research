@@ -37,6 +37,13 @@ vouches for the copy on this machine. Its SHA-256 fingerprint, the standard
 64-character summary of a file's exact contents, is checked against the one the
 specification fixes before any tensor is read, and is written into the output
 beside every number it produced.
+
+The per-layer states arrive as two files that only mean anything together, the
+archive of tensors and the metadata naming the weights they came from, so both
+carry the same one-use generation stamp written by the states stage and this
+stage refuses a pair whose stamps do not agree. A pair made before the stamp
+existed carries none, which cannot be checked and is said out loud rather than
+passed over.
 """
 
 from __future__ import annotations
@@ -54,7 +61,9 @@ import torch
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from qwen_port import snapshot_dir  # noqa: E402
+from qwen_port import (  # noqa: E402
+    GENERATION_KEY, check_commit_revision, snapshot_dir,
+)
 
 torch.set_num_threads(1)
 
@@ -195,6 +204,47 @@ def revision_for(arm: str, meta: dict,
         f"Following the local cache pointer refs/main instead, which this stage "
         f"did before, can read a version the run never used and then label "
         f"every share with it.")
+
+
+def states_generation(states, meta: dict, arm: str) -> str | None:
+    """The generation stamp both halves of the state set agree on, or None.
+
+    A generation stamp is a one-use identifier the states stage writes into both
+    the archive of tensors and its metadata, so that a reader can tell they were
+    published by the same run. They are two files and two renames cannot be one
+    step, so an interruption between them can leave a new archive beside the
+    previous run's metadata; scoring one against the other would read the new
+    states through the old revision's unembedding matrix and label the answer
+    with the old revision. Disagreeing stamps stop the run. A pair made before
+    the stamp existed carries none in either half, which cannot be checked and
+    is reported rather than passed over silently.
+    """
+    in_npz = None
+    if GENERATION_KEY in getattr(states, "files", []):
+        value = states[GENERATION_KEY]
+        in_npz = value.item() if hasattr(value, "item") else str(value)
+    in_meta = meta.get("generation")
+    if in_npz and in_meta and in_npz == in_meta:
+        return str(in_npz)
+    if in_npz or in_meta:
+        raise SystemExit(
+            f"refusing to score arm {arm}: the two halves of its per-layer "
+            f"state set were not published together. The archive "
+            f"layer_states_{arm}.npz carries generation {in_npz!r} and the "
+            f"metadata layer_states_{arm}_meta.json carries {in_meta!r}, and "
+            f"only a pair with the same stamp is known to have come out of one "
+            f"run. Scoring them against each other would read one run's states "
+            f"through another run's weights and label the answer with the "
+            f"wrong revision. Rebuild both with "
+            f"`python3 run_exp018.py --stage states --arm {arm} --revision "
+            f"<40-character identifier>`.")
+    print(f"note: neither half of the per-layer state set for arm {arm} carries "
+          f"a generation stamp, so this stage cannot check that the archive and "
+          f"its metadata came out of the same run. A pair written before the "
+          f"stamp existed is in exactly this state. The output records the "
+          f"absence rather than an agreement. Rebuilding both with `--stage "
+          f"states` writes the stamp.", flush=True)
+    return None
 
 
 def verify_lens_file() -> str:
@@ -353,12 +403,18 @@ def main() -> None:
                          "one, as is the case for the committed runs; the "
                          "output then marks it assumed rather than recorded")
     args = ap.parse_args()
+    # A revision names one exact version of the weights, so it has to be a
+    # commit identifier: a branch or tag name could name different weights on a
+    # later day while every string comparison below still reported agreement.
+    if args.revision:
+        check_commit_revision(args.revision, "--revision")
 
     t_start = time.time()
     states = np.load(Path(args.states_dir) / f"layer_states_{args.arm}.npz")
     meta = json.loads((Path(args.states_dir)
                        / f"layer_states_{args.arm}_meta.json").read_text())
     prompt_ids = [p["id"] for p in meta["prompts"]]
+    generation = states_generation(states, meta, args.arm)
     # Both of these refuse before anything large is read: the revision decision
     # costs nothing, and the fingerprint check reads the lens file once.
     revision, rev_source, rev_assumed = revision_for(args.arm, meta, args.revision)
@@ -381,6 +437,8 @@ def main() -> None:
         "arm": args.arm, "model_revision": revision,
         "model_revision_source": rev_source,
         "model_revision_assumed": rev_assumed,
+        "states_generation": generation,
+        "states_generation_checked": generation is not None,
         "lens_file": LENS_PT.name, "lens_sha256": lens_sha256,
         "k_atoms": K_ATOMS, "candidate_pool": CANDIDATE_POOL,
         "scored_layers": SCORED_LAYERS, "band_layers": BAND_LAYERS,
