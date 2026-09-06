@@ -1,0 +1,30 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 24854.78it/s]
+loaded rss=1.22 GB peak=1.69 GB
+[1/25] A08_linguistics      T= 11 lock=None iters=150 collapse_all=0.7133 collapse_ex0=0.8118 top='\n' (328s, 2.19 s/pass, rss=3.9 GB, free=10.8 GB)
+[2/25] A14_kant             T=  8 lock=None iters=150 collapse_all=0.8061 collapse_ex0=0.9495 top='...' (334s, 2.22 s/pass, rss=3.9 GB, free=7.9 GB)
+[3/25] A15_sartre           T=  9 lock=None iters=150 collapse_all=0.6239 collapse_ex0=0.6385 top='\n' (412s, 2.75 s/pass, rss=3.9 GB, free=8.0 GB)
+[4/25] A17_marx             T= 10 lock=None iters=150 collapse_all=0.7104 collapse_ex0=0.7463 top='\n' (498s, 3.32 s/pass, rss=3.7 GB, free=4.2 GB)
+[5/25] A21_dickens          T=  9 lock=None iters=150 collapse_all=0.8122 collapse_ex0=0.9634 top='\n' (774s, 5.16 s/pass, rss=3.6 GB, free=4.7 GB)
+[6/25] E01_politics         T= 12 lock=None iters=150 collapse_all=0.5898 collapse_ex0=0.6689 top='\n' (495s, 3.30 s/pass, rss=3.7 GB, free=8.6 GB)
+[7/25] D01_water            T= 17 lock=None iters=150 collapse_all=0.6791 collapse_ex0=0.6897 top='我' (509s, 3.39 s/pass, rss=3.7 GB, free=9.0 GB)
+[8/25] A01_physics          T=  9 lock=None iters=150 collapse_all=0.6070 collapse_ex0=0.5849 top=' �' (280s, 1.86 s/pass, rss=3.7 GB, free=11.6 GB)
+[9/25] B01_napoleon         T= 10 lock=None iters=150 collapse_all=0.8073 collapse_ex0=0.9248 top='\n\n' (272s, 1.81 s/pass, rss=3.7 GB, free=11.6 GB)
+[10/25] C01_jack_jill        T=  8 lock=None iters=150 collapse_all=0.9134 collapse_ex0=0.9268 top='車' (230s, 1.53 s/pass, rss=3.7 GB, free=12.1 GB)
+[11/25] F01_anger            T=  8 lock=None iters=150 collapse_all=0.6837 collapse_ex0=0.6945 top='は' (233s, 1.55 s/pass, rss=3.7 GB, free=12.1 GB)
+[12/25] G01_punctuation      T= 11 lock=None iters=150 collapse_all=0.8736 collapse_ex0=0.9508 top='\n' (298s, 1.99 s/pass, rss=3.7 GB, free=7.9 GB)
+[13/25] E02_tech             T=  8 lock=None iters=150 collapse_all=0.7257 collapse_ex0=0.7303 top='車' (233s, 1.55 s/pass, rss=3.7 GB, free=9.7 GB)
+[14/25] D02_periodic         T= 11 lock=None iters=150 collapse_all=0.8337 collapse_ex0=0.8474 top='車' (285s, 1.90 s/pass, rss=3.7 GB, free=12.2 GB)
+[15/25] A02_medical          T=  9 lock=None iters=150 collapse_all=0.8636 collapse_ex0=0.9661 top='\n\n' (251s, 1.67 s/pass, rss=3.7 GB, free=12.2 GB)
+[16/25] B02_wwi              T= 12 lock=None iters=150 collapse_all=0.7756 collapse_ex0=0.7969 top=' �' (302s, 2.01 s/pass, rss=3.7 GB, free=12.1 GB)
+[17/25] C02_king_cole        T=  8 lock=None iters=150 collapse_all=0.6317 collapse_ex0=0.6289 top='我' (228s, 1.52 s/pass, rss=3.7 GB, free=12.2 GB)
+[18/25] F02_insult           T=  8 lock=None iters=150 collapse_all=0.4830 collapse_ex0=0.4804 top='の' (229s, 1.52 s/pass, rss=3.7 GB, free=12.1 GB)
+[19/25] G02_brackets         T= 14 lock=None iters=150 collapse_all=0.9291 collapse_ex0=0.9378 top='車' (332s, 2.22 s/pass, rss=3.7 GB, free=12.3 GB)
+[20/25] E03_orgs             T=  9 lock=None iters=150 collapse_all=0.5025 collapse_ex0=0.5043 top='由於' (247s, 1.65 s/pass, rss=3.7 GB, free=12.1 GB)
+[21/25] D03_organic          T= 17 lock=None iters=150 collapse_all=0.5766 collapse_ex0=0.5643 top='の' (388s, 2.59 s/pass, rss=3.7 GB, free=12.1 GB)
+[22/25] A03_neuro            T= 10 lock=None iters=150 collapse_all=0.5518 collapse_ex0=0.5239 top='の' (274s, 1.83 s/pass, rss=3.7 GB, free=12.2 GB)
+[23/25] B03_moon             T=  8 lock=None iters=150 collapse_all=0.8462 collapse_ex0=0.8572 top='車' (243s, 1.62 s/pass, rss=3.7 GB, free=12.1 GB)
+[24/25] C03_mary_lamb        T=  8 lock=None iters=150 collapse_all=0.7309 collapse_ex0=0.7033 top='車' (243s, 1.62 s/pass, rss=3.7 GB, free=12.2 GB)
+[25/25] F03_frustration      T=  8 lock=None iters=150 collapse_all=0.9127 collapse_ex0=0.9099 top='車' (234s, 1.56 s/pass, rss=3.7 GB, free=12.1 GB)
+
+arm bare done in 136.1 min, peak=3.85 GB

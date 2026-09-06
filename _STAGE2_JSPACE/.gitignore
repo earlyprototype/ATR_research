@@ -10,3 +10,6 @@ instrument/jacobian-lens/
 artifacts/
 *.pt
 *.ckpt
+# EXP_018 intermediate per-layer states: 13 MB, reproducible from the
+# committed terminal states with `run_exp018.py --stage states`
+experiments/exp_018_chat_port/_states/

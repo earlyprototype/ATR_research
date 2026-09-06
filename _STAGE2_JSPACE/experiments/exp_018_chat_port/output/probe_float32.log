@@ -1,0 +1,47 @@
+free=12.3 GB before load
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:09<49:00,  9.49s/it]Loading weights:   1%|          | 2/311 [00:10<22:17,  4.33s/it]Loading weights:  44%|████▍     | 137/311 [00:10<00:06, 25.86it/s]Loading weights:  61%|██████    | 190/311 [00:12<00:04, 26.38it/s]Loading weights:  72%|███████▏  | 224/311 [00:13<00:03, 28.85it/s]Loading weights:  79%|███████▉  | 247/311 [00:13<00:01, 32.50it/s]Loading weights:  85%|████████▌ | 265/311 [00:13<00:01, 34.72it/s]Loading weights:  90%|████████▉ | 279/311 [00:14<00:00, 37.08it/s]Loading weights:  93%|█████████▎| 290/311 [00:14<00:00, 37.29it/s]Loading weights:  96%|█████████▌| 299/311 [00:14<00:00, 37.76it/s]Loading weights:  99%|█████████▊| 307/311 [00:14<00:00, 40.14it/s]Loading weights: 100%|██████████| 311/311 [00:14<00:00, 21.19it/s]
+loaded in 21.6s  rss=7.01 GB peak=10.98 GB free=5.2 GB
+hooks: inject=blocks.0.hook_resid_pre extract=blocks.27.hook_resid_post
+round-trip checks: {
+  "readout_vs_model_logits_max_abs": 0.0,
+  "logit_scale_max_abs": 29.089527130126953,
+  "identity_injection_max_abs": 0.0,
+  "reversed_injection_max_abs": 24.789592742919922
+}
+  bare:A08_linguistics               T= 11 L0 all=5.16 pos0=1.41 excl0=4.96 ratio=0.284
+  bare:A14_kant                      T=  8 L0 all=4.03 pos0=1.19 excl0=3.85 ratio=0.309
+  bare:A15_sartre                    T=  9 L0 all=4.65 pos0=1.55 excl0=4.39 ratio=0.353
+  bare:A17_marx                      T= 10 L0 all=4.78 pos0=1.19 excl0=4.63 ratio=0.257
+  bare:A21_dickens                   T=  9 L0 all=4.07 pos0=1.27 excl0=3.87 ratio=0.329
+  bare:E01_politics                  T= 12 L0 all=5.37 pos0=1.53 excl0=5.15 ratio=0.296
+  bare:D01_water                     T= 17 L0 all=6.07 pos0=1.51 excl0=5.88 ratio=0.258
+  bare:A01_physics                   T=  9 L0 all=4.48 pos0=1.19 excl0=4.32 ratio=0.275
+  bare:B01_napoleon                  T= 10 L0 all=4.78 pos0=1.53 excl0=4.53 ratio=0.337
+  bare:C01_jack_jill                 T=  8 L0 all=3.95 pos0=1.44 excl0=3.68 ratio=0.391
+  bare:F01_anger                     T=  8 L0 all=3.81 pos0=1.24 excl0=3.61 ratio=0.342
+  bare:G01_punctuation               T= 11 L0 all=4.98 pos0=1.75 excl0=4.67 ratio=0.375
+  bare:E02_tech                      T=  8 L0 all=4.10 pos0=1.50 excl0=3.82 ratio=0.393
+  bare:D02_periodic                  T= 11 L0 all=5.22 pos0=1.51 excl0=5.00 ratio=0.302
+  bare:A02_medical                   T=  9 L0 all=4.55 pos0=1.59 excl0=4.26 ratio=0.373
+  bare:B02_wwi                       T= 12 L0 all=5.44 pos0=1.19 excl0=5.31 ratio=0.224
+  bare:C02_king_cole                 T=  8 L0 all=4.19 pos0=1.50 excl0=3.91 ratio=0.384
+  bare:F02_insult                    T=  8 L0 all=4.09 pos0=1.29 excl0=3.88 ratio=0.333
+  bare:G02_brackets                  T= 14 L0 all=5.44 pos0=1.63 excl0=5.19 ratio=0.314
+  bare:E03_orgs                      T=  9 L0 all=4.58 pos0=1.51 excl0=4.32 ratio=0.348
+  bare:D03_organic                   T= 17 L0 all=6.13 pos0=1.50 excl0=5.94 ratio=0.253
+  bare:A03_neuro                     T= 10 L0 all=4.74 pos0=1.19 excl0=4.59 ratio=0.259
+  bare:B03_moon                      T=  8 L0 all=4.15 pos0=1.34 excl0=3.93 ratio=0.340
+  bare:C03_mary_lamb                 T=  8 L0 all=4.18 pos0=1.40 excl0=3.93 ratio=0.357
+  bare:F03_frustration               T=  8 L0 all=4.24 pos0=1.25 excl0=4.05 ratio=0.308
+  chat:A08_linguistics               T= 23 L0 all=6.85 pos0=0.42 excl0=6.84 ratio=0.061
+  chat:A14_kant                      T= 20 L0 all=6.05 pos0=0.42 excl0=6.03 ratio=0.069
+  chat:A15_sartre                    T= 21 L0 all=6.48 pos0=0.42 excl0=6.47 ratio=0.065
+  chat:A17_marx                      T= 22 L0 all=6.58 pos0=0.42 excl0=6.56 ratio=0.064
+  chat:A21_dickens                   T= 21 L0 all=6.08 pos0=0.42 excl0=6.06 ratio=0.069
+timing bare: 11 tokens, 2.431 s/pass
+  after 10 iters: collapse_all=0.6534 collapse_excl0=0.6951 cos_lag2=1.000000 top='の'
+timing chat: 23 tokens, 1.971 s/pass
+  after 10 iters: collapse_all=0.9471 collapse_excl0=0.9535 cos_lag2=1.000000 top='車'
+
+wrote /home/user/wt/exp018/_STAGE2_JSPACE/experiments/exp_018_chat_port/output/probe_natural_norms.json  peak=10.98 GB

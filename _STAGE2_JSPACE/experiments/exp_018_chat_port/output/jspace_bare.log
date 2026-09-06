@@ -1,0 +1,87 @@
+W_U (151936, 2048)  lens layers 0..26 fitted on 466 prompts
+  layer  2: settled median 0.0014  clean median 0.0122  (46s)
+  layer  5: settled median 0.0004  clean median 0.0136  (44s)
+  layer 11: settled median 0.0001  clean median 0.0190  (78s)
+  layer 12: settled median 0.0002  clean median 0.0188  (41s)
+  layer 13: settled median 0.0001  clean median 0.0242  (41s)
+  layer 14: settled median 0.0001  clean median 0.0246  (40s)
+  layer 15: settled median 0.0003  clean median 0.0249  (43s)
+  layer 16: settled median 0.0008  clean median 0.0316  (46s)
+  layer 17: settled median 0.0010  clean median 0.0312  (47s)
+  layer 18: settled median 0.0017  clean median 0.0389  (123s)
+  layer 19: settled median 0.0019  clean median 0.0484  (54s)
+  layer 20: settled median 0.0017  clean median 0.0426  (54s)
+  layer 21: settled median 0.0017  clean median 0.0390  (53s)
+  layer 22: settled median 0.0016  clean median 0.0365  (56s)
+  layer 23: settled median 0.0014  clean median 0.0310  (53s)
+  layer 24: settled median 0.0019  clean median 0.0290  (52s)
+  layer 25: settled median 0.0023  clean median 0.0249  (50s)
+{
+  "per_layer": {
+    "2": {
+      "median_settled": 0.00144,
+      "median_clean": 0.01218,
+      "median_difference": -0.01074,
+      "p_one_sided": 0.0001,
+      "settled_below_clean": true,
+      "p_below_05": true,
+      "median_settled_rot2026": 0.00108,
+      "median_clean_rot2026": 0.0066,
+      "median_settled_rot4242": 0.0069,
+      "median_clean_rot4242": 0.00493
+    },
+    "5": {
+      "median_settled": 0.00043,
+      "median_clean": 0.01365,
+      "median_difference": -0.01321,
+      "p_one_sided": 0.0001,
+      "settled_below_clean": true,
+      "p_below_05": true,
+      "median_settled_rot2026": 0.00214,
+      "median_clean_rot2026": 0.00574,
+      "median_settled_rot4242": 0.00627,
+      "median_clean_rot4242": 0.00602
+    },
+    "11": {
+      "median_settled": 9e-05,
+      "median_clean": 0.019,
+      "median_difference": -0.0189,
+      "p_one_sided": 0.0001,
+      "settled_below_clean": true,
+      "p_below_05": true,
+      "median_settled_rot2026": 0.00638,
+      "median_clean_rot2026": 0.00425,
+      "median_settled_rot4242": 0.0071,
+      "median_clean_rot4242": 0.00722
+    },
+    "12": {
+      "median_settled": 0.00016,
+      "median_clean": 0.01882,
+      "median_difference": -0.01866,
+      "p_one_sided": 0.0001,
+      "settled_below_clean": true,
+      "p_below_05": true,
+      "median_settled_rot2026": 0.0076,
+      "median_clean_rot2026": 0.00587,
+      "median_settled_rot4242": 0.00693,
+      "median_clean_rot4242": 0.0065
+    },
+    "13": {
+      "median_settled": 0.00011,
+      "median_clean": 0.02417,
+      "median_difference": -0.02406,
+      "p_one_sided": 0.0001,
+      "settled_below_clean": true,
+      "p_below_05": true,
+      "median_settled_rot2026": 0.00626,
+      "median_clean_rot2026": 0.00457,
+      "median_settled_rot4242": 0.00747,
+      "median_clean_rot4242": 0.00642
+    },
+    "14": {
+      "median_settled": 0.00015,
+      "median_clean": 0.02456,
+      "median_difference": -0.02441,
+      "p_one_sided": 0.0001,
+      
+wrote /home/user/wt/exp018/_STAGE2_JSPACE/experiments/exp_018_chat_port/output/jspace_shares_bare.json in 15.6 min
