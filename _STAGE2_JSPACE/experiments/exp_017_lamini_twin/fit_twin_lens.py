@@ -76,6 +76,12 @@ requested prompt was fitted inside the cap, 3 when the fit was short of the
 requested count or crossed the cap, in which case the section 6.2 fallback is
 the caller's next step.
 
+Every fit writes its own timing measurement. Beside the lens it saves, a fit
+writes output/fit_timings_<tag>_<n>_<date>.json holding what each prompt it
+computed cost on this machine, the machine's name and the day. That file is what
+choose_fit_budget.py reads for a probe run anywhere but the machine that ran
+this experiment on 2026-09-05, whose timings survive only as a run log.
+
 Usage:
     python3 fit_twin_lens.py --refresh-prompts
     python3 fit_twin_lens.py --n 5  --dim-batch 16 --tag probe
@@ -87,6 +93,7 @@ import hashlib
 import json
 import logging
 import os
+import platform
 import shutil
 import sys
 import time
@@ -143,6 +150,55 @@ EXIT_BUDGET_STOP = 3
 # dimensions share one backward pass and does not change the matrices.
 PROVENANCE_KEYS_COMPARED = ("model", "revision", "corpus_sha256", "max_seq_len",
                             "source_layers", "target_layer", "skip_first")
+
+
+def free_path(directory, stem, extension=".json"):
+    """A path in `directory` built from `stem` that no file occupies yet.
+
+    Adds _b, _c and so on rather than replacing anything, because everything
+    this script writes under output/ is a dated record of one run.
+    """
+    candidate = os.path.join(directory, f"{stem}{extension}")
+    letter = ord("b")
+    while os.path.exists(candidate):
+        candidate = os.path.join(directory, f"{stem}_{chr(letter)}{extension}")
+        letter += 1
+    return candidate
+
+
+def timings_record(per_prompt_seconds, *, tag, n_requested, provenance):
+    """This machine's measurement of what each prompt cost, with enough about
+    the machine and the day to tell it from another machine's.
+
+    The budget rule reads this. It exists because the rule used to read a run
+    log committed on 2026-09-05, so a probe re-run somewhere else printed its
+    timings to the terminal and the rule went on answering with the timings of
+    the machine that first ran it.
+    """
+    seconds = [round(float(x), 2) for x in per_prompt_seconds]
+    mean = sum(seconds) / len(seconds) if seconds else None
+    return {
+        "experiment": "EXP_017",
+        "what_this_is": ("per-prompt fitting cost measured on this machine, "
+                         "the input the budget rule of spec section 6.2 reads"),
+        "written_by": os.path.basename(__file__),
+        "tag": tag,
+        "n_prompts_requested": int(n_requested),
+        "n_prompts_measured_here": len(seconds),
+        "per_prompt_seconds": seconds,
+        "mean_seconds_per_prompt": None if mean is None else round(mean, 1),
+        "measured_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "machine": {
+            "node": platform.node(),
+            "platform": platform.platform(),
+            "processor_count": os.cpu_count(),
+            "torch_threads": torch.get_num_threads(),
+            "torch_version": torch.__version__,
+        },
+        "fit": {k: provenance.get(k) for k in
+                ("model", "revision", "corpus_sha256", "dim_batch",
+                 "max_seq_len", "skip_first")},
+    }
 
 
 def lens_path(n, tag=""):
@@ -263,17 +319,30 @@ def provenance_mismatches(have, want, keys=PROVENANCE_KEYS_COMPARED):
     return out
 
 
-def stopped_fit_reason(have):
-    """Why a checkpoint may not be continued, when the fit that wrote it was
-    stopped by the clock rather than finished.
+def stopped_fit_reason(have, deadline=None):
+    """Why a checkpoint may not be continued, from what its sidecar records
+    about the fit that wrote it.
 
-    Returns None when the checkpoint is continuable. A sidecar carrying
-    `fit_outcome` of "short" or "overran" was written by a fit that the
-    wall-clock cap stopped, and continuing it hands that work a second full cap:
-    the resumed fit would measure only its own hours, finish as "complete", and
-    stamp a lens whose true cost was the sum of both runs. The spec's section
-    6.2 says what to do with a fit the cap stops, which is to score H18b on the
-    base lens for both sides, so this refuses rather than restarting the clock.
+    Returns None when the checkpoint is continuable. Two cases are refused.
+
+    A sidecar carrying `fit_outcome` of "short" or "overran" was written by a
+    fit that the wall-clock cap stopped, and continuing it hands that work a
+    second full cap: the resumed fit would measure only its own hours, finish
+    as "complete", and stamp a lens whose true cost was the sum of both runs.
+    The spec's section 6.2 says what to do with a fit the cap stops, which is to
+    score H18b on the base lens for both sides, so this refuses rather than
+    restarting the clock.
+
+    A sidecar recording a cap different from the one this fit runs under is
+    refused too, and `deadline` is what makes that checkable. The case it closes
+    is quieter than the first: a fit completed under a deliberately long
+    --deadline-seconds leaves a checkpoint with every prompt consumed, so
+    re-running the same command under the 9,000 second cap does no work at all,
+    measures a few seconds, and stamps the lens as a completion inside the
+    registered cap. The cost was the long run, and the stamp would not say so.
+    Passing deadline=None skips that comparison, which is what a caller that
+    does not yet know its own cap wants.
+
     Raising --deadline-seconds is still possible for a deliberate longer fit,
     and the lens it produces is stamped with that longer cap, which
     run_jspace.py already refuses to score as the registered comparison.
@@ -281,6 +350,17 @@ def stopped_fit_reason(have):
     if not have:
         return None
     outcome = have.get("fit_outcome")
+    recorded_cap = have.get("deadline_seconds")
+    if (outcome is not None and deadline is not None and recorded_cap is not None
+            and float(recorded_cap) != float(deadline)):
+        spent = have.get("fit_wall_seconds")
+        spent_text = "" if spent is None else f", spending {float(spent):.0f} of them"
+        return (f"the fit that wrote it ran under a {float(recorded_cap):.0f} "
+                f"second cap{spent_text}, and this fit runs under "
+                f"{float(deadline):.0f} seconds. Continuing it would stamp the "
+                f"work of one cap with the other, so the lens would claim a "
+                f"budget it was not fitted under. Run under the same cap, or "
+                f"start a fit of its own under its own --tag")
     if outcome in (None, "complete"):
         return None
     spent = have.get("fit_wall_seconds")
@@ -324,7 +404,7 @@ def stamp_lens_provenance(lens_path_, record):
 
 
 def seed_checkpoint(target, source, n_prompts, want=None,
-                    accept_unstamped=False):
+                    accept_unstamped=False, deadline=None):
     """Copy a compatible earlier checkpoint into place so this fit continues it.
 
     Used so that the registered 40-prompt fit continues the five-prompt timing
@@ -382,7 +462,7 @@ def seed_checkpoint(target, source, n_prompts, want=None,
             if bad:
                 return (f"not seeding: {source} was fitted with a different "
                         f"setup: " + "; ".join(bad))
-            stopped = stopped_fit_reason(have)
+            stopped = stopped_fit_reason(have, deadline)
             if stopped:
                 return f"not seeding: {source} cannot be continued because " + stopped
     shutil.copyfile(source, target)
@@ -396,7 +476,7 @@ def seed_checkpoint(target, source, n_prompts, want=None,
             f"{int(state['next_idx']) + 1}{seeded_note}")
 
 
-def checkpoint_ready(target, want, accept_unstamped=False):
+def checkpoint_ready(target, want, accept_unstamped=False, deadline=None):
     """Whether this fit may resume the checkpoint it is about to write to.
 
     Returns (True, sentence) when the checkpoint does not exist yet, or exists
@@ -442,7 +522,7 @@ def checkpoint_ready(target, want, accept_unstamped=False):
     if bad:
         return False, (f"refusing to resume {target}: it was fitted with a "
                        f"different setup: " + "; ".join(bad))
-    stopped = stopped_fit_reason(have)
+    stopped = stopped_fit_reason(have, deadline)
     if stopped:
         return False, f"refusing to resume {target}: " + stopped
     return True, f"resuming {target}, whose provenance matches this fit"
@@ -520,10 +600,12 @@ def fit_within_deadline(model, prompts, *, dim_batch, max_seq_len, ckpt,
     """Fit in resumable chunks, stopping before the wall-clock cap is crossed.
 
     Returns (lens, prompts_consumed, prompts_fitted, wall_seconds,
-    prompts_fitted_here, overran), where prompts_fitted_here counts only the
-    prompts this invocation computed, as distinct from those it inherited from
-    an existing checkpoint, and overran says whether the measured wall time
-    crossed the cap even so. `fit_fn` and `progress_fn` default to the
+    prompts_fitted_here, overran, per_prompt_seconds), where
+    prompts_fitted_here counts only the prompts this invocation computed, as
+    distinct from those it inherited from an existing checkpoint, overran says
+    whether the measured wall time crossed the cap even so, and
+    per_prompt_seconds is this invocation's own measurement of what each prompt
+    it computed cost, which is what the budget rule reads from a timing probe. `fit_fn` and `progress_fn` default to the
     instrument's fitting call and to reading a checkpoint's progress, and exist
     so the self-test can drive this loop on a fake clock without a model.
     """
@@ -534,6 +616,7 @@ def fit_within_deadline(model, prompts, *, dim_batch, max_seq_len, ckpt,
     lens = None
     start_idx, start_done = progress_fn(ckpt)
     next_idx, n_done = start_idx, start_done
+    per_prompt = []                     # seconds each prompt this fit computed
     while True:
         take = plan_next_chunk(next_idx, len(prompts), clock() - t0,
                                seconds_per_prompt, deadline, chunk)
@@ -551,6 +634,12 @@ def fit_within_deadline(model, prompts, *, dim_batch, max_seq_len, ckpt,
         moved_to, n_done = progress_fn(ckpt)
         if moved_to <= next_idx:            # no progress; stop rather than spin
             break
+        # The chunk's cost, spread over the prompts it actually consumed. With
+        # the default chunk of one, that is one prompt's measured cost, which is
+        # what the budget rule needs from a timing probe on this machine.
+        chunk_seconds = clock() - t0 - sum(per_prompt)
+        moved = moved_to - next_idx
+        per_prompt.extend([chunk_seconds / moved] * moved)
         next_idx = moved_to
         # The cost per prompt is a prediction, so the clock is read again after
         # every chunk actually returns: a prompt slower than predicted can cross
@@ -560,7 +649,8 @@ def fit_within_deadline(model, prompts, *, dim_batch, max_seq_len, ckpt,
     wall = clock() - t0
     if lens is None:                        # nothing ran, so build from the checkpoint
         lens, _ = lens_from_checkpoint.build(ckpt)
-    return lens, next_idx, n_done, wall, n_done - start_done, wall > deadline
+    return (lens, next_idx, n_done, wall, n_done - start_done, wall > deadline,
+            per_prompt)
 
 
 def selftest():
@@ -643,7 +733,8 @@ def selftest():
             ckpt="", deadline=deadline, seconds_per_prompt=per_prompt,
             chunk=chunk, clock=clock, fit_fn=fake_fit, progress_fn=progress)
 
-    _, consumed, _, wall, _, overran = replay([221.0] * 39 + [1000.0], 221.0)
+    _, consumed, _, wall, _, overran, timings = replay([221.0] * 39 + [1000.0],
+                                                       221.0)
     check("a final prompt slower than predicted is caught after the call",
           consumed == 40 and overran and wall > CAP_SECONDS,
           f"{consumed} prompts consumed in {wall:.0f}s, overran={overran}")
@@ -652,10 +743,14 @@ def selftest():
     check("a stopped fit is named apart from the registered lens",
           lens_path(40, "twin_partial") != lens_path(40, "twin"),
           os.path.basename(lens_path(40, "twin_partial")))
-    _, consumed, _, wall, _, overran = replay([221.0] * 40, 221.0)
+    _, consumed, _, wall, _, overran, timings = replay([221.0] * 40, 221.0)
     check("a fit inside the cap is not flagged as an overrun",
           consumed == 40 and not overran and wall <= CAP_SECONDS,
           f"{consumed} prompts consumed in {wall:.0f}s")
+    check("the fit measures what each prompt it computed cost, which is what "
+          "the budget rule reads from a probe",
+          len(timings) == 40 and all(abs(x - 221.0) < 1e-6 for x in timings),
+          f"{len(timings)} timings, mean {sum(timings) / len(timings):.1f}s")
 
     # The same replay from nothing, using every one of the 40 prompts' recorded
     # times, including the five the probe paid for. This is why the fit has to
@@ -792,8 +887,30 @@ def selftest():
         write_provenance(mine, dict(want, fit_outcome="complete",
                                     fit_wall_seconds=8253.0,
                                     deadline_seconds=CAP_SECONDS))
-        ready, msg = checkpoint_ready(mine, want)
+        ready, msg = checkpoint_ready(mine, want, deadline=CAP_SECONDS)
         check("a checkpoint from a fit that finished inside its cap is resumed",
+              ready and msg.startswith("resuming"), msg)
+
+        # A fit completed under a longer cap of its own leaves every prompt
+        # consumed, so re-running under the registered cap would do no work,
+        # measure seconds, and stamp the lens as a completion inside 9,000.
+        write_provenance(mine, dict(want, fit_outcome="complete",
+                                    fit_wall_seconds=30000.0,
+                                    deadline_seconds=36000.0))
+        ready, msg = checkpoint_ready(mine, want, deadline=CAP_SECONDS)
+        check("a checkpoint completed under a longer cap is refused by a fit "
+              "under the registered one",
+              ready is False and "36000 second cap" in msg and "9000" in msg, msg)
+        seeded = seed_checkpoint(os.path.join(tmp, "s_longcap.ckpt.pt"), mine, 40,
+                                 want, deadline=CAP_SECONDS)
+        check("seeding from that checkpoint is refused too",
+              seeded.startswith("not seeding") and "36000 second cap" in seeded,
+              seeded)
+        ready, msg = checkpoint_ready(mine, want, deadline=36000.0)
+        check("the same checkpoint is continuable by a fit under its own cap",
+              ready and msg.startswith("resuming"), msg)
+        ready, msg = checkpoint_ready(mine, want)
+        check("a caller that names no cap makes no cap comparison",
               ready and msg.startswith("resuming"), msg)
         check("a sidecar with no outcome recorded, which is what a fit in "
               "progress leaves, is continuable",
@@ -913,16 +1030,26 @@ def main():
     # Continue the timing probe's work rather than repeating it, which is what
     # the committed run did by hand.
     print(seed_checkpoint(ckpt, args.resume_from, len(prompts), want,
-                          accept_unstamped=args.accept_unstamped_checkpoint),
+                          accept_unstamped=args.accept_unstamped_checkpoint,
+                          deadline=args.deadline_seconds),
           flush=True)
 
     # Whatever route the checkpoint at this fit's own path arrived by, it is
     # checked before the instrument resumes its Jacobian sums.
     ready, message = checkpoint_ready(
-        ckpt, want, accept_unstamped=args.accept_unstamped_checkpoint)
+        ckpt, want, accept_unstamped=args.accept_unstamped_checkpoint,
+        deadline=args.deadline_seconds)
     print(message, flush=True)
     if not ready:
         raise SystemExit(message)
+    # What the fit that wrote this checkpoint spent, if it recorded anything.
+    # It is carried into this fit's stamp so that a reader sees the whole cost
+    # of the lens rather than only the last invocation's share of it. It changes
+    # no gate: the cap comparison above has already refused a checkpoint from a
+    # fit under a different cap, and the spec treats the timing probe, which
+    # leaves no sidecar at all, as a step of its own.
+    resumed = read_provenance(ckpt) or {}
+    resumed_wall = resumed.get("fit_wall_seconds")
     if not os.path.exists(provenance_path(ckpt)):
         print(f"provenance stamped -> {os.path.basename(write_provenance(ckpt, want))}",
               flush=True)
@@ -950,7 +1077,8 @@ def main():
 
     model, _ = load_model(args.model_path, args.revision)
 
-    lens, consumed, fitted, wall, fitted_here, overran = fit_within_deadline(
+    (lens, consumed, fitted, wall, fitted_here, overran,
+     per_prompt_seconds) = fit_within_deadline(
         model, prompts,
         dim_batch=args.dim_batch, max_seq_len=128, ckpt=ckpt,
         deadline=args.deadline_seconds, seconds_per_prompt=per_prompt,
@@ -969,8 +1097,26 @@ def main():
     want["fit_outcome"] = outcome
     want["fit_wall_seconds"] = round(wall, 1)
     want["deadline_seconds"] = float(args.deadline_seconds)
+    want["resumed_from_wall_seconds"] = (None if resumed_wall is None
+                                         else float(resumed_wall))
+    want["wall_seconds_including_resumed"] = round(
+        wall + (0.0 if resumed_wall is None else float(resumed_wall)), 1)
     stamp_lens_provenance(out, want)
     write_provenance(ckpt, want)
+
+    # This machine's own timing measurement, written whether or not this fit is
+    # the timing probe, so that the budget rule never has to read a run log
+    # committed by another machine.
+    timings = timings_record(per_prompt_seconds, tag=args.tag,
+                             n_requested=len(prompts), provenance=want)
+    timings_file = free_path(
+        os.path.join(HERE, "output"),
+        f"fit_timings_{args.tag}_{args.n}_{time.strftime('%Y%m%d')}")
+    with open(timings_file, "w") as fh:
+        json.dump(timings, fh, indent=2)
+    print(f"timings -> output/{os.path.basename(timings_file)} "
+          f"({timings['n_prompts_measured_here']} prompts measured here at "
+          f"{timings['mean_seconds_per_prompt']}s each)", flush=True)
 
     rate = wall / max(fitted_here, 1)
     print(f"DONE n={fitted} dim_batch={args.dim_batch} wall={wall:.0f}s "

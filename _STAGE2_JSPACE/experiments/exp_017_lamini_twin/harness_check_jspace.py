@@ -2,19 +2,26 @@
 
 Runs the whole J-space path on one layer only, with the five-prompt probe lens
 standing in for the twin lens, so that a coding error surfaces in minutes
-rather than after the real fit finishes. Writes output/exp017_jspace_harness.json
-by default, which the registered run does not read and does not overwrite.
+rather than after the real fit finishes. The registered run does not read what
+this writes and does not overwrite it.
 
-The output suffix can be given as the one argument, and a re-run should give a
-new one: the committed output/exp017_jspace_harness.json is the record of what
-ran on 2026-09-05 and is described in the results record, so overwriting it
-would erase evidence rather than add to it.
+Where it writes, and why it never overwrites. The output suffix may be given as
+the one argument; with no argument it is `_harness_<today's date>`, so a check
+run today lands in a file of its own. Either way an existing destination is
+refused rather than replaced, because two of the harness files under output/ are
+historical records that the results record describes:
+`exp017_jspace_harness.json` from 2026-09-05, whose recorded and actual
+permutation counts differ for the reason deviation 16 gives, and
+`exp017_jspace_harness_p200.json` from 2026-09-06, which is the re-run that
+shows the difference. Overwriting either would erase evidence rather than add
+to it.
 
 Usage:
-    python3 harness_check_jspace.py            # writes ..._harness.json
+    python3 harness_check_jspace.py              # writes ..._harness_YYYYMMDD.json
     python3 harness_check_jspace.py _harness_p200
 """
 import sys
+import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -22,7 +29,14 @@ sys.path.insert(0, str(HERE))
 
 import run_jspace
 
-suffix = sys.argv[1] if len(sys.argv) > 1 else "_harness"
+suffix = sys.argv[1] if len(sys.argv) > 1 else time.strftime("_harness_%Y%m%d")
+destination = HERE / "output" / f"exp017_jspace{suffix}.json"
+if destination.exists():
+    raise SystemExit(
+        f"refusing to overwrite {destination.name}, which already exists. The "
+        f"harness files under output/ are dated records of what ran on the day, "
+        f"so give this run a suffix of its own, for example "
+        f"{time.strftime('_harness_%Y%m%d')}_b.")
 
 run_jspace.PROBE_LAYERS = [0, 10]
 run_jspace.BAND = [10]

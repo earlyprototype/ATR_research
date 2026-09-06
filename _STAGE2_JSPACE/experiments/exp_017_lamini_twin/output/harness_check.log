@@ -225,3 +225,38 @@ and that is the only artifact under output/ this round changed.
        absent budget decision and one recording that nothing fits both leave no
        requirement, no requirement is never the registered requirement, and a
        run in that state is a sensitivity reading that says why.
+
+2026-09-06, sixth round of pull request review fixes. Four findings, all four
+real. Nothing new was written under output/ in this round: the two artifacts a
+run would now produce, a fit's own timings file and the budget decision's
+provenance sidecar, are written only when those steps are re-run, and neither
+step was re-run here. These lines record the checks instead.
+  choose_fit_budget.py, re-run in a scratch directory
+    -> with no source named it refuses, saying that reading a log from another
+       machine silently is how the rule went wrong.
+    -> with --probe-log against the committed output/fit_probe_db16.log it
+       reproduces output/fit_budget_decision.json byte for byte, 221.0 seconds a
+       prompt and 40 prompts, and writes a provenance sidecar naming the log,
+       its SHA-256 2c608d83174b0ccf21f204b18e23878590758b8cca458949958cb1fa364b3fed
+       and a mean of 221.0 seconds.
+    -> with --timings against a fixture at 1,000 seconds a prompt it chooses
+       zero prompts and names the section 6.2 fallback; against a fixture naming
+       neither machine nor day it refuses.
+  harness_check_jspace.py, both existing destinations
+    -> refuses to overwrite exp017_jspace_harness.json and
+       exp017_jspace_harness_p200.json, naming a dated suffix to use instead.
+       With no argument it now writes exp017_jspace_harness_<date>.json.
+  python3 make_tables.py
+    -> regenerated output/tables.md with no line added, changed or removed.
+  python3 jspace.py --selftest -> ALL PASS, 8 checks, unchanged.
+  python3 fit_twin_lens.py --selftest -> ALL PASS, 47 checks, five of them new:
+       a checkpoint completed under a 36,000 second cap is refused by a fit
+       under the registered 9,000, on both the resume path and the seeding path,
+       the same checkpoint is continuable by a fit under its own cap, a caller
+       naming no cap makes no comparison, and the fitting loop's own measurement
+       of what each prompt cost is what a probe now hands the budget rule.
+  python3 run_jspace.py --selftest -> ALL PASS, 47 checks, four of them new: a
+       lens fitted on more prompts than the budget chose is refused rather than
+       accepted as registered, it becomes a sensitivity reading with the opt-in,
+       a lens whose fit asked for another prompt count is refused, and the
+       requested count is part of what a stamp must match.

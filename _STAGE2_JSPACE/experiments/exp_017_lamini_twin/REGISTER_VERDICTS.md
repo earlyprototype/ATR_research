@@ -57,7 +57,7 @@ Format as in `REGISTER.md` section 2:
    identifiers erratum (f) allocated on 2026-09-05, and this experiment used
    only those, plus existing identifiers in citations.
 4. **Deviations** are listed flat in `RESULTS_EXP017.md` §4, and there are now
-   twenty-two. The one a register reader is most likely to want is that the
+   twenty-four. The one a register reader is most likely to want is that the
    twin's Jacobian lens was fitted on 40 WikiText-103 prompts, below the 50 the
    spec named as a deviation threshold and well below the 277 of the
    Neuronpedia lens it is compared against, by the mechanical application of

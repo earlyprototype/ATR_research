@@ -19,11 +19,12 @@ comparison. It is checked against the prompt count the spec's budget rule chose,
 recorded in output/fit_budget_decision.json, and against the provenance record
 the fitting script now stamps into every lens file it writes, which says which
 model at which revision and which fitting corpus the lens came from. A lens
-fitted on fewer prompts than the budget chose is not the registered instrument:
-it is either a fit the wall-clock cap stopped short or a deliberately smaller
-one, so by default it is refused and the run takes the spec's section 6.2 route,
-scoring both sides on the base lens and reporting H18b as untestable as
-registered. A lens with no provenance stamp, which is what the committed twin
+whose prompt count is not exactly the count the budget chose is not the
+registered instrument: a shorter one is either a fit the wall-clock cap stopped
+or a deliberately smaller one, and a longer one is a different and better
+instrument whose numbers are not the ones the record carries. Either way it is
+refused by default and the run takes the spec's section 6.2 route, scoring both
+sides on the base lens and reporting H18b as untestable as registered. A lens with no provenance stamp, which is what the committed twin
 lens is because it predates the stamp, is likewise refused unless
 --accept-unstamped-twin-lens is passed, which is recorded in the output. The
 lens-quality sensitivity check, which is not registered and carries no verdict
@@ -293,10 +294,19 @@ def budget_n_prompts(path=BUDGET_JSON):
 def twin_lens_decision(n_fitted, required, allow_short):
     """Whether a twin lens may carry the registered H18b comparison.
 
-    Returns "accepted" when the lens was fitted on at least the prompt count
-    the budget rule chose, "sensitivity" when it is shorter and the caller has
-    opted in, and "refused" when it is shorter and has not. A refused lens sends
-    the run down the spec's section 6.2 route, both sides on the base lens.
+    Returns "accepted" only when the lens was fitted on exactly the prompt count
+    the budget rule chose, "sensitivity" when the count differs in either
+    direction and the caller has opted in, and "refused" when it differs and the
+    caller has not. A refused lens sends the run down the spec's section 6.2
+    route, both sides on the base lens.
+
+    The count has to match exactly rather than merely reach the budget, because
+    the registered instrument is the lens that budget rule chose and no other. A
+    lens fitted on more prompts is a better lens and a different one: its
+    numbers are not the registered comparison's numbers, and calling it
+    registered would let a quietly larger fit replace the instrument the record
+    describes. Such a lens is still readable as a sensitivity arm, which is what
+    the opt-in is for.
 
     A requirement of None means the budget rule's decision could not be read,
     which is a broken checkout rather than a permissive one: nothing then
@@ -307,7 +317,7 @@ def twin_lens_decision(n_fitted, required, allow_short):
     """
     if n_fitted is None or required is None:
         return "refused"
-    if n_fitted >= required:
+    if n_fitted == required:
         return "accepted"
     return "sensitivity" if allow_short else "refused"
 
@@ -327,15 +337,21 @@ def load_lens(path):
                "provenance": ck.get("provenance")}
 
 
-def expected_twin_lens_provenance(corpus=CORPUS_COMMITTED):
+def expected_twin_lens_provenance(corpus=CORPUS_COMMITTED, required=None):
     """What a twin lens's stamp has to say to carry the registered comparison:
     the pinned twin weights and the committed fitting corpus, hashed here so
-    that no digest is copied out and left to drift, with the sequence and layer
-    settings EXP_017 fitted at."""
+    that no digest is copied out and left to drift, the sequence and layer
+    settings EXP_017 fitted at, and, when the budget rule's count is known, the
+    prompt count the fit asked for. That last one is compared as well as the
+    count the lens ended up averaging, because a fit can ask for one number and
+    reach another, and the registered instrument is the one that asked for the
+    budget's own count."""
     want = {"model": exp017_models.name("twin"),
             "revision": exp017_models.revision("twin"),
             "corpus_sha256": sha256_file(corpus) if Path(corpus).exists() else None}
     want.update(EXPECTED_TWIN_LENS_FIT)
+    if required is not None:
+        want["n_prompts_requested"] = int(required)
     return want
 
 
@@ -466,8 +482,12 @@ def selftest():
     check("a lens meeting the budget is accepted as registered",
           got == "accepted", got)
     got = twin_lens_decision(41, 40, False)
-    check("a lens exceeding the budget is accepted as registered",
-          got == "accepted", got)
+    check("a lens fitted on more prompts than the budget chose is refused, "
+          "because the registered instrument is that count and no other",
+          got == "refused", got)
+    got = twin_lens_decision(41, 40, True)
+    check("a longer lens with the opt-in becomes a sensitivity reading",
+          got == "sensitivity", got)
     got = twin_lens_decision(5, 40, False)
     check("a short lens is refused, sending the run to the section 6.2 route",
           got == "refused", got)
@@ -531,13 +551,24 @@ def selftest():
 
     # The provenance gate, which asks what a lens was fitted from rather than
     # how many prompts it averaged.
-    want = expected_twin_lens_provenance()
+    want = expected_twin_lens_provenance(required=40)
+    check("the requested prompt count is part of what a stamp must match",
+          want.get("n_prompts_requested") == 40,
+          f"{want.get('n_prompts_requested')} prompts asked for")
+    check("with no budget count known, the stamp is not asked for one",
+          "n_prompts_requested" not in expected_twin_lens_provenance(),
+          "nothing to compare against")
     check("the committed fitting corpus is hashed for the comparison",
           want["corpus_sha256"] is not None
           and len(str(want["corpus_sha256"])) == 64,
           f"{str(want['corpus_sha256'])[:12]} from {CORPUS_COMMITTED.name}")
     good = dict(want, model="MBZUAI/LaMini-GPT-124M", n_prompts_fitted=40,
                 fit_wall_seconds=8253.0, deadline_seconds=REGISTERED_CAP_SECONDS)
+    got, why = twin_lens_provenance_decision(dict(good, n_prompts_requested=50),
+                                             want, True)
+    check("a lens whose fit asked for another prompt count is refused",
+          got == "refused" and any("n_prompts_requested" in w for w in why),
+          "; ".join(why))
     got, why = twin_lens_provenance_decision(good, want, False)
     check("a lens stamped with this experiment's own fit is accepted",
           got == "accepted", f"{got} {why}")
@@ -743,10 +774,11 @@ def main():
 
     lenses = {"base": J_base}
     # A twin lens counts as the registered instrument only if it was fitted on
-    # at least the prompt count the spec's budget rule chose. Anything shorter
-    # is either a fit the wall-clock cap stopped or a deliberately smaller one,
-    # and scoring it as registered would report SUPPORTED or NOT SUPPORTED where
-    # spec section 6.2 requires the base lens on both sides.
+    # exactly the prompt count the spec's budget rule chose. A shorter one is
+    # either a fit the wall-clock cap stopped or a deliberately smaller one, and
+    # a longer one is a different instrument; scoring either as registered would
+    # report SUPPORTED or NOT SUPPORTED where spec section 6.2 requires the base
+    # lens on both sides.
     budget, budget_why = budget_requirement()
     required, registered_requirement = requirement_decision(
         args.twin_lens_min_prompts, budget)
@@ -783,7 +815,7 @@ def main():
         # corpus, or on a local checkout of another 768-wide model, so the
         # prompt count alone never establishes that it is the registered
         # instrument.
-        want = expected_twin_lens_provenance()
+        want = expected_twin_lens_provenance(required=required)
         prov, reasons = twin_lens_provenance_decision(
             meta_twin.get("provenance"), want, args.accept_unstamped_twin_lens)
         rep["twin_lens_provenance"] = {

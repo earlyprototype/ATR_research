@@ -944,9 +944,9 @@ is probably small in its own setting too.
 
 Recorded flat, whether or not they change a verdict, per the folder rule. The
 first four were written into the spec before any run, with their reasons.
-Deviations 5 to 9 arose during the run. Deviations 10 to 22 were found after it
+Deviations 5 to 9 arose during the run. Deviations 10 to 24 were found after it
 by reviews of the pull request, on 2026-09-05 for 10 to 14 and on 2026-09-06 for
-15 to 22, the later ones by successive reviews of the changes the earlier ones
+15 to 24, the later ones by successive reviews of the changes the earlier ones
 asked for, and each names what was found and what changed in response. None of
 them was found by the run itself, which is worth saying plainly: this record's
 own checks did not catch them.
@@ -1326,6 +1326,75 @@ own checks did not catch them.
     replacement is recorded here and in `output/harness_check.log` under
     2026-09-06.
 
+23. **The budget rule read one machine's timings by a path written into the
+    script, so a probe run anywhere else was ignored.** A fourth review on
+    2026-09-06 found it. The spec's section 6.2 rule turns a measured cost per
+    prompt into a prompt count, and the measurement is supposed to be of the
+    machine that will do the fitting. `choose_fit_budget.py` read
+    `output/fit_probe_db16.log`, the run log committed on 2026-09-05, from a
+    path fixed in its own text, and nothing else wrote that file: the probe
+    prints its timings to the terminal, and the reproduction command in section
+    8 did not redirect them anywhere. So a probe re-run on other hardware
+    changed nothing, and the rule went on answering 40 prompts from this
+    machine's 221.0 seconds a prompt however fast or slow the new machine was.
+    **What changed.** Every fit now writes its own measurement beside its lens,
+    `output/fit_timings_<tag>_<n>_<date>.json`, holding what each prompt it
+    computed cost, the machine's name and platform, the processor count and
+    thread count, and the day in universal time, all measured by this script
+    rather than parsed back out of a log. `choose_fit_budget.py` now names no
+    default at all and takes exactly one source, `--timings` for such a file or
+    `--probe-log` for a run log in the 2026-09-05 format, and refuses a timings
+    file that does not say which machine measured it and when. It writes a
+    provenance sidecar, `output/fit_budget_decision.provenance.json`, naming the
+    source, its SHA-256 digest and, when the source carries them, the machine
+    and the date; the decision file's own fields are untouched so that the
+    committed one still reproduces. **Checked, not assumed:** running the rule
+    on the committed probe log in a scratch directory reproduces
+    `output/fit_budget_decision.json` byte for byte, 221.0 seconds a prompt and
+    40 prompts, and a timings file at 1,000 seconds a prompt gives the count of
+    zero that deviation 21 describes. The committed decision has no sidecar
+    beside it, because it predates one, and section 8 now names the source in
+    the command that reproduces it.
+
+24. **Three more gates were narrower than they read.** The same review found
+    them, and none changes a committed number. First, a twin lens fitted on
+    more prompts than the budget rule chose was accepted as the registered
+    instrument, because the check asked for at least the chosen count rather
+    than exactly it, and there was even a self-test asserting that a lens of 41
+    prompts against a budget of 40 was registered. That was the wrong reading of
+    what registered means: the registered instrument is the lens the budget rule
+    chose, and a longer fit is a better instrument whose numbers are not the
+    ones this record carries. The count must now match exactly, in either
+    direction, and a lens that differs is refused or, with the opt-in, read as a
+    sensitivity arm. The provenance gate also compares the count the fit asked
+    for, which a stamp records, since a fit can ask for one number and reach
+    another. **Withdrawn by name: the self-test line that read "a lens exceeding
+    the budget is accepted as registered", which asserted the old behaviour.**
+    The committed 40-prompt lens is unaffected and still passes, which the
+    self-test checks against the file itself. Second, a checkpoint completed
+    under a deliberately long `--deadline-seconds` was continuable by a fit
+    under the registered 9,000 second cap: every prompt would already be
+    consumed, so the new fit would do no work, measure a few seconds, and stamp
+    the lens as a completion inside the registered cap when the real cost was
+    the long run. A checkpoint whose sidecar records a cap different from this
+    fit's is now refused on both the seeding path and the resume path, and every
+    stamp now also carries `resumed_from_wall_seconds` and
+    `wall_seconds_including_resumed` so that the whole cost of a lens is
+    readable rather than only the last invocation's share of it. **Those two
+    fields change no gate, and that is a deliberate limit:** treating the
+    cumulative time as the thing the cap governs would make the committed
+    lens's own route, a 1,105 second probe followed by an 8,253 second fit,
+    exceed 9,000 seconds together, and this record has always said the cap
+    governs the fit run while the spec's section 9.1 treats the probe as a step
+    of its own. Whether the cap should govern the sum is a question for the
+    operator rather than a change to make quietly, and section 6.3 item 5's
+    ruling on conventions is where it belongs. Third, running the harness check
+    with no argument wrote `output/exp017_jspace_harness.json`, the 2026-09-05
+    artifact whose recorded and actual permutation counts differ for the reason
+    deviation 16 gives, so the evidence for that deviation could have been
+    overwritten by a routine smoke test. The harness now refuses any destination
+    that exists and, with no argument, writes a file named for today's date.
+
 ## 5. H18b verdict: **SUPPORTED, at exactly the pre-registered threshold**
 
 The registered wording asks whether post-training changes the settled states'
@@ -1561,7 +1630,13 @@ All paths relative to this directory.
   as the record of what ran on 2026-09-05. Deviation 16 explains the difference
   between the two.
 - `output/fit_budget_decision.json`: the mechanical application of the spec's
-  budget rule to the timing probe.
+  budget rule to the timing probe. Since 2026-09-06 the rule is given its
+  source on the command line and writes a provenance sidecar beside its
+  decision; the committed decision predates the sidecar, and deviation 23
+  records what it was made from. A fit run today also writes
+  `output/fit_timings_<tag>_<n>_<date>.json`, its own measurement of what
+  each prompt cost on the machine that ran it, which is what the rule reads
+  anywhere but the machine that ran this experiment.
 - `output/tables.md`: every table in this record, generated from the JSON.
 - Run logs: `output/loop_twin.log`, `output/loop_base.log` (which also carries
   the partition analysis output, because the two ran in one chained
@@ -1630,8 +1705,9 @@ no timing written down, so none is given here.
 3. `python3 exp017_partition.py`, the H18 and H18a computation.
 4. `python3 fit_twin_lens.py --n 5 --dim-batch 16 --tag probe`, the timing
    probe, 1,105 seconds for 5 prompts, that is 18 minutes
-   (`output/fit_probe_db16.log`); then `python3 choose_fit_budget.py`, which
-   applies the spec's budget rule to it; then `python3 fit_twin_lens.py --n 40
+   (`output/fit_probe_db16.log`); then `python3 choose_fit_budget.py
+   --probe-log output/fit_probe_db16.log`, which applies the spec's budget rule
+   to it; then `python3 fit_twin_lens.py --n 40
    --dim-batch 16 --tag twin --accept-unstamped-checkpoint`, the lens fit,
    8,253 seconds for the 35 prompts it computed, that is 2 hours 18 minutes
    (`output/fit_twin.log`). The last option is needed only against the
@@ -1642,7 +1718,23 @@ no timing written down, so none is given here.
    checkpoint sitting at its own output path before resuming it, and
    refuses one whose stamped model, revision, corpus digest or settings
    disagree, so a checkpoint left by an earlier run with different
-   arguments stops the fit instead of feeding it.
+   arguments stops the fit instead of feeding it, and refuses one completed
+   under a different wall-clock cap, so a fit finished under a long
+   `--deadline-seconds` cannot be re-stamped as a completion inside the
+   registered 9,000 seconds.
+
+   **Naming the timings is now part of the command, added 2026-09-06.** The
+   budget rule used to read `output/fit_probe_db16.log` by a path written into
+   the script, so a probe re-run on other hardware printed its own timings to
+   the terminal and the rule kept answering with this machine's 221.0 seconds a
+   prompt. `choose_fit_budget.py` now names no default and takes exactly one
+   source: `--probe-log`, which is the command above and the only way to
+   reproduce the committed decision, or `--timings`, which reads the file every
+   fit now writes under `output/fit_timings_<tag>_<n>_<date>.json` holding what
+   each prompt cost on the machine that ran it, that machine's name and the day.
+   A timings file naming neither machine nor day is refused. **Reproducing on
+   other hardware means using `--timings` from a probe run there**, and the
+   count it chooses may differ from 40, which is the point.
 
    **The order matters, and so does the reuse.** The 40-prompt lens is not 40
    prompts of fresh work. The probe fits the first 5 prompts of the same list in
@@ -1702,9 +1794,15 @@ no timing written down, so none is given here.
    comparison in the convention the lens matrices were fitted in and writes
    `output/exp017_jspace_hfframe.json`, 114 seconds. Both feed section 3.6, and
    `make_tables.py` renders them into `output/tables.md` alongside the
-   registered tables. `python3 harness_check_jspace.py _harness_p200` re-runs
-   the cheap harness check with the shuffle count taking effect, 48 seconds,
-   writing to its own file so that the committed harness artifact stands.
+   registered tables. `python3 harness_check_jspace.py _harness_p200` re-ran the
+   cheap harness check with the shuffle count taking effect, 48 seconds, writing
+   to its own file so that the committed harness artifact stands. **That exact
+   command no longer runs, and deliberately, from 2026-09-06:** the harness
+   refuses any destination that already exists, so re-running it needs a suffix
+   of its own, and with no argument at all it writes
+   `output/exp017_jspace_harness_<today's date>.json`. Both committed harness
+   files are dated records the record describes, and neither can now be
+   overwritten by a re-run.
 
 **EXP_017 COMPLETE. H18: SUPPORTED. H18a: REFUTED. H18b: SUPPORTED at exactly
 the pre-registered threshold, in both coordinate conventions, on different band
