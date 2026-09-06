@@ -260,6 +260,92 @@ def source_rule_selection(rows, items):
     return out
 
 
+def component_split(items, tokens_of):
+    """A split of a battery into a tuning half and a held-out half that never
+    puts two units sharing a lens direction on opposite sides. The committed
+    split assigns alternate items, which for H17 puts 19 of its 55 source and
+    target tokens in both halves, so under the null that a lens direction is
+    nothing but a random direction the setting chosen on the tuning half is
+    not independent of the held-out outcomes. Whole connected components are
+    assigned here instead, in a mechanical order fixed before any outcome is
+    read: components sorted by the smallest unit identifier they contain, then
+    dealt alternately, tuning first. Returns a dictionary from unit identifier
+    to half, or None when the battery is a single component and no such split
+    exists."""
+    key = component_key_of(list(items), tokens_of)
+    comps = {}
+    for i, k in sorted(key.items()):
+        comps.setdefault(k, []).append(i)
+    if len(comps) < 2:
+        return None
+    out = {}
+    for n, k in enumerate(sorted(comps)):
+        for i in comps[k]:
+            out[i] = "tuning" if n % 2 == 0 else "heldout"
+    return out
+
+
+def component_split_reading(rows, items_list):
+    """H17 scored again under the component-respecting split, with the whole
+    selection redone on the new tuning half: the source rule, the layer set,
+    the strength and the position mode are chosen together there, exactly as
+    section 5.1 of the specification chooses them, and the choice is then
+    scored on the new held-out half. Reported as a sensitivity reading beside
+    the committed alternating split, which is the one the specification
+    registers; this split was formed after the run and is not pre-registered.
+    Its point is that no token of its tuning half appears in its held-out
+    half, so the choice of setting cannot borrow strength from the outcomes it
+    is later scored against."""
+    items = {it["item_id"]: it for it in items_list}
+    toks = lambda i: (items[i]["source_tok"], items[i]["target_tok"])
+    half = component_split(items, toks)
+    if half is None:
+        return None
+    rule_of = {i: it["source_rule"] for i, it in items.items()}
+    def rates(split, extra=None):
+        acc = defaultdict(lambda: defaultdict(lambda: [0, 0]))
+        for r in rows:
+            if half[r["item_id"]] != split:
+                continue
+            if extra and not extra(r):
+                continue
+            a = acc[(r["layers"], r["alpha"], r["posmode"])][r["arm"]]
+            a[0] += r["in_top5"]; a[1] += 1
+        return {c: {k: (n / d if d else 0.0, n, d) for k, (n, d) in v.items()}
+                for c, v in acc.items()}
+    rules = sorted(set(rule_of.values()))
+    joint = {}
+    for rule in rules:
+        for cell, arms in rates("tuning", lambda r, rule=rule: rule_of[r["item_id"]] == rule).items():
+            joint[(cell, rule)] = arms
+    def k(item):
+        (cell, rule), arms = item
+        lens = arms.get("lens", (0, 0, 0))[0]
+        ctrl = arms.get("randdir", (0, 0, 0))[0]
+        ls, alpha, mode = cell
+        return (-lens, -(lens - ctrl), alpha, len(ls.split("-")),
+                int(ls.split("-")[0]), MODE_ORDER.index(mode), rules.index(rule))
+    (bc, br), _ = sorted(joint.items(), key=k)[0]
+    flt = lambda r: rule_of[r["item_id"]] == br
+    counts = {}
+    for name, split in (("tuning", "tuning"), ("heldout", "heldout")):
+        counts[name] = arms_of(rates(split, flt), bc)
+        counts[name + "_pooled"] = arms_of(rates(split), bc)
+    comps = defaultdict(list)
+    for i, h in half.items():
+        comps[h].append(i)
+    return dict(
+        split="connected components dealt alternately, tuning first",
+        n_components=len(set(component_key_of(list(items), toks).values())),
+        component_sizes=sorted((len([i for i in items if component_key_of(list(items), toks)[i] == k]))
+                               for k in sorted(set(component_key_of(list(items), toks).values()))),
+        half_sizes={h: len(v) for h, v in sorted(comps.items())},
+        tokens_shared_between_halves=len(
+            {t for i in comps["tuning"] for t in toks(i)}
+            & {t for i in comps["heldout"] for t in toks(i)}),
+        chosen_cell=list(bc), chosen_rule=br, **counts)
+
+
 def exact_within_item_test(items):
     """Exact one-sided test of the lens arm against control A on the same
     items. `items` is a list of (lens_success, [control_success per seed]).
@@ -630,6 +716,53 @@ def mirrored_target_tests(battery, cell, rule_cell=None):
     return out
 
 
+def global_draw_tests():
+    """The global-draw test, which is the one probability this record asks to
+    be believed for H17. One draw is one random direction for every concept the
+    battery can reach, seeded by the concept's token, the layer and the draw
+    index, with the battery's own target-selection rule applied to those
+    directions wherever the battery selects its target by a lens reading. A
+    whole held-out set is scored under one draw and yields one number, so
+    nothing is multiplied and nothing is assumed about independence between
+    units. Under the null that a lens direction is nothing but a norm-matched
+    random direction, the lens arm's assignment is exchangeable with the D
+    random assignments, and the probability of a total at least as large as the
+    lens arm's is (1 plus the number of draws reaching it) divided by (D plus
+    1). `global_draw_control.py` produces the draws. Returns None when that run
+    is not present in this checkout."""
+    path = D + "output/global_draw_records.csv"
+    prov_path = D + "output/global_draw_provenance.json"
+    if not (os.path.exists(path) and os.path.exists(prov_path)):
+        return None
+    prov = json.load(open(prov_path))
+    totals = defaultdict(lambda: defaultdict(int))
+    units = defaultdict(set)
+    with open(path) as fh:
+        for r in csv.DictReader(fh):
+            totals[r["set_name"]][int(r["draw"])] += int(r["success"])
+            units[r["set_name"]].add((r["item_id"], r["func"]))
+    out = {}
+    for name, per_draw in sorted(totals.items()):
+        lens_total, n_units = prov["lens_totals"][name]
+        vals = sorted(per_draw.values())
+        n = len(vals)
+        reach = sum(1 for v in vals if v >= lens_total)
+        spec = prov["sets"][name]
+        out[name] = dict(
+            battery=spec["battery"], cell=list(spec["cell"]), split=spec["split"],
+            source_rule=spec["rule"], n_units=n_units, n_draws=n,
+            lens_successes=lens_total,
+            draws_reaching_the_lens_arm=reach,
+            probability=(1 + reach) / (n + 1), floor=1 / (n + 1),
+            control_draw_totals=dict(
+                max=vals[-1], median=vals[n // 2],
+                mean=round(sum(vals) / n, 3),
+                draws_with_none=sum(1 for v in vals if v == 0),
+                successes_over_all_draws=sum(vals),
+                unit_draws=n * n_units))
+    return out
+
+
 def baseline_hit_counts(rows, cell):
     """For H17a: how much of the lens arm's success at one setting is carried
     by units whose target answer was already among the unmodified model's five
@@ -888,6 +1021,8 @@ if __name__ == "__main__":
         if b == "h17":
             out["source_rule_selection"] = source_rule_selection(
                 rows, json.load(open(D + "battery_h17.json")))
+            out["component_split"] = component_split_reading(
+                rows, json.load(open(D + "battery_h17.json")))
         if b == "h17a":
             out["pair_level_selection"] = pair_level_selection(rows, out["chosen_cell"])
         if b == "h17b":
@@ -912,6 +1047,11 @@ if __name__ == "__main__":
         mir = mirrored_target_tests(b, out["chosen_cell"], rule_cell)
         if mir:
             out["mirrored_target_tests"] = mir
+        gd = global_draw_tests()
+        if gd:
+            mine = {k: v for k, v in gd.items() if v["battery"] == b}
+            if mine:
+                out["global_draw_tests"] = mine
         json.dump(out, open(D + f"output/summary_{b}.json", "w"), indent=1)
         c = out["chosen_cell"]
         print(f"\n=== {b}: chosen on the tuning half: layers {c[0]}, "

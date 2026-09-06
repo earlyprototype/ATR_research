@@ -54,21 +54,27 @@ register:
   `output` rule into the 7 connected groups within which any two frames
   share a lens direction, and comparing them with a control whose random
   directions are reused across frames exactly as the lens directions are,
-  the exact test (see "Statistical distinguishability" below) gives 0.00137,
-  which is 1 in 729 and is the smallest value 6 informative groups of 3
-  draws can return. The same 0.00137 comes out of the stricter control that
-  also chooses its own target concept by the rule the battery used, so this
-  number does not depend on the lens arm having been allowed to pick a
-  favourable target. Three earlier figures for this gap are withdrawn as
-  headlines: 3 in 1,000,000,000, which counted every item as an independent
-  draw (correction 16); 5 in 100,000 computed against the registered
-  control A, whose random directions are not shared inside a group as the
-  lens arm's are (correction 19); and 5 in 100,000 computed with the source
-  concept as the group, a grouping under which different groups still share
-  a direction (correction 25). The last of those three is still reported
-  below, against the corrected control, because earlier versions of this
-  record and of the proposed register row led with it; the component
-  grouping is what both lead with now.
+  the record's one probability for H17 comes from a different test, described
+  under "Statistical distinguishability" below, which multiplies nothing and
+  assumes nothing about whether the frames are independent. Splitting the 84
+  frames into halves that share no concept at all, choosing the whole setting
+  on one half and scoring the other, the lens arm redirected
+  20 of 22 held-out frames, and
+  0 of 499 random assignments of
+  directions to concepts reached that total, giving 0.002, which is the
+  smallest value 499 draws can return. Under the split the
+  specification registers, whose halves share 19 of the battery's 36 concepts
+  so that its setting was not chosen independently of what it scores, the same
+  test gives 0.002 on 21 frames. Four earlier figures for this
+  gap are withdrawn as headlines: 3 in 1,000,000,000, which counted every item
+  as an independent draw (correction 16); 5 in 100,000 against the registered
+  control A, whose random directions are not shared inside a group as the lens
+  arm's are (correction 19); 5 in 100,000 with the source concept as the
+  group, a grouping under which different groups still share a direction
+  (correction 25); and 0.00137 with the connected component as the group,
+  which multiplies a factor per group and so needs the groups to be
+  independent under the control too (correction 30). All four are still
+  reported below as trail.
 - **H17a, flexible generalisation: SUPPORTED.** Exchanging one country for
   another inside the model redirected at least two of the three separate
   questions about that country on **87 percent of the held-out pairs, 13 of
@@ -137,7 +143,14 @@ register:
   percent**. The exact within-item test (the lens draw exchangeable with
   the three control draws inside each item, see "Statistical
   distinguishability" below) gives 0.25 on the held-out half (1 of 8
-  against 0 of 8), and that is the only valid test of the selected
+  against 0 of 8), which is that test's floor there, and a second reading of
+  the same eight items, scoring the whole held-out set under each of
+  499 random assignments of directions to concepts rather than
+  conditioning on each item alone, gives 0.002, because not one of those
+  assignments flipped any of the eight items; both carry the caveat that 3 of
+  this battery's 16 concepts sit in both of its halves, so its setting was not
+  chosen independently of what it is scored on (correction 29). The held-out
+  half is the only valid test of the selected
   setting: the tuning half's three flips were used to choose the layer,
   strength and position mode from 126 candidate settings and cannot also
   count as evidence for them. Over all 16 items the same test would give
@@ -329,7 +342,12 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
-Cluster-level exact tests against the token-seeded cluster-matched control, which treat the scored units that share a lens direction as a single draw rather than as independent ones. This control seeds every random direction by the token it stands in for, so it reuses a direction across units wherever the lens arm reuses one. The grouping `by component` is the connected components of the graph that joins two units whenever they use the same lens direction, in either the source or the target role, so two different components share no direction at all; the groupings by source and by source and target leave different groups sharing a direction and so still assume more independence than the design supports. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
+The global-draw test, which is the one probability this record asks to be believed. One draw is one random direction for every concept the battery can reach, seeded by that concept's token, the layer and the draw index, with the battery's own target-selection rule applied to those directions wherever the battery selects its target by a lens reading. A whole held-out set is scored under one draw and yields one number, so nothing is multiplied and nothing is assumed about whether the units are independent of one another. The probability is one plus the number of draws reaching the lens arm's total, divided by one plus the number of draws:
+
+- h17 committed heldout: committed alternating split, layers 7-8-9, strength 2.0, all, source rule output; the lens arm redirected 18 of 21 units, and 0 of 499 random draws reached that total, giving a probability of 0.002 against a floor of 0.002. The random draws redirected 130 units in total over 10479 unit draws, their best draw reaching 4 of 21 and 404 of 499 draws redirecting nothing.
+- h17 component split heldout: component-respecting split, layers 6-7-8, strength 2.0, all, source rule output; the lens arm redirected 20 of 22 units, and 0 of 499 random draws reached that total, giving a probability of 0.002 against a floor of 0.002. The random draws redirected 135 units in total over 10978 unit draws, their best draw reaching 7 of 22 and 418 of 499 draws redirecting nothing.
+
+Cluster-level exact tests against the token-seeded cluster-matched control, reported as trail rather than as probabilities to believe, because they multiply a factor per cluster and so need the clusters to be independent of one another, which the mirrored control's own choice of concepts breaks. They treat the scored units that share a lens direction as a single draw rather than as independent ones. This control seeds every random direction by the token it stands in for, so it reuses a direction across units wherever the lens arm reuses one. The grouping `by component` is the connected components of the graph that joins two units whenever they use the same lens direction, in either the source or the target role, so two different components share no direction at all; the groupings by source and by source and target leave different groups sharing a direction and so still assume more independence than the design supports. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
 
 - pooled heldout by source: cluster is the source concept; 27 lens successes over 42 scored units in 20 clusters (12 of them informative), probability 1.88e-06, resolution 1.88e-06.
 - pooled heldout by source and target: cluster is the source and target concepts; 27 lens successes over 42 scored units in 31 clusters (19 of them informative), probability 1.72e-09, resolution 8.6e-10.
@@ -517,7 +535,7 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
-Cluster-level exact tests against the token-seeded cluster-matched control, which treat the scored units that share a lens direction as a single draw rather than as independent ones. This control seeds every random direction by the token it stands in for, so it reuses a direction across units wherever the lens arm reuses one. The grouping `by component` is the connected components of the graph that joins two units whenever they use the same lens direction, in either the source or the target role, so two different components share no direction at all; the groupings by source and by source and target leave different groups sharing a direction and so still assume more independence than the design supports. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
+Cluster-level exact tests against the token-seeded cluster-matched control, reported as trail rather than as probabilities to believe, because they multiply a factor per cluster and so need the clusters to be independent of one another, which the mirrored control's own choice of concepts breaks. They treat the scored units that share a lens direction as a single draw rather than as independent ones. This control seeds every random direction by the token it stands in for, so it reuses a direction across units wherever the lens arm reuses one. The grouping `by component` is the connected components of the graph that joins two units whenever they use the same lens direction, in either the source or the target role, so two different components share no direction at all; the groupings by source and by source and target leave different groups sharing a direction and so still assume more independence than the design supports. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
 
 - pairs primary heldout: cluster is the source country; 13 lens successes over 15 scored units in 5 clusters (5 of them informative), probability 0.00412, resolution 0.00412.
 - pairs primary heldout by component: cluster is the connected component of pairs sharing any lens direction, source or target; 13 lens successes over 15 scored units in 1 cluster (1 of them informative), probability 0.333, resolution 0.333.
@@ -628,7 +646,11 @@ Exact within-item tests against control A (the lens draw exchangeable with the c
 
 Only the held-out lines test the selected setting; the tuning half chose it, so tests that include tuning items are reported for completeness and carry no evidential weight.
 
-Cluster-level exact tests against control A, the registered control. Every cluster in this battery holds a single item, because no two items share a source concept, so the lens draw and each control draw are exchangeable inside the cluster and these probabilities are valid as they stand; they are the within-item tests above. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
+The global-draw test, which is the one probability this record asks to be believed. One draw is one random direction for every concept the battery can reach, seeded by that concept's token, the layer and the draw index, with the battery's own target-selection rule applied to those directions wherever the battery selects its target by a lens reading. A whole held-out set is scored under one draw and yields one number, so nothing is multiplied and nothing is assumed about whether the units are independent of one another. The probability is one plus the number of draws reaching the lens arm's total, divided by one plus the number of draws:
+
+- h17b committed heldout: committed alternating split, layers 7, strength 2.0, all_no_bos; the lens arm redirected 1 of 8 units, and 0 of 499 random draws reached that total, giving a probability of 0.002 against a floor of 0.002. The random draws redirected 0 units in total over 3992 unit draws, their best draw reaching 0 of 8 and 499 of 499 draws redirecting nothing.
+
+Cluster-level exact tests against control A, the registered control. No two items of this battery share a source concept, so a cluster formed by source concept holds a single item and the lens draw and each control draw are exchangeable inside it; those rows are the within-item tests above. Three pairs of items do share a concept across the source and target roles, so the by-component rows group 16 items into 13 clusters, and on the held-out half, where no such sharing occurs, the two groupings agree. Resolution is the smallest probability these outcomes can produce, one over the draws per cluster raised to the number of clusters whose draws are not all equal:
 
 - items all: cluster is the source concept; 4 lens successes over 16 scored units in 16 clusters (4 of them informative), probability 0.00391, resolution 0.00391 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
 - items all by component: cluster is the connected component of items sharing any lens direction, source or target; 4 lens successes over 16 scored units in 13 clusters (3 of them informative), probability 0.0156, resolution 0.0156 (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it).
@@ -684,10 +706,10 @@ control draws, which is not an exchangeable pair because a union of draws
 succeeds more often than one draw (deviation 13).
 
 **Statistical distinguishability when the items share a direction.** Which
-probabilities this record asks to be believed, and what each one assumes,
-in one place and before the reasoning. This paragraph was rewritten on
-2026-09-06 after a second review of the same day; the trail of what each
-earlier version claimed is in corrections 16, 19, 25, 26 and 27.
+probability this record asks to be believed, and what it assumes, in one
+place and before the reasoning. This paragraph was rewritten again on
+2026-09-06 after a third review of the same day; the trail of what each
+earlier version claimed is in corrections 16, 19, 25, 26, 27, 29 and 30.
 
 The redirection counts are descriptive measurements and they stand
 unchanged, assuming nothing beyond the scoring rule: 13 of 15 held-out
@@ -696,46 +718,67 @@ country pairs redirected against 0 of 30 control trials for H17a, and 18 of
 The registered verdicts rest on those counts against the registered
 thresholds, and on nothing below.
 
-Two probabilities are asked to be believed, both for H17 and both at the
-protocol setting, meaning the tuning-selected source rule `output`, and both
-on the held-out half. Grouping the 21 held-out frames into the 7 connected
-groups within which any two frames share a lens direction, and comparing the
-lens arm with a control whose random directions are reused across frames
-exactly as the lens directions are, the exact test gives 0.00137, which is 1
-in 729 and is the smallest value 6 informative groups of 3 draws can return.
-Adding the battery's own target-selection rule to that control, so that the
-control picks its own target concept by the same layer-8 reading applied to
-its own random directions rather than being handed the concept the lens
-picked, gives the same 0.00137. The first assumes that groups sharing no
-lens direction are independent of one another, which is what the design
-supports, and that the lens arm's target is comparable with a control target
-that was not selected; the second drops that second assumption and is the
-only probability here that does not condition on the lens-selected targets.
-Both assume the exchangeability that the registered null itself asserts,
-that a lens direction is nothing but a norm-matched random direction.
+One probability is asked to be believed, and it is for H17. Split the 84
+report frames into halves that never put two frames sharing a concept on
+opposite sides, choose the source rule, the layer set, the strength and the
+position mode on one half and score the other, and compare the lens arm with
+random draws in which a whole half is scored under one random assignment of
+directions to concepts. The lens arm redirected 20 of
+22 held-out frames at the setting that half's own tuning chose,
+layers 6-7-8, strength 2.0, all positions, source rule
+`output`; 0 of 499
+random assignments reached that total, so the probability is 0.002, against
+a floor of 0.002 that 499 draws impose. That single number
+assumes three things and no more: that the scoring rule is the registered
+one, that under the null a lens direction is nothing but a norm-matched
+random direction of the same lengths, and that the random assignment is a
+fair stand-in for the lens arm's, which is why the control also chooses its
+own target concept by the battery's own rule rather than being handed the
+concept the lens chose. It assumes nothing about whether the frames are
+independent of one another, because a whole half is one draw and no factors
+are multiplied, and it assumes nothing about the tuning half, because the
+two halves share no concept.
+
+The same test under the split the specification registers, which assigns
+alternate frames rather than whole groups of them, gives 0.002 on
+21 held-out frames with the lens arm at 18,
+and it is reported below with its caveat stated inside the sentence: 19 of
+the 36 concepts the battery uses appear in both of the registered split's
+halves, so the setting chosen on its tuning half is not independent of its
+held-out outcomes under the null, and that probability is not clean of the
+choice that produced it.
 
 Everything else in this section is reported for the trail and is not asked
 to be believed as a probability. The item-level tests treat every scored
 unit as an independent draw and overstate the evidence (correction 16). The
-cluster-level tests against control A, the registered control, use a control
-whose randomness is not shared inside a group as the lens arm's is
-(correction 19). The cluster-level tests against the first cluster-matched
-control of 2026-09-06 fix that at the level of the group but still redraw
-the target direction for every unit where the lens arm reuses one direction
-across units (correction 26). The groupings by source concept, and by source
-and target concept, leave different groups sharing a direction, so their
-independence assumption is not supported by the design (correction 25).
+cluster-level tests against control A use a control whose randomness is not
+shared inside a group as the lens arm's is (correction 19). The
+cluster-level tests against the first cluster-matched control of 2026-09-06
+fix that at the level of the group but redraw the target direction for every
+unit where the lens arm reuses one direction across units (correction 26).
+The groupings by source concept, and by source and target concept, leave
+different groups sharing a direction (correction 25). And every one of the
+cluster-level tests, including the connected-component grouping, multiplies
+a factor per group, which needs the groups to be independent under the
+control as well as under the lens arm; the mirrored control chooses its own
+concepts, and one word, ' orange', sits in two of the four category lists,
+so that independence is not guaranteed for it (correction 30). The
+component-product figures are withdrawn as headlines by name: 0.00137 for
+H17 at the protocol setting, 0.0123 pooled over both source rules, 0.037 for
+the `lens` source rule, and their counterparts against the mirrored control,
+0.00137, 0.0123 and 0.0741.
 
-For H17a there is no probability to believe. Its 15 held-out pairs are
-three pairs for each of five source countries drawn from the same five
-target countries, so every pair is connected to every other by a shared
-country direction and the whole held-out half is a single group. A single
-group of three draws cannot return less than one third, and it returns
-exactly that, so the grouped test cannot distinguish the arms at all. The
-descriptive count, 13 of 15 pairs against 0 of 30 control trials, is what
-H17a rests on, and the value 0.0041 that earlier versions of this record
-gave is withdrawn (correction 25). For H17b the held-out test is unchanged
-at 0.25, because no two of its eight held-out items share a concept.
+For H17a there is no probability to believe, and no split that would give
+one. All 14 of its country concepts appear in both halves of its committed
+split, and its 50 pairs form a single connected group, so there is no way to
+divide it into halves that share no concept and no way to group it into more
+than one independent cluster. H17a rests on its counts, 13 of 15 held-out
+pairs against 0 of 30 control trials, and on the registered threshold they
+clear. For H17b the within-item test still gives 0.25 on the held-out half,
+which is that test's floor there, and the global-draw test on the same eight
+items gives 0.002,
+with the same caveat as H17's registered split, since 3 of H17b's 16
+concepts appear in both of its halves.
 
 The rest of this section says why, and gives every number.
 
@@ -913,7 +956,11 @@ this control succeeded on only one held-out frame in 168 draws. H17a gives
 one third at every setting and every reading, which is the floor for a
 single group, so it distinguishes nothing. H17b is unchanged at 0.25 on the
 held-out half and moves from 0.0039 to 0.0156 over all 16 items, where the
-components merge ' bee' to ' cow' with ' cow' to ' hen'.
+components merge ' bee' to ' cow' with ' cow' to ' hen'. Every figure in this
+paragraph is a product of one factor per component and is withdrawn as a
+headline by correction 30, which explains why such a product needs more than
+the lens arm's own concepts to be independent; they are kept here as trail,
+and the probability the record now leads with is the global-draw one below.
 
 **The selection the control was never given, and the mirrored control that
 gives it.** Every probability above compares a lens arm whose target concept
@@ -952,9 +999,12 @@ mirrored control redirected nothing at all on the held-out `output`-rule
 frames. Pooled over both source rules it gives 0.0123 by component, again
 identical. The `lens` source rule alone weakens, from 0.037 to 0.074 by
 component and from 0.0123 to 0.048 by source concept, because the mirrored
-control's two successes both fall there. The protocol reading, which is the
-one the register row quotes, therefore survives the removal of the selection
-advantage unchanged. Established as a measurement.
+control's two successes both fall there. The protocol reading therefore survives the
+removal of the selection advantage unchanged. Established as a measurement.
+These figures too are products over components and are withdrawn as headlines
+by correction 30; what survives from this paragraph is the measurement that
+the mirrored control redirected nothing on the held-out `output`-rule frames,
+which is what the global-draw test below rests on.
 
 One honest qualification about the mirror, because it is not exact. The
 battery ranked candidates by the full lens readout at layer 8, which passes
@@ -967,6 +1017,103 @@ so the two rules agree more often than chance over roughly a dozen
 candidates but are not the same rule. The mirror therefore matches the kind
 of conditioning the battery applied, not its exact form. Inferred, not
 established.
+
+**The halves share concepts, and the split that does not.** A tuned setting
+is only honest if the half that chose it and the half that scores it are
+independent under the null. They are not, in the split the specification
+registers. That split deals alternate frames to the two halves, and the
+frames draw their concepts from four fixed word lists, so 19 of the 36
+concepts the battery uses appear in both halves: the tuning half's 27
+concepts and the held-out half's 28 overlap in 19. Under the null that a
+lens direction is nothing but a random direction, a draw that happens to
+favour ' football' shows up in both halves at once, so the setting chosen on
+one half is not independent of the outcomes on the other, and the exact
+tests, which treat the chosen setting as fixed, do not account for it. Review
+found this on 2026-09-06 (correction 29).
+
+There is a split that avoids it, for H17. Joining two frames whenever they
+use the same concept in either role divides the 84 frames into exactly 4
+groups, one per category: 24 sport frames, 20 fruit, 20 colour and 20
+animal. Dealing whole groups alternately, in the fixed order of the smallest
+frame identifier each contains and tuning first, puts the animal and fruit
+frames in the tuning half, 40 frames, and the colour and sport frames in the
+held-out half, 44 frames, with no concept in both. One rule was written and
+applied once; no alternative deal was tried, and the rule is in
+`analyse.component_split`. The split is not pre-registered, it was formed
+after the run, and it is reported as a sensitivity reading rather than as
+the protocol result.
+
+Redoing the whole selection on that tuning half, the source rule, the layer
+set, the strength and the position mode together as section 5.1 of the
+specification requires, chooses layers 6-7-8, strength
+2.0, all positions and the source rule
+`output`, which differs from the committed split's choice of
+layers 7-8-9 in the layer set alone. Scored on the held-out half, the lens
+arm redirected 20 of 22
+frames, which is 91 percent, against
+1 of 44 for control A;
+the committed split gives 18 of 21 against 0 of 42 at its own chosen setting.
+Pooled over both source rules the component split gives
+26 of 44
+against 3 of
+88. Both splits clear the registered
+thresholds of at least 50 percent against at most 10 percent, so the verdict
+does not turn on which split is used, and the counts are what the verdict
+rests on.
+
+H17a has no such split. Every one of its 14 country concepts appears in both
+halves, because its pairs are drawn from one pool of countries in both
+roles, and its 50 pairs form a single connected group. H17b is nearly clean:
+3 of its 16 concepts appear in both halves, since ' cow', ' bird' and ' cat'
+are each the source of one item and the target of another, and its 16 items
+form 13 groups.
+
+**The global-draw test, and why the component product had to go.** Every
+cluster-level test above multiplies one factor per cluster, which needs the
+clusters to be independent of one another under the control as well as under
+the lens arm. The mirrored control chooses its own concepts for every draw,
+so the clusters built from the battery's own concepts do not automatically
+hold for it. In this battery the mirrored control always chooses inside the
+frame's own category, and the clusters are exactly the four categories, so
+the crossing is not the free-for-all it could be; but one word, ' orange',
+belongs to both the fruit list and the colour list, so a draw that gives
+' orange' a lucky direction can act in two clusters at once and the factors
+are not independent. That is enough to withdraw the products (correction
+30).
+
+The test that replaces them assumes no independence at all. One draw is one
+random direction for every concept the battery can reach, seeded by that
+concept's token, the layer and the draw index, with the battery's own
+target-selection rule applied to those directions. A whole held-out set is
+scored under one draw and yields one number, which is directly comparable
+with the lens arm's own number for the same set, and with D draws the
+probability that a random assignment matches or beats the lens arm is one
+plus the number that did, divided by D plus one. It is a Monte Carlo
+randomisation test, and its floor is one divided by D plus one, which is why
+499 draws were run rather than a handful.
+
+Under the component-respecting split, at that split's own chosen setting,
+the lens arm redirected 20 of 22 held-out
+frames and 0 of 499 random
+assignments reached that total, so the probability is 0.002, at its floor of
+0.002. The random assignments redirected
+135 frames in total over
+10978 frame draws, their best single
+assignment reaching 7 of 22, and
+418 of 499 assignments
+redirected nothing at all. Under the registered alternating split, at the
+setting that split chose, the lens arm redirected 18 of
+21 and 0 of 499
+assignments reached it, giving 0.002, with the caveat that its two halves
+share 19 concepts so its setting was not chosen independently of what it is
+scored on. For H17b the same test over its 8 held-out items gives 0.002
+, with the lens arm at 1 of 8 and 0 of 499 assignments reaching it.
+That is a second reading of H17b beside the within-item 0.25 the register row
+quotes, it is more powerful because it uses how rarely a random assignment
+flips anything rather than conditioning on each item alone, and it carries
+the same caveat about the halves sharing three concepts. Which of the two
+H17b readings the register row should carry is decision item 2 for the
+operator, and nothing here changes the verdict.
 
 **H17b under the looser score.** If success is counted as the alternative
 answer merely entering the top five rather than becoming the model's actual
@@ -1023,8 +1170,11 @@ confined to the country's mention, was not run for H17a.
 **Whether it reaches an intermediate reasoning step is unsettled, and the
 evidence leans yes.** H17b's flip rate of 4 in 16 items against 0 in 16
 for the control (three draws each) is small and, on the held-out half,
-the only valid test of the selected setting, not distinguishable from
-chance (exact within-item probability 0.25); the
+the only valid test of the selected setting, where the conditional test
+cannot distinguish it from chance (exact within-item probability 0.25, which
+is that test's floor there) while the global-draw reading added on 2026-09-06
+gives 0.002, no random assignment of directions to concepts having flipped
+any of the eight items in 499 tries; the
 position contrast at the tuned layer and strength (4 of 16 when the
 exchange starts at the concept's first mention, 0 of 16 when it happens
 only at the answer position) is in the direction that separates reasoning
@@ -1337,8 +1487,9 @@ number reported as a verdict was chosen on the data it is reported for.
 
 ## What this does not show
 
-Eleven limits, stated before a reader finds them. The eighth and ninth were
-added on 2026-09-05 after review, and the tenth and eleventh on 2026-09-06.
+Twelve limits, stated before a reader finds them. The eighth and ninth were
+added on 2026-09-05 after review, and the tenth, eleventh and twelfth on
+2026-09-06.
 
 First, a successful swap shows that the lens direction for a word is a
 handle the model responds to, not that the model "contains a concept" in any
@@ -1462,9 +1613,11 @@ but a norm-matched random direction, that is an advantage the lens arm holds
 and the control does not, so every H17 probability in this record except the
 mirrored ones is conditional on the selected targets. The mirrored control
 run on 2026-09-06 removes the advantage by letting the control choose its
-own target under the same rule, and the protocol reading survives it
-unchanged at 0.00137 by component, which is 1 in 729; the `lens` source
-rule's reading weakens from 0.037 to 0.074. That the protocol reading
+own target under the same rule, and the protocol reading survives it: the
+component-product figure of 0.00137 that this limit first quoted is withdrawn
+by correction 30, and the global-draw test that replaces it gives 0.002
+under the split whose halves share no concept, with the mirrored selection
+applied to every draw. That the protocol reading
 survives is established as a measurement, and it is worth saying what it
 does not establish: the mirror ranks candidates by how much of a random
 direction the residual stream carries, while the battery ranked them by the
@@ -1473,6 +1626,21 @@ items, 61 percent, so the mirror is an analogue of the battery's
 conditioning and not the identical operation. H17a and H17b carry no such
 limit, because their targets are fixed by the item design rather than by a
 lens reading.
+
+Twelfth, the tuned setting was chosen on a half that shares concepts with
+the half it was scored on. The registered split deals alternate frames, and
+19 of H17's 36 concepts, and all 14 of H17a's, appear in both halves, so
+under the null the choice of setting is not independent of the outcomes it is
+scored against and no probability at a tuned setting under that split is
+clean of it. For H17 a split into whole groups of frames that share concepts
+exists, and under it the held-out result is 20 of
+22 against 1 of
+44, with a global-draw probability of 0.002; that
+split was formed after the run and is a sensitivity reading, not a
+pre-registration. For H17a no such split exists at all, so its probabilities
+cannot be cleaned this way and it rests on its counts. The counts under both
+splits clear the registered thresholds, so this limit bears on the
+probabilities and not on the verdicts. Established for this battery.
 
 ## Deviations from the specification, stated flat
 
@@ -1743,6 +1911,20 @@ lens reading.
     control's rows exactly and adds the new arms. Neither is in the
     specification, neither changes a rate and neither changes a verdict: the
     registered thresholds compare the lens arm with control A, as registered.
+
+22. **A third and a fourth control run, and a second split, all after the
+    fact and none pre-registered.** The global-draw control of
+    `global_draw_control.py` ran 499 random assignments over three
+    held-out sets, 21 frames under the registered split at its
+    chosen setting, 22 frames under the component-respecting split
+    at its chosen setting, and H17b's 8 held-out items, scoring each whole set
+    under each assignment. The component-respecting split itself is a second
+    split of a battery whose split the specification fixes, formed after the
+    run by one mechanical rule applied once. Neither is in the specification;
+    neither changes a rate, a count or a verdict, since the registered
+    thresholds compare the lens arm's success rate with control A's under the
+    registered split. What they change is which probability the record asks to
+    be believed (corrections 29 and 30).
 
 ## Errata found during the run
 
@@ -2033,6 +2215,9 @@ incomplete, and what is true instead.
     ' cow' to ' hen' are one component. The by-source figures are still
     reported beside the component ones, because they are what the register
     rows quoted, and they are now computed against the corrected control.
+    Read this correction with correction 30: the component products it
+    introduces are themselves withdrawn as headlines, because such a product
+    needs the components to be independent under the control too.
 
 26. The cluster-matched control committed earlier on 2026-09-06 drew one
     random source direction for a whole group but a fresh random target
@@ -2075,7 +2260,10 @@ incomplete, and what is true instead.
     `output`-rule frames; the pooled reading is unchanged at 0.0123 by
     component; and the `lens` source rule alone weakens from 0.037 to 0.074
     by component and from 0.0123 to 0.048 by source concept. H17a and H17b
-    need no mirror, since neither chooses its target by a lens reading.
+    need no mirror, since neither chooses its target by a lens reading. Read
+    this correction with correction 30: the mirrored control stands, but the
+    products over components computed against it are withdrawn, and the
+    mirrored selection is now used inside the global-draw test instead.
 
 28. The reproduction section named the lens file and the model but not the
     reader package. The scripts import `jlens`, which on the machine that ran
@@ -2090,6 +2278,55 @@ incomplete, and what is true instead.
     for a layer is the 768 by 768 matrix this code multiplies by.
     `lib_exp016.py` now catches the failed import and repeats those
     instructions in the error.
+
+The two corrections below come from a third review of 2026-09-06, of commit
+`f871571`. Each says what the record said, that it was wrong or incomplete,
+and what is true instead.
+
+29. It treated the setting chosen on the tuning half as fixed when testing
+    the held-out half, which is only sound if the two halves are independent
+    under the null being tested. They are not. The registered split deals
+    alternate frames, and the frames draw their concepts from four fixed word
+    lists, so 19 of the 36 concepts H17 uses appear in both halves, and all 14
+    of H17a's country concepts appear in both of its halves. Under the null
+    that a lens direction is nothing but a random direction, a draw that
+    favours a concept present in both halves affects the choice and the score
+    together, so no probability computed at a tuned setting under that split
+    is clean of the choice that produced it. Joining frames that share a
+    concept divides H17 into 4 groups, one per category, of 24, 20, 20 and 20
+    frames; dealing whole groups alternately gives a tuning half of 40 frames
+    and a held-out half of 44 with no concept in common. Redoing the whole
+    selection there chooses layers 6-7-8, strength
+    2.0, all positions, source rule `output`,
+    and the held-out result is 20 of
+    22 against 1 of
+    44 for control A, beside the committed split's
+    18 of 21 against 0 of 42. Both clear the registered thresholds and no
+    verdict changes. H17a admits no such split, since its pairs draw source
+    and target from one pool of 14 countries and form a single group, and this
+    is now said plainly rather than left implicit. The component-respecting
+    split is not pre-registered and is reported as a sensitivity reading.
+
+30. It reported cluster-level probabilities as products of one factor per
+    cluster, which needs the clusters to be independent of one another under
+    the control as well as under the lens arm. For the mirrored control that
+    does not hold: it chooses its own concepts for every draw, so the clusters
+    built from the battery's own concepts need not survive it. Here the
+    crossing is narrow, because the control always chooses inside the frame's
+    own category and the clusters are exactly the four categories, but one
+    word, ' orange', belongs to both the fruit list and the colour list, so a
+    single draw can act in two clusters at once. Withdrawn by name as
+    headlines, all of them cluster products: H17's 0.00137 at the protocol
+    setting, 0.0123 pooled and 0.037 for the `lens` source rule against the
+    token-seeded control, and 0.00137, 0.0123 and 0.0741 against the mirrored
+    control. What replaces them is a global-draw test that multiplies nothing:
+    one draw is one random direction per concept with the battery's own target
+    selection applied, a whole held-out set is scored under one draw, and with
+    499 draws the probability is one plus the number of draws
+    reaching the lens arm, divided by 500. Under the
+    component-respecting split it gives 0.002, at its floor; under the
+    registered split it gives 0.002, with the caveat of correction 29 stated
+    with it. The cluster-level tests are kept below as trail.
 
 ## What remains
 
@@ -2138,13 +2375,27 @@ much they would add.
    is the held-out half, which this experiment's own specification names as
    the number a hypothesis is judged on, and there the result is 1 flip of 8
    items against 0 of 8 for the control, an exact within-item probability of
-   0.25 that is not distinguishable from chance. An earlier version of this
+   0.25, which is that test's floor there and cannot distinguish the effect
+   from chance. An earlier version of this
    decision item gave that probability as 0.5, which was wrong and is
    withdrawn (correction 22); it is 0.25, and 0.25 is also the smallest
    probability this test can return on these outcomes, because only one of
-   the eight items has draws that differ at all. A reasonable operator could
+   the eight items has draws that differ at all. A second reading of the same
+   eight items was added on 2026-09-06 and gives a smaller probability:
+   scoring the whole held-out set under each of 499 random
+   assignments of directions to concepts, rather than conditioning on each
+   item separately, not one of those assignments flipped any of the eight
+   items while the lens arm flipped one, which gives 0.002. The two readings
+   are both valid under the same null and differ in what they condition on,
+   the within-item one being the more conservative and the one the register
+   row quotes, and the global-draw one being more powerful because it uses how
+   rarely a random assignment flips anything at all rather than looking at one
+   item at a time. Both carry the caveat that 3 of this battery's 16 concepts
+   appear in both halves, so the setting was not chosen independently of the
+   outcomes it is scored on (correction 29). A reasonable operator could
    rule either SUPPORTED with the weakness recorded, which is what is
-   written here, or NOT SUPPORTED pending a larger battery. This is the one
+   written here, or NOT SUPPORTED pending a larger battery, and which of the
+   two readings the register row carries is part of the same ruling. This is the one
    verdict in this record where the wording and the evidence pull in
    different directions, and it is flagged rather than quietly resolved.
 
@@ -2242,8 +2493,10 @@ much they would add.
    25). A grouped test can only treat two groups as independent if they share
    no lens direction, and the groups are then the connected components of the
    units that share a direction in either role. H17's held-out `output` half
-   falls into 7 such components and its test can reach 1 in 729, which is
-   enough to be worth quoting. H17a's held-out half falls into a single
+   falls into 7 such components and a product over them could in principle
+   reach 1 in 729, though correction 30 withdraws that product because the
+   mirrored control's own choice of concepts can act in two components at
+   once. H17a's held-out half falls into a single
    component, because its five source countries and its five target countries
    are the same five countries, so its grouped test cannot return less than
    one third however large the effect, and H17a has no grouped probability to
@@ -2252,10 +2505,29 @@ much they would add.
    components, which for a country battery means drawing the target countries
    from a pool disjoint from the source countries, at the cost of items. The
    second is what the register rows for H17 and H17a should carry now: the
-   proposed rows in `REGISTER_VERDICTS.md` quote the component-grouped
-   0.00137 for H17 and, for H17a, the counts alone with a plain statement
-   that no grouped probability is available. Nothing in the register is
+   proposed rows in `REGISTER_VERDICTS.md` quote the global-draw probability
+   0.002 for H17, measured under the split whose halves share no concept, and
+   for H17a the counts alone with a plain statement that no probability is
+   available. Nothing in the register is
    changed from this branch either way (rule R8).
+
+11. **What a battery of this shape should look like next time, if a
+   probability is wanted from it** (corrections 29 and 30). Three properties
+   would have to be registered from the start, and none of them was. The two
+   halves must share no concept, so that the setting chosen on one is
+   independent of the outcomes on the other; H17 could be split that way after
+   the fact because its frames fall into four disjoint categories, but H17a
+   could not be, because its pairs draw source and target from one pool of 14
+   countries. The units must fall into many groups that share nothing, so that
+   a grouped test has room to resolve; a country battery would need disjoint
+   pools for its source and its target countries. And the number of control
+   draws must be registered in advance and large, because the global-draw test
+   this record now leads with cannot return a probability below one divided by
+   one plus the number of draws, which with the 499 draws run here
+   is 0.002. The operator's decision is whether those three become
+   requirements for the next swap battery, at the cost of items and of
+   processor time, or whether later work reports counts against thresholds and
+   leaves significance alone.
 
 ## Reproducing this
 
@@ -2314,7 +2586,10 @@ tests need (deviations 20 and 21) and writes
 and reproduces the first run's `output/cluster_control_records.csv` row for
 row, after which `analyse.py h17 h17a h17b`
 is run again so that the summaries carry the tests against those controls,
-and `make_tables.py` is run again. The lens file is not committed: download the
+and `make_tables.py` is run again; `global_draw_control.py` then runs the
+499 random assignments of the global-draw test over the three held-out sets
+and writes `output/global_draw_records.csv` (deviation 22), after which
+`analyse.py` and `make_tables.py` are run once more. The lens file is not committed: download the
 `gpt2-small` lens from the Hugging Face repository `neuronpedia/jacobian-lens`
 and place it at `_STAGE2_JSPACE/artifacts/jlens_gpt2_small_neuronpedia.pt`
 in the checkout, or point the environment variable `EXP016_LENS_PATH` at it;

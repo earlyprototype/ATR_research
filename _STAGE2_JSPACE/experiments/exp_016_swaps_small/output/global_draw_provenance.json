@@ -1,0 +1,64 @@
+{
+ "measured_at": "2026-09-06T04:37:52.563623Z",
+ "draws": 499,
+ "sets": {
+  "h17_committed_heldout": {
+   "battery": "h17",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "mirrored": true,
+   "split": "committed alternating split",
+   "rule": "output",
+   "item_ids": 21
+  },
+  "h17_component_split_heldout": {
+   "battery": "h17",
+   "cell": [
+    "6-7-8",
+    2.0,
+    "all"
+   ],
+   "mirrored": true,
+   "split": "component-respecting split",
+   "rule": "output",
+   "item_ids": 22
+  },
+  "h17b_committed_heldout": {
+   "battery": "h17b",
+   "cell": [
+    "7",
+    2.0,
+    "all_no_bos"
+   ],
+   "mirrored": false,
+   "split": "committed alternating split",
+   "rule": "",
+   "item_ids": 8
+  }
+ },
+ "lens_totals": {
+  "h17_committed_heldout": [
+   18,
+   21
+  ],
+  "h17_component_split_heldout": [
+   20,
+   22
+  ],
+  "h17b_committed_heldout": [
+   1,
+   8
+  ]
+ },
+ "n_rows": 25449,
+ "lens_arm_reproduces_committed_records": true,
+ "lens_sha256": "d1800a1335ada089ef2e1ec0e4bd4d5bd61e6011eacc31f8618fdb3d10aae762",
+ "jlens_commit": "581d398613e5602a5af361e1c34d3a92ea82ba8e",
+ "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+ "model_param_sha256": "0684f138b3472aa8c2dca86ac3fddfb29c08473d13b70052dfa87a9b7d88cfe1",
+ "torch": "2.14.0+cpu",
+ "wall_seconds": 798.9
+}

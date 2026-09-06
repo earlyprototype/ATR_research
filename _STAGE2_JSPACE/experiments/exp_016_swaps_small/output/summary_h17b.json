@@ -8260,5 +8260,31 @@
     0.25
    ]
   }
+ },
+ "global_draw_tests": {
+  "h17b_committed_heldout": {
+   "battery": "h17b",
+   "cell": [
+    "7",
+    2.0,
+    "all_no_bos"
+   ],
+   "split": "committed alternating split",
+   "source_rule": "",
+   "n_units": 8,
+   "n_draws": 499,
+   "lens_successes": 1,
+   "draws_reaching_the_lens_arm": 0,
+   "probability": 0.002,
+   "floor": 0.002,
+   "control_draw_totals": {
+    "max": 0,
+    "median": 0,
+    "mean": 0.0,
+    "draws_with_none": 499,
+    "successes_over_all_draws": 0,
+    "unit_draws": 3992
+   }
+  }
  }
 }

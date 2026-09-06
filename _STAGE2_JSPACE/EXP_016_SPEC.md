@@ -395,10 +395,10 @@ for the swap question to arise.
 ## Addendum, 2026-09-05, extended 2026-09-06
 
 This addendum is appended after the run. It changes nothing that was
-pre-registered above; it records four things a reader of this specification
+pre-registered above; it records five things a reader of this specification
 alone would otherwise not know, all found by review of the results record
 and all answered there in full. The first two were added on 2026-09-05 and
-the third and fourth on 2026-09-06.
+the third, fourth and fifth on 2026-09-06.
 
 1. **The success criterion for H17a in section 5.2 admits answers the model
    already gave.** It counts a question as redirected when the target
@@ -473,3 +473,24 @@ the third and fourth on 2026-09-06.
    rates and name no test. A later battery that wants an unconditional
    probability should either register the mirrored control from the start or
    choose its targets without consulting the instrument under test.
+
+5. **The alternating split of section 4 does not give a tuning half that is
+   independent of the held-out half.** Section 4 assigns alternate items to
+   the two halves, which separates the items but not the concepts they swap:
+   19 of the 36 concepts H17 uses appear in both halves, all 14 of H17a's
+   country concepts appear in both of its halves, and 3 of H17b's 16 do.
+   Under the null the significance tests assert, that a lens direction is
+   nothing but a norm-matched random direction, a draw favouring a concept
+   present in both halves affects the choice of setting and the score
+   together, so no probability computed at a tuned setting under this split is
+   clean of the choice that produced it. For H17 the results record reports a
+   second split, formed after the run, that deals whole groups of frames
+   sharing a concept and leaves no concept in both halves; the setting chosen
+   there is layers 6-7-8, strength 2.0,
+   all positions, source rule output, and the held-out result is
+   20 of 22 against
+   1 of 44, which
+   clears the registered thresholds as the committed split's 18 of 21 against
+   0 of 42 does. For H17a no such split exists, because its source and target
+   countries come from one pool. A later battery that wants a probability from
+   a tuned setting should register a split whose halves share no concept.

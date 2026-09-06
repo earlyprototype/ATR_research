@@ -5610,6 +5610,95 @@
    "all"
   ]
  },
+ "component_split": {
+  "split": "connected components dealt alternately, tuning first",
+  "n_components": 4,
+  "component_sizes": [
+   20,
+   20,
+   20,
+   24
+  ],
+  "half_sizes": {
+   "heldout": 44,
+   "tuning": 40
+  },
+  "tokens_shared_between_halves": 0,
+  "chosen_cell": [
+   "6-7-8",
+   2.0,
+   "all"
+  ],
+  "chosen_rule": "output",
+  "tuning": {
+   "lens": [
+    0.8,
+    16,
+    20
+   ],
+   "randdir": [
+    0.0,
+    0,
+    40
+   ],
+   "randnorm": [
+    0.0,
+    0,
+    40
+   ]
+  },
+  "tuning_pooled": {
+   "lens": [
+    0.6,
+    24,
+    40
+   ],
+   "randdir": [
+    0.0,
+    0,
+    80
+   ],
+   "randnorm": [
+    0.0,
+    0,
+    80
+   ]
+  },
+  "heldout": {
+   "lens": [
+    0.9091,
+    20,
+    22
+   ],
+   "randdir": [
+    0.0227,
+    1,
+    44
+   ],
+   "randnorm": [
+    0.0,
+    0,
+    44
+   ]
+  },
+  "heldout_pooled": {
+   "lens": [
+    0.5909,
+    26,
+    44
+   ],
+   "randdir": [
+    0.0341,
+    3,
+    88
+   ],
+   "randnorm": [
+    0.0227,
+    2,
+    88
+   ]
+  }
+ },
  "exact_tests": {
   "pooled_heldout": [
    27,
@@ -6236,6 +6325,56 @@
      0.0013717421124828531
     ],
     "control": "mirrored target selection"
+   }
+  }
+ },
+ "global_draw_tests": {
+  "h17_committed_heldout": {
+   "battery": "h17",
+   "cell": [
+    "7-8-9",
+    2.0,
+    "all"
+   ],
+   "split": "committed alternating split",
+   "source_rule": "output",
+   "n_units": 21,
+   "n_draws": 499,
+   "lens_successes": 18,
+   "draws_reaching_the_lens_arm": 0,
+   "probability": 0.002,
+   "floor": 0.002,
+   "control_draw_totals": {
+    "max": 4,
+    "median": 0,
+    "mean": 0.261,
+    "draws_with_none": 404,
+    "successes_over_all_draws": 130,
+    "unit_draws": 10479
+   }
+  },
+  "h17_component_split_heldout": {
+   "battery": "h17",
+   "cell": [
+    "6-7-8",
+    2.0,
+    "all"
+   ],
+   "split": "component-respecting split",
+   "source_rule": "output",
+   "n_units": 22,
+   "n_draws": 499,
+   "lens_successes": 20,
+   "draws_reaching_the_lens_arm": 0,
+   "probability": 0.002,
+   "floor": 0.002,
+   "control_draw_totals": {
+    "max": 7,
+    "median": 0,
+    "mean": 0.271,
+    "draws_with_none": 418,
+    "successes_over_all_draws": 135,
+    "unit_draws": 10978
    }
   }
  }

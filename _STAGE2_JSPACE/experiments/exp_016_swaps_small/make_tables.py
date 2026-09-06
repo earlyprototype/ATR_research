@@ -261,10 +261,39 @@ for b in BATTERIES:
                   + ("" if "heldout" in name else
                      " (post-selection: reuses the tuning outcomes that chose the setting, not a valid test of it)") + ".")
 
+    gd = s.get("global_draw_tests")
+    if gd:
+        print("\nThe global-draw test, which is the one probability this record asks to "
+              "be believed. One draw is one random direction for every concept the "
+              "battery can reach, seeded by that concept's token, the layer and the draw "
+              "index, with the battery's own target-selection rule applied to those "
+              "directions wherever the battery selects its target by a lens reading. A "
+              "whole held-out set is scored under one draw and yields one number, so "
+              "nothing is multiplied and nothing is assumed about whether the units are "
+              "independent of one another. The probability is one plus the number of "
+              "draws reaching the lens arm's total, divided by one plus the number of "
+              "draws:\n")
+        for name, d in gd.items():
+            c = d["control_draw_totals"]
+            rule = f", source rule {d['source_rule']}" if d["source_rule"] else ""
+            print(f"- {name.replace('_', ' ')}: {d['split']}, layers {d['cell'][0]}, "
+                  f"strength {d['cell'][1]}, {d['cell'][2]}{rule}; the lens arm "
+                  f"redirected {d['lens_successes']} of {d['n_units']} units, and "
+                  f"{d['draws_reaching_the_lens_arm']} of {d['n_draws']} random draws "
+                  f"reached that total, giving a probability of {d['probability']:.4g} "
+                  f"against a floor of {d['floor']:.4g}. The random draws redirected "
+                  f"{c['successes_over_all_draws']} units in total over "
+                  f"{c['unit_draws']} unit draws, their best draw reaching "
+                  f"{c['max']} of {d['n_units']} and {c['draws_with_none']} of "
+                  f"{d['n_draws']} draws redirecting nothing.")
+
     tok = s.get("cluster_tests_token_control")
     if tok:
         print("\nCluster-level exact tests against the token-seeded cluster-matched "
-              "control, which treat the scored units that share a lens direction as a "
+              "control, reported as trail rather than as probabilities to believe, "
+              "because they multiply a factor per cluster and so need the clusters to be "
+              "independent of one another, which the mirrored control's own choice of "
+              "concepts breaks. They treat the scored units that share a lens direction as a "
               "single draw rather than as independent ones. This control seeds every "
               "random direction by the token it stands in for, so it reuses a direction "
               "across units wherever the lens arm reuses one. The grouping `by "
@@ -323,10 +352,13 @@ for b in BATTERIES:
               "comparison only and are not valid as cluster-level tests:\n")
     else:
         print("\nCluster-level exact tests against control A, the registered control. "
-              "Every cluster in this battery holds a single item, because no two items "
-              "share a source concept, so the lens draw and each control draw are "
-              "exchangeable inside the cluster and these probabilities are valid as they "
-              "stand; they are the within-item tests above. Resolution is the smallest "
+              "No two items of this battery share a source concept, so a cluster formed "
+              "by source concept holds a single item and the lens draw and each control "
+              "draw are exchangeable inside it; those rows are the within-item tests "
+              "above. Three pairs of items do share a concept across the source and "
+              "target roles, so the by-component rows group 16 items into 13 clusters, "
+              "and on the held-out half, where no such sharing occurs, the two groupings "
+              "agree. Resolution is the smallest "
               "probability these outcomes can produce, one over the draws per cluster "
               "raised to the number of clusters whose draws are not all equal:\n")
     cluster_lines(ct)
