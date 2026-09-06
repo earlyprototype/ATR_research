@@ -19,7 +19,11 @@ Stages, in the order they are meant to run:
            go through whatever the cache pointer names today. A resume with
            nothing left to run says so and returns before the model is loaded,
            so checking that a finished arm is finished costs seconds and needs
-           neither the weights nor the memory to hold them.
+           neither the weights nor the memory to hold them. The two files this
+           stage writes, the results rows and the terminal-state archive, carry
+           one shared generation stamp and are published together, so a resume
+           can tell that they came out of one publication rather than trusting
+           the prompt identifiers in them to line up.
   states   Per-layer states for the J-space test (H19b): inject each settled
            tensor at the layer-0 entry and read every scored layer, and run the
            same prompts clean for the comparison arm. The precision is the one
@@ -333,6 +337,55 @@ def check_resume_compatible(prior: dict, arm: str, dtype: str, revision: str,
               f"against this invocation", flush=True)
 
 
+def loop_pair_generation(saved: dict, tensors, arm: str) -> str | None:
+    """The generation stamp the loop's two checkpoints agree on, or None.
+
+    The loop publishes two files after every prompt: the results file holding
+    one row per finished prompt, and the archive holding one terminal tensor
+    per finished prompt. A resume decides what is finished by intersecting the
+    identifiers in the two, so it needs them to describe the same computation.
+
+    Identifiers alone do not guarantee that. A prompt whose row exists but whose
+    tensor does not is rerun, and if the archive write lands and the results
+    write does not, the next resume finds the identifier in both, calls the
+    prompt finished, and keeps a row describing the first computation beside a
+    tensor from the second. Both files now carry the same one-use generation
+    stamp, written by the publication that produced them, so a pair that was not
+    published together can be seen and refused rather than intersected.
+
+    A pair written before the stamp existed carries none in either half, which
+    is the state of the two files committed with this experiment. That cannot be
+    checked, is said out loud, and falls back to the identifier intersection,
+    which is what the resume did before.
+    """
+    names = set(tensors.files) if hasattr(tensors, "files") else set(tensors)
+    in_npz = None
+    if GENERATION_KEY in names:
+        value = tensors[GENERATION_KEY]
+        in_npz = value.item() if hasattr(value, "item") else str(value)
+    in_json = saved.get("generation")
+    if in_npz and in_json and in_npz == in_json:
+        return str(in_npz)
+    if in_npz or in_json:
+        raise SystemExit(
+            f"refusing to pair the two checkpoints of arm {arm}: they were not "
+            f"published together. terminal_states_{arm}.npz carries generation "
+            f"{in_npz!r} and results_{arm}.json carries {in_json!r}, and only a "
+            f"pair with the same stamp is known to have come out of one "
+            f"publication. Pairing them by prompt identifier would risk keeping "
+            f"a row that describes one computation beside a tensor from "
+            f"another. Move both files aside and run the arm again, or restore "
+            f"the pair that belong together.")
+    print(f"note: neither checkpoint for arm {arm} carries a generation stamp, "
+          f"so nothing here can check that results_{arm}.json and "
+          f"terminal_states_{arm}.npz were published together; the two files "
+          f"are paired by prompt identifier alone, which is what the runner did "
+          f"before the stamp existed. The two files committed with this "
+          f"experiment are in exactly this state. Anything a loop invocation "
+          f"writes from now on carries a stamp.", flush=True)
+    return None
+
+
 def resume_revision_plan(saved: dict, arm: str, explicit: str | None,
                          assumed: str | None, work_left: bool
                          ) -> tuple[str | None, bool, str]:
@@ -448,7 +501,11 @@ def stage_loop(args) -> None:
         prior = saved["records"]
         if npz_path.exists():
             with np.load(npz_path) as npz:
-                tensors = {k: v for k, v in npz.items()}
+                # The stamp is checked against the results file and then left
+                # out of the tensor set, which holds one entry per prompt.
+                loop_pair_generation(saved, npz, args.arm)
+                tensors = {k: v for k, v in npz.items()
+                           if k != GENERATION_KEY}
         # A prompt counts as finished only when both checkpoints hold it: its
         # row in the results file and its terminal state in the state file.
         # A prompt held by only one of them is run again, because the states
@@ -532,13 +589,25 @@ def stage_loop(args) -> None:
                    "scored_layers": SCORED_LAYERS,
                    "wall_seconds": round(time.time() - t_start, 1),
                    "peak_gb": round(peak_gb(), 3), "records": results}
-        # States first, then the results row, each written through a temporary
-        # file and renamed. A crash between the two leaves a state with no row,
-        # which the resume above reruns; the reverse order would leave a row
-        # with no state, which it would also rerun, so either order is safe and
-        # neither can be read as half a prompt.
-        atomic_write(npz_path, lambda p: np.savez_compressed(p, **tensors))
-        atomic_write(res_path, lambda p: p.write_text(json.dumps(payload, indent=2)))
+        # The two checkpoints are published as one generation: both are
+        # written under names specific to this publication, both carry the same
+        # one-use stamp, and neither replaces its target until both are
+        # complete. Writing them independently was not enough. A crash between
+        # them leaves either a tensor with no row or a row with no tensor, and
+        # the resume reruns a prompt held by only one of them, which is safe
+        # for a prompt being run for the first time; but for a prompt being
+        # rerun, an archive write that lands while the results write does not
+        # leaves the recomputed tensor beside the row from the first
+        # computation, and the next resume sees the identifier in both and
+        # calls the prompt finished. The shared stamp is what the next resume
+        # checks instead of trusting the identifiers alone.
+        generation = generation_stamp()
+        payload["generation"] = generation
+        atomic_write_group([
+            (npz_path, lambda q: np.savez_compressed(
+                q, **tensors, **{GENERATION_KEY: np.array(generation)})),
+            (res_path, lambda q: q.write_text(json.dumps(payload, indent=2))),
+        ], tag=generation)
     print(f"\narm {args.arm} done in {(time.time()-t_start)/60:.1f} min, "
           f"peak={peak_gb():.2f} GB", flush=True)
 
@@ -653,6 +722,11 @@ def stage_states(args) -> None:
     # says which precision to load.
     res = json.loads((OUT / f"results_{args.arm}.json").read_text())
     dtype = dtype_from_results(args, res, "states")
+    # This stage reads the same pair the loop published, one row per prompt and
+    # one terminal tensor per prompt, so it checks the same stamp the resume
+    # checks before pairing them by identifier.
+    with np.load(OUT / f"terminal_states_{args.arm}.npz") as _npz:
+        loop_pair_generation(res, _npz, args.arm)
     pin, revision, rev_assumed = revision_from_results(
         res, "states", args.revision)
     print(f"dtype={dtype} (loop recorded {res.get('dtype')!r})  "

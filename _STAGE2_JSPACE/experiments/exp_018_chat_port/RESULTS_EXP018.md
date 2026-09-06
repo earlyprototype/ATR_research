@@ -13,7 +13,12 @@ the registered run. **Register rows:** EXP_018, H19, H19a, H19b, allocated
 The loop does not do on a modern chat model what it does on GPT-2. Two of the
 three registered hypotheses come out against the GPT-2 picture and the third
 comes out for the loop being pushed outside the model's ordinary internal
-vocabulary.
+vocabulary. **One thing needs the operator before this is final:** whether that
+third hypothesis, H19b, is answerable at all on its pre-registered wording turns
+on a word the specification uses in two different senses, and rule R8 reserves
+that kind of resolution for the operator. The question, both readings of the
+specification quoted in full, and what each would cost are set out under
+"Decision 5" below. No measured number in this record changes either way.
 
 Run in one sentence: the model is `Qwen/Qwen3-1.7B`, a 1.7-billion-number chat
 model from 2025; the loop reads the model's internal running state at the exit
@@ -82,7 +87,17 @@ directions; they are further outside them than a random set of directions would
 be. This holds at **15 of the 15 band layers**, each with a permutation p-value
 of 0.0001, its smallest possible value with 10,000 draws, against the 8 of 15
 the pre-registered rule required. **H19b is SUPPORTED on its registered
-wording.**
+wording.** **That verdict word is now under a ruling request and should not be
+swept into the register until the operator has ruled.** A review after this
+record was written argued that the specification's pre-registered escape
+clause, which makes H19b UNTESTABLE "if the lens file cannot be read or the
+settled states cannot be produced", fires here, because 0 of 25 prompts passed
+the convergence gate and so no state settled in the sense H19a defines. The
+specification uses the word "settled" in two different senses in different
+places and does not say which governs H19b, so this session has not decided it.
+Both readings are quoted in full under "Decision 5" below, and the numbers in
+this section do not change under either: what changes is only whether they are
+the answer to the registered question or an exploratory reading beside it.
 
 **One number worth the operator's attention on its own.** Under this project's
 registered loudness convention, which holds the fed-back state at the size it
@@ -189,7 +204,17 @@ measurement.
 |---|---|---|---|---|
 | **H19** | In a rotary-position chat model looped at natural loudness with position 0 excluded from the norm, the token positions do not collapse to one vector: the mean pairwise cosine between positions of the settled tensor stays below 0.99, where GPT-2 Small reaches 1.00 by about iteration 10 | median terminal cosine below 0.99, scored at lock-in or at the cap | median **0.726**, range 0.483 to 0.929; 0 of 25 prompts at or above 0.99. Scored at the cap, because nothing locked in | **SUPPORTED** |
 | **H19a** | At natural loudness the modern model's loop settles (lag-2 gate, cosine 0.999 sustained over three checks) on at least half of the run prompts within the iteration budget | 13 or more of 25 settle by repetition 150 | **0 of 25** | **NOT SUPPORTED** |
-| **H19b** | The modern model's settled states have a lower J-space share on its pre-fitted lens than its ordinary prompt residuals at the same layer | settled median below ordinary median with permutation p below 0.05 at 8 or more of the 15 band layers | settled median below ordinary median at **15 of 15** band layers, all with p = 0.0001 | **SUPPORTED** |
+| **H19b** | The modern model's settled states have a lower J-space share on its pre-fitted lens than its ordinary prompt residuals at the same layer | settled median below ordinary median with permutation p below 0.05 at 8 or more of the 15 band layers | settled median below ordinary median at **15 of 15** band layers, all with p = 0.0001 | **SUPPORTED**, and this word is under a ruling request: see Decision 5 |
+
+**The H19b verdict word is contested and is reserved for the operator.** The
+row above says SUPPORTED because that is what the arithmetic gives once the
+states the loop ends on are treated as the "settled states" the hypothesis
+names. A review after this record was written argued that they are not, that no
+state settled, and that the specification's own escape clause therefore makes
+H19b UNTESTABLE. The specification can be read both ways, both readings are
+quoted in full under "Decision 5", and nothing in this record or in
+`REGISTER_VERDICTS.md` should be swept into the register until the operator has
+ruled. No number moves either way.
 
 Every verdict is scored on the wording the register carries, not on a wording
 this session would have preferred. Two notes on what the verdicts do and do not
@@ -726,6 +751,63 @@ directory, which loads no model.
    rebuilds it from the committed terminal states with the command under
    "Artifacts" below, which writes a stamped pair.
 
+**Two findings from a sixth review, on 2026-09-06, one of which asks the
+operator a question rather than answering it.** A sixth review found two more
+faults. Both are real. One of them is about a verdict and is not this session's
+to settle, so it is filed as a ruling request rather than acted on; the other is
+in the code and is fixed. Nothing was re-run, and no measured number in this
+record changes.
+
+1. **Whether H19b is answerable at all on its pre-registered wording is a
+   question this session cannot settle, and it is now in front of the
+   operator.** H19b is scored on "settled states", and the specification's
+   verdict rule ends "UNTESTABLE if the lens file cannot be read or the settled
+   states cannot be produced". Zero of the 25 prompts passed the convergence
+   gate, so nothing settled in the sense the gate defines, and what this record
+   scored are the states each prompt was on at the 150-repetition cap. The
+   review argued that the escape clause therefore fires and that the verdict
+   should be UNTESTABLE. **Established from the specification, which was read
+   in full for this:** it uses the word "settled" in two different senses in
+   different places. Its H19b passage never carries the phrase "at lock-in or at
+   the cap" that its neighbours carry, which supports the review; its artifact
+   list calls the cap tensors "the settled tensors" and its H19b procedure
+   points at exactly that artifact, which supports what this record did. Both
+   readings are quoted in full under "Decision 5" above. **No verdict word was
+   changed and none should be until the operator rules**, because rule R8
+   reserves a resolution like this for a human and the specification does not
+   decide it. The H19b row in `REGISTER_VERDICTS.md` now carries a hold notice
+   in front of the verdict this session scored, and that file must not be swept
+   into the register until a comment beginning `TC-RULING:` says which reading
+   governs. What is not in doubt either way: every number in the H19b section is
+   the same under both readings, because both score the same states; what a
+   ruling decides is whether those numbers answer the registered question or sit
+   beside it as an exploratory reading.
+
+2. **The loop's two checkpoints were published independently, so a rerun prompt
+   could end up as a new tensor beside an old row.** The loop writes a results
+   file holding one row per finished prompt and an archive holding one terminal
+   tensor per finished prompt, and a resume decides what is finished by matching
+   prompt identifiers across the two. The fifth review's item 3 above gave the
+   per-layer state pair a shared generation stamp, meaning a one-use identifier
+   that says which publication produced a file, but left the loop's own pair
+   without one. Identifiers alone are not enough there. A prompt whose row
+   exists but whose tensor does not is rerun, and if the archive write lands
+   while the results write does not, the next resume finds the identifier in
+   both files, calls the prompt finished, and keeps a row describing the first
+   computation beside a tensor from the second. The two are now published as one
+   generation: both carry the same stamp, both are written under names specific
+   to that publication, and neither replaces its target until both are complete.
+   A resume compares the two stamps and refuses a pair that does not match, and
+   so does the states stage, which reads the same pair. **What the committed pair
+   carries:** nothing, in either half, because both files were written before the
+   stamp existed. A resume of an unstamped pair says so in a printed line and
+   falls back to matching prompt identifiers, which is exactly what it did
+   before, and anything a loop invocation writes from now on carries a stamp.
+   **The committed run was not affected:** no prompt in either arm was ever
+   rerun, because every row in each results file has its terminal state in the
+   matching archive, 25 of 25 in the main arm and 5 of 5 in the pilot arm, which
+   the fourth review already established and this session rechecked.
+
 **D6: the J-space search is restricted after one full pass.** The vocabulary
 has 151,936 entries, so after computing every direction's correlation with the
 state once, the search for the best 25 keeps only the 4,096 best-correlating
@@ -919,6 +1001,78 @@ is not encouraging. A validation gate for this lens, of the kind
 `RESULTS_JLENS_MEDIUM.md` records for the in-house Medium lens, would cost a
 session and would either strengthen or retire every number in the H19b section.
 
+**Decision 5, and the only one that blocks anything: is H19b answered, or is it
+UNTESTABLE on its own pre-registered wording?** This is a ruling request under
+rule R8, which says that a session never self-executes a resolution reserved for
+a human. Nothing in this record or in `REGISTER_VERDICTS.md` should be swept
+into `_STAGE2_JSPACE/REGISTER.md` until the operator has ruled on it, and the
+answer may change the verdict word on one of the three registered hypotheses.
+
+**The question.** H19b is scored on "settled states". Zero of the 25 prompts
+passed the convergence gate, so nothing settled in the sense that gate defines.
+The states actually scored are the states each prompt was on when the
+150-repetition cap was reached. Does the specification's pre-registered escape
+clause fire?
+
+**The specification's H19b verdict rule, quoted in full from section 5 of
+`_STAGE2_JSPACE/EXP_018_SPEC.md`:** "SUPPORTED if, at 8 or more of the 15 band
+layers, the settled-state median share is below the ordinary-state median share
+and the permutation p-value at that layer is below 0.05. NOT SUPPORTED
+otherwise. UNTESTABLE if the lens file cannot be read or the settled states
+cannot be produced."
+
+**Reading one, that H19b is UNTESTABLE.** The specification defines settling
+exactly once, inside H19a's registered statement in section 5: "At natural
+loudness the modern model's loop settles (lag-2 gate, cosine 0.999 sustained
+over three checks) on at least half of the run prompts within the iteration
+budget." No prompt met that definition, so on this reading there are no settled
+states, they could not be produced, and the escape clause fires. Two further
+things support it. First, the phrase "at lock-in or at the cap", which is how
+the specification says "the state the prompt ends on", appears twice and in
+neither case inside the H19b passage: in section 4 of the readout, "The top five
+word pieces with their probabilities, the gap in score between the first and
+second, and the spread of the whole distribution measured as entropy in nats,
+are recorded at lock-in or at the cap", and in section 5 of the metric H19 is
+scored on, "Take the tensor at lock-in or at the cap, treat each word-piece
+position as a vector, and average the cosine between every pair of distinct
+positions." Second, H19's own scoring rule was written so that it could be
+scored without any lock-in, "SUPPORTED if the median over the arm's prompts of
+the terminal all-position collapse metric is below 0.99", and H19b's was not
+given the same treatment.
+
+**Reading two, that H19b is answered on the states the loop ends on, which is
+what this session did.** The specification's own artifact list, section 6, calls
+those states the settled tensors: "output/terminal_states_bare.npz and
+output/terminal_states_chat.npz, the settled tensors in float32." The runner
+writes one entry there for every prompt whether or not it locked in, and H19b's
+procedure step 4 points at exactly that artifact: "The settled states are
+obtained by injecting each settled tensor at blocks.0.hook_resid_pre and reading
+blocks.{l}.hook_resid_post." Section 8 uses the word the same loose way: "a
+perturbation of 0.2 percent per step can in principle land a prompt in a
+different settled state after one hundred and fifty steps". On this reading
+"the settled states cannot be produced" is about the machinery failing to make
+them, which is how its companion trigger "the lens file cannot be read" reads,
+and they were in fact produced.
+
+**This session's assessment, marked as inference and not as a finding.** The
+specification uses "settled" in both senses, in different places, and never says
+which governs H19b, so the wording is genuinely ambiguous rather than clear in
+one direction. This session therefore did not change the verdict. If pressed for
+which reading is stronger, this session would say reading one, because the
+escape clause has to be given work to do and the phrase that would have made
+H19b cap-scorable was available in the adjacent paragraph and was not used;
+but that is a judgement about intent, and intent is the operator's to declare.
+
+**What each ruling costs.** No number changes under either reading, and no
+figure or table is affected. Under reading two, everything stands as written.
+Under reading one, three things change and nothing else does: the H19b verdict
+word becomes UNTESTABLE in this record and in `REGISTER_VERDICTS.md`, with
+SUPPORTED withdrawn by name; the whole comparison stays in the record with every
+number intact, relabelled as an exploratory reading rather than the answer to
+the registered question; and the pull request title, which currently reports
+three scored hypotheses, needs changing. A ruling comment beginning `TC-RULING:`
+on the pull request is what this record is waiting for, per obligation T2.
+
 ## H19b in detail: how much of a state the model's own lens can express
 
 **What is being measured, in ordinary words.** A Jacobian lens gives, for each
@@ -949,7 +1103,16 @@ what chance alone produces.
 **The result.** At **all 15 of the 15 band layers** the terminal states hold a
 smaller share than the ordinary states, and at all 15 the one-sided paired
 permutation test returns p = 0.0001, its smallest possible value with 10,000
-draws. The pre-registered rule needed 8 of 15. **H19b is SUPPORTED.**
+draws. The pre-registered rule needed 8 of 15. **H19b is SUPPORTED** on the
+reading of the specification this session took, which treats the states the loop
+ends on as the "settled states" the hypothesis names. **That reading is
+contested and the verdict word is reserved for the operator:** on the competing
+reading, the specification's clause making H19b UNTESTABLE "if the lens file
+cannot be read or the settled states cannot be produced" fires, because 0 of 25
+prompts passed the convergence gate. Every number in this section is the same
+under both readings; only their standing changes, from the answer to the
+registered question to an exploratory reading beside an untestable one. Both
+readings are quoted in full under "Decision 5".
 
 The sizes are not marginal. Across the band, the ordinary states hold a median
 share of **0.031**, that is about 3 percent of themselves inside the J-space,
@@ -1131,7 +1294,7 @@ All under `experiments/exp_018_chat_port/`.
 | `make_figures.py` | Regenerates the three figures |
 | `_run_all.sh` | The exact commands the registered run used |
 | `output/probe_natural_norms_float32.json`, `output/probe_natural_norms_bfloat16.json` | The feasibility probe and the natural-loudness recording pass in both precisions: round-trip checks, memory, timing, and the per-layer per-position entry loudness of every prompt in both arms |
-| `output/results_bare.json`, `output/results_chat.json` | One record per prompt: word-piece count, settling, terminal readout, and the merging metric and both cosines at every one of the 150 repetitions |
+| `output/results_bare.json`, `output/results_chat.json` | One record per prompt: word-piece count, settling, terminal readout, and the merging metric and both cosines at every one of the 150 repetitions. Published as one generation with the terminal-state archive beside it, though the two committed pairs predate that stamp and carry none |
 | `output/terminal_states_bare.npz`, `output/terminal_states_chat.npz` | The state each prompt was on when the cap was reached, in float32 |
 | `output/jspace_shares_bare.json`, `output/jspace_shares_chat.json` | Every J-space share, its two rotated controls, and the permutation arithmetic |
 | `output/lagscan_bare.json` | The supplementary periodicity observation |
