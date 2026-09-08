@@ -106,6 +106,9 @@ reviewer would stall the pipeline or breed rubber stamps.
 - Operator voice rules: `docs/voice.md`.
 - Reading-note format, template, checker and page builder: the
   `papertime` skill at `.claude/skills/papertime/` (R9).
+- Reading notes themselves (R9), newest last: `docs/CTM_NOTE_2026-09-08.md`,
+  on the Continuous Thought Machine and its intersection with Steve Potter's
+  closed-loop neuroscience.
 - Peer board usage: `.claude/skills/peer-board/SKILL.md`.
 - Current state of the science: `OPERATOR_REPORT_2026-07-31.md` and
   `PROJECT_REVIEW_2026-07-31.md`, plus dated results records under
