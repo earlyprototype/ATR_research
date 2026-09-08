@@ -1,3 +1,4 @@
 # Python bytecode (build artefacts, never part of a commit)
 __pycache__/
 *.pyc
+
